@@ -36,7 +36,7 @@ cd manuscript
 tectonic main.tex
 ```
 
-The generated PDF is 262 pages on US letter paper. The source uses standard
+The generated PDF is 263 pages on US letter paper. The source uses standard
 LaTeX packages and contains all required figures locally.
 
 ## Validate the companion
@@ -81,6 +81,6 @@ system before use.
 
 ## Release status
 
-The files currently represent the `1.0.0-rc.4` release candidate prepared on
+The files currently represent the `1.0.0-rc.5` release candidate prepared on
 August 5, 2026. The archival DOI and final license choices must be recorded
 before the first stable release and arXiv submission.

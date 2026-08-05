@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0-rc.5 — 2026-08-05
+
+- Restored the introduction's method hierarchy so its four components render
+  as subsections rather than leaving an empty peer section.
+- Added an orienting paragraph to the method section.
+- Replaced the ambiguous NASA ADS reference with the full, linked NASA Science
+  Explorer (SciX) API name.
+
 ## 1.0.0-rc.4 — 2026-08-05
 
 - Added the review method, evidence-grading rules, practice-selection process,

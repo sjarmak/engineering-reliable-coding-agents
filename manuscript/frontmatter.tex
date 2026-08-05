@@ -28,17 +28,19 @@ The six parts follow this order. It is not a progression from easy to difficult.
 
 \section{Method, scope, and evidence classification}\label{method-scope-and-evidence-classification}
 
-\section{Search and source assembly}\label{search-and-source-assembly}
+This review treats source collection, evidence grading, practice derivation, and the treatment of author-system cases as separate methodological decisions. The following subsections describe each decision and the limits it places on the resulting claims.
+
+\subsection{Search and source assembly}\label{search-and-source-assembly}
 
 The review was consolidated on July 26, 2026. The source collection contains 118 scholarly works organized into seven topic-specific threads, 91 practitioner records, 29 benchmark records, and 17 author-system case records. The seven scholarly threads cover benchmark validity, failure taxonomy, evaluation statistics, oversight and accountability, context and retrieval, durable execution, and scheduling with repository-scale scoping.
 
-Scholarly retrieval used hybrid keyword and semantic searches over a 32-million-record corpus containing NASA ADS and an arXiv mirror. Queries were scoped by topic, arXiv subject class, and year where appropriate. Each thread combined seminal work with recent agent-era research. Candidate records were checked through a metadata lookup, and full text was read when the corpus provided it and the claim required more than the abstract. A citation audit then added a seventh thread for scheduling and repository-scoping sources that had entered the draft through adjacent operations-research material rather than the original searches.
+Scholarly retrieval used hybrid keyword and semantic searches over a 32-million-record corpus derived from the \href{https://scixplorer.org/scixhelp/api-scix/}{NASA Science Explorer (SciX) API} and an arXiv mirror. Queries were scoped by topic, arXiv subject class, and year where appropriate. Each thread combined seminal work with recent agent-era research. Candidate records were checked through a metadata lookup, and full text was read when the corpus provided it and the claim required more than the abstract. A citation audit then added a seventh thread for scheduling and repository-scoping sources that had entered the draft through adjacent operations-research material rather than the original searches.
 
 Practitioner retrieval used semantic search and full-text keyword search over the Code Intelligence Digest corpus, restricted to practitioner categories such as engineering blogs, newsletters, podcasts, community reports, and product or operations accounts. Search logs record the query text, hit count, records examined in full, useful yields, and dry holes. Research records returned by those searches, promotional pages without a bounded practice, tracking stubs without recoverable text, and repeated accounts of the same incident were excluded or retained only as provenance for the originating account.
 
 The benchmark collection was assembled separately from benchmark documentation and publications, merged from two inventories, deduplicated by identity, and validated against a JSON Schema. Three repeated benchmark records were removed during that merge. Exact query logs, thread files, benchmark cards, and provenance records are available in the companion repository. The search is structured rather than exhaustive: it does not cover every scholarly index, venue, private operational record, or adjacent model-comparison literature.
 
-\section{Screening and evidence grading}\label{screening-and-evidence-grading}
+\subsection{Screening and evidence grading}\label{screening-and-evidence-grading}
 
 A source entered the working corpus when it contributed at least one measured result, reproducible mechanism, operational incident, benchmark property, or concrete practice relevant to coding-agent reliability. Screening removed records with unresolved identity, no recoverable claim, no relation to a decision in scope, or complete redundancy with a better-supported record. Sources could remain in the review while a proposed practice was rejected; source inclusion and practice admission were separate decisions.
 
@@ -64,7 +66,7 @@ The catalog was graded during assembly and then challenged through independent v
 
 The final adjudication was performed by the author. The challenge passes reduced correlated review error, but they do not constitute blinded independent grading by several human reviewers. This is a limitation of the evidence audit and a reason the machine-readable ledger preserves the source note, boundary, and ruling rather than exposing only a label.
 
-\section{Practice derivation and chapter selection}\label{practice-derivation-and-chapter-selection}
+\subsection{Practice derivation and chapter selection}\label{practice-derivation-and-chapter-selection}
 
 Practice derivation began with 244 records produced across six extraction shards. An admission gate retained 214 and rejected 30. Hardening and adjudication corrected evidence movement, separated bundled claims, removed redundant or self-defeating practices, and preserved contrary findings. Twenty-six practices were cut, thirteen were demoted to asides, eight were split, and three were added during adjudication. A later provenance correction reinstated one valid practice, producing the final catalog of 192. At the final gate, 158 practices qualified through at least one scholarly item, 27 through a non-author synthesis with a resolvable paper identity, and seven through at least two practitioner items with distinct independence keys.
 
@@ -72,7 +74,7 @@ Three selection passes ranked the catalog by different criteria: teachability th
 
 The consequence ranking also supplies the operational-urgency calculation used later in the monograph. Among its 52 ranked practices, the Spearman correlation between urgency rank and a binary indicator for whether the practice carried at least one strong evidence item was -0.004. The phrase \emph{nearly uncorrelated} refers to this calculation, not to all 192 catalog entries or to a latent universal measure of importance.
 
-\section{Author-system cases and limitations}\label{author-system-cases-and-limitations}
+\subsection{Author-system cases and limitations}\label{author-system-cases-and-limitations}
 
 Cases from systems operated by the author expose mechanisms, original measurements, and reproducible failure cases. They are always treated as illustrations or local measurements. They are not counted as independent external evidence and do not by themselves support a general recommendation.
 
