@@ -16,7 +16,7 @@ Agent evaluations usually arrive as a table with one row per system and one scor
 
 Each cell has three layers behind it. A public agent benchmark is a shared, published task suite used to score agents: \textbf{SWE-bench} presents real issues from software repositories, and tests decide whether a proposed change passes or fails, with SWE-bench Verified as a human-screened subset of those tasks. The \textbf{evaluation harness} is the execution and scoring apparatus that checks out the repository, supplies the task, invokes the agent, applies its change, runs the tests, and produces the reported number. The published comparison is the third layer, assembled from many harness executions.
 
-Repeated attempts need their own vocabulary. \textbf{\href{mailto:pass@k}{\nolinkurl{pass@k}}} names success across repeated attempts: \href{mailto:pass@1}{\nolinkurl{pass@1}} is the fraction of tasks solved in one attempt, \href{mailto:pass@k}{\nolinkurl{pass@k}} is the probability that at least one of k attempts passes, and pass\textsuperscript{k} the probability that all k attempts pass. One opportunity, retries available, and consistency across every attempt are three different questions. A run-level record keeps them separable by storing each attempt's outcome next to its task identity, and an item-level record joins those attempts back to the task. An aggregate is the summary computed from those records; a distribution is the set of outcomes before that aggregation.
+Repeated attempts need their own vocabulary. \(\mathrm{pass}@1\) is the fraction of tasks solved in one attempt. \(\mathrm{pass}@k\) is the probability that at least one of \(k\) attempts succeeds, while \(\mathrm{pass}^{k}\) is the probability that all \(k\) attempts succeed. One opportunity, retries available, and consistency across every attempt are three different questions. A run-level record keeps them separable by storing each attempt's outcome next to its task identity, and an item-level record joins those attempts back to the task. An aggregate is the summary computed from those records; a distribution is the set of outcomes before that aggregation.
 
 Large-scale measurement shows how much of that hidden history reaches the score. Across 60,000 SWE-bench-Verified trajectories, single-run \href{mailto:pass@1}{\nolinkurl{pass@1}} varied by 2.2 to 6.0 percentage points. At decoding temperature 0, where temperature controls how randomly the model selects each token, the standard deviation still exceeded 1.5 percentage points because of infrastructure nondeterminism. The trajectories began to diverge within the first few percent of generated tokens, and each difference changed the context for the next token, so the divergence cascaded through the run.
 
@@ -225,7 +225,11 @@ The observed difference belongs beside the complete run distribution and the eng
 \item
   Strong evidence: Dodge et al.~(2020). Fine-Tuning Pretrained Language Models: Weight Initializations, Data Orders, and Early Stopping. arXiv:2002.06305. The 2,100-trial seed result, scoped to small-data fine-tuning of pretrained encoders.
 \item
-  Prompt-variance finding: incorporated into this chapter's first developed practice, with its full evidence recorded in the companion catalog. Strong evidence: Sclar et al.~(2023), FormatSpread, arXiv:2310.11324; Mizrahi et al.~(2024), TACL, arXiv:2401.00595; and Salinas and Morstatter (2024), arXiv:2401.03729.
+  Strong evidence: Sclar et al.~(2023), FormatSpread, arXiv:2310.11324. Meaning-preserving prompt-format changes produced a median 7.5-point accuracy spread across the tested tasks, with larger task-level spreads.
+\item
+  Strong evidence: Mizrahi et al.~(2024), TACL, arXiv:2401.00595. Individual templates reversed some model comparisons even where aggregate comparisons were more stable.
+\item
+  Strong evidence: Salinas and Morstatter (2024), arXiv:2401.03729. Trivial prompt edits changed more than 10 percent of predictions on some tested tasks.
 \end{itemize}
 
 \textbf{Analyze statistical power before running}

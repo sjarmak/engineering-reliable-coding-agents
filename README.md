@@ -16,7 +16,7 @@ fault-testing protocols.
 
 | Path | Contents |
 | --- | --- |
-| [`manuscript/`](manuscript/) | Complete, compilable LaTeX source with 18 chapters, closing chapter, 19 figures, and 185 references |
+| [`manuscript/`](manuscript/) | Complete, compilable LaTeX source with 18 chapters, closing chapter, 18 figures, and 186 references |
 | [`companion/`](companion/) | Human-readable learnings plus the machine-readable practice catalog, evidence ledger, chapter crosswalk, benchmark catalog, schemas, checksums, citation metadata, and provenance |
 | [`skills/`](skills/) | Five reusable agent skills derived from the evaluation, verification, failure-analysis, and durable-execution practices |
 | [`CITATION.cff`](CITATION.cff) | Repository-level citation metadata |
@@ -81,6 +81,6 @@ system before use.
 
 ## Release status
 
-The files currently represent the `1.0.0-rc.5` release candidate prepared on
+The files currently represent the `1.0.0-rc.6` release candidate prepared on
 August 5, 2026. The archival DOI and final license choices must be recorded
 before the first stable release and arXiv submission.

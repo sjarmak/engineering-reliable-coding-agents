@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.0.0-rc.6 — 2026-08-05
+
+- Audited all 58 strong-evidence entries against the manuscript's
+  composite-claim rule and narrowed overbroad claims to the result each source
+  directly measures.
+- Reclassified the two Chapter 2 synthesis records as directional and aligned
+  the companion evidence ledger with the same boundary.
+- Defined “unverified working artifact” once, then used “local artifact” in
+  subsequent author-system cases.
+- Standardized the distinction between `pass@k` (at least one success) and
+  `pass^k` (all trials succeed), including a visual typesetting inspection.
+- Removed the redundant compaction figure while retaining the comparative
+  long-context figure; the manuscript now contains 18 figures and 186
+  references.
+
 ## 1.0.0-rc.5 — 2026-08-05
 
 - Restored the introduction's method hierarchy so its four components render

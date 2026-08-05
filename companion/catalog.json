@@ -5993,12 +5993,12 @@
       {
         "evidence_id": "hybrid-retrieval-fused-on-ranks:e3",
         "source_kind": "synthesis",
-        "evidence_group": "strong",
+        "evidence_group": "directional",
         "citation": "Hamel Husain, Ho-Hsiang Wu, Tiferet Gazit, Miltiadis Allamanis, Marc Brockschmidt (2019). CodeSearchNet Challenge: Evaluating the State of Semantic Code Search. arXiv:1909.09436.",
         "bibcode": null,
         "arxiv": "1909.09436",
         "url": "https://arxiv.org/abs/1909.09436",
-        "claim_support": "Exact/lexical match as a first-class lane fused on ranks; score fusion is broken by construction because BM25 and cosine are on incomparable scales.",
+        "claim_support": "CodeSearchNet documents the vocabulary gap between natural-language queries and code. It motivates complementary retrieval channels but does not test rank fusion or the chapter's hybrid-retrieval protocol.",
         "resolved_metadata": {
           "id": "1909.09436",
           "title": "CodeSearchNet Challenge: Evaluating the State of Semantic Code Search",
@@ -8983,12 +8983,12 @@
       {
         "evidence_id": "run-ablation-controls:e1",
         "source_kind": "synthesis",
-        "evidence_group": "strong",
+        "evidence_group": "directional",
         "citation": "Yingtie Lei, Zhongwei Wan, Jiankun Zhang, Samiul Alam, Zixuan Zhong, et al. (2026). SkillEvolBench: Benchmarking the Evolution from Episodic Experience to Procedural Skills. arXiv:2605.24117.",
         "bibcode": null,
         "arxiv": "2605.24117",
         "url": "https://arxiv.org/abs/2605.24117",
-        "claim_support": "No-Skill and Raw-Trajectory controls, coverage matching, and one-factor sweeps before crediting the memory system; leakage-through-the-writer pitfall.",
+        "claim_support": "SkillEvolBench directly measures no-skill and raw-trajectory controls, coverage matching, and controlled skill evaluation. These controls inform, but do not validate, the chapter's broader ablation protocol across coding-agent systems.",
         "resolved_metadata": {
           "id": "2605.24117",
           "title": "SkillEvolBench: Benchmarking the Evolution from Episodic Experience to Procedural Skills",
@@ -9017,12 +9017,12 @@
       {
         "evidence_id": "run-ablation-controls:e2",
         "source_kind": "synthesis",
-        "evidence_group": "strong",
+        "evidence_group": "directional",
         "citation": "Xiangyang Li, Kuicai Dong, Yi Quan Lee, Wei Xia, Hao Zhang, et al. (2024). CoIR: A Comprehensive Benchmark for Code Information Retrieval Models. arXiv:2407.02883.",
         "bibcode": null,
         "arxiv": "2407.02883",
         "url": "https://arxiv.org/abs/2407.02883",
-        "claim_support": "No-tool baseline and tool access as controlled variable; ground-truth tautology and benchmark contamination as the confounds the controls exist to catch.",
+        "claim_support": "CoIR provides a multi-task code-retrieval benchmark and its evaluation measures. It does not test the no-tool/tool-access controls or tautology checks in the broader ablation protocol.",
         "resolved_metadata": {
           "id": "2407.02883",
           "title": "CoIR: A Comprehensive Benchmark for Code Information Retrieval Models",
@@ -9243,7 +9243,7 @@
         "bibcode": null,
         "arxiv": "2605.12978",
         "url": "https://arxiv.org/abs/2605.12978",
-        "claim_support": "Continuous LLM rewriting degrades memory; immutable raw layer plus derived rebuildable distillate is the production-validated shape.",
+        "claim_support": "The controlled study measures degradation under repeated LLM memory updates and supports preserving episodic source material. It does not compare immutable-source and rebuildable-distillate system architectures.",
         "resolved_metadata": {
           "id": "2605.12978",
           "title": "Useful Memories Become Faulty When Continuously Updated by LLMs",

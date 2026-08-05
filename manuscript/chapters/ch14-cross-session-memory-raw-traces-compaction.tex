@@ -496,12 +496,6 @@ Kang et al.~reported peak-token reductions of 26 to 54 percent alongside improve
 
 Those figures do not establish an expected token reduction or success gain for coding agents.
 
-\begin{figure}[htbp]
-\centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Across app, office, and question-answering agents, removing distractions cuts peak tokens by 26\% to 54\% and raises small-model success by up to 46\%; no coding-agent benchmark supports extrapolating either effect to coding agents.}]{figures/ch14-compaction-tokens.pdf}}
-\caption{Across app, office, and question-answering agents, removing distractions cuts peak tokens by 26\% to 54\% and raises small-model success by up to 46\%; no coding-agent benchmark supports extrapolating either effect to coding agents.}
-\end{figure}
-
 The study covers app, office, and question-answering benchmarks rather than coding agents. Transfer to repository work remains an inference.
 
 A plausible mechanism is the effort required to discriminate among records. A model presented with every prior attempt must determine which constraints remain active, which observations are stale, and which abandoned branches still matter. Irrelevant history competes with useful evidence, while repetition can make an obsolete plan appear current. Removing that material can improve correctness while reducing inference cost.
@@ -575,7 +569,9 @@ Review capacity is finite and does not increase automatically with fleet size. P
 \begin{itemize}
 \tightlist
 \item
-  Strong evidence: ``Useful Memories Become Faulty When Continuously Updated by LLMs'' (Zhang 2026), arXiv:2605.12978, with Slack production context management (InfoQ 2026-04) named in the same synthesis.
+  Strong evidence for the degradation mechanism: ``Useful Memories Become Faulty When Continuously Updated by LLMs'' (Zhang 2026), arXiv:2605.12978. The study measures degradation under repeated LLM memory updates; it does not compare immutable-source and rebuildable-distillate architectures.
+\item
+  Corroborating case: Slack production context management (InfoQ 2026-04). The account supports operational plausibility without extending the strong result.
 \item
   Directional evidence: Agentic Context Engineering, arXiv:2510.04618. Direction only.
 \item
@@ -601,7 +597,7 @@ Review capacity is finite and does not increase automatically with fleet size. P
 \begin{itemize}
 \tightlist
 \item
-  Strong evidence: Kang, M., et al.~(2025), ``ACON: Optimizing Context Compression for Long-horizon LLM Agents,'' arXiv:2510.00615 (Microsoft).
+  Strong evidence for the measured failure-driven compression comparison: Kang, M., et al.~(2025), ``ACON: Optimizing Context Compression for Long-horizon LLM Agents,'' arXiv:2510.00615 (Microsoft). The study tests failure-guided compression on app, office, and question-answering benchmarks; transfer to coding agents remains directional.
 \item
   Corroboration: none on record.
 \end{itemize}

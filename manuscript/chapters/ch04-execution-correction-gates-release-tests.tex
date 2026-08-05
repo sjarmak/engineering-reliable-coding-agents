@@ -173,7 +173,7 @@ Correction belongs to the evaluation architecture, not to a personality attribut
 
 \section{Turn repeated trials into a release test}\label{turn-repeated-trials-into-a-release-test}
 
-Support for the repeated-trial metric comes from one source. tau-bench, from Yao et al.~(\href{https://arxiv.org/abs/2406.12045}{2024}), evaluates interactive, multi-turn tool use with executable oracles across repeated trials and introduces pass\textsuperscript{k} as a reliability measure.
+Support for the repeated-trial metric comes from one source. tau-bench, from Yao et al.~(\href{https://arxiv.org/abs/2406.12045}{2024}), evaluates interactive, multi-turn tool use with executable oracles across repeated trials and introduces \(\mathrm{pass}^{k}\) as a reliability measure.
 
 The paper does not evaluate two parts of the practice recommended here: selecting a team's own tasks and replaying them for every release. Those are transfers from benchmark design into release engineering. The measured result supports repeated trials under executable evaluation, not the claim that a particular local task set or release policy will predict production reliability.
 
@@ -195,30 +195,30 @@ Interactive cases belong in the set when the deployed system uses tools across t
 
 Each case needs a stable identity and immutable versions. Changing the request, starting repository, tool contract, sandbox policy, or verifier creates a different case and should produce a new version. Rewriting an existing case beneath prior scores can manufacture apparent improvement by removing a difficult condition or exposing more of the solution.
 
-Run each case more than once for the same release candidate. The repeated-trial statistics from Chapter 1 govern the experimental design and do not need to be rebuilt here. For release control, pass\textsuperscript{k} asks whether all k of k trials passed. One failed trajectory breaks the sequence.
+Run each case more than once for the same release candidate. The repeated-trial statistics from Chapter 1 govern the experimental design and do not need to be rebuilt here. For release control, \(\mathrm{pass}^{k}\) asks whether all \(k\) of \(k\) trials passed. One failed trajectory breaks the sequence.
 
 The result describes a single release candidate only when its configuration remains pinned across the sequence. Chapter 1's apparatus record applies to every trial, including the model version and decoding settings. Pinning does not guarantee independence. Shared caches, mutable services, provider incidents, and reused infrastructure can correlate outcomes, which limits the analyses the sequence supports.
 
-Pass\^{}k reflects a different operational question from best-of-k:
+\(\mathrm{pass}^{k}\) reflects a different operational question from \(\mathrm{pass}@k\):
 
 \begin{verbatim}
 same k trials
     |
-    +-> pass^k
+    +-> all-k reliability
     |     all k of k trials passed
     |     one failed trajectory breaks the sequence
     |
-    +-> best-of-k
+    +-> at-least-one success
           at least one trajectory succeeded
           several attempts were available
 
 choose the metric whose failure semantics resemble deployment
 
 workflow must complete reliably without supervision
-    -> stronger reason to use pass^k
+    -> stronger reason to use all-k reliability
 \end{verbatim}
 
-Best-of-k asks whether at least one acceptable trajectory can be found when several attempts are available. Pass\^{}k asks whether every trajectory in a required sequence succeeds. Neither is universally correct. A supervised workflow that can select among alternatives may justify best-of-k. A workflow expected to complete reliably without intervention has a stronger reason to use pass\textsuperscript{k}.
+\(\mathrm{pass}@k\) asks whether at least one acceptable trajectory can be found when several attempts are available. \(\mathrm{pass}^{k}\) asks whether every trajectory in a required sequence succeeds. Neither is universally correct. A supervised workflow that can select among alternatives may justify \(\mathrm{pass}@k\). A workflow expected to complete reliably without intervention has a stronger reason to use \(\mathrm{pass}^{k}\).
 
 The value of k comes from release policy, not from the benchmark. Increasing k makes intermittent failures easier to observe and the gate harder to satisfy. It also increases cost and gives evaluator noise more opportunities to block promotion. Choose k based on the consequence of one failed production run, the variance observed during pilot repeats, and the budget available for evaluating each release candidate.
 
@@ -248,7 +248,7 @@ The baseline must remain executable. A table copied from an earlier report is no
 
 My search-visibility measurement project treats a model update as a deployment. It replays a fixed prompt corpus against a stored model-version baseline and combines a statistical comparison with an absolute change threshold, producing pass, warning, or failure exit states for continuous integration. The controls answer different questions. Statistical comparison reduces the chance that sampling noise decides promotion. The absolute threshold prevents a detectable but operationally trivial change from doing so. This example supplies no evidence for either threshold.
 
-CodeProbe (\href{https://github.com/sjarmak/codeprobe}{public repository}) uses a different gate. It blocks a release tag unless the two most recent full-mode acceptance verdicts both pass. Those verdicts come from successive acceptance-loop iterations, not repeated trials of one pinned candidate. The rule is therefore a check over acceptance history, not a pass\textsuperscript{k} measurement. Its requirement of two consecutive passes is local to that system and should not be treated as a recommended value of k.
+CodeProbe (\href{https://github.com/sjarmak/codeprobe}{public repository}) uses a different gate. It blocks a release tag unless the two most recent full-mode acceptance verdicts both pass. Those verdicts come from successive acceptance-loop iterations, not repeated trials of one pinned candidate. The rule is therefore a check over acceptance history, not a \(\mathrm{pass}^{k}\) measurement. Its requirement of two consecutive passes is local to that system and should not be treated as a recommended value of \(k\).
 
 Golden sets decay even when their files remain unchanged. Production work moves to new frameworks, repositories acquire new checks, tool interfaces change, and models may become adapted to repeatedly exposed cases. A set that once represented costly failures can gradually become a test of a narrow historical workflow. Treat the set as production test data, with named ownership, review, and retirement criteria.
 
@@ -274,7 +274,7 @@ Run the current production system through the same cases and evaluator before te
 
 When a candidate fails, return the raw evidence to the correction loop together with the candidate identity. Do not authorize a revision that has learned nothing beyond the original request. Every modified candidate receives a new identity, starts in a clean sandbox, and earns a new verdict. Infrastructure failures remain blocking, but they do not count as candidate failures.
 
-Replay the set whenever the model, prompt, tools, orchestration, sandbox, or verifier changes. Measure pass\textsuperscript{k} across the chosen repeats, retain the per-case outcomes and run-to-run spread, and compare the candidate with the executable baseline.
+Replay the set whenever the model, prompt, tools, orchestration, sandbox, or verifier changes. Measure \(\mathrm{pass}^{k}\) across the chosen repeats, retain the per-case outcomes and run-to-run spread, and compare the candidate with the executable baseline.
 
 Record the promotion rule before running the first candidate comparison. When experience shows that the gate is too strict or too permissive, change the policy as a versioned decision and establish a new baseline where necessary. Adjusting the threshold after seeing a result turns the rule into an explanation for a decision already made.
 
@@ -313,7 +313,7 @@ Keep tasks without executable checks in a separate lane. They are not lesser tas
 \begin{itemize}
 \tightlist
 \item
-  Strong evidence: tau-bench (Yao, Shinn, Razavi \& Narasimhan 2024, arXiv:2406.12045). Introduces and measures pass\textsuperscript{k} on interactive, multi-turn tool-use tasks with executable oracles. Using a team's own tasks and replaying the set per release are transfers beyond the measured findings.
+  Strong evidence: tau-bench (Yao, Shinn, Razavi \& Narasimhan 2024, arXiv:2406.12045). Introduces and measures \(\mathrm{pass}^{k}\) on interactive, multi-turn tool-use tasks with executable oracles. Using a team's own tasks and replaying the set per release are transfers beyond the measured findings.
 \item
   Directional evidence: SWE-bench (arXiv:2310.06770). Direction only.
 \item

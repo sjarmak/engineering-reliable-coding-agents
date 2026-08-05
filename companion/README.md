@@ -1,6 +1,6 @@
 # Engineering Reliable Coding Agents: companion research artifact
 
-Release candidate 1.0.0-rc.5, prepared August 5, 2026.
+Release candidate 1.0.0-rc.6, prepared August 5, 2026.
 
 This package accompanies *Engineering Reliable Coding Agents: Evaluation, Recovery, Context, and Control Beyond the Model*. It is designed to be archived as a separate, citable research artifact. The final archival release should receive its own DOI and should be cited alongside the manuscript.
 
