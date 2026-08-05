@@ -1,0 +1,749 @@
+[
+  {
+    "chapter": 1,
+    "title": "Run-to-run variance, statistical power, and paired comparisons",
+    "developed_practices": [
+      "never-report-a-single-run",
+      "power-analyze-before-running",
+      "use-paired-tests-matched-to-metric"
+    ],
+    "companion_practices": [
+      {
+        "id": "report-correlation-aware-standard-errors",
+        "aside": false
+      },
+      {
+        "id": "estimate-pass-at-k-unbiased",
+        "aside": false
+      },
+      {
+        "id": "correct-multi-benchmark-victory-claims",
+        "aside": false
+      },
+      {
+        "id": "rank-with-paired-comparison-models-and-cis",
+        "aside": false
+      },
+      {
+        "id": "profile-benchmark-noise-before-decisions",
+        "aside": false
+      },
+      {
+        "id": "declare-decoding-configuration",
+        "aside": false
+      },
+      {
+        "id": "aggregate-few-runs-with-iqm-and-bootstrap-cis",
+        "aside": false
+      },
+      {
+        "id": "shrink-evals-with-decision-aware-validation",
+        "aside": false
+      },
+      {
+        "id": "precommit-confirmatory-eval-designs",
+        "aside": false
+      },
+      {
+        "id": "report-spread-across-prompt-variants",
+        "aside": false
+      }
+    ]
+  },
+  {
+    "chapter": 2,
+    "title": "Baselines, ablations, and cost-accuracy tradeoffs",
+    "developed_practices": [
+      "run-ablation-controls",
+      "report-cost-accuracy-pareto"
+    ],
+    "companion_practices": [
+      {
+        "id": "report-performance-vs-tuning-budget",
+        "aside": false
+      },
+      {
+        "id": "budget-sampling-by-coverage-and-verifier",
+        "aside": false
+      },
+      {
+        "id": "freeze-then-evaluate-memory",
+        "aside": false
+      },
+      {
+        "id": "pin-the-scoring-target",
+        "aside": false
+      },
+      {
+        "id": "controlled-synthesis-human-verified",
+        "aside": false
+      },
+      {
+        "id": "baseline-gates-against-random",
+        "aside": false
+      }
+    ]
+  },
+  {
+    "chapter": 3,
+    "title": "Benchmark contamination, oracle strength, and workload validity",
+    "developed_practices": [
+      "measure-public-score-inflation-with-matched-controls",
+      "evaluate-on-post-cutoff-tasks",
+      "strengthen-test-oracles-before-adjudication",
+      "benchmark-on-your-own-workload"
+    ],
+    "companion_practices": [
+      {
+        "id": "probe-memorization-before-crediting-capability",
+        "aside": false
+      },
+      {
+        "id": "measure-overlap-semantically",
+        "aside": false
+      },
+      {
+        "id": "anchor-contamination-metrics-to-score-benefit",
+        "aside": true
+      },
+      {
+        "id": "build-fresh-items-anti-searchable",
+        "aside": false
+      },
+      {
+        "id": "audit-contamination-per-model-benchmark-cell",
+        "aside": false
+      },
+      {
+        "id": "combine-contamination-detectors-by-threat-model",
+        "aside": false
+      },
+      {
+        "id": "run-construct-validity-check",
+        "aside": false
+      },
+      {
+        "id": "build-code-benchmarks-against-defect-taxonomy",
+        "aside": true
+      },
+      {
+        "id": "give-agent-benchmarks-real-holdouts",
+        "aside": false
+      },
+      {
+        "id": "pin-and-publish-eval-harness",
+        "aside": false
+      },
+      {
+        "id": "stress-test-rankings-under-perturbation",
+        "aside": false
+      },
+      {
+        "id": "protect-eval-data-at-release",
+        "aside": false
+      },
+      {
+        "id": "purge-invalid-items-before-measuring",
+        "aside": false
+      },
+      {
+        "id": "audit-leaderboard-submission-protocols",
+        "aside": false
+      },
+      {
+        "id": "audit-pipeline-against-qrp-catalog",
+        "aside": true
+      },
+      {
+        "id": "search-before-building-a-benchmark",
+        "aside": false
+      },
+      {
+        "id": "pair-offline-and-online-evals",
+        "aside": false
+      },
+      {
+        "id": "checklist-agentic-benchmarks-for-validity",
+        "aside": false
+      }
+    ]
+  },
+  {
+    "chapter": 4,
+    "title": "Execution-based evaluation, correction gates, and release tests",
+    "developed_practices": [
+      "ground-evaluation-in-execution",
+      "gate-self-correction-on-external-feedback",
+      "golden-set-pass-k"
+    ],
+    "companion_practices": [
+      {
+        "id": "score-verified-resolve-with-abstention",
+        "aside": false
+      },
+      {
+        "id": "detect-silent-tool-errors",
+        "aside": false
+      },
+      {
+        "id": "cap-turn-budgets",
+        "aside": false
+      },
+      {
+        "id": "budget-the-verifier-tax",
+        "aside": false
+      }
+    ]
+  },
+  {
+    "chapter": 5,
+    "title": "Calibrating model graders and separating agreement from correctness",
+    "developed_practices": [
+      "calibrate-llm-judges",
+      "separate-agreement-from-correctness"
+    ],
+    "companion_practices": [
+      {
+        "id": "keep-an-exact-auditor-alongside-heuristics",
+        "aside": false
+      },
+      {
+        "id": "combine-judge-labels-with-human-subset",
+        "aside": false
+      }
+    ]
+  },
+  {
+    "chapter": 6,
+    "title": "Proxy metric gaming and layered evaluation signals",
+    "developed_practices": [
+      "layer-signals-beyond-single-proxy",
+      "monitor-proxy-true-divergence",
+      "monitor-cot-without-training-pressure"
+    ],
+    "companion_practices": [
+      {
+        "id": "escalate-on-first-gaming",
+        "aside": false
+      },
+      {
+        "id": "harden-infeasible-tasks",
+        "aside": false
+      },
+      {
+        "id": "measure-reasoning-effort",
+        "aside": false
+      },
+      {
+        "id": "weight-average-reward-models",
+        "aside": false
+      },
+      {
+        "id": "evaluate-in-feedback-loops",
+        "aside": false
+      },
+      {
+        "id": "test-detectors-contrastively",
+        "aside": false
+      },
+      {
+        "id": "accept-on-vector-with-independent-judge",
+        "aside": true
+      }
+    ]
+  },
+  {
+    "chapter": 7,
+    "title": "Agent isolation, injection defenses, and independent verification",
+    "developed_practices": [
+      "contain-agent-blast-radius",
+      "distrust-agent-self-reports",
+      "defense-in-depth-injection"
+    ],
+    "companion_practices": [
+      {
+        "id": "topology-as-security-decision",
+        "aside": false
+      },
+      {
+        "id": "stateful-cross-session-guardrails",
+        "aside": true
+      },
+      {
+        "id": "execute-agent-remediations-through-typed-policy-path",
+        "aside": false
+      },
+      {
+        "id": "score-actions-by-reversibility-and-blast-radius",
+        "aside": false
+      },
+      {
+        "id": "measure-your-own-security-delta",
+        "aside": true
+      },
+      {
+        "id": "never-accept-self-attestation",
+        "aside": false
+      }
+    ]
+  },
+  {
+    "chapter": 8,
+    "title": "Persistent agent state, durable workflows, and idempotent retries",
+    "developed_practices": [
+      "make-agent-state-first-class-persistent",
+      "use-durable-workflow-engine",
+      "make-retried-steps-idempotent"
+    ],
+    "companion_practices": [
+      {
+        "id": "transactional-side-effects",
+        "aside": false
+      },
+      {
+        "id": "state-retry-contract-invariants",
+        "aside": false
+      },
+      {
+        "id": "checkpoint-async-at-consistency-boundaries",
+        "aside": false
+      },
+      {
+        "id": "calibrate-checkpoint-interval",
+        "aside": false
+      },
+      {
+        "id": "design-event-coordination-guarantees-explicitly",
+        "aside": true
+      },
+      {
+        "id": "log-steps-transactionally-with-data",
+        "aside": false
+      },
+      {
+        "id": "isolate-shared-agent-state-transactionally",
+        "aside": false
+      },
+      {
+        "id": "guard-stochastic-steps-with-postconditions",
+        "aside": true
+      },
+      {
+        "id": "version-events-weak-schema-first",
+        "aside": false
+      },
+      {
+        "id": "design-operations-order-tolerant",
+        "aside": false
+      },
+      {
+        "id": "crystallize-repeated-plans-into-blueprints",
+        "aside": true
+      }
+    ]
+  },
+  {
+    "chapter": 9,
+    "title": "Replayable traces and fault-injection recovery testing",
+    "developed_practices": [
+      "replayable-typed-traces",
+      "benchmark-recovery-with-fault-injection"
+    ],
+    "companion_practices": [
+      {
+        "id": "record-nondeterminism-replay-deterministic-code",
+        "aside": false
+      },
+      {
+        "id": "bound-replay-history",
+        "aside": false
+      },
+      {
+        "id": "provenance-driven-reexecution",
+        "aside": false
+      },
+      {
+        "id": "certify-restores-against-downstream-commitments",
+        "aside": false
+      },
+      {
+        "id": "diagnose-then-gate-recovery",
+        "aside": false
+      },
+      {
+        "id": "hide-recovery-behind-monotonic-observability",
+        "aside": false
+      },
+      {
+        "id": "fault-inject-with-realistic-fault-menu",
+        "aside": false
+      }
+    ]
+  },
+  {
+    "chapter": 10,
+    "title": "Human-auditable failure analysis and taxonomy development",
+    "developed_practices": [
+      "derive-taxonomy-from-own-traces",
+      "keep-humans-in-failure-attribution",
+      "design-traces-for-human-audit"
+    ],
+    "companion_practices": [
+      {
+        "id": "judge-from-constraint-violation-log",
+        "aside": false
+      },
+      {
+        "id": "monitor-early-trajectory-shape",
+        "aside": false
+      },
+      {
+        "id": "preempt-environment-errors",
+        "aside": false
+      },
+      {
+        "id": "aggregate-independent-attribution-judges",
+        "aside": true
+      },
+      {
+        "id": "differential-test-before-blaming-agent",
+        "aside": false
+      },
+      {
+        "id": "canonicalize-trajectories",
+        "aside": false
+      },
+      {
+        "id": "use-run-consistency-as-risk-signal",
+        "aside": true
+      }
+    ]
+  },
+  {
+    "chapter": 11,
+    "title": "Measuring and designing repository retrieval",
+    "developed_practices": [
+      "score-retrieval-and-generation-separately",
+      "hybrid-retrieval-fused-on-ranks",
+      "chunk-on-ast-boundaries"
+    ],
+    "companion_practices": [
+      {
+        "id": "retrieve-across-lexical-gaps",
+        "aside": false
+      },
+      {
+        "id": "iterate-retrieval-with-generation",
+        "aside": false
+      },
+      {
+        "id": "gate-retrieval-on-expected-benefit",
+        "aside": false
+      },
+      {
+        "id": "fix-both-ends-of-rag",
+        "aside": false
+      },
+      {
+        "id": "stage-cheap-retrieval-then-rerank",
+        "aside": false
+      }
+    ]
+  },
+  {
+    "chapter": 12,
+    "title": "Localization funnels, repository indexes, and freshness checks",
+    "developed_practices": [
+      "staged-localization-funnel",
+      "index-repository-as-knowledge-graph",
+      "gate-retrieval-on-freshness"
+    ],
+    "companion_practices": [
+      {
+        "id": "retrieve-by-structure",
+        "aside": false
+      },
+      {
+        "id": "front-load-a-repo-map",
+        "aside": false
+      },
+      {
+        "id": "inject-static-anchors",
+        "aside": false
+      },
+      {
+        "id": "schedule-exploration-prune-by-distance",
+        "aside": false
+      },
+      {
+        "id": "walk-call-graph-at-query-time",
+        "aside": false
+      },
+      {
+        "id": "extend-graph-below-function-level-for-line-precision",
+        "aside": false
+      },
+      {
+        "id": "route-entity-queries-to-cheap-graph-lookups",
+        "aside": false
+      },
+      {
+        "id": "treat-index-representation-as-first-class-design-choice",
+        "aside": false
+      }
+    ]
+  },
+  {
+    "chapter": 13,
+    "title": "Usable context budgets, consolidated-spec restarts, and file-based tool output",
+    "developed_practices": [
+      "budget-to-measured-effective-context",
+      "consolidate-spec-restart-lost-runs",
+      "persist-transient-context-as-files",
+      "measure-context-files-and-maintain-them-like-config"
+    ],
+    "companion_practices": [
+      {
+        "id": "edge-load-key-evidence",
+        "aside": false
+      },
+      {
+        "id": "verify-semantic-not-verbatim-recall",
+        "aside": false
+      },
+      {
+        "id": "compaction-as-agent-action",
+        "aside": false
+      },
+      {
+        "id": "price-token-reduction-transforms",
+        "aside": false
+      },
+      {
+        "id": "keep-always-loaded-context-minimal",
+        "aside": false
+      },
+      {
+        "id": "audit-the-assembled-context-budget",
+        "aside": false
+      }
+    ]
+  },
+  {
+    "chapter": 14,
+    "title": "Cross-session memory, raw traces, and compaction policies",
+    "developed_practices": [
+      "retain-raw-distill-separately",
+      "light-store-by-default",
+      "optimize-compaction-from-failures"
+    ],
+    "companion_practices": [
+      {
+        "id": "persist-explored-context",
+        "aside": true
+      },
+      {
+        "id": "durable-artifact-handoff",
+        "aside": true
+      },
+      {
+        "id": "scheduled-typed-consolidation",
+        "aside": false
+      },
+      {
+        "id": "model-time-explicitly",
+        "aside": false
+      },
+      {
+        "id": "plan-for-memory-portability",
+        "aside": true
+      },
+      {
+        "id": "tribal-knowledge-substrate",
+        "aside": false
+      }
+    ]
+  },
+  {
+    "chapter": 15,
+    "title": "Efficient verification interfaces and risk-based human escalation",
+    "developed_practices": [
+      "make-verification-cheaper-than-acceptance",
+      "target-friction-at-the-accept-loop",
+      "escalate-only-flagged-cases"
+    ],
+    "companion_practices": [
+      {
+        "id": "place-human-checkpoints-at-failure-points",
+        "aside": false
+      },
+      {
+        "id": "design-overseer-roles-for-skill-retention",
+        "aside": false
+      },
+      {
+        "id": "calibrate-displayed-confidence",
+        "aside": false
+      },
+      {
+        "id": "curate-what-reviewers-see",
+        "aside": false
+      },
+      {
+        "id": "shield-review-from-time-pressure",
+        "aside": false
+      },
+      {
+        "id": "render-agent-actions-as-live-state",
+        "aside": true
+      },
+      {
+        "id": "treat-human-escalation-as-a-budgeted-online-decision",
+        "aside": false
+      },
+      {
+        "id": "budget-verification-as-the-dominant-cost",
+        "aside": true
+      }
+    ]
+  },
+  {
+    "chapter": 16,
+    "title": "Autonomy calibration, provenance, effective gates, and accountability",
+    "developed_practices": [
+      "graduate-autonomy-per-action-track-record",
+      "label-ai-provenance",
+      "audit-human-gates-for-effectiveness",
+      "align-accountability-with-actual-control"
+    ],
+    "companion_practices": [
+      {
+        "id": "attach-reliance-disclaimers",
+        "aside": true
+      },
+      {
+        "id": "measure-oversight-with-decomposed-metrics",
+        "aside": false
+      },
+      {
+        "id": "scale-review-capacity-to-experience",
+        "aside": false
+      },
+      {
+        "id": "record-steps-in-hash-chained-ledger",
+        "aside": false
+      },
+      {
+        "id": "rebuild-collective-accountability",
+        "aside": false
+      },
+      {
+        "id": "separate-control-from-oversight",
+        "aside": true
+      },
+      {
+        "id": "require-comprehension-before-merge",
+        "aside": true
+      },
+      {
+        "id": "write-an-oversight-card",
+        "aside": true
+      },
+      {
+        "id": "keep-override-authority-real",
+        "aside": true
+      },
+      {
+        "id": "write-an-agent-contribution-policy",
+        "aside": false
+      },
+      {
+        "id": "set-autonomy-defaults-per-task-type",
+        "aside": false
+      },
+      {
+        "id": "treat-objective-weights-as-reviewed-policy",
+        "aside": false
+      },
+      {
+        "id": "gate-optimizer-output-behind-human-review",
+        "aside": false
+      }
+    ]
+  },
+  {
+    "chapter": 17,
+    "title": "Agent topology selection and dynamic task allocation",
+    "developed_practices": [
+      "fix-failures-structurally-not-prompts",
+      "single-agent-baseline-gate",
+      "match-topology-to-task-shape",
+      "dynamic-task-graphs"
+    ],
+    "companion_practices": [
+      {
+        "id": "oversee-mas-as-graph",
+        "aside": true
+      },
+      {
+        "id": "roles-in-config-not-code",
+        "aside": true
+      },
+      {
+        "id": "blind-review-lanes",
+        "aside": true
+      },
+      {
+        "id": "active-blackboard-with-diversity",
+        "aside": true
+      },
+      {
+        "id": "repair-root-cause-not-last-step",
+        "aside": true
+      }
+    ]
+  },
+  {
+    "chapter": 18,
+    "title": "Cost-aware fleet scheduling and model routing",
+    "developed_practices": [
+      "re-decide-cheaply-ship-the-incumbent",
+      "route-work-to-the-cheapest-sufficient-model",
+      "replay-traces-before-policy-changes"
+    ],
+    "companion_practices": [
+      {
+        "id": "formalize-work-as-constraints-and-solve-globally",
+        "aside": false
+      },
+      {
+        "id": "design-the-online-rescheduling-loop",
+        "aside": false
+      },
+      {
+        "id": "probe-only-above-an-uncertainty-threshold",
+        "aside": true
+      },
+      {
+        "id": "split-fleet-scheduling-into-global-and-local-levels",
+        "aside": false
+      },
+      {
+        "id": "audit-the-allocation-layer",
+        "aside": true
+      },
+      {
+        "id": "cost-cascade-routing",
+        "aside": false
+      },
+      {
+        "id": "log-scheduling-decisions-for-selection-effect-modeling",
+        "aside": true
+      },
+      {
+        "id": "pilot-to-pick-the-algorithm-then-commit-the-budget",
+        "aside": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Please cite the archived manuscript and companion release."
+title: "Engineering Reliable Coding Agents: Manuscript and Companion Research Artifact"
+type: dataset
+authors:
+  - family-names: Jarmak
+    given-names: Stephanie
+version: "1.0.0-rc.1"
+date-released: 2026-08-05
+repository-code: "https://github.com/sjarmak/engineering-reliable-coding-agents"
+abstract: >-
+  Manuscript source and machine-readable research artifact for a technical
+  review of the evaluation, operation, and governance of AI coding-agent
+  systems.
+keywords:
+  - AI coding agents
+  - software engineering
+  - evaluation
+  - reliability
+  - agent operations

@@ -1,0 +1,255 @@
+\chapter{Persistent agent state, durable workflows, and idempotent retries}
+\label{ch08-persistent-state-durable-workflows-idempotent-retries}
+Netflix reported losing roughly 4 percent of its cloud-operations deployments to transient failures even though the service already contained homegrown retries and compensating-transaction logic. Meyers and Zienert (\href{https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953}{2025}) state that the team moved coordination into a stateful service that records progress and reissues work after failure. The reported failure rate fell to 0.0001 percent, and the team deleted the orchestration code the service replaced. This vendor-adjacent account comes from the adopting team and was not independently audited, although it provides concrete details about the migration and observed change.
+
+That account is the only strong evidence item in this chapter. Historical surveys, systems papers, self-evaluated systems, and practitioner reports provide the rest, and the evidence record contains no controlled experiment on agents. I therefore make a narrow design argument and prescribe explicit artifacts, ownership boundaries, and failure checks. None of the practices depends on a numerical threshold.
+
+An agent that dies after step nine of a fourteen-step run presents the same coordination problem at a smaller scale. The process has disappeared, but its completed work and external effects may remain. \textbf{Durable execution} is the ability of a run to survive process death and resume from recorded progress without repeating effects already completed. That property requires explicit state, a coordinator that owns recovery once coordination becomes complex, and retryable steps whose repeated execution does not repeat their effects.
+
+The difficult case is a process that changes the world and dies before recording the change. A plan held only in model context, a tool result retained only in memory, or a completion record scheduled as the next write all disappear precisely when recovery needs them. The surviving system must then distinguish work known to be complete, work known to be incomplete, and work whose outcome is uncertain. Without that distinction, a restart inherits the old run identity without the evidence needed to resume it safely.
+
+\section{Declare the state that outlives the worker}\label{declare-the-state-that-outlives-the-worker}
+
+Consider the step-nine failure when no completion record reached durable storage. The first eight results may exist only in the lost context, while the ninth step may already have changed an external system. Support for this section comes from historical inference in stream-processing research, self-evaluated systems, and practitioner accounts. No controlled experiment establishes the result for agents.
+
+Persisted run state is the substrate from which recovery operates. The evidence does not establish how reliably this design works across open-ended agent workloads. I therefore treat explicit state as an architectural boundary to test rather than as a measured guarantee of successful recovery.
+
+The first design decision is what counts as control state. The current plan records intended work. Progress records which subset has been accepted as complete. Plans change through explicit revisions. Progress advances through named steps and carries the evidence required to accept each transition.
+
+A run also accumulates evidentiary state: intermediate knowledge, tool results, and session events. Knowledge snapshots replace earlier versions according to a declared rule. Tool results belong to specific invocations. Events append in order. A single opaque transcript preserves their text while hiding their different identities, owners, and update rules.
+
+Each recoverable item should therefore be a declared artifact with a stable identity, an owner, and an update rule. A plan can carry a run identity and revision number. A tool result can belong to a step identity and invocation identity. A progress record can name the latest completed step and the evidence that completion produced. An event record can append the attempted action, observed result, and resulting state transition.
+
+Stable identities allow a replacement worker to resume the same logical work rather than creating a parallel copy.
+
+Osmani (\href{https://addyo.substack.com/p/long-running-agents}{2026}) recommends keeping three artifacts outside model context: a plan file, progress notes, and an append-only event log. The same arrangement allows a worker to rebuild after a full context reset from a handoff file. This is a practitioner recommendation rather than a measured result.
+
+A progress record written by the agent introduces an additional problem. It is a self-report produced from the same context that may already be wrong. Completion evidence should therefore originate at the effect boundary, such as a tool response, commit identifier, verifier result, or independent state read, rather than from the agent's assertion that a step finished.
+
+Two stores that both appear authoritative create another failure mode. If a queue says step nine is ready while a progress file says it completed, recovery depends on an undocumented precedence rule. A declared architecture names the source of truth for each fact and treats other copies as indexes or caches. The queue may own delivery state. The event log may own execution history. A versioned snapshot may accelerate reconstruction without overriding later events.
+
+This architecture treats the worker as disposable. A replacement worker reads the durable queue record, loads the latest valid snapshot, applies subsequent events, and reconstructs the next permitted action. It does not require the failed process's heap or model context. The agent is amnesiac. The storage layer remembers enough that the amnesia does not break the evidence chain.
+
+This division resembles a change that unfolded over roughly two decades in stream-processing systems. Fragkoulis et al.~(\href{https://arxiv.org/abs/2008.00842}{2020}) describe early systems that treated state as application-managed data and later systems that brought state, checkpoints, and recovery under runtime control. The survey provides directional evidence and contains no experiment on agents. Its useful implication is architectural: recovery became state-centric once runtimes could identify the state they needed to preserve and coordinate it with progress through the input.
+
+The analogy has limits. A stream processor typically applies a specified computation to structured input. An agent may revise its plan, interpret ambiguous evidence, or call a model that returns a different answer to the same prompt. Explicit state cannot make those decisions deterministic. It can preserve which decision occurred, which evidence informed it, and which work followed, preventing a replacement worker from silently inventing a different history.
+
+The ADEMA architecture, from Hanlin (Zhou) et al.~(\href{https://arxiv.org/abs/2604.25849}{2026}), provides a narrower check on this reasoning. In a fixed matrix of 60 runs, removing checkpoint and resume produced the only invalid run. The result isolates checkpointing within one system and one bounded experiment. It does not compare recovery designs or establish a general failure rate. It shows that a knowledge-state snapshot can preserve information across interruption once the system has defined what belongs in that snapshot.
+
+Halukurike et al.~(\href{https://tech.instacart.com/blueberry-force-multiplier-for-the-on-call-engineer-98c446dfcc12}{2026}) report a database-backed durable queue with per-pass session snapshots handling approximately 25,000 diagnostic passes per month at 99.9 percent success, including takeover by another worker during a pass. The report comes from the team that built the system, and no independent evaluation is available. The workload also consists of bounded diagnostic passes. A multi-day agent that continually discovers new subproblems may accumulate state whose relevance, size, and ownership change during execution.
+
+\Needspace{5\baselineskip}
+
+Long-running work therefore requires more than periodic serialization. Each snapshot should record:
+
+\begin{itemize}
+\tightlist
+\item
+  the event position it incorporates;
+\item
+  the software and schema versions capable of reading it;
+\item
+  the run and plan revision to which it belongs; and
+\item
+  which earlier artifacts remain authoritative.
+\end{itemize}
+
+A replacement worker should reject a snapshot it cannot interpret. Partial loading does not produce partial truth; it invents a state the original run never held.
+
+Retention is a separate decision. Keeping every model response, tool payload, and intermediate artifact indefinitely turns recovery storage into both an uncontrolled cost and an uncontrolled audit surface. The retention policy must preserve the evidence required for recovery while defining when older material may be compacted or removed.
+
+Deduplication records described later in this chapter must survive under that policy. Deleting the record of a completed invocation restores the duplicate-execution risk that the record existed to prevent.
+
+The restore path needs its own test. Start a run and allow it to produce a plan, tool result, progress update, and event sequence. Then remove the worker. A new worker should reconstruct the same completed-step set and select the same next eligible step using only the declared artifacts.
+
+Any dependence on a live session, an untracked local file, or an operator's memory identifies state that the architecture has not declared.
+
+I learned this distinction from a contrary case in my own estate. A 2026 audit of my contribution pipeline found that all thirteen workflow skills constituting the pipeline existed only as unversioned local files, with no backup. That is an uncomfortable result for the author of a chapter about declared state. The files were persistent in the weak sense that they survived process exit, but they had no version history and no tested restore path. I moved them into a versioned repository because a declared artifact that cannot be restored remains an operational single point of failure.
+
+Persistence leaves several agent problems unsolved. It does not limit model cost, prevent a long run from drifting away from its original objective, or eliminate the need to audit accumulated decisions. In some systems, persistence can increase those burdens by preserving every questionable intermediate judgment.
+
+Its narrower benefit is recoverability. After process death, the replacement worker can determine what the system knew, what it accepted as complete, and where uncertainty begins.
+
+\section{When coordination belongs in an engine}\label{when-coordination-belongs-in-an-engine}
+
+The orchestration code Netflix deleted is as informative as the reported reduction in failures. Before the migration, application code coordinated retries, compensating actions, and service state. Afterward, a workflow engine recorded execution history and scheduled application operations from that history. The practitioner account strongly supports the result for this cloud-operations service. It does not isolate which part of the migration caused the improvement or establish the same effect for agent workloads.
+
+An engine earns its cost when it owns facts that no individual worker can recover reliably after a crash. It records which step became eligible, which attempt started, which result committed, which external event arrived, and which retry policy applies next. Workers still perform model calls, tool calls, and domain operations. The engine owns their order and lifecycle. A replacement worker receives its next action from recorded history rather than reconstructing that history from local conventions.
+
+This division places cross-service coordination in one architectural layer. Consider a deployment that reserves capacity, changes traffic, and updates an inventory. Each service can make its local transaction correct while the deployment remains half-finished. A saga treats those transactions as one logical procedure and defines a compensating action for each step that cannot be rolled back directly. When every service implements its own retry and compensation rules, no component holds a complete view of the deployment.
+
+A workflow engine makes that global view durable. A failed capacity reservation remains visible with its retry policy. A completed traffic change stays recorded while the engine waits for compensation. An operator can inspect one execution history instead of inferring order from several service logs. Failure localization improves because the coordinator records the control path and workers report their results into it.
+
+The supporting literature is useful but limited. Laigner et al.~(\href{https://arxiv.org/abs/2103.00170}{2021}) combined a literature review, repository analysis, and a survey of more than 120 practitioners. They found reliability problems concentrated around hand-built sagas and convention-managed consistency. Nadeem and Malik (\href{https://arxiv.org/abs/2204.07210}{2022}) ported a benchmark system containing 22 known bugs to a workflow engine in a single-participant case study and reported that the bugs became easier to localize. Their debugging times were compared with figures reported separately in another study, so the result is not a controlled head-to-head measurement.
+
+Centralized history does not provide one universally correct consistency guarantee. Zhang et al.~(\href{https://arxiv.org/abs/2208.09827}{2022}) surveyed a decade of transactional stream-processing research and found no generally accepted approach, even for computations far more deterministic than agent workflows. Each system selected guarantees around its application characteristics. The absence of a generally accepted approach means that an ``exactly once'' feature label does not establish that an application's state, latency, and external effects fit the advertised guarantee.
+
+\Needspace{5\baselineskip}
+
+The engine boundary should follow the workload. I use three questions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Does meaningful work remain exposed if the process dies mid-flight?
+\item
+  Does the workflow wait for external events?
+\item
+  Does it perform irreversible external effects?
+\end{enumerate}
+
+A yes to any question identifies state that a stateless scheduler may not be able to reconstruct from the current source of record. Three noes usually point toward a timer, a lockfile, and a fresh read from that source.
+
+This is my operational rule rather than an experimentally established threshold. In one \textbf{unverified working artifact} from my live maintenance loop, each run performed approximately 44 seconds of work within a 120-minute interval. An overlap-skip guard fired zero times across 77 runs. An unverified working artifact has a source that was uncommitted at the stated repository revision, with figures read from that repository rather than independently remeasured. It can illustrate one system's mechanism but cannot establish a rate or support a general claim.
+
+That loop held no valuable mid-flight state, waited for no external event, and performed no irreversible effect. A workflow engine would have added history and deployment machinery without improving the observed behavior.
+
+The opposite workload has a different shape. An agent may wait overnight for approval, call several services that cannot share a transaction, or spend substantial money on a model result that should survive a worker restart. A process-local retry loop loses its authority when the process dies. A workflow engine can persist the wait, retain the expensive result, and assign the next operation to another worker while preserving one execution identity.
+
+That capability imposes implementation constraints. Engines that reconstruct control flow from recorded history require workflow code to make the same orchestration decisions when it reads the same history. A clock read, random branch, or changed iteration order inside that code can select a path absent from the recorded execution. Code evolution therefore requires explicit version boundaries. Even a change from a fixed workflow signature to variable arguments can make a long-running execution incompatible with its stored input.
+
+Decomposition creates costs of its own. Child workflows used only to organize code create another execution to inspect and another history boundary to understand. Central coordination can reduce throughput or local autonomy when every small operation must pass through one scheduler and persistence layer. The engine improves visibility by concentrating control, but that concentration also creates contention and operational responsibility.
+
+The integration boundary often costs more than the workflow definition. My durable media integration, another \textbf{unverified working artifact}, required 15 commits across 45 files and added 11,662 lines, including 4,665 test lines. The workflow definition accounted for only a small part of the change. Most of the work established clean payloads, stable execution identities, idempotent external requests, injected-failure gates, and reconciliation with durable storage. These counts describe one system and support no industry-wide cost estimate.
+
+An engine should own coordination without absorbing domain behavior. Application code still determines what constitutes a valid deployment, payment, or agent result. The platform owns durable history, retry scheduling, waiting, and transitions between recorded step states. Keeping that boundary explicit makes engine replacement possible and prevents application correctness from depending on undocumented behavior inside a particular worker.
+
+\section{The interval that cannot be closed}\label{the-interval-that-cannot-be-closed}
+
+A worker sends a merge request, receives success, and dies before recording the completed step. The engine sees an unfinished attempt and sends the step again. My treatment of this interval rests on directional systems research and practitioner accounts. No controlled result establishes that one idempotency design makes agent workflows reliable across workloads.
+
+Redelivery is correct because the engine cannot infer completion from a missing record. This is \textbf{at-least-once delivery}. The runtime continues delivering work until it holds a durable completion record, so one logical step may receive several execution attempts. Durable execution can record a committed step result once within its own history. It cannot eliminate the interval between an external system accepting an operation and the worker recording that result.
+
+That interval remains even when both systems are individually reliable. Suppose attempt A begins step nine under invocation identity \texttt{run-42/step-9}. The worker asks a code host to merge a change, and the host completes the merge. The process dies before the worker records the response. The engine schedules attempt B because its last durable fact says only that step nine started. The code host has moved to a new state while the workflow history still describes an in-flight operation.
+
+The invocation identity must cross that boundary. Attempt B must send the same idempotency key as attempt A. Morling (\href{https://www.morling.dev/blog/building-durable-execution-engine-with-sqlite/}{2025}) describes idempotency keys at side-effect boundaries as the mechanism that makes the execute-then-log crash window safe on replay. The downstream system can then return the stored response for that key or recognize that the requested state already exists and report the same observable result.
+
+An operation is idempotent when repeating it converges on the same observable state as applying it once. The useful contract is that a duplicate becomes indistinguishable from no duplicate.
+
+\begin{verbatim}
+runtime sends request
+    -> external system may commit an effect
+        -> runtime durably records completion
+           ^                          ^
+           |<-- execute-then-log gap->|
+
+process dies inside the gap
+    -> status uncertain
+
+request known not to have executed
+    -> retry safely
+
+status uncertain
+    -> retry only through an idempotency contract
+       or stop for reconciliation
+\end{verbatim}
+
+Key design determines which work the contract covers. A fresh attempt identifier fails because the downstream system sees attempt B as new work. A key scoped only to the user can collapse two legitimate operations into one. The stable key should identify the logical invocation and include enough input or version identity to distinguish genuinely different work. Retries reuse it. New logical work receives a new key.
+
+The downstream implementation also needs an atomic claim on that key. Two workers may receive the same step concurrently after a timeout or lease dispute. If both check for a cached result and then perform the effect before either stores the result, the lookup adds latency without preventing duplication. A unique transactional record, compare-and-set operation, or equivalent mechanism must decide which worker owns the invocation before the effect occurs.
+
+Execution caching can extend the same rule through a call graph. Psarakis et al.~(\href{https://arxiv.org/abs/2312.06893}{2023}) describe a runtime that caches results by invocation identity so a repeated parent call reuses completed child calls. Within that runtime's transactional boundary, retried failed calls, recorded completed results, and call ordering can compose into a strong guarantee. An external service that ignores the invocation identity remains outside that boundary, regardless of the runtime's delivery terminology.
+
+This scope rules out a blanket claim that a completed invocation never runs twice. A step that succeeded externally but remained unrecorded may execute again because the runtime has no completion record to consult. Execution is at least once. Results committed within the runtime boundary may be recorded exactly once. Safety for an in-flight external effect still depends on the contract at that effect's boundary.
+
+Some external systems provide this contract directly. Payment APIs may accept a client-supplied key and bind it to the first accepted request. A database can commit the business change and invocation record in one transaction. A content-addressed object store can make repeated writes of identical content under the same name converge. When a tool offers no equivalent mechanism, the workflow must add an adapter that owns deduplication or treat recovery as an unknown-state decision.
+
+Meyers and Zienert (2025) also report that rewriting operations for idempotency exposed and corrected pre-existing retry defects. The rewrite changed application behavior at the engine boundary. The engine could not infer the required contract from the old code. This remains directional evidence from the adopting team.
+
+Unknown state needs a safe terminal path. In an \textbf{unverified working artifact} containing my guarded-mutation pattern, the worker records an intent claim before an irreversible action, performs the action, and resolves the claim with the observed result. A resolved claim can return its cached result on redelivery. An unresolved claim found during recovery means the effect may or may not have occurred. The workflow stops and asks a human to reconcile the external state.
+
+Guessing in either direction is unsafe. Assuming success can lose work that never happened. Assuming failure can repeat an irreversible effect.
+
+Another \textbf{unverified working artifact} from my fault demonstration makes that boundary visible. A naive pipeline was killed after requesting a merge and before recording completion. Its retry requested the merge again, and the workflow reported success without alerting anyone. Under the same kill placement, the guarded variant requested one merge, emitted one escalation, and marked the workflow failed. The failed outcome was more reliable because it preserved uncertainty instead of fabricating a completed history.
+
+Idempotence also belongs at the durable step boundary before the external side-effect boundary. Model calls are natural durable steps because they can be slow, costly, and irreproducible. Once a model result commits under a stable invocation identity, a retry can reuse it and continue from the same evidence. Reissuing the call may change cost and control flow even when no external database has changed.
+
+The boundary should not surround every function call. Each durable step adds scheduling, serialization, storage, and history-reading work. Cheap, deterministic calculations can simply run again. A durable boundary is justified when work is expensive, slow, externally visible, or impossible to reproduce from recorded inputs.
+
+A boundary can also be too broad. In another \textbf{unverified working artifact}, a transient read shared one deduplication unit with an irreversible mutation. When the read failed, the system marked the whole unit terminal, poisoned the claim, and stopped reporting work it had never performed. A watchdog consulted the same fail-closed store and also went silent. This is narrative illustration rather than evidence for the general design. Separating the retryable read from the mutation claim would have preserved an accurate pending state.
+
+Trofimov et al.~(\href{https://arxiv.org/abs/1907.06250}{2019}) propose describing guarantees through determinism and observable outcomes. Equal inputs should produce equal outputs, and duplicate execution should leave no observable difference. That formulation directs attention toward properties callers can test. It remains one research group's proposal and has not displaced at-least-once and exactly-once terminology in common systems descriptions.
+
+Repeated execution can still converge perfectly on the wrong result. The step needs postconditions that verify its domain outcome, and the workflow needs compensation or escalation when the external system cannot make the operation idempotent. Retry machinery satisfies neither responsibility.
+
+\section{Companion patterns}\label{companion-patterns}
+
+Eleven adjacent entries in the companion catalog refine this recovery contract without introducing another architectural decision. They cover external writes that carry receipts, idempotency keys, and compensating actions; retry behavior expressed as falsifiable invariants; snapshots taken outside the critical path at declared consistency boundaries; and checkpoint cadence chosen from measured recovery costs and failure rates.
+
+Other entries cover committing execution records with the corresponding data change, placing shared agent state behind transactions, beginning event histories with a minimal versioned schema, and designing operations to tolerate reordering.
+
+Three entries have thin support and contribute no evidence to the claims made in this chapter. They propose stating event-coordination guarantees explicitly, attaching postconditions to stochastic steps, and turning repeated plans into reusable blueprints.
+
+\section{Run the crash check}\label{run-the-crash-check}
+
+Choose the agent workflow whose failure midway through a run would have the greatest consequence. Give the run a stable identity, and store its plan, progress, and append-only event history as declared artifacts with named owners. Stop the process after several steps and delete nothing. A replacement worker should be able to identify completed work, pending work, and uncertain external effects from those artifacts alone.
+
+\Needspace{5\baselineskip}
+
+Before introducing a workflow engine, apply the three-question adoption check:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Does valuable state remain exposed if the process dies mid-flight?
+\item
+  Does the workflow wait for external events?
+\item
+  Does it perform irreversible external effects?
+\end{enumerate}
+
+If all three answers are no, use a timer and a lock, then read the source of record again on each run. If any answer is yes, document which coordination facts the engine will own and which domain decisions will remain in application code.
+
+Next, select the retried step with the most dangerous external effect. Give the logical invocation a stable idempotency key, propagate that key into the side-effecting system, and store the completed result under the same identity. Kill the worker after the external effect succeeds but before the completion record commits.
+
+On recovery, the run should do one of three things: return the previously recorded result, converge on the same external state, or stop with an explicit unknown-state escalation. It should never silently assume either success or failure.
+
+Recorded state makes a run resumable. Chapter 9 makes the recovery claim replayable and puts it under measurement.
+
+\section*{Sources and evidence}
+
+The evidence grouping on each entry below comes from its catalog record. Author-system cases in this chapter are narrative illustration and are not part of the evidence base.
+
+\textbf{Make agent state a first-class persistent artifact}
+
+\begin{itemize}
+\tightlist
+\item
+  Directional evidence: Fragkoulis, Carbone, Kalavri \& Katsifodimos (2020). A Survey on the Evolution of Stream Processing Systems. The VLDB Journal (2024). arXiv:2008.00842. (Exactly-once recovery arrived only when state became a first-class managed runtime artifact; implicit-state systems had lossy recovery.)
+\item
+  Corroborating case: Hanlin (Zhou) et al.~(2026). ADEMA: A Knowledge-State Orchestration Architecture for Long-Horizon Knowledge Synthesis with LLM Agents. arXiv:2604.25849. (In a fixed 60-run matrix, removing checkpoint/resume produced the only invalid run.)
+\item
+  Directional evidence: Addy Osmani (2026). ``Long-running Agents'', \href{https://addyo.substack.com/p/long-running-agents}{Elevate newsletter}, 2026-04-30. (Plan file, progress notes, append-only event log outside the context make an agent recoverable and enable full context resets rebuilt from a handoff file.)
+\item
+  Directional evidence: Karthik Halukurike et al.~(2026). ``Blueberry: Force Multiplier For The On-Call Engineer'', \href{https://tech.instacart.com/blueberry-force-multiplier-for-the-on-call-engineer-98c446dfcc12}{Instacart tech blog}, 2026-07-14.
+\end{itemize}
+
+\textbf{Use a durable workflow engine}
+
+\begin{itemize}
+\tightlist
+\item
+  Corroborating case: Nadeem \& Malik (2022). A Case for Microservices Orchestration Using Workflow Engines. ICSE-NIER. arXiv:2204.07210.
+\item
+  Directional evidence: Laigner, Zhou, Vaz Salles et al.~(2021). Data Management in Microservices: State of the Practice, Challenges, and Research Directions. PVLDB 14(13). arXiv:2103.00170. (SLR + repo analysis + 120+ practitioner survey: hand-rolled sagas and convention-managed consistency are where reliability failures concentrate.)
+\item
+  Strong evidence: Jacob Meyers and Rob Zienert (2025). ``How Temporal Powers Reliable Cloud Operations at Netflix'', \href{https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953}{Netflix TechBlog}, 2025-12-15.
+\item
+  Null or conflicting result: Zhang, Soto \& Markl (2022). A Survey on Transactional Stream Processing. The VLDB Journal. arXiv:2208.09827. (Carried as the negative result behind the engine choice; it is about deterministic data pipelines and says nothing about agents.)
+\end{itemize}
+
+\textbf{Make retried steps idempotent}
+
+\begin{itemize}
+\tightlist
+\item
+  Directional evidence: Psarakis et al.~(2023). Styx: Transactional Stateful Functions on Streaming Dataflows. SIGMOD line. arXiv:2312.06893. (Execution caching keyed by invocation identity gives exactly-once composition across call graphs.)
+\item
+  Directional evidence: Meyers and Zienert (2025), \href{https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953}{Netflix TechBlog}, 2025-12-15. (The forced idempotency rewrite alone fixed pre-existing retry issues.)
+\item
+  Directional evidence: Gunnar Morling (2025). ``Building a Durable Execution Engine with SQLite'', \href{https://www.morling.dev/blog/building-durable-execution-engine-with-sqlite/}{morling.dev}, 2025-11-20. (Idempotency keys at side-effect boundaries make the execute-then-log crash window safe on replay.)
+\item
+  Directional evidence: Trofimov, Kuralenok, Marshalkin \& Novikov (2019). Delivery, consistency, and determinism: rethinking guarantees in distributed stream processing. arXiv:1907.06250.
+\end{itemize}

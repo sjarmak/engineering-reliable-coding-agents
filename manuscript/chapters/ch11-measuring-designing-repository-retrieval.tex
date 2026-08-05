@@ -1,0 +1,428 @@
+\chapter{Measuring and designing repository retrieval}
+\label{ch11-measuring-designing-repository-retrieval}
+In my benchmark built from tasks across 73 repositories, two instruments gave different accounts of the same retrieval tool. \href{mailto:Precision@10}{\nolinkurl{Precision@10}}, the proportion of the first ten results judged relevant, rose from 0.095 to 0.313. \textbf{\href{mailto:Recall@k}{\nolinkurl{Recall@k}}}, the fraction of judged necessary items found among the first \(k\) results, rose at \(k = 10\) from 0.120 to 0.272. The share of tasks for which at least one needed file appeared rose from 0.33 to 0.56.
+
+The paired end-to-end reward across 370 tasks moved by only +0.0349, with a bootstrap 95 percent confidence interval of {[}+0.0130, +0.0579{]}, \(n = 370\).
+
+That interval treated all 370 task-level differences as independent. The tasks came from 73 repositories and were also grouped into 20 suites, but the resampling represented neither structure. The interval therefore likely understates uncertainty and should not be read as a valid bound on it.
+
+Chapter 1's rule about choosing the resampling unit applies directly, but promoting the unit from task to repository or suite is not sufficient by itself. Repositories and suites are two groupings over the same tasks. Whether they are nested or crossed determines whether one clustered unit is adequate or whether the analysis requires hierarchical or multiway resampling.
+
+The retrieval measures showed that the tool had become substantially better at placing relevant repository evidence in front of the agent. The end-to-end score showed that the system as a whole changed little. The instruments estimated different events.
+
+That disagreement changed the engineering question. Had I retained only the final reward, I would have treated retrieval as a weak intervention and looked elsewhere. The stage measurements showed that retrieval improved while much of the additional evidence failed to become correct edits. The next investigation therefore belonged downstream, in context assembly, evidence use, generation, or verification.
+
+The reverse pattern would require another explanation. An end-to-end gain without a retrieval gain could come from a model change, a prompt difference, or another uncontrolled part of the pipeline.
+
+Repository retrieval belongs to a causal chain. A task becomes one or more queries, each query searches an index, and ranked results enter a context budget. A model interprets that context before execution and verification turn its output into a scored result. Pass rate records only the state at the end of the chain and cannot identify which transition produced it.
+
+\section{Score retrieval and generation separately}\label{score-retrieval-and-generation-separately}
+
+Chapter 2 used ablations to isolate a component by removing it while holding the surrounding system fixed. Stage-level scoring applies the same attribution discipline within a run. I measure whether the retriever surfaced the evidence the task required, where that evidence appeared, whether it survived the context cutoff, and whether the generator used it. I report those measurements beside final task completion because each describes a different condition for success.
+
+The first condition is \textbf{availability}. The relevant file, symbol, documentation block, or prior decision must exist in the searchable corpus and its index. A retriever cannot return a file omitted by an indexing rule, a generated tree excluded as noise, or a recent change still waiting for an asynchronous update. Treating those cases as ranking failures directs the investigation toward query tuning when the actual defect is corpus coverage or freshness.
+
+The second condition is \textbf{retrieval}. Given an indexed target, the query must return it.
+
+The third is \textbf{placement}. A relevant item can appear too low in the ranking to survive a fixed result depth or token budget.
+
+The fourth is \textbf{contextual sufficiency}. A method signature may be relevant but insufficient when the implementation, callers, or type definition determine the correct edit.
+
+The fifth is \textbf{use}. The model may receive sufficient evidence and still ignore it, misinterpret it, or produce an edit that fails for an unrelated reason.
+
+An end-to-end failure is compatible with failure at any one of these stages, or at several simultaneously. A tool may return the correct method at position twelve, while the context builder retains only ten results and the generator invents an interface from the remaining snippets. The final failure does not reveal whether query formation, ranking, truncation, or generation should change. The trace can, but only when the evaluation records the boundaries between those stages.
+
+\begin{figure}[htbp]
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={The retrieval chain separates availability, retrieval, placement, contextual sufficiency, and use failures across the transitions from task formulation to scored execution and verification.}]{figures/ch11-retrieval-chain.pdf}}
+\caption{The retrieval chain separates availability, retrieval, placement, contextual sufficiency, and use failures across the transitions from task formulation to scored execution and verification.}
+\end{figure}
+
+Pass rate captures only the final state. It cannot reveal which transition failed or which condition governed the result.
+
+A passing task is equally ambiguous. A generator may solve a familiar edit from model knowledge while the retriever returns irrelevant material. A broad retriever may place the answer somewhere in a large dump that exceeds the model's useful attention and still receive credit because the final edit happens to work. Chapter 6's return-everything case achieved recall 1.0 by construction. Correctness at the end of a run does not certify the evidence path that preceded it.
+
+\Needspace{5\baselineskip}
+
+I therefore retain a per-task record containing at least:
+
+\begin{itemize}
+\tightlist
+\item
+  the identifiers of the judged relevant items;
+\item
+  their positions in the returned list;
+\item
+  the subset that entered model context; and
+\item
+  the final task outcome.
+\end{itemize}
+
+When the system exposes citations, tool references, or another credible evidence-use signal, I also record which items the generator appeared to use. A copy of retrieved text in the prompt establishes exposure, not use.
+
+Repository-level code-completion research provides a clean example of this decomposition. RepoBench, from Liu et al.~(\href{https://arxiv.org/abs/2306.03091}{2023}), evaluates retrieval, completion with supplied context, and the combined pipeline as separate conditions. The design distinguishes a system that cannot retrieve useful cross-file context from one that receives the context and cannot complete the code. A better ranker addresses the first failure and leaves the second untouched.
+
+Memory evaluations expose a similar split through different measurements. MemConflict, from Tao et al.~(\href{https://arxiv.org/abs/2605.20926}{2026}), combined final-answer scoring with observations of whether the required memory was absent, ranked too low, retrieved but unused, or used incorrectly. Its systems sometimes answered correctly even though the best reported conflict-recognition score reached only 0.2501.
+
+Memory Circuit Analysis, from Mao et al.~(\href{https://arxiv.org/abs/2605.03354}{2026}), reports a stage-level diagnostic that attributes silent failures to extraction, retention, or retrieval. These results support stage localization, but their memory workloads do not reproduce every constraint of repository-scale software work.
+
+Three newer studies provide directional support for the same measurement shape. SkillEvolBench, from Lei et al.~(\href{https://arxiv.org/abs/2605.24117}{2026}), and EngramaBench, from Acuna (\href{https://arxiv.org/abs/2604.21229}{2026}), examine whether stored or evolved material remains available and useful while also reporting final answers. Wolff and Bennati (\href{https://arxiv.org/abs/2601.07978}{2026}) separate what a memory system retrieves from what the answering model produces. I use these studies to establish direction, not as a numerical basis for repository-retrieval policy.
+
+\section{Retrieval metrics}\label{retrieval-metrics}
+
+When a task requires one item, its \href{mailto:Recall@k}{\nolinkurl{Recall@k}} value is binary: the item either appears among the first \(k\) results or it does not. When several items are required, \href{mailto:Recall@k}{\nolinkurl{Recall@k}} is the fraction found within those results.
+
+The aggregate may be computed as the mean of per-task recall values or as the pooled fraction across all required items. These are different estimands when tasks require unequal numbers of items, so the report should name which one it uses. It must also state what counts as relevant.
+
+A file-level measure asks whether the needed file appeared. A chunk-level measure may require the particular definition, implementation, or surrounding block. Those targets answer different questions and should not share one unlabeled score.
+
+The \textbf{rank} of a needed item is its position in the ordered results, with position one returned first. Items at positions one and ten both count as retrieved at \(k = 10\), although the first consumes less context and is less vulnerable to truncation. \href{mailto:Recall@k}{\nolinkurl{Recall@k}} does not preserve that difference.
+
+When several items are required, I retain each position or report a declared aggregate. One rank value rarely describes the full set.
+
+Retrieval depth is an experimental variable. I sweep \(k\) across a range and plot recall against depth. The \textbf{recall plateau} is the region in which the curve flattens and additional results recover little more required evidence. Fixing \(k\) before inspecting the curve can distort the comparison.
+
+A shallow cutoff can make a viable retriever appear incapable. A deep cutoff can conceal poor ranking because a disordered list still contains the target somewhere among many returned items. The plateau does not determine the operating point by itself. Latency, context consumption, and distractors may justify stopping earlier. It shows the recall the ranker can reach and the marginal number of returned items required to reach it.
+
+\begin{figure}[htbp]
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={An unmeasured recall curve rises and plateaus with retrieval depth, but a shallow cutoff leaves gains unrealized, a deep cutoff can mask poor ranking, and latency, context use, or distractors may justify stopping earlier.}]{figures/ch11-recall-depth.pdf}}
+\caption{An unmeasured recall curve rises and plateaus with retrieval depth, but a shallow cutoff leaves gains unrealized, a deep cutoff can mask poor ranking, and latency, context use, or distractors may justify stopping earlier.}
+\end{figure}
+
+Shallow cutoffs understate retrieval capability, while deep cutoffs can hide poor ranking. Latency, context consumption, and distractors may justify stopping before the plateau.
+
+Multiple retrieval channels produce ordered lists whose numeric scores may have incompatible meanings. BM25, a lexical ranking function based on term occurrence and document statistics, can produce values well above one. Cosine similarity between embedding vectors usually occupies a bounded interval. Adding or averaging their raw scores gives arbitrary influence to whichever implementation emits larger numbers.
+
+\textbf{Reciprocal-rank fusion} combines lists by position instead. Each item receives a contribution such as \(1/(c+r)\) from each channel, where \(r\) is its rank and \(c\) is a fixed damping constant. The fused order reflects agreement and placement across lists without assuming comparable score scales.
+
+Each metric remains incomplete. \href{mailto:Recall@10}{\nolinkurl{Recall@10}} does not show whether ten falls before or after the recall plateau. Mean rank excludes or obscures tasks in which the target never appeared unless missing results receive an explicit convention. A fused list may preserve coverage when one channel fails, but that failure remains visible only if the original channel results are retained.
+
+Stage-level evaluation requires relevance judgments. In a curated benchmark, maintainers may identify the file, symbol, span, or dependency set needed for each task. In a production repository, relevance may be plural and conditional. One correct patch may rely on an interface declaration and a caller. Another may use the implementation and a test. Declaring only one path relevant can penalize an equally valid evidence route.
+
+When the evaluation warrants the expense, I construct judgments from the accepted solution, dependency structure, and expert review. I retain graded labels when an item can be useful without being sufficient. A class declaration might be relevant, while the concrete override is necessary for sufficiency. Whatever schema is used, the record should state what qualified an item and which valid solution paths the reviewers considered.
+
+The cost limits where this decomposition can be applied. Repository-scale relevance judgments require people who understand both the task and the codebase, and repository changes can invalidate them. Sampling controls that expense. Annotate a stratified subset, preserve the adjudication record, and use it to diagnose the larger evaluation without pretending that unlabeled tasks have measured retrieval quality.
+
+A proxy based only on file overlap with one reference patch is cheaper and should be reported as that proxy.
+
+\Needspace{5\baselineskip}
+
+Five terms help describe retrieved context:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Relevance} asks whether an item bears on the task.
+\item
+  \textbf{Sufficiency} asks whether the returned set contains enough evidence to act correctly.
+\item
+  \textbf{Isolation} asks whether the evidence is separated from material likely to mislead the model.
+\item
+  \textbf{Economy} measures the context consumed to convey the evidence.
+\item
+  \textbf{Provenance} records where the item came from and which version it represents.
+\end{itemize}
+
+This vocabulary comes from a position paper by Vishnyakova (\href{https://arxiv.org/abs/2603.09619}{2026}) and is not itself a measurement protocol. Each property requires an operational definition tied to the evaluated system before it can enter a score.
+
+Evidence use is harder to measure than exposure. Model-generated citations may be incomplete or retrospective. Removing one retrieved item and rerunning the task is an ablation, but model variability may change the result for reasons unrelated to that item. Attention weights do not establish causal use.
+
+\Needspace{5\baselineskip}
+
+I therefore combine the available signals and state what each supports:
+
+\begin{itemize}
+\tightlist
+\item
+  Exposure logs show what the model received.
+\item
+  Citations show what the model claimed to use.
+\item
+  Controlled removal across repeated runs estimates whether an item changed the outcome.
+\end{itemize}
+
+This decomposition also changes how verbose retrieval should be interpreted. Returning more material generally raises the chance that relevant evidence appears, but it can reduce economy, isolation, and sometimes final performance. Precision and recall should therefore be reported with context-token use and completion score.
+
+A system that improves recall by filling the context window has made a different tradeoff from one that promotes the same evidence into its first few results.
+
+Stage scoring is well established in benchmarked retrieval pipelines and less established in end-to-end agent evaluation. Agents reformulate queries, inspect results, open additional files, and change direction during a run. One static top-\(k\) list does not represent that trajectory.
+
+\Needspace{5\baselineskip}
+
+I record each retrieval event with:
+
+\begin{itemize}
+\tightlist
+\item
+  the query;
+\item
+  retrieval channel;
+\item
+  index version;
+\item
+  returned results and ranks;
+\item
+  the subset selected into context; and
+\item
+  the task state when retrieval occurred.
+\end{itemize}
+
+The evaluation can then ask whether the required evidence ever appeared, whether it appeared before the decision that needed it, and whether a later query repaired an earlier miss.
+
+This record supports engineering decisions that the final score cannot. A missing indexed target, weak recall before the plateau, strong eventual recall with poor early ranks, and a relevant item excluded from context each identify a different stage. The categories are not perfectly independent, but they make the next ablation narrower and more informative.
+
+\section{Recover the evidence a single lane misses}\label{recover-the-evidence-a-single-lane-misses}
+
+My literature-review pipeline once ran with its semantic search lane down while lexical search continued returning plausible results. Nothing in the completed reviews revealed that one channel was missing. After I restored the lane and repeated the searches, the combined system surfaced 64 additional papers across nine queries for one review and 42 across seven queries for another. Manual curation retained 12 and 7 of them.
+
+This case illustrates the danger of a single-lane failure: the output can remain coherent. Lexical search still returns documents containing the query terms, so operators see populated result lists rather than an outage. The missing papers become missing claims, qualifications, and related work downstream. The example does not estimate how many sources a semantic lane will recover in general. It shows why I make both lane health and lane contribution observable even when another channel still appears to work.
+
+Each retrieval lane has characteristic blind spots. Lexical systems rank through shared tokens. They are strong when the query contains a rare identifier, exact error string, configuration key, function name, or the spelling used in code. They weaken when a task describes behavior using language different from the implementation. A request to ``stop duplicate jobs after a worker restart'' may depend on code named \texttt{claim\_epoch}, \texttt{lease\_owner}, or \texttt{dedupe\_key}, even though none of those terms appears in the request.
+
+CodeSearchNet, from Husain et al.~(\href{https://arxiv.org/abs/1909.09436}{2019}), framed this as a vocabulary gap between natural-language intent and source code. Repository agents face a wider form of the same problem because their queries combine prose, symbols, stack traces, and partial hypotheses. An embedding lane can connect semantically related text with little token overlap. It may retrieve a lease-recovery routine for the duplicate-job request even when the task never uses the routine's identifiers.
+
+The complement runs in the other direction. Semantic retrieval may place conceptually similar utilities near one another while missing the exact declaration that governs an edit. A query containing \texttt{ERR\_REPLAY\_DIVERGED}, a database column name, or a generated type gives lexical search unusually discriminating evidence. Mapping those characters into a semantic neighborhood can discard the rarity that made them useful.
+
+The strongest code-specific evidence for retaining both lanes comes from an industrial study. Across 1,669 internal WeChat repositories and 26 language models, Yang et al.~(\href{https://arxiv.org/abs/2507.18515}{2025}) found that combined lexical and semantic retrieval performed best for closed-source code completion. The channels recovered complementary evidence rather than acting as interchangeable versions of one ranking function.
+
+That result does not establish the same ordering for every repository agent or newer embedding model. The workload was industrial, dominated by large C++ codebases and completion-style tasks. The experimental design transfers more readily than the result: run each lane independently on the operated corpus and measure which relevant items each uniquely recovers.
+
+Production reports and late-interaction research point in the same direction without settling the question. A production account of agent memory from Trautmann (2026) describes parallel channels fused by rank as a deployed default. Adaptive memory retrieval, from Yan et al.~(\href{https://arxiv.org/abs/2603.16496}{2026}), and late-interaction retrieval, from Khattab and Zaharia (\href{https://arxiv.org/abs/2004.12832}{2020}), support retaining complementary representations rather than any specific fusion policy. None provides code-specific evidence for the effect of fusion.
+
+I execute the channels separately and preserve their original result lists. The lexical lane records its query, tokenizer, filters, and index version. The semantic lane records its query, embedding model, filters, and vector-index version. Per-lane \href{mailto:Recall@k}{\nolinkurl{Recall@k}} and target ranks show what each channel contributes. The fused list is a separate stage with its own recall, ranks, context consumption, and downstream completion score.
+
+Rank fusion is necessary because channel scores do not share a unit. Suppose lexical search returns an exact symbol with a BM25 score of 18, while semantic search returns a related file with cosine similarity 0.84. The difference between 18 and 0.84 says nothing about their relative relevance. Multiplying the cosine score by 100 would reverse the implicit weighting without changing the semantic order. Any sum of raw scores therefore embeds an arbitrary scaling decision.
+
+\textbf{Reciprocal-rank fusion} combines lists through position rather than score magnitude. An item receives a contribution such as \(1/(c+r)\) from each lane, where \(r\) is its rank and \(c\) is a fixed damping constant. An item ranked first by one lane and fifth by another receives support from both. An exact identifier ranked first lexically but absent semantically can remain competitive. A conceptual match ranked moderately in both lanes can rise above results supported by only one.
+
+The damping constant controls how quickly contributions fall with rank. It belongs in the recorded configuration and should be selected before inspecting completion outcomes. Choosing it afterward creates another researcher degree of freedom of the kind Chapter 1 describes.
+
+Fusion does not make agreement equivalent to relevance. Two lanes may share an ingestion error, retrieve the same stale version, or favor a heavily duplicated utility. Duplicate chunks can occupy several positions and create the appearance of independent support. I deduplicate stable item identities before or during fusion and retain provenance so that several representations of one source do not count as separate evidence.
+
+Filters also belong in each lane's record. Restrictions by language, repository area, branch, generated-code status, or modification time can improve isolation. A mistaken filter makes relevant evidence unreachable. When lanes apply different filters, their measured retrieval quality includes a corpus-selection difference as well as a ranking difference. A useful comparison either holds the eligible corpus fixed or declares corpus selection part of the lane being evaluated.
+
+Versioned corpora create a particular risk for semantic retrieval. An obsolete implementation may be extremely close to the query and structurally similar to current code while prescribing an invalid interface. Such a result becomes harmful when the generator treats similarity as authority. I record source revision and freshness with every result so the freshness gate in Chapter 12 can reject evidence whose semantic closeness exceeds its authority.
+
+Every added lane also adds cost. It requires index construction, storage, query compute, operational monitoring, and another source of distractors. Parallel execution can reduce wall-clock latency relative to sequential search, but it does not remove compute or maintenance cost. A lane belongs in the stack when it recovers useful evidence on the operated workload or supplies resilience the system needs.
+
+Demand may be asymmetric. In one corpus served by my systems, I observed 7,993 keyword calls and 2,449 semantic calls across site traffic and benchmark runs. Those counts do not measure answer quality and reflect the interfaces and users exposed by that system. They do show that replacing lexical retrieval with semantic retrieval would have ignored most expressed demand, even though the semantic lane remained necessary for vocabulary gaps.
+
+\Needspace{5\baselineskip}
+
+I evaluate an added lane through a paired ablation. The same tasks run with:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  the existing lane;
+\item
+  the added lane alone; and
+\item
+  fused results under the same retrieval and context budgets.
+\end{enumerate}
+
+Because outcomes are paired by task, the analysis uses per-task differences rather than comparing aggregate recall values alone. I sweep retrieval depth for each original list and the fused list because fusion can move the point where recall plateaus. The per-task record identifies targets found only lexically, only semantically, by both lanes, or by neither.
+
+Identifier-heavy tasks need their own stratum. Aggregate recall can conceal a fusion policy that helps prose queries while demoting exact symbols. I identify these tasks from task construction and repository artifacts before inspecting outcomes. Error-string lookup, symbol navigation, configuration lookup, and natural-language behavior queries may benefit from different mixtures. The strata should remain measurements of the workload rather than becoming routing rules justified by a small result.
+
+The companion catalog contains more elaborate retrieval paths: explicit recovery across lexical gaps, iterative re-querying when a draft exposes missing context, retrieval gates based on expected benefit, investment in whichever end of the retrieval-and-generation pipeline is limiting, and a cheap-first funnel followed by reranking. Each is useful only when the operated system exhibits a failure that calls for it. None repairs an unobserved channel outage or makes raw scores commensurate.
+
+The operational test is whether fusion recovers relevant evidence that the current lane systematically misses without consuming more context than the generator can use. I inspect the recovered items, their ranks, and the tasks whose outcomes they change. A lane that contributes only duplicates and stale neighbors has added cost without adding usable evidence, regardless of its semantic sophistication.
+
+\section{Preserve code structure inside the retrieval unit}\label{preserve-code-structure-inside-the-retrieval-unit}
+
+Replacing fixed line windows with syntax-aware chunks increased \href{mailto:Recall@5}{\nolinkurl{Recall@5}} by 4.3 percentage points on RepoEval, a repository-level retrieval and completion benchmark, in the cAST study from Zhang et al.~(\href{https://arxiv.org/abs/2506.15655}{2025}). The same study reported a 2.67-percentage-point \href{mailto:Pass@1}{\nolinkurl{Pass@1}} gain on SWE-bench generation across languages.
+
+These are modest end-to-end changes. They are still large enough to investigate at the chunking-policy layer because the intervention changes neither the model nor the information present in the repository.
+
+The chunking policy defines the units a retriever can rank and a context builder can select. An index rarely stores an entire repository as one document. It divides files into spans, attaches identifiers and metadata, and represents each span for lexical or semantic search. Those spans become the objects over which \href{mailto:Recall@k}{\nolinkurl{Recall@k}} is measured. A relevant function cannot rank as one coherent item when the chunker separates its signature, body, and surrounding contract into unrelated records.
+
+Fixed windows choose boundaries by line or token count. They are simple, deterministic, and applicable to any text format. Their weakness follows from ignoring code structure. A 100-line window may end after a function signature and place its body in the next chunk. Another may combine the end of one class, several imports, and the beginning of an unrelated helper merely because those lines are adjacent.
+
+Overlap reduces some boundary damage without eliminating it. Repeating twenty lines between windows may preserve a short definition, but it also duplicates imports, comments, and boilerplate across many indexed records. Long methods still split. Repeated spans can crowd result lists and distort fusion unless the system deduplicates them. Overlap trades index size and redundancy for fewer severed boundaries.
+
+An abstract syntax tree, or AST, represents source code as nested syntactic constructs produced by a parser. A class contains methods, a method contains statements and expressions, and a conditional contains branches. Syntax-aware chunking uses these structures as boundary constraints while still respecting a size budget. It does not require every AST node to become a separate retrieval unit.
+
+The process begins with a file-level tree and a maximum chunk size expressed in tokens or another measure tied to the context system. When a node fits, the chunker retains it as a candidate. When it is too large, the chunker descends into its children and repeats the test. Small adjacent siblings are merged while the combined representation remains within budget. The resulting units tend to preserve complete functions, methods, classes, or coherent statement groups rather than arbitrary line intervals.
+
+Comments, decorators, attributes, and signatures require explicit attachment rules. A parser may represent them as siblings or metadata even though a programmer treats them as part of the following declaration. Losing a decorator can remove authorization or routing behavior. Losing a leading comment can remove a constraint not expressed in code. I test these attachment rules by language because the generic tree shape may not represent the unit a programmer needs.
+
+Imports and type definitions introduce another choice. Copying all imports into every chunk improves local interpretability at a high token cost. Keeping imports only in a file header preserves the original structure but can leave a retrieved method with unresolved names. A practical design records stable file and symbol metadata on every chunk and allows the context assembler to retrieve a small companion span when import or type resolution is needed. Sufficiency and economy determine the policy. The tree alone does not.
+
+The concept is language-general, but parsing is not. Every supported language needs a parser compatible with the repository's syntax version, including extensions, generated forms, and incomplete files. Parse failures require an explicit fallback, such as fixed windows marked with a failure flag. Silently dropping an unparseable file creates a corpus-coverage defect that later resembles a retrieval miss.
+
+Incremental indexing adds state-management requirements. When a file changes, the system must parse the new version, retire old chunk identities, write the replacements, and update references without exposing an empty or mixed version to queries. Identities based only on line offsets churn whenever lines are inserted near the top of a file. Symbol-qualified identities survive some edits, but overloaded, anonymous, or generated constructs still need versioned disambiguation. Every chunk should record the source revision from which it was derived.
+
+Syntax is only a partial account of meaning. A large function may contain several responsibilities that deserve separate units. A small method may be unintelligible without a protocol implemented across nearby methods. Macros, reflection, generated bindings, configuration, and build files may carry semantics an AST does not represent. Syntax-aware boundaries improve structural coherence without discovering every semantic dependency.
+
+The reported 4.3-percentage-point retrieval gain should be interpreted at that layer. It shows that changed chunk boundaries moved relevant code into the first five results on the studied tasks. It does not show that structural chunking repairs a missing repository, stale index, incorrect query, or retriever unsuited to code. A chunker can shape only the items that enter the index and only the evidence the ranking system can recognize.
+
+The 2.67-percentage-point generation gain is smaller and farther downstream. Better retrieval must survive context selection and then alter the model's output. The attenuation is consistent with the stage chain developed earlier, although the study does not identify one cause for it. Some newly retrieved chunks may be redundant, appear below the usable cutoff, or fail to change generation.
+
+\Needspace{5\baselineskip}
+
+I compare chunking policies on identical repository revisions and tasks. The fixed-window and syntax-aware indexes use the same:
+
+\begin{itemize}
+\tightlist
+\item
+  eligible files;
+\item
+  retrieval methods;
+\item
+  queries;
+\item
+  filters; and
+\item
+  top-\(k\) sweeps.
+\end{itemize}
+
+Relevance judgments identify both the required symbol and acceptable supporting neighbors. I then compare chunk recall, target rank, returned tokens, duplicated content, parse-failure coverage, and final task completion.
+
+Chunk recall requires a declared unit. If the target is a method, a chunk containing one line from that method should not count as fully relevant. The chunk must contain the task-specific evidence named in the judgment, such as the complete signature and relevant branch. Partial matches can be reported separately when they help explain a failure. File-level recall remains useful for corpus and coarse-retrieval diagnosis, but it cannot establish that the returned chunk is interpretable.
+
+Chunk size needs its own sweep. Very small syntax-aware chunks improve isolation but can remove relationships required to understand state changes. Very large chunks preserve local structure while consuming more context and reducing the number of distinct candidates the model can inspect. I sweep size together with retrieval depth because the two controls interact. Ten 200-token chunks and ten 1,500-token chunks impose different costs even though both are reported as \href{mailto:Recall@10}{\nolinkurl{Recall@10}}.
+
+The implementation should also preserve ordering and provenance. When several chunks from one file enter context, source order can help the model reconstruct control flow. Every chunk should identify its file, symbol path, source revision, and line range so a failed completion can be traced back to the exact indexed representation.
+
+Structural chunking is justified when its measured benefit covers parser maintenance and indexing complexity for the supported languages. A repository dominated by languages with reliable parsers and long structured files is a strong candidate. A heterogeneous corpus containing templates, notebooks, generated fragments, and proprietary languages may require mixed policies. The appropriate retrieval unit follows the workload and the structure available within it.
+
+The final comparison returns to decomposed scoring. I measure whether syntax-aware chunks recover the required evidence and where they rank, then whether those chunks improve completion under the same context budget. Better chunk recall with unchanged completion remains a useful diagnostic result. It shows that the chunker repaired its stage and that the remaining limitation lies elsewhere in the path.
+
+\section{Run the retrieval protocol on the operated workload}\label{run-the-retrieval-protocol-on-the-operated-workload}
+
+Begin with the stack that serves real tasks. The first version can use a small sample from one query class, sized to the available annotation budget and stratified across the repositories or task shapes relevant to the decision. Judge the evidence each task requires and instrument the production retrieval path. A retrieval-depth sweep on that stratum can answer one question: whether the current top-\(k\) cutoff should change for that query class.
+
+\Needspace{5\baselineskip}
+
+For each task, identify the file, symbol, or evidence set that a competent solution could use. Record:
+
+\begin{itemize}
+\tightlist
+\item
+  every retrieval query;
+\item
+  the index revision;
+\item
+  returned item identities and ranks;
+\item
+  which items entered model context; and
+\item
+  the final task outcome.
+\end{itemize}
+
+When the system exposes citations or another credible evidence-use signal, preserve it. Do not treat context exposure alone as proof that the model used the evidence.
+
+Compute file-level and chunk-level recall separately. Sweep retrieval depth because a cutoff such as ten is usually a tool default rather than a measured operating point. Plot recall against depth, identify where additional results recover little new evidence, and record latency and context-token use at each point.
+
+Select the operating point under the workload's context and cost constraints. Retain the full sweep with the result so another reader can see what the chosen cutoff excluded.
+
+Separate tasks by the evidence they require. Exact symbols, error strings, natural-language behavior descriptions, cross-file dependencies, and version-sensitive questions exercise different retrieval paths. Define those strata before comparing systems. A gain concentrated in one query class may justify routing or an additional lane even when its aggregate effect is small.
+
+If the production stack has only one retrieval lane, add the missing lexical or semantic lane as a controlled arm. Run each lane independently and preserve its original ranking. Fuse ranks rather than raw scores because the score scales are not commensurate.
+
+\Needspace{5\baselineskip}
+
+Measure:
+
+\begin{itemize}
+\tightlist
+\item
+  which relevant items each lane uniquely recovers;
+\item
+  which stale or duplicated items each adds;
+\item
+  how fusion changes target ranks;
+\item
+  how much context the fused list consumes; and
+\item
+  whether completion changes under a fixed context budget.
+\end{itemize}
+
+Keep lane health visible in production so a populated result list cannot conceal the failure of one channel.
+
+When reliable parsers exist, build a second index using syntax-boundary chunks. Hold corpus eligibility, repository revision, task set, queries, and retriever fixed. Sweep chunk size and retrieval depth together, and report parse failures and fallback coverage.
+
+\Needspace{5\baselineskip}
+
+Compare the syntax-aware and existing chunkers on:
+
+\begin{itemize}
+\tightlist
+\item
+  target rank;
+\item
+  file and chunk recall;
+\item
+  returned tokens;
+\item
+  duplicated content;
+\item
+  parse and indexing coverage; and
+\item
+  final task completion.
+\end{itemize}
+
+The measured difference, including no meaningful difference, determines whether parser maintenance and indexing complexity belong in that repository.
+
+Interpret the resulting table by stage. Missing targets indicate a corpus-coverage, indexing, or freshness problem. Targets still absent when the recall curve plateaus indicate a query or retrieval-lane problem. Targets retrieved but ranked beyond the context cutoff indicate a ranking, fusion, or context-selection problem.
+
+When sufficient evidence reaches the model but completion remains unchanged, move the next ablation downstream. Investigate evidence use, generation, execution, or verification rather than continuing to modify retrieval.
+
+This decomposition narrows the next intervention without treating any one retrieval metric as a measure of the whole system.
+
+The retrieval depths, fusion constants, and chunk sizes in this chapter are not recommended defaults. Each is a parameter whose effect must be measured under the repository distribution, task mix, model, and context budget in operation.
+
+Chapter 12 turns to the architecture around these measurements: cheap retrieval funnels, typed indexes, and the conditions under which apparently relevant context should be rejected as stale.
+
+\section*{Sources and evidence}
+
+The evidence grouping on each entry below comes from its catalog record. Author-system cases in this chapter are narrative illustration and are not part of the evidence base.
+
+\textbf{Score retrieval and generation separately}
+
+\begin{itemize}
+\tightlist
+\item
+  Strong evidence: Liu, T., et al.~(2023), ``RepoBench: Benchmarking Repository-Level Code Auto-Completion Systems,'' ICLR 2024, arXiv:2306.03091. (R/C/P decomposition localizes failure to retrieval vs completion vs pipeline stage.)
+\item
+  Strong evidence: MemConflict (Tao et al.~2026), arXiv:2605.20926. (Black-box + white-box memory evaluation; localizes missing vs low-ranked vs retrieved-but-unused; best reported conflict-recognition score 0.2501.)
+\item
+  Strong evidence: Memory Circuit Analysis (Mao et al.~2026), arXiv:2605.03354. (Stage-level diagnostic localizing a silent failure to the responsible memory operation; extraction/retention/retrieval fail silently behind fluent answers.)
+\item
+  Directional evidence: SkillEvolBench (Lei 2026), arXiv:2605.24117. Direction only.
+\item
+  Directional evidence: EngramaBench (Acuna 2026), arXiv:2604.21229. Direction only.
+\item
+  Directional evidence: Cost-and-Accuracy study (Wolff \& Bennati 2026), arXiv:2601.07978. Direction only.
+\item
+  Corroborating case: Vishnyakova, O. (2026), arXiv:2603.09619. (Names the five context-quality criteria; position paper.)
+\end{itemize}
+
+\textbf{Hybrid retrieval fused on ranks}
+
+\begin{itemize}
+\tightlist
+\item
+  Strong evidence: Yang, Z., et al.~(2025), ``A Deep Dive into Retrieval-Augmented Generation for Code Completion: Experience on WeChat,'' arXiv:2507.18515 (industrial study).
+\item
+  Strong evidence: CodeSearchNet vocabulary-gap framing (Husain 2019), arXiv:1909.09436. (Exact/lexical match as a first-class lane fused on ranks; score fusion broken by construction.)
+\item
+  Directional evidence: Cloudflare ``Agents that remember'' (Trautmann 2026), the production account carrying the shipped default of parallel channels fused with reciprocal-rank fusion. No canonical URL is on record for this item. Direction only.
+\item
+  Directional evidence: AdaMem (Yan et al.~2026), arXiv:2603.16496, carried in the same evidence record as the Cloudflare account. Its own retrieval route is semantic retrieval with conditional graph expansion rather than rank fusion, so it supports retaining a complementary semantic lane only. Direction only.
+\item
+  Directional evidence: ColBERT (Khattab and Zaharia 2020), arXiv:2004.12832. Direction only.
+\end{itemize}
+
+\textbf{Chunk on AST boundaries}
+
+\begin{itemize}
+\tightlist
+\item
+  Strong evidence: Zhang, Y., et al.~(2025), ``cAST: Enhancing Code Retrieval-Augmented Generation with Structural Chunking via Abstract Syntax Tree,'' arXiv:2506.15655.
+\item
+  Corroboration for this entry: none on record. The other two entries in this chapter include author-system cases as illustrations rather than independent sources.
+\end{itemize}

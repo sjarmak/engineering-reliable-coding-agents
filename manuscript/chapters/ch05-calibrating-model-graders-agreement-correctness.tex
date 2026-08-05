@@ -1,0 +1,278 @@
+\chapter{Calibrating model graders and separating agreement from correctness}
+\label{ch05-calibrating-model-graders-agreement-correctness}
+Two graders that mark every submission PASS will agree on every item. Their agreement is 100 percent, but their usefulness is zero. In an easy stream, most submissions may genuinely pass, yet neither grader has shown that it can distinguish a defect from a success.
+
+This failure is easy to ship when the graders are models. An \textbf{LLM-as-judge} is a model used to evaluate another system's output. My migration-evaluation framework gates its two judges on Cohen's kappa rather than raw agreement because percent agreement can overstate grader quality when one label dominates the sample. The agreement floor, kappa threshold, and minimum trial count were fixed before either judge ran. The gate has been exercised only against replay fixtures, not a live evaluation, so it illustrates a design decision rather than supplying a field result.
+
+The measurement problem comes before the choice of threshold. A grader may agree with another grader, match a human label, track an independently verifiable outcome, or assign well-calibrated probabilities. These are different properties. A grader can satisfy one while failing another, but that distinction disappears when its labels are stored as though they were ground truth.
+
+Chapter 4 separated tasks whose correctness cannot be established through execution alone. Model grading can provide a validation lane for some of them, but only when the grader is treated as an instrument under test. Before its decisions control releases, rankings, rewards, or training data, the evaluation must establish that those decisions track the judgment the system actually needs. That test must reflect the class balance and error costs the grader will encounter in operation.
+
+\section{Build the reference labels before the grader}\label{build-the-reference-labels-before-the-grader}
+
+Calibration begins with a \textbf{rubric}, the written criteria used to assign a score or label. Domain experts should define its categories, decision rules, exclusions, and examples because the resulting labels encode domain judgment. A prompt engineer can make the wording consistent, but only someone with the relevant expertise can decide which omission is material in a medical summary or which behavioral mismatch makes a migration unsafe.
+
+The categories must be specific enough for two experts to apply independently. ``High quality'' leaves the standard inside the rater's judgment. ``PASS if every requested behavior is present, no stated constraint is violated, and every factual claim is supported by the supplied record'' identifies observations that raters can compare. The examples should include boundary cases and counterexamples, especially cases on which experts initially disagreed.
+
+\section{Agreement before automation}\label{agreement-before-automation}
+
+\textbf{Inter-rater reliability} measures how consistently independent raters assign labels to the same items. It is a prerequisite for treating their labels as a reference. When experts cannot apply the rubric consistently, a model that reproduces one expert's decisions may be learning an unstable convention rather than measuring the intended property.
+
+Raw percent agreement answers only one question: on what share of items did the labels match?
+
+Consider 100 items evaluated by two raters. Each assigns PASS to 90 items and FAIL to 10. They disagree on 10 items, with each rater assigning PASS to five of those items and FAIL to the other five. Their observed agreement is therefore 90 percent.
+
+That number appears strong until label prevalence is taken into account. Given the raters' marginal label frequencies, independent assignments would be expected to agree on 82 items:
+
+\begin{verbatim}
+expected PASS agreement: 0.90 × 0.90 = 0.81
+expected FAIL agreement: 0.10 × 0.10 = 0.01
+total expected agreement: 0.82
+\end{verbatim}
+
+Cohen (\href{https://doi.org/10.1177/001316446002000104}{1960}) defined kappa as the proportion of possible agreement beyond chance that the raters achieved:
+
+\begin{verbatim}
+kappa = (observed agreement - expected agreement)
+    / (1 - expected agreement)
+\end{verbatim}
+
+For this example:
+
+\begin{verbatim}
+kappa = (0.90 - 0.82) / (1 - 0.82)
+  = 0.08 / 0.18
+  approximately 0.44
+\end{verbatim}
+
+The raters agreed on 90 percent of the items, but much of that agreement followed from both assigning PASS almost all the time. Their agreement beyond what the label frequencies alone would predict is only moderate.
+
+The always-PASS pair is the degenerate limit of this calculation. Observed agreement and expected agreement are both 100 percent, leaving no variation from which above-chance agreement can be estimated. Kappa is therefore undefined, not perfect.
+
+\begin{figure}[htbp]
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Cells of 85, 5, 5, and 5 produce 90\% observed versus 82\% expected agreement and kappa about 0.44; two always-PASS graders produce 100\% observed and expected agreement but undefined kappa.}]{figures/ch05-agreement-kappa.pdf}}
+\caption{Cells of 85, 5, 5, and 5 produce 90\% observed versus 82\% expected agreement and kappa about 0.44; two always-PASS graders produce 100\% observed and expected agreement but undefined kappa.}
+\end{figure}
+
+A 100-item example separates observed agreement from agreement expected by chance. When every rating is PASS, kappa is undefined because the labels contain no variation.
+
+Cohen's kappa applies to two raters and estimates chance agreement from each rater's observed category frequencies. Fleiss (\href{https://doi.org/10.1037/h0031619}{1971}) extended chance-corrected agreement to multiple raters and to designs in which different raters evaluate different items. Scott (\href{https://doi.org/10.1086/266577}{1955}) defined a related two-rater measure, Scott's pi, which uses a pooled category distribution to estimate chance agreement. None of these measures can make an ambiguous rubric reliable. They make that ambiguity harder to hide behind a high raw agreement rate.
+
+Because expected agreement depends on the observed category frequencies, kappa values calculated under different label prevalences are not directly comparable. A kappa value reported without the underlying category distribution omits the quantities that determined it.
+
+No universal kappa threshold converts a set of labels into truth. An acceptable level depends on the decision being made, the prevalence of each category, the number of categories, and the cost of disagreement. The useful process is iterative. Experts label the same sample independently, inspect their disagreements, revise the category definitions, and repeat the cycle on fresh items. Cemri et al.~(\href{https://arxiv.org/abs/2503.13657}{2025}) followed this process with six annotators until Cohen's kappa reached 0.88. Only then did they test an automated annotator before using it at scale.
+
+The comparison set must remain outside the grader's development path. A held-out expert-labeled set contains items labeled by domain experts and excluded from prompts, examples, fine-tuning data, threshold selection, and any other material used to construct the grader. Orosz and Husain (\href{https://newsletter.pragmaticengineer.com/p/evals}{2025}) describe the same held-out validation practice and report class-specific rates rather than raw agreement. Their account provides practitioner experience rather than a controlled result.
+
+A random row-level split is not sufficient when paraphrases, related tasks, or multiple outputs from the same underlying case can cross the boundary. Chapter 3's contamination model applies directly. When an answer-bearing example appears during grader development, reproducing that example can look like independent judgment.
+
+Natural sampling creates a second distortion. Suppose a deployment stream contains 950 routine passes, 30 borderline cases, and 20 clear defects per 1,000 items. A random validation sample of 100 items will contain about two clear defects. Missing one changes the estimated defect-detection rate by 50 percentage points. Meanwhile, a grader that accepts every item can still appear highly accurate because routine passes dominate the sample.
+
+\textbf{Stratified sampling} fixes how many items are drawn from each stratum, such as score band, task type, or outcome class. A validation set might include 40 routine passes, 40 borderline cases, and 40 defects even though those categories occur at very different rates in deployment. This design places enough rare and costly cases under observation to measure performance on them.
+
+The balanced sample does not, by itself, estimate aggregate deployment performance. Any aggregate intended to represent production must reweight the strata according to their deployment frequencies.
+
+\begin{figure}[htbp]
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Equal-length bars compare 950 routine, 30 borderline, and 20 defect deployment items with natural 95, 3, and 2 and stratified 40 each requiring reweighting; one missed defect changes detection by 50 percentage points.}]{figures/ch05-sampling-prevalence.pdf}}
+\caption{Equal-length bars compare 950 routine, 30 borderline, and 20 defect deployment items with natural 95, 3, and 2 and stratified 40 each requiring reweighting; one missed defect changes detection by 50 percentage points.}
+\end{figure}
+
+A natural sample of 100 items from this 1,000-item stream is expected to contain only two clear defects. Missing one changes the estimated defect-detection rate by 50 percentage points. Stratified sampling places more defects under observation, but any aggregate intended to represent deployment must reweight the strata to their production frequencies.
+
+The number of cases required in each stratum is a power and precision question of the kind Chapter 1 develops. The precision of an estimated defect-detection rate depends on the number of defects in the validation set, not on the total number of items alone.
+
+\Needspace{5\baselineskip}
+
+Class-specific rates make the observed errors explicit. Treat a defect as the positive class:
+
+\begin{itemize}
+\tightlist
+\item
+  The \textbf{true-positive rate}, or TPR, is the share of expert-labeled defects that the grader flags.
+\item
+  The \textbf{true-negative rate}, or TNR, is the share of expert-labeled nondefects that the grader accepts.
+\item
+  The \textbf{false-positive rate}, or FPR, is the share of expert-labeled nondefects that the grader flags.
+\end{itemize}
+
+Suppose a validation set contains 40 defects and 80 nondefects. A grader that flags 32 of the defects has a TPR of 80 percent. If it also flags 12 of the 80 nondefects, its FPR is 15 percent and its TNR is 85 percent.
+
+The operational trade is now visible. The grader misses 8 defects, while 12 acceptable outputs receive unnecessary review or rejection. A single accuracy value combines those consequences and changes when the class mix changes. TPR, TNR, and FPR are each estimated within one class, so changing the proportion of defects and nondefects in the validation sample does not change the underlying rate estimates. A deliberately balanced set can therefore estimate all three, provided it contains enough examples from each class.
+
+Many graders produce a score before assigning a label. The \textbf{operating point} consists of the chosen threshold and the error rates produced at that threshold. Lowering the threshold for flagging a defect will usually increase both TPR and FPR: the grader catches more defects but also rejects more acceptable work. Raising the threshold usually reduces both.
+
+A grader therefore does not have one context-free level of quality. It performs at a particular operating point under a stated rubric, class distribution, and set of error costs.
+
+An error budget makes the threshold choice explicit. Suppose reviewers can inspect false alarms on no more than 5 percent of acceptable submissions. The evaluator selects a threshold that keeps FPR near that limit and then reports the resulting TPR. ``TPR at a fixed FPR'' states the conditional result directly.
+
+Threshold selection and final reporting should use separate data, or a design that accounts for the selection process. Choosing the best threshold and reporting its performance on the same small set produces optimistic estimates.
+
+Together, these components define the measuring instrument. Expert agreement establishes whether the reference labels have a stable meaning. Stratified sampling places rare and consequential cases under observation. Class-specific rates separate errors that aggregate accuracy combines. The operating point then weighs those errors against the review capacity and failure costs of the deployed system.
+
+\section{Calibrate the judge, then scale}\label{calibrate-the-judge-then-scale}
+
+Panthi and Abdelfattah (\href{https://arxiv.org/abs/2605.24060}{2026}) provide a compact example of the full protocol. They needed to adjudicate cases in which two systems received the same rank even though a downstream rule could still select different winners. They first defined a three-way rubric, then drew a 115-case human-annotated subset from the contested cases, stratified by credited-rank bucket.
+
+Agreement among the five human raters reached a Fleiss' kappa of 0.83. A panel consisting of one human and four models reached 0.79, and a second human adjudicated an overlapping set of 36 cases. Cohen's kappa between each model and the human labels ranged from 0.77 to 0.87. These measurements established how the automated judges related to the human reference before their votes entered the larger adjudication.
+
+Singh Thakur et al.~(\href{https://arxiv.org/abs/2406.12624}{2024}) found in separate comparative work that only the largest model judges approached human inter-annotator agreement under chance-corrected measures. Raw percent agreement concealed systematic leniency and position effects. Judge identity is therefore part of the measuring instrument. Model size alone does not provide an acceptance criterion.
+
+Only after validation did Panthi and Abdelfattah apply a five-model majority vote at temperature 0 to all 1,902 contested cases. The categories were defined before expert labeling, the validation subset preserved the score bands most likely to expose different errors, and scaling followed measured agreement with the human reference.
+
+The authors identify the 115-case validation set as small, so its agreement estimates should not be treated as precise values for every subgroup. Temperature 0 also reduces variation among repeated votes without eliminating the run-to-run variation that Chapter 1 observed at that setting.
+
+The protocol shows why expert labels should remain visible as measurements rather than being collapsed into ``ground truth.'' Five experts can share an interpretation that another qualified group would reject. Adjudication can settle a label without resolving the ambiguity in the category that produced the disagreement. Retain each rater's original label, the adjudicated label, and the rubric version so later revisions can reconstruct which definition produced the result.
+
+Judge validation should also include controlled perturbations. One aggregate agreement value can average away predictable biases.
+
+Zheng et al.~(\href{https://arxiv.org/abs/2306.05685}{2023}) documented position, verbosity, and self-preference effects in model judges. To test position sensitivity, present the same pair of responses in both orders and measure how often the preferred answer changes. Randomizing order during ordinary evaluation reduces the systematic advantage of appearing first or second. The controlled swap estimates how much order still affects the decision.
+
+Leniency occurs when a judge accepts work that the rubric classifies as defective. Test it with matched cases that differ by one material violation, then record acceptance of the defective case as a class-specific miss. A judge may agree with experts on routine passes and forgive most subtle defects, preserving high aggregate agreement while failing at the decision it was introduced to make.
+
+Verbosity bias requires a different control. Present semantically equivalent answers whose main difference is irrelevant explanation, or add plausible detail that does not repair the original omission. A preference for the longer response then appears as a label change without a corresponding improvement in support. The substantive content must remain as similar as possible; otherwise length is confounded with additional information.
+
+Self-preference is a dependence between the judge and the system that produced the answer. A judge may favor phrasing, conventions, or reasoning patterns associated with its own model family. Concealing model identity helps, but stylistic traces may remain. Using judges from different model families reduces one source of correlated error and provides a comparison, although different branding does not establish independence.
+
+Answer leakage belongs to the contamination problem developed in Chapter 3. A judge exposed to reference answers, rubric examples derived from evaluation cases, or memorized public solutions can reproduce a preferred label without independently evaluating the submission. The partition must therefore separate underlying tasks, related variants, and individual responses. Li (\href{https://arxiv.org/abs/2502.01534}{2025}) reports evidence in the same direction for preference leakage. That work is directional and does not establish how common the effect is across domains or model generations.
+
+Some properties should never be delegated to a model judge. When code can determine whether a required file exists, a test passed, a schema is valid, or a named artifact changed, keep that assertion deterministic. A model can evaluate claims whose meaning still requires judgment after those checks run. Replacing exact observations with generated labels adds variance, cost, latency, and another failure path without adding information.
+
+Orosz and Husain also prefer binary PASS and FAIL labels when the downstream action is binary. Binary labels force the rubric to locate the release boundary and make TPR, TNR, and FPR directly interpretable. A five-point scale allows raters and judges to use adjacent values inconsistently, while inviting the evaluator to treat the distance between 2 and 3 as equivalent to the distance between 4 and 5.
+
+The loss of nuance is deliberate, but it is not always acceptable. A writing assistant may need separate judgments for factual support, coverage, and style because one PASS label cannot identify the failure. The better design is often several narrowly defined binary claims, each tied to a downstream action. A graded score remains appropriate when the decision genuinely depends on degree and the scale anchors can be applied reliably.
+
+My trace-annotation tool makes a separate distinction explicit. Agreement asks whether annotators assign the same categories. Probability calibration asks whether events assigned confidence 0.8 occur approximately 80 percent of the time.
+
+A recorded compatibility failure sits in that tool's data path. When legacy annotation files are read, they receive confidence 1.0, making every imported category appear maximally confident. The example is narrative rather than evidence. It shows that calibration state belongs not only to the annotator's judgment, but also to the stored label and the software that reads it.
+
+After deployment, a human-reviewed sample must remain part of the operating loop. It should contain ordinary cases, flagged cases, and known boundary cases. Reviewing only judge-human disagreements measures the cases in which the monitoring system has already detected trouble. It misses cases in which the judge and another automated component make the same mistake.
+
+The ongoing sample estimates whether class-specific rates have changed and supplies new disagreements for rubric repair. Preserve the deployed threshold and grader version with each sample so a rate change can be attributed to a model update, distribution shift, or revised scoring rule. Silently replacing the underlying model breaks that record even when the prompt and public model name remain unchanged.
+
+Calibration must be repeated whenever the domain, rubric, response format, or model generation changes. A judge validated on concise code-review summaries has no automatic claim on long incident reports. Adding a finer defect taxonomy changes both the category prevalence and the expert task. Even a prompt change intended only to clarify wording can move the operating point and should be tested against the held-out expert-labeled set.
+
+The result remains bounded. Scaled judging reduces the amount of unmeasured error relative to deploying an untested judge. It does not certify that every accepted output is correct, and the expert reference itself contains disagreement. Its value is that those errors become observable before the labels begin controlling releases, rankings, rewards, or training data.
+
+\section{What a panel's vote establishes}\label{what-a-panels-vote-establishes}
+
+Bertalani\v{c} (\href{https://arxiv.org/abs/2605.00914}{2026}) reports an oracle gap of up to 32.3 percentage points between plurality voting and selecting a correct answer already present among the candidates. The candidate set contained a correct answer, but the vote discarded it. The synthesis is exploratory, and the current evidence record contains no corroborating result. The figure therefore establishes a reported failure mode, not its prevalence across panel designs.
+
+A plurality vote among model instances is itself a model-based selection rule. It labels one candidate as selected and rejects the others. When a correct candidate is available but loses the vote, the failure belongs to selection rather than generation. The panel received a correct answer and failed to identify it.
+
+Voting counts endorsements. It does not test whether a claim is supported by the evidence that would make it true. Five agents can repeat the same nonexistent command-line flag, and four votes will defeat a correct but less familiar alternative. Increasing the panel to nine may stabilize the count while leaving the unsupported premise unexamined.
+
+Correlation makes this failure more likely than an independent-voter model suggests. Model instances may share training data, architectures, system prompts, retrieved context, examples, and decoding conventions. They may converge because each interprets the same ambiguous instruction in the same way. Agreement then measures the strength of a shared dependency rather than independent confirmation. The effective number of independent judgments may be far smaller than the panel size.
+
+Cross-family judges reduce one obvious source of dependence, which is why my migration-evaluation framework uses them in its dual-judge gate. The design does not establish that their errors are independent. Different model families can reproduce the same public reference answer, follow the same leading rubric, or miss the same omitted repository state. Diversity is a control whose effect must be measured.
+
+Selection therefore needs a second criterion beside vote count. \textbf{Grounding} represents each consequential assertion as a typed claim linked to the material that supports it. A claim about a test result should point to a recorded test execution. A claim about an interface should point to the relevant source or official specification. A claim about a file change should resolve to the resulting workspace state.
+
+The claim type determines what evidence can support or refute it. A numeric performance claim may require a result table together with the experimental conditions. A causal explanation may remain an interpretation even when every observed event is recorded. A recommendation can be supported by measured failure costs without becoming a factual claim that one design is universally best.
+
+Typing prevents a fluent answer from collapsing several evidentiary obligations into one score. Consider a panel assessing a proposed database migration. The answer may contain a syntactically valid statement, a claim that existing rows are preserved, and a claim that rollback remains safe under concurrent writes. A parser can check syntax. An execution test can compare rows. Concurrency safety may require review or an experiment. One popularity count cannot replace those different checks.
+
+Grounding also changes what happens when support is missing. The system can retain the candidate, mark a claim unsupported, and route it for review. Without that state, a panel may select a winner from weak evidence simply because its interface requires one.
+
+The stored record should preserve the candidates, ballots, claim support, selected answer, and reason for abstention. A later audit can then distinguish a generation failure from a selection failure.
+
+Abstention belongs inside the decision rule. A panel should decline to select when support is insufficient, the vote is unstable, or the leading answer fails an independent check. The abstention threshold is an operating point. It should be chosen on held-out expert-labeled cases according to the cost of a wrong answer and the cost of review. A bare ``three votes wins'' rule embeds a threshold without measuring either cost.
+
+Principled abstention does not require one particular frontier algorithm. Wang (\href{https://arxiv.org/abs/2604.07667}{2026}) combines conformal uncertainty guarantees with social-choice rules. Kamelhar (\href{https://arxiv.org/abs/2604.23366}{2026}) combines grounding with consensus, and Chen et al.~(\href{https://arxiv.org/abs/2309.13007}{2023}) combines deliberation with consensus.
+
+All three report a useful direction, but none contributes a measured result to this chapter. Their operating behavior across correlated judges, changing candidate sets, and open-ended tasks remains unsettled. The supported practice is narrower: require evidence for selected claims, validate an abstention rule, and retain an independent correctness check.
+
+Debate and voting still have useful roles. They can generate alternative hypotheses, expose disagreements, and organize a candidate set that would be expensive for one reviewer to produce. Final selection should then pass through an oracle appropriate to the claim. Executable behavior goes to execution, structural facts to an exact auditor, and irreducible judgment to a validated human or model grader.
+
+This separation exposes a common architecture error. Generation, deliberation, and verification may run in the same process, but they serve different purposes and should not inherit all the same dependencies. When every stage receives the same answer-bearing context and uses models from the same family, the apparent layers may be several views of one failure path.
+
+An independent check need not re-evaluate the entire response. It can target the claims whose failure would change the decision. For a code review, that may mean confirming the cited behavior in the changed code and running the named test. For a research synthesis, it may mean resolving the primary source behind each load-bearing factual statement and abstaining when the source does not support the wording.
+
+Panels also impose operational costs that one aggregate score does not show. Additional judges increase inference expense and latency. Grounding adds retrieval and evidence storage. Abstention transfers work to people or to a slower verifier. Those costs are justified when the avoided false decision is more expensive and excessive when a deterministic assertion can answer the question directly.
+
+The always-PASS pair from the opening is the degenerate panel. A larger group of correlated judges becomes an expensive version of the same mistake when each member repeats the majority label or the same unsupported answer. Perfect internal agreement establishes only that the selection rule is stable. Correctness still requires a relation to evidence outside the vote.
+
+The companion catalog contains two narrower controls for implementations of this architecture: retain an exact auditor beside heuristic graders, and combine judge labels with a human-labeled subset. Each addresses a smaller problem than the core decisions developed here.
+
+\section{Rebuild the grader as a measured system}\label{rebuild-the-grader-as-a-measured-system}
+
+Begin by discarding the assumption that the current judge prompt defines the target. The people whose judgment the system is meant to encode should write the categories and apply them independently to fresh cases. Their disagreements reveal missing rules, conflicting interpretations, and cases that should permit abstention.
+
+Revise the rubric until measured reliability is adequate for the decision. Record both the chosen standard and the disagreements that remain.
+
+The resulting expert-labeled set must stay outside judge development and contain enough cases from each consequential score band, task type, and outcome class. Keep related tasks and answer variants on the same side of the partition so contamination cannot cross through paraphrase or shared provenance. Run deterministic assertions separately and remove from model grading any claim that code can decide exactly.
+
+Evaluate the candidate judge using chance-corrected agreement and class-specific rates at the threshold intended for deployment. Raw percent agreement may remain descriptive, but it should not become the acceptance gate. Report TPR, TNR, and FPR together with the class mix, the sample size within each stratum, and the operating cost used to select the threshold.
+
+Add controlled perturbations to the grader's release suite. Reverse answer order to test position sensitivity. Compare matched concise and padded answers to expose verbosity preference. Use defect pairs to measure leniency. Conceal source identity and compare model families to probe self-preference and shared error. A new model generation can change any of these behaviors without a corresponding change to the rubric.
+
+Binary labels keep the decision boundary legible when the downstream action is pass or fail. Several narrow binary judgments preserve more diagnostic information than one vague ordinal score, though they require more expert labeling and judge calls. A genuinely graded decision can retain a score once its anchors and probability calibration have been validated.
+
+Deployment should continue to route a sample through human review. That sample must include unflagged ordinary work as well as disputed and rejected cases. Reviewing only flagged items leaves silent false negatives outside the monitoring data.
+
+Each review record should preserve the grader version, rubric version, threshold, model output, human label, and the evidence required to reproduce the decision. Otherwise a change in observed performance cannot be assigned to a model update, a distribution shift, or a scoring-rule revision.
+
+For a panel, retain both the candidates and the ballots, and do not treat plurality as verification. Judges from different families may reduce shared model-specific errors. The selected answer must still carry grounded, typed claims, pass the independent checks available for those claims, and trigger abstention when support falls below the validated operating point.
+
+A change in domain, rubric, response format, or model generation reopens the calibration work. CodeProbe (\href{https://github.com/sjarmak/codeprobe}{public repository}) contains a dual-curator calibration gate that remains unsatisfied because the qualifying corpus does not yet exist. The code preceded the corpus. That is calibration debt, and naming it does not discharge it. The gate remains unmet until the instrument can be built.
+
+The first build does not require the complete corpus. Begin with one rubric category and a small set of expert-labeled cases from the score band where that decision turns. Keep those cases outside both the judge prompt and threshold-selection data. Evaluate the judge at the intended deployment threshold and report class-specific rates rather than percent agreement.
+
+That first stratum tests one grading decision and identifies which category should be labeled next. The broader calibration gate remains unmet until the full instrument satisfies its requirements.
+
+\section*{Sources and evidence}
+
+The evidence grouping on each entry below comes from its catalog record. Author-system cases in this chapter are narrative illustration and are not part of the evidence base.
+
+\textbf{Calibrate LLM judges}
+
+\begin{itemize}
+\tightlist
+\item
+  Strong evidence: Zheng et al.~(2023), ``Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena,'' arXiv:2306.05685. Judge position, verbosity, and self-preference bias; inter-rater agreement against human labels.
+\item
+  Strong evidence: Singh Thakur, Choudhary, Ramayapally, Vaidyanathan \& Hupkes (2024), ``Judging the Judges,'' arXiv:2406.12624. Chance-corrected alignment metrics, systematic leniency, and position effects.
+\item
+  Strong evidence: Cemri, M., et al.~(2025), ``Why Do Multi-Agent LLM Systems Fail?,'' arXiv:2503.13657. Kappa 0.88 expert taxonomy before validated automated annotation.
+\item
+  Directional evidence: Orosz with Husain (2025), ``A pragmatic guide to LLM evals for devs,'' Pragmatic Engineer newsletter, 2025-12-02, \url{https://newsletter.pragmaticengineer.com/p/evals}. Binary PASS/FAIL, deterministic evaluation where possible, and judge validation against held-out human labels with TPR/TNR.
+\item
+  Strong evidence: Panthi \& Abdelfattah (2026), ``Same Ranking, Different Winner,'' arXiv:2605.24060. The 115-case stratified validation protocol, agreement measurements, overlap adjudication, and scaled contested-case evaluation.
+\item
+  Directional evidence: Li (2025), ``Preference Leakage,'' arXiv:2502.01534. Direction only.
+\item
+  Directional evidence: Badagi (2026), ``AI Assurance,'' arXiv:2605.23459. Direction only.
+\item
+  Directional evidence: ``MemConflict,'' arXiv:2605.20926. Direction only.
+\item
+  Foundational method: Cohen, J. (1960). A Coefficient of Agreement for Nominal Scales. Educational and Psychological Measurement 20(1), 37-46. DOI: 10.1177/001316446002000104. Primary source for Cohen's kappa, the agreement statistic the chapter defines; a standard method rather than a catalog evidence item.
+\item
+  Foundational method: Fleiss, J. L. (1971). Measuring Nominal Scale Agreement Among Many Raters. Psychological Bulletin 76(5), 378-382. DOI: 10.1037/h0031619. Primary source for Fleiss's kappa, the agreement statistic the chapter defines; a standard method rather than a catalog evidence item.
+\item
+  Foundational method: Scott, W. A. (1955). Reliability of Content Analysis: The Case of Nominal Scale Coding. Public Opinion Quarterly 19(3), 321-325. DOI: 10.1086/266577. Primary source for Scott's pi, the agreement statistic the chapter defines; a standard method rather than a catalog evidence item.
+\end{itemize}
+
+\textbf{Separate agreement from correctness}
+
+\begin{itemize}
+\tightlist
+\item
+  Strong evidence: Bertalani\v{c} (2026), ``Cost of Consensus,'' arXiv:2605.00914. Oracle gap up to 32.3 percentage points; plurality voting discards correct answers already present; grounding catches failures that agreement masks.
+\item
+  Directional evidence: Kamelhar (2026), GSAR grounded consensus, arXiv:2604.23366. Direction only.
+\item
+  Directional evidence: Wang (2026), ``Conformal Social Choice,'' arXiv:2604.07667. Direction only.
+\item
+  Directional evidence: Chen et al.~(2023), ``ReConcile,'' arXiv:2309.13007. Direction only.
+\item
+  Corroboration: none on record.
+\end{itemize}
+
+\textbf{Author-system illustration cited inline}
+
+\begin{itemize}
+\tightlist
+\item
+  Not an evidence item: CodeProbe, the author's task-mining evaluation tool, \href{https://github.com/sjarmak/codeprobe}{public repository}. Named inline for the dual-curator calibration gate described in the closing section, which is narrative illustration.
+\end{itemize}

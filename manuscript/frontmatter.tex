@@ -1,0 +1,138 @@
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+\section{Problem and scope}\label{problem-and-scope}
+
+An agent has finished a change. The tests pass, and a reviewer is examining a compact diff. The run appears successful, yet the available record may not establish whether another run would produce the same result, whether the tests exercised the relevant behavior, or whether the reviewer saw the decisions that carried the most risk.
+
+The visible output is code; the uncertainty around its quality resides in the system that produced, evaluated, and approved it. A coding agent is one component in that system. Evaluation determines what counts as success, governance constrains access, context management controls the information available during a run, review defines the quality gate, and scheduling allocates compute, money, time, and human attention.
+
+These functions interact. A higher score can result from an easier test rather than a better system. A reviewer can appear ineffective because the interface concealed the evidence needed for judgment. Instrumentation can record component failures while missing failures at component boundaries. A recovery procedure can pass while depending on credentials whose compromise would also destroy the recovery path.
+
+This report examines the evaluation, operation, and governance of AI coding-agent systems. It focuses on mechanisms that remain relevant as models and products change: measurement design, execution-based grading, containment, durable state, recovery, repository retrieval, context limits, human oversight, topology, and resource allocation. It does not compare current models or teach prompt and tool-schema design.
+
+The intended reader is a software engineer who operates or evaluates coding agents and may be new to evaluation methodology. The practices are not universal rules. Their applicability depends on workload, permissions, failure costs, deployment conditions, and available review capacity.
+
+\section{Method, scope, and evidence classification}\label{method-scope-and-evidence-classification}
+
+The source collection combines 118 scholarly works organized into seven topic-specific review threads, 91 practitioner records, 29 benchmark records, and 17 author-system case records. Searches were organized around evaluation validity, grading, containment and recovery, context and memory, oversight, multi-agent design, and scheduling. Candidate sources were retained when they described a measured result, a reproducible system mechanism, an operational incident, or a concrete practice relevant to coding-agent reliability. The review is structured rather than exhaustive; it does not claim complete coverage of every adjacent literature.
+
+Evidence is reported in four reader-facing groups. \textbf{Strong evidence} directly supports the stated claim through a controlled comparison, validated benchmark result, or comparably specific measurement. \textbf{Directional evidence} supports the mechanism or direction of a claim but does not establish its magnitude or broad transfer. \textbf{Corroborating evidence} consists of case reports, practitioner accounts, or convergent observations that establish plausibility without estimating prevalence. \textbf{Null or conflicting evidence} records a result that did not support the expected effect or that materially limits another claim.
+
+Each evidence item was assigned a strength independently of its publication venue. Strong classifications were rechecked against the underlying source and retained only when the reported design and result supported the practice's own claim. Directional classifications were used when the source supported a mechanism, threat model, or comparison design but not the full recommendation. Case reports were kept as corroboration and are identified as such. The source notes preserve null and countervailing findings rather than treating absence of support as support for the opposite conclusion.
+
+Practice selection proceeded in three passes. Each pass assessed whether a practice changes an engineering decision, covers a mechanism omitted by neighboring entries, or can be explained through a sufficiently bounded case. Practices selected across those passes received full treatment when their operational relevance and available evidence justified the space. This procedure produced a catalog of 192 practices, of which 55 are developed in the 18 chapters. The remaining 137 appear in the companion catalog.
+
+Cases from systems operated by the author are used only as illustrations. They expose mechanisms, original measurements, and reproducible failure cases, but they are not counted as independent external evidence and do not by themselves support a general recommendation. Each chapter separates reported findings from local observations and states the conditions that limit transfer.
+
+The main limitations follow from the source base. Evidence is uneven across topics, several operational questions have only case-level support, recent capability measurements can age quickly, and practitioner reports are vulnerable to selection and reporting bias. The review also excludes model-comparison and prompt-engineering literatures except where they bear directly on system reliability. The resulting practices should therefore be treated as bounded claims and testable protocols, not universal deployment thresholds.
+
+\section{Contributions}\label{contributions}
+
+\Needspace{5\baselineskip}
+
+This work makes five contributions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  an evidence audit that distinguishes direct support, directional findings, corroborating cases, and null or conflicting results;
+\item
+  a catalog of 192 bounded engineering practices, including 55 practices developed in depth;
+\item
+  a dependency chain connecting measurement, grading, containment and recovery, context management, human oversight, and resource allocation;
+\item
+  original measurements and failure cases from author-operated systems, explicitly separated from external evidence; and
+\item
+  runnable protocols for local evaluation, capability-boundary testing, recovery testing, trace analysis, and release decisions.
+\end{enumerate}
+
+The chapters emphasize conditions, measurements, and failure boundaries because an outcome alone rarely identifies why a system succeeded or failed. A useful account traces ownership, permissions, persistence, ordering, and observation while distinguishing correctness from reliability, performance, cost, safety, and usability.
+
+\section{How the book is organized}\label{how-the-book-is-organized}
+
+The book has six parts and eighteen chapters. Measurement comes first because every later practice is adopted or rejected through a measured comparison. Nineteen developed practices in Parts II through VI also require a method introduced in Part I. Interleaving those methods with their uses would scatter each method across four or five chapters.
+
+This order places three chapters of experiment design before the agent-specific operating chapters. Later recommendations depend on those definitions and comparison methods.
+
+Part I establishes how I compare systems when runs vary and scores can mislead. Part II turns those measurements into grading and release decisions. Part III addresses containment, persistent state, recovery, and failure analysis. Part IV examines how repository information enters, survives, and leaves an agent run. Part V treats human review as an engineered control with interfaces, escalation rules, and accountable ownership. Part VI allocates work across agents and models under cost and capacity constraints.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3000}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Part
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Ch
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Title
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Part I: Evaluation measurement and experiment design} & 1 & Run-to-run variance, statistical power, and paired comparisons \\
+& 2 & Baselines, ablations, and cost-accuracy tradeoffs \\
+& 3 & Benchmark contamination, oracle strength, and workload validity \\
+\textbf{Part II: Evaluation and grading systems} & 4 & Execution-based evaluation, correction gates, and release tests \\
+& 5 & Calibrating model graders and separating agreement from correctness \\
+& 6 & Proxy metric gaming and layered evaluation signals \\
+\textbf{Part III: Containment, durable execution, and recovery engineering} & 7 & Agent isolation, injection defenses, and independent verification \\
+& 8 & Persistent agent state, durable workflows, and idempotent retries \\
+& 9 & Replayable traces and fault-injection recovery testing \\
+& 10 & Human-auditable failure analysis and taxonomy development \\
+\textbf{Part IV: Context engineering: retrieval, budgets, and memory} & 11 & Measuring and designing repository retrieval \\
+& 12 & Localization funnels, repository indexes, and freshness checks \\
+& 13 & Usable context budgets, consolidated-spec restarts, and file-based tool output \\
+& 14 & Cross-session memory, raw traces, and compaction policies \\
+\textbf{Part V: Human review and accountability engineering} & 15 & Efficient verification interfaces and risk-based human escalation \\
+& 16 & Autonomy calibration, provenance, effective gates, and accountability \\
+\textbf{Part VI: Work allocation and cost engineering} & 17 & Agent topology selection and dynamic task allocation \\
+& 18 & Cost-aware fleet scheduling and model routing \\
+\end{longtable}
+
+\section{What I assume you know}\label{what-i-assume-you-know}
+
+I assume working knowledge of version control, continuous integration, code review, on-call practice, containers, and basic statistics. I use those foundations without rebuilding them. I still describe the relevant system boundary when a familiar tool plays an unfamiliar role.
+
+I assume no prior exposure to the evaluation methods specific to public agent results. I begin with how to read a public score and identify the claim it can support. I then show how many repeated runs a comparison needs before an observed difference carries useful information. The answer depends on variation and the size of the difference you need to detect.
+
+I also teach why agreement with human labels does not by itself make an automated grader correct. Agreement can conceal shared mistakes, ambiguous examples, or a reference answer that measures the wrong property. I separate the observed agreement from the inference made about correctness, which becomes important when a grader controls release.
+
+Another method checks whether a score was earned on work the model had already encountered. I introduce the required vocabulary only when the mechanism appears. My goal is that a technically capable reader should be able to reproduce the reasoning presented in this book, not merely accept my interpretation.
+
+The book does not assume a particular agent architecture or deployment scale. I describe architecture separately from implementation so the mechanism survives changes in products and interfaces. Examples expose permissions, retries, caching, concurrency, identity, and ordering when those details affect the claim. Code appears only when prose would obscure a state transition or failure path.
+
+\section{How to read a chapter}\label{how-to-read-a-chapter}
+
+A chapter opens on a concrete situation, usually a measurement that came out wrong or a failure with a traceable cause. The mechanism follows, then what the evidence does and does not establish, then the boundary conditions, then a procedure you can run. Specialized terms are marked in bold where they are defined, so a term met later can be traced back to that site.
+
+Citations appear inline in author-year form, with the year linked to the source. The back matter of each chapter, headed Sources and evidence, records the evidence grouping, identifier, and claim supported by each item. The back matter is authoritative for identifiers and evidence grouping; the prose states the claim for which a source is used. A disagreement between the two is an editorial defect.
+
+A strong item supports a measured statement within the conditions of the study. A directional item supports the direction but not the magnitude of a claim. A corroborating case can establish that a failure mode exists but cannot estimate how often it occurs. A null or conflicting result limits the adjacent recommendation, and the chapter names that limit.
+
+Sentences are scoped to what was actually measured. Where support is thin, the chapter says so in its opening paragraph and prescribes a measurement you can run rather than a number to adopt.
+
+\section{The companion catalog}\label{the-companion-catalog}
+
+The companion site indexes all 192 practices under the chapter whose mechanism each extends. The 55 developed in the main chapters appear as short pointers into the chapter; the remaining 137 appear as compact entries. The catalog broadens the set of available options without forcing the main text to explain every variation.
+
+Use the relevant chapter as the foundation, then consult the catalog for practices that match a specific constraint. A compact entry cannot reproduce the chapter's full treatment of mechanism, evidence, tradeoffs, and failure boundaries. The chapter provides the reasoning needed to decide whether a neighboring practice applies to your workload.
+
+Twenty-nine of the full entries are labeled as limited-support notes. I excluded them from the developed set because the available evidence does not support a recommendation. Treat them as prompts for investigation rather than established guidance. They may point to a useful experiment, a missing control, or a failure mode worth instrumenting.
+
+The chapters and catalog serve different purposes. The chapters develop methods and claims in enough detail to evaluate critically. The catalog preserves breadth and makes related practices easier to find. Together, they let you begin with a measured problem and identify an intervention suited to the system you actually operate.
+
+\section{What you should be able to do by the end}\label{what-you-should-be-able-to-do-by-the-end}
+
+Given a published agent score, you should be able to state the narrower claim it supports and identify the conditions on which that claim depends. Given a proposed change to your own system, you should be able to measure run-to-run variation before crediting a difference and size the comparison before spending the model calls. Both systems should run on the same items, and a design that cannot resolve the difference relevant to the decision should return no verdict. Cost belongs in that judgment alongside accuracy, as does the possibility that a simpler configuration would have performed just as well.
+
+You should be able to assess whether a public score was earned on tasks the model may already have encountered and to build an evaluation set from your own repositories when the public benchmark does not represent your work. Grades should rest on execution rather than the model's confidence, and automated graders should be validated against human labels before they gate releases. When a proxy improves without a corresponding improvement in the outcome it represents, the system should make that divergence visible.
+
+Operationally, you should be able to bound what a single run can access and destroy, and you should treat an agent's account of its own work as a claim that still requires verification. A run that fails partway through should leave a durable record of which steps completed, and every retried step should be safe to execute again. Recovery should be tested by injecting failures rather than inferred from an architecture diagram. Reading a hundred traces from your own system should yield a concrete failure taxonomy.
+
+Retrieval should be evaluated separately from generation so that a wrong answer can be attributed to the stage that produced it. You should also be able to measure how much of an advertised context window the system can use effectively. Human review should occur where the reviewer can see the decision that carries the risk, and autonomy should expand by action type only when measured approval and modification rates justify it. A multi-agent design should be required to outperform a single agent on the same tasks, and each component should run on the least expensive model that can perform its role reliably.
+
+The goal is to provide you with the tools to measure what matters for your work, so the result describes the system you operate rather than a position on a leaderboard.

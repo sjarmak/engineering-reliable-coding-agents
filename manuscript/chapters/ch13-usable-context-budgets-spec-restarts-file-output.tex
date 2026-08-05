@@ -1,0 +1,570 @@
+\chapter{Usable context budgets, consolidated-spec restarts, and file-based tool output}
+\label{ch13-usable-context-budgets-spec-restarts-file-output}
+Guidance I had placed in a system prompt remained inside the context window twenty turns later but appeared nowhere in the model's stated reasoning. Across 1,705 visible thinking blocks in 199 traces from my trace-diagnostics corpus, that instruction appeared zero times.
+
+Visible reasoning is an incomplete observation of model state, so absence from those blocks does not prove that the instruction had no influence. It does show that material can remain inside the context window without remaining visibly active in the run. Benchmark evidence exposes the same gap through measured performance.
+
+Only about half of the 17 models evaluated by Hsieh et al.~(\href{https://arxiv.org/abs/2404.06654}{2024}) maintained satisfactory performance at 32,000 tokens, even though every model advertised a context window at least that large. Their RULER benchmark combined 13 task types, including retrieval and aggregation.
+
+Rando et al.~(\href{https://arxiv.org/abs/2505.07897}{2025}) found a sharper decline on realistic repository issues at the much larger context sizes vendors had begun advertising. Claude 3.5 Sonnet fell from 29 percent to 3 percent as supplied context approached one million tokens, while Qwen2.5 fell from 70.2 percent to 40 percent. Every input remained within the model's advertised capacity.
+
+The measurement problem is clearer than the prescription. I ranked ten candidate context-assembly practices three times: by how much each would change an engineering decision, how much of the problem it covered, and how teachable it was. The three rankings agreed on only one practice. Five practices appeared in exactly one ranking, and three appeared in none. I take that spread as evidence that the field has not converged. Every recommendation in this chapter is therefore either measured locally or identified as a convention.
+
+The advertised window is a capacity limit. The usable window is a property measured on the work the model must perform.
+
+Once that working limit is known, three assembly decisions follow. A run that has lost its governing specification should restart from a consolidated statement of the settled requirements. Large tool outputs should remain outside the active window in retrievable artifacts. A standing repository context file should be compared with no standing file before its permanent token cost is accepted.
+
+\section{Measure the context that remains useful}\label{measure-the-context-that-remains-useful}
+
+I use \textbf{effective context length} to mean the largest assembled context at which a model still meets a specified reliability threshold on a defined workload. The value belongs to a model, configuration, workload, and engineering threshold. A model may accept 128,000 tokens and retrieve one fact at that length while having a much shorter effective context for a code change that depends on relationships among several files.
+
+Measurement begins with task shape. A production coding agent may need to retrieve a declaration from one file, connect it to a caller in another, incorporate a test failure from a third, and preserve a constraint supplied near the beginning of the run. A single hidden fact embedded in filler tests only one part of that work.
+
+\Needspace{5\baselineskip}
+
+The qualification workload should represent the operations the deployed system actually performs, including:
+
+\begin{itemize}
+\tightlist
+\item
+  retrieval across several documents;
+\item
+  aggregation across several pieces of evidence;
+\item
+  retention of early instructions;
+\item
+  reasoning over long code; and
+\item
+  tool-using trajectories whose context grows over time.
+\end{itemize}
+
+The benchmark record shows why these distinctions matter. RULER found that advertised capacity often exceeded the length at which performance remained satisfactory. Leng et al.~(\href{https://arxiv.org/abs/2411.03538}{2024}) evaluated 20 models from 2,000 to 128,000 tokens on retrieval-augmented generation. Accuracy saturated at a model-specific context size, around 64,000 tokens for most frontier models in that study. Beyond that point, model families exhibited different combinations of refusals, repetition, and neglected instructions.
+
+Code work depends more heavily on relationships among units than simple fact retrieval does. Li et al.~(\href{https://arxiv.org/abs/2503.04359}{2025}) introduced LONGCODEU, covering nine models and eight long-code understanding tasks, and found substantial degradation beyond 32,000 tokens despite advertised windows of 128,000 to one million tokens. Understanding relationships among code units was the weakest area.
+
+LongCodeBench, the source of the million-token declines described above, evaluated issue answering and bug fixing rather than document retrieval. A successful long-document question-answering result therefore does not establish a safe context budget for a coding agent.
+
+These studies do not identify a universal ceiling. Their results depend on the model generation, prompts, tasks, and scoring rules. The durable finding is the repeated gap between capacity and competence, together with a protocol for measuring it. The knee can move with a new model and may differ between retrieval and code modification even within the same release.
+
+\begin{figure}[htbp]
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Across incomparable metrics, RULER is about half-satisfactory at 32k, long-context RAG saturates near 64k, LONGCODEU degrades beyond 32k, and toward 1M Claude 3.5 Sonnet falls 29\% to 3\% while Qwen2.5 falls 70.2\% to 40\%.}]{figures/ch13-capacity-competence.pdf}}
+\caption{Across incomparable metrics, RULER is about half-satisfactory at 32k, long-context RAG saturates near 64k, LONGCODEU degrades beyond 32k, and toward 1M Claude 3.5 Sonnet falls 29\% to 3\% while Qwen2.5 falls 70.2\% to 40\%.}
+\end{figure}
+
+Each study finds degradation within the tested or advertised window. Differences in tasks and metrics prevent direct comparison, and the evidence supplies no universal ceiling.
+
+I qualify a model using context-size strata around the range I might deploy. A first pass can include a small condition, two intermediate conditions, and one near the advertised limit. The exact token values depend on the model and workload.
+
+Each stratum should contain the same task families and, when possible, the same underlying tasks with controlled additions to context. This separates the effect of context length from a change in task difficulty.
+
+For repository work, each item begins from a fixed repository state and a known evidence set. The smallest arm receives the minimum material needed to solve the task. Larger arms add realistic neighboring files, test output, prior discussion, generated summaries, or tool schemas in a recorded order.
+
+The model receives the same task, permissions, and tool surface in every arm. I pin the model version, decoding settings, harness version, prompts, and evaluator so that context size remains the deliberate change.
+
+Each stratum is a measured comparison, so Chapter 1's requirements apply. Tasks should be paired across context sizes wherever possible, and every stratum needs repeated independent runs. One run at each length cannot distinguish a context-length effect from ordinary run-to-run variation.
+
+\Needspace{5\baselineskip}
+
+Four outcomes should remain separate:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Retrieval accuracy} records whether the required evidence was found.
+\item
+  \textbf{Task correctness} records whether the answer or code change was right.
+\item
+  \textbf{Reliability} records how often the result recurred across repeated runs.
+\item
+  \textbf{Cost} records tokens, model calls, and tool use.
+\end{itemize}
+
+Latency and usability may matter operationally, but neither can substitute for correctness. A longer prompt can reduce retrieval calls while lowering the probability of a correct patch.
+
+I plot outcome distributions by context stratum and reject thresholds based on a single passing run. The \textbf{saturation point} is the region where adding context stops improving the relevant outcome. The operational knee may occur earlier, where the marginal gain no longer justifies added cost or variance.
+
+A decline may be gradual, abrupt, or isolated to one task family. Those shapes support different operating limits.
+
+Suppose retrieval accuracy improves through the intermediate conditions and then flattens, while code-change success begins declining earlier. Retrieval alone would permit a larger budget. The coding workload would not. I set the production limit from the weakest task that must remain reliable, then place retrieval and harness caps below its measured knee.
+
+The margin accounts for token-estimation error, task variation, and fixed context that accumulates during execution. Its size follows consequence. A workflow with cheap retries and deterministic verification may operate close to the knee. A production change with costly failure and weak verification requires more distance.
+
+The final record should state the threshold, uncertainty, and consequence that justified the margin so the decision can be revisited when the system changes.
+
+Several mechanisms can produce decline. Additional context introduces competing versions of facts, similarly named symbols, and relationships the model must reconstruct. Position affects whether early instructions and evidence influence later actions. Repetition can induce repetition, while conflicting material can cause refusal or stale instruction following. The model may also spend more of its output budget restating or reconciling context rather than acting.
+
+\Needspace{5\baselineskip}
+
+Token count alone therefore does not diagnose the failure. I retain traces from every stratum and annotate the first consequential divergence. Useful classes include:
+
+\begin{itemize}
+\tightlist
+\item
+  retrieval failure;
+\item
+  incorrect symbol relationships;
+\item
+  forgotten constraints;
+\item
+  repetition;
+\item
+  stale or conflicting evidence; and
+\item
+  harness truncation.
+\end{itemize}
+
+The curve identifies where performance weakens. The trace identifies what to change.
+
+This distinction prevents an apparatus failure from being mistaken for a model limit. A harness may silently clip messages at its own cap. An evaluator that sees only the final answer may classify an instruction-following failure as missing knowledge. Larger contexts may also contain more stale repository material, confounding length with freshness.
+
+I therefore preserve the exact assembled prompt, record token allocation by source, and retain every truncation or omission decision with the run.
+
+Context also grows during tool use. A starting prompt well below the limit may cross the measured knee after searches, test logs, edits, and correction attempts accumulate. Qualification should therefore include both static prompts and representative trajectories, or replays of observed context growth.
+
+I measure the initial assembly and the maximum context reached before compaction or restart. A limit applied only to retrieval at time zero does not govern later accumulation.
+
+Every consequential change to the model, workload, or harness requires requalification. A new model may move the knee or change the dominant failure mode. A harness may add standing instructions that consume the safety margin before useful work begins. I preserve the old strata, add cases shaped by the change, and compare the curves.
+
+An unchanged average can conceal a shorter effective context offset by stronger short-context performance. When noise obscures the knee, Chapter 1's power analysis determines whether to add tasks or narrow the claim.
+
+Synthetic probes remain useful because they isolate positional recall, aggregation, and distractor effects. Their thresholds transfer only approximately to repository work. Realistic tasks entangle retrieval, reasoning, tools, and verification, making mechanism attribution harder but deployment relevance greater.
+
+I use synthetic probes to explain a failure and repository-shaped trials to set the operating limit. Neither establishes the other's threshold without measurement.
+
+\Needspace{5\baselineskip}
+
+The final configuration should specify:
+
+\begin{itemize}
+\tightlist
+\item
+  the maximum initial assembly;
+\item
+  per-source retrieval limits;
+\item
+  a reserve for tool output and correction;
+\item
+  the action taken when that reserve is exhausted; and
+\item
+  the workload and model version that justified each value.
+\end{itemize}
+
+A run can remain inside this measured budget and still fail when its specification has become fragmented or superseded.
+
+\section{Restart from the current specification}\label{restart-from-the-current-specification}
+
+A model reads the first version of a requirement, resolves an ambiguity, and begins implementing that interpretation. Three turns later, the user corrects the assumption. The correction appears in the transcript, but the plan, file selection, and partial implementation still encode the earlier choice. Each later instruction asks the model to repair work whose structure continues reproducing the misunderstanding.
+
+This can look like stubbornness or weak reasoning. A more useful explanation is commitment under an incrementally revealed specification.
+
+The current task no longer exists in one authoritative place. It is distributed across the initial request, later qualifications, rejected proposals, tool observations, and the model's own accounts of what was decided. Before choosing another action, the system must distinguish accepted decisions from abandoned ones.
+
+Laban et al.~(\href{https://arxiv.org/abs/2505.06120}{2025}) simulated more than 200,000 conversations across 15 models and compared instructions delivered together with instructions spread across several turns. Sharding the instructions produced an average performance decline of 39 percent relative to the single-turn condition. Models showed only slightly lower aptitude but much greater unreliability. They made early assumptions, committed to them, and often failed to recover when later turns supplied missing constraints.
+
+The study used simulated conversational generation tasks. It did not evaluate coding agents operating tools, receiving compiler feedback, or modifying persistent files. Tests and environment errors may correct some assumptions while partial implementations entrench others. I use the 39 percent result as evidence for the commitment mechanism, not as an effect-size estimate for coding work.
+
+The value is also an average across models and tasks rather than a per-conversation quantity. It could represent a few catastrophic failures or smaller degradation across many conversations. Those distributions would justify different interventions.
+
+The trace corpus described at the beginning of this chapter illustrates a related problem without strengthening the causal evidence. Guidance delivered once, twenty turns earlier, remained inside the window but appeared in none of the visible reasoning. Initial delivery is not evidence that a long-running agent still governs its work by the same instruction.
+
+The operational response is consolidation. When requirements emerge through discussion, I rewrite the accepted decisions, constraints, definitions, interfaces, and unresolved questions into one coherent specification. The document identifies itself as authoritative and explicitly supersedes earlier proposals on the same subjects.
+
+It represents the current agreement rather than the chronology through which that agreement emerged.
+
+\Needspace{5\baselineskip}
+
+Consolidation must remain selective because a transcript contains several kinds of state:
+
+\begin{itemize}
+\tightlist
+\item
+  Settled requirements belong in the specification.
+\item
+  Open questions remain explicitly unresolved.
+\item
+  Test failures, command output, changed files, and deployment state belong in an execution record.
+\item
+  Rationale stays with a decision when removing it would invite accidental reversal.
+\end{itemize}
+
+The distinction between specification and observation determines what a restart may discard.
+
+Suppose a run has established that an API must remain backward compatible, selected a migration sequence, edited several files, and discovered that a test fixture relies on an undocumented field. The compatibility requirement and migration sequence belong in the consolidated specification. The changed-file list, diff, test command, failure output, and fixture discovery belong in the execution handoff.
+
+Combining both into undifferentiated prose makes it difficult to tell which statements govern future work and which report what happened.
+
+\Needspace{5\baselineskip}
+
+I restart when the run's behavior shows that appended corrections no longer alter its governing interpretation. Indicators include:
+
+\begin{itemize}
+\tightlist
+\item
+  repeatedly proposing an interface that was already rejected;
+\item
+  continuing to edit files selected under an obsolete plan;
+\item
+  explaining a current failure through a superseded assumption; or
+\item
+  spending several turns reconciling conflicting summaries.
+\end{itemize}
+
+A growing token count may increase the risk, but it does not determine the boundary. A short run can become incoherent after one consequential misunderstanding. A long run can remain stable when its decisions are consistently restated.
+
+The restart package contains three artifacts.
+
+First, the \textbf{consolidated specification} contains settled requirements and genuinely unresolved questions.
+
+Second, the \textbf{execution handoff} records the repository state, completed changes, current failures, verification already performed, and raw artifacts available for inspection.
+
+Third, the \textbf{starting instruction} identifies the authoritative sources and states the next action.
+
+The package should be built from inspectable state. I use the current diff, test results, issue record, and relevant files as evidence. When a prior claim conflicts with the repository, the repository state governs, and the discrepancy remains visible. A consolidation built from an inaccurate summary produces a cleaner version of the same error.
+
+Restarting has costs. It loses conversational nuance, discarded alternatives, and tacit knowledge about how the work reached its current form. It may repeat exploration or freeze a provisional design too early.
+
+I therefore consolidate only settled decisions. When two designs remain plausible, the specification records both, the evidence supporting each, and the unresolved choice. Consolidation becomes harmful when it silently turns ambiguity into authority.
+
+Environment feedback also resists conversion into static requirements. A failed test may be obsolete, flaky, misconfigured, or decisive. A compiler error is an observation produced against one repository state. The restarted run needs the raw output or a retrievable reference, the command that produced it, and the state against which it ran.
+
+A polished sentence may erase the uncertainty the next investigation needs to resolve.
+
+Versioning prevents authoritative specifications from competing. Every consolidation receives an identity, names the prior version it supersedes, and remains visible to the run. Concurrent workers submit changes through one owner or merge process because requirements that govern all workers require an ordering rule.
+
+A failing run should not decide alone that its interpretation is accurate enough to preserve. The restart boundary belongs to the control plane and should incorporate the trace, repository state, verification results, and user decisions. The model may draft the consolidation, but an inspectable comparison should show what it retained, changed, omitted, or marked unresolved.
+
+High-consequence requirements warrant human review before the new run treats the specification as authoritative.
+
+The choice is between continuing from entangled state and paying to reconstruct clean state. Appending another correction is inexpensive when the run has incorporated earlier corrections and its working interpretation remains coherent. Restarting becomes cheaper when every new turn must fight decisions embedded in the existing trajectory.
+
+The 39 percent result helps explain why repeated correction messages can fail even when a model can solve the same task from a complete specification. When that pattern appears, restart from a consolidated statement of the settled requirements and carry execution evidence separately as raw observations rather than conclusions.
+
+\section{Move bulk output out of the active context}\label{move-bulk-output-out-of-the-active-context}
+
+In my agent fleet, a snapshot of the shared skill catalog once traveled between sessions through an environment variable. As sessions inherited, transformed, and re-emitted it, the snapshot drifted. Moving the same context surface into a fingerprinted file made each session's copy atomic and allowed every reload to validate its identity.
+
+The incident shows that turning transient text into a named artifact can make ownership, validation, and retrieval explicit. It does not show that files improve model performance.
+
+The evidence for file-backed tool output is limited to two directional practitioner accounts and no strong studies. I treat it as a convention because it is a simple way to control raw-output growth. Long terminal sessions, search results, test logs, tool responses, and pre-compaction history move into session-scoped artifacts. The active context retains a concise description, a stable pointer, and enough metadata for the agent to decide whether loading more is worth the cost.
+
+This changes where state lives. Without externalization, a tool response exists only in the conversation history. Truncation can remove it, while summarization replaces it with an interpretation produced before anyone knows which details will later matter.
+
+\Needspace{5\baselineskip}
+
+With an external artifact, the raw output belongs to the run rather than to the current context window. The active context can retain an index entry containing:
+
+\begin{itemize}
+\tightlist
+\item
+  the command or tool call;
+\item
+  the time and completion status;
+\item
+  the byte or token size;
+\item
+  a content fingerprint;
+\item
+  the artifact location; and
+\item
+  whether the content is complete or truncated.
+\end{itemize}
+
+Retrieval then becomes incremental. An agent can inspect the final lines of a failed build, search for an error code, or load a bounded range around a match. After a context reset, the replacement run can query the original output instead of relying on a lossy summary. Bulk evidence remains available without occupying the working window on every turn.
+
+The pointer should expose the cost before loading the content. My memory system follows this pattern. An index operation reports the expected token cost, and a separate content operation loads the requested material. Injected lessons can cite their evidence while leaving the raw trace unloaded. The agent may choose a short excerpt when the complete artifact would consume too much of the working window.
+
+Cursor's engineering blog (\href{https://cursor.com/blog/dynamic-context-discovery}{2026}) reports writing long tool output to files that the agent can read back, reducing forced summaries near the context limit. The Hightouch team, in an interview published by Amplify Partners (\href{https://www.amplifypartners.com/blog-posts/how-hightouch-built-their-long-running-agent-harness}{2026}), describes buffering large tool results similarly and reports that the design kept the active window focused on reasoning rather than raw output.
+
+Hightouch also reported that allowing the model to choose when to buffer performed better for its system than a coded decision tree. These accounts provide implementation direction rather than a controlled comparison. Model-selected buffering remains probabilistic, and another model or prompt may make worse choices.
+
+\Needspace{5\baselineskip}
+
+A safe interface therefore places deterministic controls around that choice. The harness owns:
+
+\begin{itemize}
+\tightlist
+\item
+  maximum inline output size;
+\item
+  artifact-write error handling;
+\item
+  retention limits;
+\item
+  access controls;
+\item
+  permitted read ranges; and
+\item
+  the behavior when preservation fails.
+\end{itemize}
+
+The model may choose among tail, search, range read, and full load within those limits. A failed write returns an explicit failure. The system must not claim that output was preserved when no artifact exists.
+
+Pointers must remain valid across restarts. A path tied only to one temporary process may disappear before a replacement worker can use it. I associate each artifact with a run identity and tool-call identity, preserve ordering, and record completeness. Concurrent calls write distinct artifacts and publish their pointers atomically so one worker cannot overwrite another's evidence.
+
+Security policy follows the data. Terminal output may contain credentials, proprietary source, personal information, or production identifiers. Removing it from the prompt may reduce incidental exposure during later turns, but it also creates a retained artifact that requires permissions, redaction, encryption where appropriate, and a deletion policy.
+
+A pointer must not allow the model to read outside the session's authorized scope. Retention and pointer validity are one decision: deleting an artifact also invalidates every pointer to it in an older transcript.
+
+Files are an implementation choice rather than the essential abstraction. An object store, content-addressed artifact service, or trace database may offer stronger retention and concurrency guarantees. Files are useful early because existing tools can search and range-read them, their failure modes are visible, and they avoid committing to a more elaborate service before the access patterns are understood.
+
+The durable requirement is retrievable raw evidence behind a stable, costed pointer.
+
+Externalization addresses only one source of context growth. Plans, speculative explanations, corrections, and abandoned approaches still accumulate in the active window. A run can write every log to disk and still lose its specification. Compaction and restart from a consolidated specification remain separate controls.
+
+The convention also introduces retrieval failures. An agent may never follow the pointer, search for the wrong term, or load an excerpt that omits the decisive line. An index may point to deleted content. A summary may misdescribe an artifact and discourage inspection.
+
+I therefore retain the raw output, validate pointer resolution, expose search and range operations, and record which portions the agent actually loaded.
+
+\Needspace{5\baselineskip}
+
+The first tests are operational:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Can a replacement run recover a required detail after context reset?
+\item
+  Do concurrent calls preserve separate outputs?
+\item
+  Does every excerpt resolve to its original artifact?
+\item
+  Are truncation and failed writes visible?
+\item
+  Do expired artifacts invalidate their pointers explicitly?
+\end{enumerate}
+
+Only after those mechanics work does task-level evaluation ask whether the convention lowers cost or improves completion on workloads with large outputs.
+
+That comparison inherits the resolution problem from Chapter 1. A difference smaller than run-to-run variation can still be measured, but doing so requires enough paired runs. I size the evaluation around the smallest cost or completion change that would alter the engineering decision and interpret the interval around the paired difference rather than one pair of totals.
+
+The current justification is inspectable preservation and ownership. Improvement in task outcomes remains unmeasured.
+
+\section{Make standing context earn its permanent cost}\label{make-standing-context-earn-its-permanent-cost}
+
+Gloaguen et al.~(\href{https://arxiv.org/abs/2602.11988}{2026}) tested whether repository context files already used by coding teams improved task success. Across the evaluated agents and models, they did not. The files increased inference cost by roughly 20 percent, even though the agents followed their instructions.
+
+This is a null result from one study. It should reverse the assumption that a standing context file is beneficial by default, without becoming a universal verdict against such files.
+
+Instruction adherence and task completion measure different effects. A file can cause an agent to run a command, follow a naming rule, or avoid a directory while leaving the final task score unchanged. It can also consume context, provoke additional tool calls, or direct attention toward an overview the model did not need.
+
+Evidence that the file was read and followed establishes treatment delivery. It does not establish benefit.
+
+The null result must be interpreted through the power analysis from Chapter 1. Failure to detect improvement may mean that the average effect is small, that positive and negative effects cancel across the task mix, or that the experiment could not resolve the effect it sought.
+
+The measured cost remains part of the result, as does the evidence that the files changed agent behavior. The study does not establish that every repository, instruction category, model, or safety outcome will reproduce the same balance.
+
+The local decision requires a no-file baseline. The same representative tasks and repository states run under the same model, prompts, tools, harness, and evaluator with and without the standing file. The comparison is paired by task, and repeated runs remain necessary when model variation is material.
+
+\Needspace{5\baselineskip}
+
+Before executing the comparison, I record:
+
+\begin{itemize}
+\tightlist
+\item
+  the primary task-success metric;
+\item
+  cost measures;
+\item
+  model and harness versions;
+\item
+  decoding settings;
+\item
+  the context-file revision;
+\item
+  the task-set version; and
+\item
+  the decision threshold.
+\end{itemize}
+
+This prevents an unfavorable result from being rescued after the fact by whichever secondary measure happened to move. Diagnostic measures such as instruction adherence, tool calls, latency, and failure class remain useful for explaining the primary result.
+
+Inference cost includes more than the file's input tokens. An instruction may trigger additional searches, builds, reviews, or explanations. A concise repository-specific command may instead prevent failed exploration and lower total cost despite adding permanent context.
+
+I therefore record input and output tokens, model calls, tool execution, and cost per completed task. File length alone is incomplete. A reported 20 percent aggregate difference is also one estimate and deserves the same repeated measurement as a completion score.
+
+\Needspace{5\baselineskip}
+
+The task sample must exercise the claims the file makes. A suite of isolated function edits says little about migration rules, generated code, deployment checks, or concurrent changes. I include:
+
+\begin{itemize}
+\tightlist
+\item
+  ordinary repository work;
+\item
+  tasks that encounter unusual local constraints; and
+\item
+  tasks where violating a rule would produce a consequential failure.
+\end{itemize}
+
+Expected use determines the mix.
+
+An all-or-nothing comparison may hide which content helps or harms. When the task budget permits, I ablate instruction categories separately. One arm may retain only build and test commands, another only failure-prevention rules, and another the architectural overview.
+
+The categories can interact, so the decomposition is imperfect. It is still more informative than concluding that the entire file either works or does not.
+
+The Gloaguen et al.~result gives narrow failure-prevention rules a plausible role because agents followed the instructions even when aggregate task success did not improve. It does not show that any particular rule deserves permanent inclusion.
+
+A rule such as ``do not regenerate this checked-in directory manually'' names a concrete failure and can be tested on tasks that encounter that directory. A page describing the repository architecture may duplicate information that search can retrieve only when needed.
+
+I therefore give permanent inclusion a high bar. The default file should focus on unusual constraints and failure-prevention rules that a capable agent is likely to miss and cannot cheaply discover at the moment of need. Common language conventions, framework summaries, and directory tours usually belong behind on-demand retrieval instead.
+
+One of my repositories uses its context file as a failure-mode ledger. Each prohibition names the incident class it prevents. That design connects a rule to a repository-specific need and allows its removal when the hazard disappears. This author-system example illustrates maintenance practice but provides no measured completion benefit.
+
+Actual context files are broader. Chatlatanagulchai et al.~(\href{https://arxiv.org/abs/2511.12884}{2025}) analyzed 2,303 files from 1,925 repositories. Implementation details appeared in 69.9 percent, architecture information in 67.7 percent, and build or execution guidance in 62.3 percent. Security and performance guidance each appeared in 14.5 percent.
+
+Those percentages describe what maintainers wrote, not what improved outcomes. The relative absence of security and performance guidance is a useful review prompt because coding agents can execute commands and modify production-relevant code. It does not show that generic security or performance text should be added.
+
+\Needspace{5\baselineskip}
+
+A file retained after evaluation should be maintained like configuration. Every instruction needs:
+
+\begin{itemize}
+\tightlist
+\item
+  an owner;
+\item
+  a reason for existing;
+\item
+  a failure or outcome it is meant to affect;
+\item
+  a review trigger; and
+\item
+  a deletion condition.
+\end{itemize}
+
+Changes should arrive as small diffs so reviewers can see which behavior is intended to change. Large generated rewrites make stale claims and contradictions harder to detect.
+
+Chatlatanagulchai et al.~also found that context files often evolve through frequent small additions. That observation is compatible with configuration-like maintenance but says nothing about the quality of the changes. A new line may document a real failure, duplicate an existing rule, or preserve an obsolete workaround. Change frequency is not correctness.
+
+Staleness is especially dangerous because the file is authoritative by placement. An obsolete build command can cause the agent to modify generated output or skip a required check. An architectural overview decays as files move. A prohibition tied to a removed failure mode can continue shaping every run after its justification disappears.
+
+I have seen this drift in my own agent-facing documents. A review-checker file contained 35 rules while its header and wrapping skill still claimed 29. A skill-library README contained three incompatible counts. Neither document had a mechanism capable of detecting the discrepancy.
+
+These cases do not measure task impact. They show that documents consumed by agents can become internally inconsistent when their claims are not checked.
+
+Some claims are mechanically verifiable. Counts can be recomputed, paths validated, commands exercised in a clean environment, and generated sections tied to source fingerprints. Another of my knowledge maps stores a source hash so that changes to the material it describes make drift observable.
+
+Semantic claims still require review, but deterministic checks reduce the surface that depends on human memory.
+
+Ownership should be specific enough to trigger review when the build system, repository structure, release process, or protected failure mode changes. Context assembly should also preserve identity and precedence for requirements repeated across system prompts, repository files, task descriptions, and tool documentation. A pre-run check can detect contradictory instructions before the agent must decide which source governs.
+
+The comparison with no file should be interpreted by instruction category and failure consequence as well as by aggregate completion. A file with no measurable mean benefit may still prevent a rare destructive event that the task suite lacks power to observe. That claim needs a specific threat model, a compliance test, and an explicit cost decision.
+
+A general completion benchmark cannot validate or dismiss safety value when its scoring rule omits the relevant failure.
+
+Correctness, reliability, cost, and usability remain separate columns in the decision record. I retain the no-file condition after the first evaluation because a new model, harness change, or substantial file revision may change both adherence and cost. The earlier result belongs to the configuration that produced it.
+
+When the comparison is inconclusive, adherence cannot substitute for the missing outcome. I report the interval the evaluation supports, inspect whether the sample exercised the file's claims, and decide whether a larger test is justified.
+
+A file may remain provisionally for a concrete safety reason, but the exception and its permanent cost should be explicit. An underpowered null does not prove uselessness, just as instruction compliance does not prove benefit.
+
+The best standing file will often become shorter after evaluation. Rules without a concrete purpose, duplicated repository descriptions, stale counts, and material better served through on-demand retrieval can be removed.
+
+What remains is a reviewed configuration surface whose permanent token cost is tied to an observed failure or measured outcome. That is narrower than claiming that repository context files help, and it is a claim the repository can test.
+
+\section{Set the context operating limits}\label{set-the-context-operating-limits}
+
+The companion catalog contains narrower techniques for systems that need them. It covers placing load-bearing evidence near a context edge, testing semantic rather than verbatim recall, compacting at task milestones, pricing compression by completed work rather than token reduction, minimizing always-loaded context, and auditing the assembled prompt as an inspectable artifact.
+
+Each technique changes one part of the context path. None removes the need to measure the complete path on the operated workload.
+
+Begin with one production-shaped task family and run it across several context sizes. Include relevant multi-document evidence, realistic distractors, and the relationships the agent must reconstruct. Measure correctness, reliability, and cost separately. Inspect the traces around the decline and place the harness limit below the measured knee for the weakest task that must remain reliable.
+
+Record the model, workload, margin, and changes that require requalification.
+
+\Needspace{5\baselineskip}
+
+Next, identify one long-running task whose governing specification has become fragmented. Stop appending correction messages. Consolidate the accepted decisions, constraints, and unresolved questions into one authoritative specification. Inspect the repository state and verification evidence, then restart from a package containing:
+
+\begin{itemize}
+\tightlist
+\item
+  the consolidated specification;
+\item
+  an execution handoff containing raw state and observations; and
+\item
+  a clear next action.
+\end{itemize}
+
+The new run should be able to distinguish what it must obey from what it must investigate.
+
+Move large tool outputs into session-scoped artifacts and retain costed pointers in the active context. Verify recovery after reset, separate preservation of concurrent calls, explicit handling of failed writes, and traceability from every excerpt to its raw source. Treat this as an operational convention until a local paired comparison demonstrates a cost or completion effect.
+
+Finally, compare the repository context file with no standing file on the same tasks and repository states. Record task success, reliability, instruction adherence, total inference and tool cost, and the exact file revision. The roughly 20 percent increase reported in one study is a reason to measure, not a transferable estimate.
+
+The paired comparison determines whether the file earns its permanent cost. Category-level ablations determine which instructions remain.
+
+\Needspace{5\baselineskip}
+
+Together, these controls establish:
+
+\begin{itemize}
+\tightlist
+\item
+  how much context the system admits;
+\item
+  when a run restarts from a clean specification;
+\item
+  where bulk evidence lives; and
+\item
+  which instructions deserve permanent residence in every run.
+\end{itemize}
+
+Chapter 14 turns to what survives between sessions and in what form.
+
+\section*{Sources and evidence}
+
+\textbf{Budget to measured effective context}
+
+\begin{itemize}
+\tightlist
+\item
+  Strong evidence: Hsieh, C.-P., et al.~(2024), ``RULER: What's the Real Context Size of Your Long-Context Language Models?'' COLM 2024, arXiv:2404.06654.
+\item
+  Strong evidence: Leng, Q., et al.~(2024), ``Long Context RAG Performance of Large Language Models,'' Databricks Mosaic Research, arXiv:2411.03538.
+\item
+  Strong evidence: Li, J., et al.~(2025), ``LONGCODEU: Benchmarking Long-Context Language Models on Long Code Understanding,'' arXiv:2503.04359.
+\item
+  Strong evidence: Rando, S., et al.~(2025), ``LongCodeBench: Evaluating Coding LLMs at 1M Context Windows,'' arXiv:2505.07897.
+\item
+  Corroboration: none on record.
+\end{itemize}
+
+\textbf{Consolidate the specification and restart lost runs}
+
+\begin{itemize}
+\tightlist
+\item
+  Strong evidence: Laban, P., et al.~(2025), ``LLMs Get Lost In Multi-Turn Conversation,'' arXiv:2505.06120.
+\item
+  Corroboration, narrative only: the author's trace-diagnostics corpus showed that guidance delivered in the system prompt twenty turns earlier was absent from the visible reasoning: 0\% across 1,705 thinking blocks in 199 traces. The literature result, not this case, carries the claim.
+\end{itemize}
+
+\textbf{Persist transient context as files}
+
+\begin{itemize}
+\tightlist
+\item
+  Directional evidence: \href{https://cursor.com/blog/dynamic-context-discovery}{``Dynamic Context Discovery in Coding Agents''}, Cursor engineering blog, 2026-01-07.
+\item
+  Directional evidence: \href{https://www.amplifypartners.com/blog-posts/how-hightouch-built-their-long-running-agent-harness}{``How Hightouch built their long-running agent harness''}, Amplify Partners engineering interview, 2026-01-20.
+\item
+  Corroboration, narrative only: the author's memory system exposes token cost before loading content, and the author's agent fleet stopped a drifting skill-catalog snapshot by moving it to a fingerprinted, session-atomic file validated on reload.
+\end{itemize}
+
+\textbf{Measure context files and maintain them like configuration}
+
+\begin{itemize}
+\tightlist
+\item
+  Null or conflicting result: Gloaguen, T., Mündler, N., Müller, M., Raychev, V., Vechev, M. (2026), ``Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?'' arXiv:2602.11988.
+\item
+  Strong evidence: Chatlatanagulchai, W., et al.~(2025), ``Agent READMEs: An Empirical Study of Context Files for Agentic Coding,'' arXiv:2511.12884.
+\item
+  Corroboration, narrative only: the author's systems include a context file maintained as a failure-mode ledger and a knowledge map with a machine-checkable source hash; contrary cases include a review-checker whose live rule count disagreed with its header and wrapper, and a skill-library README with three inconsistent counts.
+\end{itemize}
+
+Author-system cases in this chapter are narrative illustration, not evidence.

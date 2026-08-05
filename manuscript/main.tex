@@ -1,0 +1,149 @@
+\documentclass[11pt,oneside]{book}
+
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage{fancyvrb}
+\usepackage{upquote}
+\usepackage[htt]{hyphenat}
+\usepackage{xcolor}
+\usepackage{xurl}
+\usepackage[hidelinks,breaklinks=true]{hyperref}
+
+\hypersetup{
+  pdftitle={Engineering Reliable Coding Agents},
+  pdfauthor={Stephanie Jarmak},
+  pdfsubject={Evaluation, operation, and governance of AI coding-agent systems}
+}
+
+\setlength{\emergencystretch}{6em}
+\setlength{\parindent}{1.25em}
+\setlength{\parskip}{0pt}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{1}
+\setlist{
+  topsep=0.45\baselineskip,
+  partopsep=0.12\baselineskip,
+  itemsep=0.12\baselineskip,
+  parsep=0pt
+}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{0.90}
+\renewcommand{\bottomfraction}{0.80}
+\renewcommand{\textfraction}{0.08}
+\renewcommand{\floatpagefraction}{0.72}
+\setlength{\textfloatsep}{0.80\baselineskip plus 0.20\baselineskip minus 0.10\baselineskip}
+\setlength{\intextsep}{0.80\baselineskip plus 0.20\baselineskip minus 0.10\baselineskip}
+\setlength{\floatsep}{0.65\baselineskip plus 0.15\baselineskip minus 0.10\baselineskip}
+\setlength{\abovecaptionskip}{0.45\baselineskip}
+\setlength{\belowcaptionskip}{0.15\baselineskip}
+\fvset{fontsize=\small}
+\pagestyle{plain}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0.10\baselineskip}\setlength{\parskip}{0pt}}
+\newcommand{\pandocbounded}[1]{%
+  \begingroup
+  \setbox0=\hbox{#1}%
+  \ifdim\wd0>\linewidth
+    \resizebox{\linewidth}{!}{\box0}%
+  \else
+    \box0
+  \fi
+  \endgroup}
+
+\begin{document}
+\frontmatter
+
+\begin{titlepage}
+  \centering
+  \vspace*{0.16\textheight}
+  {\Huge\bfseries Engineering Reliable Coding Agents\par}
+  \vspace{1.2em}
+  {\Large Evaluation, Recovery, Context, and Control Beyond the Model\par}
+  \vspace{2.5em}
+  {\large Stephanie Jarmak\par}
+  \vfill
+  {\large August 2026\par}
+\end{titlepage}
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+\input{abstract}
+
+\tableofcontents
+\input{frontmatter}
+
+\mainmatter
+\part{Evaluation measurement and experiment design}
+
+\input{chapters/ch01-variance-power-paired-comparisons}
+
+\input{chapters/ch02-baselines-ablations-cost-accuracy}
+
+\input{chapters/ch03-contamination-oracle-workload-validity}
+
+\part{Evaluation and grading systems}
+
+\input{chapters/ch04-execution-correction-gates-release-tests}
+
+\input{chapters/ch05-calibrating-model-graders-agreement-correctness}
+
+\input{chapters/ch06-proxy-gaming-layered-signals}
+
+\part{Containment, durable execution, and recovery engineering}
+
+\input{chapters/ch07-isolation-injection-independent-verification}
+
+\input{chapters/ch08-persistent-state-durable-workflows-idempotent-retries}
+
+\input{chapters/ch09-replayable-traces-fault-injection-recovery}
+
+\input{chapters/ch10-human-auditable-failure-analysis-taxonomy}
+
+\part{Context engineering: retrieval, budgets, and memory}
+
+\input{chapters/ch11-measuring-designing-repository-retrieval}
+
+\input{chapters/ch12-localization-funnels-repository-indexes-freshness-checks}
+
+\input{chapters/ch13-usable-context-budgets-spec-restarts-file-output}
+
+\input{chapters/ch14-cross-session-memory-raw-traces-compaction}
+
+\part{Human review and accountability engineering}
+
+\input{chapters/ch15-verification-interfaces-risk-based-escalation}
+
+\input{chapters/ch16-autonomy-provenance-gates-accountability}
+
+\part{Work allocation and cost engineering}
+
+\input{chapters/ch17-agent-topology-dynamic-task-allocation}
+
+\input{chapters/ch18-cost-aware-fleet-scheduling-model-routing}
+
+\input{chapters/closing}
+
+\backmatter
+\renewcommand{\bibname}{References}
+\input{references}
+
+\chapter*{Data and materials availability}
+\addcontentsline{toc}{chapter}{Data and materials availability}
+\input{materials}
+
+\end{document}

@@ -1,0 +1,5889 @@
+{
+  "generated_at": "2026-08-05T18:50:12.603Z",
+  "arxiv": [
+    {
+      "id": "1503.07170",
+      "status": "resolved",
+      "metadata": {
+        "id": "1503.07170",
+        "title": "An Integer Linear Programming Solution to the Telescope Network Scheduling Problem",
+        "authors": [
+          "Sotiria Lampoudi",
+          "Eric Saunders",
+          "Jason Eastman"
+        ],
+        "published": "2015-03-24",
+        "updated": "2015-03-24"
+      }
+    },
+    {
+      "id": "1506.08603",
+      "status": "resolved",
+      "metadata": {
+        "id": "1506.08603",
+        "title": "Lightweight Asynchronous Snapshots for Distributed Dataflows",
+        "authors": [
+          "Paris Carbone",
+          "Gyula Fóra",
+          "Stephan Ewen",
+          "Seif Haridi",
+          "Kostas Tzoumas"
+        ],
+        "published": "2015-06-29",
+        "updated": "2015-06-29"
+      }
+    },
+    {
+      "id": "1608.07617",
+      "status": "resolved",
+      "metadata": {
+        "id": "1608.07617",
+        "title": "\"Sampling\"' as a Baseline Optimizer for Search-based Software Engineering",
+        "authors": [
+          "Jianfeng Chen",
+          "Vivek Nair",
+          "Rahul Krishna",
+          "Tim Menzies"
+        ],
+        "published": "2016-08-26",
+        "updated": "2018-01-05"
+      }
+    },
+    {
+      "id": "1709.02592",
+      "status": "resolved",
+      "metadata": {
+        "id": "1709.02592",
+        "title": "An Adversarial Model for Scheduling with Testing",
+        "authors": [
+          "Christoph Dürr",
+          "Thomas Erlebach",
+          "Nicole Megow",
+          "Julie Meißner"
+        ],
+        "published": "2017-09-08",
+        "updated": "2020-05-14"
+      }
+    },
+    {
+      "id": "1709.06560",
+      "status": "resolved",
+      "metadata": {
+        "id": "1709.06560",
+        "title": "Deep Reinforcement Learning that Matters",
+        "authors": [
+          "Peter Henderson",
+          "Riashat Islam",
+          "Philip Bachman",
+          "Joelle Pineau",
+          "Doina Precup",
+          "David Meger"
+        ],
+        "published": "2017-09-19",
+        "updated": "2019-01-30"
+      }
+    },
+    {
+      "id": "1709.09500",
+      "status": "resolved",
+      "metadata": {
+        "id": "1709.09500",
+        "title": "Replicability Analysis for Natural Language Processing: Testing Significance with Multiple Datasets",
+        "authors": [
+          "Rotem Dror",
+          "Gili Baumer",
+          "Marina Bogomolov",
+          "Roi Reichart"
+        ],
+        "published": "2017-09-27",
+        "updated": "2017-09-27"
+      }
+    },
+    {
+      "id": "1803.09578",
+      "status": "resolved",
+      "metadata": {
+        "id": "1803.09578",
+        "title": "Why Comparing Single Performance Scores Does Not Allow to Draw Conclusions About Machine Learning Approaches",
+        "authors": [
+          "Nils Reimers",
+          "Iryna Gurevych"
+        ],
+        "published": "2018-03-26",
+        "updated": "2018-03-26"
+      }
+    },
+    {
+      "id": "1806.08295",
+      "status": "resolved",
+      "metadata": {
+        "id": "1806.08295",
+        "title": "How Many Random Seeds? Statistical Power Analysis in Deep Reinforcement Learning Experiments",
+        "authors": [
+          "Cédric Colas",
+          "Olivier Sigaud",
+          "Pierre-Yves Oudeyer"
+        ],
+        "published": "2018-06-21",
+        "updated": "2018-07-05"
+      }
+    },
+    {
+      "id": "1809.01448",
+      "status": "resolved",
+      "metadata": {
+        "id": "1809.01448",
+        "title": "Appendix - Recommended Statistical Significance Tests for NLP Tasks",
+        "authors": [
+          "Rotem Dror",
+          "Roi Reichart"
+        ],
+        "published": "2018-09-05",
+        "updated": "2018-09-05"
+      }
+    },
+    {
+      "id": "1810.01963",
+      "status": "resolved",
+      "metadata": {
+        "id": "1810.01963",
+        "title": "Learning Scheduling Algorithms for Data Processing Clusters",
+        "authors": [
+          "Hongzi Mao",
+          "Malte Schwarzkopf",
+          "Shaileshh Bojja Venkatakrishnan",
+          "Zili Meng",
+          "Mohammad Alizadeh"
+        ],
+        "published": "2018-10-03",
+        "updated": "2019-08-21"
+      }
+    },
+    {
+      "id": "1810.04815",
+      "status": "resolved",
+      "metadata": {
+        "id": "1810.04815",
+        "title": "A Framework for Telescope Schedulers: With Applications to the Large Synoptic Survey Telescope",
+        "authors": [
+          "Elahesadat Naghib",
+          "Peter Yoachim",
+          "Robert J. Vanderbei",
+          "Andrew J. Connolly",
+          "R. Lynne Jones"
+        ],
+        "published": "2018-10-11",
+        "updated": "2018-10-11"
+      }
+    },
+    {
+      "id": "1905.02209",
+      "status": "resolved",
+      "metadata": {
+        "id": "1905.02209",
+        "title": "The Zwicky Transient Facility: Surveys and Scheduler",
+        "authors": [
+          "Eric C. Bellm",
+          "Shrinivas R. Kulkarni",
+          "Tom Barlow",
+          "Ulrich Feindt",
+          "Matthew J. Graham",
+          "Ariel Goobar",
+          "Thomas Kupfer",
+          "Chow-Choong Ngeow",
+          "Peter Nugent",
+          "Eran Ofek",
+          "Thomas A. Prince",
+          "Reed Riddle",
+          "Richard Walters",
+          "Quan-Zhi Ye"
+        ],
+        "published": "2019-05-06",
+        "updated": "2019-05-06"
+      }
+    },
+    {
+      "id": "1907.06250",
+      "status": "resolved",
+      "metadata": {
+        "id": "1907.06250",
+        "title": "Delivery, consistency, and determinism: rethinking guarantees in distributed stream processing",
+        "authors": [
+          "Artem Trofimov",
+          "Igor E. Kuralenok",
+          "Nikita Marshalkin",
+          "Boris Novikov"
+        ],
+        "published": "2019-07-14",
+        "updated": "2019-07-14"
+      }
+    },
+    {
+      "id": "1907.07817",
+      "status": "resolved",
+      "metadata": {
+        "id": "1907.07817",
+        "title": "Scheduling Discovery in the 2020s",
+        "authors": [
+          "Eric C. Bellm",
+          "Eric B. Ford",
+          "Aaron Tohuvavohu",
+          "Michael W. Coughlin",
+          "Brett Morris",
+          "Bryan Miller",
+          "Jennifer Sobeck",
+          "Reed Riddle",
+          "Chuanfei Dong",
+          "Peter Yoachim"
+        ],
+        "published": "2019-07-17",
+        "updated": "2019-07-17"
+      }
+    },
+    {
+      "id": "1909.03004",
+      "status": "resolved",
+      "metadata": {
+        "id": "1909.03004",
+        "title": "Show Your Work: Improved Reporting of Experimental Results",
+        "authors": [
+          "Jesse Dodge",
+          "Suchin Gururangan",
+          "Dallas Card",
+          "Roy Schwartz",
+          "Noah A. Smith"
+        ],
+        "published": "2019-09-06",
+        "updated": "2019-09-06"
+      }
+    },
+    {
+      "id": "1909.09436",
+      "status": "resolved",
+      "metadata": {
+        "id": "1909.09436",
+        "title": "CodeSearchNet Challenge: Evaluating the State of Semantic Code Search",
+        "authors": [
+          "Hamel Husain",
+          "Ho-Hsiang Wu",
+          "Tiferet Gazit",
+          "Miltiadis Allamanis",
+          "Marc Brockschmidt"
+        ],
+        "published": "2019-09-20",
+        "updated": "2020-06-08"
+      }
+    },
+    {
+      "id": "1909.13694",
+      "status": "resolved",
+      "metadata": {
+        "id": "1909.13694",
+        "title": "Automated Patch Assessment for Program Repair at Scale",
+        "authors": [
+          "He Ye",
+          "Matias Martinez",
+          "Martin Monperrus"
+        ],
+        "published": "2019-09-30",
+        "updated": "2021-05-07"
+      }
+    },
+    {
+      "id": "1911.11915",
+      "status": "resolved",
+      "metadata": {
+        "id": "1911.11915",
+        "title": "A Utilization Model for Optimization of Checkpoint Intervals in Distributed Stream Processing Systems",
+        "authors": [
+          "Sachini Jayasekara",
+          "Aaron Harwood",
+          "Shanika Karunasekera"
+        ],
+        "published": "2019-11-27",
+        "updated": "2019-11-27"
+      }
+    },
+    {
+      "id": "2001.02114",
+      "status": "resolved",
+      "metadata": {
+        "id": "2001.02114",
+        "title": "Effect of Confidence and Explanation on Accuracy and Trust Calibration in AI-Assisted Decision Making",
+        "authors": [
+          "Yunfeng Zhang",
+          "Q. Vera Liao",
+          "Rachel K. E. Bellamy"
+        ],
+        "published": "2020-01-07",
+        "updated": "2020-01-07"
+      }
+    },
+    {
+      "id": "2001.08236",
+      "status": "resolved",
+      "metadata": {
+        "id": "2001.08236",
+        "title": "Search-Based Software Engineering for Self-Adaptive Systems: Survey, Disappointments, Suggestions and Opportunities",
+        "authors": [
+          "Tao Chen",
+          "Miqing Li",
+          "Ke Li",
+          "Kalyanmoy Deb"
+        ],
+        "published": "2020-01-22",
+        "updated": "2020-08-14"
+      }
+    },
+    {
+      "id": "2002.06305",
+      "status": "resolved",
+      "metadata": {
+        "id": "2002.06305",
+        "title": "Fine-Tuning Pretrained Language Models: Weight Initializations, Data Orders, and Early Stopping",
+        "authors": [
+          "Jesse Dodge",
+          "Gabriel Ilharco",
+          "Roy Schwartz",
+          "Ali Farhadi",
+          "Hannaneh Hajishirzi",
+          "Noah Smith"
+        ],
+        "published": "2020-02-15",
+        "updated": "2020-02-15"
+      }
+    },
+    {
+      "id": "2002.08035",
+      "status": "resolved",
+      "metadata": {
+        "id": "2002.08035",
+        "title": "A Case for Humans-in-the-Loop: Decisions in the Presence of Erroneous Algorithmic Scores",
+        "authors": [
+          "Maria De-Arteaga",
+          "Riccardo Fogliato",
+          "Alexandra Chouldechova"
+        ],
+        "published": "2020-02-19",
+        "updated": "2020-02-20"
+      }
+    },
+    {
+      "id": "2003.00365",
+      "status": "resolved",
+      "metadata": {
+        "id": "2003.00365",
+        "title": "Budget-Constrained Bandits over General Cost and Reward Distributions",
+        "authors": [
+          "Semih Cayci",
+          "Atilla Eryilmaz",
+          "R. Srikant"
+        ],
+        "published": "2020-02-29",
+        "updated": "2020-02-29"
+      }
+    },
+    {
+      "id": "2004.12832",
+      "status": "resolved",
+      "metadata": {
+        "id": "2004.12832",
+        "title": "ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT",
+        "authors": [
+          "Omar Khattab",
+          "Matei Zaharia"
+        ],
+        "published": "2020-04-27",
+        "updated": "2020-06-04"
+      }
+    },
+    {
+      "id": "2005.13109",
+      "status": "resolved",
+      "metadata": {
+        "id": "2005.13109",
+        "title": "Dynamic Multi-Robot Task Allocation under Uncertainty and Temporal Constraints",
+        "authors": [
+          "Shushman Choudhury",
+          "Jayesh K. Gupta",
+          "Mykel J. Kochenderfer",
+          "Dorsa Sadigh",
+          "Jeannette Bohg"
+        ],
+        "published": "2020-05-27",
+        "updated": "2020-07-25"
+      }
+    },
+    {
+      "id": "2006.05265",
+      "status": "resolved",
+      "metadata": {
+        "id": "2006.05265",
+        "title": "MISIM: A Neural Code Semantics Similarity System Using the Context-Aware Semantics Structure",
+        "authors": [
+          "Fangke Ye",
+          "Shengtian Zhou",
+          "Anand Venkat",
+          "Ryan Marcus",
+          "Nesime Tatbul",
+          "Jesmin Jahan Tithi",
+          "Niranjan Hasabnis",
+          "Paul Petersen",
+          "Timothy Mattson",
+          "Tim Kraska",
+          "Pradeep Dubey",
+          "Vivek Sarkar",
+          "Justin Gottschlich"
+        ],
+        "published": "2020-06-05",
+        "updated": "2021-06-02"
+      }
+    },
+    {
+      "id": "2008.00842",
+      "status": "resolved",
+      "metadata": {
+        "id": "2008.00842",
+        "title": "A Survey on the Evolution of Stream Processing Systems",
+        "authors": [
+          "Marios Fragkoulis",
+          "Paris Carbone",
+          "Vasiliki Kalavri",
+          "Asterios Katsifodimos"
+        ],
+        "published": "2020-08-03",
+        "updated": "2023-01-14"
+      }
+    },
+    {
+      "id": "2009.08366",
+      "status": "resolved",
+      "metadata": {
+        "id": "2009.08366",
+        "title": "GraphCodeBERT: Pre-training Code Representations with Data Flow",
+        "authors": [
+          "Daya Guo",
+          "Shuo Ren",
+          "Shuai Lu",
+          "Zhangyin Feng",
+          "Duyu Tang",
+          "Shujie Liu",
+          "Long Zhou",
+          "Nan Duan",
+          "Alexey Svyatkovskiy",
+          "Shengyu Fu",
+          "Michele Tufano",
+          "Shao Kun Deng",
+          "Colin Clement",
+          "Dawn Drain",
+          "Neel Sundaresan",
+          "Jian Yin",
+          "Daxin Jiang",
+          "Ming Zhou"
+        ],
+        "published": "2020-09-17",
+        "updated": "2021-09-13"
+      }
+    },
+    {
+      "id": "2010.06595",
+      "status": "resolved",
+      "metadata": {
+        "id": "2010.06595",
+        "title": "With Little Power Comes Great Responsibility",
+        "authors": [
+          "Dallas Card",
+          "Peter Henderson",
+          "Urvashi Khandelwal",
+          "Robin Jia",
+          "Kyle Mahowald",
+          "Dan Jurafsky"
+        ],
+        "published": "2020-10-13",
+        "updated": "2020-10-13"
+      }
+    },
+    {
+      "id": "2010.08191",
+      "status": "resolved",
+      "metadata": {
+        "id": "2010.08191",
+        "title": "RocketQA: An Optimized Training Approach to Dense Passage Retrieval for Open-Domain Question Answering",
+        "authors": [
+          "Yingqi Qu",
+          "Yuchen Ding",
+          "Jing Liu",
+          "Kai Liu",
+          "Ruiyang Ren",
+          "Wayne Xin Zhao",
+          "Daxiang Dong",
+          "Hua Wu",
+          "Haifeng Wang"
+        ],
+        "published": "2020-10-16",
+        "updated": "2021-05-12"
+      }
+    },
+    {
+      "id": "2102.00701",
+      "status": "resolved",
+      "metadata": {
+        "id": "2102.00701",
+        "title": "Search-Based Software Re-Modularization: A Case Study at Adyen",
+        "authors": [
+          "Casper Schröder",
+          "Adriaan van der Feltz",
+          "Annibale Panichella",
+          "Maurício Aniche"
+        ],
+        "published": "2021-02-01",
+        "updated": "2021-04-09"
+      }
+    },
+    {
+      "id": "2102.09692",
+      "status": "resolved",
+      "metadata": {
+        "id": "2102.09692",
+        "title": "To Trust or to Think: Cognitive Forcing Functions Can Reduce Overreliance on AI in AI-assisted Decision-making",
+        "authors": [
+          "Zana Buçinca",
+          "Maja Barbara Malaya",
+          "Krzysztof Z. Gajos"
+        ],
+        "published": "2021-02-19",
+        "updated": "2021-02-19"
+      }
+    },
+    {
+      "id": "2103.00033",
+      "status": "resolved",
+      "metadata": {
+        "id": "2103.00033",
+        "title": "Serverless Workflows with Durable Functions and Netherite",
+        "authors": [
+          "Sebastian Burckhardt",
+          "Chris Gillum",
+          "David Justo",
+          "Konstantinos Kallas",
+          "Connor McMahon",
+          "Christopher S. Meiklejohn"
+        ],
+        "published": "2021-02-26",
+        "updated": "2021-02-26"
+      }
+    },
+    {
+      "id": "2103.00170",
+      "status": "resolved",
+      "metadata": {
+        "id": "2103.00170",
+        "title": "Data Management in Microservices: State of the Practice, Challenges, and Research Directions",
+        "authors": [
+          "Rodrigo Laigner",
+          "Yongluan Zhou",
+          "Marcos Antonio Vaz Salles",
+          "Yijian Liu",
+          "Marcos Kalinowski"
+        ],
+        "published": "2021-02-27",
+        "updated": "2021-08-22"
+      }
+    },
+    {
+      "id": "2103.03098",
+      "status": "resolved",
+      "metadata": {
+        "id": "2103.03098",
+        "title": "Accounting for Variance in Machine Learning Benchmarks",
+        "authors": [
+          "Xavier Bouthillier",
+          "Pierre Delaunay",
+          "Mirko Bronzi",
+          "Assya Trofimov",
+          "Brennan Nichyporuk",
+          "Justin Szeto",
+          "Naz Sepah",
+          "Edward Raff",
+          "Kanika Madan",
+          "Vikram Voleti",
+          "Samira Ebrahimi Kahou",
+          "Vincent Michalski",
+          "Dmitriy Serdyuk",
+          "Tal Arbel",
+          "Chris Pal",
+          "Gaël Varoquaux",
+          "Pascal Vincent"
+        ],
+        "published": "2021-03-01",
+        "updated": "2021-03-01"
+      }
+    },
+    {
+      "id": "2104.01146",
+      "status": "resolved",
+      "metadata": {
+        "id": "2104.01146",
+        "title": "An Empirical Characterization of Event Sourced Systems and Their Schema Evolution -- Lessons from Industry",
+        "authors": [
+          "Michiel Overeem",
+          "Marten Spoor",
+          "Slinger Jansen",
+          "Sjaak Brinkkemper"
+        ],
+        "published": "2021-04-02",
+        "updated": "2021-04-02"
+      }
+    },
+    {
+      "id": "2107.03374",
+      "status": "resolved",
+      "metadata": {
+        "id": "2107.03374",
+        "title": "Evaluating Large Language Models Trained on Code",
+        "authors": [
+          "Mark Chen",
+          "Jerry Tworek",
+          "Heewoo Jun",
+          "Qiming Yuan",
+          "Henrique Ponde de Oliveira Pinto",
+          "Jared Kaplan",
+          "Harri Edwards",
+          "Yuri Burda",
+          "Nicholas Joseph",
+          "Greg Brockman",
+          "Alex Ray",
+          "Raul Puri",
+          "Gretchen Krueger",
+          "Michael Petrov",
+          "Heidy Khlaaf",
+          "Girish Sastry",
+          "Pamela Mishkin",
+          "Brooke Chan",
+          "Scott Gray",
+          "Nick Ryder",
+          "Mikhail Pavlov",
+          "Alethea Power",
+          "Lukasz Kaiser",
+          "Mohammad Bavarian",
+          "Clemens Winter",
+          "Philippe Tillet",
+          "Felipe Petroski Such",
+          "Dave Cummings",
+          "Matthias Plappert",
+          "Fotios Chantzis",
+          "Elizabeth Barnes",
+          "Ariel Herbert-Voss",
+          "William Hebgen Guss",
+          "Alex Nichol",
+          "Alex Paino",
+          "Nikolas Tezak",
+          "Jie Tang",
+          "Igor Babuschkin",
+          "Suchir Balaji",
+          "Shantanu Jain",
+          "William Saunders",
+          "Christopher Hesse",
+          "Andrew N. Carr",
+          "Jan Leike",
+          "Josh Achiam",
+          "Vedant Misra",
+          "Evan Morikawa",
+          "Alec Radford",
+          "Matthew Knight",
+          "Miles Brundage",
+          "Mira Murati",
+          "Katie Mayer",
+          "Peter Welinder",
+          "Bob McGrew",
+          "Dario Amodei",
+          "Sam McCandlish",
+          "Ilya Sutskever",
+          "Wojciech Zaremba"
+        ],
+        "published": "2021-07-07",
+        "updated": "2021-07-14"
+      }
+    },
+    {
+      "id": "2108.03758",
+      "status": "resolved",
+      "metadata": {
+        "id": "2108.03758",
+        "title": "Tackling Consistency-related Design Challenges of Distributed Data-Intensive Systems - An Action Research Study",
+        "authors": [
+          "Susanne Braun",
+          "Stefan Deßloch",
+          "Eberhard Wolff",
+          "Frank Elberzhager",
+          "Andreas Jedlitschka"
+        ],
+        "published": "2021-08-08",
+        "updated": "2021-08-08"
+      }
+    },
+    {
+      "id": "2108.13264",
+      "status": "resolved",
+      "metadata": {
+        "id": "2108.13264",
+        "title": "Deep Reinforcement Learning at the Edge of the Statistical Precipice",
+        "authors": [
+          "Rishabh Agarwal",
+          "Max Schwarzer",
+          "Pablo Samuel Castro",
+          "Aaron Courville",
+          "Marc G. Bellemare"
+        ],
+        "published": "2021-08-30",
+        "updated": "2022-01-05"
+      }
+    },
+    {
+      "id": "2109.05067",
+      "status": "resolved",
+      "metadata": {
+        "id": "2109.05067",
+        "title": "The Flaws of Policies Requiring Human Oversight of Government Algorithms",
+        "authors": [
+          "Ben Green"
+        ],
+        "published": "2021-09-10",
+        "updated": "2022-10-24"
+      }
+    },
+    {
+      "id": "2111.11562",
+      "status": "resolved",
+      "metadata": {
+        "id": "2111.11562",
+        "title": "Reliable Actors with Retry Orchestration",
+        "authors": [
+          "Olivier Tardieu",
+          "David Grove",
+          "Gheorghe-Teodor Bercea",
+          "Paul Castro",
+          "Jaroslaw Cwiklik",
+          "Edward Epstein"
+        ],
+        "published": "2021-11-22",
+        "updated": "2022-11-11"
+      }
+    },
+    {
+      "id": "2111.11628",
+      "status": "resolved",
+      "metadata": {
+        "id": "2111.11628",
+        "title": "$Δ$-MILP: Deep Space Network Scheduling via Mixed-Integer Linear Programming",
+        "authors": [
+          "Thomas Claudet",
+          "Ryan Alimo",
+          "Edwin Goh",
+          "Mark Johnston",
+          "Ramtin Madani",
+          "Brian Wilson"
+        ],
+        "published": "2021-11-23",
+        "updated": "2022-02-14"
+      }
+    },
+    {
+      "id": "2112.01298",
+      "status": "resolved",
+      "metadata": {
+        "id": "2112.01298",
+        "title": "Meaningful human control: actionable properties for AI system development",
+        "authors": [
+          "Luciano Cavalcante Siebert",
+          "Maria Luce Lupetti",
+          "Evgeni Aizenberg",
+          "Niek Beckers",
+          "Arkady Zgonnikov",
+          "Herman Veluwenkamp",
+          "David Abbink",
+          "Elisa Giaccardi",
+          "Geert-Jan Houben",
+          "Catholijn M. Jonker",
+          "Jeroen van den Hoven",
+          "Deborah Forster",
+          "Reginald L. Lagendijk"
+        ],
+        "published": "2021-11-25",
+        "updated": "2022-05-19"
+      }
+    },
+    {
+      "id": "2112.11471",
+      "status": "resolved",
+      "metadata": {
+        "id": "2112.11471",
+        "title": "Towards a Science of Human-AI Decision Making: A Survey of Empirical Studies",
+        "authors": [
+          "Vivian Lai",
+          "Chacha Chen",
+          "Q. Vera Liao",
+          "Alison Smith-Renner",
+          "Chenhao Tan"
+        ],
+        "published": "2021-12-21",
+        "updated": "2021-12-21"
+      }
+    },
+    {
+      "id": "2203.00013",
+      "status": "resolved",
+      "metadata": {
+        "id": "2203.00013",
+        "title": "Foraging with MUSHROOMS: A Mixed-Integer Linear Programming Scheduler for Multimessenger Target of Opportunity Searches with the Zwicky Transient Facility",
+        "authors": [
+          "B. Parazin",
+          "Michael W. Coughlin",
+          "Leo P. Singer",
+          "Vaidehi Gupta",
+          "Shreya Anand"
+        ],
+        "published": "2022-02-28",
+        "updated": "2022-07-11"
+      }
+    },
+    {
+      "id": "2204.03293",
+      "status": "resolved",
+      "metadata": {
+        "id": "2204.03293",
+        "title": "CoCoSoDa: Effective Contrastive Learning for Code Search",
+        "authors": [
+          "Ensheng Shi",
+          "Yanlin Wang",
+          "Wenchao Gu",
+          "Lun Du",
+          "Hongyu Zhang",
+          "Shi Han",
+          "Dongmei Zhang",
+          "Hongbin Sun"
+        ],
+        "published": "2022-04-07",
+        "updated": "2023-02-12"
+      }
+    },
+    {
+      "id": "2204.07210",
+      "status": "resolved",
+      "metadata": {
+        "id": "2204.07210",
+        "title": "A Case for Microservices Orchestration Using Workflow Engines",
+        "authors": [
+          "Anas Nadeem",
+          "Muhammad Zubair Malik"
+        ],
+        "published": "2022-04-14",
+        "updated": "2022-04-14"
+      }
+    },
+    {
+      "id": "2206.15000",
+      "status": "resolved",
+      "metadata": {
+        "id": "2206.15000",
+        "title": "Grounded Copilot: How Programmers Interact with Code-Generating Models",
+        "authors": [
+          "Shraddha Barke",
+          "Michael B. James",
+          "Nadia Polikarpova"
+        ],
+        "published": "2022-06-30",
+        "updated": "2022-10-31"
+      }
+    },
+    {
+      "id": "2207.11016",
+      "status": "resolved",
+      "metadata": {
+        "id": "2207.11016",
+        "title": "Search-based Software Testing Driven by Automatically Generated and Manually Defined Fitness Functions",
+        "authors": [
+          "Federico Formica",
+          "Tony Fan",
+          "Claudio Menghi"
+        ],
+        "published": "2022-07-22",
+        "updated": "2023-09-07"
+      }
+    },
+    {
+      "id": "2208.06213",
+      "status": "resolved",
+      "metadata": {
+        "id": "2208.06213",
+        "title": "What is it like to program with artificial intelligence?",
+        "authors": [
+          "Advait Sarkar",
+          "Andrew D. Gordon",
+          "Carina Negreanu",
+          "Christian Poelitz",
+          "Sruti Srinivasa Ragavan",
+          "Ben Zorn"
+        ],
+        "published": "2022-08-12",
+        "updated": "2022-10-17"
+      }
+    },
+    {
+      "id": "2208.09727",
+      "status": "resolved",
+      "metadata": {
+        "id": "2208.09727",
+        "title": "Lost at C: A User Study on the Security Implications of Large Language Model Code Assistants",
+        "authors": [
+          "Gustavo Sandoval",
+          "Hammond Pearce",
+          "Teo Nys",
+          "Ramesh Karri",
+          "Siddharth Garg",
+          "Brendan Dolan-Gavitt"
+        ],
+        "published": "2022-08-20",
+        "updated": "2023-02-27"
+      }
+    },
+    {
+      "id": "2208.09827",
+      "status": "resolved",
+      "metadata": {
+        "id": "2208.09827",
+        "title": "A Survey on Transactional Stream Processing",
+        "authors": [
+          "Shuhao Zhang",
+          "Juan Soto",
+          "Volker Markl"
+        ],
+        "published": "2022-08-21",
+        "updated": "2023-06-01"
+      }
+    },
+    {
+      "id": "2208.13068",
+      "status": "resolved",
+      "metadata": {
+        "id": "2208.13068",
+        "title": "Apiary: A DBMS-Integrated Transactional Function-as-a-Service Framework",
+        "authors": [
+          "Peter Kraft",
+          "Qian Li",
+          "Kostis Kaffes",
+          "Athinagoras Skiadopoulos",
+          "Deeptaanshu Kumar",
+          "Danny Cho",
+          "Jason Li",
+          "Robert Redmond",
+          "Nathan Weckwerth",
+          "Brian Xia",
+          "Peter Bailis",
+          "Michael Cafarella",
+          "Goetz Graefe",
+          "Jeremy Kepner",
+          "Christos Kozyrakis",
+          "Michael Stonebraker",
+          "Lalith Suresh",
+          "Xiangyao Yu",
+          "Matei Zaharia"
+        ],
+        "published": "2022-08-27",
+        "updated": "2023-06-30"
+      }
+    },
+    {
+      "id": "2209.13085",
+      "status": "resolved",
+      "metadata": {
+        "id": "2209.13085",
+        "title": "Defining and Characterizing Reward Hacking",
+        "authors": [
+          "Joar Skalse",
+          "Nikolaus H. R. Howe",
+          "Dmitrii Krasheninnikov",
+          "David Krueger"
+        ],
+        "published": "2022-09-27",
+        "updated": "2025-03-05"
+      }
+    },
+    {
+      "id": "2210.10760",
+      "status": "resolved",
+      "metadata": {
+        "id": "2210.10760",
+        "title": "Scaling Laws for Reward Model Overoptimization",
+        "authors": [
+          "Leo Gao",
+          "John Schulman",
+          "Jacob Hilton"
+        ],
+        "published": "2022-10-19",
+        "updated": "2022-10-19"
+      }
+    },
+    {
+      "id": "2211.03622",
+      "status": "resolved",
+      "metadata": {
+        "id": "2211.03622",
+        "title": "Do Users Write More Insecure Code with AI Assistants?",
+        "authors": [
+          "Neil Perry",
+          "Megha Srivastava",
+          "Deepak Kumar",
+          "Dan Boneh"
+        ],
+        "published": "2022-11-07",
+        "updated": "2023-12-18"
+      }
+    },
+    {
+      "id": "2212.06823",
+      "status": "resolved",
+      "metadata": {
+        "id": "2212.06823",
+        "title": "Explanations Can Reduce Overreliance on AI Systems During Decision-Making",
+        "authors": [
+          "Helena Vasconcelos",
+          "Matthew Jörke",
+          "Madeleine Grunde-McLaughlin",
+          "Tobias Gerstenberg",
+          "Michael Bernstein",
+          "Ranjay Krishna"
+        ],
+        "published": "2022-12-13",
+        "updated": "2023-01-26"
+      }
+    },
+    {
+      "id": "2212.08385",
+      "status": "resolved",
+      "metadata": {
+        "id": "2212.08385",
+        "title": "Search Budget in Multi-Objective Refactoring Optimization: a Model-Based Empirical Study",
+        "authors": [
+          "Daniele Di Pompeo",
+          "Michele Tucci"
+        ],
+        "published": "2022-12-16",
+        "updated": "2022-12-16"
+      }
+    },
+    {
+      "id": "2302.07248",
+      "status": "resolved",
+      "metadata": {
+        "id": "2302.07248",
+        "title": "Generation Probabilities Are Not Enough: Uncertainty Highlighting in AI Code Completions",
+        "authors": [
+          "Helena Vasconcelos",
+          "Gagan Bansal",
+          "Adam Fourney",
+          "Q. Vera Liao",
+          "Jennifer Wortman Vaughan"
+        ],
+        "published": "2023-02-14",
+        "updated": "2024-11-09"
+      }
+    },
+    {
+      "id": "2302.12173",
+      "status": "resolved",
+      "metadata": {
+        "id": "2302.12173",
+        "title": "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+        "authors": [
+          "Kai Greshake",
+          "Sahar Abdelnabi",
+          "Shailesh Mishra",
+          "Christoph Endres",
+          "Thorsten Holz",
+          "Mario Fritz"
+        ],
+        "published": "2023-02-23",
+        "updated": "2023-05-05"
+      }
+    },
+    {
+      "id": "2303.12570",
+      "status": "resolved",
+      "metadata": {
+        "id": "2303.12570",
+        "title": "RepoCoder: Repository-Level Code Completion Through Iterative Retrieval and Generation",
+        "authors": [
+          "Fengji Zhang",
+          "Bei Chen",
+          "Yue Zhang",
+          "Jacky Keung",
+          "Jin Liu",
+          "Daoguang Zan",
+          "Yi Mao",
+          "Jian-Guang Lou",
+          "Weizhu Chen"
+        ],
+        "published": "2023-03-22",
+        "updated": "2023-10-20"
+      }
+    },
+    {
+      "id": "2304.01315",
+      "status": "resolved",
+      "metadata": {
+        "id": "2304.01315",
+        "title": "Empirical Design in Reinforcement Learning",
+        "authors": [
+          "Andrew Patterson",
+          "Samuel Neumann",
+          "Martha White",
+          "Adam White"
+        ],
+        "published": "2023-04-03",
+        "updated": "2024-10-29"
+      }
+    },
+    {
+      "id": "2305.01210",
+      "status": "resolved",
+      "metadata": {
+        "id": "2305.01210",
+        "title": "Is Your Code Generated by ChatGPT Really Correct? Rigorous Evaluation of Large Language Models for Code Generation",
+        "authors": [
+          "Jiawei Liu",
+          "Chunqiu Steven Xia",
+          "Yuyao Wang",
+          "Lingming Zhang"
+        ],
+        "published": "2023-05-02",
+        "updated": "2023-10-30"
+      }
+    },
+    {
+      "id": "2305.07722",
+      "status": "resolved",
+      "metadata": {
+        "id": "2305.07722",
+        "title": "In Search of Verifiability: Explanations Rarely Enable Complementary Performance in AI-Advised Decision Making",
+        "authors": [
+          "Raymond Fok",
+          "Daniel S. Weld"
+        ],
+        "published": "2023-05-12",
+        "updated": "2024-02-01"
+      }
+    },
+    {
+      "id": "2305.10160",
+      "status": "resolved",
+      "metadata": {
+        "id": "2305.10160",
+        "title": "Stop Uploading Test Data in Plain Text: Practical Strategies for Mitigating Data Contamination by Evaluation Benchmarks",
+        "authors": [
+          "Alon Jacovi",
+          "Avi Caciularu",
+          "Omer Goldman",
+          "Yoav Goldberg"
+        ],
+        "published": "2023-05-17",
+        "updated": "2023-10-18"
+      }
+    },
+    {
+      "id": "2306.03091",
+      "status": "resolved",
+      "metadata": {
+        "id": "2306.03091",
+        "title": "RepoBench: Benchmarking Repository-Level Code Auto-Completion Systems",
+        "authors": [
+          "Tianyang Liu",
+          "Canwen Xu",
+          "Julian McAuley"
+        ],
+        "published": "2023-06-05",
+        "updated": "2023-10-04"
+      }
+    },
+    {
+      "id": "2306.04930",
+      "status": "resolved",
+      "metadata": {
+        "id": "2306.04930",
+        "title": "When to Show a Suggestion? Integrating Human Feedback in AI-Assisted Programming",
+        "authors": [
+          "Hussein Mozannar",
+          "Gagan Bansal",
+          "Adam Fourney",
+          "Eric Horvitz"
+        ],
+        "published": "2023-06-08",
+        "updated": "2024-04-22"
+      }
+    },
+    {
+      "id": "2306.05685",
+      "status": "resolved",
+      "metadata": {
+        "id": "2306.05685",
+        "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+        "authors": [
+          "Lianmin Zheng",
+          "Wei-Lin Chiang",
+          "Ying Sheng",
+          "Siyuan Zhuang",
+          "Zhanghao Wu",
+          "Yonghao Zhuang",
+          "Zi Lin",
+          "Zhuohan Li",
+          "Dacheng Li",
+          "Eric P. Xing",
+          "Hao Zhang",
+          "Joseph E. Gonzalez",
+          "Ion Stoica"
+        ],
+        "published": "2023-06-09",
+        "updated": "2023-12-24"
+      }
+    },
+    {
+      "id": "2307.03172",
+      "status": "resolved",
+      "metadata": {
+        "id": "2307.03172",
+        "title": "Lost in the Middle: How Language Models Use Long Contexts",
+        "authors": [
+          "Nelson F. Liu",
+          "Kevin Lin",
+          "John Hewitt",
+          "Ashwin Paranjape",
+          "Michele Bevilacqua",
+          "Fabio Petroni",
+          "Percy Liang"
+        ],
+        "published": "2023-07-06",
+        "updated": "2023-11-20"
+      }
+    },
+    {
+      "id": "2308.02828",
+      "status": "resolved",
+      "metadata": {
+        "id": "2308.02828",
+        "title": "An Empirical Study of the Non-determinism of ChatGPT in Code Generation",
+        "authors": [
+          "Shuyin Ouyang",
+          "Jie M. Zhang",
+          "Mark Harman",
+          "Meng Wang"
+        ],
+        "published": "2023-08-05",
+        "updated": "2024-10-17"
+      }
+    },
+    {
+      "id": "2308.08155",
+      "status": "resolved",
+      "metadata": {
+        "id": "2308.08155",
+        "title": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation",
+        "authors": [
+          "Qingyun Wu",
+          "Gagan Bansal",
+          "Jieyu Zhang",
+          "Yiran Wu",
+          "Beibin Li",
+          "Erkang Zhu",
+          "Li Jiang",
+          "Xiaoyun Zhang",
+          "Shaokun Zhang",
+          "Jiale Liu",
+          "Ahmed Hassan Awadallah",
+          "Ryen W White",
+          "Doug Burger",
+          "Chi Wang"
+        ],
+        "published": "2023-08-16",
+        "updated": "2023-10-03"
+      }
+    },
+    {
+      "id": "2308.11696",
+      "status": "resolved",
+      "metadata": {
+        "id": "2308.11696",
+        "title": "Efficient Benchmarking of Language Models",
+        "authors": [
+          "Yotam Perlitz",
+          "Elron Bandel",
+          "Ariel Gera",
+          "Ofir Arviv",
+          "Liat Ein-Dor",
+          "Eyal Shnarch",
+          "Noam Slonim",
+          "Michal Shmueli-Scheuer",
+          "Leshem Choshen"
+        ],
+        "published": "2023-08-22",
+        "updated": "2024-04-01"
+      }
+    },
+    {
+      "id": "2309.13007",
+      "status": "resolved",
+      "metadata": {
+        "id": "2309.13007",
+        "title": "ReConcile: Round-Table Conference Improves Reasoning via Consensus among Diverse LLMs",
+        "authors": [
+          "Justin Chih-Yao Chen",
+          "Swarnadeep Saha",
+          "Mohit Bansal"
+        ],
+        "published": "2023-09-22",
+        "updated": "2024-06-21"
+      }
+    },
+    {
+      "id": "2310.01798",
+      "status": "resolved",
+      "metadata": {
+        "id": "2310.01798",
+        "title": "Large Language Models Cannot Self-Correct Reasoning Yet",
+        "authors": [
+          "Jie Huang",
+          "Xinyun Chen",
+          "Swaroop Mishra",
+          "Huaixiu Steven Zheng",
+          "Adams Wei Yu",
+          "Xinying Song",
+          "Denny Zhou"
+        ],
+        "published": "2023-10-03",
+        "updated": "2024-03-14"
+      }
+    },
+    {
+      "id": "2310.06770",
+      "status": "resolved",
+      "metadata": {
+        "id": "2310.06770",
+        "title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+        "authors": [
+          "Carlos E. Jimenez",
+          "John Yang",
+          "Alexander Wettig",
+          "Shunyu Yao",
+          "Kexin Pei",
+          "Ofir Press",
+          "Karthik Narasimhan"
+        ],
+        "published": "2023-10-10",
+        "updated": "2024-11-11"
+      }
+    },
+    {
+      "id": "2310.11324",
+      "status": "resolved",
+      "metadata": {
+        "id": "2310.11324",
+        "title": "Quantifying Language Models' Sensitivity to Spurious Features in Prompt Design or: How I learned to start worrying about prompt formatting",
+        "authors": [
+          "Melanie Sclar",
+          "Yejin Choi",
+          "Yulia Tsvetkov",
+          "Alane Suhr"
+        ],
+        "published": "2023-10-17",
+        "updated": "2024-07-01"
+      }
+    },
+    {
+      "id": "2310.17623",
+      "status": "resolved",
+      "metadata": {
+        "id": "2310.17623",
+        "title": "Proving Test Set Contamination in Black Box Language Models",
+        "authors": [
+          "Yonatan Oren",
+          "Nicole Meister",
+          "Niladri Chatterji",
+          "Faisal Ladhak",
+          "Tatsunori B. Hashimoto"
+        ],
+        "published": "2023-10-26",
+        "updated": "2023-11-24"
+      }
+    },
+    {
+      "id": "2310.18497",
+      "status": "resolved",
+      "metadata": {
+        "id": "2310.18497",
+        "title": "Solving the Traveling Telescope Problem with Mixed Integer Linear Programming",
+        "authors": [
+          "Luke B. Handley",
+          "Erik A. Petigura",
+          "Velibor V. Misic"
+        ],
+        "published": "2023-10-27",
+        "updated": "2023-10-27"
+      }
+    },
+    {
+      "id": "2311.04850",
+      "status": "resolved",
+      "metadata": {
+        "id": "2311.04850",
+        "title": "Rethinking Benchmark and Contamination for Language Models with Rephrased Samples",
+        "authors": [
+          "Shuo Yang",
+          "Wei-Lin Chiang",
+          "Lianmin Zheng",
+          "Joseph E. Gonzalez",
+          "Ion Stoica"
+        ],
+        "published": "2023-11-08",
+        "updated": "2023-11-11"
+      }
+    },
+    {
+      "id": "2312.06893",
+      "status": "resolved",
+      "metadata": {
+        "id": "2312.06893",
+        "title": "Styx: Transactional Stateful Functions on Streaming Dataflows",
+        "authors": [
+          "Kyriakos Psarakis",
+          "George Christodoulou",
+          "George Siachamis",
+          "Marios Fragkoulis",
+          "Asterios Katsifodimos"
+        ],
+        "published": "2023-12-11",
+        "updated": "2025-02-06"
+      }
+    },
+    {
+      "id": "2401.00595",
+      "status": "resolved",
+      "metadata": {
+        "id": "2401.00595",
+        "title": "State of What Art? A Call for Multi-Prompt LLM Evaluation",
+        "authors": [
+          "Moran Mizrahi",
+          "Guy Kaplan",
+          "Dan Malkin",
+          "Rotem Dror",
+          "Dafna Shahaf",
+          "Gabriel Stanovsky"
+        ],
+        "published": "2023-12-31",
+        "updated": "2024-05-06"
+      }
+    },
+    {
+      "id": "2401.03729",
+      "status": "resolved",
+      "metadata": {
+        "id": "2401.03729",
+        "title": "The Butterfly Effect of Altering Prompts: How Small Changes and Jailbreaks Affect Large Language Model Performance",
+        "authors": [
+          "Abel Salinas",
+          "Fred Morstatter"
+        ],
+        "published": "2024-01-08",
+        "updated": "2024-04-01"
+      }
+    },
+    {
+      "id": "2401.12187",
+      "status": "resolved",
+      "metadata": {
+        "id": "2401.12187",
+        "title": "WARM: On the Benefits of Weight Averaged Reward Models",
+        "authors": [
+          "Alexandre Ramé",
+          "Nino Vieillard",
+          "Léonard Hussenot",
+          "Robert Dadashi",
+          "Geoffrey Cideron",
+          "Olivier Bachem",
+          "Johan Ferret"
+        ],
+        "published": "2024-01-22",
+        "updated": "2024-01-22"
+      }
+    },
+    {
+      "id": "2401.13138",
+      "status": "resolved",
+      "metadata": {
+        "id": "2401.13138",
+        "title": "Visibility into AI Agents",
+        "authors": [
+          "Alan Chan",
+          "Carson Ezell",
+          "Max Kaufmann",
+          "Kevin Wei",
+          "Lewis Hammond",
+          "Herbie Bradley",
+          "Emma Bluemke",
+          "Nitarshan Rajkumar",
+          "David Krueger",
+          "Noam Kolt",
+          "Lennart Heim",
+          "Markus Anderljung"
+        ],
+        "published": "2024-01-23",
+        "updated": "2024-05-17"
+      }
+    },
+    {
+      "id": "2402.01781",
+      "status": "resolved",
+      "metadata": {
+        "id": "2402.01781",
+        "title": "When Benchmarks are Targets: Revealing the Sensitivity of Large Language Model Leaderboards",
+        "authors": [
+          "Norah Alzahrani",
+          "Hisham Abdullah Alyahya",
+          "Yazeed Alnumay",
+          "Sultan Alrashed",
+          "Shaykhah Alsubaie",
+          "Yusef Almushaykeh",
+          "Faisal Mirza",
+          "Nouf Alotaibi",
+          "Nora Altwairesh",
+          "Areeb Alowisheq",
+          "M Saiful Bari",
+          "Haidar Khan"
+        ],
+        "published": "2024-02-01",
+        "updated": "2024-07-03"
+      }
+    },
+    {
+      "id": "2402.02823",
+      "status": "resolved",
+      "metadata": {
+        "id": "2402.02823",
+        "title": "Evading Data Contamination Detection for Language Models is (too) Easy",
+        "authors": [
+          "Jasper Dekoninck",
+          "Mark Niklas Müller",
+          "Maximilian Baader",
+          "Marc Fischer",
+          "Martin Vechev"
+        ],
+        "published": "2024-02-05",
+        "updated": "2024-02-12"
+      }
+    },
+    {
+      "id": "2402.06627",
+      "status": "resolved",
+      "metadata": {
+        "id": "2402.06627",
+        "title": "Feedback Loops With Language Models Drive In-Context Reward Hacking",
+        "authors": [
+          "Alexander Pan",
+          "Erik Jones",
+          "Meena Jagadeesan",
+          "Jacob Steinhardt"
+        ],
+        "published": "2024-02-09",
+        "updated": "2024-06-06"
+      }
+    },
+    {
+      "id": "2402.07632",
+      "status": "resolved",
+      "metadata": {
+        "id": "2402.07632",
+        "title": "Understanding the Effects of Miscalibrated AI Confidence on User Trust, Reliance, and Decision Efficacy",
+        "authors": [
+          "Jingshu Li",
+          "Yitian Yang",
+          "Renwen Zhang",
+          "Q. Vera Liao",
+          "Tianqi Song",
+          "Zhengtao Xu",
+          "Yi-chieh Lee"
+        ],
+        "published": "2024-02-12",
+        "updated": "2025-09-26"
+      }
+    },
+    {
+      "id": "2402.14992",
+      "status": "resolved",
+      "metadata": {
+        "id": "2402.14992",
+        "title": "tinyBenchmarks: evaluating LLMs with fewer examples",
+        "authors": [
+          "Felipe Maia Polo",
+          "Lucas Weber",
+          "Leshem Choshen",
+          "Yuekai Sun",
+          "Gongjun Xu",
+          "Mikhail Yurochkin"
+        ],
+        "published": "2024-02-22",
+        "updated": "2024-05-26"
+      }
+    },
+    {
+      "id": "2403.03185",
+      "status": "resolved",
+      "metadata": {
+        "id": "2403.03185",
+        "title": "Correlated Proxies: A New Definition and Improved Mitigation for Reward Hacking",
+        "authors": [
+          "Cassidy Laidlaw",
+          "Shivam Singhal",
+          "Anca Dragan"
+        ],
+        "published": "2024-03-05",
+        "updated": "2025-03-13"
+      }
+    },
+    {
+      "id": "2403.04132",
+      "status": "resolved",
+      "metadata": {
+        "id": "2403.04132",
+        "title": "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference",
+        "authors": [
+          "Wei-Lin Chiang",
+          "Lianmin Zheng",
+          "Ying Sheng",
+          "Anastasios Nikolas Angelopoulos",
+          "Tianle Li",
+          "Dacheng Li",
+          "Hao Zhang",
+          "Banghua Zhu",
+          "Michael Jordan",
+          "Joseph E. Gonzalez",
+          "Ion Stoica"
+        ],
+        "published": "2024-03-07",
+        "updated": "2024-03-07"
+      }
+    },
+    {
+      "id": "2403.04811",
+      "status": "resolved",
+      "metadata": {
+        "id": "2403.04811",
+        "title": "Quantifying Contamination in Evaluating Code Generation Capabilities of Language Models",
+        "authors": [
+          "Martin Riddell",
+          "Ansong Ni",
+          "Arman Cohan"
+        ],
+        "published": "2024-03-06",
+        "updated": "2024-03-06"
+      }
+    },
+    {
+      "id": "2403.07008",
+      "status": "resolved",
+      "metadata": {
+        "id": "2403.07008",
+        "title": "AutoEval Done Right: Using Synthetic Data for Model Evaluation",
+        "authors": [
+          "Pierre Boyeau",
+          "Anastasios N. Angelopoulos",
+          "Nir Yosef",
+          "Jitendra Malik",
+          "Michael I. Jordan"
+        ],
+        "published": "2024-03-09",
+        "updated": "2026-06-01"
+      }
+    },
+    {
+      "id": "2403.07974",
+      "status": "resolved",
+      "metadata": {
+        "id": "2403.07974",
+        "title": "LiveCodeBench: Holistic and Contamination Free Evaluation of Large Language Models for Code",
+        "authors": [
+          "Naman Jain",
+          "King Han",
+          "Alex Gu",
+          "Wen-Ding Li",
+          "Fanjia Yan",
+          "Tianjun Zhang",
+          "Sida Wang",
+          "Armando Solar-Lezama",
+          "Koushik Sen",
+          "Ion Stoica"
+        ],
+        "published": "2024-03-12",
+        "updated": "2024-06-06"
+      }
+    },
+    {
+      "id": "2403.10059",
+      "status": "resolved",
+      "metadata": {
+        "id": "2403.10059",
+        "title": "Repoformer: Selective Retrieval for Repository-Level Code Completion",
+        "authors": [
+          "Di Wu",
+          "Wasi Uddin Ahmad",
+          "Dejiao Zhang",
+          "Murali Krishna Ramanathan",
+          "Xiaofei Ma"
+        ],
+        "published": "2024-03-15",
+        "updated": "2024-06-04"
+      }
+    },
+    {
+      "id": "2403.17927",
+      "status": "resolved",
+      "metadata": {
+        "id": "2403.17927",
+        "title": "MAGIS: LLM-Based Multi-Agent Framework for GitHub Issue Resolution",
+        "authors": [
+          "Wei Tao",
+          "Yucheng Zhou",
+          "Yanlin Wang",
+          "Wenqiang Zhang",
+          "Hongyu Zhang",
+          "Yu Cheng"
+        ],
+        "published": "2024-03-26",
+        "updated": "2024-06-27"
+      }
+    },
+    {
+      "id": "2403.19114",
+      "status": "resolved",
+      "metadata": {
+        "id": "2403.19114",
+        "title": "Top Leaderboard Ranking = Top Coding Proficiency, Always? EvoEval: Evolving Coding Benchmarks via LLM",
+        "authors": [
+          "Chunqiu Steven Xia",
+          "Yinlin Deng",
+          "Lingming Zhang"
+        ],
+        "published": "2024-03-28",
+        "updated": "2024-03-28"
+      }
+    },
+    {
+      "id": "2404.00699",
+      "status": "resolved",
+      "metadata": {
+        "id": "2404.00699",
+        "title": "A Comprehensive Survey of Contamination Detection Methods in Large Language Models",
+        "authors": [
+          "Mathieu Ravaut",
+          "Bosheng Ding",
+          "Fangkai Jiao",
+          "Hailin Chen",
+          "Xingxuan Li",
+          "Ruochen Zhao",
+          "Chengwei Qin",
+          "Caiming Xiong",
+          "Shafiq Joty"
+        ],
+        "published": "2024-03-31",
+        "updated": "2025-07-09"
+      }
+    },
+    {
+      "id": "2404.04059",
+      "status": "resolved",
+      "metadata": {
+        "id": "2404.04059",
+        "title": "On the Quest for Effectiveness in Human Oversight: Interdisciplinary Perspectives",
+        "authors": [
+          "Sarah Sterz",
+          "Kevin Baum",
+          "Sebastian Biewer",
+          "Holger Hermanns",
+          "Anne Lauber-Rönsberg",
+          "Philip Meinel",
+          "Markus Langer"
+        ],
+        "published": "2024-04-05",
+        "updated": "2024-05-07"
+      }
+    },
+    {
+      "id": "2404.06203",
+      "status": "resolved",
+      "metadata": {
+        "id": "2404.06203",
+        "title": "A Comprehensive Benchmarking Analysis of Fault Recovery in Stream Processing Frameworks",
+        "authors": [
+          "Adriano Vogel",
+          "Sören Henning",
+          "Esteban Perez-Wohlfeil",
+          "Otmar Ertl",
+          "Rick Rabiser"
+        ],
+        "published": "2024-04-09",
+        "updated": "2024-05-29"
+      }
+    },
+    {
+      "id": "2404.06654",
+      "status": "resolved",
+      "metadata": {
+        "id": "2404.06654",
+        "title": "RULER: What's the Real Context Size of Your Long-Context Language Models?",
+        "authors": [
+          "Cheng-Ping Hsieh",
+          "Simeng Sun",
+          "Samuel Kriman",
+          "Shantanu Acharya",
+          "Dima Rekesh",
+          "Fei Jia",
+          "Yang Zhang",
+          "Boris Ginsburg"
+        ],
+        "published": "2024-04-09",
+        "updated": "2024-08-06"
+      }
+    },
+    {
+      "id": "2404.16966",
+      "status": "resolved",
+      "metadata": {
+        "id": "2404.16966",
+        "title": "Examining the robustness of LLM evaluation to the distributional assumptions of benchmarks",
+        "authors": [
+          "Melissa Ailem",
+          "Katerina Marazopoulou",
+          "Charlotte Siska",
+          "James Bono"
+        ],
+        "published": "2024-04-25",
+        "updated": "2024-06-05"
+      }
+    },
+    {
+      "id": "2405.00332",
+      "status": "resolved",
+      "metadata": {
+        "id": "2405.00332",
+        "title": "A Careful Examination of Large Language Model Performance on Grade School Arithmetic",
+        "authors": [
+          "Hugh Zhang",
+          "Jeff Da",
+          "Dean Lee",
+          "Vaughn Robinson",
+          "Catherine Wu",
+          "Will Song",
+          "Tiffany Zhao",
+          "Pranav Raja",
+          "Charlotte Zhuang",
+          "Dylan Slack",
+          "Qin Lyu",
+          "Sean Hendryx",
+          "Russell Kaplan",
+          "Michele Lunati",
+          "Summer Yue"
+        ],
+        "published": "2024-05-01",
+        "updated": "2024-11-22"
+      }
+    },
+    {
+      "id": "2405.14782",
+      "status": "resolved",
+      "metadata": {
+        "id": "2405.14782",
+        "title": "Lessons from the Trenches on Reproducible Evaluation of Language Models",
+        "authors": [
+          "Stella Biderman",
+          "Hailey Schoelkopf",
+          "Lintang Sutawika",
+          "Leo Gao",
+          "Jonathan Tow",
+          "Baber Abbasi",
+          "Alham Fikri Aji",
+          "Pawan Sasanka Ammanamanchi",
+          "Sidney Black",
+          "Jordan Clive",
+          "Anthony DiPofi",
+          "Julen Etxaniz",
+          "Benjamin Fattori",
+          "Jessica Zosa Forde",
+          "Charles Foster",
+          "Jeffrey Hsu",
+          "Mimansa Jaiswal",
+          "Wilson Y. Lee",
+          "Haonan Li",
+          "Charles Lovering",
+          "Niklas Muennighoff",
+          "Ellie Pavlick",
+          "Jason Phang",
+          "Aviya Skowron",
+          "Samson Tan",
+          "Xiangru Tang",
+          "Kevin A. Wang",
+          "Genta Indra Winata",
+          "François Yvon",
+          "Andy Zou"
+        ],
+        "published": "2024-05-23",
+        "updated": "2026-05-31"
+      }
+    },
+    {
+      "id": "2405.15793",
+      "status": "resolved",
+      "metadata": {
+        "id": "2405.15793",
+        "title": "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering",
+        "authors": [
+          "John Yang",
+          "Carlos E. Jimenez",
+          "Alexander Wettig",
+          "Kilian Lieret",
+          "Shunyu Yao",
+          "Karthik Narasimhan",
+          "Ofir Press"
+        ],
+        "published": "2024-05-06",
+        "updated": "2024-11-11"
+      }
+    },
+    {
+      "id": "2405.16081",
+      "status": "resolved",
+      "metadata": {
+        "id": "2405.16081",
+        "title": "A Study on Developer Behaviors for Validating and Repairing LLM-Generated Code Using Eye Tracking and IDE Actions",
+        "authors": [
+          "Ningzhi Tang",
+          "Meng Chen",
+          "Zheng Ning",
+          "Aakash Bansal",
+          "Yu Huang",
+          "Collin McMillan",
+          "Toby Jia-Jun Li"
+        ],
+        "published": "2024-05-25",
+        "updated": "2024-05-25"
+      }
+    },
+    {
+      "id": "2406.01422",
+      "status": "resolved",
+      "metadata": {
+        "id": "2406.01422",
+        "title": "Alibaba LingmaAgent: Improving Automated Issue Resolution via Comprehensive Repository Exploration",
+        "authors": [
+          "Yingwei Ma",
+          "Qingping Yang",
+          "Rongyu Cao",
+          "Binhua Li",
+          "Fei Huang",
+          "Yongbin Li"
+        ],
+        "published": "2024-06-03",
+        "updated": "2025-03-26"
+      }
+    },
+    {
+      "id": "2406.07003",
+      "status": "resolved",
+      "metadata": {
+        "id": "2406.07003",
+        "title": "GraphCoder: Enhancing Repository-Level Code Completion via Code Context Graph-based Retrieval and Language Model",
+        "authors": [
+          "Wei Liu",
+          "Ailun Yu",
+          "Daoguang Zan",
+          "Bo Shen",
+          "Wei Zhang",
+          "Haiyan Zhao",
+          "Zhi Jin",
+          "Qianxiang Wang"
+        ],
+        "published": "2024-06-11",
+        "updated": "2024-09-13"
+      }
+    },
+    {
+      "id": "2406.07155",
+      "status": "resolved",
+      "metadata": {
+        "id": "2406.07155",
+        "title": "Scaling Large Language Model-based Multi-Agent Collaboration",
+        "authors": [
+          "Chen Qian",
+          "Zihao Xie",
+          "YiFei Wang",
+          "Wei Liu",
+          "Kunlun Zhu",
+          "Hanchen Xia",
+          "Yufan Dang",
+          "Zhuoyun Du",
+          "Weize Chen",
+          "Cheng Yang",
+          "Zhiyuan Liu",
+          "Maosong Sun"
+        ],
+        "published": "2024-06-11",
+        "updated": "2025-03-17"
+      }
+    },
+    {
+      "id": "2406.10162",
+      "status": "resolved",
+      "metadata": {
+        "id": "2406.10162",
+        "title": "Sycophancy to Subterfuge: Investigating Reward-Tampering in Large Language Models",
+        "authors": [
+          "Carson Denison",
+          "Monte MacDiarmid",
+          "Fazl Barez",
+          "David Duvenaud",
+          "Shauna Kravec",
+          "Samuel Marks",
+          "Nicholas Schiefer",
+          "Ryan Soklaski",
+          "Alex Tamkin",
+          "Jared Kaplan",
+          "Buck Shlegeris",
+          "Samuel R. Bowman",
+          "Ethan Perez",
+          "Evan Hubinger"
+        ],
+        "published": "2024-06-14",
+        "updated": "2024-06-29"
+      }
+    },
+    {
+      "id": "2406.10229",
+      "status": "resolved",
+      "metadata": {
+        "id": "2406.10229",
+        "title": "Quantifying Variance in Evaluation Benchmarks",
+        "authors": [
+          "Lovish Madaan",
+          "Aaditya K. Singh",
+          "Rylan Schaeffer",
+          "Andrew Poulton",
+          "Sanmi Koyejo",
+          "Pontus Stenetorp",
+          "Sharan Narang",
+          "Dieuwke Hupkes"
+        ],
+        "published": "2024-06-14",
+        "updated": "2024-06-14"
+      }
+    },
+    {
+      "id": "2406.12045",
+      "status": "resolved",
+      "metadata": {
+        "id": "2406.12045",
+        "title": "$τ$-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains",
+        "authors": [
+          "Shunyu Yao",
+          "Noah Shinn",
+          "Pedram Razavi",
+          "Karthik Narasimhan"
+        ],
+        "published": "2024-06-17",
+        "updated": "2024-06-17"
+      }
+    },
+    {
+      "id": "2406.12624",
+      "status": "resolved",
+      "metadata": {
+        "id": "2406.12624",
+        "title": "Judging the Judges: Evaluating Alignment and Vulnerabilities in LLMs-as-Judges",
+        "authors": [
+          "Aman Singh Thakur",
+          "Kartik Choudhary",
+          "Venkat Srinik Ramayapally",
+          "Sankaran Vaidyanathan",
+          "Dieuwke Hupkes"
+        ],
+        "published": "2024-06-18",
+        "updated": "2025-08-18"
+      }
+    },
+    {
+      "id": "2406.13352",
+      "status": "resolved",
+      "metadata": {
+        "id": "2406.13352",
+        "title": "AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents",
+        "authors": [
+          "Edoardo Debenedetti",
+          "Jie Zhang",
+          "Mislav Balunović",
+          "Luca Beurer-Kellner",
+          "Marc Fischer",
+          "Florian Tramèr"
+        ],
+        "published": "2024-06-19",
+        "updated": "2024-11-24"
+      }
+    },
+    {
+      "id": "2406.14497",
+      "status": "resolved",
+      "metadata": {
+        "id": "2406.14497",
+        "title": "CodeRAG-Bench: Can Retrieval Augment Code Generation?",
+        "authors": [
+          "Zora Zhiruo Wang",
+          "Akari Asai",
+          "Xinyan Velocity Yu",
+          "Frank F. Xu",
+          "Yiqing Xie",
+          "Graham Neubig",
+          "Daniel Fried"
+        ],
+        "published": "2024-06-20",
+        "updated": "2025-02-26"
+      }
+    },
+    {
+      "id": "2406.16008",
+      "status": "resolved",
+      "metadata": {
+        "id": "2406.16008",
+        "title": "Found in the Middle: Calibrating Positional Attention Bias Improves Long Context Utilization",
+        "authors": [
+          "Cheng-Yu Hsieh",
+          "Yung-Sung Chuang",
+          "Chun-Liang Li",
+          "Zifeng Wang",
+          "Long T. Le",
+          "Abhishek Kumar",
+          "James Glass",
+          "Alexander Ratner",
+          "Chen-Yu Lee",
+          "Ranjay Krishna",
+          "Tomas Pfister"
+        ],
+        "published": "2024-06-23",
+        "updated": "2024-07-03"
+      }
+    },
+    {
+      "id": "2406.18665",
+      "status": "resolved",
+      "metadata": {
+        "id": "2406.18665",
+        "title": "RouteLLM: Learning to Route LLMs with Preference Data",
+        "authors": [
+          "Isaac Ong",
+          "Amjad Almahairi",
+          "Vincent Wu",
+          "Wei-Lin Chiang",
+          "Tianhao Wu",
+          "Joseph E. Gonzalez",
+          "M Waleed Kadous",
+          "Ion Stoica"
+        ],
+        "published": "2024-06-26",
+        "updated": "2025-02-23"
+      }
+    },
+    {
+      "id": "2406.19228",
+      "status": "resolved",
+      "metadata": {
+        "id": "2406.19228",
+        "title": "Tools Fail: Detecting Silent Errors in Faulty Tools",
+        "authors": [
+          "Jimin Sun",
+          "So Yeon Min",
+          "Yingshan Chang",
+          "Yonatan Bisk"
+        ],
+        "published": "2024-06-27",
+        "updated": "2024-06-27"
+      }
+    },
+    {
+      "id": "2407.00125",
+      "status": "resolved",
+      "metadata": {
+        "id": "2407.00125",
+        "title": "A Survey on Failure Analysis and Fault Injection in AI Systems",
+        "authors": [
+          "Guangba Yu",
+          "Gou Tan",
+          "Haojia Huang",
+          "Zhenyu Zhang",
+          "Pengfei Chen",
+          "Roberto Natella",
+          "Zibin Zheng"
+        ],
+        "published": "2024-06-28",
+        "updated": "2026-01-06"
+      }
+    },
+    {
+      "id": "2407.01489",
+      "status": "resolved",
+      "metadata": {
+        "id": "2407.01489",
+        "title": "Agentless: Demystifying LLM-based Software Engineering Agents",
+        "authors": [
+          "Chunqiu Steven Xia",
+          "Yinlin Deng",
+          "Soren Dunn",
+          "Lingming Zhang"
+        ],
+        "published": "2024-07-01",
+        "updated": "2024-10-29"
+      }
+    },
+    {
+      "id": "2407.01502",
+      "status": "resolved",
+      "metadata": {
+        "id": "2407.01502",
+        "title": "AI Agents That Matter",
+        "authors": [
+          "Sayash Kapoor",
+          "Benedikt Stroebl",
+          "Zachary S. Siegel",
+          "Nitya Nadgir",
+          "Arvind Narayanan"
+        ],
+        "published": "2024-07-01",
+        "updated": "2024-07-01"
+      }
+    },
+    {
+      "id": "2407.02883",
+      "status": "resolved",
+      "metadata": {
+        "id": "2407.02883",
+        "title": "CoIR: A Comprehensive Benchmark for Code Information Retrieval Models",
+        "authors": [
+          "Xiangyang Li",
+          "Kuicai Dong",
+          "Yi Quan Lee",
+          "Wei Xia",
+          "Hao Zhang",
+          "Xinyi Dai",
+          "Yasheng Wang",
+          "Ruiming Tang"
+        ],
+        "published": "2024-07-03",
+        "updated": "2025-06-06"
+      }
+    },
+    {
+      "id": "2407.05337",
+      "status": "resolved",
+      "metadata": {
+        "id": "2407.05337",
+        "title": "A Fault Tolerance Mechanism for Hybrid Scientific Workflows",
+        "authors": [
+          "Alberto Mulone",
+          "Doriana Medić",
+          "Marco Aldinucci"
+        ],
+        "published": "2024-07-07",
+        "updated": "2024-07-07"
+      }
+    },
+    {
+      "id": "2407.06738",
+      "status": "resolved",
+      "metadata": {
+        "id": "2407.06738",
+        "title": "Failure Transparency in Stateful Dataflow Systems (Technical Report)",
+        "authors": [
+          "Aleksey Veresov",
+          "Jonas Spenger",
+          "Paris Carbone",
+          "Philipp Haller"
+        ],
+        "published": "2024-07-09",
+        "updated": "2024-10-18"
+      }
+    },
+    {
+      "id": "2407.07565",
+      "status": "resolved",
+      "metadata": {
+        "id": "2407.07565",
+        "title": "On Leakage of Code Generation Evaluation Datasets",
+        "authors": [
+          "Alexandre Matton",
+          "Tom Sherborne",
+          "Dennis Aumiller",
+          "Elena Tommasone",
+          "Milad Alizadeh",
+          "Jingyi He",
+          "Raymond Ma",
+          "Maxime Voisin",
+          "Ellen Gilsenan-McMahon",
+          "Matthias Gallé"
+        ],
+        "published": "2024-07-10",
+        "updated": "2024-10-03"
+      }
+    },
+    {
+      "id": "2407.10457",
+      "status": "resolved",
+      "metadata": {
+        "id": "2407.10457",
+        "title": "The Good, The Bad, and The Greedy: Evaluation of LLMs Should Not Ignore Non-Determinism",
+        "authors": [
+          "Yifan Song",
+          "Guoyin Wang",
+          "Sujian Li",
+          "Bill Yuchen Lin"
+        ],
+        "published": "2024-07-15",
+        "updated": "2024-07-15"
+      }
+    },
+    {
+      "id": "2407.12220",
+      "status": "resolved",
+      "metadata": {
+        "id": "2407.12220",
+        "title": "Questionable practices in machine learning",
+        "authors": [
+          "Gavin Leech",
+          "Juan J. Vazquez",
+          "Niclas Kupper",
+          "Misha Yagudin",
+          "Laurence Aitchison"
+        ],
+        "published": "2024-07-17",
+        "updated": "2024-10-30"
+      }
+    },
+    {
+      "id": "2407.21787",
+      "status": "resolved",
+      "metadata": {
+        "id": "2407.21787",
+        "title": "Large Language Monkeys: Scaling Inference Compute with Repeated Sampling",
+        "authors": [
+          "Bradley Brown",
+          "Jordan Juravsky",
+          "Ryan Ehrlich",
+          "Ronald Clark",
+          "Quoc V. Le",
+          "Christopher Ré",
+          "Azalia Mirhoseini"
+        ],
+        "published": "2024-07-31",
+        "updated": "2024-12-30"
+      }
+    },
+    {
+      "id": "2408.00440",
+      "status": "resolved",
+      "metadata": {
+        "id": "2408.00440",
+        "title": "An Empirical Study on Challenges of Event Management in Microservice Architectures",
+        "authors": [
+          "Rodrigo Laigner",
+          "Ana Carolina Almeida",
+          "Wesley K. G. Assunção",
+          "Yongluan Zhou"
+        ],
+        "published": "2024-08-01",
+        "updated": "2024-08-01"
+      }
+    },
+    {
+      "id": "2408.01703",
+      "status": "resolved",
+      "metadata": {
+        "id": "2408.01703",
+        "title": "WaitGPT: Monitoring and Steering Conversational LLM Agent in Data Analysis with On-the-Fly Code Visualization",
+        "authors": [
+          "Liwenhan Xie",
+          "Chengbo Zheng",
+          "Haijun Xia",
+          "Huamin Qu",
+          "Chen Zhu-Tian"
+        ],
+        "published": "2024-08-03",
+        "updated": "2024-08-03"
+      }
+    },
+    {
+      "id": "2408.03910",
+      "status": "resolved",
+      "metadata": {
+        "id": "2408.03910",
+        "title": "CodexGraph: Bridging Large Language Models and Code Repositories via Code Graph Databases",
+        "authors": [
+          "Xiangyan Liu",
+          "Bo Lan",
+          "Zhiyuan Hu",
+          "Yang Liu",
+          "Zhicheng Zhang",
+          "Fei Wang",
+          "Michael Shieh",
+          "Wenmeng Zhou"
+        ],
+        "published": "2024-08-07",
+        "updated": "2026-07-27"
+      }
+    },
+    {
+      "id": "2408.05861",
+      "status": "resolved",
+      "metadata": {
+        "id": "2408.05861",
+        "title": "Temporal Knowledge-Graph Memory in a Partially Observable Environment",
+        "authors": [
+          "Taewoon Kim",
+          "Vincent François-Lavet",
+          "Michael Cochez"
+        ],
+        "published": "2024-08-11",
+        "updated": "2026-02-25"
+      }
+    },
+    {
+      "id": "2408.15204",
+      "status": "resolved",
+      "metadata": {
+        "id": "2408.15204",
+        "title": "Can Unconfident LLM Annotations Be Used for Confident Conclusions?",
+        "authors": [
+          "Kristina Gligorić",
+          "Tijana Zrnic",
+          "Cinoo Lee",
+          "Emmanuel J. Candès",
+          "Dan Jurafsky"
+        ],
+        "published": "2024-08-27",
+        "updated": "2025-02-08"
+      }
+    },
+    {
+      "id": "2409.09927",
+      "status": "resolved",
+      "metadata": {
+        "id": "2409.09927",
+        "title": "Towards Data Contamination Detection for Modern Large Language Models: Limitations, Inconsistencies, and Oracle Challenges",
+        "authors": [
+          "Vinay Samuel",
+          "Yue Zhou",
+          "Henry Peng Zou"
+        ],
+        "published": "2024-09-16",
+        "updated": "2024-12-08"
+      }
+    },
+    {
+      "id": "2409.20489",
+      "status": "resolved",
+      "metadata": {
+        "id": "2409.20489",
+        "title": "Online Decision Deferral under Budget Constraints",
+        "authors": [
+          "Mirabel Reid",
+          "Tom Sühr",
+          "Claire Vernade",
+          "Samira Samadi"
+        ],
+        "published": "2024-09-30",
+        "updated": "2024-09-30"
+      }
+    },
+    {
+      "id": "2410.06992",
+      "status": "resolved",
+      "metadata": {
+        "id": "2410.06992",
+        "title": "SWE-Bench+: Enhanced Coding Benchmark for LLMs",
+        "authors": [
+          "Reem Aleithan",
+          "Haoran Xue",
+          "Mohammad Mahdi Mohajer",
+          "Elijah Nnorom",
+          "Gias Uddin",
+          "Song Wang"
+        ],
+        "published": "2024-10-09",
+        "updated": "2024-10-10"
+      }
+    },
+    {
+      "id": "2410.09247",
+      "status": "resolved",
+      "metadata": {
+        "id": "2410.09247",
+        "title": "Benchmark Inflation: Revealing LLM Performance Gaps Using Retro-Holdouts",
+        "authors": [
+          "Jacob Haimes",
+          "Cenny Wenner",
+          "Kunvar Thaman",
+          "Vassil Tashev",
+          "Clement Neo",
+          "Esben Kran",
+          "Jason Schreiber"
+        ],
+        "published": "2024-10-11",
+        "updated": "2024-10-11"
+      }
+    },
+    {
+      "id": "2410.14684",
+      "status": "resolved",
+      "metadata": {
+        "id": "2410.14684",
+        "title": "RepoGraph: Enhancing AI Software Engineering with Repository-level Code Graph",
+        "authors": [
+          "Siru Ouyang",
+          "Wenhao Yu",
+          "Kaixin Ma",
+          "Zilin Xiao",
+          "Zhihan Zhang",
+          "Mengzhao Jia",
+          "Jiawei Han",
+          "Hongming Zhang",
+          "Dong Yu"
+        ],
+        "published": "2024-10-03",
+        "updated": "2025-03-18"
+      }
+    },
+    {
+      "id": "2410.18124",
+      "status": "resolved",
+      "metadata": {
+        "id": "2410.18124",
+        "title": "Optimal Checkpoint Interval with Availability as an Objective Function",
+        "authors": [
+          "Nirmal Raj Saxena",
+          "Saurabh Hukerikar",
+          "Mikolaj Blaz",
+          "Swapna Raj"
+        ],
+        "published": "2024-10-15",
+        "updated": "2024-10-15"
+      }
+    },
+    {
+      "id": "2411.00640",
+      "status": "resolved",
+      "metadata": {
+        "id": "2411.00640",
+        "title": "Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations",
+        "authors": [
+          "Evan Miller"
+        ],
+        "published": "2024-11-01",
+        "updated": "2024-11-01"
+      }
+    },
+    {
+      "id": "2411.00998",
+      "status": "resolved",
+      "metadata": {
+        "id": "2411.00998",
+        "title": "Automation Bias in AI-Assisted Medical Decision-Making under Time Pressure in Computational Pathology",
+        "authors": [
+          "Emely Rosbach",
+          "Jonathan Ganz",
+          "Jonas Ammeling",
+          "Andreas Riener",
+          "Marc Aubreville"
+        ],
+        "published": "2024-11-01",
+        "updated": "2024-11-01"
+      }
+    },
+    {
+      "id": "2411.03538",
+      "status": "resolved",
+      "metadata": {
+        "id": "2411.03538",
+        "title": "Long Context RAG Performance of Large Language Models",
+        "authors": [
+          "Quinn Leng",
+          "Jacob Portes",
+          "Sam Havens",
+          "Matei Zaharia",
+          "Michael Carbin"
+        ],
+        "published": "2024-11-05",
+        "updated": "2024-11-05"
+      }
+    },
+    {
+      "id": "2411.03923",
+      "status": "resolved",
+      "metadata": {
+        "id": "2411.03923",
+        "title": "Evaluation data contamination in LLMs: how do we measure it and (when) does it matter?",
+        "authors": [
+          "Aaditya K. Singh",
+          "Muhammed Yusuf Kocyigit",
+          "Andrew Poulton",
+          "David Esiobu",
+          "Maria Lomeli",
+          "Gergely Szilvasy",
+          "Dieuwke Hupkes"
+        ],
+        "published": "2024-11-06",
+        "updated": "2024-11-06"
+      }
+    },
+    {
+      "id": "2411.13323",
+      "status": "resolved",
+      "metadata": {
+        "id": "2411.13323",
+        "title": "Are Large Language Models Memorizing Bug Benchmarks?",
+        "authors": [
+          "Daniel Ramos",
+          "Claudia Mamede",
+          "Kush Jain",
+          "Paulo Canelas",
+          "Catarina Gamboa",
+          "Claire Le Goues"
+        ],
+        "published": "2024-11-20",
+        "updated": "2025-03-31"
+      }
+    },
+    {
+      "id": "2411.17501",
+      "status": "resolved",
+      "metadata": {
+        "id": "2411.17501",
+        "title": "The Limits of Inference Scaling Through Resampling",
+        "authors": [
+          "Benedikt Stroebl",
+          "Sayash Kapoor",
+          "Arvind Narayanan"
+        ],
+        "published": "2024-11-26",
+        "updated": "2026-03-26"
+      }
+    },
+    {
+      "id": "2412.01007",
+      "status": "resolved",
+      "metadata": {
+        "id": "2412.01007",
+        "title": "CoRNStack: High-Quality Contrastive Data for Better Code Retrieval and Reranking",
+        "authors": [
+          "Tarun Suresh",
+          "Revanth Gangi Reddy",
+          "Yifei Xu",
+          "Zach Nussbaum",
+          "Andriy Mulyar",
+          "Brandon Duderstadt",
+          "Heng Ji"
+        ],
+        "published": "2024-12-01",
+        "updated": "2025-03-04"
+      }
+    },
+    {
+      "id": "2412.15584",
+      "status": "resolved",
+      "metadata": {
+        "id": "2412.15584",
+        "title": "To Rely or Not to Rely? Evaluating Interventions for Appropriate Reliance on Large Language Models",
+        "authors": [
+          "Jessica Y. Bo",
+          "Sophia Wan",
+          "Ashton Anderson"
+        ],
+        "published": "2024-12-20",
+        "updated": "2025-10-29"
+      }
+    },
+    {
+      "id": "2501.00539",
+      "status": "resolved",
+      "metadata": {
+        "id": "2501.00539",
+        "title": "MCP-Solver: Integrating Language Models with Constraint Programming Systems",
+        "authors": [
+          "Stefan Szeider"
+        ],
+        "published": "2024-12-31",
+        "updated": "2025-04-06"
+      }
+    },
+    {
+      "id": "2501.10711",
+      "status": "resolved",
+      "metadata": {
+        "id": "2501.10711",
+        "title": "Code Benchmarks Should Prioritize Rigor, Reliability, and Reproducibility",
+        "authors": [
+          "Jialun Cao",
+          "Yuk-Kit Chan",
+          "Zixuan Ling",
+          "Wenxuan Wang",
+          "Shuqing Li",
+          "Mingwei Liu",
+          "Ruixi Qiao",
+          "Yuting Han",
+          "Chaozheng Wang",
+          "Boxi Yu",
+          "Pinjia He",
+          "Shuai Wang",
+          "Zibin Zheng",
+          "Michael R. Lyu",
+          "Shing-Chi Cheung"
+        ],
+        "published": "2025-01-18",
+        "updated": "2026-07-06"
+      }
+    },
+    {
+      "id": "2502.00350",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.00350",
+        "title": "OrcaLoca: An LLM Agent Framework for Software Issue Localization",
+        "authors": [
+          "Zhongming Yu",
+          "Hejia Zhang",
+          "Yujie Zhao",
+          "Hanxian Huang",
+          "Matrix Yao",
+          "Ke Ding",
+          "Jishen Zhao"
+        ],
+        "published": "2025-02-01",
+        "updated": "2025-10-10"
+      }
+    },
+    {
+      "id": "2502.01534",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.01534",
+        "title": "Preference Leakage: A Contamination Problem in LLM-as-a-judge",
+        "authors": [
+          "Dawei Li",
+          "Renliang Sun",
+          "Yue Huang",
+          "Ming Zhong",
+          "Bohan Jiang",
+          "Jiawei Han",
+          "Xiangliang Zhang",
+          "Wei Wang",
+          "Huan Liu"
+        ],
+        "published": "2025-02-03",
+        "updated": "2026-03-04"
+      }
+    },
+    {
+      "id": "2502.02649",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.02649",
+        "title": "Fully Autonomous AI Agents Should Not be Developed",
+        "authors": [
+          "Margaret Mitchell",
+          "Avijit Ghosh",
+          "Alexandra Sasha Luccioni",
+          "Giada Pistilli"
+        ],
+        "published": "2025-02-04",
+        "updated": "2025-10-20"
+      }
+    },
+    {
+      "id": "2502.02743",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.02743",
+        "title": "LLM Bandit: Cost-Efficient LLM Generation via Preference-Conditioned Dynamic Routing",
+        "authors": [
+          "Yang Li"
+        ],
+        "published": "2025-02-04",
+        "updated": "2025-02-04"
+      }
+    },
+    {
+      "id": "2502.03261",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.03261",
+        "title": "CARROT: A Cost Aware Rate Optimal Router",
+        "authors": [
+          "Seamus Somerstep",
+          "Felipe Maia Polo",
+          "Allysson Flavio Melo de Oliveira",
+          "Prattyush Mangal",
+          "Mírian Silva",
+          "Onkar Bhardwaj",
+          "Mikhail Yurochkin",
+          "Subha Maity"
+        ],
+        "published": "2025-02-05",
+        "updated": "2025-05-19"
+      }
+    },
+    {
+      "id": "2502.03461",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.03461",
+        "title": "Do Large Language Model Benchmarks Test Reliability?",
+        "authors": [
+          "Joshua Vendrow",
+          "Edward Vendrow",
+          "Sara Beery",
+          "Aleksander Madry"
+        ],
+        "published": "2025-02-05",
+        "updated": "2025-02-05"
+      }
+    },
+    {
+      "id": "2502.05167",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.05167",
+        "title": "NoLiMa: Long-Context Evaluation Beyond Literal Matching",
+        "authors": [
+          "Ali Modarressi",
+          "Hanieh Deilamsalehy",
+          "Franck Dernoncourt",
+          "Trung Bui",
+          "Ryan A. Rossi",
+          "Seunghyun Yoon",
+          "Hinrich Schütze"
+        ],
+        "published": "2025-02-07",
+        "updated": "2025-07-09"
+      }
+    },
+    {
+      "id": "2502.06215",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.06215",
+        "title": "LessLeak-Bench: A First Investigation of Data Leakage in LLMs Across 83 Software Engineering Benchmarks",
+        "authors": [
+          "Xin Zhou",
+          "Martin Weyssow",
+          "Ratnadira Widyasari",
+          "Ting Zhang",
+          "Junda He",
+          "Yunbo Lyu",
+          "Jianming Chang",
+          "Beiqi Zhang",
+          "Dan Huang",
+          "David Lo"
+        ],
+        "published": "2025-02-10",
+        "updated": "2025-02-10"
+      }
+    },
+    {
+      "id": "2502.11127",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.11127",
+        "title": "G-Safeguard: A Topology-Guided Security Lens and Treatment on LLM-based Multi-agent Systems",
+        "authors": [
+          "Shilong Wang",
+          "Guibin Zhang",
+          "Miao Yu",
+          "Guancheng Wan",
+          "Fanci Meng",
+          "Chongye Guo",
+          "Kun Wang",
+          "Yang Wang"
+        ],
+        "published": "2025-02-16",
+        "updated": "2025-02-16"
+      }
+    },
+    {
+      "id": "2502.11448",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.11448",
+        "title": "AGrail: A Lifelong Agent Guardrail with Effective and Adaptive Safety Detection",
+        "authors": [
+          "Weidi Luo",
+          "Shenghong Dai",
+          "Xiaogeng Liu",
+          "Suman Banerjee",
+          "Huan Sun",
+          "Muhao Chen",
+          "Chaowei Xiao"
+        ],
+        "published": "2025-02-17",
+        "updated": "2025-02-18"
+      }
+    },
+    {
+      "id": "2502.13295",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.13295",
+        "title": "Demonstrating specification gaming in reasoning models",
+        "authors": [
+          "Alexander Bondarenko",
+          "Denis Volk",
+          "Dmitrii Volkov",
+          "Jeffrey Ladish"
+        ],
+        "published": "2025-02-18",
+        "updated": "2025-08-27"
+      }
+    },
+    {
+      "id": "2502.13965",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.13965",
+        "title": "Autellix: An Efficient Serving Engine for LLM Agents as General Programs",
+        "authors": [
+          "Michael Luo",
+          "Xiaoxiang Shi",
+          "Colin Cai",
+          "Tianjun Zhang",
+          "Justin Wong",
+          "Yichuan Wang",
+          "Chi Wang",
+          "Yanping Huang",
+          "Zhifeng Chen",
+          "Joseph E. Gonzalez",
+          "Ion Stoica"
+        ],
+        "published": "2025-02-19",
+        "updated": "2025-02-19"
+      }
+    },
+    {
+      "id": "2502.14847",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.14847",
+        "title": "Red-Teaming LLM Multi-Agent Systems via Communication Attacks",
+        "authors": [
+          "Pengfei He",
+          "Yupin Lin",
+          "Shen Dong",
+          "Han Xu",
+          "Yue Xing",
+          "Hui Liu"
+        ],
+        "published": "2025-02-20",
+        "updated": "2025-06-02"
+      }
+    },
+    {
+      "id": "2502.15292",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.15292",
+        "title": "Bridging Bug Localization and Issue Fixing: A Hierarchical Localization Framework Leveraging Large Language Models",
+        "authors": [
+          "Jianming Chang",
+          "Xin Zhou",
+          "Lulu Wang",
+          "David Lo",
+          "Bixin Li"
+        ],
+        "published": "2025-02-21",
+        "updated": "2025-02-21"
+      }
+    },
+    {
+      "id": "2502.15963",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.15963",
+        "title": "Accountability in Code Review: The Role of Intrinsic Drivers and the Impact of LLMs",
+        "authors": [
+          "Adam Alami",
+          "Victor Vadmand Jensen",
+          "Neil A. Ernst"
+        ],
+        "published": "2025-02-21",
+        "updated": "2025-02-21"
+      }
+    },
+    {
+      "id": "2502.15964",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.15964",
+        "title": "Minions: Cost-efficient Collaboration Between On-device and Cloud Language Models",
+        "authors": [
+          "Avanika Narayan",
+          "Dan Biderman",
+          "Sabri Eyuboglu",
+          "Avner May",
+          "Scott Linderman",
+          "James Zou",
+          "Christopher Re"
+        ],
+        "published": "2025-02-21",
+        "updated": "2025-02-21"
+      }
+    },
+    {
+      "id": "2502.17521",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.17521",
+        "title": "Recent Advances in Large Langauge Model Benchmarks against Data Contamination: From Static to Dynamic Evaluation",
+        "authors": [
+          "Simin Chen",
+          "Yiming Chen",
+          "Zexin Li",
+          "Yifan Jiang",
+          "Zhongwei Wan",
+          "Yixin He",
+          "Dezhi Ran",
+          "Tianle Gu",
+          "Haizhou Li",
+          "Tao Xie",
+          "Baishakhi Ray"
+        ],
+        "published": "2025-02-23",
+        "updated": "2025-09-29"
+      }
+    },
+    {
+      "id": "2502.17560",
+      "status": "resolved",
+      "metadata": {
+        "id": "2502.17560",
+        "title": "Optimal Follow-Up of Gravitational-Wave Events with the UltraViolet EXplorer (UVEX)",
+        "authors": [
+          "Leo P. Singer",
+          "Alexander W. Criswell",
+          "Sydney C. Leggio",
+          "R. Weizmann Kiendrebeogo",
+          "Michael W. Coughlin",
+          "Hannah P. Earnshaw",
+          "Suvi Gezari",
+          "Brian W. Grefenstette",
+          "Fiona A. Harrison",
+          "Mansi M. Kasliwal",
+          "Brett M. Morris",
+          "Erik Tollerud",
+          "S. Bradley Cenko"
+        ],
+        "published": "2025-02-24",
+        "updated": "2025-07-29"
+      }
+    },
+    {
+      "id": "2503.01935",
+      "status": "resolved",
+      "metadata": {
+        "id": "2503.01935",
+        "title": "MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents",
+        "authors": [
+          "Kunlun Zhu",
+          "Hongyi Du",
+          "Zhaochen Hong",
+          "Xiaocheng Yang",
+          "Shuyi Guo",
+          "Zhe Wang",
+          "Zhenhailong Wang",
+          "Cheng Qian",
+          "Xiangru Tang",
+          "Heng Ji",
+          "Jiaxuan You"
+        ],
+        "published": "2025-03-03",
+        "updated": "2025-03-03"
+      }
+    },
+    {
+      "id": "2503.04359",
+      "status": "resolved",
+      "metadata": {
+        "id": "2503.04359",
+        "title": "LONGCODEU: Benchmarking Long-Context Language Models on Long Code Understanding",
+        "authors": [
+          "Jia Li",
+          "Xuyuan Guo",
+          "Lei Li",
+          "Kechi Zhang",
+          "Ge Li",
+          "Jia Li",
+          "Zhengwei Tao",
+          "Fang Liu",
+          "Chongyang Tao",
+          "Yuqi Zhu",
+          "Zhi Jin"
+        ],
+        "published": "2025-03-06",
+        "updated": "2025-03-06"
+      }
+    },
+    {
+      "id": "2503.05860",
+      "status": "resolved",
+      "metadata": {
+        "id": "2503.05860",
+        "title": "Benchmarking AI Models in Software Engineering: A Review, Search Tool, and Unified Approach for Elevating Benchmark Quality",
+        "authors": [
+          "Roham Koohestani",
+          "Philippe de Bekker",
+          "Begüm Koç",
+          "Maliheh Izadi"
+        ],
+        "published": "2025-03-07",
+        "updated": "2025-12-12"
+      }
+    },
+    {
+      "id": "2503.07675",
+      "status": "resolved",
+      "metadata": {
+        "id": "2503.07675",
+        "title": "DynTaskMAS: A Dynamic Task Graph-driven Framework for Asynchronous and Parallel LLM-based Multi-Agent Systems",
+        "authors": [
+          "Junwei Yu",
+          "Yepeng Ding",
+          "Hiroyuki Sato"
+        ],
+        "published": "2025-03-10",
+        "updated": "2025-12-02"
+      }
+    },
+    {
+      "id": "2503.09089",
+      "status": "resolved",
+      "metadata": {
+        "id": "2503.09089",
+        "title": "LocAgent: Graph-Guided LLM Agents for Code Localization",
+        "authors": [
+          "Zhaoling Chen",
+          "Xiangru Tang",
+          "Gangda Deng",
+          "Fang Wu",
+          "Jialong Wu",
+          "Zhiwei Jiang",
+          "Viktor Prasanna",
+          "Arman Cohan",
+          "Xingyao Wang"
+        ],
+        "published": "2025-03-12",
+        "updated": "2025-04-29"
+      }
+    },
+    {
+      "id": "2503.11926",
+      "status": "resolved",
+      "metadata": {
+        "id": "2503.11926",
+        "title": "Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation",
+        "authors": [
+          "Bowen Baker",
+          "Joost Huizinga",
+          "Leo Gao",
+          "Zehao Dou",
+          "Melody Y. Guan",
+          "Aleksander Madry",
+          "Wojciech Zaremba",
+          "Jakub Pachocki",
+          "David Farhi"
+        ],
+        "published": "2025-03-14",
+        "updated": "2025-03-14"
+      }
+    },
+    {
+      "id": "2503.11951",
+      "status": "resolved",
+      "metadata": {
+        "id": "2503.11951",
+        "title": "SagaLLM: Context Management, Validation, and Transaction Guarantees for Multi-Agent LLM Planning",
+        "authors": [
+          "Edward Y. Chang",
+          "Longling Geng"
+        ],
+        "published": "2025-03-15",
+        "updated": "2025-07-09"
+      }
+    },
+    {
+      "id": "2503.12029",
+      "status": "resolved",
+      "metadata": {
+        "id": "2503.12029",
+        "title": "Enhancing LLM Performance Through Debate: An Empirical Study on Multi-Agent Debate for Coding Tasks",
+        "authors": [
+          "Yong Jin Chun",
+          "Qihong Chen",
+          "Jiawei Li",
+          "Iftekhar Ahmed"
+        ],
+        "published": "2025-03-15",
+        "updated": "2026-08-03"
+      }
+    },
+    {
+      "id": "2503.12374",
+      "status": "resolved",
+      "metadata": {
+        "id": "2503.12374",
+        "title": "Beyond Final Code: A Process-Oriented Error Analysis of Software Development Agents in Real-World GitHub Scenarios",
+        "authors": [
+          "Zhi Chen",
+          "Wei Ma",
+          "Lingxiao Jiang"
+        ],
+        "published": "2025-03-16",
+        "updated": "2026-04-09"
+      }
+    },
+    {
+      "id": "2503.13657",
+      "status": "resolved",
+      "metadata": {
+        "id": "2503.13657",
+        "title": "Why Do Multi-Agent LLM Systems Fail?",
+        "authors": [
+          "Mert Cemri",
+          "Melissa Z. Pan",
+          "Shuyi Yang",
+          "Lakshya A. Agrawal",
+          "Bhavya Chopra",
+          "Rishabh Tiwari",
+          "Kurt Keutzer",
+          "Aditya Parameswaran",
+          "Dan Klein",
+          "Kannan Ramchandran",
+          "Matei Zaharia",
+          "Joseph E. Gonzalez",
+          "Ion Stoica"
+        ],
+        "published": "2025-03-17",
+        "updated": "2025-10-26"
+      }
+    },
+    {
+      "id": "2503.21710",
+      "status": "resolved",
+      "metadata": {
+        "id": "2503.21710",
+        "title": "Enhancing repository-level software repair via repository-aware knowledge graphs",
+        "authors": [
+          "Boyang Yang",
+          "Jiadong Ren",
+          "Shunfu Jin",
+          "Yang Liu",
+          "Feng Liu",
+          "Bach Le",
+          "Haoye Tian"
+        ],
+        "published": "2025-03-27",
+        "updated": "2025-10-03"
+      }
+    },
+    {
+      "id": "2503.22424",
+      "status": "resolved",
+      "metadata": {
+        "id": "2503.22424",
+        "title": "Issue Localization via LLM-Driven Iterative Code Graph Searching",
+        "authors": [
+          "Zhonghao Jiang",
+          "Xiaoxue Ren",
+          "Meng Yan",
+          "Wei Jiang",
+          "Yong Li",
+          "Zhongxin Liu"
+        ],
+        "published": "2025-03-28",
+        "updated": "2025-10-10"
+      }
+    },
+    {
+      "id": "2504.20879",
+      "status": "resolved",
+      "metadata": {
+        "id": "2504.20879",
+        "title": "The Leaderboard Illusion",
+        "authors": [
+          "Shivalika Singh",
+          "Yiyang Nan",
+          "Alex Wang",
+          "Daniel D'Souza",
+          "Sayash Kapoor",
+          "Ahmet Üstün",
+          "Sanmi Koyejo",
+          "Yuntian Deng",
+          "Shayne Longpre",
+          "Noah A. Smith",
+          "Beyza Ermis",
+          "Marzieh Fadaee",
+          "Sara Hooker"
+        ],
+        "published": "2025-04-29",
+        "updated": "2025-05-12"
+      }
+    },
+    {
+      "id": "2505.00212",
+      "status": "resolved",
+      "metadata": {
+        "id": "2505.00212",
+        "title": "Which Agent Causes Task Failures and When? On Automated Failure Attribution of LLM Multi-Agent Systems",
+        "authors": [
+          "Shaokun Zhang",
+          "Ming Yin",
+          "Jieyu Zhang",
+          "Jiale Liu",
+          "Zhiguang Han",
+          "Jingyang Zhang",
+          "Beibin Li",
+          "Chi Wang",
+          "Huazheng Wang",
+          "Yiran Chen",
+          "Qingyun Wu"
+        ],
+        "published": "2025-04-30",
+        "updated": "2025-06-02"
+      }
+    },
+    {
+      "id": "2505.06120",
+      "status": "resolved",
+      "metadata": {
+        "id": "2505.06120",
+        "title": "LLMs Get Lost In Multi-Turn Conversation",
+        "authors": [
+          "Philippe Laban",
+          "Hiroaki Hayashi",
+          "Yingbo Zhou",
+          "Jennifer Neville"
+        ],
+        "published": "2025-05-09",
+        "updated": "2025-05-09"
+      }
+    },
+    {
+      "id": "2505.07897",
+      "status": "resolved",
+      "metadata": {
+        "id": "2505.07897",
+        "title": "LongCodeBench: Evaluating Coding LLMs at 1M Context Windows",
+        "authors": [
+          "Stefano Rando",
+          "Luca Romani",
+          "Alessio Sampieri",
+          "Luca Franco",
+          "John Yang",
+          "Yuta Kyuragi",
+          "Fabio Galasso",
+          "Tatsunori Hashimoto"
+        ],
+        "published": "2025-05-12",
+        "updated": "2025-10-22"
+      }
+    },
+    {
+      "id": "2505.08638",
+      "status": "resolved",
+      "metadata": {
+        "id": "2505.08638",
+        "title": "TRAIL: Trace Reasoning and Agentic Issue Localization",
+        "authors": [
+          "Darshan Deshpande",
+          "Varun Gangal",
+          "Hersh Mehta",
+          "Jitin Krishnan",
+          "Anand Kannappan",
+          "Rebecca Qian"
+        ],
+        "published": "2025-05-13",
+        "updated": "2025-06-23"
+      }
+    },
+    {
+      "id": "2505.13353",
+      "status": "resolved",
+      "metadata": {
+        "id": "2505.13353",
+        "title": "Sense and Sensitivity: Examining the Influence of Semantic Recall on Long Context Code Understanding",
+        "authors": [
+          "Adam Štorek",
+          "Mukur Gupta",
+          "Samira Hajizadeh",
+          "Prashast Srivastava",
+          "Suman Jana"
+        ],
+        "published": "2025-05-19",
+        "updated": "2026-07-10"
+      }
+    },
+    {
+      "id": "2505.20411",
+      "status": "resolved",
+      "metadata": {
+        "id": "2505.20411",
+        "title": "SWE-rebench: An Automated Pipeline for Task Collection and Decontaminated Evaluation of Software Engineering Agents",
+        "authors": [
+          "Ibragim Badertdinov",
+          "Alexander Golubev",
+          "Maksim Nekrashevich",
+          "Anton Shevtsov",
+          "Simon Karasik",
+          "Andrei Andriushchenko",
+          "Maria Trofimova",
+          "Daria Litvintseva",
+          "Boris Yangel"
+        ],
+        "published": "2025-05-26",
+        "updated": "2025-11-04"
+      }
+    },
+    {
+      "id": "2505.23419",
+      "status": "resolved",
+      "metadata": {
+        "id": "2505.23419",
+        "title": "SWE-bench Goes Live!",
+        "authors": [
+          "Linghao Zhang",
+          "Shilin He",
+          "Chaoyun Zhang",
+          "Yu Kang",
+          "Bowen Li",
+          "Chengxing Xie",
+          "Junhao Wang",
+          "Maoquan Wang",
+          "Yufan Huang",
+          "Shengyu Fu",
+          "Elsie Nallipogu",
+          "Qingwei Lin",
+          "Yingnong Dang",
+          "Saravan Rajmohan",
+          "Dongmei Zhang"
+        ],
+        "published": "2025-05-29",
+        "updated": "2025-06-01"
+      }
+    },
+    {
+      "id": "2505.24201",
+      "status": "resolved",
+      "metadata": {
+        "id": "2505.24201",
+        "title": "SentinelAgent: Graph-based Anomaly Detection in Multi-Agent Systems",
+        "authors": [
+          "Xu He",
+          "Di Wu",
+          "Yan Zhai",
+          "Kun Sun"
+        ],
+        "published": "2025-05-30",
+        "updated": "2025-05-30"
+      }
+    },
+    {
+      "id": "2506.09289",
+      "status": "resolved",
+      "metadata": {
+        "id": "2506.09289",
+        "title": "UTBoost: Rigorous Evaluation of Coding Agents on SWE-Bench",
+        "authors": [
+          "Boxi Yu",
+          "Yuxuan Zhu",
+          "Pinjia He",
+          "Daniel Kang"
+        ],
+        "published": "2025-06-10",
+        "updated": "2025-06-10"
+      }
+    },
+    {
+      "id": "2506.12286",
+      "status": "resolved",
+      "metadata": {
+        "id": "2506.12286",
+        "title": "The SWE-Bench Illusion: When State-of-the-Art LLMs Remember Instead of Reason",
+        "authors": [
+          "Shanchao Liang",
+          "Spandan Garg",
+          "Roshanak Zilouchian Moghaddam"
+        ],
+        "published": "2025-06-14",
+        "updated": "2025-12-01"
+      }
+    },
+    {
+      "id": "2506.15655",
+      "status": "resolved",
+      "metadata": {
+        "id": "2506.15655",
+        "title": "cAST: Enhancing Code Retrieval-Augmented Generation with Structural Chunking via Abstract Syntax Tree",
+        "authors": [
+          "Yilin Zhang",
+          "Xinran Zhao",
+          "Zora Zhiruo Wang",
+          "Chenyang Yang",
+          "Jiayi Wei",
+          "Tongshuang Wu"
+        ],
+        "published": "2025-06-18",
+        "updated": "2025-10-02"
+      }
+    },
+    {
+      "id": "2506.17001",
+      "status": "resolved",
+      "metadata": {
+        "id": "2506.17001",
+        "title": "PersonalAI: A Systematic Comparison of Knowledge Graph Storage and Retrieval Approaches for Personalized LLM agents",
+        "authors": [
+          "Mikhail Menschikov",
+          "Dmitry Evseev",
+          "Victoria Dochkina",
+          "Ruslan Kostoev",
+          "Ilia Perepechkin",
+          "Petr Anokhin",
+          "Nikita Semenov",
+          "Evgeny Burnaev"
+        ],
+        "published": "2025-06-20",
+        "updated": "2026-04-12"
+      }
+    },
+    {
+      "id": "2506.20430",
+      "status": "resolved",
+      "metadata": {
+        "id": "2506.20430",
+        "title": "An Agentic System for Rare Disease Diagnosis with Traceable Reasoning",
+        "authors": [
+          "Weike Zhao",
+          "Chaoyi Wu",
+          "Yanjie Fan",
+          "Xiaoman Zhang",
+          "Pengcheng Qiu",
+          "Yuze Sun",
+          "Xiao Zhou",
+          "Yanfeng Wang",
+          "Xin Sun",
+          "Ya Zhang",
+          "Yongguo Yu",
+          "Kun Sun",
+          "Weidi Xie"
+        ],
+        "published": "2025-06-25",
+        "updated": "2026-02-16"
+      }
+    },
+    {
+      "id": "2507.02825",
+      "status": "resolved",
+      "metadata": {
+        "id": "2507.02825",
+        "title": "Establishing Best Practices for Building Rigorous Agentic Benchmarks",
+        "authors": [
+          "Yuxuan Zhu",
+          "Tengjun Jin",
+          "Yada Pruksachatkun",
+          "Andy Zhang",
+          "Shu Liu",
+          "Sasha Cui",
+          "Sayash Kapoor",
+          "Shayne Longpre",
+          "Kevin Meng",
+          "Rebecca Weiss",
+          "Fazl Barez",
+          "Rahul Gupta",
+          "Jwala Dhamala",
+          "Jacob Merizian",
+          "Mario Giulianelli",
+          "Harry Coppock",
+          "Cozmin Ududec",
+          "Jasjeet Sekhon",
+          "Jacob Steinhardt",
+          "Antony Kellermann",
+          "Sarah Schwettmann",
+          "Matei Zaharia",
+          "Ion Stoica",
+          "Percy Liang",
+          "Daniel Kang"
+        ],
+        "published": "2025-07-03",
+        "updated": "2025-08-07"
+      }
+    },
+    {
+      "id": "2507.03525",
+      "status": "resolved",
+      "metadata": {
+        "id": "2507.03525",
+        "title": "Limits of Safe AI Deployment: Differentiating Oversight and Control",
+        "authors": [
+          "David Manheim",
+          "Aidan Homewood"
+        ],
+        "published": "2025-07-04",
+        "updated": "2025-11-03"
+      }
+    },
+    {
+      "id": "2507.03870",
+      "status": "resolved",
+      "metadata": {
+        "id": "2507.03870",
+        "title": "Uncovering Systemic and Environment Errors in Autonomous Systems Using Differential Testing",
+        "authors": [
+          "Yashwanthi Anand",
+          "Rahil P Mehta",
+          "Manish Motwani",
+          "Sandhya Saisubramanian"
+        ],
+        "published": "2025-07-05",
+        "updated": "2026-01-14"
+      }
+    },
+    {
+      "id": "2507.08149",
+      "status": "resolved",
+      "metadata": {
+        "id": "2507.08149",
+        "title": "Code with Me or for Me? How Increasing AI Automation Transforms Developer Workflows",
+        "authors": [
+          "Valerie Chen",
+          "Ameet Talwalkar",
+          "Robert Brennan",
+          "Graham Neubig"
+        ],
+        "published": "2025-07-10",
+        "updated": "2025-09-13"
+      }
+    },
+    {
+      "id": "2507.11059",
+      "status": "resolved",
+      "metadata": {
+        "id": "2507.11059",
+        "title": "SWE-MERA: A Dynamic Benchmark for Agenticly Evaluating Large Language Models on Software Engineering Tasks",
+        "authors": [
+          "Pavel Adamenko",
+          "Mikhail Ivanov",
+          "Aidar Valeev",
+          "Rodion Levichev",
+          "Pavel Zadorozhny",
+          "Ivan Lopatin",
+          "Dmitry Babaev",
+          "Alena Fenogenova",
+          "Valentin Malykh"
+        ],
+        "published": "2025-07-15",
+        "updated": "2026-07-11"
+      }
+    },
+    {
+      "id": "2507.18515",
+      "status": "resolved",
+      "metadata": {
+        "id": "2507.18515",
+        "title": "A Deep Dive into Retrieval-Augmented Generation for Code Completion: Experience on WeChat",
+        "authors": [
+          "Zezhou Yang",
+          "Ting Peng",
+          "Cuiyun Gao",
+          "Chaozheng Wang",
+          "Hailiang Huang",
+          "Yuetang Deng"
+        ],
+        "published": "2025-07-24",
+        "updated": "2025-07-24"
+      }
+    },
+    {
+      "id": "2507.19942",
+      "status": "resolved",
+      "metadata": {
+        "id": "2507.19942",
+        "title": "Prometheus: Towards Long-Horizon Codebase Navigation for Repository-Level Problem Solving",
+        "authors": [
+          "Yue Pan",
+          "Zimin Chen",
+          "Siyu Lu",
+          "Zhaoyang Chu",
+          "Xiang Li",
+          "Han Li",
+          "Yang Feng",
+          "Claire Le Goues",
+          "Federica Sarro",
+          "Martin Monperrus",
+          "He Ye"
+        ],
+        "published": "2025-07-26",
+        "updated": "2026-02-07"
+      }
+    },
+    {
+      "id": "2508.02611",
+      "status": "resolved",
+      "metadata": {
+        "id": "2508.02611",
+        "title": "Meta-RAG on Large Codebases Using Code Summarization",
+        "authors": [
+          "Vali Tawosi",
+          "Salwa Alamir",
+          "Xiaomo Liu",
+          "Manuela Veloso"
+        ],
+        "published": "2025-08-04",
+        "updated": "2025-08-04"
+      }
+    },
+    {
+      "id": "2508.02736",
+      "status": "resolved",
+      "metadata": {
+        "id": "2508.02736",
+        "title": "AgentSight: System-Level Observability for AI Agents Using eBPF",
+        "authors": [
+          "Yusheng Zheng",
+          "Yanpeng Hu",
+          "Tong Yu",
+          "Andi Quinn"
+        ],
+        "published": "2025-08-02",
+        "updated": "2025-08-15"
+      }
+    },
+    {
+      "id": "2508.13143",
+      "status": "resolved",
+      "metadata": {
+        "id": "2508.13143",
+        "title": "Exploring Autonomous Agents: A Closer Look at Why They Fail When Completing Tasks",
+        "authors": [
+          "Ruofan Lu",
+          "Yichen Li",
+          "Yintong Huo"
+        ],
+        "published": "2025-08-18",
+        "updated": "2025-08-18"
+      }
+    },
+    {
+      "id": "2508.13144",
+      "status": "resolved",
+      "metadata": {
+        "id": "2508.13144",
+        "title": "Signal and Noise: A Framework for Reducing Uncertainty in Language Model Evaluation",
+        "authors": [
+          "David Heineman",
+          "Valentin Hofmann",
+          "Ian Magnusson",
+          "Yuling Gu",
+          "Noah A. Smith",
+          "Hannaneh Hajishirzi",
+          "Kyle Lo",
+          "Jesse Dodge"
+        ],
+        "published": "2025-08-18",
+        "updated": "2025-08-18"
+      }
+    },
+    {
+      "id": "2508.19461",
+      "status": "resolved",
+      "metadata": {
+        "id": "2508.19461",
+        "title": "Reliable Weak-to-Strong Monitoring of LLM Agents",
+        "authors": [
+          "Neil Kale",
+          "Chen Bo Calvin Zhang",
+          "Kevin Zhu",
+          "Ankit Aich",
+          "Paula Rodriguez",
+          "Scale Red Team",
+          "Christina Q. Knight",
+          "Zifan Wang"
+        ],
+        "published": "2025-08-26",
+        "updated": "2025-08-26"
+      }
+    },
+    {
+      "id": "2509.08682",
+      "status": "resolved",
+      "metadata": {
+        "id": "2509.08682",
+        "title": "Automatic Failure Attribution and Critical Step Prediction Method for Multi-Agent Systems Based on Causal Inference",
+        "authors": [
+          "Guoqing Ma",
+          "Jia Zhu",
+          "Hanghui Guo",
+          "Weijie Shi",
+          "Jiawei Shen",
+          "Jingjiang Liu",
+          "Yidan Liang"
+        ],
+        "published": "2025-09-10",
+        "updated": "2025-09-10"
+      }
+    },
+    {
+      "id": "2509.23537",
+      "status": "resolved",
+      "metadata": {
+        "id": "2509.23537",
+        "title": "Beyond the Strongest LLM: Multi-Turn Multi-Agent Orchestration vs. Single LLMs on Benchmarks",
+        "authors": [
+          "Aaron Xuxiang Tian",
+          "Ruofan Zhang",
+          "Jiayao Tang",
+          "Young Min Cho",
+          "Xueqian Li",
+          "Qiang Yi",
+          "Ji Wang",
+          "Zhunping Zhang",
+          "Danrui Qi",
+          "Zekun Li",
+          "Xingyu Xiang",
+          "Sharath Chandra Guntuku",
+          "Lyle Ungar",
+          "Tianyu Shi",
+          "Chi Wang"
+        ],
+        "published": "2025-09-28",
+        "updated": "2025-10-01"
+      }
+    },
+    {
+      "id": "2509.25257",
+      "status": "resolved",
+      "metadata": {
+        "id": "2509.25257",
+        "title": "RANGER -- Repository-Level Agent for Graph-Enhanced Retrieval",
+        "authors": [
+          "Pratik Shah",
+          "Rajat Ghosh",
+          "Aryan Singhal",
+          "Debojyoti Dutta"
+        ],
+        "published": "2025-09-27",
+        "updated": "2025-09-27"
+      }
+    },
+    {
+      "id": "2509.25370",
+      "status": "resolved",
+      "metadata": {
+        "id": "2509.25370",
+        "title": "Where LLM Agents Fail and How They can Learn From Failures",
+        "authors": [
+          "Kunlun Zhu",
+          "Zijia Liu",
+          "Bingxuan Li",
+          "Muxin Tian",
+          "Yingxuan Yang",
+          "Jiaxun Zhang",
+          "Pengrui Han",
+          "Qipeng Xie",
+          "Fuyang Cui",
+          "Weijia Zhang",
+          "Xiaoteng Ma",
+          "Xiaodong Yu",
+          "Gowtham Ramesh",
+          "Jialian Wu",
+          "Zicheng Liu",
+          "Pan Lu",
+          "James Zou",
+          "Jiaxuan You"
+        ],
+        "published": "2025-09-29",
+        "updated": "2025-09-29"
+      }
+    },
+    {
+      "id": "2510.00328",
+      "status": "resolved",
+      "metadata": {
+        "id": "2510.00328",
+        "title": "Vibe Coding in Practice: Motivations, Challenges, and a Future Outlook -- a Grey Literature Review",
+        "authors": [
+          "Ahmed Fawzy",
+          "Amjed Tahir",
+          "Kelly Blincoe"
+        ],
+        "published": "2025-09-30",
+        "updated": "2025-09-30"
+      }
+    },
+    {
+      "id": "2510.00615",
+      "status": "resolved",
+      "metadata": {
+        "id": "2510.00615",
+        "title": "ACON: Optimizing Context Compression for Long-horizon LLM Agents",
+        "authors": [
+          "Minki Kang",
+          "Wei-Ning Chen",
+          "Dongge Han",
+          "Huseyin A. Inan",
+          "Lukas Wutschitz",
+          "Yanzhi Chen",
+          "Robert Sim",
+          "Saravan Rajmohan"
+        ],
+        "published": "2025-10-01",
+        "updated": "2026-06-01"
+      }
+    },
+    {
+      "id": "2510.01367",
+      "status": "resolved",
+      "metadata": {
+        "id": "2510.01367",
+        "title": "Is It Thinking or Cheating? Detecting Implicit Reward Hacking by Measuring Reasoning Effort",
+        "authors": [
+          "Xinpeng Wang",
+          "Nitish Joshi",
+          "Barbara Plank",
+          "Rico Angell",
+          "He He"
+        ],
+        "published": "2025-10-01",
+        "updated": "2026-03-02"
+      }
+    },
+    {
+      "id": "2510.02557",
+      "status": "resolved",
+      "metadata": {
+        "id": "2510.02557",
+        "title": "Orchestrating Human-AI Teams: The Manager Agent as a Unifying Research Challenge",
+        "authors": [
+          "Charlie Masters",
+          "Advaith Vellanki",
+          "Jiangbo Shangguan",
+          "Bart Kultys",
+          "Jonathan Gilmore",
+          "Alastair Moore",
+          "Stefano V. Albrecht"
+        ],
+        "published": "2025-10-02",
+        "updated": "2025-10-02"
+      }
+    },
+    {
+      "id": "2510.04618",
+      "status": "resolved",
+      "metadata": {
+        "id": "2510.04618",
+        "title": "Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models",
+        "authors": [
+          "Qizheng Zhang",
+          "Changran Hu",
+          "Shubhangi Upasani",
+          "Boyuan Ma",
+          "Fenglu Hong",
+          "Vamsidhar Kamanuru",
+          "Jay Rainton",
+          "Chen Wu",
+          "Mengmeng Ji",
+          "Hanchen Li",
+          "Urmish Thakker",
+          "James Zou",
+          "Kunle Olukotun"
+        ],
+        "published": "2025-10-06",
+        "updated": "2026-03-29"
+      }
+    },
+    {
+      "id": "2510.04886",
+      "status": "resolved",
+      "metadata": {
+        "id": "2510.04886",
+        "title": "Where Did It All Go Wrong? A Hierarchical Look into Multi-Agent Error Attribution",
+        "authors": [
+          "Adi Banerjee",
+          "Anirudh Nair",
+          "Tarik Borogovac"
+        ],
+        "published": "2025-10-06",
+        "updated": "2025-10-16"
+      }
+    },
+    {
+      "id": "2510.04905",
+      "status": "resolved",
+      "metadata": {
+        "id": "2510.04905",
+        "title": "Retrieval-Augmented Code Generation: A Survey with Focus on Repository-Level Approaches",
+        "authors": [
+          "Yicheng Tao",
+          "Yuante Li",
+          "Yao Qin",
+          "Yepang Liu"
+        ],
+        "published": "2025-10-06",
+        "updated": "2026-05-20"
+      }
+    },
+    {
+      "id": "2510.16786",
+      "status": "resolved",
+      "metadata": {
+        "id": "2510.16786",
+        "title": "More with Less: An Empirical Study of Turn-Control Strategies for Efficient Coding Agents",
+        "authors": [
+          "Pengfei Gao",
+          "Chao Peng"
+        ],
+        "published": "2025-10-19",
+        "updated": "2025-11-25"
+      }
+    },
+    {
+      "id": "2510.22614",
+      "status": "resolved",
+      "metadata": {
+        "id": "2510.22614",
+        "title": "Does In-IDE Calibration of Large Language Models work at Scale?",
+        "authors": [
+          "Roham Koohestani",
+          "Agnia Sergeyuk",
+          "David Gros",
+          "Claudio Spiess",
+          "Sergey Titov",
+          "Prem Devanbu",
+          "Maliheh Izadi"
+        ],
+        "published": "2025-10-26",
+        "updated": "2025-10-26"
+      }
+    },
+    {
+      "id": "2511.00197",
+      "status": "resolved",
+      "metadata": {
+        "id": "2511.00197",
+        "title": "Understanding Code Agent Behaviour: An Empirical Study of Success and Failure Trajectories",
+        "authors": [
+          "Oorja Majgaonkar",
+          "Zhiwei Fei",
+          "Xiang Li",
+          "Federica Sarro",
+          "He Ye"
+        ],
+        "published": "2025-10-31",
+        "updated": "2025-10-31"
+      }
+    },
+    {
+      "id": "2511.04703",
+      "status": "resolved",
+      "metadata": {
+        "id": "2511.04703",
+        "title": "Measuring what Matters: Construct Validity in Large Language Model Benchmarks",
+        "authors": [
+          "Andrew M. Bean",
+          "Ryan Othniel Kearns",
+          "Angelika Romanou",
+          "Franziska Sofia Hafner",
+          "Harry Mayne",
+          "Jan Batzner",
+          "Negar Foroutan",
+          "Chris Schmitz",
+          "Karolina Korgul",
+          "Hunar Batra",
+          "Oishi Deb",
+          "Emma Beharry",
+          "Cornelius Emde",
+          "Thomas Foster",
+          "Anna Gausen",
+          "María Grandury",
+          "Simeng Han",
+          "Valentin Hofmann",
+          "Lujain Ibrahim",
+          "Hazel Kim",
+          "Hannah Rose Kirk",
+          "Fangru Lin",
+          "Gabrielle Kaili-May Liu",
+          "Lennart Luettgau",
+          "Jabez Magomere",
+          "Jonathan Rystrøm",
+          "Anna Sotnikova",
+          "Yushi Yang",
+          "Yilun Zhao",
+          "Adel Bibi",
+          "Antoine Bosselut",
+          "Ronald Clark",
+          "Arman Cohan",
+          "Jakob Foerster",
+          "Yarin Gal",
+          "Scott A. Hale",
+          "Inioluwa Deborah Raji",
+          "Christopher Summerfield",
+          "Philip H. S. Torr",
+          "Cozmin Ududec",
+          "Luc Rocher",
+          "Adam Mahdi"
+        ],
+        "published": "2025-11-03",
+        "updated": "2025-11-03"
+      }
+    },
+    {
+      "id": "2511.12884",
+      "status": "resolved",
+      "metadata": {
+        "id": "2511.12884",
+        "title": "Agent READMEs: An Empirical Study of Context Files for Agentic Coding",
+        "authors": [
+          "Worawalan Chatlatanagulchai",
+          "Hao Li",
+          "Yutaro Kashiwa",
+          "Brittany Reid",
+          "Kundjanasith Thonglek",
+          "Pattara Leelaprute",
+          "Arnon Rungsawang",
+          "Bundit Manaskasemsak",
+          "Bram Adams",
+          "Ahmed E. Hassan",
+          "Hajimu Iida"
+        ],
+        "published": "2025-11-17",
+        "updated": "2025-11-17"
+      }
+    },
+    {
+      "id": "2511.16842",
+      "status": "resolved",
+      "metadata": {
+        "id": "2511.16842",
+        "title": "Fantastic Bugs and Where to Find Them in AI Benchmarks",
+        "authors": [
+          "Sang Truong",
+          "Yuheng Tu",
+          "Michael Hardy",
+          "Anka Reuel",
+          "Zeyu Tang",
+          "Jirayu Burapacheep",
+          "Jonathan Perera",
+          "Chibuike Uwakwe",
+          "Ben Domingue",
+          "Nick Haber",
+          "Sanmi Koyejo"
+        ],
+        "published": "2025-11-20",
+        "updated": "2025-11-20"
+      }
+    },
+    {
+      "id": "2512.07094",
+      "status": "resolved",
+      "metadata": {
+        "id": "2512.07094",
+        "title": "VIGIL: A Reflective Runtime for Self-Healing Agents",
+        "authors": [
+          "Christopher Cruz"
+        ],
+        "published": "2025-12-08",
+        "updated": "2025-12-09"
+      }
+    },
+    {
+      "id": "2512.10218",
+      "status": "resolved",
+      "metadata": {
+        "id": "2512.10218",
+        "title": "Does SWE-Bench-Verified Test Agent Ability or Model Memory?",
+        "authors": [
+          "Thanosan Prathifkumar",
+          "Noble Saji Mathews",
+          "Meiyappan Nagappan"
+        ],
+        "published": "2025-12-11",
+        "updated": "2025-12-22"
+      }
+    },
+    {
+      "id": "2512.20660",
+      "status": "resolved",
+      "metadata": {
+        "id": "2512.20660",
+        "title": "The Dual-State Architecture for Reliable LLM Agents",
+        "authors": [
+          "Matthew Thompson"
+        ],
+        "published": "2025-12-18",
+        "updated": "2026-03-27"
+      }
+    },
+    {
+      "id": "2512.22087",
+      "status": "resolved",
+      "metadata": {
+        "id": "2512.22087",
+        "title": "Context as a Tool: Context Management for Long-Horizon SWE-Agents",
+        "authors": [
+          "Shukai Liu",
+          "Jian Yang",
+          "Bo Jiang",
+          "Yizhi Li",
+          "Jinyang Guo",
+          "Xianglong Liu",
+          "Bryan Dai"
+        ],
+        "published": "2025-12-26",
+        "updated": "2025-12-26"
+      }
+    },
+    {
+      "id": "2601.07978",
+      "status": "resolved",
+      "metadata": {
+        "id": "2601.07978",
+        "title": "Cost and Accuracy of Long-Term Memory in Distributed Multi-Agent Systems Based on Large Language Models",
+        "authors": [
+          "Benedict Wolff",
+          "Jacopo Bennati"
+        ],
+        "published": "2026-01-12",
+        "updated": "2026-07-13"
+      }
+    },
+    {
+      "id": "2601.20103",
+      "status": "resolved",
+      "metadata": {
+        "id": "2601.20103",
+        "title": "Benchmarking Reward Hack Detection in Code Environments via Contrastive Analysis",
+        "authors": [
+          "Darshan Deshpande",
+          "Anand Kannappan",
+          "Rebecca Qian"
+        ],
+        "published": "2026-01-27",
+        "updated": "2026-01-27"
+      }
+    },
+    {
+      "id": "2602.01146",
+      "status": "resolved",
+      "metadata": {
+        "id": "2602.01146",
+        "title": "PersistBench: When Should Long-Term Memories Be Forgotten by LLMs?",
+        "authors": [
+          "Sidharth Pulipaka",
+          "Oliver Chen",
+          "Manas Sharma",
+          "Taaha S Bajwa",
+          "Vyas Raina",
+          "Ivaxi Sheth"
+        ],
+        "published": "2026-02-01",
+        "updated": "2026-06-02"
+      }
+    },
+    {
+      "id": "2602.02475",
+      "status": "resolved",
+      "metadata": {
+        "id": "2602.02475",
+        "title": "AgentRx: Diagnosing AI Agent Failures from Execution Trajectories",
+        "authors": [
+          "Shraddha Barke",
+          "Arnav Goyal",
+          "Alind Khare",
+          "Avaljot Singh",
+          "Suman Nath",
+          "Chetan Bansal"
+        ],
+        "published": "2026-02-02",
+        "updated": "2026-02-02"
+      }
+    },
+    {
+      "id": "2602.05665",
+      "status": "resolved",
+      "metadata": {
+        "id": "2602.05665",
+        "title": "Graph-based Agent Memory: Taxonomy, Techniques, and Applications",
+        "authors": [
+          "Chang Yang",
+          "Chuang Zhou",
+          "Yilin Xiao",
+          "Su Dong",
+          "Luyao Zhuang",
+          "Yujing Zhang",
+          "Zhu Wang",
+          "Zijin Hong",
+          "Zheng Yuan",
+          "Zhishang Xiang",
+          "Shengyuan Chen",
+          "Huachi Zhou",
+          "Qinggang Zhang",
+          "Ninghao Liu",
+          "Jinsong Su",
+          "Xinrun Wang",
+          "Yi Chang",
+          "Xiao Huang"
+        ],
+        "published": "2026-02-05",
+        "updated": "2026-02-05"
+      }
+    },
+    {
+      "id": "2602.05891",
+      "status": "resolved",
+      "metadata": {
+        "id": "2602.05891",
+        "title": "When Elo Lies: Hidden Biases in Codeforces-Based Evaluation of Large Language Models",
+        "authors": [
+          "Shenyu Zheng",
+          "Ximing Dong",
+          "Xiaoshuang Liu",
+          "Gustavo Oliva",
+          "Chong Chun Yong",
+          "Dayi Lin",
+          "Boyuan Chen",
+          "Shaowei Wang",
+          "Ahmed E. Hassan"
+        ],
+        "published": "2026-02-05",
+        "updated": "2026-02-05"
+      }
+    },
+    {
+      "id": "2602.07150",
+      "status": "resolved",
+      "metadata": {
+        "id": "2602.07150",
+        "title": "On Randomness in Agentic Evals",
+        "authors": [
+          "Bjarni Haukur Bjarnason",
+          "André Silva",
+          "Martin Monperrus"
+        ],
+        "published": "2026-02-06",
+        "updated": "2026-03-25"
+      }
+    },
+    {
+      "id": "2602.09937",
+      "status": "resolved",
+      "metadata": {
+        "id": "2602.09937",
+        "title": "Why Do AI Agents Systematically Fail at Cloud Root Cause Analysis?",
+        "authors": [
+          "Taeyoon Kim",
+          "Woohyeok Park",
+          "Hoyeong Yun",
+          "Kyungyong Lee"
+        ],
+        "published": "2026-02-10",
+        "updated": "2026-03-04"
+      }
+    },
+    {
+      "id": "2602.11619",
+      "status": "resolved",
+      "metadata": {
+        "id": "2602.11619",
+        "title": "When Agents Disagree With Themselves: Behavioral Consistency as an Uncertainty Signal for LLM Agents",
+        "authors": [
+          "Aman Mehta"
+        ],
+        "published": "2026-02-12",
+        "updated": "2026-07-15"
+      }
+    },
+    {
+      "id": "2602.11988",
+      "status": "resolved",
+      "metadata": {
+        "id": "2602.11988",
+        "title": "Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?",
+        "authors": [
+          "Thibaud Gloaguen",
+          "Niels Mündler",
+          "Mark Müller",
+          "Veselin Raychev",
+          "Martin Vechev"
+        ],
+        "published": "2026-02-12",
+        "updated": "2026-06-23"
+      }
+    },
+    {
+      "id": "2602.19843",
+      "status": "resolved",
+      "metadata": {
+        "id": "2602.19843",
+        "title": "MAS-FIRE: Fault Injection and Reliability Evaluation for LLM-Based Multi-Agent Systems",
+        "authors": [
+          "Jin Jia",
+          "Zhiling Deng",
+          "Zhuangbin Chen",
+          "Yingqi Wang",
+          "Zibin Zheng"
+        ],
+        "published": "2026-02-23",
+        "updated": "2026-02-23"
+      }
+    },
+    {
+      "id": "2602.23905",
+      "status": "resolved",
+      "metadata": {
+        "id": "2602.23905",
+        "title": "Novice Developers Produce Larger Review Overhead for Project Maintainers while Vibe Coding",
+        "authors": [
+          "Syed Ammar Asdaque",
+          "Imran Haider",
+          "Muhammad Umar Malik",
+          "Maryam Abdul Ghafoor",
+          "Abdul Ali Bangash"
+        ],
+        "published": "2026-02-27",
+        "updated": "2026-02-27"
+      }
+    },
+    {
+      "id": "2603.00520",
+      "status": "resolved",
+      "metadata": {
+        "id": "2603.00520",
+        "title": "SWE-ABS: Adversarial Benchmark Strengthening Exposes Inflated Success Rates on Test-based Benchmark",
+        "authors": [
+          "Boxi Yu",
+          "Yang Cao",
+          "Yuzhong Zhang",
+          "Liting Lin",
+          "Junjielong Xu",
+          "Zhiqing Zhong",
+          "Qinghua Xu",
+          "Guancheng Wang",
+          "Jialun Cao",
+          "Shing-Chi Cheung",
+          "Pinjia He",
+          "Lionel Briand"
+        ],
+        "published": "2026-02-28",
+        "updated": "2026-02-28"
+      }
+    },
+    {
+      "id": "2603.09619",
+      "status": "resolved",
+      "metadata": {
+        "id": "2603.09619",
+        "title": "Context Engineering: From Prompts to Corporate Multi-Agent Architecture",
+        "authors": [
+          "Vera V. Vishnyakova"
+        ],
+        "published": "2026-03-10",
+        "updated": "2026-03-13"
+      }
+    },
+    {
+      "id": "2603.11262",
+      "status": "resolved",
+      "metadata": {
+        "id": "2603.11262",
+        "title": "Unveiling Practical Shortcomings of Patch Overfitting Detection Techniques",
+        "authors": [
+          "David Williams",
+          "Ioakim Avraam",
+          "Aldeida Aleti",
+          "Matias Martinez",
+          "Justyna Petke",
+          "Federica Sarro"
+        ],
+        "published": "2026-03-11",
+        "updated": "2026-03-11"
+      }
+    },
+    {
+      "id": "2603.16496",
+      "status": "resolved",
+      "metadata": {
+        "id": "2603.16496",
+        "title": "AdaMem: Adaptive User-Centric Memory for Long-Horizon Dialogue Agents",
+        "authors": [
+          "Shannan Yan",
+          "Jingchen Ni",
+          "Leqi Zheng",
+          "Jiajun Zhang",
+          "Peixi Wu",
+          "Dacheng Yin",
+          "Jing Lyu",
+          "Chun Yuan",
+          "Fengyun Rao"
+        ],
+        "published": "2026-03-17",
+        "updated": "2026-04-29"
+      }
+    },
+    {
+      "id": "2603.19328",
+      "status": "resolved",
+      "metadata": {
+        "id": "2603.19328",
+        "title": "The Verifier Tax: Horizon Dependent Safety Success Tradeoffs in Tool Using LLM Agents",
+        "authors": [
+          "Tanmay Sah",
+          "Vishal Srivastava",
+          "Dolly Sah",
+          "Kayden Jordan"
+        ],
+        "published": "2026-03-18",
+        "updated": "2026-03-18"
+      }
+    },
+    {
+      "id": "2603.20625",
+      "status": "resolved",
+      "metadata": {
+        "id": "2603.20625",
+        "title": "ACRFence: Preventing Semantic Rollback Attacks in Agent Checkpoint-Restore",
+        "authors": [
+          "Yusheng Zheng",
+          "Yiwei Yang",
+          "Wei Zhang",
+          "Andi Quinn"
+        ],
+        "published": "2026-03-21",
+        "updated": "2026-03-21"
+      }
+    },
+    {
+      "id": "2603.25764",
+      "status": "resolved",
+      "metadata": {
+        "id": "2603.25764",
+        "title": "Confident and Wrong: Silent Semantic Failures in Coding Agents",
+        "authors": [
+          "Aman Mehta"
+        ],
+        "published": "2026-03-26",
+        "updated": "2026-06-21"
+      }
+    },
+    {
+      "id": "2604.01527",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.01527",
+        "title": "REAP: Automatic Curation of Coding Agent Benchmarks from Interactive Production Usage",
+        "authors": [
+          "Smriti Jha",
+          "Matteo Paltenghi",
+          "Chandra Maddila",
+          "Vijayaraghavan Murali",
+          "Shubham Ugare",
+          "Satish Chandra"
+        ],
+        "published": "2026-04-02",
+        "updated": "2026-07-28"
+      }
+    },
+    {
+      "id": "2604.05481",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.05481",
+        "title": "On the Role of Fault Localization Context for LLM-Based Program Repair",
+        "authors": [
+          "Melika Sepidband",
+          "Hung Viet Pham",
+          "Hadi Hemmati"
+        ],
+        "published": "2026-04-07",
+        "updated": "2026-04-07"
+      }
+    },
+    {
+      "id": "2604.07667",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.07667",
+        "title": "From Debate to Decision: Conformal Social Choice for Safe Multi-Agent Deliberation",
+        "authors": [
+          "Mengdie Flora Wang",
+          "Haochen Xie",
+          "Guanghui Wang",
+          "Aijing Gao",
+          "Guang Yang",
+          "Ziyuan Li",
+          "Qucy Wei Qiu",
+          "Fangwei Han",
+          "Hengzhi Qiu",
+          "Yajing Huang",
+          "Bing Zhu",
+          "Jae Oh Woo"
+        ],
+        "published": "2026-04-09",
+        "updated": "2026-04-09"
+      }
+    },
+    {
+      "id": "2604.07830",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.07830",
+        "title": "To Copilot and Beyond: 22 AI Systems Developers Want Built",
+        "authors": [
+          "Rudrajit Choudhuri",
+          "Christian Bird",
+          "Carmen Badea",
+          "Anita Sarma"
+        ],
+        "published": "2026-04-09",
+        "updated": "2026-04-09"
+      }
+    },
+    {
+      "id": "2604.07877",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.07877",
+        "title": "MemReader: From Passive to Active Extraction for Long-Term Agent Memory",
+        "authors": [
+          "Jingyi Kang",
+          "Chunyu Li",
+          "Ding Chen",
+          "Bo Tang",
+          "Feiyu Xiong",
+          "Zhiyu Li"
+        ],
+        "published": "2026-04-09",
+        "updated": "2026-04-10"
+      }
+    },
+    {
+      "id": "2604.08206",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.08206",
+        "title": "\"Theater of Mind\" for LLMs: A Cognitive Architecture Based on Global Workspace Theory",
+        "authors": [
+          "Wenlong Shang"
+        ],
+        "published": "2026-04-09",
+        "updated": "2026-04-09"
+      }
+    },
+    {
+      "id": "2604.09744",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.09744",
+        "title": "MPAC: A Multi-Principal Agent Coordination Protocol for Interoperable Multi-Agent Collaboration",
+        "authors": [
+          "Kaiyang Qian",
+          "Xinmin Fang",
+          "Zhengxiong Li"
+        ],
+        "published": "2026-04-10",
+        "updated": "2026-04-10"
+      }
+    },
+    {
+      "id": "2604.09963",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.09963",
+        "title": "Rebooting Microreboot: Architectural Support for Safe, Parallel Recovery in Microservice Systems",
+        "authors": [
+          "Laurent Bindschaedler"
+        ],
+        "published": "2026-04-11",
+        "updated": "2026-04-11"
+      }
+    },
+    {
+      "id": "2604.12262",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.12262",
+        "title": "CascadeDebate: Multi-Agent Deliberation for Cost-Aware LLM Cascades",
+        "authors": [
+          "Raeyoung Chang",
+          "Dongwook Kwon",
+          "Jisoo Lee",
+          "Nikhil Verma"
+        ],
+        "published": "2026-04-14",
+        "updated": "2026-04-14"
+      }
+    },
+    {
+      "id": "2604.13018",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.13018",
+        "title": "Toward Autonomous Long-Horizon Engineering for ML Research",
+        "authors": [
+          "Guoxin Chen",
+          "Jie Chen",
+          "Lei Chen",
+          "Jiale Zhao",
+          "Fanzhe Meng",
+          "Wayne Xin Zhao",
+          "Ruihua Song",
+          "Cheng Chen",
+          "Ji-Rong Wen",
+          "Kai Jia"
+        ],
+        "published": "2026-04-14",
+        "updated": "2026-05-26"
+      }
+    },
+    {
+      "id": "2604.13108",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.13108",
+        "title": "Formal Architecture Descriptors as Navigation Primitives for AI Coding Agents",
+        "authors": [
+          "Ruoqi Jin"
+        ],
+        "published": "2026-04-11",
+        "updated": "2026-04-11"
+      }
+    },
+    {
+      "id": "2604.13120",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.13120",
+        "title": "AgentForge: Execution-Grounded Multi-Agent LLM Framework for Autonomous Software Engineering",
+        "authors": [
+          "Rajesh Kumar",
+          "Waqar Ali",
+          "Junaid Ahmed",
+          "Najma Imtiaz Ali",
+          "Shaban Usman"
+        ],
+        "published": "2026-04-13",
+        "updated": "2026-04-13"
+      }
+    },
+    {
+      "id": "2604.13725",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.13725",
+        "title": "On the Effectiveness of Context Compression for Repository-Level Tasks: An Empirical Investigation",
+        "authors": [
+          "Jia Feng",
+          "Zhanyue Qin",
+          "Cuiyun Gao",
+          "Ruiqi Wang",
+          "Chaozheng Wang",
+          "Yingwei Ma",
+          "Xiaoyuan Xie"
+        ],
+        "published": "2026-04-15",
+        "updated": "2026-04-15"
+      }
+    },
+    {
+      "id": "2604.14723",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.14723",
+        "title": "Bounded Autonomy for Enterprise AI: Typed Action Contracts and Consumer-Side Execution",
+        "authors": [
+          "Sarmad Sohail",
+          "Ghufran Haider"
+        ],
+        "published": "2026-04-16",
+        "updated": "2026-04-16"
+      }
+    },
+    {
+      "id": "2604.21131",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.21131",
+        "title": "Cross-Session Threats in AI Agents: Benchmark, Evaluation, and Algorithms",
+        "authors": [
+          "Ari Azarafrooz"
+        ],
+        "published": "2026-04-22",
+        "updated": "2026-04-22"
+      }
+    },
+    {
+      "id": "2604.21229",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.21229",
+        "title": "EngramaBench: Evaluating Long-Term Conversational Memory with Structured Graph Retrieval",
+        "authors": [
+          "Julian Acuna"
+        ],
+        "published": "2026-04-23",
+        "updated": "2026-04-23"
+      }
+    },
+    {
+      "id": "2604.22446",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.22446",
+        "title": "From Skills to Talent: Organising Heterogeneous Agents as a Real-World Company",
+        "authors": [
+          "Zhengxu Yu",
+          "Yu Fu",
+          "Zhiyuan He",
+          "Yuxuan Huang",
+          "Lee Ka Yiu",
+          "Meng Fang",
+          "Weilin Luo",
+          "Jun Wang"
+        ],
+        "published": "2026-04-24",
+        "updated": "2026-04-24"
+      }
+    },
+    {
+      "id": "2604.23366",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.23366",
+        "title": "GSAR: Typed Grounding for Hallucination Detection and Recovery in Multi-Agent LLMs",
+        "authors": [
+          "Federico A. Kamelhar"
+        ],
+        "published": "2026-04-25",
+        "updated": "2026-04-25"
+      }
+    },
+    {
+      "id": "2604.23459",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.23459",
+        "title": "Architecture Matters for Multi-Agent Security",
+        "authors": [
+          "Ben Hagag",
+          "William L. Anderson",
+          "Christian Schroeder de Witt",
+          "Sarah Scheffler"
+        ],
+        "published": "2026-04-25",
+        "updated": "2026-04-25"
+      }
+    },
+    {
+      "id": "2604.25849",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.25849",
+        "title": "ADEMA: A Knowledge-State Orchestration Architecture for Long-Horizon Knowledge Synthesis with LLMAgents",
+        "authors": [
+          "Zhou Hanlin",
+          "Chan Huah Yong"
+        ],
+        "published": "2026-04-28",
+        "updated": "2026-04-28"
+      }
+    },
+    {
+      "id": "2604.28138",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.28138",
+        "title": "Crab: A Semantics-Aware Checkpoint/Restore Runtime for Agent Sandboxes",
+        "authors": [
+          "Tianyuan Wu",
+          "Chaokun Chang",
+          "Lunxi Cao",
+          "Wei Gao",
+          "Wei Wang"
+        ],
+        "published": "2026-04-30",
+        "updated": "2026-04-30"
+      }
+    },
+    {
+      "id": "2605.00827",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.00827",
+        "title": "Separating Intelligence from Execution: A Workflow Engine for the Model Context Protocol",
+        "authors": [
+          "Abhinav Singh Parmar"
+        ],
+        "published": "2026-03-13",
+        "updated": "2026-03-13"
+      }
+    },
+    {
+      "id": "2605.00914",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.00914",
+        "title": "The Cost of Consensus: Isolated Self-Correction Prevails Over Unguided Homogeneous Multi-Agent Debate",
+        "authors": [
+          "Blaž Bertalanič",
+          "Carolina Fortuna"
+        ],
+        "published": "2026-04-29",
+        "updated": "2026-04-29"
+      }
+    },
+    {
+      "id": "2605.02273",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.02273",
+        "title": "These Aren't the Reviews You're Looking For How Humans Review AI-Generated Pull Requests",
+        "authors": [
+          "Kacper Duma",
+          "Patryk Wróblewski",
+          "Jagoda Bobińska",
+          "Julia Winiarska",
+          "Piotr Przymus"
+        ],
+        "published": "2026-05-04",
+        "updated": "2026-05-04"
+      }
+    },
+    {
+      "id": "2605.02421",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.02421",
+        "title": "AOCI: Symbolic-Semantic Indexing for Practical Repository-Scale Code Understanding with LLMs",
+        "authors": [
+          "Jinshi Liu",
+          "Hanying Zuo",
+          "Congyin Cao",
+          "Anran Zhang",
+          "Yixuan Liu",
+          "Xinzhou Xie"
+        ],
+        "published": "2026-05-04",
+        "updated": "2026-05-04"
+      }
+    },
+    {
+      "id": "2605.02431",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.02431",
+        "title": "ARIADNE: Agentic Reward-Informed Adaptive Decision Exploration via Blackboard-Driven MCTS for Competitive Program Generation",
+        "authors": [
+          "Minnan Wei",
+          "Xiang Chen",
+          "Xiaoshuai Niu",
+          "Siyu Chen"
+        ],
+        "published": "2026-05-04",
+        "updated": "2026-05-04"
+      }
+    },
+    {
+      "id": "2605.03117",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.03117",
+        "title": "ARISE: A Repository-level Graph Representation and Toolset for Agentic Program Repair and Fault Localization",
+        "authors": [
+          "Shahd Seddik",
+          "Fahd Seddik",
+          "Amirrezza Esmaeili",
+          "Mahdieh Sadatbenis",
+          "Fatemeh Fard"
+        ],
+        "published": "2026-05-04",
+        "updated": "2026-07-03"
+      }
+    },
+    {
+      "id": "2605.03354",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.03354",
+        "title": "What Happens Inside Agent Memory? Circuit Analysis from Emergence to Diagnosis",
+        "authors": [
+          "Xutao Mao",
+          "Jinman Zhao",
+          "Gerald Penn",
+          "Cong Wang"
+        ],
+        "published": "2026-05-05",
+        "updated": "2026-05-07"
+      }
+    },
+    {
+      "id": "2605.03409",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.03409",
+        "title": "Robust Agent Compensation (RAC): Teaching AI Agents to Compensate",
+        "authors": [
+          "Srinath Perera",
+          "Kaviru Hapuarachchi",
+          "Frank Leymann",
+          "Rania Khalaf"
+        ],
+        "published": "2026-05-05",
+        "updated": "2026-05-18"
+      }
+    },
+    {
+      "id": "2605.08112",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.08112",
+        "title": "Context-Augmented Code Generation: How Product Context Improves AI Coding Agent Decision Compliance by 49%",
+        "authors": [
+          "Drew Dillon",
+          "Kasyap Varanasi"
+        ],
+        "published": "2026-04-27",
+        "updated": "2026-04-27"
+      }
+    },
+    {
+      "id": "2605.08717",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.08717",
+        "title": "Debugging the Debuggers: Failure-Anchored Structured Recovery for Software Engineering Agents",
+        "authors": [
+          "Chenyu Zhao",
+          "Shenglin Zhang",
+          "Yihang Lin",
+          "Wenwei Gu",
+          "Zhimin Chen",
+          "Yongqian Sun",
+          "Dan Pei",
+          "Chetan Bansal",
+          "Saravan Rajmohan",
+          "Minghua Ma"
+        ],
+        "published": "2026-05-09",
+        "updated": "2026-06-05"
+      }
+    },
+    {
+      "id": "2605.10913",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.10913",
+        "title": "Shepherd: Enabling Programmable Meta-Agents via Reversible Agentic Execution Traces",
+        "authors": [
+          "Simon Yu",
+          "Derek Chong",
+          "Ananjan Nandi",
+          "Dilara Soylu",
+          "Jiuding Sun",
+          "Christopher D Manning",
+          "Weiyan Shi"
+        ],
+        "published": "2026-05-11",
+        "updated": "2026-06-24"
+      }
+    },
+    {
+      "id": "2605.11026",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.11026",
+        "title": "AgentShield: Deception-based Compromise Detection for Tool-using LLM Agents",
+        "authors": [
+          "Yassin H. Rassul",
+          "Tarik A. Rashid"
+        ],
+        "published": "2026-05-10",
+        "updated": "2026-05-10"
+      }
+    },
+    {
+      "id": "2605.12978",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.12978",
+        "title": "Useful Memories Become Faulty When Continuously Updated by LLMs",
+        "authors": [
+          "Dylan Zhang",
+          "Yanshan Lin",
+          "Zhengkun Wu",
+          "Yihang Sun",
+          "Bingxuan Li",
+          "Dianqi Li",
+          "Hao Peng"
+        ],
+        "published": "2026-05-13",
+        "updated": "2026-05-13"
+      }
+    },
+    {
+      "id": "2605.13850",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.13850",
+        "title": "A Two-Dimensional Framework for AI Agent Design Patterns: Cognitive Function and Execution Topology",
+        "authors": [
+          "Jia Huang",
+          "Joey Tianyi Zhou"
+        ],
+        "published": "2026-03-16",
+        "updated": "2026-05-24"
+      }
+    },
+    {
+      "id": "2605.14478",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.14478",
+        "title": "When Retrieval Hurts Code Completion: A Diagnostic Study of Stale Repository Context",
+        "authors": [
+          "Haojun Weng",
+          "Qianqian Yang",
+          "Hao Fu",
+          "Haobin Pan",
+          "Xinwei Lv"
+        ],
+        "published": "2026-05-14",
+        "updated": "2026-05-14"
+      }
+    },
+    {
+      "id": "2605.15132",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.15132",
+        "title": "APWA: A Distributed Architecture for Parallelizable Agentic Workflows",
+        "authors": [
+          "Evan Rose",
+          "Tushin Mallick",
+          "Matthew D. Laws",
+          "Cristina Nita-Rotaru",
+          "Alina Oprea"
+        ],
+        "published": "2026-05-14",
+        "updated": "2026-05-14"
+      }
+    },
+    {
+      "id": "2605.16278",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.16278",
+        "title": "Keeping an Eye on AI: A Framework for Effective Human Oversight of AI Systems",
+        "authors": [
+          "Susanne Gaube",
+          "Markus Langer",
+          "Tim Miller",
+          "Kevin Baum",
+          "Raimund Dachselt",
+          "Anna Maria Feit",
+          "Ujwal Gadiraju",
+          "Harmanpreet Kaur",
+          "Mark T. Keane",
+          "Richard Landers",
+          "Johann Laux",
+          "Q. Vera Liao",
+          "Brian Lim",
+          "Linda Onnasch",
+          "Tim Schrills",
+          "Liz Sonenberg",
+          "Chenhao Tan",
+          "Nava Tintarev",
+          "Ziang Xiao",
+          "Hanwei Zhang"
+        ],
+        "published": "2026-04-09",
+        "updated": "2026-04-09"
+      }
+    },
+    {
+      "id": "2605.17480",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.17480",
+        "title": "The Capability Paradox: How Smarter Auditors Make Multi-Agent Systems Less Secure",
+        "authors": [
+          "Qiqi Liu",
+          "Runhan Song",
+          "Shilin Ye"
+        ],
+        "published": "2026-05-17",
+        "updated": "2026-07-29"
+      }
+    },
+    {
+      "id": "2605.20926",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.20926",
+        "title": "MemConflict: Evaluating Long-Term Memory Systems Under Memory Conflicts",
+        "authors": [
+          "Zhen Tao",
+          "Jinxiang Zhao",
+          "Peng Liu",
+          "Dinghao Xi",
+          "Yanfang Chen",
+          "Wei Xu",
+          "Zhiyu Li"
+        ],
+        "published": "2026-05-20",
+        "updated": "2026-05-20"
+      }
+    },
+    {
+      "id": "2605.23023",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.23023",
+        "title": "How to Steer Your Multi-Agent System: Human-LLM Collaborative Planning",
+        "authors": [
+          "Zeyu He",
+          "Hannah Kim",
+          "Dan Zhang",
+          "Estevam Hruschka"
+        ],
+        "published": "2026-05-21",
+        "updated": "2026-05-21"
+      }
+    },
+    {
+      "id": "2605.23311",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.23311",
+        "title": "DART: Semantic Recoverability for Structured Tool Agents",
+        "authors": [
+          "Ke Yang",
+          "Panpan Li",
+          "Zonghan Wu",
+          "Kejin Xu",
+          "Huaxi Huang",
+          "Xiaoshui Huang"
+        ],
+        "published": "2026-05-22",
+        "updated": "2026-05-22"
+      }
+    },
+    {
+      "id": "2605.23459",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.23459",
+        "title": "AI Assurance: A Comprehensive Testing Strategy for Enterprise AI Systems",
+        "authors": [
+          "Chitra Badagi",
+          "Divye Singh",
+          "Animesh Sen",
+          "Adinath Shirsath"
+        ],
+        "published": "2026-05-22",
+        "updated": "2026-05-22"
+      }
+    },
+    {
+      "id": "2605.23929",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.23929",
+        "title": "Toward Reliable Design of LLM-Enabled Agentic Workflows: Optimizing Latency-Reliability-Cost Tradeoffs",
+        "authors": [
+          "Ya-Ting Yang",
+          "Quanyan Zhu"
+        ],
+        "published": "2026-04-21",
+        "updated": "2026-04-21"
+      }
+    },
+    {
+      "id": "2605.24060",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.24060",
+        "title": "Same Ranking, Different Winner: How Scoring Targets Shape LLM Memory Benchmarks",
+        "authors": [
+          "Sugam Panthi",
+          "Rabab Abdelfattah"
+        ],
+        "published": "2026-05-22",
+        "updated": "2026-05-22"
+      }
+    },
+    {
+      "id": "2605.24117",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.24117",
+        "title": "SkillEvolBench: Benchmarking the Evolution from Episodic Experience to Procedural Skills",
+        "authors": [
+          "Yingtie Lei",
+          "Zhongwei Wan",
+          "Jiankun Zhang",
+          "Samiul Alam",
+          "Zixuan Zhong",
+          "Peizhou Huang",
+          "Xin Wang",
+          "Jingxuan Zhang",
+          "Donghao Zhou",
+          "Yunta Hsieh",
+          "Zhihao Dou",
+          "Hui Shen",
+          "Yan Xu",
+          "Dimitrios Dimitriadis",
+          "Tuo Zhang",
+          "Mi Zhang"
+        ],
+        "published": "2026-05-22",
+        "updated": "2026-05-22"
+      }
+    },
+    {
+      "id": "2605.26178",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.26178",
+        "title": "ATOM: Instantiating Budget-Controllable Multi-Agent Collaboration via Nucleus-Electron Hierarchy",
+        "authors": [
+          "Xinkui Zhao",
+          "Sai Liu",
+          "Yifan Zhang",
+          "Qingyu Ma",
+          "Zewen Lin",
+          "Naibo Wang",
+          "Guanjie Cheng",
+          "Chang Liu",
+          "Yueshen Xu"
+        ],
+        "published": "2026-05-25",
+        "updated": "2026-05-25"
+      }
+    },
+    {
+      "id": "2605.26563",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.26563",
+        "title": "TrajAudit: Automated Failure Diagnosis for Agentic Coding Systems",
+        "authors": [
+          "Minxing Wang",
+          "Xiaofei Xie",
+          "Yintong Huo"
+        ],
+        "published": "2026-05-26",
+        "updated": "2026-07-28"
+      }
+    },
+    {
+      "id": "2605.29442",
+      "status": "resolved",
+      "metadata": {
+        "id": "2605.29442",
+        "title": "How Coding Agents Fail Their Users: A Large-Scale Analysis of Developer-Agent Misalignment in 20,574 Real-World Sessions",
+        "authors": [
+          "Ningzhi Tang",
+          "Chaoran Chen",
+          "Gelei Xu",
+          "Yiyu Shi",
+          "Yu Huang",
+          "Collin McMillan",
+          "Tao Dong",
+          "Toby Jia-Jun Li"
+        ],
+        "published": "2026-05-28",
+        "updated": "2026-05-28"
+      }
+    },
+    {
+      "id": "2606.00655",
+      "status": "resolved",
+      "metadata": {
+        "id": "2606.00655",
+        "title": "Scaling Behavior of Single LLM-Driven Multi-Agent Systems",
+        "authors": [
+          "Jialing Li",
+          "Zhouhong Gu",
+          "Yin Cai",
+          "Hongwei Feng"
+        ],
+        "published": "2026-05-30",
+        "updated": "2026-05-30"
+      }
+    },
+    {
+      "id": "2606.01138",
+      "status": "resolved",
+      "metadata": {
+        "id": "2606.01138",
+        "title": "memorywire: A Vendor-Neutral Wire Format for Agent Memory Operations",
+        "authors": [
+          "Thamilvendhan Munirathinam"
+        ],
+        "published": "2026-05-31",
+        "updated": "2026-07-17"
+      }
+    },
+    {
+      "id": "2606.01326",
+      "status": "resolved",
+      "metadata": {
+        "id": "2606.01326",
+        "title": "Reducing Token Usage of State-in-Context Agents using Minification",
+        "authors": [
+          "Nicolas Hrubec",
+          "Jürgen Cito"
+        ],
+        "published": "2026-05-31",
+        "updated": "2026-05-31"
+      }
+    },
+    {
+      "id": "2606.04056",
+      "status": "resolved",
+      "metadata": {
+        "id": "2606.04056",
+        "title": "Token Budgets: An Empirical Catalog of 63 LLM-Agent Budget-Overrun Incidents, with an Affine-Typed Rust Mitigation as a Case Study",
+        "authors": [
+          "Sajjad Khan"
+        ],
+        "published": "2026-06-02",
+        "updated": "2026-06-02"
+      }
+    },
+    {
+      "id": "2606.14594",
+      "status": "resolved",
+      "metadata": {
+        "id": "2606.14594",
+        "title": "Regulating the Machine Contributor: Governance and Policy Alignment in Open Source",
+        "authors": [
+          "Jassem Manita",
+          "Aziz Amari"
+        ],
+        "published": "2026-06-12",
+        "updated": "2026-06-12"
+      }
+    },
+    {
+      "id": "2606.17182",
+      "status": "resolved",
+      "metadata": {
+        "id": "2606.17182",
+        "title": "Verified Detection and Prevention of Concurrency Anomalies in Multi-Agent Large Language Model Systems",
+        "authors": [
+          "Sajjad Khan"
+        ],
+        "published": "2026-06-15",
+        "updated": "2026-06-15"
+      }
+    },
+    {
+      "id": "2606.26979",
+      "status": "resolved",
+      "metadata": {
+        "id": "2606.26979",
+        "title": "How Much Static Structure Do Code Agents Need? A Study of Deterministic Anchoring",
+        "authors": [
+          "Zhihao Lin",
+          "Mingyi Zhou",
+          "Yizhuo Yang",
+          "Li Li"
+        ],
+        "published": "2026-06-25",
+        "updated": "2026-07-02"
+      }
+    },
+    {
+      "id": "2607.00533",
+      "status": "resolved",
+      "metadata": {
+        "id": "2607.00533",
+        "title": "You Shall Not Pass! Where and Why Developers Draw The Line on AI Autonomy",
+        "authors": [
+          "Rudrajit Choudhuri",
+          "Christian Bird",
+          "Carmen Badea",
+          "Marco Gerosa",
+          "Anita Sarma"
+        ],
+        "published": "2026-07-01",
+        "updated": "2026-07-11"
+      }
+    },
+    {
+      "id": "2607.06184",
+      "status": "resolved",
+      "metadata": {
+        "id": "2607.06184",
+        "title": "What Resolve Rate Hides: Trajectory Structure Diagnostics for Coding Agents",
+        "authors": [
+          "Rui Shu",
+          "Chun Yong Chong",
+          "Xin Zhou",
+          "Yun Peng",
+          "Zihan Wu",
+          "Xu Han",
+          "Zeyang Zhuang",
+          "Guowen Yuan",
+          "Yuan Wang"
+        ],
+        "published": "2026-07-07",
+        "updated": "2026-07-07"
+      }
+    },
+    {
+      "id": "2607.07989",
+      "status": "resolved",
+      "metadata": {
+        "id": "2607.07989",
+        "title": "Who Broke the System? Failure Localization in LLM-Based Multi-Agent Systems",
+        "authors": [
+          "Yufei Xia",
+          "Anjun Gao",
+          "Yueyang Quan",
+          "Zhuqing Liu",
+          "Minghong Fang"
+        ],
+        "published": "2026-07-08",
+        "updated": "2026-07-08"
+      }
+    },
+    {
+      "id": "2607.08740",
+      "status": "resolved",
+      "metadata": {
+        "id": "2607.08740",
+        "title": "Workflow as Knowledge: Semantic Persistence for LLM-Mediated Workflows",
+        "authors": [
+          "Emanuele Quinto",
+          "Carlo Andrea Rozzi",
+          "Francesco Zanitti"
+        ],
+        "published": "2026-07-09",
+        "updated": "2026-07-09"
+      }
+    },
+    {
+      "id": "2607.09510",
+      "status": "resolved",
+      "metadata": {
+        "id": "2607.09510",
+        "title": "Failure as a Process: An Anatomy of CLI Coding Agent Trajectories",
+        "authors": [
+          "Xiangxin Zhao",
+          "Han Li",
+          "Shuaiting Li",
+          "Tianyi Zhao",
+          "Earl T. Barr",
+          "Federica Sarro",
+          "He Ye"
+        ],
+        "published": "2026-07-10",
+        "updated": "2026-07-10"
+      }
+    },
+    {
+      "id": "2607.09682",
+      "status": "resolved",
+      "metadata": {
+        "id": "2607.09682",
+        "title": "AuditWeave: A Tamper-Evident, Auditor-Navigable Evidence Layer for AI-Assisted and Data-Transformation Workflows",
+        "authors": [
+          "Vimal Nakrani"
+        ],
+        "published": "2026-06-14",
+        "updated": "2026-06-14"
+      }
+    },
+    {
+      "id": "2607.11046",
+      "status": "resolved",
+      "metadata": {
+        "id": "2607.11046",
+        "title": "Retrieval-Oriented Code Representations in Agentic Bug Localization",
+        "authors": [
+          "Genevieve Caumartin",
+          "Tse-Hsun",
+          "Chen",
+          "Diego Elias Costa"
+        ],
+        "published": "2026-07-13",
+        "updated": "2026-07-13"
+      }
+    }
+  ],
+  "dois": [
+    {
+      "doi": "10.1007/BF02295996",
+      "url": "https://doi.org/10.1007/BF02295996",
+      "status": "resolved",
+      "title": "Note on the Sampling Error of the Difference Between Correlated Proportions or Percentages",
+      "authors": [
+        "Quinn McNemar"
+      ],
+      "published": "1947-6"
+    },
+    {
+      "doi": "10.1016/0005-1098(83)90046-8",
+      "url": "https://doi.org/10.1016/0005-1098(83)90046-8",
+      "status": "resolved",
+      "title": "Ironies of automation",
+      "authors": [
+        "Lisanne Bainbridge"
+      ],
+      "published": "1983-11"
+    },
+    {
+      "doi": "10.1037/h0031619",
+      "url": "https://doi.org/10.1037/h0031619",
+      "status": "resolved",
+      "title": "Measuring nominal scale agreement among many raters.",
+      "authors": [
+        "Joseph L. Fleiss"
+      ],
+      "published": "1971-11"
+    },
+    {
+      "doi": "10.1086/266577",
+      "url": "https://doi.org/10.1086/266577",
+      "status": "resolved",
+      "title": "Reliability of Content Analysis: The Case of Nominal Scale Coding",
+      "authors": [
+        "William A. Scott"
+      ],
+      "published": "1955"
+    },
+    {
+      "doi": "10.1177/001316446002000104",
+      "url": "https://doi.org/10.1177/001316446002000104",
+      "status": "resolved",
+      "title": "A Coefficient of Agreement for Nominal Scales",
+      "authors": [
+        "Jacob Cohen"
+      ],
+      "published": "1960-4"
+    }
+  ],
+  "web_sources": [
+    {
+      "url": "http://www.w3.org/1998/Math/MathML",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://www.w3.org/1998/Math/MathML/",
+      "title": "MathML Namespace"
+    },
+    {
+      "url": "https://addyo.substack.com/p/long-running-agents",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://addyo.substack.com/p/long-running-agents",
+      "title": "Long-running Agents - by Addy Osmani - Elevate"
+    },
+    {
+      "url": "https://cursor.com/blog/dynamic-context-discovery",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://cursor.com/blog/dynamic-context-discovery",
+      "title": "Dynamic context discovery · Cursor"
+    },
+    {
+      "url": "https://devops.com/when-should-a-devops-agent-act-without-human-approval/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://devops.com/when-should-a-devops-agent-act-without-human-approval/",
+      "title": "When Should a DevOps Agent Act Without Human Approval? - DevOps.com"
+    },
+    {
+      "url": "https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork",
+      "title": "Better Experiments with LLM Evals — A funnel, not a fork | Spotify Engineering"
+    },
+    {
+      "url": "https://github.com/sjarmak/codeprobe",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://github.com/sjarmak/codeprobe",
+      "title": "GitHub - sjarmak/codeprobe: Turn a repository's merged pull requests into coding-agent evaluations, then measure the whole agent setup (model, tools, retrieval, cost, harness) against them. Python CLI, on PyPI. · GitHub"
+    },
+    {
+      "url": "https://martinfowler.com/articles/exploring-gen-ai/context-engineering-coding-agents.html",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://martinfowler.com/articles/exploring-gen-ai/context-engineering-coding-agents.html",
+      "title": "Context Engineering for Coding Agents"
+    },
+    {
+      "url": "https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://martinfowler.com/articles/harness-engineering.html",
+      "title": "Harness engineering for coding agent users"
+    },
+    {
+      "url": "https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953?gi=030347a2d540",
+      "title": "Medium"
+    },
+    {
+      "url": "https://newsletter.pragmaticengineer.com/p/evals",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://newsletter.pragmaticengineer.com/p/evals",
+      "title": "A pragmatic guide to LLM evals for devs"
+    },
+    {
+      "url": "https://openai.com/index/separating-signal-from-noise-coding-evaluations/",
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://openai.com/index/separating-signal-from-noise-coding-evaluations/",
+      "title": null
+    },
+    {
+      "url": "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified",
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified",
+      "title": null
+    },
+    {
+      "url": "https://pushtoprod.substack.com/p/my-ai-agent-didnt-do-anything",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://pushtoprod.substack.com/p/my-ai-agent-didnt-do-anything",
+      "title": "My AI Agent Said It Was Done. It Hadn&#x27;t Done Anything."
+    },
+    {
+      "url": "https://rss.xcancel.com/GergelyOrosz/status/2077434907274428914",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://xcancel.com/GergelyOrosz/status/2077434907274428914",
+      "title": "Verifying your browser…"
+    },
+    {
+      "url": "https://tech.instacart.com/blueberry-force-multiplier-for-the-on-call-engineer-98c446dfcc12",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://tech.instacart.com/blueberry-force-multiplier-for-the-on-call-engineer-98c446dfcc12?gi=ac4aa4a8b360",
+      "title": "Medium"
+    },
+    {
+      "url": "https://www.amplifypartners.com/blog-posts/how-hightouch-built-their-long-running-agent-harness",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://www.amplifypartners.com/blog-posts/how-hightouch-built-their-long-running-agent-harness",
+      "title": "How Hightouch built their long-running agent harness — Amplify Partners"
+    },
+    {
+      "url": "https://www.infoq.com/news/2026/03/stripe-autonomous-coding-agents/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://www.infoq.com/news/2026/03/stripe-autonomous-coding-agents/",
+      "title": "Stripe Engineers Deploy Minions, Autonomous Agents Producing Thousands of Pull Requests Weekly - InfoQ"
+    },
+    {
+      "url": "https://www.morling.dev/blog/building-durable-execution-engine-with-sqlite/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://www.morling.dev/blog/building-durable-execution-engine-with-sqlite/",
+      "title": "Building a Durable Execution Engine With SQLite - Gunnar Morling"
+    },
+    {
+      "url": "https://www.reddit.com/r/LLMDevs/comments/1q7avil/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://www.reddit.com/r/LLMDevs/comments/1q7avil/",
+      "title": "Reddit"
+    },
+    {
+      "url": "https://www.reddit.com/r/LLMDevs/comments/1rfh6p4/what_fills_the_context_window/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://www.reddit.com/r/LLMDevs/comments/1rfh6p4/what_fills_the_context_window/",
+      "title": "Reddit"
+    },
+    {
+      "url": "https://www.reddit.com/r/LLMDevs/comments/1s8879g/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://www.reddit.com/r/LLMDevs/comments/1s8879g/",
+      "title": "Reddit"
+    },
+    {
+      "url": "https://www.reddit.com/r/compsci/comments/1rqcmu8/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://www.reddit.com/r/compsci/comments/1rqcmu8/",
+      "title": "Reddit"
+    },
+    {
+      "url": "https://www.reddit.com/r/devops/comments/1tbbls4/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://www.reddit.com/r/devops/comments/1tbbls4/",
+      "title": "Reddit"
+    },
+    {
+      "url": "https://www.reddit.com/r/devops/comments/1touxz4/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://www.reddit.com/r/devops/comments/1touxz4/",
+      "title": "Reddit"
+    },
+    {
+      "url": "https://www.reddit.com/r/programming/comments/1p70pol/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://www.reddit.com/r/programming/comments/1p70pol/",
+      "title": "Reddit"
+    },
+    {
+      "url": "https://www.turingpost.com",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://www.turingpost.com/",
+      "title": "AI Research Newsletter | Turing Post"
+    },
+    {
+      "url": "https://x.com/cursor_ai/status/2032148129038950779",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://x.com/cursor_ai/status/2032148129038950779",
+      "title": "Cursor on X: \"We use a combination of offline benchmarks and online evals to measure model quality. This makes results more useful, especially as public benchmarks are increasingly saturated. https://t.co/lMKCkOyXyW\" / X"
+    },
+    {
+      "url": "https://x.com/swyx/status/2011344788486774942",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://x.com/swyx/status/2011344788486774942",
+      "title": "swyx on X: \"evals should be validated by vibes. i think not enough people give sufficient credit to @METR_Evals (@joel_bkr et al) for clearly identifying/quantifying the Opus 4.5 outperformance. on paper, GPT 5.2 Thinking outperforms Opus 4.5 by 55.6 vs 52% on SWE Bench Pro. in practice https://t.co/sc9tLqst82\" / X"
+    }
+  ]
+}

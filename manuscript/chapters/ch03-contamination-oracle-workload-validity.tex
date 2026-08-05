@@ -1,0 +1,296 @@
+\chapter{Benchmark contamination, oracle strength, and workload validity}
+\label{ch03-contamination-oracle-workload-validity}
+In February 2026, OpenAI (\href{https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified}{Feb 2026}) stopped reporting results on a benchmark subset it had helped create. Later in July 2026, it did the same for SWE-Bench Pro (\href{https://openai.com/index/separating-signal-from-noise-coding-evaluations/}{Jul 2026}). SWE-bench Verified had become one of the most cited measures of coding-agent performance. Its 500 tasks had survived screening by 93 paid professional developers, a process intended to remove ambiguous issues and defective tests. Less than two years later, a practitioner breakdown of the sponsor's audit reported that at least 16.4 percent of the full subset was unsolvable as shipped. That figure is derived from the audited sample rather than stated in the sponsor's own summary. The same audit showed frontier models reproducing solution details verbatim when given only a task identifier.
+
+Human screening had improved the original collection, but it could not control what happened after publication. \textbf{Contamination} is exposure to evaluation material before testing. Once tasks, issue discussions, reference patches, tests, and leaderboard results are public, they can enter training corpora, retrieval systems, fine-tuning sets, prompt libraries, and repeated development cycles. A clean review at release establishes nothing about those later paths.
+
+The retirement also exposed a separate problem. Some tasks rejected functionally valid patches because the tests required an undocumented implementation detail or checked behavior absent from the issue. Other tests were too permissive and accepted patches that did not implement the requested behavior. Human review had missed both kinds of defect, because task quality is conditional on the candidates being graded. A test that looks reasonable in isolation can fail when it meets an implementation its authors did not anticipate.
+
+You should treat any public score as the output of three coupled measurements. First, has the model already encountered the work? Second, can the test oracle refute an incorrect answer? Third, does the task distribution represent the work someone wants the model to do? The sponsor's reversal is the demonstration that reputation, curation effort, and a large annotator count answer none of these questions. Each question needs its own control.
+
+\begin{verbatim}
+public score
+    ^
+    |
+    +-> has the model already encountered the work?
+    |       -> matched control set
+    |
+    +-> can the test oracle refute an incorrect answer?
+    |       -> adversarial test strengthening
+    |       -> re-adjudication
+    |
+    +-> does the task distribution represent the work?
+            -> tasks mined from the reader's own merged work
+
+reputation + curation effort + large annotator count
+    -> answer none of these questions
+\end{verbatim}
+
+\section{Measure the public-private gap}\label{measure-the-public-private-gap}
+
+The first control is a point-in-time audit that any evaluator can commission. A \textbf{matched control set} reproduces the public suite's relevant difficulty characteristics using tasks the benchmark never released. Running both sets under the same protocol produces a separate public-private gap for each model.
+
+Prathifkumar et al.~(\href{https://arxiv.org/abs/2512.10218}{2025}) conducted an observational comparison and found roughly a threefold overall advantage and a sixfold file-localization advantage on SWE-bench Verified relative to their control tasks. The comparison covered popular open-source Python projects, but it did not establish that the individual issues were equally difficult. Unresolved differences in task difficulty therefore remain a plausible explanation for part of the observed gap.
+
+This audit provides a point-in-time measurement. The post-cutoff pipeline in the next section provides a standing control, avoiding the need to reconstruct the comparison each time the public benchmark ages.
+
+An evaluator usually cannot inspect a model's complete training history. Providers rarely publish full training corpora, and even a searchable disclosed corpus would omit later fine-tuning, generated training examples, and indirect exposure through task discussions or benchmark-driven development. Asking whether a model has seen a particular item creates an attribution problem without reliable ground truth. Asking how its performance changes on comparable unseen work produces an observable difference.
+
+The audit requires two task sets that differ in public exposure while matching as closely as possible on the features that determine difficulty. For repository work, those features include programming language, repository scale, issue format, expected patch size, dependency burden, and the amount of localization required before editing. The model, harness, prompt, tool access, retry policy, and scoring procedure remain fixed across both sets.
+
+When each public task has a defensible counterpart, the audit should use a paired design so the analysis can compare outcomes within each matched pair.
+
+For a given model, the primary estimate is:
+
+\begin{verbatim}
+inflation_gap(model) =
+    score(model, public_tasks) - score(model, matched_control_tasks)
+\end{verbatim}
+
+The gap estimates the combined effect of public exposure on the measured score. It cannot isolate a pure training-data effect. The estimate may include direct exposure to tasks or solutions, familiarity with repositories and issue conventions, and adaptation through repeated use of the public suite.
+
+That final channel does not require any change to model weights. Each time developers evaluate an agent on a public suite, retain a change that raises its score, and discard one that lowers it, the development process adapts to the suite. The iteration holdout described in Chapter 2 protects a local development process from this form of selection. The matched comparison estimates the inflation that remains across all exposure channels together.
+
+A single audit is also a single realization. The gap inherits the run-to-run variation described in Chapter 1, so both task sets require repeated runs before their difference can be interpreted as an estimate rather than one draw.
+
+There are three practical ways to construct the comparison set. A \textbf{private mirror} reproduces the public suite's collection procedure using tasks that have never been released. A \textbf{newly collected set} samples recent work from the same task family. A \textbf{retroactive twin set} reconstructs tasks with the same measured properties, provided the model's training cutoff predates publication of the twins. Each supports a narrower claim than the phrase ``clean benchmark'' suggests.
+
+A private mirror provides the strongest control over exposure, but it is expensive to construct. Repository tasks require reproducible code states, issue descriptions, reference changes, and tests that distinguish acceptable from unacceptable patches. The mirror loses its protection once it is released, distributed broadly to vendors, or used repeatedly during agent development. Access logs, handling rules, and usage history therefore become part of the measurement because the set's exposure status changes over time.
+
+Newly collected tasks are less expensive when a team already has a stream of resolved work. Their recency makes prior exposure less likely, but it may also introduce a different mixture of repositories, framework generations, and issue types. A lower score may therefore reflect unfamiliarity, greater difficulty, or both.
+
+Matching requires an explicit adequacy check. Similar averages are not enough. The evaluator should determine whether the feature distributions overlap, whether individual pairs are defensible in engineering terms, and whether the conclusion survives the removal of visibly poor matches.
+
+Retroactive twins make the matching problem especially visible. Haimes et al.~(\href{https://arxiv.org/abs/2410.09247}{2024}) constructed twins for a public question-answering benchmark and required them to pass four statistical indistinguishability checks before comparison. Across 20 models, some public scores exceeded twin scores by as much as 16 percentage points. A substantial public-private gap can therefore remain even after formal matching checks are satisfied.
+
+Those results do not establish a comparable gap for repository-scale coding. The twins were constructed and validated for question answering, and the method applies only when the model's training cutoff predates publication of the twin set. The 16-point result is the largest gap observed under that study's design. It is not a bound on coding benchmarks and should not be used as a correction factor for coding scores.
+
+A controlled arithmetic study provides another boundary. Zhang et al.~(\href{https://arxiv.org/abs/2405.00332}{2024}) econstructed a grade-school arithmetic benchmark as a private mirror and measured accuracy drops of up to 8 percent. The model-level gap was also associated with the probability that a model would reproduce public items verbatim, with a reported squared Spearman correlation of 0.36.
+
+Many frontier systems showed little overfitting, and every evaluated model generalized to the novel items. That variation is why the audit must be performed separately for each model. Exposure and score inflation are properties of a particular model-benchmark pair. Applying one average correction across models would erase the model-specific signal the audit is intended to measure.
+
+The observational coding result is more directly relevant to software work but less controlled. Both sides used popular open-source Python projects, yet matching at that level does not establish equivalent issue difficulty. A model may localize files more easily in repositories it has encountered repeatedly, which is itself a meaningful familiarity effect. The observed performance difference may also include repository-specific complexity.
+
+The reported threefold and sixfold gaps should therefore be treated as directional evidence, with the matching limitation attached whenever those figures are used.
+
+The audit should produce a separate record for each model containing the public score, matched-control score, paired difference where pairing is justified, and uncertainty for each quantity. It should also document the task-matching procedure closely enough for another evaluator to challenge it. A single pooled gap is inadequate because models differ in both exposure and generalization. A corrected leaderboard is worse because it converts uncertain, model-specific estimates into false precision.
+
+The decision depends on the size and stability of the measured gap. A small gap with a wide confidence interval means the audit lacked the resolution to establish much. A large gap that survives plausible rematching indicates that the public score is a poor estimate of that model's performance on comparable unseen tasks.
+
+Neither result establishes how the model will perform on the reader's repositories. The audit answers a narrower question: whether public availability appears to change the measurement.
+
+\section{Keep the task window ahead of the model}\label{keep-the-task-window-ahead-of-the-model}
+
+A \textbf{temporal holdout} tags every task by publication time and evaluates a model only on work published after its stated training cutoff. This is the standing pipeline. The matched comparison in the previous section is the point-in-time audit, and a reader who adopts that audit alone has to keep commissioning new ones as the public set ages. The pipeline removes that repetition at a real cost. Longitudinal comparability weakens, because every time window contains different work.
+
+The control removes the most direct path from a public task into pre-evaluation training. Suppose a model's stated cutoff is June 2025. An issue first published in August can enter its evaluation window, while an issue published in May cannot, even when both are assembled into the benchmark in September. The relevant date belongs to the underlying task material rather than to the benchmark's ingestion.
+
+That distinction changes the data model for an evaluation suite. Each task needs provenance for its issue, repository state, tests, solution, and any discussion that reveals the solution. Each model needs a recorded cutoff and a policy for ambiguous or rolling cutoffs. Eligibility is then a function of both records:
+
+\begin{verbatim}
+eligible(task, model) =
+    task.first_public_at > model.training_cutoff
+\end{verbatim}
+
+The inequality is the easy part. \texttt{first\_public\_at} may refer to an issue that was discussed in a public chat before it reached the tracker, a security fix disclosed after private coordination, or a commit mirrored across several hosts. A benchmark maintainer must choose which event counts and retain enough provenance to revisit that choice. Cutoff claims pose a similar problem, because providers may disclose a date without specifying whether later supervised tuning, tool traces, or retrieval indexes include newer material.
+
+Eligibility is also a property of a task-model pair rather than of a task set. A collection labeled post-cutoff without naming the model it was checked against establishes nothing about eligibility.
+
+Controlled evidence from continuously collected coding problems shows why the date split is still useful. Jain et al.~(\href{https://arxiv.org/abs/2403.07974}{2024}) tagged problems by release date and found that some model families lost substantial performance on problems published after their cutoffs. The same time-windowed scoring exposed overfitting to an older function-level suite, because models that scored well on it dropped on a fresh distribution. The discontinuity is stronger evidence than a memorization probe alone, because it connects temporal eligibility to the score being interpreted. It remains conditional on the accuracy of the disclosed cutoff and on the comparability of adjacent task windows.
+
+Repository-scale live collections provide directional support. Zhang et al.~(\href{https://arxiv.org/abs/2505.23419}{2025}) rebuilt the issue-to-environment recipe continuously, with a reproducible environment built per task, and reported that the same systems scored well below their results on a frozen suite. Badertdinov et al.~(\href{https://arxiv.org/abs/2505.20411}{2025}) ran a continuous collection pipeline with decontaminated evaluation and hedged that some models' frozen-suite scores may be inflated by contamination. Adamenko et al.~(\href{https://arxiv.org/abs/2507.11059}{2025}) described a continuously updated pipeline that draws on roughly 10,000 potential tasks and passes a small fraction of them through automated gates into the released benchmark. These results show that live evaluation is operationally possible and that frozen and fresh distributions can disagree. They do not isolate direct training exposure from changes in repositories, issue difficulty, or curation.
+
+A standing pipeline has four recurring jobs: gather new work, reconstruct a reproducible environment, reject invalid tasks, and publish results by time window. Failure in any stage can look like a model failure. A missing dependency lowers scores without establishing anything about capability. A permissive filter raises scores by admitting trivial tasks. A delayed ingestion process can place nominally new work behind a model's actual exposure. Freshness is therefore a property of the whole collection process.
+
+Automated gates make continuous collection affordable, but they are less discriminating than expert review. A window of a few hundred accepted tasks also produces wider uncertainty than a large fixed suite, especially when results are split by language or task type. The temptation is to combine windows until the interval narrows. Combining them can cross a model cutoff or merge meaningfully different task distributions, which removes the temporal property that justified the pipeline.
+
+The longitudinal trade is unavoidable. If Model A is evaluated in March and Model B in September, their eligible sets differ. If one fixed set is retained for both, it stops being post-cutoff for the later model. Rolling-window results should be the ones reported for current validity, and a fixed suite belongs beside them only when a trend line is necessary. The fixed series answers how systems change on one historical instrument. The rolling series answers how they perform on currently eligible work.
+
+Comparability needs its own audit. A dynamic benchmark introduces generators, source selection, filters, environment builders, and a refresh cadence, and each of those can change the score independently of the model. Chen et al.~(\href{https://arxiv.org/abs/2502.17521}{2025}) surveyed the shift from static to dynamic evaluation, identified the absence of standardized criteria for judging a dynamic benchmark, and proposed design principles for building one. Their principles are prescriptive rather than tested at scale. Three inspection questions follow from them for a reader assessing someone else's live result: how the pipeline enforces cutoff hygiene, what quality control runs on regenerated tasks, and how comparability across snapshots is accounted for. The word `live' supplies no evidence about any of those mechanisms.
+
+Temporal separation has two further limits. A model provider may have private prerelease access to material that becomes public later. The public timestamp can therefore follow actual exposure. Once a live window is released, later models can train on it and the window becomes historical. The pipeline preserves a moving boundary by continuing to collect tasks and applying eligibility per model. A benchmark does not stay clean permanently.
+
+In one of my evaluation frameworks, a pre-cutoff and post-cutoff split is written into every result record, keyed to repository creation date and model cutoff, with a warning above a five-percentage-point gap. Repository creation date is a coarser field than the eligibility rule above requires, because a repository can be created years before the issue that becomes the task. This illustrates a methodology and supplies no evidence that the threshold detects exposure. The warning has fired only on replayed fixtures and never on live data. Retaining the split permits recomputation when better dates or cutoff information arrive, while a single aggregate would require reconstruction.
+
+The companion catalog extends these two controls without turning them into one omnibus procedure. Its related entries cover memorization probes, semantic-overlap searches across paraphrases and translations, per-model and per-benchmark audits, and detector combinations chosen for a stated threat model. Other entries address anti-searchable task construction, protecting evaluation data at release, and attaching measured score benefit to a detector's finding. That last proposal has thin support. It remains a research direction and supplies no correction factor.
+
+\section{Make passing patches harder to preserve}\label{make-passing-patches-harder-to-preserve}
+
+A passing patch can fail to support the capability claim for three independent reasons, and they do not all fail in the same way. Training contamination means the model encountered evaluation material before the run. Solution leakage means the benchmark item included its answer during the run, in the issue text or in the comments. Those two can produce a correct patch while removing the grounds for attributing it to independent problem-solving. A weak oracle is the third defect, in which the tests cannot refute an incorrect patch, and only this one lets a wrong patch pass. The remedies are respectively temporal or access controls, removal of answer-bearing task material, and stronger tests.
+
+All three failures can produce a successful-looking transcript. A model may reproduce a reference patch it saw during training, copy an answer supplied in the prompt, or find a shortcut that satisfies shallow assertions. The final test process records the same state in each case: pass. Transcript inspection and contamination probes cannot compensate for a test suite that accepts wrong behavior, and added tests cannot establish whether the model recalled the right behavior.
+
+I therefore treat a passing patch as a hypothesis about correctness. The test oracle is the ordinary continuous-integration mechanism that decides whether the candidate passes or fails. Its strength is the range of plausible wrong behavior it can reject. A suite is stronger when it checks more of the behavior implied by the task, especially behavior that superficially reasonable patches get wrong.
+
+Function-level code generation provides a controlled example. Liu et al.~(\href{https://arxiv.org/abs/2305.01210}{2023}) expanded a widely used suite's tests by 80x with generated inputs and mutation-based cases. Across 26 models, the stronger suite reduced \href{mailto:pass@k}{\nolinkurl{pass@k}} by up to roughly 19 to 29 percent and reshuffled rankings. The models and the generated programs were held fixed. Only the set of observations used to decide correctness changed. The original ranking had partly measured which wrong programs happened to fit sparse tests.
+
+Repository-scale results show the same mechanism under more realistic state. Yu et al.~(\href{https://arxiv.org/abs/2506.09289}{2025}) augmented SWE-bench tests retroactively and found 36 under-tested tasks and 345 patches that had been labeled as passing incorrectly. Re-adjudication corrected 40.9 percent of entries on the smaller suite and 24.4 percent on the human-screened suite, changing 29 rankings. This was an audit of already reported results, so oracle weakness had propagated beyond individual tasks into system comparisons.
+
+The problem predates current coding models. Ye et al.~(\href{https://arxiv.org/abs/1909.13694}{2019}) generated random tests against a human reference patch and assessed 638 candidate patches from 14 repair systems. The added oracle improved automatic patch assessment by 190 percent over the prior methods used in that comparison. The historical context is useful because it locates the defect in test-based program repair itself. Generative models make candidate production faster and more varied, but shipped tests are not equivalent to a specification.
+
+Adversarial strengthening begins from the candidate failures a benchmark should reject. Construct plausible patches that implement only the common case, hard-code a fixture, change an unrelated return value, suppress an exception, or satisfy the visible assertion while violating the issue's broader contract. Then retain the tests that kill those patches. Yu et al.~(\href{https://arxiv.org/abs/2603.00520}{2026}) built suites that way, rejected 19.71 percent of patches that had passed previously, and reported a top score falling from 78.80 percent to 62.20 percent.
+
+\begin{figure}[htbp]
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Stronger oracles cut SWE-ABS from 78.80\% to 62.20\% and SWE-Bench+ resolution from 12.47\% to 3.97\%; 40.9\% corrections, 29 ranking changes, 80x test expansion, 19\% to 29\% pass@k reductions, 32.67\% leakage, and 31.08\% weak-test passes.}]{figures/ch03-oracle-strength.pdf}}
+\caption{Stronger oracles cut SWE-ABS from 78.80\% to 62.20\% and SWE-Bench+ resolution from 12.47\% to 3.97\%; 40.9\% corrections, 29 ranking changes, 80x test expansion, 19\% to 29\% \href{mailto:pass@k}{\nolinkurl{pass@k}} reductions, 32.67\% leakage, and 31.08\% weak-test passes.}
+\end{figure}
+
+Four audits test apparent benchmark success under stronger oracles; SWE-Bench+ covers one agent-model pair, so its percentages cannot estimate prevalence for other agents or models.
+
+This process searches a different space from ordinary coverage expansion. Generated inputs explore more executions of a trusted implementation. Mutation-based cases perturb code to reveal assertions that fail to notice behavioral changes. Differential tests run the candidate and a trusted reference on the same inputs, then compare the results. Wrong-patch construction starts from foreseeable shortcuts and asks whether the suite detects them. A strong audit combines these approaches, because each makes a different assumption about where missing behavior resides.
+
+The trusted reference is the central dependency. Random or generated tests need expected outputs, and differential testing needs behavior worth treating as ground truth. A human patch can contain unrelated changes or encode only one acceptable design. When the issue permits several implementations, exact agreement with that patch can reject valid alternatives. The evaluator must distinguish behavioral equivalence from textual or structural similarity, while accepting that some behavior remains underspecified.
+
+Manual review addresses failures that generated tests are unlikely to expose. Aleithan et al.~(\href{https://arxiv.org/abs/2410.06992}{2024}) screened the apparent SWE-bench successes of one agent and model pair and found that 32.67 percent involved solution leakage and 31.08 percent passed weak tests. Removing those cases dropped the reported resolution rate from 12.47 percent to 3.97 percent. The scope is one pair, and the percentages do not estimate the prevalence for other agents or models. They show that leakage and oracle weakness can occupy a large share of one system's credited successes.
+
+That study also clarifies why solution leakage belongs here. An issue may include the intended algorithm, a maintainer comment with the decisive condition, or a link to the merged fix. The model has legitimate access to that content during evaluation, so a training cutoff cannot remove it. If the deployment workload includes equally explicit issue discussions, retaining the material may be valid. If the benchmark claim concerns inferring fixes from ordinary bug reports, the leaked solution changes the task being measured.
+
+In my own audit of an enterprise-scale benchmark, I scored a null agent that merely repeated each instruction against every gradeable task. Some verifiers awarded the echo credit. One gave full marks because its checker searched for vocabulary that appeared in the prompt itself. An agent with no capability at all is a cheap adversary, and it found real defects. The audit supplies no capability estimate, but it demonstrates a useful attack. Submit candidates that contain task language without task behavior, then inspect every nonzero grade.
+
+Re-adjudication is the step that makes a strengthened oracle consequential. Run the stronger suite on stored patches from every system under comparison, including older submissions. Recompute \href{mailto:pass@k}{\nolinkurl{pass@k}}, rankings, paired differences, and any reward or release gate derived from the old labels. That recomputation has to start from the stored per-attempt outcomes rather than from a rescaling of the published rate, because \href{mailto:pass@k}{\nolinkurl{pass@k}} is estimated from attempts.
+
+Report the survival fraction, the number of tasks whose adjudication changed, and the uncertainty remaining after invalid tasks are removed. A suite that changes only one system's labels may expose a system-specific shortcut. Broad changes point toward a benchmark-level defect.
+
+Additional tests provide one-sided evidence. They can disprove more candidates by finding counterexamples. A surviving patch has resisted the tests run so far, but it has not been certified correct for every valid input and environment. That boundary is tighter for repository tasks, because their behavior depends on configuration, dependency versions, persistent state, concurrency, and interactions outside the changed function.
+
+Strengthening also has a coverage boundary. One of these efforts strengthened only about half of its benchmark instances. Its corrected rate remains an upper bound, because weak passes may persist in the untouched half and in behaviors the new tests still omit. Manual review is expensive, generation can reproduce assumptions embedded in the reference, and an adversarial patch set can miss shortcuts no one imagined.
+
+The practical stopping rule follows the decision being made. For a research comparison, sample-based manual review and broad generated augmentation may bound the inflation well enough to qualify the claim. A release gate on the reader's own repository requires closer alignment with the actual acceptance criteria and failure costs. In both settings, the evaluator should publish how many old passes survived. Reporting only the strengthened score hides the size and the location of the correction.
+
+\section{Move the instrument onto your work}\label{move-the-instrument-onto-your-work}
+
+When a public ranking conflicts with sustained field behavior, the first question is whether the two measurements represent the same work. The evidence behind this practice is the thinnest in the chapter. It rests on one directional, practitioner-authored production benchmark and two anecdotal practitioner accounts, with no strong item standing behind it. The prescription asks the reader to build and measure on the relevant workload. It supplies no vendor score to adopt.
+
+Construct validity asks whether an instrument measures the property named in the claim. Bean et al.~(\href{https://arxiv.org/abs/2511.04703}{2025}) used that question as the checklist for a systematic review of 445 benchmarks. A coding benchmark can measure repository issue resolution while offering weak evidence about migration work, security remediation, build repair, or long-running feature development. Passing tests establish performance on the sampled tasks under the specified harness. Generalizing that result to another workload requires a reason to believe the task distributions and operating conditions overlap.
+
+Public repository suites usually select work that can be reconstructed from visible artifacts. This favors languages with reproducible environments, projects with mature tests, issues linked cleanly to merged changes, and tasks short enough to run economically. A production workload may contain private dependencies, sparse tests, organization-specific conventions, partial requirements, abandoned attempts, incident response, and changes whose value appears weeks later. The public suite can be carefully built and still omit the state transitions that dominate the deployment.
+
+Construction should start with the work product and trace backward. For a coding assistant, candidate tasks include production prompts, accepted changes, review outcomes, and the tests associated with completed work. The evaluation record should preserve the repository state available at task start, the instruction as received, the permitted context and tools, and the evidence that caused the organization to accept the result. Other domains need their own decision sequence and artifacts. A general reasoning proxy omits that structure.
+
+Jha et al.~(\href{https://arxiv.org/abs/2604.01527}{2026}) demonstrated one curation approach for a production-derived benchmark. They built tasks from sessions with their own coding assistant, classified the work, checked that tests were relevant to each task, and required stability across repeated runs. This is directional evidence from one vendor's environment. It shows that production traces can be converted into repeatable tasks. It does not establish that the resulting distribution represents another organization, or even every kind of work inside the source organization.
+
+The two anecdotal accounts identify transfer failures worth testing. Bytesfortruth (\href{https://www.reddit.com/r/compsci/comments/1rqcmu8/}{2026}), a lending-domain practitioner, reported that a model near the 90th percentile on a general-reasoning measure failed basic mortgage-underwriting tasks, and that rankings changed considerably on a domain-lifecycle evaluation. The account covers one team and reports no failure frequencies. It establishes one transfer failure and supplies no population rate for domain mismatch.
+
+In the second account, a headline coding benchmark and a long-horizon evaluation disagreed about a model, and swyx (\href{https://x.com/swyx/status/2011344788486774942}{2026}) reported that later developer experience followed the construct-matched long-horizon result. This is retrospective interpretation from one observer. It supports the choice of a hypothesis to test. Evaluations that preserve task duration and acceptance conditions may predict field experience better than short public tasks.
+
+The task-sampling frame should follow the deployment claim. A tool meant to fix failing tests needs a distribution of actual failures, including the hard and unresolved ones. A tool meant to draft small maintenance changes needs accepted small changes plus representative rejections. Mixing those claims into one private score recreates the ambiguity of a general leaderboard under local ownership.
+
+In my own work, I built CodeProbe (\href{https://github.com/sjarmak/codeprobe}{public repository}) to mine evaluation tasks from a repository's merged pull requests. It keeps the instruction separate from the recorded ground-truth commit and uses the test files touched by the original change as the verification command. That design turns completed work into replayable cases without exposing the recorded solution to the candidate. It is a methodology illustration and carries the same oracle caveat as any test-derived benchmark. The tests a merged change happened to touch are candidate historical checks, not a certification that the recorded solution was correct.
+
+Merged history is a selective record. Language filters and minimum-file thresholds exclude some changes before sampling begins. Requiring touched tests favors well-instrumented code, while abandoned work and incidents may leave no merge to mine. The resulting set is closer to the repository's accepted work by construction, but its representativeness remains bounded by what the workflow recorded and what the miner can reconstruct.
+
+Consent and data handling also constrain the instrument. Production prompts can contain customer data, credentials, internal incidents, or employee-authored material collected for a different purpose. Redaction may remove the context that made a task difficult. Broad access may create a new exposure path. A private evaluation program therefore needs explicit collection authority, access controls, retention rules, and a record of who has seen each task.
+
+Long-horizon outcomes create a different measurement problem. A patch can pass today and produce maintenance cost later, and a generated migration can complete while leaving operational cleanup for another team. These labels arrive slowly and contain organizational noise. Pairing offline task results with later online outcomes helps test whether the local instrument predicts the field, though sparse failures make tail estimates unstable.
+
+When public and local results disagree, the instrument whose construction supports the deployment claim is the better guide. That ordering is conditional. A small private set with weak tests can be less informative than a mature public suite. A small private set also inherits the resolution limits from Chapter 1, and with a few dozen tasks, differences smaller than its minimum detectable effect are not reliably distinguishable from noise. The local set earns priority by preserving relevant work and surviving repeated measurement. Privacy alone does not add validity.
+
+A locally mined task set is also the raw material for the release instrument in Chapter 4, which curates a subset of these tasks into a golden set, replays it for each release, and attaches an executable gate.
+
+The companion catalog carries the remaining validity checks. They include real temporal holdouts for agent benchmarks, pinned evaluation apparatus and published scored artifacts, ranking stress tests under perturbation, invalid-item purges, and audits of leaderboard submission protocols and questionable research practices. It also includes construct-validity checks, code-benchmark review against defect taxonomies, searches for an adequate benchmark before building one, and paired offline and online evaluation. The proposals on score-anchored contamination metrics, submission-protocol audits, and defect-taxonomy vetting have thin support and supply no evidence for any claim in this chapter.
+
+\section{Discount the next public number}\label{discount-the-next-public-number}
+
+The next time you encounter a public benchmark number, identify the answers to these 4 questions before using it.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  How old are the tasks relative to this model's training cutoff? Look for a public-versus-matched gap measured on this model. Do not substitute the leaderboard average or another model's audit.
+\item
+  How strong is the test oracle? Ask whether anyone augmented the tests, constructed adversarial wrong patches, or manually screened apparent successes. The useful result is the fraction of previous passes that survived.
+\item
+  Who produced the number, on which harness, with what task distribution? Compare the languages, prompt forms, repository structures, time horizons, context, and acceptance criteria against the work you need done.
+\item
+  What does the same protocol report on tasks mined from your team's merged work? Preserve the original instruction, pre-change state, acceptance evidence, and repeated-run uncertainty.
+\end{enumerate}
+
+These answers do not yield a universal correction formula. They turn one impressive-looking score into a bounded claim: performance by a named system, under a named apparatus, on work with a known exposure history, judged by tests with observed power to reject wrong patches. The local replay tests that claim on the work the system will actually be asked to do.
+
+\section*{Sources and evidence}
+
+The evidence grouping on each entry below comes from its catalog record. Author-system cases in this chapter are narrative and methodology illustrations, not evidence. They support no empirical claim or capability number.
+
+\textbf{Opening scene}
+
+\begin{itemize}
+\tightlist
+\item
+  OpenAI, ``Why we no longer evaluate SWE-bench Verified,'' 2026-02-20, \url{https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified}. {[}Corroborating evidence{]}
+\item
+  swyx, ``SWE-Bench Verified is dead!!'', 2026-02-23, breakdown of the OpenAI audit. {[}Corroborating evidence{]} Source of the 16.4\% full-set figure, which is derived from the audited sample and does not appear verbatim in the post summary.
+\item
+  Tejal Patwardhan, public statement on frontier evaluations, 2026-06-16: ``saturated or gamed.'' {[}Corroborating evidence{]}
+\item
+  SWE-bench Verified card: 500 instances, 93 professional screeners. {[}Benchmark record{]}
+\end{itemize}
+
+\textbf{Measure public-score inflation with matched controls}
+
+\begin{itemize}
+\tightlist
+\item
+  Prathifkumar, Saji Mathews \& Nagappan (2025), arXiv:2512.10218, Waterloo. {[}Directional evidence{]}
+\item
+  Zhang, H. et al.~(2024), GSM1k, arXiv:2405.00332, Scale AI. {[}Strong evidence{]}
+\item
+  Haimes, Wenner et al.~(2024), arXiv:2410.09247, Apart Research. {[}Strong evidence{]}
+\item
+  Corroboration: none on record.
+\end{itemize}
+
+\textbf{Evaluate on post-cutoff tasks}
+
+\begin{itemize}
+\tightlist
+\item
+  Jain et al.~(2024), arXiv:2403.07974, LiveCodeBench, ICLR 2025. {[}Strong evidence{]}
+\item
+  Zhang, L. et al.~(2025), SWE-bench Goes Live!, arXiv:2505.23419, Microsoft Research. {[}Directional evidence{]}
+\item
+  Adamenko et al.~(2025), arXiv:2507.11059, SWE-MERA. {[}Directional evidence{]}
+\item
+  Badertdinov et al.~(2025), arXiv:2505.20411, SWE-rebench, Nebius. {[}Directional evidence{]}
+\item
+  Chen, S. et al.~(2025), arXiv:2502.17521, static-to-dynamic benchmark survey. {[}Directional evidence{]}
+\end{itemize}
+
+\textbf{Strengthen test oracles before adjudication}
+
+\begin{itemize}
+\tightlist
+\item
+  Liu, Xia, Wang \& Zhang (2023), arXiv:2305.01210, HumanEval+ / EvalPlus, NeurIPS 2023. {[}Strong evidence{]}
+\item
+  Yu, S. et al.~(2025), arXiv:2506.09289, UTBoost. {[}Strong evidence{]}
+\item
+  Ye, Martinez \& Monperrus (2019), arXiv:1909.13694. {[}Strong evidence{]}
+\item
+  Aleithan et al.~(2024), arXiv:2410.06992, SWE-Bench+. {[}Directional evidence{]}
+\item
+  Yu, B. et al.~(2026), arXiv:2603.00520, SWE-ABS. {[}Strong evidence{]}
+\end{itemize}
+
+\textbf{Benchmark on your own workload}
+
+\begin{itemize}
+\tightlist
+\item
+  Jha, Paltenghi, Maddila, Murali, Ugare, and Chandra (2026), \emph{REAP: Automatic Curation of Coding Agent Benchmarks from Interactive Production Usage}, arXiv:2604.01527; the resulting benchmark is Harvest. {[}Directional evidence{]} The title and benchmark name were verified against the arXiv record on 2026-07-29; earlier working records used the name ProdCodeBench.
+\item
+  Bytesfortruth (2026), lending-domain benchmark account, r/compsci, 2026-03-10, \url{https://www.reddit.com/r/compsci/comments/1rqcmu8/}. {[}Corroborating case{]}
+\item
+  swyx (2026), long-horizon evaluation account, X, 2026-01-14, \url{https://x.com/swyx/status/2011344788486774942}. {[}Corroborating case{]}
+\item
+  Bean, A.M. et al.~(2025), Measuring what Matters, arXiv:2511.04703. {[}Directional evidence{]} Carried in the companion catalog as the construct-validity record; named inline for the construct-validity definition that opens this section.
+\end{itemize}
+
+\textbf{Author-system illustration cited inline}
+
+\begin{itemize}
+\tightlist
+\item
+  Not an evidence item: CodeProbe, the author's task-mining evaluation tool, \href{https://github.com/sjarmak/codeprobe}{public repository}. Named inline for the merged-pull-request mining design described above, which is methodology illustration.
+\end{itemize}
