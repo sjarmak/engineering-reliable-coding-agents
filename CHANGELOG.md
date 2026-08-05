@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.0.0-rc.4 — 2026-08-05
+
+- Added the review method, evidence-grading rules, practice-selection process,
+  and explicit limitations to the manuscript introduction.
+- Moved the reliability dependency chain into the introduction and added its
+  temporal-orchestration-style figure.
+- Standardized the work's identity as a technical review and engineering
+  monograph, compressed repeated evidence caveats, and marked Part VI as the
+  most transfer-heavy section.
+- Corrected section numbering, citation metadata, academic register, list
+  spacing, and the Chapter 9 figure rendering.
+- Replaced the generic recall-depth figure, expanded the bibliography to 185
+  entries, and linked the repository, interactive companion, web edition, and
+  five reusable agent skills from the manuscript.
+
 ## 1.0.0-rc.3 — 2026-08-05
 
 - Added five reusable agent skills for evaluation design, end-to-end testing,

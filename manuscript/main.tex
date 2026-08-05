@@ -29,14 +29,17 @@
 
 \setlength{\emergencystretch}{6em}
 \setlength{\parindent}{1.25em}
-\setlength{\parskip}{0pt}
+\setlength{\parskip}{0.08\baselineskip plus 0.03\baselineskip minus 0.02\baselineskip}
 \setcounter{secnumdepth}{2}
 \setcounter{tocdepth}{1}
+\makeatletter
+\renewcommand*\l@section{\@dottedtocline{1}{1.5em}{3.3em}}
+\makeatother
 \setlist{
-  topsep=0.45\baselineskip,
-  partopsep=0.12\baselineskip,
-  itemsep=0.12\baselineskip,
-  parsep=0pt
+  topsep=0.62\baselineskip,
+  partopsep=0.18\baselineskip,
+  itemsep=0.16\baselineskip,
+  parsep=0.04\baselineskip
 }
 \setcounter{topnumber}{3}
 \setcounter{bottomnumber}{2}
@@ -54,7 +57,7 @@
 \pagestyle{plain}
 
 \providecommand{\tightlist}{%
-  \setlength{\itemsep}{0.10\baselineskip}\setlength{\parskip}{0pt}}
+  \setlength{\itemsep}{0.16\baselineskip}\setlength{\parskip}{0.04\baselineskip}}
 \newcommand{\pandocbounded}[1]{%
   \begingroup
   \setbox0=\hbox{#1}%

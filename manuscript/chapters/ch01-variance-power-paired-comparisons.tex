@@ -2,11 +2,11 @@
 \label{ch01-variance-power-paired-comparisons}
 \section{One run is one draw}\label{one-run-is-one-draw}
 
-I created an evaluation tool called CodeProbe (\href{https://github.com/sjarmak/codeprobe}{public repository}) that mines tasks from a repository's merged pull requests. In one of my runs using the tool it had reported that one configuration led another by +0.054 on a task family, and a single task accounted for most of that gap with a +0.300 advantage. This seemed reasonable, nothing about the run was `wrong', and the scoring code returned a number precise to three decimal places. I could easily have written the larger score up as a win.
+I created an evaluation tool called CodeProbe (\href{https://github.com/sjarmak/codeprobe}{public repository}) that mines tasks from a repository's merged pull requests. In one run, one configuration led another by +0.054 on a task family, with a single task contributing a +0.300 advantage. The scoring code reported three decimal places, but the experiment contained no repeated runs from which to estimate stability.
 
-But, in my stubborn scientific ways, I reran the family instead, three times per configuration. The difference fell to +0.0035, with a 95\% \textbf{confidence interval}, the range produced by a procedure that covers the true value in 95\% of repeated experiments, running from -0.0005 to +0.0074. The five tasks in the family were the paired units: the three repeats collapsed into one per-configuration score for each task, leaving five paired observations and 4 degrees of freedom. The paired t statistic of 2.41 fell below the critical value of 2.776, so the result was the semi-dreaded `not significant'. The task that had appeared to improve by +0.300 came back at exactly 0.000, with both configurations scoring 0.800 on every repeat.
+I reran the family three times per configuration. The difference fell to +0.0035, with a 95\% \textbf{confidence interval}, the range produced by a procedure that covers the true value in 95\% of repeated experiments, from -0.0005 to +0.0074. The five tasks were the paired units: the three repeats were collapsed into one score per configuration for each task, leaving five paired observations and 4 degrees of freedom. The paired t statistic of 2.41 fell below the critical value of 2.776. The task that had appeared to improve by +0.300 returned a difference of 0.000, with both configurations scoring 0.800 on every repeat.
 
-Those reruns showed that the original observation could not justify a claim that would have been easy to make. One bad baseline score created the outlier, and the outlier disappeared once the trial was repeated. Three decimal places of `precision' is meaningless with a single run, and it describes the format of the number while indicating nothing about the stability of the process that produced it.
+The original observation could not support a configuration-level effect. One unusually low baseline score created the apparent advantage, and it disappeared under repetition. The three-decimal display described the representation of the score, not the stability of the process that produced it.
 
 This task family scores through a deterministic test-suite oracle, under which the end state either passes the fixed tests or does not. That oracle collapses different trajectories onto the same score, so the tight repeat scores are a certification of scorer stability rather than agent determinism. The conclusion covers these five fixed tasks and no wider population.
 
@@ -207,8 +207,6 @@ When a provider exposes no stable model version, I record the evaluation window 
 The observed difference belongs beside the complete run distribution and the engineering threshold written before execution. I do not credit a difference that remains smaller than the measured variation. I return no verdict when the experiment lacked the power to resolve the difference that would have changed the decision.
 
 \section*{Sources and evidence}
-
-The evidence grouping on each entry below comes from its catalog record. Author-system cases in this chapter are narrative illustration and are not part of the evidence base.
 
 \textbf{Never report a single run}
 

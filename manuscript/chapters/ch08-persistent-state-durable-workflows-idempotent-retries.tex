@@ -2,7 +2,7 @@
 \label{ch08-persistent-state-durable-workflows-idempotent-retries}
 Netflix reported losing roughly 4 percent of its cloud-operations deployments to transient failures even though the service already contained homegrown retries and compensating-transaction logic. Meyers and Zienert (\href{https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953}{2025}) state that the team moved coordination into a stateful service that records progress and reissues work after failure. The reported failure rate fell to 0.0001 percent, and the team deleted the orchestration code the service replaced. This vendor-adjacent account comes from the adopting team and was not independently audited, although it provides concrete details about the migration and observed change.
 
-That account is the only strong evidence item in this chapter. Historical surveys, systems papers, self-evaluated systems, and practitioner reports provide the rest, and the evidence record contains no controlled experiment on agents. I therefore make a narrow design argument and prescribe explicit artifacts, ownership boundaries, and failure checks. None of the practices depends on a numerical threshold.
+That account is the chapter's only strong evidence item. Historical surveys, systems papers, self-evaluated systems, and practitioner reports provide the rest; none supplies a controlled experiment on agents. The argument is therefore limited to explicit artifacts, ownership boundaries, and failure checks rather than numerical thresholds.
 
 An agent that dies after step nine of a fourteen-step run presents the same coordination problem at a smaller scale. The process has disappeared, but its completed work and external effects may remain. \textbf{Durable execution} is the ability of a run to survive process death and resume from recorded progress without repeating effects already completed. That property requires explicit state, a coordinator that owns recovery once coordination becomes complex, and retryable steps whose repeated execution does not repeat their effects.
 
@@ -10,9 +10,7 @@ The difficult case is a process that changes the world and dies before recording
 
 \section{Declare the state that outlives the worker}\label{declare-the-state-that-outlives-the-worker}
 
-Consider the step-nine failure when no completion record reached durable storage. The first eight results may exist only in the lost context, while the ninth step may already have changed an external system. Support for this section comes from historical inference in stream-processing research, self-evaluated systems, and practitioner accounts. No controlled experiment establishes the result for agents.
-
-Persisted run state is the substrate from which recovery operates. The evidence does not establish how reliably this design works across open-ended agent workloads. I therefore treat explicit state as an architectural boundary to test rather than as a measured guarantee of successful recovery.
+Consider the step-nine failure when no completion record reached durable storage. The first eight results may exist only in the lost context, while the ninth step may already have changed an external system. Historical stream-processing research, self-evaluated systems, and practitioner accounts support explicit state as an architectural boundary to test, not as a measured guarantee across open-ended agent workloads.
 
 The first design decision is what counts as control state. The current plan records intended work. Progress records which subset has been accepted as complete. Plans change through explicit revisions. Progress advances through named steps and carries the evidence required to accept each transition.
 
@@ -209,8 +207,6 @@ On recovery, the run should do one of three things: return the previously record
 Recorded state makes a run resumable. Chapter 9 makes the recovery claim replayable and puts it under measurement.
 
 \section*{Sources and evidence}
-
-The evidence grouping on each entry below comes from its catalog record. Author-system cases in this chapter are narrative illustration and are not part of the evidence base.
 
 \textbf{Make agent state a first-class persistent artifact}
 

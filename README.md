@@ -3,8 +3,8 @@
 *Evaluation, Recovery, Context, and Control Beyond the Model*
 
 This repository contains the manuscript source and companion research artifact
-for Stephanie Jarmak's technical review of the evaluation, operation, and
-governance of AI coding-agent systems.
+for Stephanie Jarmak's technical review and engineering monograph on the
+evaluation, operation, and governance of AI coding-agent systems.
 
 The review treats coding agents as systems rather than isolated models. Its
 contributions include an evidence audit, a catalog of 192 bounded engineering
@@ -16,7 +16,7 @@ fault-testing protocols.
 
 | Path | Contents |
 | --- | --- |
-| [`manuscript/`](manuscript/) | Complete, compilable LaTeX source with 18 chapters, closing chapter, 19 figures, and 182 references |
+| [`manuscript/`](manuscript/) | Complete, compilable LaTeX source with 18 chapters, closing chapter, 19 figures, and 185 references |
 | [`companion/`](companion/) | Human-readable learnings plus the machine-readable practice catalog, evidence ledger, chapter crosswalk, benchmark catalog, schemas, checksums, citation metadata, and provenance |
 | [`skills/`](skills/) | Five reusable agent skills derived from the evaluation, verification, failure-analysis, and durable-execution practices |
 | [`CITATION.cff`](CITATION.cff) | Repository-level citation metadata |
@@ -36,7 +36,7 @@ cd manuscript
 tectonic main.tex
 ```
 
-The generated PDF is 251 pages on US letter paper. The source uses standard
+The generated PDF is 262 pages on US letter paper. The source uses standard
 LaTeX packages and contains all required figures locally.
 
 ## Validate the companion
@@ -81,6 +81,6 @@ system before use.
 
 ## Release status
 
-The files currently represent the `1.0.0-rc.3` release candidate prepared on
+The files currently represent the `1.0.0-rc.4` release candidate prepared on
 August 5, 2026. The archival DOI and final license choices must be recorded
 before the first stable release and arXiv submission.

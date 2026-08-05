@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T18:50:12.603Z",
+  "generated_at": "2026-08-05T21:28:59.710Z",
   "arxiv": [
     {
       "id": "1503.07170",
@@ -5732,6 +5732,13 @@
       "title": "GitHub - sjarmak/codeprobe: Turn a repository's merged pull requests into coding-agent evaluations, then measure the whole agent setup (model, tools, retrieval, cost, harness) against them. Python CLI, on PyPI. · GitHub"
     },
     {
+      "url": "https://github.com/sjarmak/engineering-reliable-coding-agents",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://github.com/sjarmak/engineering-reliable-coding-agents",
+      "title": "GitHub - sjarmak/engineering-reliable-coding-agents · GitHub"
+    },
+    {
       "url": "https://martinfowler.com/articles/exploring-gen-ai/context-engineering-coding-agents.html",
       "status": "resolved",
       "http_status": 200,
@@ -5749,7 +5756,7 @@
       "url": "https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953",
       "status": "resolved",
       "http_status": 200,
-      "final_url": "https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953?gi=030347a2d540",
+      "final_url": "https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953?gi=02a9a7c93866",
       "title": "Medium"
     },
     {
@@ -5782,16 +5789,30 @@
     },
     {
       "url": "https://rss.xcancel.com/GergelyOrosz/status/2077434907274428914",
+      "status": "request_error",
+      "http_status": null,
+      "final_url": null,
+      "title": null
+    },
+    {
+      "url": "https://sjarmak.ai/books/engineering-reliable-coding-agents",
       "status": "resolved",
       "http_status": 200,
-      "final_url": "https://xcancel.com/GergelyOrosz/status/2077434907274428914",
-      "title": "Verifying your browser…"
+      "final_url": "https://www.sjarmak.ai/books/engineering-reliable-coding-agents",
+      "title": "Engineering Reliable Coding Agents: Evaluation, Recovery, Context, and Control Beyond the Model — Stephanie Jarmak"
+    },
+    {
+      "url": "https://sjarmak.ai/books/engineering-reliable-coding-agents/companion",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://www.sjarmak.ai/books/engineering-reliable-coding-agents/companion",
+      "title": "Companion catalog · Engineering Reliable Coding Agents — Stephanie Jarmak"
     },
     {
       "url": "https://tech.instacart.com/blueberry-force-multiplier-for-the-on-call-engineer-98c446dfcc12",
       "status": "resolved",
       "http_status": 200,
-      "final_url": "https://tech.instacart.com/blueberry-force-multiplier-for-the-on-call-engineer-98c446dfcc12?gi=ac4aa4a8b360",
+      "final_url": "https://tech.instacart.com/blueberry-force-multiplier-for-the-on-call-engineer-98c446dfcc12?gi=c2249832d06a",
       "title": "Medium"
     },
     {

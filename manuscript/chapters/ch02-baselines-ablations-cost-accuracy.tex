@@ -8,7 +8,7 @@ Those results do not establish the same conclusion for repository-scale engineer
 
 That omission changes the claim. A system with memory, retrieval, tools, or multiple agents may score higher than a direct model call. The score alone cannot tell us whether the added machinery caused the gain, whether another model call would have produced the same gain, or whether the comparison spent more until it found more successful samples. Engineering selection requires two coordinates: what the system accomplishes and what it consumes.
 
-The evidence base for this chapter is narrow. It holds five items across two developed practices. Four of them are source syntheses, and none of those four is a controlled experiment. One practice has no strong evidence item. I therefore use the evidence to specify comparisons readers can run on their own workloads. The record cannot support a universal cost threshold or a recommended architecture.
+The available evidence supports comparison design rather than a universal cost threshold or recommended architecture. The chapter therefore develops controls that readers can run on their own workloads.
 
 An elaborate system is worth keeping only when both comparisons support it. Its components must contribute something that remains when the rest of the experiment is held fixed, and the full configuration must beat the simple alternatives at a cost the operator is willing to pay. These are separate tests. Component removal addresses causal attribution. Direct-call and retry baselines address engineering value.
 
@@ -16,7 +16,7 @@ An elaborate system is worth keeping only when both comparisons support it. Its 
 
 An \textbf{ablation} removes one component and reruns the evaluation with the rest of the system and procedure held fixed. If a memory-enabled agent outperforms an agent without memory, the missing-memory arm estimates what the memory system contributed. If the comparison changes the model, prompt, task subset, token budget, harness version, or scoring procedure at the same time, the subtraction no longer isolates memory. It measures an unspecified bundle of changes. Without the missing-component arm, base-model capability and item difficulty remain plausible explanations for the observed score.
 
-The evidence for this practice is source synthesis, which the evidence audit retained as strong although no single controlled experiment supplies the support. The same control logic appeared independently in two corpora. In agent memory, the spine of that synthesis is SkillEvolBench, from Lei et al.~(\href{https://arxiv.org/abs/2605.24117}{2026}). In code retrieval, CoIR, from Li et al.~(\href{https://arxiv.org/abs/2407.02883}{2024}), supplies only the task and metric substrate, and the control logic below comes from the synthesis's evaluation-design blocks rather than from that benchmark paper. The provenance is imperfect, because the memory synthesis named three works behind a single carried identifier before that record was split. Two of the three are now carried at directional strength with no figure of their own. The support rests on convergence between the corpora rather than on one reported effect size.
+The component controls recur in two source corpora. SkillEvolBench, from Lei et al.~(\href{https://arxiv.org/abs/2605.24117}{2026}), reports no-skill and raw-trajectory controls for agent memory. CoIR, from Li et al.~(\href{https://arxiv.org/abs/2407.02883}{2024}), supplies the task and metric substrate for code retrieval, while the no-tool control comes from the associated evaluation-design synthesis. These sources support narrower measurements in their own settings; neither tests the complete repository-scale prescription developed here. Their convergence motivates the protocol, while the generalized recommendation remains directional.
 
 Memory requires at least three arms. The first is the proposed memory system. The second is the no-skill control, which removes the written memory entirely. The third reuses the raw trajectory from prior work without asking a writer to consolidate it into a skill or memory record. The no-skill arm tests whether prior experience helps at all. The raw-trajectory arm tests whether the consolidation mechanism adds anything beyond retaining the original evidence.
 
@@ -123,8 +123,6 @@ Carry the per-task record from Chapter 1 into the cost analysis. For every arm, 
 Reserve the iteration holdout before the first scaffold change. Decide who can inspect it, when it can be opened, which aggregate results will be returned, and what event ends the comparison. Once developers have used its failures to revise the system, it has become development material. The boundary cannot be created retroactively around tasks the team has already learned to optimize.
 
 \section*{Sources and evidence}
-
-The evidence grouping on each entry below comes from its catalog record. Author-system cases in this chapter are narrative illustration and are not part of the evidence base.
 
 \textbf{Run ablation controls}
 

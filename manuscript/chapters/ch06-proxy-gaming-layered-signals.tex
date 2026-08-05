@@ -4,7 +4,7 @@
 
 CodeProbe (\href{https://github.com/sjarmak/codeprobe}{public repository}) scores agent runs on tasks mined from our own repositories. For one day, its scorer included a recall-family reward under which an agent could earn a ``perfect'' 1.0 by returning the entire repository. A response containing everything cannot omit a relevant item. The strategy was degenerate, but it was correct under the proxy because recall measures how much relevant material was returned and ignores how much irrelevant material accompanied it.
 
-We shipped that reward family and retracted it the next day, which was one day later than I would have preferred.
+The reward family was withdrawn the following day after the degenerate optimum was identified.
 
 The replacement default scores overlap F1 against the oracle set. F1 penalizes both omitted relevant material and returned irrelevant material, so returning the entire repository no longer earns 1.0. The recall family remains available only through explicit per-task opt-in.
 
@@ -199,8 +199,6 @@ The rebuilt path will still make mistakes. Its advantage is that signals owned a
 Part III begins at that observable boundary and turns to containing what happens after an agent crosses it.
 
 \section*{Sources and evidence}
-
-The evidence grouping on each entry below comes from its catalog record. Author-system cases in this chapter are narrative illustration and are not part of the evidence base.
 
 \textbf{Layer signals beyond a single proxy}
 

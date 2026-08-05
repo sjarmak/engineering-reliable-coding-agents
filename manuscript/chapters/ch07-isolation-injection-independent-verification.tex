@@ -2,9 +2,7 @@
 \label{ch07-isolation-injection-independent-verification}
 In spring 2026, a practitioner reported on a public forum that an agent deleted a production database in nine seconds. The backups could not be recovered because the same credentials reached both the live database and the backup store. This is a self-reported incident rather than a verified reconstruction. The public record does not establish the exact command sequence, the surrounding controls, or whether every contributing condition was identified.
 
-The containment evidence available for this chapter consists of incident reports and accounts from individual organizations. It contains no controlled comparison of the three practices developed here, and none of those practices has a strong-graded evidence item behind it.
-
-Evidence strength and operational urgency were nearly uncorrelated in the source corpus. Weak evidence about how often a failure occurs does not make an already exposed production boundary less urgent. Because the record cannot support a numerical target, each practice below is framed as a boundary to move or a check to run. Each resolves to an observation a reader can make against a live system.
+The containment evidence available for this chapter consists of incident reports and accounts from individual organizations; it contains no controlled comparison of the three practices developed here. Across the 52 practices ranked by operational consequence during selection, rank and the presence of strong evidence had a Spearman correlation of -0.004. Sparse prevalence evidence therefore does not resolve the urgency of an exposed production boundary. The practices below specify observable boundaries and checks rather than unsupported numerical targets.
 
 The incident raises two immediate questions: what could the agent reach, and what could reach the agent? Its identity could reach both the live store and the material needed to recover from losing it. An instruction stream that the public account neither reconstructed nor audited could reach the agent. A third question appears later, when the system reports what it believes it did: what evidence would show that the report is true?
 
@@ -228,8 +226,6 @@ Finally, select one recent completion claim and verify it against the workspace 
 Containment limits the damage a live process can cause. Chapter 8 turns to what must survive when that process dies.
 
 \section*{Sources and evidence}
-
-The evidence grouping on each entry below comes from its catalog record. The author-system cases in this chapter are narrative illustration. They show implementation choices and control boundaries, and they do not independently support the chapter's empirical or theoretical claims.
 
 \textbf{Contain agent blast radius}
 

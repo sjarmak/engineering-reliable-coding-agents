@@ -8,23 +8,77 @@ The visible output is code; the uncertainty around its quality resides in the sy
 
 These functions interact. A higher score can result from an easier test rather than a better system. A reviewer can appear ineffective because the interface concealed the evidence needed for judgment. Instrumentation can record component failures while missing failures at component boundaries. A recovery procedure can pass while depending on credentials whose compromise would also destroy the recovery path.
 
-This report examines the evaluation, operation, and governance of AI coding-agent systems. It focuses on mechanisms that remain relevant as models and products change: measurement design, execution-based grading, containment, durable state, recovery, repository retrieval, context limits, human oversight, topology, and resource allocation. It does not compare current models or teach prompt and tool-schema design.
+This technical review and engineering monograph examines the evaluation, operation, and governance of AI coding-agent systems. It focuses on mechanisms that remain relevant as models and products change: measurement design, execution-based grading, containment, durable state, recovery, repository retrieval, context limits, human oversight, topology, and resource allocation. It does not compare current models or teach prompt and tool-schema design.
 
-The intended reader is a software engineer who operates or evaluates coding agents and may be new to evaluation methodology. The practices are not universal rules. Their applicability depends on workload, permissions, failure costs, deployment conditions, and available review capacity.
+The intended reader is a software engineer who operates or evaluates coding agents and may be new to evaluation methodology. The practices are bounded engineering claims rather than universal rules. Their applicability depends on workload, permissions, failure costs, deployment conditions, and available review capacity.
+
+\section{The reliability dependency chain}\label{the-reliability-dependency-chain}
+
+The organizing argument is a dependency chain. Measurement determines whether a difference is credible. Grading converts observations into acceptance decisions. Containment and recovery determine whether the resulting execution record survives failure without extending authority. Retrieval and context determine which evidence reaches the agent. Review and accountability determine who can challenge the result and who controls the consequential transition. Allocation and cost determine which system receives future work.
+
+Each layer determines what the next may trust. A weak measurement can become a confident grade; a weak grade can admit unsafe work; an incomplete recovery record can enter retrieval as if it were complete; missing context can make review appear ineffective; and an invalid review signal can steer more work toward the wrong configuration. Downstream confidence cannot repair evidence lost upstream.
+
+\begin{figure}[htbp]
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={The reliability dependency chain runs from measurement through grading, containment and recovery, retrieval and context, review and accountability, and allocation and cost. Each layer supplies the evidence boundary on which the next relies.}]{figures/dependency-chain.pdf}}
+\caption{The reliability dependency chain runs from measurement through grading, containment and recovery, retrieval and context, review and accountability, and allocation and cost. Each layer supplies the evidence boundary on which the next relies.}
+\end{figure}
+
+The six parts follow this order. It is not a progression from easy to difficult. It is an account of how an apparently local defect can propagate into later operational decisions while retaining the appearance of a clean score, verdict, or artifact.
 
 \section{Method, scope, and evidence classification}\label{method-scope-and-evidence-classification}
 
-The source collection combines 118 scholarly works organized into seven topic-specific review threads, 91 practitioner records, 29 benchmark records, and 17 author-system case records. Searches were organized around evaluation validity, grading, containment and recovery, context and memory, oversight, multi-agent design, and scheduling. Candidate sources were retained when they described a measured result, a reproducible system mechanism, an operational incident, or a concrete practice relevant to coding-agent reliability. The review is structured rather than exhaustive; it does not claim complete coverage of every adjacent literature.
+\section{Search and source assembly}\label{search-and-source-assembly}
 
-Evidence is reported in four reader-facing groups. \textbf{Strong evidence} directly supports the stated claim through a controlled comparison, validated benchmark result, or comparably specific measurement. \textbf{Directional evidence} supports the mechanism or direction of a claim but does not establish its magnitude or broad transfer. \textbf{Corroborating evidence} consists of case reports, practitioner accounts, or convergent observations that establish plausibility without estimating prevalence. \textbf{Null or conflicting evidence} records a result that did not support the expected effect or that materially limits another claim.
+The review was consolidated on July 26, 2026. The source collection contains 118 scholarly works organized into seven topic-specific threads, 91 practitioner records, 29 benchmark records, and 17 author-system case records. The seven scholarly threads cover benchmark validity, failure taxonomy, evaluation statistics, oversight and accountability, context and retrieval, durable execution, and scheduling with repository-scale scoping.
 
-Each evidence item was assigned a strength independently of its publication venue. Strong classifications were rechecked against the underlying source and retained only when the reported design and result supported the practice's own claim. Directional classifications were used when the source supported a mechanism, threat model, or comparison design but not the full recommendation. Case reports were kept as corroboration and are identified as such. The source notes preserve null and countervailing findings rather than treating absence of support as support for the opposite conclusion.
+Scholarly retrieval used hybrid keyword and semantic searches over a 32-million-record corpus containing NASA ADS and an arXiv mirror. Queries were scoped by topic, arXiv subject class, and year where appropriate. Each thread combined seminal work with recent agent-era research. Candidate records were checked through a metadata lookup, and full text was read when the corpus provided it and the claim required more than the abstract. A citation audit then added a seventh thread for scheduling and repository-scoping sources that had entered the draft through adjacent operations-research material rather than the original searches.
 
-Practice selection proceeded in three passes. Each pass assessed whether a practice changes an engineering decision, covers a mechanism omitted by neighboring entries, or can be explained through a sufficiently bounded case. Practices selected across those passes received full treatment when their operational relevance and available evidence justified the space. This procedure produced a catalog of 192 practices, of which 55 are developed in the 18 chapters. The remaining 137 appear in the companion catalog.
+Practitioner retrieval used semantic search and full-text keyword search over the Code Intelligence Digest corpus, restricted to practitioner categories such as engineering blogs, newsletters, podcasts, community reports, and product or operations accounts. Search logs record the query text, hit count, records examined in full, useful yields, and dry holes. Research records returned by those searches, promotional pages without a bounded practice, tracking stubs without recoverable text, and repeated accounts of the same incident were excluded or retained only as provenance for the originating account.
 
-Cases from systems operated by the author are used only as illustrations. They expose mechanisms, original measurements, and reproducible failure cases, but they are not counted as independent external evidence and do not by themselves support a general recommendation. Each chapter separates reported findings from local observations and states the conditions that limit transfer.
+The benchmark collection was assembled separately from benchmark documentation and publications, merged from two inventories, deduplicated by identity, and validated against a JSON Schema. Three repeated benchmark records were removed during that merge. Exact query logs, thread files, benchmark cards, and provenance records are available in the companion repository. The search is structured rather than exhaustive: it does not cover every scholarly index, venue, private operational record, or adjacent model-comparison literature.
 
-The main limitations follow from the source base. Evidence is uneven across topics, several operational questions have only case-level support, recent capability measurements can age quickly, and practitioner reports are vulnerable to selection and reporting bias. The review also excludes model-comparison and prompt-engineering literatures except where they bear directly on system reliability. The resulting practices should therefore be treated as bounded claims and testable protocols, not universal deployment thresholds.
+\section{Screening and evidence grading}\label{screening-and-evidence-grading}
+
+A source entered the working corpus when it contributed at least one measured result, reproducible mechanism, operational incident, benchmark property, or concrete practice relevant to coding-agent reliability. Screening removed records with unresolved identity, no recoverable claim, no relation to a decision in scope, or complete redundancy with a better-supported record. Sources could remain in the review while a proposed practice was rejected; source inclusion and practice admission were separate decisions.
+
+\Needspace{5\baselineskip}
+
+Evidence is reported in four reader-facing groups:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Strong evidence} is an on-claim controlled comparison, validated benchmark result, or comparably specific measurement within stated conditions.
+\item
+  \textbf{Directional evidence} supports a mechanism, threat model, comparison design, or direction of effect without establishing the complete recommendation, its magnitude, or broad transfer.
+\item
+  \textbf{Corroborating evidence} consists of case reports, practitioner accounts, or convergent observations that establish plausibility without estimating prevalence.
+\item
+  \textbf{Null or conflicting evidence} records a result that did not support the expected effect or that materially limits another claim.
+\end{itemize}
+
+These labels attach to evidence items and scoped claims, not to publication venues or whole chapters. A composite recommendation does not become strong because several directional sources converge. When no individual controlled study supports the complete recommendation, the text either narrows the claim to the measured component, classifies the transfer as directional, or presents a protocol to test locally. A strong item may therefore support one step of a developed practice while leaving the generalized prescription directional.
+
+The catalog was graded during assembly and then challenged through independent verification passes. A targeted audit examined ten practices whose sole supporting synthesis had been graded strong, together with two restored items. Six grades were reduced because the source demonstrated a hazard, substrate, or adjacent result rather than the stated remedy; six were retained because the controlled comparison matched the claim. Identifier checks, duplicate-identifier gates, thin-evidence rulings, practitioner-independence checks, and contrary evidence were preserved in the audit record. Ambiguous cases defaulted to the lower grade.
+
+The final adjudication was performed by the author. The challenge passes reduced correlated review error, but they do not constitute blinded independent grading by several human reviewers. This is a limitation of the evidence audit and a reason the machine-readable ledger preserves the source note, boundary, and ruling rather than exposing only a label.
+
+\section{Practice derivation and chapter selection}\label{practice-derivation-and-chapter-selection}
+
+Practice derivation began with 244 records produced across six extraction shards. An admission gate retained 214 and rejected 30. Hardening and adjudication corrected evidence movement, separated bundled claims, removed redundant or self-defeating practices, and preserved contrary findings. Twenty-six practices were cut, thirteen were demoted to asides, eight were split, and three were added during adjudication. A later provenance correction reinstated one valid practice, producing the final catalog of 192. At the final gate, 158 practices qualified through at least one scholarly item, 27 through a non-author synthesis with a resolvable paper identity, and seven through at least two practitioner items with distinct independence keys.
+
+Three selection passes ranked the catalog by different criteria: teachability through a bounded case, consequence for an engineering decision, and coverage of the fourteen mechanism clusters. The passes selected 52, 52, and 53 practices, respectively, with a union of 86. Twenty-two practices appeared in all three lists, 27 in two, and 37 in one. The 49 practices selected by at least two passes formed the base; five single-pass practices were added after individual adjudication to repair thin mechanism coverage, and one scheduling practice was added after a provenance correction. The resulting 55 practices receive full treatment in the 18 chapters; the remaining 137 appear in the companion catalog.
+
+The consequence ranking also supplies the operational-urgency calculation used later in the monograph. Among its 52 ranked practices, the Spearman correlation between urgency rank and a binary indicator for whether the practice carried at least one strong evidence item was -0.004. The phrase \emph{nearly uncorrelated} refers to this calculation, not to all 192 catalog entries or to a latent universal measure of importance.
+
+\section{Author-system cases and limitations}\label{author-system-cases-and-limitations}
+
+Cases from systems operated by the author expose mechanisms, original measurements, and reproducible failure cases. They are always treated as illustrations or local measurements. They are not counted as independent external evidence and do not by themselves support a general recommendation.
+
+Evidence remains uneven across topics. Several operational questions have only case-level support, recent capability measurements can age quickly, and practitioner reports are vulnerable to selection, survivorship, and reporting bias. The review excludes model-comparison and prompt-engineering literatures except where they bear directly on system reliability. Transfer is especially substantial in Part VI, where observatory scheduling, compute-cluster scheduling, and adjacent multi-agent studies motivate testable designs for coding-agent fleets. That part should be read partly as a research agenda, not as a body of settled deployment guidance.
+
+This section establishes the standard evidence legend for the whole monograph. Later chapters repeat a limitation only when it is specific enough to change the interpretation of that chapter's claim.
 
 \section{Contributions}\label{contributions}
 
@@ -49,13 +103,13 @@ This work makes five contributions:
 
 The chapters emphasize conditions, measurements, and failure boundaries because an outcome alone rarely identifies why a system succeeded or failed. A useful account traces ownership, permissions, persistence, ordering, and observation while distinguishing correctness from reliability, performance, cost, safety, and usability.
 
-\section{How the book is organized}\label{how-the-book-is-organized}
+\section{How the monograph is organized}\label{how-the-monograph-is-organized}
 
-The book has six parts and eighteen chapters. Measurement comes first because every later practice is adopted or rejected through a measured comparison. Nineteen developed practices in Parts II through VI also require a method introduced in Part I. Interleaving those methods with their uses would scatter each method across four or five chapters.
+The monograph has six parts and eighteen chapters. Measurement comes first because every later practice is adopted or rejected through a measured comparison. Nineteen developed practices in Parts II through VI also require a method introduced in Part I. Interleaving those methods with their uses would scatter each method across four or five chapters.
 
 This order places three chapters of experiment design before the agent-specific operating chapters. Later recommendations depend on those definitions and comparison methods.
 
-Part I establishes how I compare systems when runs vary and scores can mislead. Part II turns those measurements into grading and release decisions. Part III addresses containment, persistent state, recovery, and failure analysis. Part IV examines how repository information enters, survives, and leaves an agent run. Part V treats human review as an engineered control with interfaces, escalation rules, and accountable ownership. Part VI allocates work across agents and models under cost and capacity constraints.
+Part I establishes how I compare systems when runs vary and scores can mislead. Part II turns those measurements into grading and release decisions. Part III addresses containment, persistent state, recovery, and failure analysis. Part IV examines how repository information enters, survives, and leaves an agent run. Part V treats human review as an engineered control with interfaces, escalation rules, and accountable ownership. Part VI allocates work across agents and models under cost and capacity constraints; it is the most transfer-heavy part and states its claims accordingly.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3000}}
@@ -101,9 +155,9 @@ I assume no prior exposure to the evaluation methods specific to public agent re
 
 I also teach why agreement with human labels does not by itself make an automated grader correct. Agreement can conceal shared mistakes, ambiguous examples, or a reference answer that measures the wrong property. I separate the observed agreement from the inference made about correctness, which becomes important when a grader controls release.
 
-Another method checks whether a score was earned on work the model had already encountered. I introduce the required vocabulary only when the mechanism appears. My goal is that a technically capable reader should be able to reproduce the reasoning presented in this book, not merely accept my interpretation.
+Another method checks whether a score was earned on work the model had already encountered. I introduce the required vocabulary only when the mechanism appears. My goal is that a technically capable reader should be able to reproduce the reasoning presented in this monograph, not merely accept my interpretation.
 
-The book does not assume a particular agent architecture or deployment scale. I describe architecture separately from implementation so the mechanism survives changes in products and interfaces. Examples expose permissions, retries, caching, concurrency, identity, and ordering when those details affect the claim. Code appears only when prose would obscure a state transition or failure path.
+The monograph does not assume a particular agent architecture or deployment scale. I describe architecture separately from implementation so the mechanism survives changes in products and interfaces. Examples expose permissions, retries, caching, concurrency, identity, and ordering when those details affect the claim. Code appears only when prose would obscure a state transition or failure path.
 
 \section{How to read a chapter}\label{how-to-read-a-chapter}
 
@@ -111,19 +165,19 @@ A chapter opens on a concrete situation, usually a measurement that came out wro
 
 Citations appear inline in author-year form, with the year linked to the source. The back matter of each chapter, headed Sources and evidence, records the evidence grouping, identifier, and claim supported by each item. The back matter is authoritative for identifiers and evidence grouping; the prose states the claim for which a source is used. A disagreement between the two is an editorial defect.
 
-A strong item supports a measured statement within the conditions of the study. A directional item supports the direction but not the magnitude of a claim. A corroborating case can establish that a failure mode exists but cannot estimate how often it occurs. A null or conflicting result limits the adjacent recommendation, and the chapter names that limit.
-
-Sentences are scoped to what was actually measured. Where support is thin, the chapter says so in its opening paragraph and prescribes a measurement you can run rather than a number to adopt.
+The evidence legend in the methods section applies throughout. Chapter text restates only limitations that materially narrow a particular result, while each unnumbered Sources and evidence section records the claim, identifier, and evidence group for the cited items.
 
 \section{The companion catalog}\label{the-companion-catalog}
 
-The companion site indexes all 192 practices under the chapter whose mechanism each extends. The 55 developed in the main chapters appear as short pointers into the chapter; the remaining 137 appear as compact entries. The catalog broadens the set of available options without forcing the main text to explain every variation.
+The \href{https://sjarmak.ai/books/engineering-reliable-coding-agents/companion}{companion site} indexes all 192 practices under the chapter whose mechanism each extends. The 55 developed in the main chapters appear as short pointers into the chapter; the remaining 137 appear as compact entries. The catalog broadens the set of available options without forcing the main text to explain every variation. The \href{https://github.com/sjarmak/engineering-reliable-coding-agents}{project repository} contains the versioned manuscript, evidence ledger, benchmark catalog, schemas, provenance data, and release checksums. The \href{https://sjarmak.ai/books/engineering-reliable-coding-agents}{web edition} provides the browser-oriented reading version.
 
 Use the relevant chapter as the foundation, then consult the catalog for practices that match a specific constraint. A compact entry cannot reproduce the chapter's full treatment of mechanism, evidence, tradeoffs, and failure boundaries. The chapter provides the reasoning needed to decide whether a neighboring practice applies to your workload.
 
 Twenty-nine of the full entries are labeled as limited-support notes. I excluded them from the developed set because the available evidence does not support a recommendation. Treat them as prompts for investigation rather than established guidance. They may point to a useful experiment, a missing control, or a failure mode worth instrumenting.
 
 The chapters and catalog serve different purposes. The chapters develop methods and claims in enough detail to evaluate critically. The catalog preserves breadth and makes related practices easier to find. Together, they let you begin with a measured problem and identify an intervention suited to the system you actually operate.
+
+The repository also packages five reusable agent skills derived from selected practices: evaluation design, end-to-end test design, failure-mode capture, focused execution, and verified long-running implementation. Each skill includes a practice-level evidence map. These are implementation artifacts intended to make the protocols reusable; they are not additional evidence that the practices work across environments.
 
 \section{What you should be able to do by the end}\label{what-you-should-be-able-to-do-by-the-end}
 
