@@ -1,10 +1,12 @@
 # Engineering Reliable Coding Agents: companion research artifact
 
-Release candidate 1.0.0-rc.2, prepared August 5, 2026.
+Release candidate 1.0.0-rc.3, prepared August 5, 2026.
 
 This package accompanies *Engineering Reliable Coding Agents: Evaluation, Recovery, Context, and Control Beyond the Model*. It is designed to be archived as a separate, citable research artifact. The final archival release should receive its own DOI and should be cited alongside the manuscript.
 
 Review the interactive [website companion](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion), or read the complete chapter-organized catalog in [`LEARNINGS.md`](LEARNINGS.md).
+
+Reusable agent workflows derived from selected practices are published separately in the repository's [`skills/` collection](https://github.com/sjarmak/engineering-reliable-coding-agents/tree/main/skills). They are implementation artifacts, not additional evidence.
 
 Canonical repository: [https://github.com/sjarmak/engineering-reliable-coding-agents](https://github.com/sjarmak/engineering-reliable-coding-agents)
 

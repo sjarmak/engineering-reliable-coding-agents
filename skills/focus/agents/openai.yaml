@@ -1,0 +1,4 @@
+interface:
+  display_name: "Focus"
+  short_description: "Execute one scoped task through verification"
+  default_prompt: "Use $focus to execute this scoped task through verified completion."

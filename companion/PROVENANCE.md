@@ -4,6 +4,8 @@ Canonical repository: [https://github.com/sjarmak/engineering-reliable-coding-ag
 
 Interactive companion: [https://sjarmak.ai/books/engineering-reliable-coding-agents/companion](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion)
 
+Derived agent skills: [https://github.com/sjarmak/engineering-reliable-coding-agents/tree/main/skills](https://github.com/sjarmak/engineering-reliable-coding-agents/tree/main/skills)
+
 ## Source snapshot
 
 - Public manuscript chapter snapshot: website repository commit `c40183e` (August 5, 2026).
@@ -18,6 +20,8 @@ The hashes identify the exact build inputs without exposing workstation paths or
 ## Transformations
 
 `LEARNINGS.md` is generated from the website companion source by removing site frontmatter and replacing rendered MathML spans with ordinary inline LaTeX. Internal evidence shorthand and editorial workflow notes were replaced by reader-facing `source_kind` and `evidence_group` fields in the machine-readable catalog. Internal derivation pointers were omitted. The known DynTaskMAS author-name defect in the source catalog was corrected from “Yin” to Yu, Ding, and Sato using the official arXiv record. Official arXiv metadata captured during the manuscript reference audit supplies citations and appears under `resolved_metadata`.
+
+The separately packaged skills retain their own practice maps and evidence boundaries. They are derived operational artifacts and are not counted as independent evidence.
 
 Corroborating author-system records remain available for reproducibility but are explicitly excluded from independent external evidence. Records previously removed from supporting evidence are retained as null or conflicting material with their limitation.
 

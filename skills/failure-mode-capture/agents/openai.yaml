@@ -1,0 +1,4 @@
+interface:
+  display_name: "Failure-Mode Capture"
+  short_description: "Turn verified failures into durable guardrails"
+  default_prompt: "Use $failure-mode-capture to turn this observed failure into a durable repository guardrail."

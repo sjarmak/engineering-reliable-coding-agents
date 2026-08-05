@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Evaluation Design"
+  short_description: "Design decision-ready agent evaluations"
+  default_prompt: "Use $agent-eval-design to design a rigorous evaluation for this agent system."

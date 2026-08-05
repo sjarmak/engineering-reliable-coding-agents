@@ -18,6 +18,7 @@ fault-testing protocols.
 | --- | --- |
 | [`manuscript/`](manuscript/) | Complete, compilable LaTeX source with 18 chapters, closing chapter, 19 figures, and 182 references |
 | [`companion/`](companion/) | Human-readable learnings plus the machine-readable practice catalog, evidence ledger, chapter crosswalk, benchmark catalog, schemas, checksums, citation metadata, and provenance |
+| [`skills/`](skills/) | Five reusable agent skills derived from the evaluation, verification, failure-analysis, and durable-execution practices |
 | [`CITATION.cff`](CITATION.cff) | Repository-level citation metadata |
 | [`LICENSE-SCOPE.md`](LICENSE-SCOPE.md) | Current license boundaries for the manuscript, data, and repository infrastructure |
 
@@ -56,8 +57,30 @@ The release candidate contains 192 practice records, 564 evidence or
 corroboration records, and 29 benchmark records. Author-system cases are marked
 as illustrations and are not counted as independent external evidence.
 
+## Reusable agent skills
+
+The `skills/` collection packages five existing operational workflows:
+
+- `agent-eval-design`: design decision-ready evaluations and benchmarks.
+- `e2e-testing`: build stable end-to-end release gates around critical journeys.
+- `failure-mode-capture`: turn observed failures into durable, deduplicated guardrails.
+- `focus`: carry one scoped task through persistent state and verification.
+- `ultracode`: execute a locked Codex goal through durable, verified completion.
+
+Each skill includes `SKILL.md`, Codex interface metadata, and an evidence map to
+the corresponding companion practices and transfer limits. Copy an individual
+skill directory into your Codex skills directory, or build the complete bundle:
+
+```sh
+node scripts/package-skills.mjs
+```
+
+These are derived implementation artifacts, not independent evidence. Review
+the evidence map and adapt thresholds, tools, and escalation rules to the local
+system before use.
+
 ## Release status
 
-The files currently represent the `1.0.0-rc.2` release candidate prepared on
+The files currently represent the `1.0.0-rc.3` release candidate prepared on
 August 5, 2026. The archival DOI and final license choices must be recorded
 before the first stable release and arXiv submission.

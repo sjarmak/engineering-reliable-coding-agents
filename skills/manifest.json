@@ -1,0 +1,33 @@
+{
+  "bundle": "engineering-reliable-coding-agents-skills",
+  "version": "0.1.0",
+  "prepared": "2026-08-05",
+  "derived_from": {
+    "companion_version": "1.0.0-rc.3",
+    "repository": "https://github.com/sjarmak/engineering-reliable-coding-agents",
+    "website_companion": "https://sjarmak.ai/books/engineering-reliable-coding-agents/companion"
+  },
+  "evidence_boundary": "Derived operational artifacts; not independent external evidence.",
+  "skills": [
+    {
+      "name": "agent-eval-design",
+      "purpose": "Design decision-ready evaluations for agents and repository-scale automation."
+    },
+    {
+      "name": "e2e-testing",
+      "purpose": "Build stable, risk-driven end-to-end release tests."
+    },
+    {
+      "name": "failure-mode-capture",
+      "purpose": "Turn observed failures into deduplicated durable guardrails."
+    },
+    {
+      "name": "focus",
+      "purpose": "Execute one scoped task through persistent state and verification."
+    },
+    {
+      "name": "ultracode",
+      "purpose": "Drive a locked Codex goal through durable, verified completion."
+    }
+  ]
+}

@@ -2,7 +2,8 @@
 
 The root [`LICENSE`](LICENSE) contains the Apache License 2.0 selected when this
 repository was created. It applies to repository infrastructure, scripts, and
-metadata unless a more specific notice states otherwise.
+metadata, including the reusable agent skills under `skills/`, unless a more
+specific notice states otherwise.
 
 The manuscript text and figures under `manuscript/` and the research data under
 `companion/` remain copyright © 2026 Stephanie Jarmak, with all rights reserved,

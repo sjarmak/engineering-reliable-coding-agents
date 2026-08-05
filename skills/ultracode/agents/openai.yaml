@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ultracode"
+  short_description: "Drive locked goals to verified completion"
+  default_prompt: "Use $ultracode to execute the active goal through durable, verified completion."

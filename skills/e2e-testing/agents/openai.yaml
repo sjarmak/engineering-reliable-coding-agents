@@ -1,0 +1,4 @@
+interface:
+  display_name: "E2E Testing"
+  short_description: "Build stable, risk-driven end-to-end tests"
+  default_prompt: "Use $e2e-testing to design stable end-to-end coverage for these critical journeys."
