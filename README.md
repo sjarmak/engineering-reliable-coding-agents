@@ -17,12 +17,13 @@ fault-testing protocols.
 | Path | Contents |
 | --- | --- |
 | [`manuscript/`](manuscript/) | Complete, compilable LaTeX source with 18 chapters, closing chapter, 19 figures, and 182 references |
-| [`companion/`](companion/) | Machine-readable practice catalog, evidence ledger, chapter crosswalk, benchmark catalog, schemas, checksums, citation metadata, and provenance |
+| [`companion/`](companion/) | Human-readable learnings plus the machine-readable practice catalog, evidence ledger, chapter crosswalk, benchmark catalog, schemas, checksums, citation metadata, and provenance |
 | [`CITATION.cff`](CITATION.cff) | Repository-level citation metadata |
 | [`LICENSE-SCOPE.md`](LICENSE-SCOPE.md) | Current license boundaries for the manuscript, data, and repository infrastructure |
 
-The browser-based edition and companion catalog are available at
-[sjarmak.ai/books/engineering-reliable-coding-agents](https://sjarmak.ai/books/engineering-reliable-coding-agents).
+Read the [browser-based book](https://sjarmak.ai/books/engineering-reliable-coding-agents)
+or use the [interactive companion catalog](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion)
+for chapter navigation, filtering, and graph exploration.
 
 ## Build the manuscript
 
@@ -39,6 +40,11 @@ LaTeX packages and contains all required figures locally.
 
 ## Validate the companion
 
+Start with [`companion/LEARNINGS.md`](companion/LEARNINGS.md) to review all 192
+practices in chapter context. It presents each practice's action, mechanism,
+evidence, and boundary in prose while preserving stable identifiers for the
+machine-readable files.
+
 Run the checksum verification from the companion directory:
 
 ```sh
@@ -52,6 +58,6 @@ as illustrations and are not counted as independent external evidence.
 
 ## Release status
 
-The files currently represent the `1.0.0-rc.1` release candidate prepared on
+The files currently represent the `1.0.0-rc.2` release candidate prepared on
 August 5, 2026. The archival DOI and final license choices must be recorded
 before the first stable release and arXiv submission.

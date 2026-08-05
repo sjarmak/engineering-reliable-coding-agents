@@ -5,13 +5,14 @@ type: dataset
 authors:
   - family-names: Jarmak
     given-names: Stephanie
-version: "1.0.0-rc.1"
+version: "1.0.0-rc.2"
 date-released: 2026-08-05
 repository-code: "https://github.com/sjarmak/engineering-reliable-coding-agents"
+url: "https://sjarmak.ai/books/engineering-reliable-coding-agents/companion"
 abstract: >-
-  Manuscript source and machine-readable research artifact for a technical
-  review of the evaluation, operation, and governance of AI coding-agent
-  systems.
+  Manuscript source and human-readable and machine-readable research artifact
+  for a technical review of the evaluation, operation, and governance of AI
+  coding-agent systems.
 keywords:
   - AI coding agents
   - software engineering
