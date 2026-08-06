@@ -16,8 +16,9 @@ fault-testing protocols.
 
 | Path | Contents |
 | --- | --- |
-| [`manuscript/`](manuscript/) | Complete, compilable LaTeX source with 18 chapters, closing chapter, 16 figures, and 196 references |
+| [`manuscript/`](manuscript/) | Complete, compilable LaTeX source with 18 chapters, a closing chapter, 17 figures, 7 numbered tables, a glossary, and 213 references |
 | [`companion/`](companion/) | Human-readable learnings plus the machine-readable practice catalog, evidence ledger, chapter crosswalk, benchmark catalog, review-method records, schemas, web-source preservation record, checksums, citation metadata, and provenance |
+| [`protocols/`](protocols/) | Six runnable protocols and a minimum reliability pass, each with a decision, inputs, bounded procedure, pass condition, retained artifact, and stable practice mappings |
 | [`skills/`](skills/) | Five reusable agent skills derived from the evaluation, verification, failure-analysis, and durable-execution practices |
 | [`SUBMISSION.md`](SUBMISSION.md) | Paste-ready arXiv metadata, packaging decisions, license and endorsement notes, audit results, and upload checklist |
 | [`CITATION.cff`](CITATION.cff) | Repository-level citation metadata |
@@ -37,7 +38,7 @@ cd manuscript
 tectonic main.tex
 ```
 
-The generated PDF is 258 pages on US letter paper. The source uses standard
+The generated PDF is 270 pages on US letter paper. The source uses standard
 LaTeX packages and contains all required figures locally.
 
 ## Validate the companion
@@ -54,10 +55,11 @@ cd companion
 sha256sum -c SHA256SUMS
 ```
 
-The release candidate contains 192 practice records, 574 evidence or
+The release candidate contains 192 practice records, 578 evidence or
 corroboration records, and 29 benchmark records. Its methodology directory
-records the corpus snapshots, common search protocol, 118 retained thread-source
-identities, and all 39 decisions in the bounded August update audit.
+records the corpus snapshots, common search protocol, 138 retained scholarly
+works, all 39 decisions in the bounded August update audit, a 148-record
+software-engineering coverage probe, and a deterministic 40-DOI SciX comparison.
 Author-system cases are marked as illustrations and are not counted as
 independent external evidence.
 
@@ -85,6 +87,9 @@ system before use.
 
 ## Release status
 
-The files currently represent the `1.0.0-rc.9` release candidate prepared on
-August 6, 2026. The archival DOI and final license choices must be recorded
+The files currently represent the `1.0.0-rc.10` release candidate prepared on
+August 6, 2026. Archival v1 remains gated on two measured additions: blinded
+external grading of the packaged 20-practice sample and a supplementary search
+of ACM Digital Library, IEEE Xplore, and Scopus (or a justified database
+substitution). The archival DOI and final license choices must also be recorded
 before the first stable release and arXiv submission.

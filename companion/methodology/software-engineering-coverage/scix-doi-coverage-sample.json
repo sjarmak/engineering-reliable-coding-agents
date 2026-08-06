@@ -1,0 +1,327 @@
+{
+  "seed": "ERCA-SE-COVERAGE",
+  "sample": [
+    {
+      "doi": "10.1145/3487569",
+      "title": "In-IDE Code Generation from Natural Language: Promise and Challenges",
+      "venue": "ACM Transactions on Software Engineering and Methodology",
+      "year": 2022,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10664-021-09999-9",
+      "title": "Industry practices and challenges for the evolvability assurance of microservices",
+      "venue": "Empirical Software Engineering",
+      "year": 2021,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10606-024-09489-8",
+      "title": "Cultivating Data Practices Across Boundaries: How Organizations Become Data-driven",
+      "venue": "Computer Supported Cooperative Work (CSCW)",
+      "year": 2024,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1145/3280987",
+      "title": "Oracles for Testing Software Timeliness with Uncertainty",
+      "venue": "ACM Transactions on Software Engineering and Methodology",
+      "year": 2018,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1109/tse.2023.3310874",
+      "title": "DexBERT: Effective, Task-Agnostic and Fine-Grained Representation Learning of Android Bytecode",
+      "venue": "IEEE Transactions on Software Engineering",
+      "year": 2023,
+      "in_scix_by_exact_doi": true
+    },
+    {
+      "doi": "10.1145/3649594",
+      "title": "Non-Autoregressive Line-Level Code Completion",
+      "venue": "ACM Transactions on Software Engineering and Methodology",
+      "year": 2024,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10664-021-09963-7",
+      "title": "Development of recommendation systems for software engineering: the CROSSMINER experience",
+      "venue": "Empirical Software Engineering",
+      "year": 2021,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10664-023-10362-3",
+      "title": "What is an app store? The software engineering perspective",
+      "venue": "Empirical Software Engineering",
+      "year": 2024,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10664-022-10244-0",
+      "title": "Developer discussion topics on the adoption and barriers of low code software development platforms",
+      "venue": "Empirical Software Engineering",
+      "year": 2022,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1109/tse.2022.3187689",
+      "title": "Revisiting Binary Code Similarity Analysis Using Interpretable Feature Engineering and Lessons Learned",
+      "venue": "IEEE Transactions on Software Engineering",
+      "year": 2022,
+      "in_scix_by_exact_doi": true
+    },
+    {
+      "doi": "10.1007/s10664-026-10816-4",
+      "title": "VLM-Fuzz: Vision language model assisted recursive depth-first search exploration for effective GUI testing of android apps",
+      "venue": "Empirical Software Engineering",
+      "year": 2026,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1145/3611664",
+      "title": "Snippet Comment Generation Based on Code Context Expansion",
+      "venue": "ACM Transactions on Software Engineering and Methodology",
+      "year": 2023,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10664-019-09694-w",
+      "title": "Classifying code comments in Java software systems",
+      "venue": "Empirical Software Engineering",
+      "year": 2019,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10664-019-09706-9",
+      "title": "Towards understanding and detecting fake reviews in app stores",
+      "venue": "Empirical Software Engineering",
+      "year": 2019,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1109/tse.2024.3403042",
+      "title": "Fusing Code Searchers",
+      "venue": "IEEE Transactions on Software Engineering",
+      "year": 2024,
+      "in_scix_by_exact_doi": true
+    },
+    {
+      "doi": "10.1007/s10664-026-10901-8",
+      "title": "CDBench: Benchmarking the mutation testing capabilities of LLMs with code defenders",
+      "venue": "Empirical Software Engineering",
+      "year": 2026,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10664-023-10390-z",
+      "title": "Investigating the readability of test code",
+      "venue": "Empirical Software Engineering",
+      "year": 2024,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1145/3607179",
+      "title": "A Systematic Review of Automated Query Reformulations in Source Code Search",
+      "venue": "ACM Transactions on Software Engineering and Methodology",
+      "year": 2023,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10664-023-10425-5",
+      "title": "Taxonomy of inline code comment smells",
+      "venue": "Empirical Software Engineering",
+      "year": 2024,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10664-026-10869-5",
+      "title": "PatchTrack: A comprehensive analysis of ChatGPT’s influence on pull request outcomes",
+      "venue": "Empirical Software Engineering",
+      "year": 2026,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10515-026-00648-3",
+      "title": "GenAI as an instant, readily available co-developer: redefining software design process for AI native hybrid work",
+      "venue": "Automated Software Engineering",
+      "year": 2026,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1109/tse.2020.3023177",
+      "title": "Predicting Defective Lines Using a Model-Agnostic Technique",
+      "venue": "IEEE Transactions on Software Engineering",
+      "year": 2020,
+      "in_scix_by_exact_doi": true
+    },
+    {
+      "doi": "10.1109/tse.2022.3165938",
+      "title": "How Should Software Engineering Secondary Studies Include Grey Material?",
+      "venue": "IEEE Transactions on Software Engineering",
+      "year": 2022,
+      "in_scix_by_exact_doi": true
+    },
+    {
+      "doi": "10.1007/s10664-026-10921-4",
+      "title": "Large language models in model-driven engineering: a systematic mapping study",
+      "venue": "Empirical Software Engineering",
+      "year": 2026,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10606-022-09453-4",
+      "title": "Values and Value Conflicts in the Context of OSINT Technologies for Cybersecurity Incident Response: A Value Sensitive Design Perspective",
+      "venue": "Computer Supported Cooperative Work (CSCW)",
+      "year": 2023,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10664-020-09803-0",
+      "title": "Practical relevance of software engineering research: synthesizing the community’s voice",
+      "venue": "Empirical Software Engineering",
+      "year": 2020,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1109/tse.2019.2891715",
+      "title": "App Store Effects on Software Engineering Practices",
+      "venue": "IEEE Transactions on Software Engineering",
+      "year": 2019,
+      "in_scix_by_exact_doi": true
+    },
+    {
+      "doi": "10.1145/3818607",
+      "title": "Exploring Code Analysis: Zero-Shot Insights on Syntax and Semantics with LLMs",
+      "venue": "ACM Transactions on Software Engineering and Methodology",
+      "year": 2026,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1145/3779217",
+      "title": "<scp>CatCoder</scp> : Repository-Level Code Generation with Relevant Code and Type Context",
+      "venue": "ACM Transactions on Software Engineering and Methodology",
+      "year": 2025,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1109/tse.2022.3170087",
+      "title": "Applying Human Values Theory to Software Engineering Practice: Lessons and Implications",
+      "venue": "IEEE Transactions on Software Engineering",
+      "year": 2022,
+      "in_scix_by_exact_doi": true
+    },
+    {
+      "doi": "10.1145/3604611",
+      "title": "Asteria-Pro: Enhancing Deep Learning-based Binary Code Similarity Detection by Incorporating Domain Knowledge",
+      "venue": "ACM Transactions on Software Engineering and Methodology",
+      "year": 2023,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1145/3631975",
+      "title": "Deep Is Better? An Empirical Comparison of Information Retrieval and Deep Learning Approaches to Code Summarization",
+      "venue": "ACM Transactions on Software Engineering and Methodology",
+      "year": 2023,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1145/3708522",
+      "title": "Large Language Model for Vulnerability Detection and Repair: Literature Review and the Road Ahead",
+      "venue": "ACM Transactions on Software Engineering and Methodology",
+      "year": 2024,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10664-021-10065-7",
+      "title": "Analysing app reviews for software engineering: a systematic literature review",
+      "venue": "Empirical Software Engineering",
+      "year": 2022,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10606-025-09514-4",
+      "title": "Dimensions of Human-Machine Combination: Prompting the Development of Deployable Intelligent Decision Systems for Situated Clinical Contexts",
+      "venue": "Computer Supported Cooperative Work (CSCW)",
+      "year": 2025,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1145/3593800",
+      "title": "XCoS: Explainable Code Search Based on Query Scoping and Knowledge Graph",
+      "venue": "ACM Transactions on Software Engineering and Methodology",
+      "year": 2023,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1109/tse.2022.3184842",
+      "title": "Scalable and Accurate Test Case Prioritization in Continuous Integration Contexts",
+      "venue": "IEEE Transactions on Software Engineering",
+      "year": 2022,
+      "in_scix_by_exact_doi": true
+    },
+    {
+      "doi": "10.1145/3532183",
+      "title": "Microservice Security Metrics for Secure Communication, Identity Management, and Observability",
+      "venue": "ACM Transactions on Software Engineering and Methodology",
+      "year": 2022,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1007/s10664-018-9620-y",
+      "title": "Software engineering in start-up companies: An analysis of 88 experience reports",
+      "venue": "Empirical Software Engineering",
+      "year": 2018,
+      "in_scix_by_exact_doi": false
+    },
+    {
+      "doi": "10.1145/3576039",
+      "title": "The Best of Both Worlds: Combining Learned Embeddings with Engineered Features for Accurate Prediction of Correct Patches",
+      "venue": "ACM Transactions on Software Engineering and Methodology",
+      "year": 2022,
+      "in_scix_by_exact_doi": false
+    }
+  ],
+  "matches": [
+    {
+      "bibcode": "2021ITSEn..47..300A",
+      "title": "App Store Effects on Software Engineering Practices",
+      "doi": "10.1109/TSE.2019.2891715"
+    },
+    {
+      "bibcode": "2022ITSEn..48.1480W",
+      "title": "Predicting Defective Lines Using a Model-Agnostic Technique",
+      "doi": "10.1109/TSE.2020.3023177"
+    },
+    {
+      "bibcode": "2023ITSEn..49.1615Y",
+      "title": "Scalable and Accurate Test Case Prioritization in Continuous Integration Contexts",
+      "doi": "10.1109/TSE.2022.3184842"
+    },
+    {
+      "bibcode": "2023ITSEn..49.1661K",
+      "title": "Revisiting Binary Code Similarity Analysis Using Interpretable Feature Engineering and Lessons Learned",
+      "doi": "10.1109/TSE.2022.3187689"
+    },
+    {
+      "bibcode": "2023ITSEn..49.4691S",
+      "title": "DexBERT: Effective, Task-Agnostic and Fine-Grained Representation Learning of Android Bytecode",
+      "doi": "10.1109/TSE.2023.3310874"
+    },
+    {
+      "bibcode": "2023ITSEn..49..872K",
+      "title": "How Should Software Engineering Secondary Studies Include Grey Material?",
+      "doi": "10.1109/TSE.2022.3165938"
+    },
+    {
+      "bibcode": "2023ITSEn..49..973F",
+      "title": "Applying Human Values Theory to Software Engineering Practice: Lessons and Implications",
+      "doi": "10.1109/TSE.2022.3170087"
+    },
+    {
+      "bibcode": "2024ITSEn..50.1852W",
+      "title": "Fusing Code Searchers",
+      "doi": "10.1109/TSE.2024.3403042"
+    }
+  ]
+}

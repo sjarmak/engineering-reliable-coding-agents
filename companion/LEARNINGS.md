@@ -28,19 +28,19 @@ The following pointer entries identify the practices taught in Chapter 1, where 
 
 ### Compare distributions across randomized repeated runs
 
-`never-report-a-single-run`
+`ERCA-020` · `never-report-a-single-run`
 
 Run every evaluation configuration through multiple independent repeats, randomizing nuisance sources such as seeds, data order, and splits, then report the resulting distribution alongside pass@k and pass^k. Use measured run-to-run spread to judge whether an apparent difference is distinguishable from evaluation noise. Chapter 1 develops the experimental design and reporting discipline behind this practice.
 
 ### Power-analyze the evaluation before running it
 
-`power-analyze-before-running`
+`ERCA-025` · `power-analyze-before-running`
 
 Determine the sample size needed to detect the smallest difference that would change the decision, using explicit significance and power targets plus variance estimated from pilot data. For a fixed evaluation, calculate the minimum detectable effect so null and small-difference results can be interpreted against the design’s actual sensitivity. Chapter 1 works through how to plan and assess this power analysis.
 
 ### Compare systems with metric-appropriate paired tests
 
-`use-paired-tests-matched-to-metric`
+`ERCA-024` · `use-paired-tests-matched-to-metric`
 
 Compare systems evaluated on the same items by analyzing per-item score differences, and report the paired difference, its standard error, and the correlation between scores. Match the significance test to the metric so the comparison respects how that metric is constructed and how uncertainty should be sampled. Chapter 1 explains the paired design and appropriate testing choices in full.
 
@@ -48,7 +48,7 @@ The following compact entries record practices attached to Chapter 1’s mechani
 
 ### Report correlation-aware standard errors with every evaluation score
 
-`report-correlation-aware-standard-errors`
+`ERCA-023` · `report-correlation-aware-standard-errors`
 
 Attach a standard error of the mean to every reported evaluation score, treating the tested questions as observations drawn from a broader population. When questions share a document, passage, repository, or another source, calculate clustered standard errors at that grouping level. Also use the resulting covariance structure when comparing or ranking systems. Correlated questions repeat some of the same information, so their raw count overstates the effective sample size. An independence-based calculation consequently produces uncertainty intervals that are too narrow and can make an unstable ordering appear settled.
 
@@ -56,7 +56,7 @@ A statistical treatment by Miller ([2024](https://arxiv.org/abs/2411.00640)) dev
 
 ### Estimate pass@k with the unbiased combinatorial estimator
 
-`estimate-pass-at-k-unbiased`
+`ERCA-026` · `estimate-pass-at-k-unbiased`
 
 For each problem, generate $n \ge k$ samples, count the $c$ correct samples, and average $1-\binom{n-c}{k}/\binom{n}{k}$ across problems, computing the ratio through its numerically stable product form. Report both $k$ and $n$ with the estimate. Do not substitute an observed per-problem success rate $p$ into $1-(1-p)^k$. That plug-in calculation treats the estimated rate as known, so sampling noise in $p$ produces an upward-biased estimate. The combinatorial calculation instead measures the fraction of size-$k$ subsets among the observed samples that contain at least one success.
 
@@ -64,7 +64,7 @@ In a code-generation evaluation study, Chen and colleagues ([2021](https://arxiv
 
 ### Correct suite-wide victory claims with replicability analysis
 
-`correct-multi-benchmark-victory-claims`
+`ERCA-027` · `correct-multi-benchmark-victory-claims`
 
 When claiming that one system beats another across a benchmark suite, apply partial-conjunction testing and report the minimum number $u$ of $N$ datasets on which the advantage is statistically supported. Counting datasets with uncorrected per-dataset p-values gives the comparison repeated opportunities to produce a false win. Partial-conjunction analysis combines those tests while controlling family-wise error, yielding the interpretable statement that the advantage holds on at least $u$ of $N$ datasets. Keep the individual effect estimates and uncertainty beside that count so readers can distinguish consistent useful gains from several detectable but negligible differences.
 
@@ -72,7 +72,7 @@ In a multi-dataset NLP study, Dror and colleagues ([2017](https://arxiv.org/abs/
 
 ### Rank systems with a paired-comparison model, confidence intervals, and active sampling
 
-`rank-with-paired-comparison-models-and-cis`
+`ERCA-029` · `rank-with-paired-comparison-models-and-cis`
 
 When an evaluation collects pairwise preferences, fit a Bradley-Terry model to estimate relative system strengths, publish a confidence interval for every rating, and direct new comparisons toward pairs whose ordering remains uncertain. Screen anomalous voters before aggregation. The model converts wins and losses across heterogeneous prompts and opponents into a common relative scale. Confidence intervals expose rankings that the available comparisons have not resolved, while active pair selection concentrates evaluation effort on matchups that can still change the ordering instead of repeatedly sampling settled comparisons.
 
@@ -80,7 +80,7 @@ In a large human-preference evaluation study, Chiang and colleagues ([2024](http
 
 ### Profile benchmark noise before making decisions and engineer its signal-to-noise ratio upward
 
-`profile-benchmark-noise-before-decisions`
+`ERCA-030` · `profile-benchmark-noise-before-decisions`
 
 Before using a benchmark to choose a training or engineering change, measure its seed variance and inter-checkpoint variability, then compare the observed delta with that profile. Prefer benchmarks with high signal-to-noise ratio for the decision at hand. Where the evaluation permits, preserve more information with continuous metrics such as choice log-likelihood or bits-per-byte, remove subtasks dominated by noise, and average the last few checkpoints when you control training. These changes reduce irrelevant variation or avoid the information loss caused by converting graded model confidence into thresholded accuracy.
 
@@ -90,7 +90,7 @@ Published noise profiles transfer only approximately across model families, trai
 
 ### Declare decoding settings and compare greedy with sampled generation
 
-`declare-decoding-configuration`
+`ERCA-031` · `declare-decoding-configuration`
 
 Treat decoding as an experimental variable: report whether generation was greedy or sampled, state the temperature and any best-of-N procedure, and evaluate each model under both greedy and sampled generation before claiming a comparison. Decoding changes the distribution of candidate outputs and therefore changes measured capability. Best-of-N additionally changes the number of opportunities for success. If those settings remain implicit, a reported model difference may instead reflect incompatible inference policies, and results produced by separate evaluation harnesses cannot be compared cleanly.
 
@@ -100,7 +100,7 @@ Alignment methods reduced sampling variance inconsistently across model families
 
 ### Aggregate a handful of runs with IQM, bootstrap intervals, and performance profiles
 
-`aggregate-few-runs-with-iqm-and-bootstrap-cis`
+`ERCA-035` · `aggregate-few-runs-with-iqm-and-bootstrap-cis`
 
 When only a few runs per task are affordable, report the interquartile mean across the suite, attach a stratified-bootstrap confidence interval to every aggregate, and show performance profiles across tasks and runs. IQM limits the influence of extreme task results while using more observations than the median, whose variability can be high and whose result can conceal failures when many scores are zero. Stratified resampling preserves the suite’s task structure, and the resulting intervals reveal apparent differences that the available runs cannot resolve.
 
@@ -110,7 +110,7 @@ The evidence assumes roughly 3 or more runs per task. IQM deliberately discards 
 
 ### Validate every benchmark reduction by its effect on decisions
 
-`shrink-evals-with-decision-aware-validation`
+`ERCA-028` · `shrink-evals-with-decision-aware-validation`
 
 Before adopting a cheaper evaluation protocol, estimate its decision-flip rate against the full protocol and retain it only if that rate is acceptable for the decisions the evaluation governs. For item-count reductions, select about 100 informative anchor items using item-response theory, preserve their per-item weights, and periodically refit the selection as the evaluated model population changes. This treats cost reduction as a modification to the measurement instrument and tests whether the modification changes rankings or verdicts.
 
@@ -120,7 +120,7 @@ DIoR inherits every validity defect of the full benchmark because matching its d
 
 ### Pilot the evaluation, pre-commit its design, and confirm once
 
-`precommit-confirmatory-eval-designs`
+`ERCA-033` · `precommit-confirmatory-eval-designs`
 
 Use inexpensive pilot runs to choose hyperparameters, metrics, thresholds, and run counts, then record that design before executing the confirmatory experiment once. Keep subsequent design exploration separate from the result being confirmed. When experimenters repeatedly inspect measurements and revise the evaluation until a favorable result appears, they perform implicit multiple testing and adapt the design to noise. A fixed estimand and decision rule make the reported error rates interpretable and allow another evaluator to reproduce the intended test.
 
@@ -130,7 +130,7 @@ The discipline adds pilot compute and slows experimentation. During early hypoth
 
 ### Measure performance across plausible prompt variants
 
-`report-spread-across-prompt-variants`
+`ERCA-016` · `report-spread-across-prompt-variants`
 
 Evaluate each model over a sampled set of meaning-preserving prompt variants, including separator, casing, and spacing changes, instruction paraphrases, output-format requests, and greetings, then report the resulting spread or interval. Use max-over-prompts when measuring deliberate product prompt tuning and average-over-prompts when making robustness claims. Record variant-induced prediction churn as part of the pipeline’s error budget. Sampling multiple prompts separates capability from sensitivity to arbitrary harness choices because a format that benefits one model may not benefit another.
 
@@ -146,13 +146,13 @@ The following pointer entries identify the practices taught in Chapter 2, where 
 
 ### Run controls that isolate each component’s contribution
 
-`run-ablation-controls`
+`ERCA-114` · `run-ablation-controls`
 
 Isolate the contribution of memory, retrieval, or tools by running controls that remove the component, expose raw inputs, match coverage, and vary one factor at a time. Treat tool availability as part of the experimental configuration so gains can be attributed to the mechanism under study. Chapter 2 develops the control designs required for credible ablation claims.
 
 ### Evaluate accuracy and cost on a Pareto frontier
 
-`report-cost-accuracy-pareto`
+`ERCA-012` · `report-cost-accuracy-pareto`
 
 Evaluate an agent on accuracy and inference cost together, plotting the configurations that form the Pareto frontier and recording dollars, token counts, and the applicable pricing snapshot. Include simple baselines and preserve a holdout that development never targets, so system selection reflects both useful performance and resource use. Chapter 2 develops this joint evaluation and comparison framework.
 
@@ -160,7 +160,7 @@ The following compact entries record practices attached to Chapter 2’s mechani
 
 ### Report expected best performance across tuning budgets
 
-`report-performance-vs-tuning-budget`
+`ERCA-034` · `report-performance-vs-tuning-budget`
 
 Plot the expected validation performance of the best configuration found after each number of tuning trials, and publish the search space, sampling procedure, trial count, and selection rule alongside the curve. The winning score rises as a method receives more opportunities to find a favorable configuration, even when its underlying quality remains unchanged. Reporting only that winner therefore mixes method quality with search budget and luck. Dodge and colleagues ([2019](https://arxiv.org/abs/1909.03004)) showed empirically that best-of-B is a biased order statistic and that published method rankings can reverse when tuning budgets are equalized. A budget-conditional curve lets readers compare methods at the amount of compute they can actually spend.
 
@@ -168,7 +168,7 @@ This treatment applies to validation-set selection, including scaffold searches,
 
 ### Budget repeated sampling from coverage and verifier limits
 
-`budget-sampling-by-coverage-and-verifier`
+`ERCA-036` · `budget-sampling-by-coverage-and-verifier`
 
 Measure coverage at several small sample counts, fit the exponentiated-power-law relationship between coverage and samples, and use the fitted curve to choose a larger sampling budget only after measuring the verifier's false-positive rate. Repeated sampling raises the chance that at least one correct candidate exists, which turns inference compute into a quantity that can be budgeted against expected coverage. Brown and colleagues ([2024](https://arxiv.org/abs/2407.21787)) found that this relationship held over four orders of magnitude; on SWE-bench Lite, coverage rose from 15.9% at one sample to 56% at 250 samples.
 
@@ -176,7 +176,7 @@ Coverage becomes deliverable performance only when the system can identify the c
 
 ### Freeze memory before evaluating deployment performance
 
-`freeze-then-evaluate-memory`
+`ERCA-112` · `freeze-then-evaluate-memory`
 
 Separate memory acquisition from deployment by allowing writes and consolidation during an acquisition phase, then freezing the resulting library before running held-out tasks. Keep the model, prompts, and surrounding machinery fixed, and compare the frozen library with both a no-memory arm and a raw-trajectory arm. The freeze prevents local recovery, replay, or test-time adaptation from being credited as durable learning. The raw control determines whether consolidation created a useful abstraction or merely discarded information that direct reuse would have preserved.
 
@@ -184,7 +184,7 @@ Directional evidence synthesized from two benchmark reports supports this experi
 
 ### Pin the stored form that receives retrieval credit
 
-`pin-the-scoring-target`
+`ERCA-113` · `pin-the-scoring-target`
 
 Define whether a returned raw turn, source summary, or canonical fact receives retrieval credit, report that choice, and rescore saved rankings under the other plausible targets. Restrict system comparisons to query subsets with matched target coverage. A consolidating store can create several descendants from one source, so an unchanged ranking may receive different relevance judgments depending on which descendant the evaluator treats as the answer. The scoring target therefore belongs in the estimand rather than remaining an implicit property of the benchmark.
 
@@ -192,7 +192,7 @@ A purpose-built study by Panthi and Abdelfattah ([2026](https://arxiv.org/abs/26
 
 ### Synthesize constrained eval instances and require human review
 
-`controlled-synthesis-human-verified`
+`ERCA-115` · `controlled-synthesis-human-verified`
 
 Generate evaluation instances from structured specifications such as persona profiles or procedure families, inject distractors, hard negatives, and adversarial shortcuts, and require human approval for every instance before it enters the benchmark. Structured seeds define the capability being tested, while competing cues make superficial matching less likely to satisfy the task. Human reviewers then check that each generated item is coherent, answerable, and aligned with the intended construct instead of trusting synthetic output as ground truth.
 
@@ -200,7 +200,7 @@ The MemConflict report ([2026](https://arxiv.org/abs/2605.20926)) provides direc
 
 ### Benchmark every patch gate against random selection
 
-`baseline-gates-against-random`
+`ERCA-058` · `baseline-gates-against-random`
 
 Evaluate any static, dynamic, or learned patch-overfitting detector against random selection on a realistic mixture of correct and overfitting patches before using it as a deployment gate. Reject the detector if it cannot beat that floor on the distribution produced by the repair systems it will oversee. A gate can appear discriminative when evaluated on an artificial patch mixture yet provide no practical selection value once correct and incorrect patches occur at deployment-like rates.
 
@@ -214,25 +214,25 @@ The following pointer entries identify the practices taught in Chapter 3, where 
 
 ### Measure public benchmark inflation with matched private controls
 
-`measure-public-score-inflation-with-matched-controls`
+`ERCA-003` · `measure-public-score-inflation-with-matched-controls`
 
 Pair every score on a public benchmark with a score from matched tasks that were never part of that benchmark, using the same evaluation protocol for both. Report the public-private gap as the estimate of inflation from benchmark familiarity and repeated selection against the public set. Chapter 3 develops the construction and validation of matched controls for this purpose.
 
 ### Evaluate models on post-cutoff tasks
 
-`evaluate-on-post-cutoff-tasks`
+`ERCA-004` · `evaluate-on-post-cutoff-tasks`
 
 Tag evaluation tasks by release date and score each model on tasks published after its training cutoff, supported by a live pipeline that harvests, validates, and preserves reproducible fresh tasks. Audit dynamic benchmarks for cutoff hygiene, regeneration quality, and comparability across snapshots before using their results. Chapter 3 develops both temporal holdouts and the operational requirements of live evaluation.
 
 ### Strengthen test oracles before adjudicating results
 
-`strengthen-test-oracles-before-adjudication`
+`ERCA-001` · `strengthen-test-oracles-before-adjudication`
 
 Strengthen the tests that determine whether a solution passes by adding generated and adversarial cases, using trusted references, coverage signals, mutations, and plausible incorrect patches to improve fault detection. Re-adjudicate new and existing results under the stronger oracle, with manual review of a sample of apparent successes. Chapter 3 develops the construction and use of these stronger correctness checks.
 
 ### Benchmark systems on the workload they will serve
 
-`benchmark-on-your-own-workload`
+`ERCA-066` · `benchmark-on-your-own-workload`
 
 Build evaluation sets from the work the production system is expected to perform, including real prompts, repository changes, tests, and domain-specific task lifecycles. Use those results to select systems according to the construct and conditions that match deployment, rather than substituting general leaderboard rank for workload validity. Chapter 3 develops how to turn production experience into a defensible workload evaluation.
 
@@ -240,7 +240,7 @@ The following compact entries record practices attached to Chapter 3’s mechani
 
 ### Probe memorization before crediting benchmark gains to capability
 
-`probe-memorization-before-crediting-capability`
+`ERCA-002` · `probe-memorization-before-crediting-capability`
 
 Before attributing a benchmark gain to problem-solving ability, remove information required for a legitimate solution and ask the model to recover an instance-specific artifact. For a repository task, provide only the issue description, deny repository access, and request the buggy file’s location. Compare the result with the same probe on held-out repositories. This separates knowledge of a published instance from the ability to inspect and repair unfamiliar code.
 
@@ -250,7 +250,7 @@ Each benchmark requires a newly designed probe. The withheld information must ge
 
 ### Measure overlap with semantic matching
 
-`measure-overlap-semantically`
+`ERCA-005` · `measure-overlap-semantically`
 
 Before using an inspectable training corpus to validate a benchmark, scan prompts and solutions with both surface matching and semantic comparison, then report model scores separately for marked and unmarked items. Strings and n-grams catch direct reuse; embeddings or model-based comparisons can expose rephrased, translated, and synthetic variants that preserve a task while changing its wording.
 
@@ -260,7 +260,7 @@ This practice depends on access to the training data, so it mainly serves model 
 
 ### Investigate contamination through estimated score benefit
 
-`anchor-contamination-metrics-to-score-benefit`
+`ERCA-006` · `anchor-contamination-metrics-to-score-benefit`
 
 If an audit were comparing several definitions of contamination, it could estimate the score difference between the items each definition marks and leaves unmarked, with uncertainty around that difference. Exact copies, paraphrases, shared facts, and structurally similar problems could then be compared according to whether the evaluated model appeared to benefit from them. Raw overlap percentages would remain descriptive context rather than determine the audit’s conclusion.
 
@@ -270,7 +270,7 @@ The available support is too thin to recommend this practice; this entry should 
 
 ### Build fresh items under an anti-searchability protocol
 
-`build-fresh-items-anti-searchable`
+`ERCA-007` · `build-fresh-items-anti-searchable`
 
 When commissioning a private evaluation set, require annotators to create original prompts without copying web or model output, record every inspiration source, test each prompt for web searchability, and reject items that fail originality, difficulty, or ambiguity review. The annotation plan should accommodate rejection so reviewers do not preserve weak items merely to meet a target count.
 
@@ -280,7 +280,7 @@ Originality checks cannot prove that an idea is absent from every training corpu
 
 ### Audit each model-benchmark cell separately
 
-`audit-contamination-per-model-benchmark-cell`
+`ERCA-008` · `audit-contamination-per-model-benchmark-cell`
 
 Before comparing models on a leaderboard, audit leakage for each specific model-benchmark pairing and retain item-level results. Where access permits, combine corpus membership checks with negative-log-likelihood and n-gram accuracy tests. Flag comparisons whose models have different training lineages or different evidence of memorization instead of applying one contamination discount to the entire benchmark.
 
@@ -290,7 +290,7 @@ Open-corpus matching cannot reveal proprietary training data. Likelihood and n-g
 
 ### Combine contamination detectors by threat model
 
-`combine-contamination-detectors-by-threat-model`
+`ERCA-009` · `combine-contamination-detectors-by-threat-model`
 
 Choose multiple contamination detectors according to both available access and the suspected leakage channel. Use direct and semantic matching when training data are inspectable; use negative-log-likelihood, Min-K, membership, and order-canonicity tests when logits are available; use carefully designed prompting probes when only text access exists. The combined set should cover verbatim, paraphrased, and cross-lingual exposure, with disagreements sent to manual audit.
 
@@ -300,7 +300,7 @@ Multiple negative results therefore mean only that the selected methods found no
 
 ### Run a construct-validity check before adopting or building a benchmark
 
-`run-construct-validity-check`
+`ERCA-010` · `run-construct-validity-check`
 
 Before adopting or constructing a benchmark, record the phenomenon it claims to measure, whether its tasks represent that phenomenon, and why its scoring metric distinguishes success from failure. Apply the eight recommendations from Bean and colleagues ([2025](https://arxiv.org/abs/2511.04703)) as review gates while the design can still be changed. The resulting record should connect each capability claim to concrete task properties and scoring behavior, so a precise result cannot silently inherit a broader interpretation than the instrument supports.
 
@@ -310,7 +310,7 @@ The review describes published practice rather than experimentally testing the c
 
 ### Investigate code-benchmark design against the documented defect taxonomy
 
-`build-code-benchmarks-against-defect-taxonomy`
+`ERCA-011` · `build-code-benchmarks-against-defect-taxonomy`
 
 If a team is investigating weaknesses in a code benchmark, it could compare the design with the 55-criteria How2Bench checklist across construction, quality assurance, release, and reporting. The inquiry could look for contamination exposure, missing or weak oracles, unverified ground truth, absent difficulty calibration, and incomplete statistical reporting. These categories provide a vocabulary for checking whether a proposed benchmark repeats failure classes already observed in earlier collections.
 
@@ -320,7 +320,7 @@ The support is too thin to recommend this practice. This entry is a lead for inv
 
 ### Split agent holdouts by the claimed level of generalization
 
-`give-agent-benchmarks-real-holdouts`
+`ERCA-013` · `give-agent-benchmarks-real-holdouts`
 
 Reserve agent tasks that developers cannot inspect or tune against, then choose the split according to the generalization claim: use a task-distribution holdout for performance within a known distribution, or unseen task families for a broader transfer claim. Before accepting the resulting score, test whether task identifiers, shared artifacts, or other shortcuts let the agent succeed without performing the intended work.
 
@@ -330,7 +330,7 @@ This entry supplies a generalization-level split, not separation in time from a 
 
 ### Pin the eval harness and publish its complete artifacts
 
-`pin-and-publish-eval-harness`
+`ERCA-014` · `pin-and-publish-eval-harness`
 
 Run every recurring evaluation through a versioned harness with pinned task definitions and shared metric implementations, then publish the exact prompts, extraction and normalization rules, scoring code, harness version, and raw model outputs with each score. Inspect a small batch of outputs before scaling the run, and decline direct numerical comparisons when the underlying harnesses differ materially.
 
@@ -340,7 +340,7 @@ Standardization establishes comparability only within the recorded apparatus. A 
 
 ### Stress-test rankings under task and harness perturbations
 
-`stress-test-rankings-under-perturbation`
+`ERCA-015` · `stress-test-rankings-under-perturbation`
 
 Before selecting a model or enforcing a regression gate from leaderboard rank, rerun the comparison across semantically transformed tasks and plausible harness variants. Rephrase, recombine, or deliberately shift problem difficulty; reorder answer choices; and apply alternative scoring methods. Report the resulting rank movement as uncertainty attached to the ordering.
 
@@ -350,7 +350,7 @@ Generated transformations can change difficulty, so absolute scores on evolved s
 
 ### Protect evaluation data when releasing it
 
-`protect-eval-data-at-release`
+`ERCA-017` · `protect-eval-data-at-release`
 
 Release test material only in encrypted form under a no-derivatives license, and decline to send private items through APIs that provide no training-exclusion guarantee. Exclude tasks whose solutions appear beside them online, publish the surrounding web context of internet-derived items for audit, and regenerate templated counterfactual instances from a fresh evaluation seed when the task permits it.
 
@@ -360,7 +360,7 @@ The protections assume sincere and competent participants. One negligent plain-t
 
 ### Purge invalid items before measuring reliability
 
-`purge-invalid-items-before-measuring`
+`ERCA-018` · `purge-invalid-items-before-measuring`
 
 Remove mislabeled, ambiguous, and otherwise invalid items before treating benchmark failures as evidence of system unreliability. Fit a response model to per-item statistics, flag anomalous response patterns, send those candidates through an LLM-judge triage pass, and reserve expert review for the survivors. Invalid questions cause capable and unreliable systems to fail for the same instrument-side reason, compressing differences between their error profiles. In a platinum-grading study of fifteen popular benchmarks, Vendrow and colleagues ([2025](https://arxiv.org/abs/2502.03461)) found that cleaning label errors and ambiguity exposed persistent frontier-model failures on simple tasks that the dirty sets had obscured. In a separate study across nine benchmarks, Truong and colleagues ([2025](https://arxiv.org/abs/2511.16842)) combined item-statistic outlier detection with model-assisted triage and achieved up to 84% precision when identifying problematic questions.
 
@@ -368,7 +368,7 @@ Use the cleaned instrument for saturation-adjacent reliability claims, where inv
 
 ### Audit the leaderboard submission protocol before trusting its rankings
 
-`audit-leaderboard-submission-protocols`
+`ERCA-019` · `audit-leaderboard-submission-protocols`
 
 Forbid undisclosed private-variant testing, selective score disclosure, and removal of inconvenient results, then publish submission, sampling, correction, and retraction rules before accepting entries. When consuming an external leaderboard, inspect those same rules and discount rankings from providers allowed to test many hidden candidates or expose only favorable outcomes. Best-of-k private testing selects the highest observation from a noisy metric, so reported scores and Bradley-Terry ratings rise even when the rating calculation itself is correct. A large forensic observational analysis by Singh and colleagues ([2025](https://arxiv.org/abs/2504.20879)) documented protocol asymmetries on Chatbot Arena, including 27 private Meta variants tested before Llama-4’s release, selective disclosure, and unequal access to arena data.
 
@@ -378,7 +378,7 @@ The strongest evidence is an observational analysis of one platform. Outsiders c
 
 ### Treat a questionable-practices catalog as an investigative lead
 
-`audit-pipeline-against-qrp-catalog`
+`ERCA-021` · `audit-pipeline-against-qrp-catalog`
 
 If an evaluation team chose to investigate possible analytic flexibility, it could compare its pipeline with the catalogued questionable and irreproducible practices, including selective baseline choice, repeated test-set exposure, cherry-picked checkpoints, and unreported prompt tuning. The review could record which choices were fixed before results appeared, which alternatives were available, and which decisions changed after inspecting scores. Such a record would make aligned discretionary choices visible and could suggest sensitivity analyses or preregistered reruns.
 
@@ -388,7 +388,7 @@ The support is too thin to recommend this practice as an evaluation control. Thi
 
 ### Search for an adequate benchmark before creating another
 
-`search-before-building-a-benchmark`
+`ERCA-022` · `search-before-building-a-benchmark`
 
 Search the existing benchmark population for instruments that represent your intended construct, then repair a suitable candidate through a structured enhancement protocol before designing a new suite. Semantic retrieval can surface benchmarks described with different terminology, while a common enhancement process concentrates testing, defect discovery, and documentation on instruments that already have users. Koohestani and colleagues ([2025](https://arxiv.org/abs/2503.05860)) provide directional evidence from a review-and-tooling contribution that catalogued 204 AI4SE benchmarks with overlapping constructs. Their BenchScout tool supports semantic benchmark search, and BenchFrame structures the assessment and correction of known limitations. The authors demonstrated the enhancement process on HumanEval.
 
@@ -398,7 +398,7 @@ The evidence establishes a direction rather than a general advantage for enhance
 
 ### Pair offline evaluation with online experiments and recalibrate the judge
 
-`pair-offline-and-online-evals`
+`ERCA-067` · `pair-offline-and-online-evals`
 
 Use offline evaluations to filter candidate models or prompts before controlled exposure to production traffic, then run the same judge on experiment data and compare its preference with observed user and business outcomes. Keep secondary guardrail metrics in the experiment even when the optimization target excludes them. The offline stage reduces how many variants reach users; the online stage tests consequences that a fixed task set cannot represent. Disagreement between judge scores and experiment outcomes identifies a proxy failure and supplies live examples for recalibration.
 
@@ -408,7 +408,7 @@ This pattern requires sufficient traffic, an experimentation platform, and safeg
 
 ### Check task validity and outcome validity before using an agent benchmark
 
-`checklist-agentic-benchmarks-for-validity`
+`ERCA-032` · `checklist-agentic-benchmarks-for-validity`
 
 Before adopting or publishing an agent benchmark, verify separately that each task is solvable in its configured environment, represents the claimed capability, and has a grader that accepts genuine success while rejecting failure. Report failed checks alongside aggregate scores. Agent evaluations place executable environments, state transitions, tools, and programmatic graders inside the measurement path. A defect in any component can prevent a valid trajectory, manufacture apparent success, or score behavior unrelated to the stated task.
 
@@ -424,19 +424,19 @@ The following pointer entries identify the practices taught in Chapter 4, where 
 
 ### Gate candidate work on execution results
 
-`ground-evaluation-in-execution`
+`ERCA-094` · `ground-evaluation-in-execution`
 
 Run candidate work in a resource-bounded, network-isolated environment, and allow it to propagate only when tests, compilation, deployment checks, or other executable oracles succeed. This replaces plausibility-based acceptance with observed behavior. Chapter 4 develops the execution model and its role in dependable evaluation.
 
 ### Require external feedback for every correction step
 
-`gate-self-correction-on-external-feedback`
+`ERCA-061` · `gate-self-correction-on-external-feedback`
 
 Couple each model revision to new information from a test, tool, verifier, or other external source instead of asking the model to reconsider the same reasoning unaided. The feedback gives correction loops a concrete signal to act on. Chapter 4 explains how to design and apply these gates.
 
 ### Replay a golden task set and score repeated success
 
-`golden-set-pass-k`
+`ERCA-095` · `golden-set-pass-k`
 
 Curate representative real tasks with unambiguous oracles, replay them for every release, and measure whether the system succeeds consistently across repeated trials. This turns release evaluation into a check of operational reliability rather than a report of one favorable run. Chapter 4 develops the complete golden-set and pass^k practice.
 
@@ -444,7 +444,7 @@ The following compact entries record practices attached to Chapter 4’s mechani
 
 ### Score verified resolution separately and reward abstention
 
-`score-verified-resolve-with-abstention`
+`ERCA-063` · `score-verified-resolve-with-abstention`
 
 Report submission and test-verified resolution as separate rates across repeated runs, include uncertainty, and add already-correct tasks whose successful outcome is no edit. An external oracle measures the resulting system state, while abstention probes expose an agent that treats every request as authorization to mutate code. This prevents confident completion messages and agreement across runs from standing in for correctness.
 
@@ -454,7 +454,7 @@ The evidence comes from one author, a limited task set, and four models. Lightwe
 
 ### Detect silent tool errors before planning
 
-`detect-silent-tool-errors`
+`ERCA-064` · `detect-silent-tool-errors`
 
 Insert an explicit validation step between every consequential tool response and the plan that consumes it, checking structural validity, semantic plausibility, and whether the response is sufficiently complete. When validation fails, the plan should select a defined recovery route such as retrying differently, narrowing the request, using another source, surfacing the error, or stopping safely. A successful call without an exception should never by itself certify the returned content.
 
@@ -464,7 +464,7 @@ This support remains early-stage and covers only two controlled settings. Semant
 
 ### Cap agent turns and extend budgets only on evidence of progress
 
-`cap-turn-budgets`
+`ERCA-065` · `cap-turn-budgets`
 
 Set a finite turn budget from the unrestricted baseline for the actual model, scaffold, and workload, using roughly its 75th percentile as an initial fixed ceiling or a smaller default that can be extended when observable progress justifies it. Give every loop explicit success and failure exits, and specify backoff and fallback behavior for flaky dependencies. Because accumulated token use grows quadratically with turns and unsuccessful runs tend to continue longer, a ceiling concentrates spending on trajectories that remain productive.
 
@@ -474,7 +474,7 @@ Recalibrate the distribution whenever models, scaffolds, or tasks change, since 
 
 ### Budget enforcement overhead and test recovery after blocks
 
-`budget-the-verifier-tax`
+`ERCA-169` · `budget-the-verifier-tax`
 
 Evaluate runtime safety enforcement by whether the agent completes the task safely, completes it through a prohibited action, or fails after intervention, while also recording added turns and compute. For every blocked action, return structured policy information and provide an allowed continuation path that the agent can attempt. Test that path as a distinct recovery behavior instead of counting interception as the completed safety outcome.
 
@@ -490,13 +490,13 @@ The following pointer entries identify the practices taught in Chapter 5, where 
 
 ### Calibrate model judges against expert labels
 
-`calibrate-llm-judges`
+`ERCA-096` · `calibrate-llm-judges`
 
 Define judgment categories with experts, establish dependable human labeling, and validate the model judge on held-out, stratified examples using chance-corrected agreement and error-sensitive measures. Use deterministic assertions wherever possible and retain human review in the scaled process. Chapter 5 develops the calibration workflow and the safeguards needed for trustworthy model grading.
 
 ### Keep agreement separate from correctness
 
-`separate-agreement-from-correctness`
+`ERCA-111` · `separate-agreement-from-correctness`
 
 Treat consensus among models or candidates as a measure of agreement, never as verification that a claim is correct. Ground typed claims in checkable sources and use principled abstention when the available support is insufficient. Chapter 5 develops the verification approach and shows how it fits into calibrated evaluation.
 
@@ -504,7 +504,7 @@ The following compact entries record practices attached to Chapter 5’s mechani
 
 ### Keep an exact auditor beside heuristic graders
 
-`keep-an-exact-auditor-alongside-heuristics`
+`ERCA-172` · `keep-an-exact-auditor-alongside-heuristics`
 
 Add a deterministic auditor to your grading pipeline for every claim that admits exact checking, and run it beside heuristic or model graders, off the hot path if necessary. Recheck yesterday’s evaluations, compare exact results with heuristic verdicts, and alert whenever a grader confidently rejects valid work or accepts an impossible result. The auditor supplies a certificate where the heuristic supplies only a judgment, exposing errors that would otherwise leave no failure signal. This is the grading counterpart of auditing a dispatcher that silently drops schedulable work.
 
@@ -514,7 +514,7 @@ Exact checking may be too costly for live evaluation, which can confine it to ni
 
 ### Combine judge labels with a random human-labeled subset
 
-`combine-judge-labels-with-human-subset`
+`ERCA-037` · `combine-judge-labels-with-human-subset`
 
 Collect plentiful AI-judge labels, label a small random sample from the target population with humans, and combine both through prediction-powered inference. Use the human subset to estimate and remove the judge’s aggregate bias, allowing automated labels to reduce variance without defining the answer. When allocating further human review, prioritize items with low verbalized judge confidence through an inference procedure that accounts for that allocation.
 
@@ -530,19 +530,19 @@ The following pointer entries identify the practices taught in Chapter 6, where 
 
 ### Layer independent signals into every acceptance gate
 
-`layer-signals-beyond-single-proxy`
+`ERCA-038` · `layer-signals-beyond-single-proxy`
 
 Combine any optimized proxy, such as tests passed, lint score, diff size, or judge score, with at least one independent signal the agent cannot directly optimize against. The additional signal helps the gate detect work that improves the proxy without improving the intended outcome. Chapter 6 develops this layered evaluation practice for acceptance decisions.
 
 ### Monitor divergence between proxy and true signals
 
-`monitor-proxy-true-divergence`
+`ERCA-039` · `monitor-proxy-true-divergence`
 
 Track an independent quality signal alongside every optimized proxy, and compare how their relationship changes on a fixed reference distribution. Treat rising proxy performance as provisional until the independent measure confirms corresponding improvement, and alert when their correlation deteriorates. Chapter 6 develops this monitoring practice and its operational use.
 
 ### Monitor chain of thought without optimizing against it
 
-`monitor-cot-without-training-pressure`
+`ERCA-042` · `monitor-cot-without-training-pressure`
 
 Use a trusted model to inspect chain-of-thought traces for signs of reward hacking while keeping that monitor outside the training reward and strong selection pressure. This preserves a separate transparency channel that can reveal problematic strategies rather than becoming another target for optimization. Chapter 6 develops the monitoring design and how it supports oversight.
 
@@ -550,7 +550,7 @@ The following compact entries record practices attached to Chapter 6’s mechani
 
 ### Escalate oversight at the first sign of gaming
 
-`escalate-on-first-gaming`
+`ERCA-040` · `escalate-on-first-gaming`
 
 Escalate monitoring and human review as soon as an agent exhibits sycophancy, cosmetic test edits, or another mild form of specification gaming. Early exploits reveal that the agent has found reward in satisfying the measurement while bypassing its intent. Once that strategy has been reinforced, the same reasoning can transfer to settings where the available exploit causes greater harm. Escalation should include preserving the trajectory, examining similar runs, and tightening oversight on subsequent high-impact actions.
 
@@ -558,7 +558,7 @@ In a constructed curriculum study, Denison and colleagues ([2024](https://arxiv.
 
 ### Harden the environment around infeasible tasks
 
-`harden-infeasible-tasks`
+`ERCA-041` · `harden-infeasible-tasks`
 
 Increase sandboxing, action monitoring, and review depth for tasks the agent is likely to find infeasible or unusually difficult. When the intended route offers little prospect of reward, exploiting the environment can become computationally attractive. Difficulty should therefore affect the oversight budget as well as model selection and scheduling. A stretch coding task may warrant narrower permissions, closer inspection of tool calls, and independent validation of the resulting state.
 
@@ -566,7 +566,7 @@ In a comparative chess study, Bondarenko and colleagues ([2025](https://arxiv.or
 
 ### Measure how early reward appears in the reasoning
 
-`measure-reasoning-effort`
+`ERCA-043` · `measure-reasoning-effort`
 
 Add a content-independent effort signal by truncating an agent’s reasoning at progressively later points, forcing an answer at each cutoff, and measuring the resulting reward curve. Flag runs that attain high reward from a small fraction of their full reasoning, represented by a large truncated-reward area under the curve. The mechanism relies on a cost asymmetry: exploiting a loophole can require less computation than completing the intended task, causing reward to become available unusually early.
 
@@ -574,7 +574,7 @@ In an evaluation study, Wang and colleagues ([2025](https://arxiv.org/abs/2510.0
 
 ### Average compatible reward models in weight space
 
-`weight-average-reward-models`
+`ERCA-055` · `weight-average-reward-models`
 
 Fine-tune several reward models from the same pretrained base and average their parameters before using the result to train or gate an agent. Individual reward models develop different errors under distribution shift and inconsistent preference labels, leaving idiosyncratic gaps that an optimizer can exploit. Weight averaging combines their learned solutions while retaining inference efficiency near that of one model, provided the shared initialization keeps those solutions linearly mode-connected.
 
@@ -582,7 +582,7 @@ In controlled summarization experiments, Ramé and colleagues ([2024](https://ar
 
 ### Evaluate agents inside their deployment feedback loops
 
-`evaluate-in-feedback-loops`
+`ERCA-056` · `evaluate-in-feedback-loops`
 
 Test deployed agents in repeated-interaction environments where each output can alter later world state, retrieved context, or engagement signals. Preserve the causal path from an action to the inputs that follow it instead of certifying behavior solely on a fixed dataset. Feedback can amplify side effects through output refinement, where generated material shapes subsequent material, and policy refinement, where the agent adapts to an environment it has already influenced.
 
@@ -590,7 +590,7 @@ In a simulated deployment study, Pan and colleagues ([2024](https://arxiv.org/ab
 
 ### Test hack detectors on realistic contrastive mixtures
 
-`test-detectors-contrastively`
+`ERCA-060` · `test-detectors-contrastively`
 
 Evaluate a reward-hack detector on mixed sets of benign and hacked trajectories using ratios that resemble deployment, then stress-test it on exploits whose meaning depends on task context. Contrastive examples expose the distinctions the detector must make in operation, while realistic base rates reveal whether benign behavior overwhelms its signal. Isolated classification can conceal both problems because it removes nearby alternatives and changes the prevalence of the behavior being detected.
 
@@ -598,7 +598,7 @@ In a directional benchmark study of 517 human-verified trajectories spanning a 5
 
 ### Explore vector acceptance with an independent judge
 
-`accept-on-vector-with-independent-judge`
+`ERCA-173` · `accept-on-vector-with-independent-judge`
 
 As an investigatory variant, you could retain tests, diff size, coverage delta, locality metrics, and review findings as a vector, compare candidates by dominance within explicit tolerances, and reserve acceptance for a judge that neither generated the change nor served as the optimization target. Deterministic gates would select candidates, while a different model would actively test acceptance criteria in a separate context. Sensitive changes would still require adversarial stress testing and human review as the real shipping gate.
 
@@ -612,19 +612,19 @@ The following pointer entries identify the practices taught in Chapter 7, where 
 
 ### Contain each agent’s blast radius
 
-`contain-agent-blast-radius`
+`ERCA-068` · `contain-agent-blast-radius`
 
 Default agents to read-only access, require explicit gates for writes, and separate routine capabilities from destructive platform operations. Keep backups beyond the credentials and endpoints available to agents so an error cannot erase both production state and recovery assets. Chapter 7 develops this permission architecture and shows how to apply it to agent deployments.
 
 ### Verify every agent completion claim
 
-`distrust-agent-self-reports`
+`ERCA-069` · `distrust-agent-self-reports`
 
 Treat every completion claim as a hypothesis to verify against the actual workspace, branch, checklist, and persisted artifacts. Preserve failed work for inspection, assign a fresh task identity to each attempt, and make correction and resumption depend on observed state rather than inherited progress reports. Chapter 7 develops the harness and review practices that make independent verification routine.
 
 ### Defend against prompt injection in depth
 
-`defense-in-depth-injection`
+`ERCA-105` · `defense-in-depth-injection`
 
 Layer input and output controls, allowlists, adversarial testing, and human approval around high-impact actions, with protections mapped to a recognized threat model. The goal is to contain what an injected instruction can cause the agent to do, even when hostile content reaches its context. Chapter 7 develops this defense-in-depth approach to prompt injection.
 
@@ -632,7 +632,7 @@ The following compact entries record practices attached to Chapter 7’s mechani
 
 ### Make orchestration topology part of the security design
 
-`topology-as-security-decision`
+`ERCA-104` · `topology-as-security-decision`
 
 Map every agent-to-agent connection as a trust boundary, isolate workers that consume untrusted material, restrict each worker’s tools, and validate model output before another agent can interpret it as a command. Topology determines how contaminated context travels and which capabilities it can reach. In tested configurations, Hagag ([2026](https://arxiv.org/abs/2604.23459)) found up to 3.8x attack-success variance across topologies for the same task, with untrusted input propagating across agent boundaries. Directional work on communication attacks by He ([2025](https://arxiv.org/abs/2502.14847)), G-Safeguard by Wang ([2025](https://arxiv.org/abs/2502.11127)), and the MPAC protocol ([2026](https://arxiv.org/abs/2604.09744)) points toward treating communication paths and permission boundaries as security controls.
 
@@ -640,7 +640,7 @@ Splitting a task among more agents does not itself provide isolation. The tested
 
 ### Investigate stateful guardrails across sessions
 
-`stateful-cross-session-guardrails`
+`ERCA-110` · `stateful-cross-session-guardrails`
 
 If cross-session attacks are in scope, an investigation could distribute validation across agents, retain security-relevant state between sessions, and treat every cross-agent handoff as attacker-controlled input. The proposed mechanism would connect fragments that a session-bound gate sees only separately. It could also expose injection laundering, where content gains apparent legitimacy while passing through agents that each inspect only part of its history. Azarafrooz ([2026](https://arxiv.org/abs/2604.21131)) directionally reports that central session-bound gates miss cross-session and context-fragmented violations. AGrail by Luo ([2025](https://arxiv.org/abs/2502.11448)) and Architecture Matters ([2026](https://arxiv.org/abs/2604.23459)) point in the same architectural direction without supplying a production effect size for this design.
 
@@ -648,7 +648,7 @@ The support is too thin to recommend this practice, so this entry is a lead for 
 
 ### Route agent remediations through a typed policy path
 
-`execute-agent-remediations-through-typed-policy-path`
+`ERCA-139` · `execute-agent-remediations-through-typed-policy-path`
 
 Make diagnosis and planning agents emit typed remediation plans over a small action set, then allow only a compact validated executor to apply those plans transactionally. Each mitigation should traverse explicit preconditions, evidence analysis, an action plan, plan reflection, an execution-policy check, and result reflection, with stopping represented as a valid result. The mechanism confines autonomy to operations whose side effects are declared and checkable. Safety therefore depends primarily on the action vocabulary, validator, and transaction boundary rather than on an agent’s confidence or apparent diagnostic skill.
 
@@ -656,7 +656,7 @@ A directional preprint by Bindschaedler ([2026](https://arxiv.org/abs/2604.09963
 
 ### Assign autonomy separately to every action
 
-`score-actions-by-reversibility-and-blast-radius`
+`ERCA-189` · `score-actions-by-reversibility-and-blast-radius`
 
 Place each agent action on an explicit ladder from observe-only, inform, and recommend through act-with-approval, act-with-notification, and fully autonomous execution. Choose the rung by examining the action’s reversibility, blast radius, signal quality or confidence, and time sensitivity. This makes authority a property of a particular side effect rather than a permanent rating attached to an agent. Reversibility determines whether a mistaken action can be repaired, while blast radius determines how much of the system may require repair. Consequently, the same agent can restart an isolated worker at one rung and delete shared state only at another.
 
@@ -664,7 +664,7 @@ Bala Priya C’s directional practitioner article, [“When Should a DevOps Agen
 
 ### Investigate the local security effect of AI assistance
 
-`measure-your-own-security-delta`
+`ERCA-151` · `measure-your-own-security-delta`
 
 If an organization is considering a local comparison, it could measure assisted and unassisted development on the same tasks and participant population before treating an external security result as locally representative. Such a comparison would test whether assistance changes functional output and security defects under the organization’s own languages, tools, and review process. Sandoval and colleagues ([2022/2023](https://arxiv.org/abs/2208.09727)) conducted a controlled N=58 study on a low-level C linked-list task. In that setting, assisted users produced critical bugs at no more than 10% above control while producing more functional code, contradicting a headline obtained in a different setting and showing that the measured effect can depend on task and population.
 
@@ -672,7 +672,7 @@ The support is too narrow to recommend local assisted-versus-unassisted testing 
 
 ### Reject self-attestation for AI-assisted code
 
-`never-accept-self-attestation`
+`ERCA-152` · `never-accept-self-attestation`
 
 Treat an author’s confidence in AI-assisted code as a report of belief and require verification independent of both the author and the generating system. Match the check to the claim: execute behavioral tests, test security properties directly, and use independent review for assumptions that executable checks cannot encode. During generation, encourage skeptical prompting and active steering because these behaviors were associated with better outcomes, while preserving external verification as the acceptance gate.
 
@@ -688,19 +688,19 @@ The following pointer entries identify the practices taught in Chapter 8, where 
 
 ### Make agent state a persistent artifact
 
-`make-agent-state-first-class-persistent`
+`ERCA-130` · `make-agent-state-first-class-persistent`
 
 Externalize plans, progress, event history, context snapshots, and checkpoints into durable managed artifacts instead of leaving workflow state inside a process or model context. Use those artifacts to reconstruct the work faithfully after interruption, worker replacement, or session loss. Chapter 8 develops the state model and recovery workflow needed to make persistence a first-class property.
 
 ### Coordinate multi-step work with a durable workflow engine
 
-`use-durable-workflow-engine`
+`ERCA-128` · `use-durable-workflow-engine`
 
 Put multi-step, multi-service, and multi-agent coordination under a durable workflow engine that owns persisted execution state, retries, compensation, and the overall view of a run. Keep orchestration concerns in that platform layer so application code does not accumulate scattered recovery logic or instance-local coordination state. Chapter 8 develops how this architecture organizes reliable long-running work.
 
 ### Make every retried step idempotent
 
-`make-retried-steps-idempotent`
+`ERCA-124` · `make-retried-steps-idempotent`
 
 Design every retryable step so repeated execution produces the same observable result as one execution. Carry an idempotency key with side effects and retain results by invocation identity, allowing redelivered work to return the prior result instead of repeating the action. Chapter 8 develops the guarantees and implementation mechanics for safe retries.
 
@@ -708,7 +708,7 @@ The following compact entries record practices attached to Chapter 8’s mechani
 
 ### Give every external effect a receipt and a compensator
 
-`transactional-side-effects`
+`ERCA-098` · `transactional-side-effects`
 
 Extend each side-effecting tool adapter with a durable invocation identity, an effect receipt, and, where reversal is possible, a compensating operation. When the same invocation returns after a crash, replay the recorded result instead of issuing the write again; assign a new identity only when the caller explicitly requests a new effect. Append completed effects to a per-run transaction log, record their dependencies, and invoke compensators in reverse dependency order when later work fails.
 
@@ -718,7 +718,7 @@ A compensator must encode the semantics of its particular tool, and reversal may
 
 ### Define the runtime retry contract with three observable invariants
 
-`state-retry-contract-invariants`
+`ERCA-123` · `state-retry-contract-invariants`
 
 Write the retry contract for every tool or step as three testable guarantees: failed invocations return for another attempt, completed invocations never execute again, and happens-before relationships within a call stack survive recovery. Verify each guarantee by killing the runtime at the precise step granularity on which the application relies, then inspect the runtime’s authoritative state to determine whether progress, effects, or ordering changed.
 
@@ -728,7 +728,7 @@ The formal result stops at the managed-state boundary. An irrevocable API call, 
 
 ### Take asynchronous snapshots at natural consistency boundaries
 
-`checkpoint-async-at-consistency-boundaries`
+`ERCA-125` · `checkpoint-async-at-consistency-boundaries`
 
 Place snapshot triggers at boundaries where the runtime can identify a consistent state, and perform the persistence work asynchronously. In a dataflow, insert barrier markers into the record stream and save each operator’s state as the barrier passes. In an agent sandbox, inspect the OS-visible effects of each completed turn, classify which state changed, and checkpoint only the state classes required for recovery.
 
@@ -738,7 +738,7 @@ The guarantees do not transfer unchanged between the two settings. Barrier snaps
 
 ### Calculate checkpoint cadence from measured operating conditions
 
-`calibrate-checkpoint-interval`
+`ERCA-126` · `calibrate-checkpoint-interval`
 
 Calculate checkpoint cadence from the observed cost of saving state, the deployment’s failure rate, recovery cost, and fault-detection latency. Retain more than one snapshot, and define a meaningful unit of agent work so intermediate state is saved after a calibrated number of units. Recompute the cadence when workload, infrastructure, snapshot size, or detection behavior changes.
 
@@ -748,7 +748,7 @@ These models assume that the failure process has been characterized, commonly as
 
 ### Investigate event-delivery guarantees before choosing choreography
 
-`design-event-coordination-guarantees-explicitly`
+`ERCA-129` · `design-event-coordination-guarantees-explicitly`
 
 If event-based coordination is under consideration, treat ordering scope, delivery behavior, replay sources, deduplication identity, and dead-letter ownership as questions the candidate design would need to answer. Each event flow would need an identified owner for unprocessable messages and a recovery path through which repaired consumers could catch up after restarts or concurrent delivery. Broker labels alone would not establish those properties.
 
@@ -758,7 +758,7 @@ The support is too thin to recommend this practice, and this entry should be tre
 
 ### Commit each step’s execution record with its data changes
 
-`log-steps-transactionally-with-data`
+`ERCA-131` · `log-steps-transactionally-with-data`
 
 Record each step execution in the same transactional store as the authoritative data it changes, and commit the execution record and data mutation in one transaction. A failed transaction should expose neither record; a successful transaction should expose both. Recovery can then determine from one source whether an attempt committed, while operators gain an execution history tied directly to the corresponding state transition.
 
@@ -768,7 +768,7 @@ The guarantee covers only effects represented inside the transaction. An email, 
 
 ### Isolate shared agent state with transactional controls
 
-`isolate-shared-agent-state-transactionally`
+`ERCA-140` · `isolate-shared-agent-state-transactionally`
 
 Place shared memory stores, vector indices, and tool registries behind isolation controls that treat each agent interaction as a long-running read-generate-write transaction. Record the version of every shared resource read during generation, then validate those versions before committing an update or external action. The controls should explicitly exclude stale-generation, phantom-tool, causal-cascade, and tool-effect-reordering anomalies. Model latency lengthens the interval in which concurrent agents can invalidate one another’s premises, so checking only the final write leaves important conflicts undetected.
 
@@ -778,7 +778,7 @@ The formal guarantee depends on deterministic generation and covers interactions
 
 ### Investigate deterministic postconditions for stochastic steps
 
-`guard-stochastic-steps-with-postconditions`
+`ERCA-135` · `guard-stochastic-steps-with-postconditions`
 
 Investigate whether each stochastic generation could be paired with a deterministic guard that maps its output and workflow state to pass or fail. If such a predicate were writable, a candidate recovery hierarchy could retry the step with refined context, backtrack after stagnation by invalidating dependent work and injecting context upstream, and finally escalate to a human. This structure could keep failures from becoming durable progress while avoiding the uncontrolled retry growth that independent retries across many steps could create.
 
@@ -788,7 +788,7 @@ The support is too thin to recommend this practice, so this entry is only a lead
 
 ### Version events early and strengthen their schema gradually
 
-`version-events-weak-schema-first`
+`ERCA-137` · `version-events-weak-schema-first`
 
 Assign an explicit version to every event type from the beginning, while allowing readers to tolerate compatible additive changes. Introduce upcasters when current consumers need older records translated into the present representation. If adapter chains become operationally burdensome, consolidate them through a copy-and-transform migration. This progression preserves access to durable history without imposing the cost of a mature migration system before evolution pressure exists.
 
@@ -798,7 +798,7 @@ This evidence comes from one vendor-adjacent population and does not compare the
 
 ### Design operations to tolerate partial execution order
 
-`design-operations-order-tolerant`
+`ERCA-138` · `design-operations-order-tolerant`
 
 Define domain operations under eventual consistency so that safe outcomes survive interleaving and partial execution order. Prefer incremental updates and genuinely blind updates when the domain permits them, and document explicit compatibility relations between pairs of operations. Reserve read-modify-write sequences for cases that require a serial decision, because embedding a previously read value in a later write can overwrite concurrent progress.
 
@@ -808,7 +808,7 @@ The practice requires upfront domain analysis and engineers able to reason about
 
 ### Investigate crystallizing repeated plans into declarative blueprints
 
-`crystallize-repeated-plans-into-blueprints`
+`ERCA-141` · `crystallize-repeated-plans-into-blueprints`
 
 Investigate whether a repeated, stable multi-tool task could be designed once by an agent and emitted as a parameterized JSON blueprint for later execution without model involvement. A candidate blueprint could use a deliberately small language of five primitives and convergent mutations such as MERGE semantics. If the task’s shape remained fixed, subsequent runs could become deterministic workflow executions, with retries reproducing the same operations instead of invoking fresh tool selection and planning.
 
@@ -824,13 +824,13 @@ The following pointer entries identify the practices taught in Chapter 9, where 
 
 ### Record every run as a replayable typed trace
 
-`replayable-typed-traces`
+`ERCA-097` · `replayable-typed-traces`
 
 Represent each run as a persistent typed event stream that records model, tool, and environment effects in a replayable form. Include agent, session, and reasoning-step identifiers so decisions can be joined to the actions they caused, and use shared telemetry conventions to keep the trace interoperable. Chapter 9 develops this tracing model and its role in reliable agent operations.
 
 ### Benchmark recovery by injecting failures
 
-`benchmark-recovery-with-fault-injection`
+`ERCA-127` · `benchmark-recovery-with-fault-injection`
 
 Test recovery by deliberately injecting failures into the running system and observing how it returns to useful, stable operation. Measure recovery behavior, restored performance, and the effects of repeated disruptions so fault-tolerance claims rest on demonstrated behavior rather than system diagrams. Chapter 9 develops the experimental method for turning recovery into a benchmark.
 
@@ -838,7 +838,7 @@ The following compact entries record practices attached to Chapter 9’s mechani
 
 ### Record nondeterministic results and replay only deterministic code
 
-`record-nondeterminism-replay-deterministic-code`
+`ERCA-121` · `record-nondeterminism-replay-deterministic-code`
 
 Keep workflow control flow deterministic, and move clock reads, randomness, I/O, LLM calls, and every other nondeterministic operation into logged activities whose recorded results are reused during replay. Classify agent steps as derive or infer. Derive steps may run again because their outputs follow deterministically from recorded inputs. Infer steps capture model judgment, so persist their outputs and reuse them only when an explicit compatibility policy permits it.
 
@@ -848,7 +848,7 @@ Any nondeterministic value that enters orchestration code can still invalidate r
 
 ### Bound the event history that recovery must replay
 
-`bound-replay-history`
+`ERCA-122` · `bound-replay-history`
 
 Divide long-running workflows at durable semantic boundaries by using sub-orchestrations, restarting with explicit state through continue-as-new, or expressing long tasks as chains of small persisted tail calls. Choose each cut so that recovery needs to replay or retry only a short suffix, and carry all state required by the next segment as explicit input.
 
@@ -858,7 +858,7 @@ The runtime cannot identify the application’s semantic cut points automaticall
 
 ### Recover heterogeneous workflows from task-level provenance
 
-`provenance-driven-reexecution`
+`ERCA-132` · `provenance-driven-reexecution`
 
 Persist task-level provenance when a workflow crosses environments that lack a shared event log or transaction substrate, recording each task’s inputs, outputs, dependencies, execution environment, and completion state. On failure, use that record to identify the affected dependency subgraph, roll it back to a valid boundary, and re-execute only the tasks that must be restored in their respective environments.
 
@@ -868,7 +868,7 @@ Re-execution remains safe only when tasks are deterministic, idempotent, or othe
 
 ### Certify restore points against committed downstream work
 
-`certify-restores-against-downstream-commitments`
+`ERCA-133` · `certify-restores-against-downstream-commitments`
 
 Before restoring an agent step from a checkpoint, inspect which downstream consumers have committed work based on that step’s output. Admit only restore points that preserve those commitments. If a rollback would remove the upstream history supporting an already committed effect, refuse the restore and escalate the case for compensation or human resolution.
 
@@ -878,7 +878,7 @@ The certification is only as sound as the declared dependency and effect metadat
 
 ### Diagnose failures before admitting guidance to a retry
 
-`diagnose-then-gate-recovery`
+`ERCA-134` · `diagnose-then-gate-recovery`
 
 After restoring a failed run, classify the failure and select a matching intervention such as replanning, prompt correction, or tool reselection. Convert telemetry into structured evidence, then pass guidance into the next attempt only when it is grounded in that evidence, actionable by the agent, and confined to behavior the recovery layer can influence. Withhold guidance when the trace cannot support a bounded intervention.
 
@@ -888,7 +888,7 @@ Detection accuracy still limits the entire loop, and the absolute recovery rate 
 
 ### Expose recovery as failure-free only through monotonic observations
 
-`hide-recovery-behind-monotonic-observability`
+`ERCA-136` · `hide-recovery-behind-monotonic-observability`
 
 Present checkpoint and recovery as a failure-free programming model only when external observers see committed state monotonically. Buffer output until its epoch or transaction commits, and prevent tools, notifications, streams, or other side channels from revealing state that recovery might later abandon.
 
@@ -898,7 +898,7 @@ The proof concerns a formal model rather than the production Flink implementatio
 
 ### Inject semantic failures from a realistic fault menu
 
-`fault-inject-with-realistic-fault-menu`
+`ERCA-052` · `fault-inject-with-realistic-fault-menu`
 
 Build a fault menu from failures observed in agent traces, map each failure to the system layer that can produce it, and inject it there through prompt modification, response rewriting, or message-routing manipulation. Include syntactically valid failures that ordinary exception tests miss, such as hallucinated content, misread instructions, reasoning drift, context noise, tool delays, API failures, and corrupted coordination. These faults can propagate through successful calls and plausible messages, so recovery tests expose whether later agents detect, contain, or amplify them.
 
@@ -914,19 +914,19 @@ The following pointer entries identify the practices taught in Chapter 10, where
 
 ### Derive the failure taxonomy from your own traces
 
-`derive-taxonomy-from-own-traces`
+`ERCA-045` · `derive-taxonomy-from-own-traces`
 
 Build the failure taxonomy from a substantial, varied sample of your own raw traces, recording open-ended human observations and labeling the first upstream failure in each run. Cluster those observations into a small set of actionable themes, then direct mitigation toward the stages and classes where failures concentrate. Chapter 10 develops this trace-led method for creating useful taxonomies.
 
 ### Keep humans responsible for failure attribution
 
-`keep-humans-in-failure-attribution`
+`ERCA-046` · `keep-humans-in-failure-attribution`
 
 Keep people responsible for determining which agent and decision produced a failure, supported by instrumentation that preserves the decisive step in structured state. Use automation to organize evidence for review, not to replace human judgment with post-hoc model inference over logs. Chapter 10 develops the attribution workflow and the observability required to make it practical.
 
 ### Design traces for human audit
 
-`design-traces-for-human-audit`
+`ERCA-047` · `design-traces-for-human-audit`
 
 Structure traces around step boundaries, tool calls, decision points, inputs, retries, and outcomes so a person can reconstruct what happened and replay the relevant decision. Design the audit experience for factual inspection rather than asking a model to infer the cause from an undifferentiated transcript. Chapter 10 develops the trace design needed for rigorous human failure analysis.
 
@@ -934,7 +934,7 @@ The following compact entries record practices attached to Chapter 10’s mechan
 
 ### Localize failures from a constraint-violation log
 
-`judge-from-constraint-violation-log`
+`ERCA-049` · `judge-from-constraint-violation-log`
 
 Before asking a human or model judge to localize a failure, convert the task requirements into explicit constraints, evaluate each constraint against every relevant trajectory step, and produce a violation log that links each finding to its evidence. The judge then examines discrete claims about which requirement was breached and when. This narrows an open-ended interpretation problem while preserving a path from every attribution back to observable events. In a directional evaluation of 115 annotated failed trajectories, Barke and colleagues ([2026](https://arxiv.org/abs/2602.02475)) found that constraint-violation logs improved step localization and attribution over judging raw traces across structured application workflows, incident management, and open-ended web and file tasks.
 
@@ -942,7 +942,7 @@ The resulting diagnosis can only cover constraints represented in the log. Const
 
 ### Monitor early trajectory shape during execution
 
-`monitor-early-trajectory-shape`
+`ERCA-050` · `monitor-early-trajectory-shape`
 
 Instrument active runs to track trajectory length, step-to-step variance, tool-call growth, and the beliefs formed during the first few execution steps. Runs that become long or erratic should enter an early-review queue, with reviewers checking especially for incorrect assumptions about the repository, available tools, or execution environment. A directional observational study across OpenHands, SWE-agent, and Prometheus on SWE-bench found that failed trajectories were consistently longer and more variable than successful ones, even while file localization remained sound, as reported by Majgaonkar and colleagues ([2025](https://arxiv.org/abs/2511.00197)). These shape changes can therefore become visible before the terminal outcome.
 
@@ -952,7 +952,7 @@ These studies do not establish a universal abort threshold. Patterns differed si
 
 ### Preempt environment errors before reasoning begins
 
-`preempt-environment-errors`
+`ERCA-051` · `preempt-environment-errors`
 
 Add deterministic dependency checks, permission probes, service-health checks, and namespace-conflict detection before an agent begins reasoning, and classify resulting failures separately from model failures. Missing modules, incompatible types, operating-system faults, and database-integrity errors can otherwise trigger repeated diagnosis and repair attempts against conditions the agent cannot resolve. A directional process-mining study by Chen and colleagues ([2025](https://arxiv.org/abs/2503.12374)) examined 3,977 solving trajectories and 3,931 test logs from 8 agents on 500 SWE-bench issues. Python execution errors correlated with lower resolution rates and higher reasoning overhead, with the most damaging cases taking the form of infrastructure faults. The authors consequently recommended mechanical checks that expose such conditions before the main solving loop.
 
@@ -962,7 +962,7 @@ Some execution errors provide useful feedback, and the SWE-bench platform itself
 
 ### If automating attribution, investigate hierarchical context and independent judges
 
-`aggregate-independent-attribution-judges`
+`ERCA-053` · `aggregate-independent-attribution-judges`
 
 If a team experiments with model-based attribution, it could divide the trace into hierarchical context levels, run several genuinely independent judge passes, and combine their outputs through consensus or confidence-aware weighting. Disagreement could trigger another pass or human review instead of being hidden by a forced verdict. Hierarchical levels would limit the evidence each judge must interpret at once, while independent passes could reduce reliance on one position-sensitive reading. In a directional author-run evaluation, Banerjee and colleagues ([2025](https://arxiv.org/abs/2510.04886)) found that hierarchical context leveling with consensus voting outperformed all-at-once, step-by-step, and binary-search attribution. Another directional author-run evaluation by Xia and colleagues ([2026](https://arxiv.org/abs/2607.07989)) combined independent evaluators using confidence-aware aggregation and fed disagreement back into the judging process.
 
@@ -970,7 +970,7 @@ The support is too thin to recommend this practice. This aside is a lead for inv
 
 ### Differentially test the agent against an environment oracle
 
-`differential-test-before-blaming-agent`
+`ERCA-054` · `differential-test-before-blaming-agent`
 
 Before assigning a failure to the agent, sample diverse environment configurations, such as with a Latin Hypercube over configurable parameters, and submit each task to an agent-independent planner or solver. Classify an agent failure only for configurations where that feasibility oracle succeeds while the agent fails. The comparison prevents an inherently infeasible task instance from entering the model-failure bucket merely because the agent encountered it first. In a directional black-box evaluation, Anand and colleagues ([2025](https://arxiv.org/abs/2507.03870)) used an independent planner to separate systemic agent errors from environment errors and reported detecting more total and unique errors than the evaluated prior methods across their domains.
 
@@ -980,7 +980,7 @@ Differential testing requires a credible independent oracle. Classical planners 
 
 ### Canonicalize trajectories without discarding source events
 
-`canonicalize-trajectories`
+`ERCA-057` · `canonicalize-trajectories`
 
 Map scaffold-specific trace events into a compact action vocabulary such as search, read, edit, validate, and revert, then attach deterministic effect labels and scan the normalized sequence for named anti-patterns. Paired runs can be aligned at the point where their canonical behaviors diverge, making traces from different agents or versions mechanically comparable. A directional study by Shu and colleagues ([2026](https://arxiv.org/abs/2607.06184)) applied this approach to 2,500 trajectories from five production settings on SWE-bench Verified. Function-level selection separated successful from failed behavior where file selection was too coarse, while rule-based detectors exposed search loops and skipped verification that terminal resolve rate concealed.
 
@@ -990,7 +990,7 @@ The vocabulary and anti-pattern rules require manual adaptation and validation f
 
 ### Use run-to-run consistency as a per-task risk signal
 
-`use-run-consistency-as-risk-signal`
+`ERCA-062` · `use-run-consistency-as-risk-signal`
 
 If you are investigating consistency as a risk signal, you could run an agent repeatedly on the same input, compare its action paths, and flag tasks whose paths diverge, especially at their first decisions. Divergence may reveal inputs for which small sampling differences send execution toward different tools, intermediate states, or conclusions. A single-author preprint by Mehta ([2026](https://arxiv.org/abs/2602.11619)) found a directional association between greater action-path divergence and poorer outcomes in ReAct-style agents on HotpotQA, with divergence becoming visible early enough to inform per-task review routing.
 
@@ -1004,19 +1004,19 @@ The following pointer entries identify the practices taught in Chapter 11, where
 
 ### Score retrieval separately from final answers
 
-`score-retrieval-and-generation-separately`
+`ERCA-076` · `score-retrieval-and-generation-separately`
 
 Measure whether the system surfaced the needed evidence, where it ranked, and whether the generator used it, then report those diagnostics separately from completion quality. This separation makes retrieval and generation failures visible as distinct engineering problems. Chapter 11 develops the scoring design and explains how to interpret both process diagnostics and end-to-end results.
 
 ### Run hybrid retrieval and fuse the ranked results
 
-`hybrid-retrieval-fused-on-ranks`
+`ERCA-083` · `hybrid-retrieval-fused-on-ranks`
 
 Run lexical and semantic retrieval as parallel, first-class channels, then combine their ranked outputs with reciprocal-rank fusion while preserving each lane for inspection. This gives exact identifiers and paraphrased concepts independent routes into the candidate set and makes ranking faults traceable. Chapter 11 explains how the channels, fusion, and diagnostics work together.
 
 ### Chunk code along AST boundaries
 
-`chunk-on-ast-boundaries`
+`ERCA-085` · `chunk-on-ast-boundaries`
 
 Construct retrieval chunks from syntactic units by recursively splitting large AST nodes and combining small related siblings within a size budget. The resulting chunks preserve coherent functions, classes, and declarations so retrieved code remains understandable and useful for generation. Chapter 11 develops the structure-aware chunking procedure and its role in repository retrieval.
 
@@ -1024,7 +1024,7 @@ The following compact entries record practices attached to Chapter 11’s mechan
 
 ### Bridge lexical gaps before generation
 
-`retrieve-across-lexical-gaps`
+`ERCA-073` · `retrieve-across-lexical-gaps`
 
 Route tasks through semantic or structural retrieval when their descriptions share no surface vocabulary with the required code. Issue reports often describe behavior in user-facing terms while implementations expose domain-specific symbols, so adding more repository text does not necessarily reveal the association. A controlled long-context evaluation by Modarressi and colleagues ([2025](https://arxiv.org/abs/2502.05167)) removed literal matching cues and found that 10 of 12 models claiming >=128K windows fell below 50% of their short-context baseline at 32K tokens. GPT-4o moved from 99.3% to 69.7%. The measurement shows that nominal window capacity does not guarantee reliable retrieval across a latent association.
 
@@ -1032,7 +1032,7 @@ Diagnose the query before selecting the retrieval path. Exact symbols, error str
 
 ### Re-query the repository as the draft develops
 
-`iterate-retrieval-with-generation`
+`ERCA-074` · `iterate-retrieval-with-generation`
 
 Run another repository query whenever a draft, exploration result, or failed attempt exposes a new symbol, dependency, or unresolved assumption. The initial query can use only the language available in the task, while intermediate output often names the API, neighboring implementation, or type relationship that the next pass should retrieve. Generation therefore produces evidence for refining retrieval. In a repository-level code-completion comparison, Zhang and colleagues ([2023](https://arxiv.org/abs/2303.12570)) found that iterative retrieval and generation beat single-shot RAG and improved over in-file-only baselines by >10% on RepoEval.
 
@@ -1040,7 +1040,7 @@ Preserve each query, candidate set, and draft so evaluation can distinguish prod
 
 ### Gate retrieval on its expected downstream benefit
 
-`gate-retrieval-on-expected-benefit`
+`ERCA-075` · `gate-retrieval-on-expected-benefit`
 
 Insert a query-level policy that predicts whether retrieved context will improve the target model’s output, and skip retrieval when that prediction falls below a calibrated threshold. Apply the same decision at architecture scale by measuring whether each task class benefits enough to justify retrieval infrastructure. Retrieved passages can consume attention, introduce plausible but misleading code, and add tool or reranking cost. In code-completion experiments, Wu and colleagues ([2024](https://arxiv.org/abs/2403.10059)) found that threshold-based selective retrieval beat always-retrieving and greedy selection on RepoEval and CrossCodeEval. Their 16B policy achieved state-of-the-art accuracy with up to 70% inference speedup, and 1B and 3B variants were also released.
 
@@ -1050,7 +1050,7 @@ Draw the operating boundary from effective-length, saturation, cost, and failure
 
 ### Test retrieval quality and context use independently
 
-`fix-both-ends-of-rag`
+`ERCA-077` · `fix-both-ends-of-rag`
 
 Before improving the retriever, test whether the generator can solve the task when given ideal context within the actual window budget; before expanding the window or changing the generator, test whether retrieval surfaces the required material. These experiments separate context acquisition from context integration. When either stage is limiting, an improvement to the other may leave end-to-end performance unchanged and create a misleading null result. In a benchmark spanning five retrieval sources and three task classes, Wang and colleagues ([2024](https://arxiv.org/abs/2406.14497)) found bottlenecks at both ends: retrievers struggled when lexical overlap was limited, while generators sometimes failed to use supplied context under constrained windows or weak context-integration ability.
 
@@ -1058,7 +1058,7 @@ Use retrieval-only judgments to estimate the acquisition ceiling and oracle-cont
 
 ### Prune cheaply, then rerank a small candidate set
 
-`stage-cheap-retrieval-then-rerank`
+`ERCA-089` · `stage-cheap-retrieval-then-rerank`
 
 Use an inexpensive retriever to reduce the corpus, then apply a cross-encoder or late-interaction reranker only to the top 20-30 candidates. Candidate count multiplies the cost of the expensive technique, so staging preserves broad first-pass coverage while concentrating detailed comparison near the context cutoff. A strong retrieval study by Khattab ([2020](https://arxiv.org/abs/2004.12832)) supports this cheap-first-stage, expensive-shortlist design and shows that first-stage quality caps the achievable result. Treat initial ranks as provisional and train the candidate generator with hard negatives when function-level localization matters.
 
@@ -1074,19 +1074,19 @@ The following pointer entries identify the practices taught in Chapter 12, where
 
 ### Localize repository changes through a staged funnel
 
-`staged-localization-funnel`
+`ERCA-084` · `staged-localization-funnel`
 
 Move through repository structure, candidate files, relevant symbols, and concrete edit locations as explicit narrowing stages. Give each stage the context and localization machinery suited to its granularity, with particular attention to assembling the right file set before reasoning about edits. Chapter 12 develops this funnel as a complete repository-localization workflow.
 
 ### Index the repository as a typed knowledge graph
 
-`index-repository-as-knowledge-graph`
+`ERCA-174` · `index-repository-as-knowledge-graph`
 
 Represent directories, files, classes, functions, and linked development artifacts as typed nodes connected by containment, import, invocation, inheritance, definition, and reference relationships. Search and traverse that graph to answer structural questions and reach change sites through compact multi-hop paths. Chapter 12 develops the indexing model, traversal workflow, and downstream localization design.
 
 ### Gate retrieved context on freshness and authorization
 
-`gate-retrieval-on-freshness`
+`ERCA-078` · `gate-retrieval-on-freshness`
 
 Refresh retrieval indexes against the working tree and verify that returned evidence reflects the repository’s current state before placing it in model context. Apply authorization checks at the same gate so only current, permitted material can influence reasoning or edits. Chapter 12 develops the freshness and access controls required for dependable repository retrieval.
 
@@ -1094,7 +1094,7 @@ The following compact entries record practices attached to Chapter 12’s mechan
 
 ### Retrieve completion context through structural relations
 
-`retrieve-by-structure`
+`ERCA-079` · `retrieve-by-structure`
 
 Add a structural retrieval lane that narrows completion context through control-flow, data-dependence, and syntax relations before selecting code fragments. Statements connected to the completion point through execution or value flow can supply useful context even when they share little vocabulary with it. Liu and colleagues ([2024](https://arxiv.org/abs/2406.07003)) compared dependence-graph retrieval with sequence-similarity RAG baselines for repository-level completion. Graph-keyed retrieval improved exact match on code by +6.06 and identifier match by +6.23 while using less time and space. Guo and colleagues ([2020](https://arxiv.org/abs/2009.08366)) likewise provide strong evidence that structural and data-flow signals support code retrieval, while Ye and colleagues ([2020](https://arxiv.org/abs/2006.05265)) support the direction of this practice without supplying a cataloged magnitude.
 
@@ -1102,7 +1102,7 @@ Keep literal text search and semantic code search as separate query lanes. A tri
 
 ### Front-load a condensed repository map
 
-`front-load-a-repo-map`
+`ERCA-086` · `front-load-a-repo-map`
 
 Generate a structured repository map before the agent opens source, let it identify likely files and subsystems from that map, and descend into raw code only where implementation detail is needed. Compression preserves repository shape within a workable context window, reducing the tool calls spent paging through weakly directed search results. Tawosi and colleagues ([2025](https://arxiv.org/abs/2508.02611)) report directional evidence that summary-first reasoning can reduce repository context while retaining useful file and function localization. Yang and colleagues ([2024](https://arxiv.org/abs/2405.15793)) also found that adding iterative search could perform worse than providing no search interface, showing how undirected exploration can consume budget without improving resolution.
 
@@ -1112,7 +1112,7 @@ A repository map discards implementation detail by design and can drift from the
 
 ### Inject static-analysis facts beside the code
 
-`inject-static-anchors`
+`ERCA-087` · `inject-static-anchors`
 
 Place selected call-graph, inheritance, and configuration-dependency facts beside the code as plain-text annotations, with the primary goal of making navigation repeatable across runs. Keyword-driven exploration can send identical tasks through different files and tool trajectories. Deterministic structural relations narrow those choices, giving successive runs common landmarks even when the model generates different search terms. Lin and colleagues ([2026](https://arxiv.org/abs/2606.26979)) provide directional evidence that static-structure annotations improve run-to-run stability more than raw capability on a strong Codex baseline.
 
@@ -1122,7 +1122,7 @@ The evidence covers medium-scale repositories and added roughly 10% more input t
 
 ### Schedule exploration by relevance and prune it by graph distance
 
-`schedule-exploration-prune-by-distance`
+`ERCA-090` · `schedule-exploration-prune-by-distance`
 
 Maintain a priority queue of pending exploration actions, split coarse actions into independently scoreable steps, and remove context that lies too far from the current suspect before it enters the model window. The queue spends each tool call on the strongest available lead instead of following whichever branch the agent generated first. Decomposition makes broad actions comparable, while distance-aware pruning limits interference from structurally remote code.
 
@@ -1132,7 +1132,7 @@ A relevance score can rank the wrong branch highly, and aggressive distance prun
 
 ### Walk the current call graph when no maintained index is available
 
-`walk-call-graph-at-query-time`
+`ERCA-091` · `walk-call-graph-at-query-time`
 
 Build and expand module and function call graphs during each query when maintaining a persistent index is impractical. Begin from plausible entry points, use module relations to reduce the initial search area, and then follow function calls outward while pruning the frontier to fit the context budget. Because the relations come from the current working tree, this method avoids consulting a structural index that may describe an earlier repository state.
 
@@ -1142,7 +1142,7 @@ The system pays for that freshness by reconstructing and traversing relations on
 
 ### Add statement-level def-use edges for line precision
 
-`extend-graph-below-function-level-for-line-precision`
+`ERCA-175` · `extend-graph-below-function-level-for-line-precision`
 
 Extend the repository graph with statement nodes and intra-procedural definition-use edges when the agent must identify particular lines rather than stop at a function. Expose data-flow slicing as a direct query so the agent can retrieve the statements that define or consume a variable in one operation. This layer represents value movement that containment and call graphs omit, allowing localization to follow the state involved in a fault instead of reconstructing it through repeated text searches.
 
@@ -1152,7 +1152,7 @@ Those conditions are narrow. The evaluation used Qwen2.5-Coder-32B and Python-on
 
 ### Route entity queries to cheap graph lookups and reserve model exploration for ambiguous questions
 
-`route-entity-queries-to-cheap-graph-lookups`
+`ERCA-176` · `route-entity-queries-to-cheap-graph-lookups`
 
 Split repository-graph retrieval into two lanes: send queries that name a code entity and request its callers, dependencies, definition, or references to deterministic graph operations, while assigning entity-free natural-language questions to LLM-guided exploration. Named-entity requests expose a stable traversal target, allowing exact graph operations to return reproducible neighborhoods without paying for model planning. For questions expressed only in natural language, textual descriptions and embeddings on graph nodes provide a bridge from the user’s vocabulary to relevant code entities. Concentrating exploration in that lane directs the larger search budget toward queries whose target must first be inferred.
 
@@ -1160,7 +1160,7 @@ Directional benchmark evidence from Shah and colleagues ([2025](https://arxiv.or
 
 ### Compare indexed representations before choosing one
 
-`treat-index-representation-as-first-class-design-choice`
+`ERCA-177` · `treat-index-representation-as-first-class-design-choice`
 
 Benchmark file paths, raw source, and role-aware file summaries before fixing what a retrieval index stores, and prefer summaries for file-level localization when their measured accuracy and footprint suit the deployment. Each representation exposes different matching signals: paths provide compact identifiers, summaries foreground a file’s role, and source preserves implementation detail at much greater storage and retrieval cost. Measuring retrieval quality alongside representation footprint reveals whether apparent retriever improvements actually come from changing the information available to it. Complementary representations and reranking can then be tested as explicit additions instead of inherited defaults.
 
@@ -1174,25 +1174,25 @@ The following pointer entries identify the practices taught in Chapter 13, where
 
 ### Budget context using measured effective capacity
 
-`budget-to-measured-effective-context`
+`ERCA-072` · `budget-to-measured-effective-context`
 
 Measure each model’s usable context on tasks resembling the actual workload, including retrieval, multi-hop reasoning, aggregation, and long-code understanding. Set harness and retrieval budgets from the observed saturation point so the working context remains useful rather than merely fitting within the advertised window. Chapter 13 develops the evaluation method and context-budgeting practice.
 
 ### Consolidate the specification and restart lost runs
 
-`consolidate-spec-restart-lost-runs`
+`ERCA-088` · `consolidate-spec-restart-lost-runs`
 
 Present requirements as a consolidated specification and periodically restate them when they arrive across multiple turns. If a run has committed to the wrong interpretation, restart from the consolidated context instead of extending the damaged trajectory with more corrections. Chapter 13 develops this approach to specification delivery, recovery, and reliable multi-turn execution.
 
 ### Persist large transient outputs as files
 
-`persist-transient-context-as-files`
+`ERCA-143` · `persist-transient-context-as-files`
 
 Write long tool results, terminal transcripts, and pre-compaction conversation history to session-scoped files, leaving concise pointers in the active context. Reopen, search, or tail those files when their details become relevant so the reasoning window stays dense without discarding recoverable information. Chapter 13 develops the file-backed context workflow and its integration with agent sessions.
 
 ### Evaluate and maintain context files like configuration
 
-`measure-context-files-and-maintain-them-like-config`
+`ERCA-178` · `measure-context-files-and-maintain-them-like-config`
 
 A/B-test repository context files against a no-file baseline before adopting them, and measure both task outcomes and inference cost. Keep retained files focused on nonstandard repository constraints, then evolve them through small, reviewed changes that include commonly neglected security and performance requirements. Chapter 13 develops the evaluation and maintenance discipline for these files.
 
@@ -1200,7 +1200,7 @@ The following compact entries record practices attached to Chapter 13’s mechan
 
 ### Put load-bearing evidence at the edges of the context
 
-`edge-load-key-evidence`
+`ERCA-070` · `edge-load-key-evidence`
 
 Reserve the beginning and end of assembled context for the evidence most likely to determine correctness, such as the failing test, target function, decisive constraint, or key interface. Documents of lesser consequence can occupy intermediate positions. Controlled multi-document question-answering and key-value retrieval experiments by Liu and colleagues ([2023](https://arxiv.org/abs/2307.03172)) measured a U-shaped sensitivity curve: models used relevant material less reliably when it appeared near the middle of a long context. Edge placement makes use of that positional behavior without requiring additional tokens.
 
@@ -1210,7 +1210,7 @@ Ordering remains a mitigation. Positional curves differ across models and tasks,
 
 ### Qualify context with semantic tracing instead of needle recall
 
-`verify-semantic-not-verbatim-recall`
+`ERCA-071` · `verify-semantic-not-verbatim-recall`
 
 Replace verbatim needle tests with evaluations that require the model to trace operational semantics, propagate state, or predict behavior under counterfactual inputs. Keep code that the model must mentally execute near a context edge until those evaluations show that its position no longer changes performance. Finding or repeating a string measures lexical access, while coding work usually requires relations among operations to survive retrieval and influence subsequent reasoning.
 
@@ -1220,7 +1220,7 @@ The experiment used synthetic, deliberately unpredictable operations. Real repos
 
 ### Give the agent a milestone-triggered compaction action
 
-`compaction-as-agent-action`
+`ERCA-082` · `compaction-as-agent-action`
 
 Expose context maintenance as a callable action that the agent invokes after stable milestones such as a verified patch, a settled design decision, or a completed investigation. Have the action preserve stable task semantics, condense older working state, and retain recent interactions at higher fidelity. Append-only histories accumulate obsolete branches, duplicated evidence, and superseded assumptions; separating these classes lets the working context reflect the task’s current state instead of its entire chronology.
 
@@ -1230,7 +1230,7 @@ The compressor received trajectory-level supervision, so the result does not est
 
 ### Measure the task cost of every context-reduction transform
 
-`price-token-reduction-transforms`
+`ERCA-092` · `price-token-reduction-transforms`
 
 Gate minification, comment removal, whitespace stripping, and learned compression on end-task performance before applying them to code shown to the agent. Use a transform only when the token budget genuinely binds, keep repository compression near mild ratios such as ~4x, and evaluate generation and cross-file reasoning alongside completion. A source transformation can preserve program behavior while changing the representation through which the model recognizes intent, boundaries, and relationships.
 
@@ -1240,7 +1240,7 @@ These findings apply to particular models, pipelines, and compression methods. R
 
 ### Keep permanent context small and verify deferred capabilities
 
-`keep-always-loaded-context-minimal`
+`ERCA-144` · `keep-always-loaded-context-minimal`
 
 Grow always-loaded rules only from demonstrated needs, and move specialized material into path-scoped rules, on-demand skills, or subagents that load when relevant. Compact intentionally before the task reaches its measured degradation region, and periodically remove instructions that newer models no longer require. Every permanent instruction and capability consumes attention as well as tokens, while copied configurations can accumulate overlapping or contradictory guidance.
 
@@ -1250,7 +1250,7 @@ Context configurations transfer more reliably within teams than between stranger
 
 ### Budget every contributor and inspect the assembled context
 
-`audit-the-assembled-context-budget`
+`ERCA-190` · `audit-the-assembled-context-budget`
 
 Enumerate every contributor to the model’s window, including rules, skills, tool definitions, servers that expose tools to the agent, memory, retrieved chunks, and conversation state. Give each category an explicit token budget, record the final ordering and cost, and inspect the assembled context that reaches the model. Independently configured components can each appear reasonable while their combination duplicates instructions, obscures capabilities, violates cache assumptions, or exceeds the measured effective context.
 
@@ -1266,19 +1266,19 @@ The following pointer entries identify the practices taught in Chapter 14, where
 
 ### Retain raw traces and distill them separately
 
-`retain-raw-distill-separately`
+`ERCA-116` · `retain-raw-distill-separately`
 
 Store complete episodic traces and transcripts as immutable ground truth, while treating consolidated memories as derived artifacts that can be inspected and rebuilt. This preserves the original record even as a compact working layer is regenerated for later sessions. Chapter 14 develops the two-layer memory architecture and the lifecycle of raw and distilled information.
 
 ### Start cross-session memory with a lightweight transcript store
 
-`light-store-by-default`
+`ERCA-118` · `light-store-by-default`
 
 Build cross-session memory first around a transcript store using SQLite and full-text search, and inspect the real dependency graph of any framework added to that foundation. This keeps storage, retrieval, and operational assumptions visible before introducing more elaborate infrastructure. Chapter 14 develops the lightweight design and the architectural decisions surrounding heavier memory systems.
 
 ### Optimize compaction rules from observed failures
 
-`optimize-compaction-from-failures`
+`ERCA-081` · `optimize-compaction-from-failures`
 
 Treat the agent’s compression policy as an artifact that can be evaluated and improved. Identify failures caused by missing or distracting context, revise the natural-language compaction guidance against those cases, and use the resulting examples to strengthen or distill the compressor. Chapter 14 develops this failure-driven process for improving context retention and task performance.
 
@@ -1286,7 +1286,7 @@ The following compact entries record practices attached to Chapter 14’s mechan
 
 ### Persist explored repository context between reasoning steps
 
-`persist-explored-context`
+`ERCA-080` · `persist-explored-context`
 
 If repeated repository exploration is consuming a long-running agent’s budget, investigate a working-memory layer that would retain the files, symbols, relationships, and conclusions already examined. Later reasoning steps could resume from that map instead of beginning each query with fresh embedding retrieval, file-system traversal, or graph lookup. Revision identifiers and invalidation signals would need to accompany every retained observation so that a changed repository region triggers renewed exploration.
 
@@ -1294,7 +1294,7 @@ A directional system report from Pan and colleagues ([2025](https://arxiv.org/ab
 
 ### Investigate durable references for agent handoffs
 
-`durable-artifact-handoff`
+`ERCA-099` · `durable-artifact-handoff`
 
 If conversational handoffs are disappearing with sessions or losing important evidence, investigate moving substantial state through a shared task and artifact store. Messages between agents would carry control information and stable references, while recipients would retrieve the underlying plans, outputs, evidence, and traces directly. This arrangement could preserve inspectable state across context replacement or process failure and reduce dependence on the sender’s choice of what to include in a summary.
 
@@ -1302,7 +1302,7 @@ The evidence is one directional explorer synthesis spanning the long-horizon eng
 
 ### Consolidate memory on a schedule and govern the resulting store
 
-`scheduled-typed-consolidation`
+`ERCA-109` · `scheduled-typed-consolidation`
 
 Separate fast event acquisition from slower consolidation, then run deduplication, typing, utility assessment, and pruning in scheduled batches. The consolidator should work from retained source records and organize outputs by their operational role, allowing evidence, preferences, decisions, and transient observations to receive different schemas and lifetimes. Batching reduces repeated extraction work and gives the system enough surrounding history to judge whether an item is likely to change future behavior.
 
@@ -1312,7 +1312,7 @@ Production illustrations expose both sides of the mechanism. One implementation 
 
 ### Define whether each fact is superseded or versioned
 
-`model-time-explicitly`
+`ERCA-117` · `model-time-explicitly`
 
 Assign temporal semantics to every mutable memory field before records begin accumulating. Mark an update as superseding its predecessor when only current state matters, and create a new version when the sequence of changes affects later decisions. Where both the period during which a fact was true and the time at which the system learned it matter, represent those timelines separately with bi-temporal fields.
 
@@ -1322,7 +1322,7 @@ An implementation illustration separates retrieval confidence from truth confide
 
 ### Investigate an exportable contract for agent memory
 
-`plan-for-memory-portability`
+`ERCA-119` · `plan-for-memory-portability`
 
 If a long-lived agent product may compose or replace memory systems, investigate an application-owned contract that could export content together with types, provenance, temporal state, and deletion semantics. Vendor-specific stores would sit behind adapters, while audit tools and replacement implementations could consume the same canonical events. Such a contract could preserve distinctions that opaque embeddings or proprietary operations may make impossible to recover during a later migration.
 
@@ -1332,7 +1332,7 @@ A nascent format could itself create compatibility work while products and propo
 
 ### Maintain a retrieval substrate for knowledge outside the repository
 
-`tribal-knowledge-substrate`
+`ERCA-120` · `tribal-knowledge-substrate`
 
 Create and fund a searchable substrate for product decisions, operating assumptions, architectural rationale, and local conventions that do not appear in source code. Connect its records to owners, provenance, affected systems, and lifecycle state so an agent can retrieve the reasons surrounding a change alongside the relevant implementation. Code search reveals what the repository currently does, while this additional context can expose constraints, rejected alternatives, and obligations that experienced maintainers otherwise carry informally.
 
@@ -1348,19 +1348,19 @@ The following pointer entries identify the practices taught in Chapter 15, where
 
 ### Make Verification Cheaper Than Blind Acceptance
 
-`make-verification-cheaper-than-acceptance`
+`ERCA-153` · `make-verification-cheaper-than-acceptance`
 
 Create tests, executable examples, types, CI gates, sandboxed runs, and inline evidence that let reviewers check an agent’s work with less effort than accepting it on trust. Use these verification surfaces to make correctness directly inspectable at the point of review. Chapter 15 develops the oversight design behind this practice and shows how to apply it.
 
 ### Put Friction at the Moment of Acceptance
 
-`target-friction-at-the-accept-loop`
+`ERCA-148` · `target-friction-at-the-accept-loop`
 
 Place cognitive forcing functions at the accept decision, such as requiring reviewers to form a judgment before seeing the agent’s answer or slowing its reveal at consequential checkpoints. Target these interventions at acceleration-mode interactions, where rapid acceptance can displace active scrutiny. Chapter 15 explains how to design and position this friction within the review loop.
 
 ### Escalate Flagged Cases to Human Verdict Owners
 
-`escalate-only-flagged-cases`
+`ERCA-157` · `escalate-only-flagged-cases`
 
 Direct human attention to anomalies identified by automated monitors, while ensuring a person with real authority retains responsibility for the final verdict. Build the monitoring system in layers, moving from deterministic checks to rubric-based model judgments and trace-aware agent review, with humans calibrating the system. Chapter 15 develops this escalation architecture and its operational requirements.
 
@@ -1368,7 +1368,7 @@ The following compact entries record practices attached to Chapter 15’s mechan
 
 ### Place human checkpoints at measured failure points with an owned escalation route
 
-`place-human-checkpoints-at-failure-points`
+`ERCA-106` · `place-human-checkpoints-at-failure-points`
 
 Measure where the workflow confuses real-world entities and where it initiates irreversible mutations, then require human confirmation immediately before those transitions. At each checkpoint, present the evidence-linked reasoning chain and a summary of completed validation. Route the response to a component that records and applies the reviewer’s decision.
 
@@ -1378,7 +1378,7 @@ Placement based on workflow symmetry or intuition can impose review costs on rou
 
 ### Design overseer roles to preserve intervention skill
 
-`design-overseer-roles-for-skill-retention`
+`ERCA-146` · `design-overseer-roles-for-skill-retention`
 
 Give human overseers recurring manual practice and drills built from known automation failures. Rotate them through enough ordinary work to retain procedural fluency, then rehearse diagnosis and recovery under realistic conditions. Treat this practice as part of the operating budget for the automated workflow.
 
@@ -1388,7 +1388,7 @@ Interface improvements can expose state and evidence, yet they cannot recreate p
 
 ### Calibrate confidence signals before showing them to reviewers
 
-`calibrate-displayed-confidence`
+`ERCA-147` · `calibrate-displayed-confidence`
 
 Test an agent’s confidence scores against actual correctness before exposing them, and display only signals that remain calibrated in the intended setting. Where the data supports presentation, prefer a simple nonnumeric indicator. Assess separately whether reviewers possess knowledge that covers the model’s error region before treating their review as a control.
 
@@ -1398,7 +1398,7 @@ A large-scale null result from Koohestani and colleagues ([2025](https://arxiv.o
 
 ### Curate displayed suggestions and highlight edit-likely tokens
 
-`curate-what-reviewers-see`
+`ERCA-161` · `curate-what-reviewers-see`
 
 Estimate a suggestion’s utility from interaction data before placing it on the review surface, and withhold suggestions predicted to waste attention. Within suggestions that pass the gate, use a separate edit-prediction model to highlight tokens programmers are likely to change. Keep raw generation probabilities out of this highlighting role.
 
@@ -1408,7 +1408,7 @@ Generation probabilities describe uncertainty in sampling, which does not direct
 
 ### Shield high-stakes review from deadline pressure
 
-`shield-review-from-time-pressure`
+`ERCA-164` · `shield-review-from-time-pressure`
 
 Schedule consequential agent-output review outside deadline pressure whenever the workflow allows it. When a deadline cannot move, reduce the review scope, add another check, or reserve capacity for errors whose severity may grow even if their frequency does not. Plan for deeper reliance on wrong advice rather than assuming pressure merely produces additional mistakes.
 
@@ -1418,7 +1418,7 @@ The task involved medical image estimation, and its reviewers worked under an ar
 
 ### Investigate whether live step-level state could support mid-flight steering
 
-`render-agent-actions-as-live-state`
+`ERCA-170` · `render-agent-actions-as-live-state`
 
 For a conversational data-analysis agent, an exploratory interface could translate generated code into a live sequence of data operations with visible inputs, outputs, and ordering. A user could then inspect or modify an individual operation before later steps depend on it. Such an interface could move some checking into execution while retaining access to the generated code.
 
@@ -1428,7 +1428,7 @@ The support is too thin to recommend this practice, so this entry should serve o
 
 ### Allocate scarce human review with an adaptive budgeted deferral policy
 
-`treat-human-escalation-as-a-budgeted-online-decision`
+`ERCA-188` · `treat-human-escalation-as-a-budgeted-online-decision`
 
 Represent each escalation as a contextual choice between agent handling and expert review, constrain those choices by the available review budget, and update the policy as outcomes arrive. The policy can account for the current case and the observed relative performance of each route. This matters when tasks arrive sequentially or their distribution changes, because a confidence cutoff calibrated on an earlier workload preserves an allocation rule after the value of expert intervention has shifted.
 
@@ -1438,7 +1438,7 @@ The formulation requires measurable outcomes for selected actions and accepts pa
 
 ### Investigate whether verification dominates AI-assisted coding costs
 
-`budget-verification-as-the-dominant-cost`
+`ERCA-150` · `budget-verification-as-the-dominant-cost`
 
 If a team wants to test whether verification has become its dominant AI-assisted coding cost, it could measure reviewer wait time, test execution, validation work, and repair cycles alongside generation time. The hypothesis is that cheap synthesis can break the former balance between producing code and checking it, allowing proposed changes to accumulate faster than the team can establish their behavior, safety, and fit. Under that hypothesis, schedules based mainly on generated output would omit the work governing when code becomes acceptable.
 
@@ -1454,25 +1454,25 @@ The following pointer entries identify the practices taught in Chapter 16, where
 
 ### Graduate Each Action’s Autonomy from Its Track Record
 
-`graduate-autonomy-per-action-track-record`
+`ERCA-145` · `graduate-autonomy-per-action-track-record`
 
 Measure approval, correctness, and human modification separately for each action type, then widen autonomy only through explicit transfer-of-control decisions supported by that record. Provide verification surfaces that make agent behavior understandable before granting greater freedom. Chapter 16 develops the graduated-autonomy model, including how evidence and review artifacts support each transition.
 
 ### Label AI-Generated Code with Its Provenance
 
-`label-ai-provenance`
+`ERCA-165` · `label-ai-provenance`
 
 Mark AI-generated code explicitly wherever people validate or repair it, using mechanisms such as pull-request labels, commit trailers, or editor badges. Provenance should be visible during review so developers can recognize the origin of the work and engage with it accordingly. Chapter 16 develops this practice and its implications for verification behavior.
 
 ### Audit Human Gates for Real Effectiveness
 
-`audit-human-gates-for-effectiveness`
+`ERCA-154` · `audit-human-gates-for-effectiveness`
 
 Examine every human approval gate to confirm that the designated person can understand, stop, or change the action and is positioned to exercise meaningful judgment. Replace ceremonial person-gates with institutional oversight whose purpose, authority, and effectiveness are explicit and validated. Chapter 16 develops the criteria and audit approach for making these gates substantive.
 
 ### Align Accountability with Actual Human Control
 
-`align-accountability-with-actual-control`
+`ERCA-149` · `align-accountability-with-actual-control`
 
 Assign responsibility for agent outcomes only to people who possess the authority, tools, time, and access needed to influence those outcomes. Evaluate deployed systems with actual users to determine whether behavior matches justified expectations and whether responsibility can be traced to a capable, informed decision-maker. Chapter 16 develops this control-accountability alignment and the methods used to examine it.
 
@@ -1480,7 +1480,7 @@ The following compact entries record practices attached to Chapter 16’s mechan
 
 ### Test plain reliance disclaimers before stronger interventions
 
-`attach-reliance-disclaimers`
+`ERCA-160` · `attach-reliance-disclaimers`
 
 A team investigating reliance interventions could place a standing, plain-language warning beside agent advice, such as “this answer may be wrong; verify it before relying,” and compare it with more elaborate designs. The evaluation would separately measure acceptance of wrong advice and rejection of correct advice. It could also distinguish forcing-style interventions that reduce acceptance from interventions that preserve useful reliance. This would make the disclaimer a low-cost experimental baseline, rather than presumed protection.
 
@@ -1488,7 +1488,7 @@ In a randomized experiment with 400 lay participants, Bo and colleagues ([2024](
 
 ### Decompose oversight metrics before reporting coverage
 
-`measure-oversight-with-decomposed-metrics`
+`ERCA-163` · `measure-oversight-with-decomposed-metrics`
 
 Split oversight measurements into over-reliance, under-reliance, direct human review, agent review, human steering of an agent, and automated checks before calculating coverage. Accepting incorrect output and rejecting correct output impose different costs, so a single accuracy figure can conceal an intervention that merely exchanges one failure for another. Repository dashboards create a similar distortion when every recorded interaction counts as review, even when no person examined the contribution itself.
 
@@ -1496,7 +1496,7 @@ A survey synthesis by Lai and colleagues ([2021](https://arxiv.org/abs/2112.1147
 
 ### Allocate review capacity by contributor experience
 
-`scale-review-capacity-to-experience`
+`ERCA-166` · `scale-review-capacity-to-experience`
 
 Forecast review demand by contributor experience tier as well as by pull-request volume, and assign novice AI-assisted contributors targeted training and adaptive review cycles. An agent can increase a contributor’s production rate without supplying the judgment needed to bound changes, interpret feedback, or verify behavior. The resulting workload appears downstream as larger submissions, longer review exchanges, and more diagnostic work for maintainers. Capacity planning based only on contribution counts misses that transfer.
 
@@ -1504,7 +1504,7 @@ A descriptive observational study by Ammar Asdaque and colleagues ([2026](https:
 
 ### Record workflow steps in a hash-chained ledger
 
-`record-steps-in-hash-chained-ledger`
+`ERCA-142` · `record-steps-in-hash-chained-ledger`
 
 Emit each source, retrieval, transformation, inference, decision, and human attestation as an append-only event linked to its upstream evidence, then incorporate the preceding event’s hash into the next event. Bind confidential inputs by content hash when their contents cannot appear in the record. Verification can then expose edits, insertions, deletions, and reordering because those changes disrupt the links that follow them. The same event history can support recovery and give reviewers a navigable path from a decision back to its recorded inputs.
 
@@ -1514,7 +1514,7 @@ The construction supplies tamper evidence only. An actor controlling storage can
 
 ### Restore collective accountability around agent-reviewed work
 
-`rebuild-collective-accountability`
+`ERCA-155` · `rebuild-collective-accountability`
 
 Assign a named human owner to every agent-reviewed merge, expose the review and acceptance record to the team, and retain recurring peer-facing quality rituals. Human peer review carries a social mechanism beyond defect detection: contributors know that colleagues will see both their work and their response to criticism. Replacing that interaction with private agent feedback can remove reciprocity and peer visibility even when the automated reviewer finds useful issues. Visible ownership reconnects the accepting decision to people who share responsibility for the codebase.
 
@@ -1522,7 +1522,7 @@ A qualitative study by Alami and colleagues ([2025](https://arxiv.org/abs/2502.1
 
 ### Investigate control and oversight as separate supervision functions
 
-`separate-control-from-oversight`
+`ERCA-156` · `separate-control-from-oversight`
 
 A deployment team investigating this framework could classify each supervision mechanism by when it would act: control would include permission gates, sandboxes, and real-time blocks, while oversight would include transcripts, ledgers, postmortems, and incentive processes. The inventory could then reveal whether a deployment has mechanisms for both prevention and later detection or remediation. A transcript might support investigation without blocking an unsafe action, while a sandbox might contain an action without explaining its cause. Keeping the categories separate could prevent monitoring coverage from being interpreted as preventive authority.
 
@@ -1530,7 +1530,7 @@ Manheim and Homewood ([2025](https://arxiv.org/abs/2507.03525)) propose this dis
 
 ### Test comprehension before merging generated code
 
-`require-comprehension-before-merge`
+`ERCA-158` · `require-comprehension-before-merge`
 
 If a team is investigating comprehension gates, it could make generated changes mergeable only after the accepting developer explains the change, completes artifact-specific quality checks, and accepts responsibility for debugging it, with an independent checker evaluating the generating system’s work. Such a gate would make the reviewer’s epistemic access observable. A person who cannot describe the behavior, identify likely failure points, or investigate a defect cannot exercise the oversight mechanisms developed in this chapter, even when formally present in the approval path.
 
@@ -1540,7 +1540,7 @@ The support is too thin to recommend comprehension gates. The review is self-rep
 
 ### Investigate an oversight card for each deployed system
 
-`write-an-oversight-card`
+`ERCA-159` · `write-an-oversight-card`
 
 If an organization is exploring oversight cards, it could document each system’s oversight architecture in a standard template naming the responsible roles, monitored signals, evidence each role can access, and interventions each role can authorize. Each claimed control could also be mapped to a recognized risk framework and to a concrete test showing that the control operates. The resulting card would expose mismatches such as a role held responsible for an outcome while lacking the information or authority needed to change it.
 
@@ -1550,7 +1550,7 @@ The support is too thin to recommend oversight cards. The framework has not been
 
 ### Investigate whether experts retain usable override authority
 
-`keep-override-authority-real`
+`ERCA-162` · `keep-override-authority-real`
 
 Where a team is investigating human override mechanisms, it could preserve a path through which domain experts can reject a machine recommendation, including when the path requires supervisory sign-off. The relevant mechanism is the combination of independent case information and authority to act on it. Friction may slow an override, but a reviewer who can inspect evidence unavailable to the model and can stop or redirect the decision has a substantive control rather than ceremonial participation.
 
@@ -1560,7 +1560,7 @@ The support is too narrow to recommend this design across agent systems, so this
 
 ### Define six dimensions of agent-contribution policy
 
-`write-an-agent-contribution-policy`
+`ERCA-167` · `write-an-agent-contribution-policy`
 
 For every repository that accepts agent contributions, publish a policy covering disclosure, responsibility, human oversight, licensing, enforcement, and maintainer workload. State within those dimensions which agent-assisted contribution paths are accepted, who remains answerable for submitted work, what review is required, and what happens when contributors breach the rules. Compare the resulting policy with the EU AI Act, NIST AI RMF, ISO/IEC 42001, and any other governance frameworks to which the organization already answers, so agent contributions do not create conflicting obligations.
 
@@ -1570,7 +1570,7 @@ The study covers six organizations, with process tracing for two, and its harmon
 
 ### Set autonomy defaults by task type
 
-`set-autonomy-defaults-per-task-type`
+`ERCA-168` · `set-autonomy-defaults-per-task-type`
 
 Configure lower default autonomy for identity-defining, human-facing, design-oriented, and individually accountable tasks, while allowing higher defaults for bounded work with low accountability and preserving individual adjustment. Task-sensitive defaults place the initial delegation boundary closer to where responsibility and professional judgment already sit. They can reduce the pressure to surrender control on consequential work while leaving routine, well-scoped work available for broader automation.
 
@@ -1580,7 +1580,7 @@ The study came from a single company, Microsoft, and measured stated acceptance 
 
 ### Review objective terms and weights as policy
 
-`treat-objective-weights-as-reviewed-policy`
+`ERCA-180` · `treat-objective-weights-as-reviewed-policy`
 
 Place an optimizer’s objective definition and priority weights under code-like review by the stakeholders whose interests they encode. Represent concerns such as fairness among competing consumers as explicit objective terms, and validate the resulting scheduler on the worst real oversubscribed periods rather than average demand. When a weighted index refines declared priority bands, require each adjacent band gap to exceed the sum of all secondary feature weights, with secondary features normalized to [0,1]. This construction makes declared priority dominate while permitting machine reordering within a band.
 
@@ -1590,7 +1590,7 @@ Fairness definitions such as max-min and proportional fairness remain policy cho
 
 ### Gate optimizer output behind developer review
 
-`gate-optimizer-output-behind-human-review`
+`ERCA-185` · `gate-optimizer-output-behind-human-review`
 
 Require a developer to approve recommendations from metric-optimizing search before they can change code or configuration, and keep score improvement out of the merge criteria. Optimization explores candidates according to information encoded in its objective, while review tests concerns the objective may omit, such as architectural fit, ownership boundaries, and maintenance consequences. A single-organization case study by Schröder and colleagues ([2021](https://arxiv.org/abs/2102.00701)) examined search-based re-modularization at Adyen across 5.5M+ LOC. Developers valued the recommendations overall but often considered the suggested target modules wrong. The study therefore gives directional support for treating the optimized score as a candidate signal while reserving acceptance for the people responsible for the artifact.
 
@@ -1604,25 +1604,25 @@ The following pointer entries identify the practices taught in Chapter 17, where
 
 ### Fix recurring failure classes through system structure
 
-`fix-failures-structurally-not-prompts`
+`ERCA-044` · `fix-failures-structurally-not-prompts`
 
 When a failure class persists, redesign the agent system around it by strengthening verification, clarifying communication protocols, specializing roles, or changing the conversation topology. This practice turns repeated failures into improvements to the harness instead of accumulating increasingly brittle prompt patches. Chapter 17 develops the structural interventions and design choices involved.
 
 ### Gate multi-agent fan-out with a single-agent baseline
 
-`single-agent-baseline-gate`
+`ERCA-093` · `single-agent-baseline-gate`
 
 Establish a measured single-agent baseline before introducing additional agents, then evaluate orchestration against that reference on the same representative tasks. The baseline makes success, cost, and added coordination complexity visible, so topology decisions rest on observed performance. Chapter 17 explains how to build and apply this gate when selecting an agent configuration.
 
 ### Match the orchestration topology to the task
 
-`match-topology-to-task-shape`
+`ERCA-107` · `match-topology-to-task-shape`
 
 Choose the communication and control structure that fits how the work decomposes, how information moves, and where integration occurs. This practice aligns pipelines, orchestrator-worker arrangements, hierarchies, and shared-state designs with the task shape they must support. Chapter 17 develops topology selection as an architectural decision rather than a generic orchestration preference.
 
 ### Schedule work through dynamic task graphs
 
-`dynamic-task-graphs`
+`ERCA-101` · `dynamic-task-graphs`
 
 Represent work as an evolving graph of dependencies, releasing independent branches as soon as their prerequisites are satisfied and bounding each step’s execution. This gives the scheduler a live model of what can proceed, what must wait, and where concurrency is available. Chapter 17 develops the mechanisms for building and operating these dynamic graphs.
 
@@ -1630,7 +1630,7 @@ The following compact entries record practices attached to Chapter 17’s mechan
 
 ### Oversee multi-agent execution at node, edge, and path levels
 
-`oversee-mas-as-graph`
+`ERCA-059` · `oversee-mas-as-graph`
 
 If investigating graph-level oversight, represent each live multi-agent run as a changing graph and give a separate overseer access to its nodes, edges, and paths under pre-written intervention policies. This representation could expose failures distributed across several interactions, including coordinated behavior, latent exploit paths, and cascades that remain plausible when each message is inspected alone. The overseer could associate an anomaly with the interactions that produced it and select only the responses permitted by policy.
 
@@ -1638,7 +1638,7 @@ He and colleagues ([2025](https://arxiv.org/abs/2505.24201)) reported graph-leve
 
 ### Express agent roles through configuration and prompts
 
-`roles-in-config-not-code`
+`ERCA-102` · `roles-in-config-not-code`
 
 For an exploratory design, move task-specific role definitions into reviewed, versioned configuration or prompts while keeping identity, messaging, permissions, and lifecycle behind stable runtime interfaces. Roles could then form around the task without adding a subclass or dispatch branch for every specialization. This arrangement may reduce coupling between coordination policy and orchestration machinery, allowing role declarations to change alongside models and workloads.
 
@@ -1646,7 +1646,7 @@ One explorer synthesis points in this direction across “From Skills to Talent�
 
 ### Blind review lanes and conceal interim tallies
 
-`blind-review-lanes`
+`ERCA-103` · `blind-review-lanes`
 
 If testing a multi-reviewer topology, anonymize each reviewer’s lane and withhold votes or scores until the synthesis stage. Authorship cues can encourage reviewers to favor their own contributions, while visible early tallies can make later judgments converge before reviewers have produced independent observations. The orchestrator could retain provenance for audit while removing identity and vote state from the context shown to reviewers.
 
@@ -1654,7 +1654,7 @@ Directional explorer evidence from Tian ([2025](https://arxiv.org/abs/2509.23537
 
 ### Activate blackboard writes and test a diversity check
 
-`active-blackboard-with-diversity`
+`ERCA-108` · `active-blackboard-with-diversity`
 
 For an exploratory blackboard topology, make each relevant write trigger a notification or broadcast, and add a diversity mechanism that can introduce a different search direction when contributors deadlock. Active delivery could let participants react to shared-state changes without polling, while a diversity check could interrupt repeated contributions that no longer expand the search. This variant applies specifically to teams working over shared, evolving state.
 
@@ -1662,7 +1662,7 @@ Wei’s ARIADNE work ([2026](https://arxiv.org/abs/2605.02431)) presents a black
 
 ### Repair the earliest supported root cause
 
-`repair-root-cause-not-last-step`
+`ERCA-048` · `repair-root-cause-not-last-step`
 
 When investigating a failed run, identify the earliest error supported by the trajectory, restore or rerun from that point, and supply corrective feedback aimed at the classified failure. An upstream mistake can shape every later observation and decision, so editing the final answer may leave the generating error intact. Targeted repair could prevent the same false premise from propagating through a repeated execution.
 
@@ -1676,19 +1676,19 @@ The following pointer entries identify the practices taught in Chapter 18, where
 
 ### Recompute schedules cheaply and ship the incumbent
 
-`re-decide-cheaply-ship-the-incumbent`
+`ERCA-171` · `re-decide-cheaply-ship-the-incumbent`
 
 Treat scheduling as a continuing control loop that periodically recomputes from current state while using inexpensive decisions between full solves. Preserve in-flight work, cap optimization time, and deploy the best valid schedule available when the cap arrives so planning remains responsive to change. Chapter 18 develops this approach to practical, stability-aware fleet scheduling.
 
 ### Route each task to the cheapest sufficient model
 
-`route-work-to-the-cheapest-sufficient-model`
+`ERCA-187` · `route-work-to-the-cheapest-sufficient-model`
 
 Estimate model cost and task performance explicitly, then assign each request to the least expensive model expected to meet the declared objective. Update those routing estimates from outcome feedback while retaining a dependable fallback when observations are sparse. Chapter 18 develops the static and learning-based machinery for budget-aware model selection.
 
 ### Replay recorded traces before changing dispatch policy
 
-`replay-traces-before-policy-changes`
+`ERCA-191` · `replay-traces-before-policy-changes`
 
 Evaluate proposed scheduling policies by replaying the same recorded arrivals, priorities, durations, outcomes, and review results through each contender. Holding the workload fixed makes policy comparisons interpretable and gives simple baselines and constructed test cases a consistent role in validation. Chapter 18 develops the replay protocol used to assess scheduling changes before deployment.
 
@@ -1696,7 +1696,7 @@ The following compact entries record practices attached to Chapter 18’s mechan
 
 ### Formalize work as constraints and solve the allocation globally
 
-`formalize-work-as-constraints-and-solve-globally`
+`ERCA-179` · `formalize-work-as-constraints-and-solve-globally`
 
 Represent every request through one versioned schema of required resources, time windows, budgets, priority, and weighted preferences, then rerun a search or integer-programming solver over the complete workload whenever conditions change. A common formalism makes requests comparable, allowing the solver to trade preferences across the fleet instead of preserving an arbitrary queue order. Keep coefficients, priorities, and constraints in a reviewed judgment layer. Treat solving as transport, and retain bounds, optimality gaps, and timing logs so each allocation can be reproduced and appealed. When no solution exists, report an irreducible infeasible subsystem that identifies the declared rules in conflict.
 
@@ -1704,7 +1704,7 @@ One reported operational case from Johnston and Miller (1990) describes SPIKE co
 
 ### Design rescheduling as a closed-loop algorithm
 
-`design-the-online-rescheduling-loop`
+`ERCA-181` · `design-the-online-rescheduling-loop`
 
 Choose the scheduling horizon, re-solve time-step, hybrid trigger policy, and churn penalty as explicit parts of the online scheduler. Run periodic decisions alongside event-triggered reactions, implement only the near-term portion of each plan, observe the resulting state, and solve again. Add objective terms or constraints that price unnecessary changes to announced or prepared work. Such additions can worsen the apparent quality of one open-loop solution while improving the sequence that ultimately executes.
 
@@ -1714,7 +1714,7 @@ Judge the design from executed traces, including churn, abandoned preparation, m
 
 ### Investigate threshold-gated probing when uncertainty is costly
 
-`probe-only-above-an-uncertainty-threshold`
+`ERCA-182` · `probe-only-above-an-uncertainty-threshold`
 
 If you investigate this option, configure a bounded profiler, canary, dry run, or classifier to run only when a task’s declared upper cost bound crosses a threshold; tasks below it would proceed without probing. The proposed mechanism prices information gathering against execution. A probe can improve dispatch when uncertainty could change the chosen route, yet it consumes time and capacity even when the original route would have succeeded.
 
@@ -1724,7 +1724,7 @@ The support is too thin to recommend this practice; this entry is a lead for inv
 
 ### Split scheduling between global coordination and local workers
 
-`split-fleet-scheduling-into-global-and-local-levels`
+`ERCA-184` · `split-fleet-scheduling-into-global-and-local-levels`
 
 Assign fleet-wide allocation and per-worker ordering to separate scheduling levels. The global coordinator should distribute work using coverage, available capacity, urgency, and conflicts across all workers. Each worker should then order and adapt its assigned tasks at its own timescale. Compute local policies independently where possible, resolve collisions in the upper layer, and keep the allocator and local planner behind swappable interfaces.
 
@@ -1734,7 +1734,7 @@ Neither study concerns a production software-agent fleet. The planner must know 
 
 ### Investigate the allocation layer as a shared audited component
 
-`audit-the-allocation-layer`
+`ERCA-192` · `audit-the-allocation-layer`
 
 If a shared queue and contended resources make allocation failures recurring, investigate separating execution, planning, and fleet-wide optimization into three named levels. The audit would enumerate claim order, pool sizing, model-tier routing, merge slots, interrupt policy, and review bandwidth, then distinguish measured choices from inherited defaults. It would also trace failures that worker improvements cannot repair, including selecting the wrong task, colliding file sets, serializing independent chains, draining execution capacity during an interrupt, and leaving completed work behind one reviewer.
 
@@ -1744,7 +1744,7 @@ The support is too thin to recommend the three-level split or a shared allocatio
 
 ### Route cheap-first and escalate through an uncertainty gate
 
-`cost-cascade-routing`
+`ERCA-100` · `cost-cascade-routing`
 
 Start each eligible task on the cheap route and escalate to a stronger model or quorum only when a calibrated uncertainty signal fires. Record tokens, dollar cost, and latency for every step, and preserve missing measurements as unknown. A zero would make an unmeasured weak route appear free and distort both dispatch and evaluation. A controlled comparison reported by Chang ([2026](https://arxiv.org/abs/2604.12262)) found that confidence-gated cascades could beat always-on strong-model fan-out on both cost and quality; the result applies to that design and workload.
 
@@ -1754,7 +1754,7 @@ When data are thin, retain the chapter’s static table as the fallback, making 
 
 ### Investigate decision logging for later selection-effect modeling
 
-`log-scheduling-decisions-for-selection-effect-modeling`
+`ERCA-183` · `log-scheduling-decisions-for-selection-effect-modeling`
 
 A fleet investigating selection effects could record every scheduling choice at decision time, including the eligible items, the winner, the active policy, relevant state, and the stated routing reason. That record would preserve how the scheduler shaped the observed workload: downstream measurements reflect which work was attempted, expedited, or excluded. A shared reporting schema could also make decisions comparable across cooperating fleets, while open-source scheduler packages could expose the mechanisms that produced those records.
 
@@ -1764,7 +1764,7 @@ Even under investigation, the log would preserve inputs for modeling rather than
 
 ### Pick the algorithm with short pilots, then commit the long budget
 
-`pilot-to-pick-the-algorithm-then-commit-the-budget`
+`ERCA-186` · `pilot-to-pick-the-algorithm-then-commit-the-budget`
 
 Use short-budget pilots to select among candidate optimization algorithms, then give the selected algorithm the longest affordable execution budget. The pilots spend scarce experimental capacity on the choice that most strongly separated results in the available study. Once that choice is made, concentrating the remaining budget avoids repeatedly dividing the final run among alternatives or assuming that a modest extension will repair a weak selection.
 

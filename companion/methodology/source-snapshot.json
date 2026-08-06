@@ -1,12 +1,13 @@
 {
   "schema_version": "1.0",
-  "companion_version": "1.0.0-rc.9",
+  "companion_version": "1.0.0-rc.10",
   "consolidated_at": "2026-07-26",
   "update_cutoff": "2026-08-06",
   "manuscript_source_counts": {
-    "scholarly": 129,
+    "scholarly": 138,
     "scholarly_at_consolidation": 118,
     "scholarly_admitted_in_update": 11,
+    "scholarly_admitted_in_se_coverage_probe": 9,
     "practitioner": 91,
     "benchmarks": 29,
     "author_system_cases": 17

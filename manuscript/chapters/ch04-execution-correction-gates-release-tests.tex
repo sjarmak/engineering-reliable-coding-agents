@@ -1,5 +1,11 @@
 \chapter{Execution-based evaluation, correction gates, and release tests}
 \label{ch04-execution-correction-gates-release-tests}
+\begin{quote}
+\textbf{Evidence profile.} 3 strong · 4 directional · 0 corroborating evidence items across 3 developed practices (ERCA-061, ERCA-094, ERCA-095).
+
+\textbf{Chapter claim.} Execution decides whether work moves.
+\end{quote}
+
 Mehta (\href{https://arxiv.org/abs/2603.25764}{2026}) analyzed 1,750 coding-agent trajectories across 50 tasks and four models and found a sharp divide between submission and correctness. One model submitted an answer in every trial, yet an external oracle found that it resolved only 44 percent of the tasks. Its semantic failures were often silent, confident, and consistent across repeated runs. Most models also modified code that was already correct.
 
 The study provides directional evidence rather than a general estimate of coding-agent failure rates. It covers one author's analysis, a limited task set, and four models, without a controlled design for estimating prevalence across agents or workloads.
@@ -285,6 +291,8 @@ Replay the set whenever the model, prompt, tools, orchestration, sandbox, or ver
 Record the promotion rule before running the first candidate comparison. When experience shows that the gate is too strict or too permissive, change the policy as a versioned decision and establish a new baseline where necessary. Adjusting the threshold after seeing a result turns the rule into an explanation for a decision already made.
 
 Keep tasks without executable checks in a separate lane. They are not lesser tasks, but forcing them through weak proxies would make the gate appear more complete than it is. Chapter 5 develops the calibrated judgment process those tasks require.
+
+\textbf{Portable claim.} Execution decides whether work moves.
 
 \section*{Sources and evidence}
 

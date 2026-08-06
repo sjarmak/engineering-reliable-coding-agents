@@ -1,5 +1,11 @@
 \chapter{Efficient verification interfaces and risk-based human escalation}
 \label{ch15-verification-interfaces-risk-based-escalation}
+\begin{quote}
+\textbf{Evidence profile.} 3 strong · 4 directional · 0 corroborating evidence items across 3 developed practices (ERCA-148, ERCA-153, ERCA-157).
+
+\textbf{Chapter claim.} Verification must be cheaper than uncritical acceptance.
+\end{quote}
+
 On my site, every agent output arrives as a schema-validated Git diff. The agent cannot write to the production database or publish a page. The architecture places the proposed state transition in an artifact that I can inspect, execute, reject, or revise before it acquires production authority.
 
 It provides no evidence that the proposed change is correct. A diff that is easy to approve can look much like one that has been verified.
@@ -7,6 +13,8 @@ It provides no evidence that the proposed change is correct. A diff that is easy
 A reviewer who skims that diff is making a cost-benefit decision. Reading every changed branch, reconstructing the intended behavior, running the relevant tests, and comparing the result with the task costs far more than clicking approve. When the expected consequence of a missed defect feels remote, shallow review becomes the rational response even for someone who intends to be careful.
 
 Vasconcelos et al.~(\href{https://arxiv.org/abs/2212.06823}{2023}) tested this account across five experiments. They studied \textbf{overreliance}, the failure in which a person accepts an incorrect AI output. Overreliance changed when the economics of checking changed. Participants engaged more when verification required less effort or when the cost of an error became more salient. Explanations reduced overreliance when they altered that calculation. They did not act as a general antidote to misplaced trust.
+
+Software-engineering studies locate the same problem closer to the operated tools. Drosos et al.~(\href{https://doi.org/10.1145/3772370}{2025}) derived a trust framework from 18 practitioner interviews and tested its factors in a 368-response Microsoft survey. Tufano et al.~(\href{https://doi.org/10.1109/TSE.2023.3348172}{2024}) manually inspected 2,291 predictions from code-review automation techniques, identifying task-specific success and failure classes along with dataset defects. These studies support showing reviewers the conditions under which a tool succeeds and the evidence behind a particular output. They do not test the patch-gate interfaces proposed in this chapter, so that transfer remains directional.
 
 \Needspace{5\baselineskip}
 
@@ -533,69 +541,17 @@ Start with one consequential agent workflow. Identify the decision that transfer
 
 Name the person or role that owns that decision. When no owner can be named, escalation cannot end in an accountable verdict.
 
-\Needspace{5\baselineskip}
-
-List the claims the reviewer must establish before acceptance. Attach a falsification artifact to each claim where one is available:
-
-\begin{itemize}
-\tightlist
-\item
-  a test;
-\item
-  a typed interface;
-\item
-  a deterministic replay;
-\item
-  a structured trace;
-\item
-  a sandbox result;
-\item
-  a policy match; or
-\item
-  an executable example.
-\end{itemize}
+List the claims the reviewer must establish before acceptance. Attach a falsification artifact to each claim where one is available: a test, typed interface, deterministic replay, structured trace, sandbox result, policy match, or executable example.
 
 Mark the claims that still require expert judgment. Do not count an explanation as evidence unless it makes one of those checks possible.
 
-\Needspace{5\baselineskip}
-
-Measure the review path before adding friction. Record:
-
-\begin{itemize}
-\tightlist
-\item
-  how long evidence takes to obtain;
-\item
-  which tools, permissions, and expertise it requires;
-\item
-  where reviewers stop checking;
-\item
-  which failures remain invisible after a green run; and
-\item
-  how often approval occurs without accessing the available evidence.
-\end{itemize}
+Measure the review path before adding friction. Record how long evidence takes to obtain, which tools and permissions it requires, where reviewers stop checking, which failures remain invisible after a green run, and how often approval occurs without accessing the available evidence.
 
 The objective is to identify where the system charges a person for mechanical work or presents confidence without a reachable basis. No universal review-time threshold applies.
 
 Place a forcing function at the acceptance decision for cases in which shallow validation is both plausible and consequential. Require an independent judgment or claim-specific response before revealing the agent's recommendation.
 
-\Needspace{5\baselineskip}
-
-Preserve an emergency bypass with:
-
-\begin{itemize}
-\tightlist
-\item
-  a named owner;
-\item
-  a reason;
-\item
-  a defined scope;
-\item
-  the evidence available at the time; and
-\item
-  a required follow-up state.
-\end{itemize}
+Preserve an emergency bypass with a named owner, reason, defined scope, the evidence available at the time, and a required follow-up state.
 
 Evaluate detection, delay, bypass frequency, and workarounds together. Satisfaction alone will favor the controls that interfere least, not necessarily those that improve judgment.
 
@@ -620,35 +576,15 @@ Every layer should return the evidence required to challenge its conclusion.
 
 Calibrate the complete stack on an expert-labeled, stratified, held-out set. Choose and record the operating point, then translate its rates into expected queue volume using the deployed action volume and event prevalence. A percentage without the expected number of human cases does not define an operating policy.
 
-\Needspace{5\baselineskip}
-
-Define the escalation route as part of deployment. Every flag should identify:
-
-\begin{itemize}
-\tightlist
-\item
-  the decision owner;
-\item
-  the outcome at stake;
-\item
-  the supporting evidence;
-\item
-  the available options;
-\item
-  the recommended action;
-\item
-  the reason automation cannot decide;
-\item
-  the state currently paused; and
-\item
-  the event or token that resumes execution.
-\end{itemize}
+Define the escalation route as part of deployment. Every flag should identify the decision owner, outcome at stake, supporting evidence, available options, recommended action, reason automation cannot decide, state currently paused, and event or token that resumes execution.
 
 Test the route by processing a real rejection through it. When the named owner cannot stop, revise, or narrow the action, assign authority before assigning accountability.
 
 After deployment, sample both flagged and unflagged cases. Compare human verdicts with monitor decisions by risk stratum and monitor version. Recalibrate after material changes to agents, tools, rubrics, or workload. Examine whether knowledge of monitoring changes behavior.
 
 Finally, budget practice for the people expected to handle rare failures. A name in an escalation table does not preserve operational skill.
+
+\textbf{Portable claim.} Verification must be cheaper than uncritical acceptance.
 
 \section*{Sources and evidence}
 
@@ -660,6 +596,10 @@ Finally, budget practice for the people expected to handle rare failures. A name
   Strong evidence: Vasconcelos, H., Jörke, M., Grunde-McLaughlin, M., Gerstenberg, T., Bernstein, M., Krishna, R. (2022/2023). Explanations Can Reduce Overreliance on AI Systems During Decision-Making. PACM HCI 7(CSCW1). arXiv:2212.06823. Five experiments treat overreliance as a cost-benefit choice and find greater engagement when verification is cheaper or stakes are higher.
 \item
   Directional evidence: Fok, R., Weld, D.S. (2023/2024). In Search of Verifiability: Explanations Rarely Enable Complementary Performance in AI-Advised Decision Making. AI Magazine 45(3). arXiv:2305.07722. Across the XAI-reliance literature, explanations help only insofar as they enable verification.
+\item
+  Directional evidence: Drosos, I., et al.~(2025). ``Facilitating Trust in AI-assisted Software Tools.'' \emph{ACM Transactions on Software Engineering and Methodology}. \href{https://doi.org/10.1145/3772370}{DOI:10.1145/3772370}. Eighteen interviews and a 368-response survey identify factors shaping trust in software tools; autonomous patch-gate transfer remains untested.
+\item
+  Directional evidence: Tufano, M., et al.~(2024). ``Code Review Automation: Strengths and Weaknesses of the State of the Art.'' \emph{IEEE Transactions on Software Engineering}. \href{https://doi.org/10.1109/TSE.2023.3348172}{DOI:10.1109/TSE.2023.3348172}. Manual analysis of 2,291 predictions exposes capability boundaries and dataset defects; it does not evaluate this chapter's interface design.
 \item
   Corroboration (illustration only): the author's website, ``Two retrieval systems write this site'' (2026-06-10), describes schema-validated agent output landing as a Git diff that serves as the review gate. This author-system case does not count as independent external evidence.
 \end{itemize}

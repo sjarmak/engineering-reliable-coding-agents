@@ -3,48 +3,67 @@
     "chapter": 1,
     "title": "Run-to-run variance, statistical power, and paired comparisons",
     "developed_practices": [
-      "never-report-a-single-run",
-      "power-analyze-before-running",
-      "use-paired-tests-matched-to-metric"
+      {
+        "practice_id": "ERCA-020",
+        "slug": "never-report-a-single-run"
+      },
+      {
+        "practice_id": "ERCA-025",
+        "slug": "power-analyze-before-running"
+      },
+      {
+        "practice_id": "ERCA-024",
+        "slug": "use-paired-tests-matched-to-metric"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-023",
         "id": "report-correlation-aware-standard-errors",
         "aside": false
       },
       {
+        "practice_id": "ERCA-026",
         "id": "estimate-pass-at-k-unbiased",
         "aside": false
       },
       {
+        "practice_id": "ERCA-027",
         "id": "correct-multi-benchmark-victory-claims",
         "aside": false
       },
       {
+        "practice_id": "ERCA-029",
         "id": "rank-with-paired-comparison-models-and-cis",
         "aside": false
       },
       {
+        "practice_id": "ERCA-030",
         "id": "profile-benchmark-noise-before-decisions",
         "aside": false
       },
       {
+        "practice_id": "ERCA-031",
         "id": "declare-decoding-configuration",
         "aside": false
       },
       {
+        "practice_id": "ERCA-035",
         "id": "aggregate-few-runs-with-iqm-and-bootstrap-cis",
         "aside": false
       },
       {
+        "practice_id": "ERCA-028",
         "id": "shrink-evals-with-decision-aware-validation",
         "aside": false
       },
       {
+        "practice_id": "ERCA-033",
         "id": "precommit-confirmatory-eval-designs",
         "aside": false
       },
       {
+        "practice_id": "ERCA-016",
         "id": "report-spread-across-prompt-variants",
         "aside": false
       }
@@ -54,31 +73,43 @@
     "chapter": 2,
     "title": "Baselines, ablations, and cost-accuracy tradeoffs",
     "developed_practices": [
-      "run-ablation-controls",
-      "report-cost-accuracy-pareto"
+      {
+        "practice_id": "ERCA-114",
+        "slug": "run-ablation-controls"
+      },
+      {
+        "practice_id": "ERCA-012",
+        "slug": "report-cost-accuracy-pareto"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-034",
         "id": "report-performance-vs-tuning-budget",
         "aside": false
       },
       {
+        "practice_id": "ERCA-036",
         "id": "budget-sampling-by-coverage-and-verifier",
         "aside": false
       },
       {
+        "practice_id": "ERCA-112",
         "id": "freeze-then-evaluate-memory",
         "aside": false
       },
       {
+        "practice_id": "ERCA-113",
         "id": "pin-the-scoring-target",
         "aside": false
       },
       {
+        "practice_id": "ERCA-115",
         "id": "controlled-synthesis-human-verified",
         "aside": false
       },
       {
+        "practice_id": "ERCA-058",
         "id": "baseline-gates-against-random",
         "aside": false
       }
@@ -88,81 +119,111 @@
     "chapter": 3,
     "title": "Benchmark contamination, oracle strength, and workload validity",
     "developed_practices": [
-      "measure-public-score-inflation-with-matched-controls",
-      "evaluate-on-post-cutoff-tasks",
-      "strengthen-test-oracles-before-adjudication",
-      "benchmark-on-your-own-workload"
+      {
+        "practice_id": "ERCA-003",
+        "slug": "measure-public-score-inflation-with-matched-controls"
+      },
+      {
+        "practice_id": "ERCA-004",
+        "slug": "evaluate-on-post-cutoff-tasks"
+      },
+      {
+        "practice_id": "ERCA-001",
+        "slug": "strengthen-test-oracles-before-adjudication"
+      },
+      {
+        "practice_id": "ERCA-066",
+        "slug": "benchmark-on-your-own-workload"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-002",
         "id": "probe-memorization-before-crediting-capability",
         "aside": false
       },
       {
+        "practice_id": "ERCA-005",
         "id": "measure-overlap-semantically",
         "aside": false
       },
       {
+        "practice_id": "ERCA-006",
         "id": "anchor-contamination-metrics-to-score-benefit",
         "aside": true
       },
       {
+        "practice_id": "ERCA-007",
         "id": "build-fresh-items-anti-searchable",
         "aside": false
       },
       {
+        "practice_id": "ERCA-008",
         "id": "audit-contamination-per-model-benchmark-cell",
         "aside": false
       },
       {
+        "practice_id": "ERCA-009",
         "id": "combine-contamination-detectors-by-threat-model",
         "aside": false
       },
       {
+        "practice_id": "ERCA-010",
         "id": "run-construct-validity-check",
         "aside": false
       },
       {
+        "practice_id": "ERCA-011",
         "id": "build-code-benchmarks-against-defect-taxonomy",
         "aside": true
       },
       {
+        "practice_id": "ERCA-013",
         "id": "give-agent-benchmarks-real-holdouts",
         "aside": false
       },
       {
+        "practice_id": "ERCA-014",
         "id": "pin-and-publish-eval-harness",
         "aside": false
       },
       {
+        "practice_id": "ERCA-015",
         "id": "stress-test-rankings-under-perturbation",
         "aside": false
       },
       {
+        "practice_id": "ERCA-017",
         "id": "protect-eval-data-at-release",
         "aside": false
       },
       {
+        "practice_id": "ERCA-018",
         "id": "purge-invalid-items-before-measuring",
         "aside": false
       },
       {
+        "practice_id": "ERCA-019",
         "id": "audit-leaderboard-submission-protocols",
         "aside": false
       },
       {
+        "practice_id": "ERCA-021",
         "id": "audit-pipeline-against-qrp-catalog",
         "aside": true
       },
       {
+        "practice_id": "ERCA-022",
         "id": "search-before-building-a-benchmark",
         "aside": false
       },
       {
+        "practice_id": "ERCA-067",
         "id": "pair-offline-and-online-evals",
         "aside": false
       },
       {
+        "practice_id": "ERCA-032",
         "id": "checklist-agentic-benchmarks-for-validity",
         "aside": false
       }
@@ -172,24 +233,37 @@
     "chapter": 4,
     "title": "Execution-based evaluation, correction gates, and release tests",
     "developed_practices": [
-      "ground-evaluation-in-execution",
-      "gate-self-correction-on-external-feedback",
-      "golden-set-pass-k"
+      {
+        "practice_id": "ERCA-094",
+        "slug": "ground-evaluation-in-execution"
+      },
+      {
+        "practice_id": "ERCA-061",
+        "slug": "gate-self-correction-on-external-feedback"
+      },
+      {
+        "practice_id": "ERCA-095",
+        "slug": "golden-set-pass-k"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-063",
         "id": "score-verified-resolve-with-abstention",
         "aside": false
       },
       {
+        "practice_id": "ERCA-064",
         "id": "detect-silent-tool-errors",
         "aside": false
       },
       {
+        "practice_id": "ERCA-065",
         "id": "cap-turn-budgets",
         "aside": false
       },
       {
+        "practice_id": "ERCA-169",
         "id": "budget-the-verifier-tax",
         "aside": false
       }
@@ -199,15 +273,23 @@
     "chapter": 5,
     "title": "Calibrating model graders and separating agreement from correctness",
     "developed_practices": [
-      "calibrate-llm-judges",
-      "separate-agreement-from-correctness"
+      {
+        "practice_id": "ERCA-096",
+        "slug": "calibrate-llm-judges"
+      },
+      {
+        "practice_id": "ERCA-111",
+        "slug": "separate-agreement-from-correctness"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-172",
         "id": "keep-an-exact-auditor-alongside-heuristics",
         "aside": false
       },
       {
+        "practice_id": "ERCA-037",
         "id": "combine-judge-labels-with-human-subset",
         "aside": false
       }
@@ -217,36 +299,52 @@
     "chapter": 6,
     "title": "Proxy metric gaming and layered evaluation signals",
     "developed_practices": [
-      "layer-signals-beyond-single-proxy",
-      "monitor-proxy-true-divergence",
-      "monitor-cot-without-training-pressure"
+      {
+        "practice_id": "ERCA-038",
+        "slug": "layer-signals-beyond-single-proxy"
+      },
+      {
+        "practice_id": "ERCA-039",
+        "slug": "monitor-proxy-true-divergence"
+      },
+      {
+        "practice_id": "ERCA-042",
+        "slug": "monitor-cot-without-training-pressure"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-040",
         "id": "escalate-on-first-gaming",
         "aside": false
       },
       {
+        "practice_id": "ERCA-041",
         "id": "harden-infeasible-tasks",
         "aside": false
       },
       {
+        "practice_id": "ERCA-043",
         "id": "measure-reasoning-effort",
         "aside": false
       },
       {
+        "practice_id": "ERCA-055",
         "id": "weight-average-reward-models",
         "aside": false
       },
       {
+        "practice_id": "ERCA-056",
         "id": "evaluate-in-feedback-loops",
         "aside": false
       },
       {
+        "practice_id": "ERCA-060",
         "id": "test-detectors-contrastively",
         "aside": false
       },
       {
+        "practice_id": "ERCA-173",
         "id": "accept-on-vector-with-independent-judge",
         "aside": true
       }
@@ -256,32 +354,47 @@
     "chapter": 7,
     "title": "Agent isolation, injection defenses, and independent verification",
     "developed_practices": [
-      "contain-agent-blast-radius",
-      "distrust-agent-self-reports",
-      "defense-in-depth-injection"
+      {
+        "practice_id": "ERCA-068",
+        "slug": "contain-agent-blast-radius"
+      },
+      {
+        "practice_id": "ERCA-069",
+        "slug": "distrust-agent-self-reports"
+      },
+      {
+        "practice_id": "ERCA-105",
+        "slug": "defense-in-depth-injection"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-104",
         "id": "topology-as-security-decision",
         "aside": false
       },
       {
+        "practice_id": "ERCA-110",
         "id": "stateful-cross-session-guardrails",
         "aside": true
       },
       {
+        "practice_id": "ERCA-139",
         "id": "execute-agent-remediations-through-typed-policy-path",
         "aside": false
       },
       {
+        "practice_id": "ERCA-189",
         "id": "score-actions-by-reversibility-and-blast-radius",
         "aside": false
       },
       {
+        "practice_id": "ERCA-151",
         "id": "measure-your-own-security-delta",
         "aside": true
       },
       {
+        "practice_id": "ERCA-152",
         "id": "never-accept-self-attestation",
         "aside": false
       }
@@ -291,52 +404,72 @@
     "chapter": 8,
     "title": "Persistent agent state, durable workflows, and idempotent retries",
     "developed_practices": [
-      "make-agent-state-first-class-persistent",
-      "use-durable-workflow-engine",
-      "make-retried-steps-idempotent"
+      {
+        "practice_id": "ERCA-130",
+        "slug": "make-agent-state-first-class-persistent"
+      },
+      {
+        "practice_id": "ERCA-128",
+        "slug": "use-durable-workflow-engine"
+      },
+      {
+        "practice_id": "ERCA-124",
+        "slug": "make-retried-steps-idempotent"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-098",
         "id": "transactional-side-effects",
         "aside": false
       },
       {
+        "practice_id": "ERCA-123",
         "id": "state-retry-contract-invariants",
         "aside": false
       },
       {
+        "practice_id": "ERCA-125",
         "id": "checkpoint-async-at-consistency-boundaries",
         "aside": false
       },
       {
+        "practice_id": "ERCA-126",
         "id": "calibrate-checkpoint-interval",
         "aside": false
       },
       {
+        "practice_id": "ERCA-129",
         "id": "design-event-coordination-guarantees-explicitly",
         "aside": true
       },
       {
+        "practice_id": "ERCA-131",
         "id": "log-steps-transactionally-with-data",
         "aside": false
       },
       {
+        "practice_id": "ERCA-140",
         "id": "isolate-shared-agent-state-transactionally",
         "aside": false
       },
       {
+        "practice_id": "ERCA-135",
         "id": "guard-stochastic-steps-with-postconditions",
         "aside": true
       },
       {
+        "practice_id": "ERCA-137",
         "id": "version-events-weak-schema-first",
         "aside": false
       },
       {
+        "practice_id": "ERCA-138",
         "id": "design-operations-order-tolerant",
         "aside": false
       },
       {
+        "practice_id": "ERCA-141",
         "id": "crystallize-repeated-plans-into-blueprints",
         "aside": true
       }
@@ -346,35 +479,48 @@
     "chapter": 9,
     "title": "Replayable traces and fault-injection recovery testing",
     "developed_practices": [
-      "replayable-typed-traces",
-      "benchmark-recovery-with-fault-injection"
+      {
+        "practice_id": "ERCA-097",
+        "slug": "replayable-typed-traces"
+      },
+      {
+        "practice_id": "ERCA-127",
+        "slug": "benchmark-recovery-with-fault-injection"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-121",
         "id": "record-nondeterminism-replay-deterministic-code",
         "aside": false
       },
       {
+        "practice_id": "ERCA-122",
         "id": "bound-replay-history",
         "aside": false
       },
       {
+        "practice_id": "ERCA-132",
         "id": "provenance-driven-reexecution",
         "aside": false
       },
       {
+        "practice_id": "ERCA-133",
         "id": "certify-restores-against-downstream-commitments",
         "aside": false
       },
       {
+        "practice_id": "ERCA-134",
         "id": "diagnose-then-gate-recovery",
         "aside": false
       },
       {
+        "practice_id": "ERCA-136",
         "id": "hide-recovery-behind-monotonic-observability",
         "aside": false
       },
       {
+        "practice_id": "ERCA-052",
         "id": "fault-inject-with-realistic-fault-menu",
         "aside": false
       }
@@ -384,36 +530,52 @@
     "chapter": 10,
     "title": "Human-auditable failure analysis and taxonomy development",
     "developed_practices": [
-      "derive-taxonomy-from-own-traces",
-      "keep-humans-in-failure-attribution",
-      "design-traces-for-human-audit"
+      {
+        "practice_id": "ERCA-045",
+        "slug": "derive-taxonomy-from-own-traces"
+      },
+      {
+        "practice_id": "ERCA-046",
+        "slug": "keep-humans-in-failure-attribution"
+      },
+      {
+        "practice_id": "ERCA-047",
+        "slug": "design-traces-for-human-audit"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-049",
         "id": "judge-from-constraint-violation-log",
         "aside": false
       },
       {
+        "practice_id": "ERCA-050",
         "id": "monitor-early-trajectory-shape",
         "aside": false
       },
       {
+        "practice_id": "ERCA-051",
         "id": "preempt-environment-errors",
         "aside": false
       },
       {
+        "practice_id": "ERCA-053",
         "id": "aggregate-independent-attribution-judges",
         "aside": true
       },
       {
+        "practice_id": "ERCA-054",
         "id": "differential-test-before-blaming-agent",
         "aside": false
       },
       {
+        "practice_id": "ERCA-057",
         "id": "canonicalize-trajectories",
         "aside": false
       },
       {
+        "practice_id": "ERCA-062",
         "id": "use-run-consistency-as-risk-signal",
         "aside": true
       }
@@ -423,28 +585,42 @@
     "chapter": 11,
     "title": "Measuring and designing repository retrieval",
     "developed_practices": [
-      "score-retrieval-and-generation-separately",
-      "hybrid-retrieval-fused-on-ranks",
-      "chunk-on-ast-boundaries"
+      {
+        "practice_id": "ERCA-076",
+        "slug": "score-retrieval-and-generation-separately"
+      },
+      {
+        "practice_id": "ERCA-083",
+        "slug": "hybrid-retrieval-fused-on-ranks"
+      },
+      {
+        "practice_id": "ERCA-085",
+        "slug": "chunk-on-ast-boundaries"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-073",
         "id": "retrieve-across-lexical-gaps",
         "aside": false
       },
       {
+        "practice_id": "ERCA-074",
         "id": "iterate-retrieval-with-generation",
         "aside": false
       },
       {
+        "practice_id": "ERCA-075",
         "id": "gate-retrieval-on-expected-benefit",
         "aside": false
       },
       {
+        "practice_id": "ERCA-077",
         "id": "fix-both-ends-of-rag",
         "aside": false
       },
       {
+        "practice_id": "ERCA-089",
         "id": "stage-cheap-retrieval-then-rerank",
         "aside": false
       }
@@ -454,40 +630,57 @@
     "chapter": 12,
     "title": "Localization funnels, repository indexes, and freshness checks",
     "developed_practices": [
-      "staged-localization-funnel",
-      "index-repository-as-knowledge-graph",
-      "gate-retrieval-on-freshness"
+      {
+        "practice_id": "ERCA-084",
+        "slug": "staged-localization-funnel"
+      },
+      {
+        "practice_id": "ERCA-174",
+        "slug": "index-repository-as-knowledge-graph"
+      },
+      {
+        "practice_id": "ERCA-078",
+        "slug": "gate-retrieval-on-freshness"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-079",
         "id": "retrieve-by-structure",
         "aside": false
       },
       {
+        "practice_id": "ERCA-086",
         "id": "front-load-a-repo-map",
         "aside": false
       },
       {
+        "practice_id": "ERCA-087",
         "id": "inject-static-anchors",
         "aside": false
       },
       {
+        "practice_id": "ERCA-090",
         "id": "schedule-exploration-prune-by-distance",
         "aside": false
       },
       {
+        "practice_id": "ERCA-091",
         "id": "walk-call-graph-at-query-time",
         "aside": false
       },
       {
+        "practice_id": "ERCA-175",
         "id": "extend-graph-below-function-level-for-line-precision",
         "aside": false
       },
       {
+        "practice_id": "ERCA-176",
         "id": "route-entity-queries-to-cheap-graph-lookups",
         "aside": false
       },
       {
+        "practice_id": "ERCA-177",
         "id": "treat-index-representation-as-first-class-design-choice",
         "aside": false
       }
@@ -497,33 +690,51 @@
     "chapter": 13,
     "title": "Usable context budgets, consolidated-spec restarts, and file-based tool output",
     "developed_practices": [
-      "budget-to-measured-effective-context",
-      "consolidate-spec-restart-lost-runs",
-      "persist-transient-context-as-files",
-      "measure-context-files-and-maintain-them-like-config"
+      {
+        "practice_id": "ERCA-072",
+        "slug": "budget-to-measured-effective-context"
+      },
+      {
+        "practice_id": "ERCA-088",
+        "slug": "consolidate-spec-restart-lost-runs"
+      },
+      {
+        "practice_id": "ERCA-143",
+        "slug": "persist-transient-context-as-files"
+      },
+      {
+        "practice_id": "ERCA-178",
+        "slug": "measure-context-files-and-maintain-them-like-config"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-070",
         "id": "edge-load-key-evidence",
         "aside": false
       },
       {
+        "practice_id": "ERCA-071",
         "id": "verify-semantic-not-verbatim-recall",
         "aside": false
       },
       {
+        "practice_id": "ERCA-082",
         "id": "compaction-as-agent-action",
         "aside": false
       },
       {
+        "practice_id": "ERCA-092",
         "id": "price-token-reduction-transforms",
         "aside": false
       },
       {
+        "practice_id": "ERCA-144",
         "id": "keep-always-loaded-context-minimal",
         "aside": false
       },
       {
+        "practice_id": "ERCA-190",
         "id": "audit-the-assembled-context-budget",
         "aside": false
       }
@@ -533,32 +744,47 @@
     "chapter": 14,
     "title": "Cross-session memory, raw traces, and compaction policies",
     "developed_practices": [
-      "retain-raw-distill-separately",
-      "light-store-by-default",
-      "optimize-compaction-from-failures"
+      {
+        "practice_id": "ERCA-116",
+        "slug": "retain-raw-distill-separately"
+      },
+      {
+        "practice_id": "ERCA-118",
+        "slug": "light-store-by-default"
+      },
+      {
+        "practice_id": "ERCA-081",
+        "slug": "optimize-compaction-from-failures"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-080",
         "id": "persist-explored-context",
         "aside": true
       },
       {
+        "practice_id": "ERCA-099",
         "id": "durable-artifact-handoff",
         "aside": true
       },
       {
+        "practice_id": "ERCA-109",
         "id": "scheduled-typed-consolidation",
         "aside": false
       },
       {
+        "practice_id": "ERCA-117",
         "id": "model-time-explicitly",
         "aside": false
       },
       {
+        "practice_id": "ERCA-119",
         "id": "plan-for-memory-portability",
         "aside": true
       },
       {
+        "practice_id": "ERCA-120",
         "id": "tribal-knowledge-substrate",
         "aside": false
       }
@@ -568,40 +794,57 @@
     "chapter": 15,
     "title": "Efficient verification interfaces and risk-based human escalation",
     "developed_practices": [
-      "make-verification-cheaper-than-acceptance",
-      "target-friction-at-the-accept-loop",
-      "escalate-only-flagged-cases"
+      {
+        "practice_id": "ERCA-153",
+        "slug": "make-verification-cheaper-than-acceptance"
+      },
+      {
+        "practice_id": "ERCA-148",
+        "slug": "target-friction-at-the-accept-loop"
+      },
+      {
+        "practice_id": "ERCA-157",
+        "slug": "escalate-only-flagged-cases"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-106",
         "id": "place-human-checkpoints-at-failure-points",
         "aside": false
       },
       {
+        "practice_id": "ERCA-146",
         "id": "design-overseer-roles-for-skill-retention",
         "aside": false
       },
       {
+        "practice_id": "ERCA-147",
         "id": "calibrate-displayed-confidence",
         "aside": false
       },
       {
+        "practice_id": "ERCA-161",
         "id": "curate-what-reviewers-see",
         "aside": false
       },
       {
+        "practice_id": "ERCA-164",
         "id": "shield-review-from-time-pressure",
         "aside": false
       },
       {
+        "practice_id": "ERCA-170",
         "id": "render-agent-actions-as-live-state",
         "aside": true
       },
       {
+        "practice_id": "ERCA-188",
         "id": "treat-human-escalation-as-a-budgeted-online-decision",
         "aside": false
       },
       {
+        "practice_id": "ERCA-150",
         "id": "budget-verification-as-the-dominant-cost",
         "aside": true
       }
@@ -611,61 +854,86 @@
     "chapter": 16,
     "title": "Autonomy calibration, provenance, effective gates, and accountability",
     "developed_practices": [
-      "graduate-autonomy-per-action-track-record",
-      "label-ai-provenance",
-      "audit-human-gates-for-effectiveness",
-      "align-accountability-with-actual-control"
+      {
+        "practice_id": "ERCA-145",
+        "slug": "graduate-autonomy-per-action-track-record"
+      },
+      {
+        "practice_id": "ERCA-165",
+        "slug": "label-ai-provenance"
+      },
+      {
+        "practice_id": "ERCA-154",
+        "slug": "audit-human-gates-for-effectiveness"
+      },
+      {
+        "practice_id": "ERCA-149",
+        "slug": "align-accountability-with-actual-control"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-160",
         "id": "attach-reliance-disclaimers",
         "aside": true
       },
       {
+        "practice_id": "ERCA-163",
         "id": "measure-oversight-with-decomposed-metrics",
         "aside": false
       },
       {
+        "practice_id": "ERCA-166",
         "id": "scale-review-capacity-to-experience",
         "aside": false
       },
       {
+        "practice_id": "ERCA-142",
         "id": "record-steps-in-hash-chained-ledger",
         "aside": false
       },
       {
+        "practice_id": "ERCA-155",
         "id": "rebuild-collective-accountability",
         "aside": false
       },
       {
+        "practice_id": "ERCA-156",
         "id": "separate-control-from-oversight",
         "aside": true
       },
       {
+        "practice_id": "ERCA-158",
         "id": "require-comprehension-before-merge",
         "aside": true
       },
       {
+        "practice_id": "ERCA-159",
         "id": "write-an-oversight-card",
         "aside": true
       },
       {
+        "practice_id": "ERCA-162",
         "id": "keep-override-authority-real",
         "aside": true
       },
       {
+        "practice_id": "ERCA-167",
         "id": "write-an-agent-contribution-policy",
         "aside": false
       },
       {
+        "practice_id": "ERCA-168",
         "id": "set-autonomy-defaults-per-task-type",
         "aside": false
       },
       {
+        "practice_id": "ERCA-180",
         "id": "treat-objective-weights-as-reviewed-policy",
         "aside": false
       },
       {
+        "practice_id": "ERCA-185",
         "id": "gate-optimizer-output-behind-human-review",
         "aside": false
       }
@@ -675,29 +943,46 @@
     "chapter": 17,
     "title": "Agent topology selection and dynamic task allocation",
     "developed_practices": [
-      "fix-failures-structurally-not-prompts",
-      "single-agent-baseline-gate",
-      "match-topology-to-task-shape",
-      "dynamic-task-graphs"
+      {
+        "practice_id": "ERCA-044",
+        "slug": "fix-failures-structurally-not-prompts"
+      },
+      {
+        "practice_id": "ERCA-093",
+        "slug": "single-agent-baseline-gate"
+      },
+      {
+        "practice_id": "ERCA-107",
+        "slug": "match-topology-to-task-shape"
+      },
+      {
+        "practice_id": "ERCA-101",
+        "slug": "dynamic-task-graphs"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-059",
         "id": "oversee-mas-as-graph",
         "aside": true
       },
       {
+        "practice_id": "ERCA-102",
         "id": "roles-in-config-not-code",
         "aside": true
       },
       {
+        "practice_id": "ERCA-103",
         "id": "blind-review-lanes",
         "aside": true
       },
       {
+        "practice_id": "ERCA-108",
         "id": "active-blackboard-with-diversity",
         "aside": true
       },
       {
+        "practice_id": "ERCA-048",
         "id": "repair-root-cause-not-last-step",
         "aside": true
       }
@@ -707,40 +992,57 @@
     "chapter": 18,
     "title": "Cost-aware fleet scheduling and model routing",
     "developed_practices": [
-      "re-decide-cheaply-ship-the-incumbent",
-      "route-work-to-the-cheapest-sufficient-model",
-      "replay-traces-before-policy-changes"
+      {
+        "practice_id": "ERCA-171",
+        "slug": "re-decide-cheaply-ship-the-incumbent"
+      },
+      {
+        "practice_id": "ERCA-187",
+        "slug": "route-work-to-the-cheapest-sufficient-model"
+      },
+      {
+        "practice_id": "ERCA-191",
+        "slug": "replay-traces-before-policy-changes"
+      }
     ],
     "companion_practices": [
       {
+        "practice_id": "ERCA-179",
         "id": "formalize-work-as-constraints-and-solve-globally",
         "aside": false
       },
       {
+        "practice_id": "ERCA-181",
         "id": "design-the-online-rescheduling-loop",
         "aside": false
       },
       {
+        "practice_id": "ERCA-182",
         "id": "probe-only-above-an-uncertainty-threshold",
         "aside": true
       },
       {
+        "practice_id": "ERCA-184",
         "id": "split-fleet-scheduling-into-global-and-local-levels",
         "aside": false
       },
       {
+        "practice_id": "ERCA-192",
         "id": "audit-the-allocation-layer",
         "aside": true
       },
       {
+        "practice_id": "ERCA-100",
         "id": "cost-cascade-routing",
         "aside": false
       },
       {
+        "practice_id": "ERCA-183",
         "id": "log-scheduling-decisions-for-selection-effect-modeling",
         "aside": true
       },
       {
+        "practice_id": "ERCA-186",
         "id": "pilot-to-pick-the-algorithm-then-commit-the-budget",
         "aside": false
       }

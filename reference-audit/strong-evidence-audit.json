@@ -1,0 +1,727 @@
+{
+  "generated_at": "2026-08-06T18:28:58.766Z",
+  "rule": "A strong label must point to one directly identifiable source and must not promote a synthesis, corpus, or catalog-only transfer into a strong composite claim.",
+  "totals": {
+    "strong_entries": 65,
+    "passing": 65,
+    "failing": 0
+  },
+  "entries": [
+    {
+      "location": "autonomy-provenance-gates-accountability.md:480",
+      "arxiv_ids": [
+        "2507.08149"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Chen, V., Talwalkar, A., Brennan, R., Neubig, G. (2025). Code with Me or for Me? How Increasing AI Automation Transforms Developer Workflows. arXiv:2507.08149. In the controlled study, users' failure to understand agent behavior, not capability, limited broader adoption."
+    },
+    {
+      "location": "autonomy-provenance-gates-accountability.md:485",
+      "arxiv_ids": [
+        "2405.16081"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Tang, N., Chen, M., Ning, Z., Bansal, A., Huang, Y., McMillan, C., Li, T. J.-J. (2024). A Study on Developer Behaviors for Validating and Repairing LLM-Generated Code Using Eye Tracking and IDE Actions. arXiv:2405.16081. Supports improved repair performance and greater verification effort with provenance disclosure; recognition without disclosure was unreliable. Limited by a small laboratory sample and code chunks of tens of lines; the attention cost may not scale to constant exposure."
+    },
+    {
+      "location": "baselines-ablations-cost-accuracy.md:139",
+      "arxiv_ids": [
+        "2607.22520"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence for the narrower transition analysis: Tank, D., and Nama, B. (2026), \"The Regression Tax: Decomposing Why Skills Help and Hurt LLM Agents,\" arXiv:2607.22520. Nearly 6,000 runs across two office-automation benchmarks and three model-harness stacks; transfer to coding-agent skill libraries is directional."
+    },
+    {
+      "location": "calibrating-model-graders-agreement-correctness.md:220",
+      "arxiv_ids": [
+        "2306.05685"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Zheng et al. (2023), \"Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena,\" arXiv:2306.05685. Judge position, verbosity, and self-preference bias; inter-rater agreement against human labels."
+    },
+    {
+      "location": "calibrating-model-graders-agreement-correctness.md:221",
+      "arxiv_ids": [
+        "2406.12624"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Singh Thakur, Choudhary, Ramayapally, Vaidyanathan & Hupkes (2024), \"Judging the Judges,\" arXiv:2406.12624. Chance-corrected alignment metrics, systematic leniency, and position effects."
+    },
+    {
+      "location": "calibrating-model-graders-agreement-correctness.md:222",
+      "arxiv_ids": [
+        "2503.13657"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Cemri, M., et al. (2025), \"Why Do Multi-Agent LLM Systems Fail?,\" arXiv:2503.13657. Kappa 0.88 expert taxonomy before validated automated annotation."
+    },
+    {
+      "location": "calibrating-model-graders-agreement-correctness.md:224",
+      "arxiv_ids": [
+        "2605.24060"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Panthi & Abdelfattah (2026), \"Same Ranking, Different Winner,\" arXiv:2605.24060. The 115-case stratified validation protocol, agreement measurements, overlap adjudication, and scaled contested-case evaluation."
+    },
+    {
+      "location": "calibrating-model-graders-agreement-correctness.md:234",
+      "arxiv_ids": [
+        "2605.00914"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Bertalanič (2026), \"Cost of Consensus,\" arXiv:2605.00914. Oracle gap up to 32.3 percentage points; plurality voting discards correct answers already present; grounding catches failures that agreement masks."
+    },
+    {
+      "location": "closing.md:102",
+      "arxiv_ids": [
+        "2209.13085"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Skalse, Howe, Krasheninnikov & Krueger (2022). Defining and Characterizing Reward Hacking. NeurIPS 2022. arXiv:2209.13085. Chapter 6, `layer-signals-beyond-single-proxy`."
+    },
+    {
+      "location": "closing.md:103",
+      "arxiv_ids": [
+        "2505.00212"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Zhang, S., et al. (2025). Which Agent Causes Task Failures and When? On Automated Failure Attribution of LLM Multi-Agent Systems. ICML 2025. arXiv:2505.00212. Chapter 10, `keep-humans-in-failure-attribution`."
+    },
+    {
+      "location": "closing.md:105",
+      "arxiv_ids": [
+        "1608.07617"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Chen, J., et al. (2016). Sampling as a Baseline Optimizer for Search-Based Software Engineering. arXiv:1608.07617. Chapter 18, `replay-traces-before-policy-changes`."
+    },
+    {
+      "location": "contamination-oracle-workload-validity.md:240",
+      "arxiv_ids": [
+        "2607.22368"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence for audited protocol defects and paired score inflation: Shao, J., Chen, H., Zhang, W., Pan, M., and Luo, B. (2026), \"Do Agent Benchmarks Measure Capability? Protocol Validity in the Age of Agentic AI,\" arXiv:2607.22368. The reported rates apply to the audited protocols, not all agent benchmarks."
+    },
+    {
+      "location": "contamination-oracle-workload-validity.md:241",
+      "arxiv_ids": [
+        "2607.28587"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence for benchmark-specific PR-issue misalignment and detector accuracy: Wang, M., Xu, J., and He, P. (2026), \"PAIChecker: Uncovering and Checking PR-Issue Misalignment in SWE-Bench-Like Benchmarks,\" arXiv:2607.28587."
+    },
+    {
+      "location": "cost-aware-fleet-scheduling-model-routing.md:432",
+      "arxiv_ids": [
+        "2608.00101"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence for production workload characterization, directional for capacity-policy transfer: Liu, B., et al. (2026), \"Agentic Coding in the Wild: Characterizing GitHub Copilot Traces at Production Scale,\" arXiv:2608.00101."
+    },
+    {
+      "location": "cost-aware-fleet-scheduling-model-routing.md:441",
+      "arxiv_ids": [
+        "2608.04804"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence for one benchmark-bound scout-and-fixer configuration and its no-router ablation: Bhola, I., Krishnan, A., and NS, M. (2026), \"Scrouting: Cost-Aware Routing of Coding Agents by Scouting the Repository First,\" arXiv:2608.04804. The handoff, rather than the router, carried the measured result."
+    },
+    {
+      "location": "cost-aware-fleet-scheduling-model-routing.md:448",
+      "arxiv_ids": [
+        "1608.07617"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence for the cheap-baseline comparison only: SWAY, Chen, J., et al. (2016), \"Sampling as a Baseline Optimizer for Search-Based Software Engineering,\" arXiv:1608.07617. The study supports requiring a candidate optimizer to beat a cheap baseline; fixed-arrival replay is a transfer beyond its experiment."
+    },
+    {
+      "location": "cross-session-memory-raw-traces-compaction.md:385",
+      "arxiv_ids": [
+        "2605.12978"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence for the degradation mechanism: \"Useful Memories Become Faulty When Continuously Updated by LLMs\" (Zhang 2026), arXiv:2605.12978. The study measures degradation under repeated LLM memory updates; it does not compare immutable-source and rebuildable-distillate architectures."
+    },
+    {
+      "location": "cross-session-memory-raw-traces-compaction.md:399",
+      "arxiv_ids": [
+        "2510.00615"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence for the measured failure-driven compression comparison: Kang, M., et al. (2025), \"ACON: Optimizing Context Compression for Long-horizon LLM Agents,\" arXiv:2510.00615 (Microsoft). The study tests failure-guided compression on app, office, and question-answering benchmarks; transfer to coding agents remains directional."
+    },
+    {
+      "location": "execution-correction-gates-release-tests.md:271",
+      "arxiv_ids": [
+        "2607.25152"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence for externally grounded gating in the measured testbed: Park, H., and Choi, B. (2026), \"When Do Agent Loops Mistake Stagnation for Progress?\" arXiv:2607.25152. The 54-cycle result does not estimate a general agent failure rate."
+    },
+    {
+      "location": "execution-correction-gates-release-tests.md:275",
+      "arxiv_ids": [
+        "2310.01798"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Huang, J., et al. (2023). Large Language Models Cannot Self-Correct Reasoning Yet. ICLR 2024. arXiv:2310.01798."
+    },
+    {
+      "location": "execution-correction-gates-release-tests.md:279",
+      "arxiv_ids": [
+        "2406.12045"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: τ-bench (Yao, Shinn, Razavi & Narasimhan 2024, arXiv:2406.12045). Introduces and measures \\(\\mathrm{pass}^{k}\\) on interactive, multi-turn tool-use tasks with executable oracles. Using a team's own tasks and replaying the set per release are transfers beyond the measured findings."
+    },
+    {
+      "location": "human-auditable-failure-analysis-taxonomy.md:245",
+      "arxiv_ids": [
+        "2505.00212"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Zhang, S., et al. (2025), \"Which Agent Causes Task Failures and When? On Automated Failure Attribution of LLM Multi-Agent Systems,\" ICML 2025, arXiv:2505.00212. (Who&When: expert-annotated failure logs from 127 multi-agent systems; 53.5% agent-level and 14.2% step-level for the best automated method; some methods below random.)"
+    },
+    {
+      "location": "human-auditable-failure-analysis-taxonomy.md:250",
+      "arxiv_ids": [
+        "2505.08638"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Deshpande, D., et al. (2025), \"TRAIL: Trace Reasoning and Agentic Issue Localization,\" Patronus AI, arXiv:2505.08638. (Best evaluated model localized issues in 11% of 148 expert-annotated traces; a 2025 capability snapshot.)"
+    },
+    {
+      "location": "human-auditable-failure-analysis-taxonomy.md:252",
+      "arxiv_ids": [
+        "2607.28802"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Directional evidence for interaction-centered failure localization, with strong evidence for label reproducibility in the evaluated set: Raj, H., et al. (2026), \"Model or Harness? An Interaction-Centric Taxonomy for Localizing Agent Failures,\" arXiv:2607.28802. The strongest automated judge reached Cohen's \\(\\kappa=0.76\\) against human labels."
+    },
+    {
+      "location": "isolation-injection-independent-verification.md:232",
+      "arxiv_ids": [
+        "2211.03622"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "  - Strong evidence: Perry, Srivastava, Kumar, Boneh (2022/2023), \"Do Users Write More Insecure Code with AI Assistants?\", ACM CCS 2023, arXiv:2211.03622."
+    },
+    {
+      "location": "localization-funnels-repository-indexes-freshness-checks.md:263",
+      "arxiv_ids": [
+        "2407.01489"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Xia, C. S., et al. (2024), \"Agentless: Demystifying LLM-based Software Engineering Agents,\" arXiv:2407.01489."
+    },
+    {
+      "location": "localization-funnels-repository-indexes-freshness-checks.md:265",
+      "arxiv_ids": [
+        "2604.05481"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Sepidband, M., Viet Pham, H., Hemmati, H. (2026), \"On the Role of Fault Localization Context for LLM-Based Program Repair,\" arXiv:2604.05481."
+    },
+    {
+      "location": "localization-funnels-repository-indexes-freshness-checks.md:270",
+      "arxiv_ids": [
+        "2503.09089"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Chen, Z., et al. (2025), \"LocAgent: Graph-Guided LLM Agents for Code Localization,\" arXiv:2503.09089."
+    },
+    {
+      "location": "localization-funnels-repository-indexes-freshness-checks.md:272",
+      "arxiv_ids": [
+        "2406.01422"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Ma, Y., et al. (2024), \"Alibaba LingmaAgent: Improving Automated Issue Resolution via Comprehensive Repository Exploration,\" arXiv:2406.01422."
+    },
+    {
+      "location": "localization-funnels-repository-indexes-freshness-checks.md:274",
+      "arxiv_ids": [
+        "2410.14684"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Ouyang, S., et al. (2024), \"RepoGraph: Enhancing AI Software Engineering with Repository-level Code Graph,\" arXiv:2410.14684."
+    },
+    {
+      "location": "localization-funnels-repository-indexes-freshness-checks.md:275",
+      "arxiv_ids": [
+        "2605.02421"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: AOCI AI-oriented code indexing (Liu 2026), arXiv:2605.02421."
+    },
+    {
+      "location": "measuring-designing-repository-retrieval.md:296",
+      "arxiv_ids": [
+        "2306.03091"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Liu, T., et al. (2023), \"RepoBench: Benchmarking Repository-Level Code Auto-Completion Systems,\" ICLR 2024, arXiv:2306.03091. (R/C/P decomposition localizes failure to retrieval vs completion vs pipeline stage.)"
+    },
+    {
+      "location": "measuring-designing-repository-retrieval.md:297",
+      "arxiv_ids": [
+        "2605.20926"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: MemConflict (Tao et al. 2026), arXiv:2605.20926. (Black-box + white-box memory evaluation; localizes missing vs low-ranked vs retrieved-but-unused; best reported conflict-recognition score 0.2501.)"
+    },
+    {
+      "location": "measuring-designing-repository-retrieval.md:298",
+      "arxiv_ids": [
+        "2605.03354"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Memory Circuit Analysis (Mao et al. 2026), arXiv:2605.03354. (Stage-level diagnostic localizing a silent failure to the responsible memory operation; extraction/retention/retrieval fail silently behind fluent answers.)"
+    },
+    {
+      "location": "measuring-designing-repository-retrieval.md:303",
+      "arxiv_ids": [
+        "2607.24882"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence for the benchmark measurements and controlled seed pilot: Qin, B., and Xie, Y. (2026), \"Agent Retrieval Bench: Evaluating Repository Context Retrieval for Coding Agents,\" arXiv:2607.24882. The benchmark supports stage-level evaluation rather than a universal retrieval-family ranking."
+    },
+    {
+      "location": "measuring-designing-repository-retrieval.md:307",
+      "arxiv_ids": [
+        "2507.18515"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Yang, Z., et al. (2025), \"A Deep Dive into Retrieval-Augmented Generation for Code Completion: Experience on WeChat,\" arXiv:2507.18515 (industrial study)."
+    },
+    {
+      "location": "measuring-designing-repository-retrieval.md:308",
+      "arxiv_ids": [
+        "1909.09436"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence for the vocabulary-gap claim: CodeSearchNet (Husain 2019), arXiv:1909.09436. The study establishes the mismatch between natural-language queries and code vocabulary. It does not test the chapter's rank-fusion protocol; Yang et al. supply the direct comparison of combined lexical and semantic retrieval."
+    },
+    {
+      "location": "measuring-designing-repository-retrieval.md:317",
+      "arxiv_ids": [
+        "2506.15655"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Zhang, Y., et al. (2025), \"cAST: Enhancing Code Retrieval-Augmented Generation with Structural Chunking via Abstract Syntax Tree,\" arXiv:2506.15655."
+    },
+    {
+      "location": "proxy-gaming-layered-signals.md:182",
+      "arxiv_ids": [
+        "2209.13085"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- **Strong evidence:** Skalse, Howe, Krasheninnikov & Krueger (2022). *Defining and Characterizing Reward Hacking*. NeurIPS 2022. arXiv:2209.13085."
+    },
+    {
+      "location": "proxy-gaming-layered-signals.md:187",
+      "arxiv_ids": [
+        "2210.10760"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- **Strong evidence:** Gao, Schulman & Hilton (2022). *Scaling Laws for Reward Model Overoptimization*. ICML 2023. arXiv:2210.10760."
+    },
+    {
+      "location": "proxy-gaming-layered-signals.md:192",
+      "arxiv_ids": [
+        "2503.11926"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- **Strong evidence:** Baker, B., et al. (2025). *Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation*. OpenAI. arXiv:2503.11926."
+    },
+    {
+      "location": "replayable-traces-fault-injection-recovery.md:296",
+      "arxiv_ids": [
+        "2404.06203"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Vogel et al. (2024), \"A Comprehensive Benchmarking Analysis of Fault Recovery in Stream Processing Frameworks,\" arXiv:2404.06203 (JSS line)."
+    },
+    {
+      "location": "usable-context-budgets-spec-restarts-file-output.md:388",
+      "arxiv_ids": [
+        "2404.06654"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Hsieh, C.-P., et al. (2024), \"RULER: What's the Real Context Size of Your Long-Context Language Models?\" COLM 2024, arXiv:2404.06654."
+    },
+    {
+      "location": "usable-context-budgets-spec-restarts-file-output.md:389",
+      "arxiv_ids": [
+        "2411.03538"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Leng, Q., et al. (2024), \"Long Context RAG Performance of Large Language Models,\" Databricks Mosaic Research, arXiv:2411.03538."
+    },
+    {
+      "location": "usable-context-budgets-spec-restarts-file-output.md:390",
+      "arxiv_ids": [
+        "2503.04359"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Li, J., et al. (2025), \"LONGCODEU: Benchmarking Long-Context Language Models on Long Code Understanding,\" arXiv:2503.04359."
+    },
+    {
+      "location": "usable-context-budgets-spec-restarts-file-output.md:391",
+      "arxiv_ids": [
+        "2505.07897"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Rando, S., et al. (2025), \"LongCodeBench: Evaluating Coding LLMs at 1M Context Windows,\" arXiv:2505.07897."
+    },
+    {
+      "location": "usable-context-budgets-spec-restarts-file-output.md:396",
+      "arxiv_ids": [
+        "2505.06120"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Laban, P., et al. (2025), \"LLMs Get Lost In Multi-Turn Conversation,\" arXiv:2505.06120."
+    },
+    {
+      "location": "usable-context-budgets-spec-restarts-file-output.md:409",
+      "arxiv_ids": [
+        "2511.12884"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Chatlatanagulchai, W., et al. (2025), \"Agent READMEs: An Empirical Study of Context Files for Agentic Coding,\" arXiv:2511.12884."
+    },
+    {
+      "location": "variance-power-paired-comparisons.md:190",
+      "arxiv_ids": [
+        "2308.02828"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Ouyang, Zhang, Harman & Wang (2023). An Empirical Study of the Non-determinism of ChatGPT in Code Generation. arXiv:2308.02828. Nominally identical requests, different programs and outcomes."
+    },
+    {
+      "location": "variance-power-paired-comparisons.md:191",
+      "arxiv_ids": [
+        "2602.07150"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Bjarnason, Silva & Monperrus (2026). On Randomness in Agentic Evals. arXiv:2602.07150. The 60,000-trajectory result: 2.2 to 6.0 pp single-run spread, SD above 1.5 pp at temperature 0, early-token divergence."
+    },
+    {
+      "location": "variance-power-paired-comparisons.md:192",
+      "arxiv_ids": [
+        "1803.09578"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Reimers & Gurevych (2018). Why Comparing Single Performance Scores Does Not Allow to Draw Conclusions About Machine Learning Approaches. arXiv:1803.09578. The 26% result."
+    },
+    {
+      "location": "variance-power-paired-comparisons.md:193",
+      "arxiv_ids": [
+        "2103.03098"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Bouthillier et al. (2021). Accounting for Variance in Machine Learning Benchmarks. MLSys 2021. arXiv:2103.03098. The ~51x result and the fixed-seed critique."
+    },
+    {
+      "location": "variance-power-paired-comparisons.md:194",
+      "arxiv_ids": [
+        "1709.06560"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Henderson et al. (2017). Deep Reinforcement Learning that Matters. AAAI 2018. arXiv:1709.06560. Five-seed splits and unreported researcher degrees of freedom."
+    },
+    {
+      "location": "variance-power-paired-comparisons.md:195",
+      "arxiv_ids": [
+        "2002.06305"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Dodge et al. (2020). Fine-Tuning Pretrained Language Models: Weight Initializations, Data Orders, and Early Stopping. arXiv:2002.06305. The 2,100-trial seed result, scoped to small-data fine-tuning of pretrained encoders."
+    },
+    {
+      "location": "variance-power-paired-comparisons.md:196",
+      "arxiv_ids": [
+        "2310.11324"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Sclar et al. (2023), FormatSpread, arXiv:2310.11324. Meaning-preserving prompt-format changes produced a median 7.5-point accuracy spread across the tested tasks, with larger task-level spreads."
+    },
+    {
+      "location": "variance-power-paired-comparisons.md:197",
+      "arxiv_ids": [
+        "2401.00595"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Mizrahi et al. (2024), TACL, arXiv:2401.00595. Individual templates reversed some model comparisons even where aggregate comparisons were more stable."
+    },
+    {
+      "location": "variance-power-paired-comparisons.md:198",
+      "arxiv_ids": [
+        "2401.03729"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Salinas and Morstatter (2024), arXiv:2401.03729. Trivial prompt edits changed more than 10 percent of predictions on some tested tasks."
+    },
+    {
+      "location": "variance-power-paired-comparisons.md:202",
+      "arxiv_ids": [
+        "2411.00640"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Miller (2024). Adding Error Bars to Evals. arXiv:2411.00640 (Anthropic). The 13.2% to 7.5% minimum-detectable-effect example and the response-count lever."
+    },
+    {
+      "location": "variance-power-paired-comparisons.md:203",
+      "arxiv_ids": [
+        "2010.06595"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Card et al. (2020). With Little Power Comes Great Responsibility. EMNLP 2020. arXiv:2010.06595. GLUE underpowering and effect-size exaggeration."
+    },
+    {
+      "location": "variance-power-paired-comparisons.md:204",
+      "arxiv_ids": [
+        "1806.08295"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Colas, Sigaud & Oudeyer (2018). How Many Random Seeds? arXiv:1806.08295. The pilot floor, the bootstrap false-positive rate at small N, the DDPG case, and the preference for Welch's t-test."
+    },
+    {
+      "location": "variance-power-paired-comparisons.md:208",
+      "arxiv_ids": [
+        "2411.00640"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Miller (2024). Adding Error Bars to Evals. arXiv:2411.00640. Paired per-item differences with paired standard error and score correlation."
+    },
+    {
+      "location": "verification-interfaces-risk-based-escalation.md:398",
+      "arxiv_ids": [
+        "2212.06823"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Vasconcelos, H., Jörke, M., Grunde-McLaughlin, M., Gerstenberg, T., Bernstein, M., Krishna, R. (2022/2023). Explanations Can Reduce Overreliance on AI Systems During Decision-Making. PACM HCI 7(CSCW1). arXiv:2212.06823. Five experiments treat overreliance as a cost-benefit choice and find greater engagement when verification is cheaper or stakes are higher."
+    },
+    {
+      "location": "verification-interfaces-risk-based-escalation.md:406",
+      "arxiv_ids": [
+        "2102.09692"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Buçinca, Z., Malaya, M.B., Gajos, K.Z. (2021). To Trust or to Think: Cognitive Forcing Functions Can Reduce Overreliance on AI in AI-assisted Decision-making. PACM HCI 5(CSCW1), 188. arXiv:2102.09692. Cognitive forcing functions reduced overreliance where explanations failed (N=199)."
+    },
+    {
+      "location": "verification-interfaces-risk-based-escalation.md:412",
+      "arxiv_ids": [
+        "2508.19461"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Kale, N., et al. (2025). Reliable Weak-to-Strong Monitoring of LLM Agents. arXiv:2508.19461. Targeted escalation adds approximately 15% TPR at FPR=0.01. Hybrid hierarchical-sequential scaffolds let weaker models monitor stronger agents. The paper reports that scaffolding mattered more than monitor awareness; the awareness caution in this chapter is my design caution, not a result from this paper. The setting is a covert-misbehavior arena, not production code review. This is the sole admitted evidence item for the whole grouping."
+    },
+    {
+      "location": "verification-interfaces-risk-based-escalation.md:417",
+      "arxiv_ids": [
+        "2411.00998"
+      ],
+      "linked_urls": [],
+      "doi_urls": [],
+      "composite_risk_terms": [],
+      "status": "pass",
+      "text": "- Strong evidence: Rosbach, E., Ganz, J., Ammeling, J., Riener, A., Aubreville, M. (2024). Automation Bias in AI-Assisted Medical Decision-Making under Time Pressure in Computational Pathology. arXiv:2411.00998. This is the basis for the time-pressure paragraph. The setting is computational pathology, not software review."
+    }
+  ],
+  "failures": []
+}

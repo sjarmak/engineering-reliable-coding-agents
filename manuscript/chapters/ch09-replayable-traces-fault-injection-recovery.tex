@@ -1,5 +1,11 @@
 \chapter{Replayable traces and fault-injection recovery testing}
 \label{ch09-replayable-traces-fault-injection-recovery}
+\begin{quote}
+\textbf{Evidence profile.} 1 strong · 3 directional · 0 corroborating evidence items across 2 developed practices (ERCA-097, ERCA-127).
+
+\textbf{Chapter claim.} Recovery is a measured property.
+\end{quote}
+
 Vogel et al.~(\href{https://arxiv.org/abs/2404.06203}{2024}) injected pod kills and recurring failures into Apache Flink, Kafka Streams, and Spark Structured Streaming on a Kubernetes testbed under representative load. Flink was the most stable of the three and had one of the strongest recovery profiles, contradicting earlier published comparisons. The effect of failure also changed across successive injections. A test that stopped after one successful restart would not have detected that variation.
 
 Fault tolerance is often inferred from an architecture diagram. A checkpoint appears before a restart arrow, and the system is described as fault tolerant. The diagram is a hypothesis about the running system. Only measurement can establish whether recovery behaves as claimed.
@@ -371,7 +377,11 @@ Under a recorded workload and configuration, with specified faults injected at s
 
 That claim can be challenged, repeated, and revised when the system changes.
 
+The repository artifact \href{https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/recovery-fault-injection.md}{\texttt{protocols/recovery-fault-injection.md}} supplies the bounded run sequence, pass condition, and output manifest.
+
 A trace detailed enough to replay is also the artifact a person reads when recovery fails. Even a complete trace, however, does not establish which action caused the failure or how a person can defend that attribution.
+
+\textbf{Portable claim.} Recovery is a measured property.
 
 \section*{Sources and evidence}
 

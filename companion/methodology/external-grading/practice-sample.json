@@ -1,0 +1,142 @@
+[
+  {
+    "sample_order": 1,
+    "practice_id": "ERCA-092",
+    "practice_slug": "price-token-reduction-transforms",
+    "practice_claim": "Before adopting any token-reduction transform on code shown to the agent (minification, comment/whitespace stripping, learned or continuous-latent compression), measure the end-task cost, and adopt only where the token budget genuinely binds. If repository context must be compressed, stay at mild ratios (~4x) and validate on generation and cross-file tasks, not just completion.",
+    "chapter": 13
+  },
+  {
+    "sample_order": 2,
+    "practice_id": "ERCA-144",
+    "practice_slug": "keep-always-loaded-context-minimal",
+    "practice_claim": "Build rules files up gradually from real need and keep them small; move everything else into path-scoped rules, on-demand skills, and subagents that load only when relevant, and operate below the model's 'dumb zone' through intentional compaction.",
+    "chapter": 13
+  },
+  {
+    "sample_order": 3,
+    "practice_id": "ERCA-045",
+    "practice_slug": "derive-taxonomy-from-own-traces",
+    "practice_claim": "Before building any metric, manually review 100+ diverse raw traces with open-ended notes, annotate only the first upstream failure in each trace, cluster the notes into 5-10 themes, and aim the first mitigations at the phases/classes where the failure mass concentrates (planning and self-diagnosis in published base rates).",
+    "chapter": 10
+  },
+  {
+    "sample_order": 4,
+    "practice_id": "ERCA-065",
+    "practice_slug": "cap-turn-budgets",
+    "practice_claim": "Impose a turn/iteration budget on agent loops: fixed at roughly the 75th percentile of the unrestricted baseline's turn distribution, or better, a small default budget with on-demand extensions, plus explicit exit conditions and backoff/fallback handling for flaky dependencies, rather than letting runs go unbounded.",
+    "chapter": 4
+  },
+  {
+    "sample_order": 5,
+    "practice_id": "ERCA-009",
+    "practice_slug": "combine-contamination-detectors-by-threat-model",
+    "practice_claim": "Select detection methods by access level (training data: matching; logits: NLL/Min-K and order-canonicity tests; text only: prompting probes) and suspected channel (verbatim, paraphrase, cross-lingual); always run more than one, and never certify a closed model clean because detectors came back negative.",
+    "chapter": 3
+  },
+  {
+    "sample_order": 6,
+    "practice_id": "ERCA-043",
+    "practice_slug": "measure-reasoning-effort",
+    "practice_claim": "Detect implicit reward hacking by measuring reasoning effort: truncate the CoT at increasing lengths, force an answer at each cut, and flag runs where high reward is reached with a small fraction of the reasoning (large truncated-reward AUC).",
+    "chapter": 6
+  },
+  {
+    "sample_order": 7,
+    "practice_id": "ERCA-015",
+    "practice_slug": "stress-test-rankings-under-perturbation",
+    "practice_claim": "Before acting on a benchmark ranking, re-run it under perturbation — semantically transformed problem variants (difficulty-shifted, recombined, rephrased) and harness perturbations (answer-choice reordering, alternative scoring methods) — and treat rank shifts under perturbation as the ranking's real uncertainty.",
+    "chapter": 3
+  },
+  {
+    "sample_order": 8,
+    "practice_id": "ERCA-053",
+    "practice_slug": "aggregate-independent-attribution-judges",
+    "practice_claim": "When using LLMs for error attribution at all, structure the trace into hierarchical context levels and aggregate multiple independent judge passes by consensus or confidence-aware weighting, feeding disagreement back to adapt the judge, instead of one all-at-once read or binary search over the trace.",
+    "chapter": 10
+  },
+  {
+    "sample_order": 9,
+    "practice_id": "ERCA-191",
+    "practice_slug": "replay-traces-before-policy-changes",
+    "practice_claim": "Build a read-only replay harness over your own recorded arrival traces (arrival time, priority, claim, duration, outcome, review verdict) and replay identical traces under competing dispatch policies with arrivals held fixed; require any proposed optimizer to beat FCFS and a trivially-tuned priority sort on the same traces, keep a random-oversampling baseline in the protocol, and validate kernels on constructed instances with known optima.",
+    "chapter": 18
+  },
+  {
+    "sample_order": 10,
+    "practice_id": "ERCA-085",
+    "practice_slug": "chunk-on-ast-boundaries",
+    "practice_claim": "Build retrieval chunks by recursively splitting large AST nodes and merging small sibling nodes under a size budget, so every chunk is a self-contained syntactic unit; do not use fixed-line-window chunking.",
+    "chapter": 11
+  },
+  {
+    "sample_order": 11,
+    "practice_id": "ERCA-003",
+    "practice_slug": "measure-public-score-inflation-with-matched-controls",
+    "practice_claim": "Run the same protocol on matched tasks the benchmark never used — a matched control set, a from-scratch private mirror matched on difficulty, or a retro-holdout twin validated by statistical indistinguishability gates — and report the public-private score gap as the inflation estimate.",
+    "chapter": 3
+  },
+  {
+    "sample_order": 12,
+    "practice_id": "ERCA-021",
+    "practice_slug": "audit-pipeline-against-qrp-catalog",
+    "practice_claim": "Before publishing or acting on internal eval results, review the pipeline against the 44 catalogued questionable research practices (selective baseline choice, test-set peeking via repeated iteration, cherry-picked checkpoints, unreported prompt tuning) and the irreproducible-practice list.",
+    "chapter": 3
+  },
+  {
+    "sample_order": 13,
+    "practice_id": "ERCA-031",
+    "practice_slug": "declare-decoding-configuration",
+    "practice_claim": "Treat decoding configuration (greedy vs. sampling, temperature, best-of-N) as a first-class experimental variable: report it in the methods, and evaluate under both greedy and sampled generation before claiming a model comparison.",
+    "chapter": 1
+  },
+  {
+    "sample_order": 14,
+    "practice_id": "ERCA-006",
+    "practice_slug": "anchor-contamination-metrics-to-score-benefit",
+    "practice_claim": "When quantifying contamination, choose the contamination metric by whether models actually benefit from the samples it marks contaminated (score delta on marked vs unmarked), instead of reporting raw overlap percentages.",
+    "chapter": 3
+  },
+  {
+    "sample_order": 15,
+    "practice_id": "ERCA-148",
+    "practice_slug": "target-friction-at-the-accept-loop",
+    "practice_claim": "Require the reviewer to commit a judgment before seeing the agent's answer, or delay/slow the reveal at high-stakes checkpoints; aim these scrutiny mechanisms at the fast accept-loop where the programmer already 'knows' the plan, not uniformly across exploration-mode use.",
+    "chapter": 15
+  },
+  {
+    "sample_order": 16,
+    "practice_id": "ERCA-101",
+    "practice_slug": "dynamic-task-graphs",
+    "practice_claim": "Model dependencies explicitly; let the scheduler fan out independent branches asynchronously; bound per-step time so one slow step cannot stall the batch.",
+    "chapter": 17
+  },
+  {
+    "sample_order": 17,
+    "practice_id": "ERCA-074",
+    "practice_slug": "iterate-retrieval-with-generation",
+    "practice_claim": "Re-query the repository with each generation draft (or exploration result) instead of retrieving once up front; let intermediate outputs sharpen the retrieval query.",
+    "chapter": 11
+  },
+  {
+    "sample_order": 18,
+    "practice_id": "ERCA-087",
+    "practice_slug": "inject-static-anchors",
+    "practice_claim": "Inject lightweight static-analysis facts (call graph, inheritance, configuration dependencies) as plain-text annotations in the agent's view of the code, primarily to stabilize navigation across runs.",
+    "chapter": 12
+  },
+  {
+    "sample_order": 19,
+    "practice_id": "ERCA-001",
+    "practice_slug": "strengthen-test-oracles-before-adjudication",
+    "practice_claim": "Before reporting, gating, or rewarding on a pass rate, strengthen the oracle: augment hand-written benchmark tests with generated inputs (LLM- and mutation-based, coverage-driven, or random tests sampled against a trusted reference patch), synthesize plausible-but-wrong patches and keep the tests that kill them, and manually screen a sample of 'solved' instances for solution leakage and tests too weak to verify correctness. Then re-adjudicate all results, including existing leaderboard submissions and any acceptance gate or reward signal, under the stronger oracle.",
+    "chapter": 3
+  },
+  {
+    "sample_order": 20,
+    "practice_id": "ERCA-007",
+    "practice_slug": "build-fresh-items-anti-searchable",
+    "practice_claim": "When creating private eval sets, forbid annotators from copying any web or LLM source, require citation of inspiration sources, verify each prompt is not web-searchable, and disqualify items that fail originality/difficulty/ambiguity review.",
+    "chapter": 3
+  }
+]

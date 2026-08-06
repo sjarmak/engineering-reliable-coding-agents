@@ -1,5 +1,11 @@
 \chapter{Measuring and designing repository retrieval}
 \label{ch11-measuring-designing-repository-retrieval}
+\begin{quote}
+\textbf{Evidence profile.} 6 strong · 8 directional · 1 corroborating evidence items across 3 developed practices (ERCA-076, ERCA-083, ERCA-085).
+
+\textbf{Chapter claim.} Retrieval can improve while task outcomes do not.
+\end{quote}
+
 In my benchmark built from tasks across 73 repositories, two instruments gave different accounts of the same retrieval tool. \(\mathrm{Precision}@10\), the proportion of the first ten results judged relevant, rose from 0.095 to 0.313. \textbf{\(\mathrm{Recall}@k\)}, the fraction of judged necessary items found among the first \(k\) results, rose at \(k = 10\) from 0.120 to 0.272. The share of tasks for which at least one needed file appeared rose from 0.33 to 0.56.
 
 The paired end-to-end reward across 370 tasks moved by only +0.0349, with a bootstrap 95 percent confidence interval of {[}+0.0130, +0.0579{]}, \(n = 370\).
@@ -178,6 +184,8 @@ This case illustrates the danger of a single-lane failure: the output can remain
 Each retrieval lane has characteristic blind spots. Lexical systems rank through shared tokens. They are strong when the query contains a rare identifier, exact error string, configuration key, function name, or the spelling used in code. They weaken when a task describes behavior using language different from the implementation. A request to ``stop duplicate jobs after a worker restart'' may depend on code named \texttt{claim\_epoch}, \texttt{lease\_owner}, or \texttt{dedupe\_key}, even though none of those terms appears in the request.
 
 CodeSearchNet, from Husain et al.~(\href{https://arxiv.org/abs/1909.09436}{2019}), framed this as a vocabulary gap between natural-language intent and source code. Repository agents face a wider form of the same problem because their queries combine prose, symbols, stack traces, and partial hypotheses. An embedding lane can connect semantically related text with little token overlap. It may retrieve a lease-recovery routine for the duplicate-job request even when the task never uses the routine's identifiers.
+
+The software-engineering venue audit found two reviews that sharpen this stage boundary. Rahman et al.~(\href{https://doi.org/10.1145/3607179}{2023}) screened 2,970 candidates and synthesized 70 primary studies on automated query reformulation for source-code search. Liu et al.~(\href{https://doi.org/10.1145/3656341}{2024}) organized 68 code-search studies around query understanding, code understanding, and query-code matching. Their taxonomies support recording query formation as its own stage rather than attributing every miss to ranking. Neither review tests the hybrid rank-fusion protocol developed here.
 
 The complement runs in the other direction. Semantic retrieval may place conceptually similar utilities near one another while missing the exact declaration that governs an edit. A query containing \texttt{ERR\_REPLAY\_DIVERGED}, a database column name, or a generated type gives lexical search unusually discriminating evidence. Mapping those characters into a semantic neighborhood can discard the rarity that made them useful.
 
@@ -376,6 +384,8 @@ The retrieval depths, fusion constants, and chunk sizes in this chapter are not 
 
 Chapter 12 turns to the architecture around these measurements: cheap retrieval funnels, typed indexes, and the conditions under which apparently relevant context should be rejected as stale.
 
+\textbf{Portable claim.} Retrieval can improve while task outcomes do not.
+
 \section*{Sources and evidence}
 
 \textbf{Score retrieval and generation separately}
@@ -414,6 +424,10 @@ Chapter 12 turns to the architecture around these measurements: cheap retrieval 
   Directional evidence: AdaMem (Yan et al.~2026), arXiv:2603.16496, carried in the same evidence record as the Cloudflare account. Its own retrieval route is semantic retrieval with conditional graph expansion rather than rank fusion, so it supports retaining a complementary semantic lane only.
 \item
   Directional evidence: ColBERT (Khattab and Zaharia 2020), arXiv:2004.12832.
+\item
+  Directional evidence: Rahman, M. M., et al.~(2023), ``A Systematic Review of Automated Query Reformulations in Source Code Search,'' \emph{ACM Transactions on Software Engineering and Methodology}, \href{https://doi.org/10.1145/3607179}{DOI:10.1145/3607179}. The review supports treating query formation as a distinct retrieval stage, not the chapter's fusion policy.
+\item
+  Directional evidence: Liu, C., et al.~(2024), ``A Survey of Source Code Search: A 3-Dimensional Perspective,'' \emph{ACM Transactions on Software Engineering and Methodology}, \href{https://doi.org/10.1145/3656341}{DOI:10.1145/3656341}. The survey separates query, code, and matching components; transfer to repository agents remains directional.
 \end{itemize}
 
 \textbf{Chunk on AST boundaries}

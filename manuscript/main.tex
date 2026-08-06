@@ -19,6 +19,7 @@
 \usepackage[htt]{hyphenat}
 \usepackage{xcolor}
 \usepackage{xurl}
+\usepackage{fancyhdr}
 \usepackage[hidelinks,breaklinks=true]{hyperref}
 
 \hypersetup{
@@ -29,11 +30,12 @@
 
 \setlength{\emergencystretch}{6em}
 \setlength{\parindent}{1.25em}
-\setlength{\parskip}{0.08\baselineskip plus 0.03\baselineskip minus 0.02\baselineskip}
+\setlength{\parskip}{0.14\baselineskip plus 0.04\baselineskip minus 0.03\baselineskip}
 \setcounter{secnumdepth}{2}
 \setcounter{tocdepth}{1}
 \makeatletter
 \renewcommand*\l@section{\@dottedtocline{1}{1.5em}{3.3em}}
+\renewcommand*{\@pnumwidth}{2.2em}
 \makeatother
 \setlist{
   topsep=0.62\baselineskip,
@@ -54,7 +56,17 @@
 \setlength{\abovecaptionskip}{0.45\baselineskip}
 \setlength{\belowcaptionskip}{0.15\baselineskip}
 \fvset{fontsize=\small}
-\pagestyle{plain}
+\newcommand{\currentparttitle}{}
+\providecommand{\partmark}[1]{}
+\renewcommand{\partmark}[1]{\gdef\currentparttitle{#1}}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter}{}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\nouppercase{\leftmark}}
+\fancyhead[R]{\small\nouppercase{\currentparttitle}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\thepage}\renewcommand{\headrulewidth}{0pt}}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0.16\baselineskip}\setlength{\parskip}{0.04\baselineskip}}
@@ -80,7 +92,7 @@
   \vspace{2.5em}
   {\large Stephanie Jarmak\par}
   \vfill
-  {\large August 2026\par}
+  {\large Version 1.0.0-rc.10 --- August 2026\par}
 \end{titlepage}
 
 \chapter*{Abstract}
@@ -88,10 +100,13 @@
 \input{abstract}
 
 \tableofcontents
+\listoffigures
+\listoftables
 \input{frontmatter}
 
 \mainmatter
 \part{Evaluation measurement and experiment design}
+\gdef\currentparttitle{Part I: Evaluation}
 
 \input{chapters/ch01-variance-power-paired-comparisons}
 
@@ -100,6 +115,7 @@
 \input{chapters/ch03-contamination-oracle-workload-validity}
 
 \part{Evaluation and grading systems}
+\gdef\currentparttitle{Part II: Grading}
 
 \input{chapters/ch04-execution-correction-gates-release-tests}
 
@@ -108,6 +124,7 @@
 \input{chapters/ch06-proxy-gaming-layered-signals}
 
 \part{Containment, durable execution, and recovery engineering}
+\gdef\currentparttitle{Part III: Containment and recovery}
 
 \input{chapters/ch07-isolation-injection-independent-verification}
 
@@ -118,6 +135,7 @@
 \input{chapters/ch10-human-auditable-failure-analysis-taxonomy}
 
 \part{Context engineering: retrieval, budgets, and memory}
+\gdef\currentparttitle{Part IV: Context}
 
 \input{chapters/ch11-measuring-designing-repository-retrieval}
 
@@ -128,20 +146,26 @@
 \input{chapters/ch14-cross-session-memory-raw-traces-compaction}
 
 \part{Human review and accountability engineering}
+\gdef\currentparttitle{Part V: Human review}
 
 \input{chapters/ch15-verification-interfaces-risk-based-escalation}
 
 \input{chapters/ch16-autonomy-provenance-gates-accountability}
 
-\part{Work allocation and cost engineering}
+\part{Research agenda: work allocation and cost engineering}
+\gdef\currentparttitle{Part VI: Research agenda}
 
 \input{chapters/ch17-agent-topology-dynamic-task-allocation}
 
 \input{chapters/ch18-cost-aware-fleet-scheduling-model-routing}
 
+\gdef\currentparttitle{Closing}
 \input{chapters/closing}
 
 \backmatter
+\markboth{Reference material}{}
+\gdef\currentparttitle{}
+\input{chapters/glossary}
 \renewcommand{\bibname}{References}
 \input{references}
 

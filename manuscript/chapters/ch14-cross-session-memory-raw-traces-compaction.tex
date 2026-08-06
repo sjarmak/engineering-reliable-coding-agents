@@ -1,5 +1,11 @@
 \chapter{Cross-session memory, raw traces, and compaction policies}
 \label{ch14-cross-session-memory-raw-traces-compaction}
+\begin{quote}
+\textbf{Evidence profile.} 2 strong · 4 directional · 0 corroborating evidence items across 3 developed practices (ERCA-081, ERCA-116, ERCA-118).
+
+\textbf{Chapter claim.} Preserve raw events; rebuild derived memory.
+\end{quote}
+
 One of my memory systems rebuilds its entire derived layer whenever the schema version changes. Nothing in that layer is migrated in place. Three append-only tables containing lessons, memory events, and provenance events cross the rebuild boundary through mechanical export and import. Everything else is regenerated from the work record that produced it.
 
 The arrangement is deliberately inconvenient. I have no comparative evidence that it outperforms a system that rewrites its memory incrementally.
@@ -565,6 +571,8 @@ Initial compaction rules remain explicit hypotheses, and every condensed history
 Token reduction is useful for capacity planning. It cannot substitute for evidence that the agent made better decisions.
 
 Review capacity is finite and does not increase automatically with fleet size. Part V turns to the people who remain accountable for this work and to the interfaces, review policies, and escalation paths built around their limited attention.
+
+\textbf{Portable claim.} Preserve raw events; rebuild derived memory.
 
 \section*{Sources and evidence}
 

@@ -5,7 +5,7 @@ type: dataset
 authors:
   - family-names: Jarmak
     given-names: Stephanie
-version: "1.0.0-rc.9"
+version: "1.0.0-rc.10"
 repository-code: "https://github.com/sjarmak/engineering-reliable-coding-agents"
 url: "https://sjarmak.ai/books/engineering-reliable-coding-agents/companion"
 abstract: >-

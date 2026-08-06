@@ -8,8 +8,8 @@ Derived agent skills: [https://github.com/sjarmak/engineering-reliable-coding-ag
 
 ## Source snapshot
 
-- Public manuscript chapter snapshot: packaged with companion version `1.0.0-rc.9` in the canonical repository.
-- Human-readable companion input SHA-256: `939e019098672bc34678367abfabbeb8670eb8bcfff3fad350e3859b68ef59bb`.
+- Public manuscript chapter snapshot: packaged with companion version `1.0.0-rc.10` in the canonical repository.
+- Human-readable companion input SHA-256: `d4e53b1a8fe0c53cb1152b5118f35024a2a36cdc0bba63b9a5b8a6283891975f`.
 - Practice catalog input SHA-256: `1709cc2216d46cf41cedbd580e6b7b9f424815a7ee2f8259f6e546e8a0500019`.
 - Companion chapter-map input SHA-256: `b31599ac15bbb7747a704d0f9691c6f02fd6a7f72bb7d505fb5826c65fac7ffe`.
 - Developed-practice map input SHA-256: `ce0100e923059ffbd2799af59a472454e8b4ea75893c22b765685eaa7e153513`.
@@ -19,7 +19,7 @@ Corpus counts, retrieval revisions, and retained thread hashes appear in `method
 
 ## Transformations
 
-`LEARNINGS.md` is generated from the website companion source by removing site frontmatter and replacing rendered MathML spans with ordinary inline LaTeX. Internal evidence shorthand and editorial workflow notes were replaced by reader-facing `source_kind` and `evidence_group` fields in the machine-readable catalog. Internal derivation pointers were omitted. Four public-release evidence records were narrowed to the claim tested by the cited study: the SkillEvolBench and CoIR records under `run-ablation-controls`, the CodeSearchNet record under `hybrid-retrieval-fused-on-ranks`, and the memory-degradation record under `retain-raw-distill-separately`. Eleven post-consolidation scholarly records were added with claim-specific evidence groups; their record-level rulings appear in `methodology/screening-decisions.csv`. The known DynTaskMAS author-name defect in the source catalog was corrected from “Yin” to Yu, Ding, and Sato using the official arXiv record. Official arXiv metadata captured during the manuscript reference audit supplies citations and appears under `resolved_metadata`.
+`LEARNINGS.md` is generated from the website companion source by removing site frontmatter and replacing rendered MathML spans with ordinary inline LaTeX. Internal evidence shorthand and editorial workflow notes were replaced by reader-facing `source_kind` and `evidence_group` fields in the machine-readable catalog. Internal derivation pointers were omitted. Five public-release evidence records were narrowed or reclassified to match the claim tested by the cited source: the SkillEvolBench and CoIR records under `run-ablation-controls`, the CodeSearchNet record under `hybrid-retrieval-fused-on-ranks`, the memory-degradation record under `retain-raw-distill-separately`, and the Netflix migration record under `use-durable-workflow-engine`. Eleven post-consolidation scholarly records and nine software-engineering coverage-probe records were added with claim-specific evidence groups; their record-level rulings appear in `methodology/screening-decisions.csv`. The OpenAlex probe is published as a coverage diagnosis and is not represented as a substitute for the pending publisher-native ACM, IEEE, and Scopus search. The known DynTaskMAS author-name defect in the source catalog was corrected from “Yin” to Yu, Ding, and Sato using the official arXiv record. Official arXiv metadata captured during the manuscript reference audit supplies citations and appears under `resolved_metadata`.
 
 The separately packaged skills retain their own practice maps and evidence boundaries. They are derived operational artifacts and are not counted as independent evidence.
 

@@ -1,0 +1,81 @@
+{
+  "run_date": "2026-08-06",
+  "status": "discovery_audit_not_publisher_native_supplement",
+  "purpose": "Test whether the existing SciX plus arXiv review can assume coverage of core software-engineering venues and prepare a publisher-native supplementary search.",
+  "discovery_source": "OpenAlex public metadata, used as a coverage probe rather than a substitute for ACM DL, IEEE Xplore, or Scopus.",
+  "venues": [
+    "S4306419842",
+    "S4306418451",
+    "S4210177399",
+    "S4306420215",
+    "S109852484",
+    "S8351582",
+    "S142627899",
+    "S177586587"
+  ],
+  "queries": [
+    {
+      "id": "secondary-study-method",
+      "query": "systematic literature review multivocal grey literature software engineering quality assessment"
+    },
+    {
+      "id": "evaluation-validity",
+      "query": "coding agent evaluation benchmark validity contamination test oracle"
+    },
+    {
+      "id": "grader-validity",
+      "query": "automated software engineering evaluation human labels agreement correctness"
+    },
+    {
+      "id": "human-review",
+      "query": "AI assisted code review human oversight automation bias verification"
+    },
+    {
+      "id": "operations-recovery",
+      "query": "software agent reliability fault injection recovery durable workflow"
+    },
+    {
+      "id": "retrieval-context",
+      "query": "repository code search retrieval context developer task"
+    },
+    {
+      "id": "topology",
+      "query": "multi agent software engineering coordination delegation failure"
+    },
+    {
+      "id": "adoption-governance",
+      "query": "generative AI software engineering adoption governance accountability"
+    }
+  ],
+  "years": [
+    2018,
+    2026
+  ],
+  "results": {
+    "unique_candidates": 148,
+    "not_already_in_manuscript_by_doi_or_normalized_title": 147,
+    "deterministic_scix_doi_sample": 40,
+    "exact_doi_matches_in_scix": 8
+  },
+  "provider_checks": [
+    {
+      "name": "ACM Digital Library search",
+      "url": "https://dl.acm.org/action/doSearch?AllField=AI%20coding%20agents",
+      "http_status": 403,
+      "accessible": false
+    },
+    {
+      "name": "IEEE Xplore metadata API without a configured key",
+      "url": "https://ieeexploreapi.ieee.org/api/v1/search/articles?querytext=AI%20coding%20agents&max_records=1",
+      "http_status": 403,
+      "accessible": false
+    },
+    {
+      "name": "Scopus Search API without a configured key",
+      "url": "https://api.elsevier.com/content/search/scopus?query=TITLE-ABS-KEY%28AI%20coding%20agents%29&count=1",
+      "http_status": 401,
+      "accessible": false
+    }
+  ],
+  "interpretation": "A missing exact DOI in this deterministic sample demonstrates a coverage gap but does not estimate recall for all software-engineering literature. The archival edition remains conditional on a native ACM/IEEE/Scopus search or a justified database substitution with documented equivalence."
+}

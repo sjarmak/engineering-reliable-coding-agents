@@ -1,0 +1,303 @@
+[
+  {
+    "evidence_id": "price-token-reduction-transforms:e1",
+    "practice_id": "ERCA-092",
+    "practice_slug": "price-token-reduction-transforms",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "price-token-reduction-transforms:e2",
+    "practice_id": "ERCA-092",
+    "practice_slug": "price-token-reduction-transforms",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "keep-always-loaded-context-minimal:e1",
+    "practice_id": "ERCA-144",
+    "practice_slug": "keep-always-loaded-context-minimal",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "keep-always-loaded-context-minimal:e2",
+    "practice_id": "ERCA-144",
+    "practice_slug": "keep-always-loaded-context-minimal",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "derive-taxonomy-from-own-traces:e1",
+    "practice_id": "ERCA-045",
+    "practice_slug": "derive-taxonomy-from-own-traces",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "derive-taxonomy-from-own-traces:e2",
+    "practice_id": "ERCA-045",
+    "practice_slug": "derive-taxonomy-from-own-traces",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "derive-taxonomy-from-own-traces:supplement-1",
+    "practice_id": "ERCA-045",
+    "practice_slug": "derive-taxonomy-from-own-traces",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "cap-turn-budgets:e1",
+    "practice_id": "ERCA-065",
+    "practice_slug": "cap-turn-budgets",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "cap-turn-budgets:e2",
+    "practice_id": "ERCA-065",
+    "practice_slug": "cap-turn-budgets",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "cap-turn-budgets:e3",
+    "practice_id": "ERCA-065",
+    "practice_slug": "cap-turn-budgets",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "combine-contamination-detectors-by-threat-model:e1",
+    "practice_id": "ERCA-009",
+    "practice_slug": "combine-contamination-detectors-by-threat-model",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "combine-contamination-detectors-by-threat-model:e2",
+    "practice_id": "ERCA-009",
+    "practice_slug": "combine-contamination-detectors-by-threat-model",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "combine-contamination-detectors-by-threat-model:e3",
+    "practice_id": "ERCA-009",
+    "practice_slug": "combine-contamination-detectors-by-threat-model",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "combine-contamination-detectors-by-threat-model:e4",
+    "practice_id": "ERCA-009",
+    "practice_slug": "combine-contamination-detectors-by-threat-model",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "measure-reasoning-effort:e1",
+    "practice_id": "ERCA-043",
+    "practice_slug": "measure-reasoning-effort",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "stress-test-rankings-under-perturbation:e1",
+    "practice_id": "ERCA-015",
+    "practice_slug": "stress-test-rankings-under-perturbation",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "stress-test-rankings-under-perturbation:e2",
+    "practice_id": "ERCA-015",
+    "practice_slug": "stress-test-rankings-under-perturbation",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "aggregate-independent-attribution-judges:e1",
+    "practice_id": "ERCA-053",
+    "practice_slug": "aggregate-independent-attribution-judges",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "aggregate-independent-attribution-judges:e2",
+    "practice_id": "ERCA-053",
+    "practice_slug": "aggregate-independent-attribution-judges",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "replay-traces-before-policy-changes:e1",
+    "practice_id": "ERCA-191",
+    "practice_slug": "replay-traces-before-policy-changes",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "replay-traces-before-policy-changes:e2",
+    "practice_id": "ERCA-191",
+    "practice_slug": "replay-traces-before-policy-changes",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "replay-traces-before-policy-changes:e3",
+    "practice_id": "ERCA-191",
+    "practice_slug": "replay-traces-before-policy-changes",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "chunk-on-ast-boundaries:e1",
+    "practice_id": "ERCA-085",
+    "practice_slug": "chunk-on-ast-boundaries",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "measure-public-score-inflation-with-matched-controls:e1",
+    "practice_id": "ERCA-003",
+    "practice_slug": "measure-public-score-inflation-with-matched-controls",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "measure-public-score-inflation-with-matched-controls:e2",
+    "practice_id": "ERCA-003",
+    "practice_slug": "measure-public-score-inflation-with-matched-controls",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "measure-public-score-inflation-with-matched-controls:e3",
+    "practice_id": "ERCA-003",
+    "practice_slug": "measure-public-score-inflation-with-matched-controls",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "audit-pipeline-against-qrp-catalog:e1",
+    "practice_id": "ERCA-021",
+    "practice_slug": "audit-pipeline-against-qrp-catalog",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "declare-decoding-configuration:e1",
+    "practice_id": "ERCA-031",
+    "practice_slug": "declare-decoding-configuration",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "anchor-contamination-metrics-to-score-benefit:e1",
+    "practice_id": "ERCA-006",
+    "practice_slug": "anchor-contamination-metrics-to-score-benefit",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "target-friction-at-the-accept-loop:e1",
+    "practice_id": "ERCA-148",
+    "practice_slug": "target-friction-at-the-accept-loop",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "target-friction-at-the-accept-loop:e2",
+    "practice_id": "ERCA-148",
+    "practice_slug": "target-friction-at-the-accept-loop",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "dynamic-task-graphs:e1",
+    "practice_id": "ERCA-101",
+    "practice_slug": "dynamic-task-graphs",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "dynamic-task-graphs:e2",
+    "practice_id": "ERCA-101",
+    "practice_slug": "dynamic-task-graphs",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "dynamic-task-graphs:e3",
+    "practice_id": "ERCA-101",
+    "practice_slug": "dynamic-task-graphs",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "dynamic-task-graphs:e4",
+    "practice_id": "ERCA-101",
+    "practice_slug": "dynamic-task-graphs",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "iterate-retrieval-with-generation:e1",
+    "practice_id": "ERCA-074",
+    "practice_slug": "iterate-retrieval-with-generation",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "inject-static-anchors:e1",
+    "practice_id": "ERCA-087",
+    "practice_slug": "inject-static-anchors",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "strengthen-test-oracles-before-adjudication:e1",
+    "practice_id": "ERCA-001",
+    "practice_slug": "strengthen-test-oracles-before-adjudication",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "strengthen-test-oracles-before-adjudication:e2",
+    "practice_id": "ERCA-001",
+    "practice_slug": "strengthen-test-oracles-before-adjudication",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "strengthen-test-oracles-before-adjudication:e3",
+    "practice_id": "ERCA-001",
+    "practice_slug": "strengthen-test-oracles-before-adjudication",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "strengthen-test-oracles-before-adjudication:e4",
+    "practice_id": "ERCA-001",
+    "practice_slug": "strengthen-test-oracles-before-adjudication",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "strengthen-test-oracles-before-adjudication:e5",
+    "practice_id": "ERCA-001",
+    "practice_slug": "strengthen-test-oracles-before-adjudication",
+    "label": "",
+    "rationale": ""
+  },
+  {
+    "evidence_id": "build-fresh-items-anti-searchable:e1",
+    "practice_id": "ERCA-007",
+    "practice_slug": "build-fresh-items-anti-searchable",
+    "label": "",
+    "rationale": ""
+  }
+]

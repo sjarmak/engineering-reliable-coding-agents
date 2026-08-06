@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T14:33:14.845Z",
+  "generated_at": "2026-08-06T18:28:58.618Z",
   "arxiv": [
     {
       "id": "1503.07170",
@@ -5835,6 +5835,18 @@
       "published": "1983-11"
     },
     {
+      "doi": "10.1016/j.infsof.2018.09.006",
+      "url": "https://doi.org/10.1016/j.infsof.2018.09.006",
+      "status": "resolved",
+      "title": "Guidelines for including grey literature and conducting multivocal literature reviews in software engineering",
+      "authors": [
+        "Vahid Garousi",
+        "Michael Felderer",
+        "Mika V. Mäntylä"
+      ],
+      "published": "2019-2"
+    },
+    {
       "doi": "10.1037/h0031619",
       "url": "https://doi.org/10.1037/h0031619",
       "status": "resolved",
@@ -5853,6 +5865,110 @@
         "William A. Scott"
       ],
       "published": "1955"
+    },
+    {
+      "doi": "10.1109/TSE.2022.3165938",
+      "url": "https://doi.org/10.1109/TSE.2022.3165938",
+      "status": "resolved",
+      "title": "How Should Software Engineering Secondary Studies Include Grey Material?",
+      "authors": [
+        "Barbara Kitchenham",
+        "Lech Madeyski",
+        "David Budgen"
+      ],
+      "published": "2023-2-1"
+    },
+    {
+      "doi": "10.1109/TSE.2022.3174092",
+      "url": "https://doi.org/10.1109/TSE.2022.3174092",
+      "status": "resolved",
+      "title": "SEGRESS: Software Engineering Guidelines for REporting Secondary Studies",
+      "authors": [
+        "Barbara Kitchenham",
+        "Lech Madeyski",
+        "David Budgen"
+      ],
+      "published": "2023-3-1"
+    },
+    {
+      "doi": "10.1109/TSE.2022.3176725",
+      "url": "https://doi.org/10.1109/TSE.2022.3176725",
+      "status": "resolved",
+      "title": "Construct Validity in Software Engineering",
+      "authors": [
+        "Dag I. K. Sjøberg",
+        "Gunnar Rye Bergersen"
+      ],
+      "published": "2023-3-1"
+    },
+    {
+      "doi": "10.1109/TSE.2023.3348172",
+      "url": "https://doi.org/10.1109/TSE.2023.3348172",
+      "status": "resolved",
+      "title": "Code Review Automation: Strengths and Weaknesses of the State of the Art",
+      "authors": [
+        "Rosalia Tufano",
+        "Ozren Dabić",
+        "Antonio Mastropaolo",
+        "Matteo Ciniselli",
+        "Gabriele Bavota"
+      ],
+      "published": "2024-2"
+    },
+    {
+      "doi": "10.1145/3241743",
+      "url": "https://doi.org/10.1145/3241743",
+      "status": "resolved",
+      "title": "The ABC of Software Engineering Research",
+      "authors": [
+        "Klaas-Jan Stol",
+        "Brian Fitzgerald"
+      ],
+      "published": "2018-7-31"
+    },
+    {
+      "doi": "10.1145/3607179",
+      "url": "https://doi.org/10.1145/3607179",
+      "status": "resolved",
+      "title": "A Systematic Review of Automated Query Reformulations in Source Code Search",
+      "authors": [
+        "Mohammad Masudur Rahman",
+        "Chanchal K. Roy"
+      ],
+      "published": "2023-9-28"
+    },
+    {
+      "doi": "10.1145/3656341",
+      "url": "https://doi.org/10.1145/3656341",
+      "status": "resolved",
+      "title": "A Survey of Source Code Search: A 3-Dimensional Perspective",
+      "authors": [
+        "Weisong Sun",
+        "Chunrong Fang",
+        "Yifei Ge",
+        "Yuling Hu",
+        "Yuchen Chen",
+        "Quanjun Zhang",
+        "Xiuting Ge",
+        "Yang Liu",
+        "Zhenyu Chen"
+      ],
+      "published": "2024-6-28"
+    },
+    {
+      "doi": "10.1145/3772370",
+      "url": "https://doi.org/10.1145/3772370",
+      "status": "resolved",
+      "title": "Facilitating Trust in AI-assisted Software Tools",
+      "authors": [
+        "Brittany Johnson",
+        "Christian Bird",
+        "Denae Ford",
+        "Ebtesam Al Haque",
+        "Nicole Forsgren",
+        "Thomas Zimmermann"
+      ],
+      "published": "2026-6-17"
     },
     {
       "doi": "10.1177/001316446002000104",
@@ -5885,7 +6001,7 @@
       "status": "resolved",
       "http_status": 200,
       "final_url": "https://blog.cloudflare.com/introducing-agent-memory/",
-      "title": "Agents that remember: introducing Agent Memory | The Cloudflare Blog"
+      "title": "Agents that remember: introducing Agent Memory | Cloudflare Blog"
     },
     {
       "url": "https://cursor.com/blog/dynamic-context-discovery",
@@ -5921,6 +6037,48 @@
       "http_status": 200,
       "final_url": "https://github.com/sjarmak/engineering-reliable-coding-agents",
       "title": "GitHub - sjarmak/engineering-reliable-coding-agents · GitHub"
+    },
+    {
+      "url": "https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/allocation-policy-replay.md",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/allocation-policy-replay.md",
+      "title": "engineering-reliable-coding-agents/protocols/allocation-policy-replay.md at main · sjarmak/engineering-reliable-coding-agents · GitHub"
+    },
+    {
+      "url": "https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/authority-boundary-test.md",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/authority-boundary-test.md",
+      "title": "engineering-reliable-coding-agents/protocols/authority-boundary-test.md at main · sjarmak/engineering-reliable-coding-agents · GitHub"
+    },
+    {
+      "url": "https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/evaluation-comparison.md",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/evaluation-comparison.md",
+      "title": "engineering-reliable-coding-agents/protocols/evaluation-comparison.md at main · sjarmak/engineering-reliable-coding-agents · GitHub"
+    },
+    {
+      "url": "https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/failure-trace-review.md",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/failure-trace-review.md",
+      "title": "engineering-reliable-coding-agents/protocols/failure-trace-review.md at main · sjarmak/engineering-reliable-coding-agents · GitHub"
+    },
+    {
+      "url": "https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/minimum-reliability-pass.md",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/minimum-reliability-pass.md",
+      "title": "engineering-reliable-coding-agents/protocols/minimum-reliability-pass.md at main · sjarmak/engineering-reliable-coding-agents · GitHub"
+    },
+    {
+      "url": "https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/recovery-fault-injection.md",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/recovery-fault-injection.md",
+      "title": "engineering-reliable-coding-agents/protocols/recovery-fault-injection.md at main · sjarmak/engineering-reliable-coding-agents · GitHub"
     },
     {
       "url": "https://martinfowler.com/articles/exploring-gen-ai/context-engineering-coding-agents.html",
@@ -5959,10 +6117,10 @@
     },
     {
       "url": "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified",
-      "status": "resolved",
-      "http_status": 200,
-      "final_url": "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/",
-      "title": "Why SWE-bench Verified no longer measures frontier coding capabilities | OpenAI"
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified",
+      "title": null
     },
     {
       "url": "https://pushtoprod.substack.com/p/my-ai-agent-didnt-do-anything",
@@ -6012,6 +6170,20 @@
       "http_status": 403,
       "final_url": "https://tech.instacart.com/blueberry-force-multiplier-for-the-on-call-engineer-98c446dfcc12",
       "title": "Attention Required! | Cloudflare"
+    },
+    {
+      "url": "https://web.archive.org/web/20260806014103/https://www.reddit.com/r/LLMDevs/comments/1q7avil/what_actually_broke_when_we_put_ai_agents_into/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://web.archive.org/web/20260806014103/https://www.reddit.com/r/LLMDevs/comments/1q7avil/what_actually_broke_when_we_put_ai_agents_into/",
+      "title": "Reddit - The heart of the internet"
+    },
+    {
+      "url": "https://web.archive.org/web/20260806014121/https://www.reddit.com/r/devops/comments/1tbbls4/ai_agent_wiped_railway_db_in_9_seconds_how_do_you/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://web.archive.org/web/20260806014121/https://www.reddit.com/r/devops/comments/1tbbls4/ai_agent_wiped_railway_db_in_9_seconds_how_do_you/",
+      "title": "Reddit - The heart of the internet"
     },
     {
       "url": "https://www.amplifypartners.com/blog-posts/how-hightouch-built-their-long-running-agent-harness",

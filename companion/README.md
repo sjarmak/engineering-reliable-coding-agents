@@ -1,6 +1,6 @@
 # Engineering Reliable Coding Agents: companion research artifact
 
-Release candidate 1.0.0-rc.9, prepared August 6, 2026.
+Release candidate 1.0.0-rc.10, prepared August 6, 2026.
 
 This package accompanies *Engineering Reliable Coding Agents: Evaluation, Recovery, Context, and Control Beyond the Model*. It is designed to be archived as a separate, citable research artifact. The final archival release should receive its own DOI and should be cited alongside the manuscript.
 
@@ -12,14 +12,14 @@ Canonical repository: [https://github.com/sjarmak/engineering-reliable-coding-ag
 
 ## Contents
 
-- `LEARNINGS.md`: human-readable, chapter-organized presentation of all 192 practices, including actions, mechanisms, evidence, and boundaries.
-- `catalog.json`: all 192 bounded practices in machine-readable form, including the bounded August 6 evidence additions.
+- `LEARNINGS.md`: human-readable, chapter-organized presentation of the 192 practice records in this edition, including stable IDs, actions, mechanisms, evidence, and boundaries.
+- `catalog.json`: the 192 bounded practice records in this edition in machine-readable form, including the bounded August 6 evidence additions. The count reflects this edition's granularity decisions; it is not an estimate of how many reliability practices exist.
 - `evidence-ledger.csv`: one row per evidence item or corroborating item.
 - `chapter-crosswalk.json`: the 55 practices developed in the manuscript and the 137 companion-only entries.
 - `benchmark-catalog.json`: 29 coding-agent benchmark records.
 - `reference-metadata.json`: resolved arXiv, DOI, and web-source metadata from the manuscript audit.
 - `WEB-SOURCE-PRESERVATION.md`: canonical and archived URLs for retained practitioner sources on mutable hosts.
-- `methodology/`: corpus snapshots, thread protocols and source identities, search records, record-level update decisions, and the human/automated adjudication boundary.
+- `methodology/`: corpus snapshots, thread protocols and source identities, search records, record-level update decisions, the external-grading packet, and the human/automated adjudication boundary.
 - `schemas/`: JSON Schemas for the catalog and benchmark records.
 - `PROVENANCE.md`: source snapshot, transformations, evidence definitions, and release exclusions.
 - `CITATION.cff`: citation metadata for GitHub and archival services.
@@ -33,4 +33,4 @@ Author-system cases are labeled `author_system_illustration` and set `independen
 
 ## Before public release
 
-Replace this release-candidate version with `1.0.0`, add the selected license, publish a tagged release in the canonical repository, archive that exact tag with Zenodo or another DOI-granting repository, and add the resulting DOI to this file and `CITATION.cff`. Do not archive internal review notes, rejected candidates, private receipts, or unpublished operational data.
+Complete the publisher-native ACM Digital Library, IEEE Xplore, and Scopus search described under `methodology/software-engineering-coverage/`, then complete the blinded external calibration described in `methodology/external-grading/README.md` and report both results in the manuscript. Then replace this release-candidate version with `1.0.0`, add the selected license, publish a tagged release in the canonical repository, archive that exact tag with Zenodo or another DOI-granting repository, and add the resulting DOI to this file and `CITATION.cff`. Do not archive internal review notes, rejected candidates, private receipts, or unpublished operational data.

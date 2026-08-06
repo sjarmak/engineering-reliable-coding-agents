@@ -1,5 +1,11 @@
 \chapter{Run-to-run variance, statistical power, and paired comparisons}
 \label{ch01-variance-power-paired-comparisons}
+\begin{quote}
+\textbf{Evidence profile.} 10 strong · 1 directional · 0 corroborating evidence items across 3 developed practices (ERCA-020, ERCA-024, ERCA-025).
+
+\textbf{Chapter claim.} One run is one draw.
+\end{quote}
+
 \hypertarget{one-run-is-one-draw}{%
 \section{One run is one draw}\label{one-run-is-one-draw}}
 
@@ -11,7 +17,7 @@ The original observation could not support a configuration-level effect. One unu
 
 This task family scores through a deterministic test-suite oracle, under which the end state either passes the fixed tests or does not. That oracle collapses different trajectories onto the same score, so the tight repeat scores are a certification of scorer stability rather than agent determinism. The conclusion covers these five fixed tasks and no wider population.
 
-It is critical to record repeated independent runs before declaring a meaningful difference between agent systems. A single score is one outcome from a variable execution process, even when the configuration appears deterministic. Without repeats, the observed difference mixes the system change I intended to test with variation from model execution, infrastructure, task ordering, and the other choices built into the evaluation apparatus.
+Record repeated independent runs before declaring a meaningful difference between agent systems. A single score is one outcome from a variable execution process, even when the configuration appears deterministic. Without repeats, the observed difference mixes the system change I intended to test with variation from model execution, infrastructure, task ordering, and the other choices built into the evaluation apparatus.
 
 Agent evaluations usually arrive as a table with one row per system and one score per row, which suppresses the execution history behind each cell. A score can aggregate hundreds of tasks and still be a single run, if each task was attempted once under one instantiation of the surrounding conditions.
 
@@ -148,6 +154,17 @@ The table below gives directional guidance. The recommendations for language-gen
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\caption{Outcome structure, paired estimand, and corresponding test guidance.}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Outcome structure
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Comparison to analyze
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Test guidance
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Outcome structure
@@ -209,6 +226,10 @@ Repeated trials remain interpretable only while the apparatus is pinned:
 When a provider exposes no stable model version, I record the evaluation window and treat later reruns as potentially affected by model drift.
 
 The observed difference belongs beside the complete run distribution and the engineering threshold written before execution. I do not credit a difference that remains smaller than the measured variation. I return no verdict when the experiment lacked the power to resolve the difference that would have changed the decision.
+
+The repository artifact \href{https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/evaluation-comparison.md}{\texttt{protocols/evaluation-comparison.md}} packages this sequence, pass condition, and retained files.
+
+\textbf{Portable claim.} One run is one draw.
 
 \section*{Sources and evidence}
 

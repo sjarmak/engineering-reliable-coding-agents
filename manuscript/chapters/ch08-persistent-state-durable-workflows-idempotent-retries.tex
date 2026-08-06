@@ -1,8 +1,14 @@
 \chapter{Persistent agent state, durable workflows, and idempotent retries}
 \label{ch08-persistent-state-durable-workflows-idempotent-retries}
+\begin{quote}
+\textbf{Evidence profile.} 0 strong · 8 directional · 3 corroborating · 1 null or conflicting evidence items across 3 developed practices (ERCA-124, ERCA-128, ERCA-130).
+
+\textbf{Chapter claim.} Durable intent survives the worker; external effects require their own contract.
+\end{quote}
+
 Netflix reported losing roughly 4 percent of its cloud-operations deployments to transient failures even though the service already contained homegrown retries and compensating-transaction logic. Meyers and Zienert (\href{https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953}{2025}) state that the team moved coordination into a stateful service that records progress and reissues work after failure. The reported failure rate fell to 0.0001 percent, and the team deleted the orchestration code the service replaced. This vendor-adjacent account comes from the adopting team and was not independently audited, although it provides concrete details about the migration and observed change.
 
-That account is the chapter's only strong evidence item. Historical surveys, systems papers, self-evaluated systems, and practitioner reports provide the rest; none supplies a controlled experiment on agents. The argument is therefore limited to explicit artifacts, ownership boundaries, and failure checks rather than numerical thresholds.
+I classify that account as corroborating, not strong. It is specific enough to show that the migration and reported change occurred in one service, but the adopting team supplied the measurement and the migration changed several things at once. Historical surveys, systems papers, self-evaluated systems, and practitioner reports provide the rest of the chapter's evidence. The engineering controls below are therefore justified through explicit state boundaries and executable failure checks rather than a claimed universal improvement rate.
 
 An agent that dies after step nine of a fourteen-step run presents the same coordination problem at a smaller scale. The process has disappeared, but its completed work and external effects may remain. \textbf{Durable execution} is the ability of a run to survive process death and resume from recorded progress without repeating effects already completed. That property requires explicit state, a coordinator that owns recovery once coordination becomes complex, and retryable steps whose repeated execution does not repeat their effects.
 
@@ -72,7 +78,7 @@ Its narrower benefit is recoverability. After process death, the replacement wor
 \hypertarget{when-coordination-belongs-in-an-engine}{%
 \section{When coordination belongs in an engine}\label{when-coordination-belongs-in-an-engine}}
 
-The orchestration code Netflix deleted is as informative as the reported reduction in failures. Before the migration, application code coordinated retries, compensating actions, and service state. Afterward, a workflow engine recorded execution history and scheduled application operations from that history. The practitioner account strongly supports the result for this cloud-operations service. It does not isolate which part of the migration caused the improvement or establish the same effect for agent workloads.
+The orchestration code Netflix deleted is as informative as the reported reduction in failures. Before the migration, application code coordinated retries, compensating actions, and service state. Afterward, a workflow engine recorded execution history and scheduled application operations from that history. The account corroborates the service-local before-and-after result. Because the migration changed retries, compensation, coordination, and state ownership together, it cannot attribute the improvement to one component or carry the reported rate into agent workloads.
 
 An engine earns its cost when it owns facts that no individual worker can recover reliably after a crash. It records which step became eligible, which attempt started, which result committed, which external event arrived, and which retry policy applies next. Workers still perform model calls, tool calls, and domain operations. The engine owns their order and lifecycle. A replacement worker receives its next action from recorded history rather than reconstructing that history from local conventions.
 
@@ -199,6 +205,8 @@ On recovery, the run should do one of three things: return the previously record
 
 Recorded state makes a run resumable. Chapter 9 makes the recovery claim replayable and puts it under measurement.
 
+\textbf{Portable claim.} Durable intent survives the worker; external effects require their own contract.
+
 \section*{Sources and evidence}
 
 \textbf{Make agent state a first-class persistent artifact}
@@ -224,7 +232,7 @@ Recorded state makes a run resumable. Chapter 9 makes the recovery claim replaya
 \item
   Directional evidence: Laigner, Zhou, Vaz Salles et al.~(2021). Data Management in Microservices: State of the Practice, Challenges, and Research Directions. PVLDB 14(13). arXiv:2103.00170. (SLR + repo analysis + 120+ practitioner survey: hand-rolled sagas and convention-managed consistency are where reliability failures concentrate.)
 \item
-  Strong evidence for the reported service-local before-and-after measurement: Jacob Meyers and Rob Zienert (2025). ``How Temporal Powers Reliable Cloud Operations at Netflix'', \href{https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953}{Netflix TechBlog}, 2025-12-15. The adopting team reports its observed failure-rate change; the account does not isolate a causal component or measure transfer to agent workloads.
+  Corroborating evidence for the reported service-local before-and-after measurement: Jacob Meyers and Rob Zienert (2025). ``How Temporal Powers Reliable Cloud Operations at Netflix'', \href{https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953}{Netflix TechBlog}, 2025-12-15. The vendor-adjacent account comes from the adopting team, was not independently audited, and does not isolate a causal component or measure transfer to agent workloads.
 \item
   Null or conflicting result: Zhang, Soto \& Markl (2022). A Survey on Transactional Stream Processing. The VLDB Journal. arXiv:2208.09827. (Carried as the negative result behind the engine choice; it is about deterministic data pipelines and says nothing about agents.)
 \end{itemize}

@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.0.0-rc.10 — 2026-08-06
+
+- Reframed the review as a multivocal software-engineering secondary study,
+  added claim-scoped quality-assessment terminology, and documented the
+  curation, automation, screening, challenge, extraction, and synthesis steps.
+- Added a PRISMA-style review-flow figure, stable `ERCA-001` through
+  `ERCA-192` practice identifiers, per-chapter evidence-density banners, a
+  glossary, numbered tables, and explicit research-agenda formatting for Part
+  VI.
+- Ran a software-engineering venue coverage probe over 148 OpenAlex candidates,
+  admitted nine methodologically material works, and made publisher-native ACM,
+  IEEE, and Scopus searching an explicit archival-v1 gate.
+- Added a blinded 20-practice external-grading packet and agreement analyzer;
+  no agreement value is reported until independent readers return labels.
+- Added six runnable protocols plus a minimum reliability pass, and connected
+  every protocol and reusable skill to stable practice IDs.
+- Completed the composite-claim audit with 65 of 65 strong-evidence entries
+  passing; resolved 319 arXiv identifiers and 14 DOIs; and rebuilt the exact
+  clean archive at 270 pages, 17 figures, 7 numbered tables, and 213 references.
+
 ## 1.0.0-rc.9 — 2026-08-06
 
 - Added three high-information conceptual figures: the benchmark validity

@@ -11,7 +11,7 @@ These functions interact. A higher score can result from an easier test rather t
 
 This technical review and engineering monograph examines the evaluation, operation, and governance of AI coding-agent systems. It focuses on mechanisms that remain relevant as models and products change: measurement design, execution-based grading, containment, durable state, recovery, repository retrieval, context limits, human oversight, topology, and resource allocation. It does not compare current models or teach prompt and tool-schema design.
 
-The intended reader is a software engineer who operates or evaluates coding agents and may be new to evaluation methodology. The practices are bounded engineering claims rather than universal rules. Their applicability depends on workload, permissions, failure costs, deployment conditions, and available review capacity.
+The intended reader is a staff engineer, evaluation lead, or technical owner building a coding-agent evaluation or operations program. The statistical methods are introduced where they affect an engineering decision, but the monograph assumes comfort with experiment design, production controls, and technical review. Its practices are bounded engineering claims rather than universal rules. Their applicability depends on workload, permissions, failure costs, deployment conditions, and available review capacity.
 
 \hypertarget{the-reliability-dependency-chain}{%
 \section{The reliability dependency chain}\label{the-reliability-dependency-chain}}
@@ -19,6 +19,8 @@ The intended reader is a software engineer who operates or evaluates coding agen
 The organizing argument is a dependency chain. Measurement determines whether a difference is credible. Grading converts observations into acceptance decisions. Containment and recovery determine whether the resulting execution record survives failure without extending authority. Retrieval and context determine which evidence reaches the agent. Review and accountability determine who can challenge the result and who controls the consequential transition. Allocation and cost determine which system receives future work.
 
 Each layer determines what the next may trust. A weak measurement can become a confident grade; a weak grade can admit unsafe work; an incomplete recovery record can enter retrieval as if it were complete; missing context can make review appear ineffective; and an invalid review signal can steer more work toward the wrong configuration. Downstream confidence cannot repair evidence lost upstream.
+
+This creates a repair asymmetry. Later machinery is often easier to add than the earlier instrument is to repair, yet it is evaluated through that earlier instrument. More samples cannot repair a task distribution that excludes production work. More judges cannot repair a rubric experts apply inconsistently. More agents cannot repair a retrieval boundary that treats an empty result as authoritative. The dependency chain is therefore a sequence of evidence obligations, not a list of subsystems.
 
 \begin{figure}[htbp]
 \centering
@@ -36,7 +38,7 @@ This review treats source collection, evidence grading, practice derivation, and
 \hypertarget{search-and-source-assembly}{%
 \subsection{Search and source assembly}\label{search-and-source-assembly}}
 
-The review was consolidated on July 26, 2026, then subjected to a bounded update audit through August 6, 2026. The resulting source collection contains 129 scholarly works, 91 practitioner records, 29 benchmark records, and 17 author-system case records. The original 118 scholarly works were organized into seven topic-specific threads covering benchmark validity, failure taxonomy, evaluation statistics, oversight and accountability, context and retrieval, durable execution, and scheduling with repository-scale scoping. Eleven works were admitted during the update audit.
+The review was consolidated on July 26, 2026, then subjected to a bounded update audit and a software-engineering venue coverage probe through August 6, 2026. The release-candidate source collection contains 138 scholarly works, 91 practitioner records, 29 benchmark records, and 17 author-system case records. The original 118 scholarly works were organized into seven topic-specific threads covering benchmark validity, failure taxonomy, evaluation statistics, oversight and accountability, context and retrieval, durable execution, and scheduling with repository-scale scoping. Eleven works were admitted during the update audit and nine during the coverage probe.
 
 Scholarly retrieval used \href{https://scixplorer.org/scixabout/}{SciX}, the NASA-supported literature discovery service operated by the Smithsonian Astrophysical Observatory, and a local retrieval layer referred to here as \textbf{SciX Agent}. The official \href{https://scixplorer.org/scixhelp/api-scix/}{SciX API} supplied bibliographic identities and metadata. At consolidation, SciX Agent searched a 32.4-million-record SciX and arXiv corpus with 299.3 million citation links and full text for 14.9 million records. It combined INDUS dense retrieval with BM25 lexical retrieval through reciprocal-rank fusion. These systems determined which records were retrieved and read first; they did not determine evidence grades.
 
@@ -44,7 +46,21 @@ Queries were scoped by topic, subject class, and year where appropriate. Each th
 
 Practitioner retrieval used the \textbf{\href{https://www.sjarmak.ai/projects/code-intelligence-digest}{Code Intelligence Digest}}, an author-operated corpus that ingests research feeds, engineering publications, newsletters, podcasts, community discussions, and product or operations accounts. At the July 26 cutoff, its local snapshot contained 162,350 normalized records from 149 source labels, including 43,953 records with retained full text. Keyword and semantic retrieval were used within relevant practitioner categories. Research records found through the Digest were moved to the scholarly lane and deduplicated there. Repeated practitioner accounts of one incident shared an independence key and could not be counted as independent corroboration merely because several pages repeated the event.
 
-The benchmark collection was assembled separately from benchmark documentation and publications, merged from two inventories, deduplicated by identity, and validated against a JSON Schema. Three repeated benchmark records were removed during that merge. The search is structured rather than exhaustive: it does not cover every scholarly index, venue, private operational record, or adjacent model-comparison literature.
+This practitioner lane makes the review \textbf{multivocal} in the software-engineering sense described by Garousi, Felderer, and Mäntylä (\href{https://doi.org/10.1016/j.infsof.2018.09.006}{2019}): it combines scholarly and grey literature because operational mechanisms and incidents are often documented outside venues. The lane also follows the more restrictive point made by Kitchenham and colleagues (\href{https://doi.org/10.1109/TSE.2022.3165938}{2022}): a mutable social-media post is not treated as a primary study merely because it is informative. Practitioner records remain corroborating cases unless they report a sufficiently specific measurement, and mutable cited pages are archived. The independence key operationalizes source independence by grouping reports that repeat one originating incident or claim.
+
+The benchmark collection was assembled separately from benchmark documentation and publications, merged from two inventories, deduplicated by identity, and validated against a JSON Schema. Three repeated benchmark records were removed during that merge.
+
+The initial scholarly search did not establish adequate coverage of the core software-engineering venue literature. A subsequent OpenAlex metadata probe searched eight topic formulations across ICSE, FSE, ASE, ISSTA, \emph{Empirical Software Engineering}, \emph{IEEE Transactions on Software Engineering}, \emph{ACM Transactions on Software Engineering and Methodology}, and \emph{Computer Supported Cooperative Work}. It surfaced 148 unique candidates. Nine methodologically material works were admitted after title-and-abstract screening, including the SEGRESS reporting guideline (\href{https://doi.org/10.1109/TSE.2022.3174092}{Kitchenham et al.~2022}), the ABC framework for software-engineering research (\href{https://doi.org/10.1145/3241743}{Ralph et al.~2018}), and work on construct validity in software engineering (\href{https://doi.org/10.1109/TSE.2022.3176725}{Ralph and Tempero 2022}).
+
+That probe diagnosed coverage; it did not replace a publisher-native search. In a deterministic sample of 40 candidate DOIs, SciX contained eight exact DOI matches. The sample is too small and topical to estimate corpus recall, but the missing records are sufficient to reject an assumption of complete SE venue coverage. ACM Digital Library returned HTTP 403 to the automated search client, while the IEEE Xplore and Scopus APIs required credentials not configured in the review environment. The archival first edition is therefore conditional on a supplementary search executed against ACM Digital Library, IEEE Xplore, and Scopus, or on a documented database substitution whose coverage is justified. The companion preserves the probe protocol, all 148 candidates, and the exact SciX comparison.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{figures/review-flow.pdf}
+\caption{Flow of source review and practice synthesis. The source lane distinguishes the base review, bounded update audit, SE coverage probe, and the remaining publisher-native search. The practice lane reports the admission gate and overlapping hardening operations without treating their counts as an arithmetic decomposition.}
+\end{figure}
+
+The search remains structured rather than exhaustive. It does not cover every scholarly index, venue, private operational record, or adjacent model-comparison literature. The SEGRESS reporting items provide the vocabulary used below: source admission is governed by inclusion and exclusion criteria; evidence-group assignment is a quality assessment of a scoped claim; and practice construction is data extraction and synthesis. These names do not change the underlying decisions, but they make the review easier to compare with software-engineering secondary studies.
 
 \hypertarget{curation-and-assembly-workflow}{%
 \subsection{Curation and assembly workflow}\label{curation-and-assembly-workflow}}
@@ -52,6 +68,44 @@ The benchmark collection was assembled separately from benchmark documentation a
 The assembly process followed a fixed sequence: define a question for each thread; retrieve candidates; resolve record identity; screen for an in-scope claim; extract the bounded claim and its conditions; assign an evidence group; challenge the assignment; derive candidate practices; select practices for chapter treatment; and audit the final citations. Retrieval rank determined screening order only. A highly ranked record received no evidentiary preference after screening.
 
 Automated systems assisted with retrieval, normalization, duplicate detection, bounded claim extraction, metadata checks, and challenge passes. The cited source remained authoritative. The author made the final decisions about inclusion, evidence grouping, practice admission, chapter placement, and prose. When a challenge pass exposed ambiguity, the lower evidence group was used unless the narrower strong claim could be stated directly.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\caption{Automation and human judgment in the review workflow. \emph{Automated} means the operation ran without item-level prompting; \emph{assisted} means a system proposed or flagged material for a human decision; \emph{human} means the substantive choice was made without an automated verdict.}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Review step
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Mode
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Human decision retained
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Review step
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Mode
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Human decision retained
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Candidate retrieval and ranking & Automated and assisted & I defined each thread question and search boundary, then read the admitted sources. \\
+Identity resolution, normalization, and duplicate checks & Automated checks with human resolution & I resolved ambiguous identities and practitioner independence keys. \\
+Bounded-claim extraction & Assisted & I checked the source, revised the extracted claim, and accepted or rejected it. \\
+Initial evidence-group proposal & Assisted & I assigned the final label to the scoped claim. \\
+Challenge pass & Assisted & Automated passes flagged composite claims, contrary findings, duplicate support, and label inconsistencies; I reread the source and adjudicated each change. \\
+Practice admission, chapter selection, and prose & Human & I made the selection and writing decisions. \\
+Schema, checksum, identifier, and cross-reference gates & Automated verification & A failure blocked the release until the underlying record was corrected. \\
+\end{longtable}
+
+The challenge pass was an error-finding aid, not an independent grader. In particular, automated assistance in that pass searched for composite claims, inconsistent evidence groups, contrary findings, duplicate support, and broken identifiers. It did not accept a practice or promote an evidence group.
 
 The update audit screened 38 distinct scholarly records surfaced in Code Intelligence Digest editions published from July 27 through August 5, plus one paper found in a targeted August 6 check. Eleven new works were admitted, one record was already present, and 27 were deferred or excluded. Admission required a material addition to a claim already in scope; novelty or recency alone was insufficient. Material published after August 6 enters the update queue for a later edition unless it corrects a factual error in this one.
 
@@ -82,14 +136,16 @@ These labels attach to evidence items and scoped claims, not to publication venu
 
 The catalog was graded during assembly and then challenged through independent verification passes. A targeted audit examined ten practices whose sole supporting synthesis had been graded strong, together with two restored items. Six grades were reduced because the source demonstrated a hazard, substrate, or adjacent result rather than the stated remedy; six were retained because the controlled comparison matched the claim. Identifier checks, duplicate-identifier gates, thin-evidence rulings, practitioner-independence checks, and contrary evidence were preserved in the audit record. Ambiguous cases defaulted to the lower grade.
 
-The final adjudication was performed by the author. The challenge passes reduced correlated review error, but they do not constitute blinded independent grading by several human reviewers. This is a limitation of the evidence audit and a reason the machine-readable ledger preserves the source note, boundary, and ruling rather than exposing only a label.
+The final adjudication was performed by the author. The challenge passes reduced correlated review error, but they do not constitute blinded independent grading by several human reviewers. That creates an asymmetry with Chapter 5, which asks operators to calibrate graders against independent labels before relying on them.
+
+The release artifact therefore includes a deterministic random sample of 20 practices, the associated evidence items with the author's labels hidden, a reviewer response template, and a script that reports pairwise Cohen's kappa, Fleiss's kappa when three readers participate, observed agreement, and disagreement patterns. At least two external readers must complete that pass before archival v1. This release candidate reports no agreement value because no external labels have yet been collected. The author label will be compared after the blinded pass and will not be treated as ground truth. Even after calibration, agreement measures reproducibility of the quality-assessment instrument rather than correctness of every grade.
 
 \hypertarget{practice-derivation-and-chapter-selection}{%
 \subsection{Practice derivation and chapter selection}\label{practice-derivation-and-chapter-selection}}
 
-Practice derivation began with 244 records produced across six extraction shards. An admission gate retained 214 and rejected 30. Hardening and adjudication corrected evidence movement, separated bundled claims, removed redundant or self-defeating practices, and preserved contrary findings. Twenty-six practices were cut, thirteen were demoted to asides, eight were split, and three were added during adjudication. A later provenance correction reinstated one valid practice, producing the final catalog of 192. At the final gate, 158 practices qualified through at least one scholarly item, 27 through a non-author synthesis with a resolvable paper identity, and seven through at least two practitioner items with distinct independence keys.
+Candidate practices were derived through bounded-claim extraction and synthesis, then passed through a separate admission gate. A record qualified at the final gate through at least one scholarly item, a non-author synthesis with a resolvable scholarly identity, or at least two practitioner items with distinct independence keys. Hardening separated bundled claims, removed redundant or self-defeating records, preserved contrary findings, and repaired provenance. The resulting catalog contains 192 edition records, each with a stable identifier. That total reflects the chosen claim granularity and editorial boundaries; it is not an estimate of how many reliability practices exist. The full record arithmetic and overlapping hardening operations appear in the companion and in the review-flow figure above.
 
-Three selection passes ranked the catalog by different criteria: teachability through a bounded case, consequence for an engineering decision, and coverage of the fourteen mechanism clusters. The passes selected 52, 52, and 53 practices, respectively, with a union of 86. Twenty-two practices appeared in all three lists, 27 in two, and 37 in one. The 49 practices selected by at least two passes formed the base; five single-pass practices were added after individual adjudication to repair thin mechanism coverage, and one scheduling practice was added after a provenance correction. The resulting 55 practices receive full treatment in the 18 chapters; the remaining 137 appear in the companion catalog.
+Three selection passes ranked the catalog by different criteria: teachability through a bounded case, consequence for an engineering decision, and coverage of the fourteen mechanism clusters. Practices selected by at least two passes formed the base of the developed set. Individual adjudication then repaired thin mechanism coverage and one provenance defect. The resulting 55 practices receive full treatment in the 18 chapters; the remaining 137 appear in the companion catalog.
 
 The consequence ranking also supplies the operational-urgency calculation used later in the monograph. Among its 52 ranked practices, the Spearman correlation between urgency rank and a binary indicator for whether the practice carried at least one strong evidence item was -0.004. The phrase \emph{nearly uncorrelated} refers to this calculation, not to all 192 catalog entries or to a latent universal measure of importance.
 
@@ -100,7 +156,7 @@ The resulting chapter set is an authorial engineering judgment, not an evidence-
 
 Cases from systems operated by the author expose mechanisms, original measurements, and reproducible failure cases. They are always treated as illustrations or local measurements. They are not counted as independent external evidence and do not by themselves support a general recommendation.
 
-An \textbf{unverified working artifact} is an author-system record whose source was uncommitted at the cited repository revision and whose reported figures were read from that source rather than independently remeasured. The label describes provenance, not evidence strength. Later chapters call these records local artifacts unless the uncommitted-source condition changes the interpretation of a result.
+A \textbf{local artifact} is a record from a system operated by the author and used to expose a mechanism or local measurement. It is not independent external evidence. When its source was uncommitted at the cited revision or its figures were read from source rather than independently remeasured, the chapter states that provenance condition at first use instead of assigning the artifact a second name.
 
 Evidence remains uneven across topics. Several operational questions have only case-level support, recent capability measurements can age quickly, and practitioner reports are vulnerable to selection, survivorship, and reporting bias. The review excludes model-comparison and prompt-engineering literatures except where they bear directly on system reliability. Transfer is especially substantial in Part VI, where observatory scheduling, compute-cluster scheduling, and adjacent multi-agent studies motivate testable designs for coding-agent fleets. That part should be read partly as a research agenda, not as a body of settled deployment guidance.
 
@@ -111,24 +167,52 @@ This section establishes the standard evidence legend for the whole monograph. L
 
 \Needspace{5\baselineskip}
 
-This work makes five contributions:
+This work makes six contributions:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  an evidence audit that distinguishes direct support, directional findings, corroborating cases, and null or conflicting results;
+  a multivocal evidence audit and machine-readable ledger that distinguish direct support, directional findings, corroborating cases, and null or conflicting results;
 \item
-  a catalog of 192 bounded engineering practices, including 55 practices developed in depth;
+  a versioned catalog of 192 bounded practice records in this edition, including 55 developed in depth and stable identifiers that connect the manuscript, companion, and implementation artifacts;
 \item
-  a dependency chain connecting measurement, grading, containment and recovery, context management, human oversight, and resource allocation;
+  a dependency chain---and its repair asymmetry---connecting measurement, grading, containment and recovery, context management, human oversight, and resource allocation;
 \item
-  original measurements and failure cases from author-operated systems, explicitly separated from external evidence; and
+  original measurements and failure cases from author-operated systems, explicitly separated from external evidence;
 \item
-  runnable protocols for local evaluation, capability-boundary testing, recovery testing, trace analysis, and release decisions.
+  runnable protocols for local evaluation, capability-boundary testing, recovery testing, trace analysis, and release decisions; and
+\item
+  five reusable agent skills with practice-level evidence maps, packaged in the project repository as implementation artifacts rather than additional evidence.
 \end{enumerate}
 
 The chapters emphasize conditions, measurements, and failure boundaries because an outcome alone rarely identifies why a system succeeded or failed. A useful account traces ownership, permissions, persistence, ordering, and observation while distinguishing correctness from reliability, performance, cost, safety, and usability.
+
+\hypertarget{a-minimum-pass-through-the-dependency-chain}{%
+\section{A minimum pass through the dependency chain}\label{a-minimum-pass-through-the-dependency-chain}}
+
+\Needspace{5\baselineskip}
+
+For an existing system, one compact pass produces the minimum record on which later decisions can build:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Reopen one decision based on an aggregate score. Run the cheapest credible baseline and the candidate on identical task versions, initially three times per item, and preserve per-item outcomes.
+\item
+  Record success, reliability, cost, latency, model, harness, prompt, permissions, and pricing snapshot separately.
+\item
+  Exercise one permitted and one prohibited action with the ordinary identity, including the boundary between primary and recovery resources.
+\item
+  Verify one recent completion claim from repository or system state and rerun the executable check that makes it true.
+\item
+  Read twenty failed or unverifiable runs, label the first upstream failure where the trace permits it, and repair the first ordinary causal question the schema cannot answer.
+\item
+  Before the next promotion run, record the success floor, cost ceiling, task and baseline versions, mechanism condition, and fault-containment guard.
+\end{enumerate}
+
+The pass leaves six challengeable artifacts: a paired distribution, a cost-quality record, an observed authority boundary, an independently verified state transition, a seed failure corpus, and a decision rule fixed before the result was known. It is an entry point, not a reliability certificate. The repository artifact \href{https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/minimum-reliability-pass.md}{\texttt{protocols/minimum-reliability-pass.md}} supplies the runnable checklist and retained-artifact layout; the chapters develop each step.
 
 \hypertarget{how-the-monograph-is-organized}{%
 \section{How the monograph is organized}\label{how-the-monograph-is-organized}}
@@ -137,12 +221,23 @@ The monograph has six parts and eighteen chapters. Measurement comes first becau
 
 This order places three chapters of experiment design before the agent-specific operating chapters. Later recommendations depend on those definitions and comparison methods.
 
-Part I establishes how I compare systems when runs vary and scores can mislead. Part II turns those measurements into grading and release decisions. Part III addresses containment, persistent state, recovery, and failure analysis. Part IV examines how repository information enters, survives, and leaves an agent run. Part V treats human review as an engineered control with interfaces, escalation rules, and accountable ownership. Part VI allocates work across agents and models under cost and capacity constraints; it is the most transfer-heavy part and states its claims accordingly.
+Part I establishes how I compare systems when runs vary and scores can mislead. Part II turns those measurements into grading and release decisions. Part III addresses containment, persistent state, recovery, and failure analysis. Part IV examines how repository information enters, survives, and leaves an agent run. Part V treats human review as an engineered control with interfaces, escalation rules, and accountable ownership. Part VI is a research agenda for allocating work across agents and models under cost and capacity constraints. Its questions transfer methods from adjacent scheduling and multi-agent literatures rather than presenting settled coding-agent effects.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3000}}
   >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3000}}@{}}
+\caption{Parts and chapters in the dependency-chain order.}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Part
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Ch
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Title
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Part
@@ -171,7 +266,7 @@ Title
 & 14 & Cross-session memory, raw traces, and compaction policies \\
 \textbf{Part V: Human review and accountability engineering} & 15 & Efficient verification interfaces and risk-based human escalation \\
 & 16 & Autonomy calibration, provenance, effective gates, and accountability \\
-\textbf{Part VI: Work allocation and cost engineering} & 17 & Agent topology selection and dynamic task allocation \\
+\textbf{Part VI: Research agenda---work allocation and cost engineering} & 17 & Agent topology selection and dynamic task allocation \\
 & 18 & Cost-aware fleet scheduling and model routing \\
 \end{longtable}
 
@@ -209,6 +304,8 @@ Twenty-nine of the full entries are labeled as limited-support notes. I excluded
 The chapters and catalog serve different purposes. The chapters develop methods and claims in enough detail to evaluate critically. The catalog preserves breadth and makes related practices easier to find. Together, they let you begin with a measured problem and identify an intervention suited to the system you actually operate.
 
 The repository also packages five reusable agent skills derived from selected practices: evaluation design, end-to-end test design, failure-mode capture, focused execution, and verified long-running implementation. Each skill includes a practice-level evidence map. These are implementation artifacts intended to make the protocols reusable; they are not additional evidence that the practices work across environments.
+
+This edition is versioned because capability measurements and source availability change. The evidence ledger is scheduled for an annual review, with an out-of-cycle release when a material factual error, citation failure, or retraction changes a claim. Stable practice IDs persist across those releases; a later edition may retire, split, or merge a record without silently reusing its identifier.
 
 \hypertarget{what-you-should-be-able-to-do-by-the-end}{%
 \section{What you should be able to do by the end}\label{what-you-should-be-able-to-do-by-the-end}}

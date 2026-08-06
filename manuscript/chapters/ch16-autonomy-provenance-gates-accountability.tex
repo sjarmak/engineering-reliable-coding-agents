@@ -1,5 +1,11 @@
 \chapter{Autonomy calibration, provenance, effective gates, and accountability}
 \label{ch16-autonomy-provenance-gates-accountability}
+\begin{quote}
+\textbf{Evidence profile.} 2 strong · 5 directional · 0 corroborating evidence items across 4 developed practices (ERCA-145, ERCA-149, ERCA-154, ERCA-165).
+
+\textbf{Chapter claim.} A gate that cannot change execution records assent and nothing more.
+\end{quote}
+
 I built a human-approval queue to hold decisions an agent was not permitted to make. The architecture appeared conservative: the agent could prepare an action, but execution stopped at a human-only boundary.
 
 An audit found paths around that boundary. Some scripts failed open when a required component was missing, and command construction reached execution without the validation the gate was supposed to enforce. The system could report that approval existed while allowing an action to bypass the person. The conservative appearance of the apparatus had concealed a material difference between policy and execution.
@@ -348,6 +354,19 @@ Evaluate those conditions against an execution trace rather than the policy docu
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\caption{Conditions under which a human gate can exercise effective control.}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Condition
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Question for the running gate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Observation to collect
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Failure implication
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Condition
@@ -601,23 +620,7 @@ Run four checks against one defined action class and one real repository workflo
 \hypertarget{test-the-autonomy-transfer}{%
 \section{Test the autonomy transfer}\label{test-the-autonomy-transfer}}
 
-\Needspace{5\baselineskip}
-
-Define:
-
-\begin{itemize}
-\tightlist
-\item
-  the action class;
-\item
-  the current autonomy rung;
-\item
-  a correct outcome;
-\item
-  the material difference that would justify wider authority; and
-\item
-  the failures that would prevent promotion.
-\end{itemize}
+Define the action class, current autonomy rung, correct outcome, material difference that would justify wider authority, and failures that would prevent promotion.
 
 Record every proposed transfer, including rejected, modified, timed-out, abandoned, and executed proposals. Do not combine action classes or autonomy rungs, and do not build the record from executed actions alone.
 
@@ -628,27 +631,7 @@ Calculate uncertainty around approval, modification, and outcome rates. Test whe
 
 Choose the smallest provenance unit that can survive the repository workflow while still representing the review decision it is intended to affect.
 
-\Needspace{5\baselineskip}
-
-Exercise that marker through:
-
-\begin{itemize}
-\tightlist
-\item
-  rebases;
-\item
-  cherry-picks;
-\item
-  squash merges;
-\item
-  file moves;
-\item
-  copied patches;
-\item
-  partial adoption; and
-\item
-  later human modification.
-\end{itemize}
+Exercise that marker through rebases, cherry-picks, squash merges, file moves, copied patches, partial adoption, and later human modification.
 
 Verify that a reviewer can distinguish generation, human revision, and integration responsibility after each transformation.
 
@@ -659,31 +642,7 @@ Keep the count semantics narrow. The 14.5 percent trailer-signed floor described
 
 Run the gate audit in a contained environment. Name the action, gate, and decision owner, then capture the complete execution trace.
 
-\Needspace{5\baselineskip}
-
-Remove or fail each gate dependency in turn. Exercise:
-
-\begin{itemize}
-\tightlist
-\item
-  approval;
-\item
-  rejection;
-\item
-  modification;
-\item
-  cancellation;
-\item
-  timeout;
-\item
-  missing validation;
-\item
-  missing binaries or services;
-\item
-  stale approval tokens; and
-\item
-  attempts to execute through alternate paths.
-\end{itemize}
+Remove or fail each gate dependency in turn. Exercise approval, rejection, modification, cancellation, timeout, missing validation, missing binaries or services, stale approval tokens, and attempts to execute through alternate paths.
 
 Inspect the evidence available to the reviewer and verify the durable state produced by each decision. A rejected action must fail to execute through every path. A modified action must receive renewed review when the modification changes the authorized state transition.
 
@@ -697,25 +656,7 @@ Interview the assigned reviewer about the risk they believe they are checking, t
 
 For each role named as accountable, select a real action and test the role's deployed permissions.
 
-\Needspace{5\baselineskip}
-
-Exercise whether the role can:
-
-\begin{itemize}
-\tightlist
-\item
-  reject the action;
-\item
-  alter its scope;
-\item
-  stop execution;
-\item
-  inspect the relevant evidence;
-\item
-  initiate recovery; and
-\item
-  reverse the result where reversal is part of the claimed control.
-\end{itemize}
+Exercise whether the role can reject the action, alter its scope, stop execution, inspect the relevant evidence, initiate recovery, and reverse the result where reversal is part of the claimed control.
 
 Record the state transitions outside that role's authority, the information it cannot access, the tools it lacks, and the point after which intervention becomes ineffective.
 
@@ -726,55 +667,15 @@ Where control is missing, either repair the role within least-privilege constrai
 
 Interview actual users, operators, reviewers, and owners using tracking and tracing questions. Compare their justified expectations with policy and execution traces.
 
-\Needspace{5\baselineskip}
-
-Record as separate findings:
-
-\begin{itemize}
-\tightlist
-\item
-  expectation mismatches;
-\item
-  protocol deviations;
-\item
-  actions without a traceable execution identity;
-\item
-  reviewers who cannot explain the decision they approved;
-\item
-  roles assigned responsibility without intervention power;
-\item
-  ineffective escalation routes; and
-\item
-  delays that allowed the action to become irreversible before review.
-\end{itemize}
+Record expectation mismatches separately from protocol deviations, untraceable actions, reviewers who cannot explain an approval, responsibility assigned without intervention power, ineffective escalation routes, and delays that allowed an action to become irreversible before review.
 
 Repeat the first pass whenever permissions, action classes, execution paths, or recovery mechanisms change. Repeat the second when the user population, operating protocol, interface, or escalation policy changes.
 
-\Needspace{5\baselineskip}
-
-Measure the findings that carry operational weight, such as:
-
-\begin{itemize}
-\tightlist
-\item
-  untraceable actions;
-\item
-  failed stops;
-\item
-  unauthorized execution paths;
-\item
-  expectation mismatches;
-\item
-  dead-end escalations;
-\item
-  stale approvals;
-\item
-  interventions that arrive too late; and
-\item
-  time lost before someone with effective control becomes involved.
-\end{itemize}
+Measure the findings that carry operational weight: untraceable actions, failed stops, unauthorized execution paths, expectation mismatches, dead-end escalations, stale approvals, late interventions, and time lost before someone with effective control becomes involved.
 
 Do not adopt a pass rate borrowed from another system. Decide in advance which failures invalidate the accountability claim and preserve the identities, traces, interviews, and execution evidence required to reproduce that decision.
+
+\textbf{Portable claim.} A gate that cannot change execution records assent and nothing more.
 
 \section*{Sources and evidence}
 
