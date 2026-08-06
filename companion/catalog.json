@@ -2570,6 +2570,50 @@
           "published": "2025-07-03",
           "updated": "2025-08-07"
         }
+      },
+      {
+        "evidence_id": "checklist-agentic-benchmarks-for-validity:supplement-1",
+        "source_kind": "scholarly",
+        "evidence_group": "strong",
+        "citation": "Jiaqi Shao, Hanck Chen, Wei Zhang, Maxm Pan, Bing Luo (2026). Do Agent Benchmarks Measure Capability? Protocol Validity in the Age of Agentic AI. arXiv:2607.22368.",
+        "bibcode": null,
+        "arxiv": "2607.22368",
+        "url": "https://arxiv.org/abs/2607.22368",
+        "claim_support": "The audit measured protocol exposures and paired score inflation in 2,385 traces across 15 agent benchmarks. The reported rates apply to the audited protocols, not agent benchmarks generally.",
+        "resolved_metadata": {
+          "id": "2607.22368",
+          "title": "Do Agent Benchmarks Measure Capability? Protocol Validity in the Age of Agentic AI",
+          "authors": [
+            "Jiaqi Shao",
+            "Hanck Chen",
+            "Wei Zhang",
+            "Maxm Pan",
+            "Bing Luo"
+          ],
+          "published": "2026-07-24",
+          "updated": "2026-07-24"
+        }
+      },
+      {
+        "evidence_id": "checklist-agentic-benchmarks-for-validity:supplement-2",
+        "source_kind": "scholarly",
+        "evidence_group": "strong",
+        "citation": "Manyi Wang, Junjielong Xu, Pinjia He (2026). PAIChecker: Uncovering and Checking PR-Issue Misalignment in SWE-Bench-Like Benchmarks. arXiv:2607.28587.",
+        "bibcode": null,
+        "arxiv": "2607.28587",
+        "url": "https://arxiv.org/abs/2607.28587",
+        "claim_support": "The study measured PR-issue misalignment in SWE-bench Verified and detector accuracy on SWE-Gym and SWE-bench Multilingual. Other benchmark collections require their own alignment audit.",
+        "resolved_metadata": {
+          "id": "2607.28587",
+          "title": "PAIChecker: Uncovering and Checking PR-Issue Misalignment in SWE-Bench-Like Benchmarks",
+          "authors": [
+            "Manyi Wang",
+            "Junjielong Xu",
+            "Pinjia He"
+          ],
+          "published": "2026-07-30",
+          "updated": "2026-08-04"
+        }
       }
     ],
     "corroborating_material": [
@@ -3430,6 +3474,31 @@
         "url": "https://newsletter.pragmaticengineer.com/p/evals",
         "claim_support": "Open coding on 100+ traces, annotate first upstream failure, axial coding into 5-10 themes, prioritize by frequency; pre-built metrics uncorrelated with outcomes.",
         "resolved_metadata": null
+      },
+      {
+        "evidence_id": "derive-taxonomy-from-own-traces:supplement-1",
+        "source_kind": "scholarly",
+        "evidence_group": "directional",
+        "citation": "Harsh Raj, Vipul Gupta, Anas Mahmoud, Razvan-Gabriel Dumitru, Darvin Yi, et al. (2026). Model or Harness? An Interaction-Centric Taxonomy for Localizing Agent Failures. arXiv:2607.28802.",
+        "bibcode": null,
+        "arxiv": "2607.28802",
+        "url": "https://arxiv.org/abs/2607.28802",
+        "claim_support": "The interaction-centered taxonomy organizes 41 failure modes, and its strongest automated judge reached Cohen's kappa of 0.76 against human labels. The agreement result supports label reproducibility, not causal correctness or the chapter's local derivation protocol.",
+        "resolved_metadata": {
+          "id": "2607.28802",
+          "title": "Model or Harness? An Interaction-Centric Taxonomy for Localizing Agent Failures",
+          "authors": [
+            "Harsh Raj",
+            "Vipul Gupta",
+            "Anas Mahmoud",
+            "Razvan-Gabriel Dumitru",
+            "Darvin Yi",
+            "Aakash Sabharwal",
+            "Yunzhong He"
+          ],
+          "published": "2026-07-30",
+          "updated": "2026-07-30"
+        }
       }
     ],
     "corroborating_material": [
@@ -4388,6 +4457,26 @@
           ],
           "published": "2023-10-03",
           "updated": "2024-03-14"
+        }
+      },
+      {
+        "evidence_id": "gate-self-correction-on-external-feedback:supplement-1",
+        "source_kind": "scholarly",
+        "evidence_group": "strong",
+        "citation": "Hyundoo Park, Byungho Choi (2026). When Do Agent Loops Mistake Stagnation for Progress? Self-Evaluation Bias and Externally Grounded Verification in Long-Running Autonomous LLM Agent Loops. arXiv:2607.25152.",
+        "bibcode": null,
+        "arxiv": "2607.25152",
+        "url": "https://arxiv.org/abs/2607.25152",
+        "claim_support": "In a preregistered 54-cycle testbed, changing only the evaluator's information channel showed that externally grounded state, rather than self-verdict, determined whether the gate tracked real progress.",
+        "resolved_metadata": {
+          "id": "2607.25152",
+          "title": "When Do Agent Loops Mistake Stagnation for Progress? Self-Evaluation Bias and Externally Grounded Verification in Long-Running Autonomous LLM Agent Loops",
+          "authors": [
+            "Hyundoo Park",
+            "Byungho Choi"
+          ],
+          "published": "2026-07-27",
+          "updated": "2026-07-27"
         }
       }
     ],
@@ -5525,6 +5614,26 @@
           ],
           "published": "2026-03-10",
           "updated": "2026-03-13"
+        }
+      },
+      {
+        "evidence_id": "score-retrieval-and-generation-separately:supplement-1",
+        "source_kind": "scholarly",
+        "evidence_group": "strong",
+        "citation": "Bowen Qin, Yi Xie (2026). Agent Retrieval Bench: Evaluating Repository Context Retrieval for Coding Agents. arXiv:2607.24882.",
+        "bibcode": null,
+        "arxiv": "2607.24882",
+        "url": "https://arxiv.org/abs/2607.24882",
+        "claim_support": "The 427-sample repository benchmark and controlled seed pilot directly measure the upstream retrieval stage. They do not establish one retrieval family as best for every repository.",
+        "resolved_metadata": {
+          "id": "2607.24882",
+          "title": "Agent Retrieval Bench: Evaluating Repository Context Retrieval for Coding Agents",
+          "authors": [
+            "Bowen Qin",
+            "Yi Xie"
+          ],
+          "published": "2026-07-27",
+          "updated": "2026-07-27"
         }
       }
     ],
@@ -8147,6 +8256,30 @@
           "published": "2026-05-17",
           "updated": "2026-07-29"
         }
+      },
+      {
+        "evidence_id": "topology-as-security-decision:supplement-1",
+        "source_kind": "scholarly",
+        "evidence_group": "strong",
+        "citation": "Jiajun Zhou, Zhaoxuan Ke, Jihang Ye, Xuanze Chen, Shanqing Yu, et al. (2026). AgentS4D: Benchmarking Runtime Risks across the Execution Lifecycle of LLM-Based Workspace Agents. arXiv:2607.27294.",
+        "bibcode": null,
+        "arxiv": "2607.27294",
+        "url": "https://arxiv.org/abs/2607.27294",
+        "claim_support": "Across 6,560 benchmark runs, safety varied by harness-model pairing and risk carrier, and 66.22 percent of runs were both unsafe under a prespecified signal and complete. This is not a production incident rate.",
+        "resolved_metadata": {
+          "id": "2607.27294",
+          "title": "AgentS4D: Benchmarking Runtime Risks across the Execution Lifecycle of LLM-Based Workspace Agents",
+          "authors": [
+            "Jiajun Zhou",
+            "Zhaoxuan Ke",
+            "Jihang Ye",
+            "Xuanze Chen",
+            "Shanqing Yu",
+            "Qi Xuan"
+          ],
+          "published": "2026-07-29",
+          "updated": "2026-07-29"
+        }
       }
     ],
     "corroborating_material": []
@@ -8471,6 +8604,32 @@
           ],
           "published": "2026-04-09",
           "updated": "2026-04-09"
+        }
+      },
+      {
+        "evidence_id": "match-topology-to-task-shape:supplement-1",
+        "source_kind": "scholarly",
+        "evidence_group": "strong",
+        "citation": "Amirkia Rafiei Oskooei, Bora Ilci, Alperen Kayim, Mehmet Egemen Uzun, Berat Can, et al. (2026). Deep Agentic Search for Repository-Level Code Question Answering: An Empirical Study. arXiv:2608.01507.",
+        "bibcode": null,
+        "arxiv": "2608.01507",
+        "url": "https://arxiv.org/abs/2608.01507",
+        "claim_support": "On SWE-QA, semantic retrieval outperformed planner-to-subagent search at lower cost, and 41.8 percent of subagent failures occurred at the handoff. Transfer beyond read-only repository questions remains directional.",
+        "resolved_metadata": {
+          "id": "2608.01507",
+          "title": "Deep Agentic Search for Repository-Level Code Question Answering: An Empirical Study",
+          "authors": [
+            "Amirkia Rafiei Oskooei",
+            "Bora Ilci",
+            "Alperen Kayim",
+            "Mehmet Egemen Uzun",
+            "Berat Can",
+            "Kaan Emre Kara",
+            "Ozan Orhan",
+            "Mehmet S. Aktas"
+          ],
+          "published": "2026-08-02",
+          "updated": "2026-08-02"
         }
       }
     ],
@@ -9072,6 +9231,26 @@
           ],
           "published": "2026-05-20",
           "updated": "2026-05-20"
+        }
+      },
+      {
+        "evidence_id": "run-ablation-controls:supplement-1",
+        "source_kind": "scholarly",
+        "evidence_group": "strong",
+        "citation": "Darshan Tank, Baran Nama (2026). The Regression Tax: Decomposing Why Skills Help and Hurt LLM Agents. arXiv:2607.22520.",
+        "bibcode": null,
+        "arxiv": "2607.22520",
+        "url": "https://arxiv.org/abs/2607.22520",
+        "claim_support": "Across nearly 6,000 runs on two office-automation benchmarks and three model-harness stacks, the study supports decomposing a skill intervention into gains, regressions, and residual failures. Transfer to coding-agent skill libraries remains directional.",
+        "resolved_metadata": {
+          "id": "2607.22520",
+          "title": "The Regression Tax: Decomposing Why Skills Help and Hurt LLM Agents",
+          "authors": [
+            "Darshan Tank",
+            "Baran Nama"
+          ],
+          "published": "2026-07-24",
+          "updated": "2026-07-24"
         }
       }
     ],
@@ -12945,6 +13124,25 @@
           "published": "2025-11-17",
           "updated": "2025-11-17"
         }
+      },
+      {
+        "evidence_id": "measure-context-files-and-maintain-them-like-config:supplement-1",
+        "source_kind": "scholarly",
+        "evidence_group": "null_or_conflicting",
+        "citation": "Prakhar Khatri (2026). Do Context Files Help Coding Agents? A Two-Agent Ablation Study on Real Repositories. arXiv:2607.27250.",
+        "bibcode": null,
+        "arxiv": "2607.27250",
+        "url": "https://arxiv.org/abs/2607.27250",
+        "claim_support": "Across two agents, 17 tasks, three repositories, and 288 runs, the study found no measurable correctness improvement and bounded effects through equivalence testing to roughly 10 to 15 percentage points in the studied conditions.",
+        "resolved_metadata": {
+          "id": "2607.27250",
+          "title": "Do Context Files Help Coding Agents? A Two-Agent Ablation Study on Real Repositories",
+          "authors": [
+            "Prakhar Khatri"
+          ],
+          "published": "2026-07-28",
+          "updated": "2026-07-28"
+        }
       }
     ],
     "corroborating_material": [
@@ -13456,6 +13654,27 @@
           "published": "2025-02-04",
           "updated": "2025-02-04"
         }
+      },
+      {
+        "evidence_id": "route-work-to-the-cheapest-sufficient-model:supplement-1",
+        "source_kind": "scholarly",
+        "evidence_group": "strong",
+        "citation": "Ishaan Bhola, Adithyan Krishnan, Mukunda NS (2026). Scrouting: Cost-Aware Routing of Coding Agents by Scouting the Repository First. arXiv:2608.04804.",
+        "bibcode": null,
+        "arxiv": "2608.04804",
+        "url": "https://arxiv.org/abs/2608.04804",
+        "claim_support": "On 266 Python SWE-bench Pro tasks, the scout-and-fixer configuration matched the best single model at about one fifth of the reported cost per solve. A no-router ablation tied the routed system, locating the measured result in the handoff rather than the router.",
+        "resolved_metadata": {
+          "id": "2608.04804",
+          "title": "Scrouting: Cost-Aware Routing of Coding Agents by Scouting the Repository First",
+          "authors": [
+            "Ishaan Bhola",
+            "Adithyan Krishnan",
+            "Mukunda NS"
+          ],
+          "published": "2026-08-05",
+          "updated": "2026-08-05"
+        }
       }
     ],
     "corroborating_material": [
@@ -13864,6 +14083,30 @@
           ],
           "published": "2025-02-24",
           "updated": "2025-07-29"
+        }
+      },
+      {
+        "evidence_id": "audit-the-allocation-layer:supplement-1",
+        "source_kind": "scholarly",
+        "evidence_group": "directional",
+        "citation": "Banruo Liu, Haoran Qiu, Íñigo Goiri, Rodrigo Fonseca, Ricardo Bianchini, et al. (2026). Agentic Coding in the Wild: Characterizing GitHub Copilot Traces at Production Scale. arXiv:2608.00101.",
+        "bibcode": null,
+        "arxiv": "2608.00101",
+        "url": "https://arxiv.org/abs/2608.00101",
+        "claim_support": "Production traces from GitHub Copilot characterize turn-boundary cache loss and long user-idle periods at scale. They motivate measuring these workload features but do not test an allocation policy.",
+        "resolved_metadata": {
+          "id": "2608.00101",
+          "title": "Agentic Coding in the Wild: Characterizing GitHub Copilot Traces at Production Scale",
+          "authors": [
+            "Banruo Liu",
+            "Haoran Qiu",
+            "Íñigo Goiri",
+            "Rodrigo Fonseca",
+            "Ricardo Bianchini",
+            "Esha Choukse"
+          ],
+          "published": "2026-07-30",
+          "updated": "2026-07-30"
         }
       }
     ],

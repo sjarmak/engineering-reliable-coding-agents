@@ -26,7 +26,10 @@ Allocation policy is easy to mistake for a local configuration detail. In an age
 
 A cheaper model call can trigger enough repair and review to cost more per accepted result. A mathematically better schedule can become operationally worse if computing it delays the work beyond its deadline. I therefore treat scheduling and routing as measured decisions rather than static configuration.
 
-\section{Define the allocation decision before choosing the algorithm}\label{define-the-allocation-decision-before-choosing-the-algorithm}
+Production traces also show that coding-agent traffic differs from chatbot traffic. Liu et al.~(\href{https://arxiv.org/abs/2608.00101}{2026}) sampled GitHub Copilot activity from 3.2 million users, 13 million sessions, 761 million model calls, and 95 trillion tokens. KV-cache hit rates averaged 90 percent within a turn and 55 percent across turn boundaries; a lightweight predictor captured 86 to 90 percent of total user idle time. The study strongly characterizes one production workload and directionally supports measuring turn boundaries and idle periods in capacity policy.
+
+\hypertarget{define-the-allocation-decision-before-choosing-the-algorithm}{%
+\section{Define the allocation decision before choosing the algorithm}\label{define-the-allocation-decision-before-choosing-the-algorithm}}
 
 \textbf{Cheapest-sufficient routing} selects, for each request, the least expensive worker predicted to satisfy that request's declared requirement. The worker may be a model tier, a model-plus-tool configuration, or another execution pool with a known price.
 
@@ -66,7 +69,7 @@ Operations may reasonably execute either. Evaluation should not treat them as eq
 
 \begin{figure}[htbp]
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={The re-decision loop recomputes from observed events under fixed work and churn costs, then executes a deadline capped incumbent while retaining its optimality gap.}]{figures/ch18-redecision-loop.pdf}}
+\includegraphics{figures/ch18-redecision-loop.pdf}
 \caption{The re-decision loop recomputes from observed events under fixed work and churn costs, then executes a deadline capped incumbent while retaining its optimality gap.}
 \end{figure}
 
@@ -94,7 +97,8 @@ These terms identify the decisions that must be made before selecting an algorit
 
 The companion catalog contains algorithmic patterns. The narrower question here is whether these decisions lower accepted-result cost or improve flow on the fleet's own workload.
 
-\section{Recompute from current state and stop solving on time}\label{recompute-from-current-state-and-stop-solving-on-time}
+\hypertarget{recompute-from-current-state-and-stop-solving-on-time}{%
+\section{Recompute from current state and stop solving on time}\label{recompute-from-current-state-and-stop-solving-on-time}}
 
 An observatory scheduler can spend the night improving a plan that clouds have already invalidated, or compute another imperfect plan from the sky that remains observable. Bellm et al.~(\href{https://arxiv.org/abs/1905.02209}{2019}) describe the Zwicky Transient Facility taking the second approach in production since 2018. When changing conditions invalidate the schedule, it resolves the nightly integer program again rather than enumerating every weather scenario in advance.
 
@@ -216,11 +220,12 @@ The design becomes auditable when the following are explicit:
 
 Its value remains an empirical question until the fleet's traces answer it.
 
-\section{Route to the cheapest worker predicted to meet the requirement}\label{route-to-the-cheapest-worker-predicted-to-meet-the-requirement}
+\hypertarget{route-to-the-cheapest-worker-predicted-to-meet-the-requirement}{%
+\section{Route to the cheapest worker predicted to meet the requirement}\label{route-to-the-cheapest-worker-predicted-to-meet-the-requirement}}
 
-Cheapest-sufficient routing has support from three directional literature items and no strong result. Cayci, Eryilmaz, and Srikant (\href{https://arxiv.org/abs/2003.00365}{2020}) developed budget-constrained online learning under broad cost and reward distributions. Somerstep et al.~(\href{https://arxiv.org/abs/2502.03261}{2025}) analyzed a calibrated static router. Li (\href{https://arxiv.org/abs/2502.02743}{2025}) reported preference-conditioned dynamic routing in a single-author preprint.
+Cheapest-sufficient routing has support from three directional literature items and one recent benchmark-bound controlled result. Cayci, Eryilmaz, and Srikant (\href{https://arxiv.org/abs/2003.00365}{2020}) developed budget-constrained online learning under broad cost and reward distributions. Somerstep et al.~(\href{https://arxiv.org/abs/2502.03261}{2025}) analyzed a calibrated static router. Li (\href{https://arxiv.org/abs/2502.02743}{2025}) reported preference-conditioned dynamic routing in a single-author preprint.
 
-All three evaluate mathematical formulations or benchmarks. None evaluates a production software-agent fleet. This section therefore defines the routing decision and the measurements required to test it. It does not establish that a learned router will lower the cost of a particular fleet.
+None evaluates a production software-agent fleet. This section therefore defines the routing decision and the measurements required to test it. It does not establish that a learned router will lower the cost of a particular fleet.
 
 My fleet orchestrator illustrates the starting point. Each execution pool has a model assigned through a static configuration string. There is no request-level performance estimate, cost model, deadline, or lookahead.
 
@@ -239,6 +244,8 @@ A cheapest-sufficient router replaces the static assignment with two estimates f
 \end{itemize}
 
 It then selects the least expensive worker predicted to satisfy the declared requirement.
+
+Bhola, Krishnan, and NS (\href{https://arxiv.org/abs/2608.04804}{2026}) evaluated a scout-and-route configuration on 266 Python tasks from SWE-bench Pro. It solved 159 tasks, compared with 158 for the best single model, at about one fifth of the reported total cost per solve. A no-router ablation that always selected the cheapest fixer but retained the verified handoff tied the routed system, locating the measured gain in the handoff rather than the routing decision. The result strongly supports that benchmark-specific configuration and its null routing ablation; generalized cheapest-sufficient routing remains directional.
 
 Somerstep et al.~analyze this plug-in structure in CARROT and argue that its direct routing overhead is negligible because selection requires evaluating the two predictors for each available model. The useful behavior still depends on calibration: predicted performance must correspond to observed performance on the deployment distribution.
 
@@ -391,7 +398,8 @@ Evaluation should report cost per accepted result and failure rates by request c
 
 Cheapest-sufficient routing is useful because it makes the economic policy explicit: what is being predicted, what requirement must be met, and which tradeoff is being selected. It cannot repair an unrepresentative calibration set, a reward that measures the wrong outcome, or a task whose true cost appears only after repair and review.
 
-\section{Replay identical arrivals before changing allocation policy}\label{replay-identical-arrivals-before-changing-allocation-policy}
+\hypertarget{replay-identical-arrivals-before-changing-allocation-policy}{%
+\section{Replay identical arrivals before changing allocation policy}\label{replay-identical-arrivals-before-changing-allocation-policy}}
 
 In one replay of my agent fleet, the interesting scheduling idea lost to a one-word configuration change. Across eleven weeks of recorded traffic, a four-feature weighted index performed within 0.1 percent of plain priority banding.
 
@@ -605,7 +613,8 @@ Replay cheapest-sufficient routes from logged estimates when counterfactual outc
 
 Build the trace, hold arrivals fixed, make the cheap policy compete, and let the fleet produce the evidence its allocation policy requires.
 
-\section{Instrument decisions before optimizing them}\label{instrument-decisions-before-optimizing-them}
+\hypertarget{instrument-decisions-before-optimizing-them}{%
+\section{Instrument decisions before optimizing them}\label{instrument-decisions-before-optimizing-them}}
 
 \Needspace{5\baselineskip}
 
@@ -744,6 +753,8 @@ Until the ledger can answer those questions, choosing a more sophisticated polic
 \item
   Directional evidence: Parazin, B., et al.~(2022), ``Foraging with MUSHROOMS: A Mixed-integer Linear Programming Scheduler for Multimessenger Target of Opportunity Searches with the Zwicky Transient Facility,'' ApJ 935, 87, arXiv:2203.00013.
 \item
+  Strong evidence for production workload characterization, directional for capacity-policy transfer: Liu, B., et al.~(2026), ``Agentic Coding in the Wild: Characterizing GitHub Copilot Traces at Production Scale,'' arXiv:2608.00101.
+\item
   No strong result and no software-fleet measurement support this entry; all three items are observatory scheduling, and the cadence, cap, and churn charge remain deployment decisions.
 \item
   Corroboration (narrative only): the author's transfer notes on observatory scheduling restate the same ZTF and MUSHROOMS results already carried above as literature evidence.
@@ -760,7 +771,9 @@ Until the ledger can answer those questions, choosing a more sophisticated polic
 \item
   Directional evidence: Li, Y. (2025), ``LLM Bandit: Cost-Efficient LLM Generation via Preference-Conditioned Dynamic Routing,'' arXiv:2502.02743. Single-author preprint, benchmark evidence.
 \item
-  Three directional items and zero strong results; none evaluates a production software-agent fleet, so the entry defines a decision and its measurements rather than establishing a cost reduction.
+  Strong evidence for one benchmark-bound scout-and-fixer configuration and its no-router ablation: Bhola, I., Krishnan, A., and NS, M. (2026), ``Scrouting: Cost-Aware Routing of Coding Agents by Scouting the Repository First,'' arXiv:2608.04804. The handoff, rather than the router, carried the measured result.
+\item
+  The three routing-theory items remain directional, and no source evaluates a production software-agent fleet; generalized cheapest-sufficient routing therefore remains a decision to test rather than an established cost reduction.
 \item
   Directional evidence for this developed practice: CascadeDebate (Chang 2026), arXiv:2604.12262. Its confidence-gated cascade comparison strongly supports the narrower companion-catalog claim in the tested setting; transfer to production software-agent routing remains directional.
 \item

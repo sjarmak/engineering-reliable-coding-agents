@@ -16,7 +16,8 @@ The reverse pattern would require another explanation. An end-to-end gain withou
 
 Repository retrieval belongs to a causal chain. A task becomes one or more queries, each query searches an index, and ranked results enter a context budget. A model interprets that context before execution and verification turn its output into a scored result. Pass rate records only the state at the end of the chain and cannot identify which transition produced it.
 
-\section{Score retrieval and generation separately}\label{score-retrieval-and-generation-separately}
+\hypertarget{score-retrieval-and-generation-separately}{%
+\section{Score retrieval and generation separately}\label{score-retrieval-and-generation-separately}}
 
 Chapter 2 used ablations to isolate a component by removing it while holding the surrounding system fixed. Stage-level scoring applies the same attribution discipline within a run. I measure whether the retriever surfaced the evidence the task required, where that evidence appeared, whether it survived the context cutoff, and whether the generator used it. I report those measurements beside final task completion because each describes a different condition for success.
 
@@ -34,7 +35,7 @@ An end-to-end failure is compatible with failure at any one of these stages, or 
 
 \begin{figure}[htbp]
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={The retrieval chain separates availability, retrieval, placement, contextual sufficiency, and use failures across the transitions from task formulation to scored execution and verification.}]{figures/ch11-retrieval-chain.pdf}}
+\includegraphics{figures/ch11-retrieval-chain.pdf}
 \caption{The retrieval chain separates availability, retrieval, placement, contextual sufficiency, and use failures across the transitions from task formulation to scored execution and verification.}
 \end{figure}
 
@@ -68,7 +69,10 @@ Memory Circuit Analysis, from Mao et al.~(\href{https://arxiv.org/abs/2605.03354
 
 Three newer studies provide directional support for the same measurement shape. SkillEvolBench, from Lei et al.~(\href{https://arxiv.org/abs/2605.24117}{2026}), and EngramaBench, from Acuna (\href{https://arxiv.org/abs/2604.21229}{2026}), examine whether stored or evolved material remains available and useful while also reporting final answers. Wolff and Bennati (\href{https://arxiv.org/abs/2601.07978}{2026}) separate what a memory system retrieves from what the answering model produces. I use these studies to establish direction, not as a numerical basis for repository-retrieval policy.
 
-\section{Retrieval metrics}\label{retrieval-metrics}
+Agent Retrieval Bench provides a direct repository-scale instrument for the upstream stage. Qin and Xie (\href{https://arxiv.org/abs/2607.24882}{2026}) built 427 samples across 25 repositories, including positive retrieval tasks, natural no-gold cases, and counterfactual wrong-repository controls. No retrieval family dominated all measures, and logged agent trajectories missed every gold file on 27 to 35 percent of samples. A controlled seed pilot found that retrieval-derived initial context raised file F1 while reducing later exploration relative to random non-gold context. These are strong benchmark and pilot results under the released design; they do not select one retrieval architecture for every repository.
+
+\hypertarget{retrieval-metrics}{%
+\section{Retrieval metrics}\label{retrieval-metrics}}
 
 When a task requires one item, its \(\mathrm{Recall}@k\) value is binary: the item either appears among the first \(k\) results or it does not. When several items are required, \(\mathrm{Recall}@k\) is the fraction found within those results.
 
@@ -164,7 +168,8 @@ The evaluation can then ask whether the required evidence ever appeared, whether
 
 This record supports engineering decisions that the final score cannot. A missing indexed target, weak recall before the plateau, strong eventual recall with poor early ranks, and a relevant item excluded from context each identify a different stage. The categories are not perfectly independent, but they make the next ablation narrower and more informative.
 
-\section{Recover the evidence a single lane misses}\label{recover-the-evidence-a-single-lane-misses}
+\hypertarget{recover-the-evidence-a-single-lane-misses}{%
+\section{Recover the evidence a single lane misses}\label{recover-the-evidence-a-single-lane-misses}}
 
 My literature-review pipeline once ran with its semantic search lane down while lexical search continued returning plausible results. Nothing in the completed reviews revealed that one channel was missing. After I restored the lane and repeated the searches, the combined system surfaced 64 additional papers across nine queries for one review and 42 across seven queries for another. Manual curation retained 12 and 7 of them.
 
@@ -223,7 +228,8 @@ The companion catalog contains more elaborate retrieval paths: explicit recovery
 
 The operational test is whether fusion recovers relevant evidence that the current lane systematically misses without consuming more context than the generator can use. I inspect the recovered items, their ranks, and the tasks whose outcomes they change. A lane that contributes only duplicates and stale neighbors has added cost without adding usable evidence, regardless of its semantic sophistication.
 
-\section{Preserve code structure inside the retrieval unit}\label{preserve-code-structure-inside-the-retrieval-unit}
+\hypertarget{preserve-code-structure-inside-the-retrieval-unit}{%
+\section{Preserve code structure inside the retrieval unit}\label{preserve-code-structure-inside-the-retrieval-unit}}
 
 Replacing fixed line windows with syntax-aware chunks increased \(\mathrm{Recall}@5\) by 4.3 percentage points on RepoEval, a repository-level retrieval and completion benchmark, in the cAST study from Zhang et al.~(\href{https://arxiv.org/abs/2506.15655}{2025}). The same study reported a 2.67-percentage-point \(\mathrm{Pass}@1\) gain on SWE-bench generation across languages.
 
@@ -283,7 +289,8 @@ Structural chunking is justified when its measured benefit covers parser mainten
 
 The final comparison returns to decomposed scoring. I measure whether syntax-aware chunks recover the required evidence and where they rank, then whether those chunks improve completion under the same context budget. Better chunk recall with unchanged completion remains a useful diagnostic result. It shows that the chunker repaired its stage and that the remaining limitation lies elsewhere in the path.
 
-\section{Run the retrieval protocol on the operated workload}\label{run-the-retrieval-protocol-on-the-operated-workload}
+\hypertarget{run-the-retrieval-protocol-on-the-operated-workload}{%
+\section{Run the retrieval protocol on the operated workload}\label{run-the-retrieval-protocol-on-the-operated-workload}}
 
 Begin with the stack that serves real tasks. The first version can use a small sample from one query class, sized to the available annotation budget and stratified across the repositories or task shapes relevant to the decision. Judge the evidence each task requires and instrument the production retrieval path. A retrieval-depth sweep on that stratum can answer one question: whether the current top-\(k\) cutoff should change for that query class.
 
@@ -389,6 +396,8 @@ Chapter 12 turns to the architecture around these measurements: cheap retrieval 
   Directional evidence: Cost-and-Accuracy study (Wolff \& Bennati 2026), arXiv:2601.07978.
 \item
   Corroborating case: Vishnyakova, O. (2026), arXiv:2603.09619. (Names the five context-quality criteria; position paper.)
+\item
+  Strong evidence for the benchmark measurements and controlled seed pilot: Qin, B., and Xie, Y. (2026), ``Agent Retrieval Bench: Evaluating Repository Context Retrieval for Coding Agents,'' arXiv:2607.24882. The benchmark supports stage-level evaluation rather than a universal retrieval-family ranking.
 \end{itemize}
 
 \textbf{Hybrid retrieval fused on ranks}

@@ -14,7 +14,8 @@ The advertised window is a capacity limit. The usable window is a property measu
 
 Once that working limit is known, three assembly decisions follow. A run that has lost its governing specification should restart from a consolidated statement of the settled requirements. Large tool outputs should remain outside the active window in retrievable artifacts. A standing repository context file should be compared with no standing file before its permanent token cost is accepted.
 
-\section{Measure the context that remains useful}\label{measure-the-context-that-remains-useful}
+\hypertarget{measure-the-context-that-remains-useful}{%
+\section{Measure the context that remains useful}\label{measure-the-context-that-remains-useful}}
 
 I use \textbf{effective context length} to mean the largest assembled context at which a model still meets a specified reliability threshold on a defined workload. The value belongs to a model, configuration, workload, and engineering threshold. A model may accept 128,000 tokens and retrieve one fact at that length while having a much shorter effective context for a code change that depends on relationships among several files.
 
@@ -146,7 +147,8 @@ The final configuration should specify:
 
 A run can remain inside this measured budget and still fail when its specification has become fragmented or superseded.
 
-\section{Restart from the current specification}\label{restart-from-the-current-specification}
+\hypertarget{restart-from-the-current-specification}{%
+\section{Restart from the current specification}\label{restart-from-the-current-specification}}
 
 A model reads the first version of a requirement, resolves an ambiguity, and begins implementing that interpretation. Three turns later, the user corrects the assumption. The correction appears in the transcript, but the plan, file selection, and partial implementation still encode the earlier choice. Each later instruction asks the model to repair work whose structure continues reproducing the misunderstanding.
 
@@ -234,7 +236,8 @@ The choice is between continuing from entangled state and paying to reconstruct 
 
 The 39 percent result helps explain why repeated correction messages can fail even when a model can solve the same task from a complete specification. When that pattern appears, restart from a consolidated statement of the settled requirements and carry execution evidence separately as raw observations rather than conclusions.
 
-\section{Move bulk output out of the active context}\label{move-bulk-output-out-of-the-active-context}
+\hypertarget{move-bulk-output-out-of-the-active-context}{%
+\section{Move bulk output out of the active context}\label{move-bulk-output-out-of-the-active-context}}
 
 In my agent fleet, a snapshot of the shared skill catalog once traveled between sessions through an environment variable. As sessions inherited, transformed, and re-emitted it, the snapshot drifted. Moving the same context surface into a fingerprinted file made each session's copy atomic and allowed every reload to validate its identity.
 
@@ -335,11 +338,14 @@ That comparison inherits the resolution problem from Chapter 1. A difference sma
 
 The current justification is inspectable preservation and ownership. Improvement in task outcomes remains unmeasured.
 
-\section{Make standing context earn its permanent cost}\label{make-standing-context-earn-its-permanent-cost}
+\hypertarget{make-standing-context-earn-its-permanent-cost}{%
+\section{Make standing context earn its permanent cost}\label{make-standing-context-earn-its-permanent-cost}}
 
 Gloaguen et al.~(\href{https://arxiv.org/abs/2602.11988}{2026}) tested whether repository context files already used by coding teams improved task success. Across the evaluated agents and models, they did not. The files increased inference cost by roughly 20 percent, even though the agents followed their instructions.
 
 This is a null result from one study. It should reverse the assumption that a standing context file is beneficial by default, without becoming a universal verdict against such files.
+
+Khatri (\href{https://arxiv.org/abs/2607.27250}{2026}) ran a second controlled ablation across two agents, 17 real tasks from three repositories, and 288 evaluated runs. Equivalence tests bounded any correctness effect to no more than roughly 10 to 15 percentage points and found no measurable improvement. This null result strengthens the case for a no-file baseline while remaining limited by the agents, repositories, tasks, and equivalence bounds studied.
 
 Instruction adherence and task completion measure different effects. A file can cause an agent to run a command, follow a naming rule, or avoid a directory while leaving the final task score unchanged. It can also consume context, provoke additional tool calls, or direct attention toward an overview the model did not need.
 
@@ -459,7 +465,8 @@ The best standing file will often become shorter after evaluation. Rules without
 
 What remains is a reviewed configuration surface whose permanent token cost is tied to an observed failure or measured outcome. That is narrower than claiming that repository context files help, and it is a claim the repository can test.
 
-\section{Set the context operating limits}\label{set-the-context-operating-limits}
+\hypertarget{set-the-context-operating-limits}{%
+\section{Set the context operating limits}\label{set-the-context-operating-limits}}
 
 The companion catalog contains narrower techniques for systems that need them. It covers placing load-bearing evidence near a context edge, testing semantic rather than verbatim recall, compacting at task milestones, pricing compression by completed work rather than token reduction, minimizing always-loaded context, and auditing the assembled prompt as an inspectable artifact.
 
@@ -555,6 +562,8 @@ Chapter 14 turns to what survives between sessions and in what form.
 \tightlist
 \item
   Null or conflicting result: Gloaguen, T., Mündler, N., Müller, M., Raychev, V., Vechev, M. (2026), ``Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?'' arXiv:2602.11988.
+\item
+  Null or conflicting result: Khatri, P. (2026), ``Do Context Files Help Coding Agents? A Two-Agent Ablation Study on Real Repositories,'' arXiv:2607.27250. Across 288 runs, equivalence tests bounded correctness effects to no more than roughly 10 to 15 percentage points in the studied conditions.
 \item
   Strong evidence: Chatlatanagulchai, W., et al.~(2025), ``Agent READMEs: An Empirical Study of Context Files for Agentic Coding,'' arXiv:2511.12884.
 \item

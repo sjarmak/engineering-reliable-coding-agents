@@ -1,6 +1,6 @@
 # arXiv submission handoff
 
-Prepared August 5, 2026 for the August 2026 edition of *Engineering Reliable Coding Agents*.
+Prepared August 6, 2026 for the August 2026 edition of *Engineering Reliable Coding Agents*.
 
 ## Positioning
 
@@ -10,7 +10,7 @@ Prepared August 5, 2026 for the August 2026 edition of *Engineering Reliable Cod
 
 - `engineering-reliable-coding-agents-arxiv-source.zip`: LaTeX release candidate for arXiv.
 - `engineering-reliable-coding-agents-preview.pdf`: PDF compiled from that source.
-- `engineering-reliable-coding-agents-companion-1.0.0-rc.7.zip`: separate companion research artifact release candidate.
+- `engineering-reliable-coding-agents-companion-1.0.0-rc.8.zip`: separate companion research artifact release candidate.
 - `engineering-reliable-coding-agents-skills-0.1.0.zip`: reusable agent workflows derived from selected companion practices.
 - `reference-audit/README.md`: reference-audit summary.
 
@@ -30,11 +30,11 @@ Add an affiliation only if it is current and should be public. Use the same name
 
 ### Abstract
 
-AI coding agents are commonly evaluated as models but deployed as systems whose behavior also depends on evaluation harnesses, execution state, retrieval, permissions, review interfaces, and resource allocation. This technical review and engineering monograph examines reliability at those system boundaries. A structured search assembled 118 scholarly works in seven topic-specific reviews, 91 practitioner records, 29 benchmark records, and 17 author-system case records. Sources were screened for identifiable claims, graded by the strength and independence of their support, and challenged through targeted evidence audits; ambiguous classifications defaulted to the lower grade. The study contributes an evidence audit, a catalog of 192 bounded practices with 55 developed in depth, a dependency chain across evaluation and operation, scoped measurements and failure cases from author-operated systems, and runnable protocols for local evaluation and fault testing. The review is structured rather than exhaustive, evidence is uneven across topics, and capability results remain time- and workload-dependent. Author-system cases are reported as illustrations, not as independent external evidence.
+AI coding agents are commonly evaluated as models but deployed as systems whose behavior also depends on evaluation harnesses, execution state, retrieval, permissions, review interfaces, and resource allocation. This technical review and engineering monograph examines reliability at those system boundaries. A structured search and bounded update audit assembled 129 scholarly works, 91 practitioner records, 29 benchmark records, and 17 author-system case records. Sources were screened for identifiable claims, graded by the strength and independence of their support, and challenged through targeted evidence audits; ambiguous classifications defaulted to the lower grade. The study contributes an evidence audit, a catalog of 192 bounded practices with 55 developed in depth, a dependency chain across evaluation and operation, scoped measurements and failure cases from author-operated systems, and runnable protocols for local evaluation and fault testing. The review is structured rather than exhaustive, evidence is uneven across topics, and capability results remain time- and workload-dependent. Author-system cases are reported as illustrations, not as independent external evidence.
 
 ### Comments
 
-Technical review and engineering monograph, 254 pages, 13 figures. Includes an evidence audit, a 192-practice companion research artifact, and runnable protocols for evaluating and operating AI coding agents. August 2026. Source, companion, and reusable protocols: https://github.com/sjarmak/engineering-reliable-coding-agents.
+Technical review and engineering monograph, 258 pages, 13 figures. Includes an evidence audit, a 192-practice companion research artifact, and runnable protocols for evaluating and operating AI coding agents. August 2026. Source, companion, and reusable protocols: https://github.com/sjarmak/engineering-reliable-coding-agents.
 
 If the companion receives a DOI before submission, append `Companion DOI: <DOI>.` Otherwise use the text above without a DOI placeholder.
 
@@ -62,7 +62,7 @@ The repository currently has a root Apache-2.0 license. Before adding the manusc
 
 1. Complete the author review of `companion-release/`.
 2. Choose a companion license separately from the manuscript license. `CITATION.cff` intentionally has no license field yet.
-3. Replace release-candidate version `1.0.0-rc.7` with `1.0.0` in the build script and citation metadata.
+3. Replace release-candidate version `1.0.0-rc.8` with `1.0.0` in the build script and citation metadata.
 4. Publish the exact package in the book repository and create a `v1.0.0` release.
 5. Connect that repository to Zenodo or another DOI-granting archive and archive the exact tag.
 6. Add the DOI to `CITATION.cff`, the companion README, the manuscript’s Data and materials availability statement, and the arXiv Comments field.
@@ -72,10 +72,11 @@ The companion release contains:
 
 - a human-readable, chapter-organized presentation of all 192 practices, with a direct link to the interactive website companion;
 - 192 practice records, including boundary conditions;
-- a 563-row evidence and corroboration ledger;
+- a 574-row evidence and corroboration ledger;
 - a crosswalk separating 55 manuscript-developed practices from 137 companion-only practices;
 - 29 benchmark records;
-- resolved metadata for 308 arXiv identifiers, five DOIs, and other web sources;
+- resolved metadata for 319 arXiv identifiers, five DOIs, and other web sources;
+- source snapshots, seven literature-review thread protocols, a 118-record thread-source index, and 39 record-level update-screening decisions;
 - JSON Schemas, provenance hashes, citation metadata, and checksums.
 
 The separately packaged skills bundle contains five derived operational
@@ -89,11 +90,10 @@ Author-system cases are labeled as illustrations and are explicitly excluded fro
 
 The audit covers all 20 manuscript files and all 192 companion practices.
 
-- 308 unique arXiv identifiers resolved from official arXiv API metadata; zero unresolved. The current audit reused previously resolved official-API metadata after the API became temporarily unavailable, and records that fallback in its machine-readable method field.
+- 319 unique arXiv identifiers resolved from official arXiv API metadata; zero unresolved. The current audit reused previously resolved official-API metadata after the API became temporarily unavailable, and records that fallback in its machine-readable method field.
 - Five DOI records resolved through Crossref; zero unresolved.
-- 32 other web URLs checked with redirects enabled.
-- Four canonical pages returned HTTP 403 to the automated client: the two official OpenAI pages below, one Netflix engineering post, and one Instacart engineering post. Their citation identities and canonical URLs are retained; the OpenAI claims were also checked against the rendered pages during the source audit.
-  - `https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/`
+- 34 other web URLs checked with redirects enabled.
+- Three canonical pages returned HTTP 403 to the automated client: one official OpenAI page, one Netflix engineering post, and one Instacart engineering post. Their citation identities and canonical URLs are retained; the OpenAI claim was also checked against the rendered page during the source audit.
   - `https://openai.com/index/separating-signal-from-noise-coding-evaluations/`
 - The audit found and corrected one author-name defect in the companion source: DynTaskMAS is by Yu, Ding, and Sato, not “Yin.”
 - Four retained practitioner pages on mutable hosts have timestamped Internet Archive snapshots listed in the companion's `WEB-SOURCE-PRESERVATION.md`. Unsupported swyx and Patwardhan records, plus an unarchivable X post, were removed rather than left as unstable support.
@@ -107,7 +107,7 @@ Identifier resolution verifies that the cited record exists and captures current
 3. **Companion license.** Decide independently whether the catalog and benchmark metadata should permit adaptation and redistribution. The repository currently has a root Apache-2.0 license; confirm or scope it before publishing the companion.
 4. **Endorsement.** Start a draft submission and select `cs.SE` early. A prior record in another archive may not satisfy endorsement for a new computer-science category.
 5. **Identity.** Link ORCID and confirm author name and affiliation.
-6. **Reference exceptions.** The four HTTP 403 results are access restrictions rather than unresolved identifiers. Recheck them manually at structural freeze if their claims remain material.
+6. **Reference exceptions.** The three HTTP 403 results are access restrictions rather than unresolved identifiers. Recheck them manually at structural freeze if their claims remain material.
 7. **Companion DOI.** Either archive the companion first and append its DOI to the Comments field, or submit the paste-ready text above with the public repository URL only.
 
 ## Submission sequence
@@ -125,17 +125,17 @@ Identifier resolution verifies that the cited record exists and captures current
 
 ## Technical validation
 
-- Exact source ZIP compiled in a fresh temporary directory with Tectonic 0.15.0.
-- Output: 254 letter-size pages, single-spaced, one-inch margins, PDF 1.5.
+- Exact source ZIP compiled in a fresh temporary directory with Tectonic 0.16.9.
+- Output: 258 letter-size pages, single-spaced, one-inch margins, PDF 1.5.
 - Figures: 13 of 13 included as PDF.
 - Chapter sources: 19 unnumbered chapter-end source blocks, excluded from the numbered section hierarchy and table of contents.
-- Full references: 183 alphabetized entries; all manuscript-cited arXiv identifiers, five DOI records, and audited web sources are represented, with additional named sources and author illustrations identified separately.
-- Text extraction: approximately 104,000 machine-readable words.
+- Full references: 196 alphabetized entries; all manuscript-cited arXiv identifiers, five DOI records, and audited web sources are represented, with additional named sources and author illustrations identified separately.
+- Text extraction: approximately 106,000 machine-readable words.
 - PDF security: no encryption, JavaScript, forms, or embedded multimedia.
 - Archive hygiene: 38 required files; no generated PDF, log, auxiliary file, Markdown source, dataset, or private note.
 - TeX diagnostics: no errors, missing files, missing characters, undefined commands, or overfull boxes. A small number of harmless underfull-box warnings remain in source-list paragraphs.
 - Prose review: all 20 source files were reviewed for academic register, casual framing, unsupported certainty, promotional language, and unexplained internal evidence shorthand.
-- Companion checks: catalog and benchmark JSON validate against their schemas; checksums pass; the CSV contains 563 records with a consistent 11-column structure.
+- Companion checks: catalog and benchmark JSON validate against their schemas; checksums pass; the CSV contains 574 records with a consistent 11-column structure. The update-screening decisions total 39: 11 admitted, one already present, and 27 deferred or excluded.
 
 ## Official arXiv guidance
 

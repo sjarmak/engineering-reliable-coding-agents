@@ -1,6 +1,7 @@
 \chapter{Run-to-run variance, statistical power, and paired comparisons}
 \label{ch01-variance-power-paired-comparisons}
-\section{One run is one draw}\label{one-run-is-one-draw}
+\hypertarget{one-run-is-one-draw}{%
+\section{One run is one draw}\label{one-run-is-one-draw}}
 
 I created an evaluation tool called CodeProbe (\href{https://github.com/sjarmak/codeprobe}{public repository}) that mines tasks from a repository's merged pull requests. In one run, one configuration led another by +0.054 on a task family, with a single task contributing a +0.300 advantage. The scoring code reported three decimal places, but the experiment contained no repeated runs from which to estimate stability.
 
@@ -44,7 +45,8 @@ Repetition is a direct cost multiplier. Three runs require roughly three times t
 
 The operational rule is narrow. Measure the local run-to-run spread, and do not credit a difference that remains smaller than that spread. Repetition alone does not establish that a detected difference is large enough to matter, nor does it determine how many runs are sufficient. Both depend on the decision threshold and the statistical power of the experiment.
 
-\section{What could the experiment have detected?}\label{what-could-the-experiment-have-detected}
+\hypertarget{what-could-the-experiment-have-detected}{%
+\section{What could the experiment have detected?}\label{what-could-the-experiment-have-detected}}
 
 Before running a suite, the first question is which differences the design can resolve at all. In Miller's worked example (\href{https://arxiv.org/abs/2411.00640}{2024}), sampling more responses per question reduced the minimum detectable effect from 13.2 percent to 7.5 percent. The minimum detectable effect is the smallest difference the experiment can reliably distinguish from noise. Neither the model nor the questions became more accurate. Each question simply produced a less variable estimate, allowing the same experiment to resolve a smaller difference.
 
@@ -84,7 +86,8 @@ One of my evaluation frameworks makes refusal mechanical. It scores a system acr
 
 A completed comparison should therefore report its detectable range. When the observed difference falls below the predeclared engineering threshold or below the experiment's minimum detectable effect, I report that limitation explicitly. Insufficient resolution is not evidence that the systems are equal.
 
-\section{Compare outcomes item by item}\label{compare-outcomes-item-by-item}
+\hypertarget{compare-outcomes-item-by-item}{%
+\section{Compare outcomes item by item}\label{compare-outcomes-item-by-item}}
 
 When two systems face the same tasks, the comparison should be based on their per-item differences, and the experiment must preserve those differences from the start. A \textbf{paired design} runs both systems on the same experimental units so that their outcomes can be compared item by item. Pairing is a property of the experiment. The statistical test is chosen only after the paired observations exist.
 
@@ -111,7 +114,7 @@ When the systems respond similarly to item difficulty, the covariance is positiv
 
 \begin{figure}[htbp]
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Schematic of correlated item scores for systems A and B and the narrower uncertainty obtained by analyzing their matched differences.}]{figures/ch01-paired-comparison.pdf}}
+\includegraphics{figures/ch01-paired-comparison.pdf}
 \caption{Schematic of correlated item scores for systems A and B and the narrower uncertainty obtained by analyzing their matched differences.}
 \end{figure}
 
@@ -142,9 +145,9 @@ Agent evaluations introduce outcomes that standard benchmark guidance does not f
 The table below gives directional guidance. The recommendations for language-generation metrics come from the broader methodological guidance of Dror and Reichart (\href{https://arxiv.org/abs/1809.01448}{2018}) rather than from controlled comparisons of agent evaluations. The binary row applies \textbf{McNemar's test}, introduced by McNemar (\href{https://doi.org/10.1007/BF02295996}{1947}), the standard test for paired pass or fail outcomes. It analyzes the discordant pairs in which one system passes and the other fails. The table is a starting point, not a substitute for deriving the metric's actual sampling structure.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Outcome structure
@@ -168,7 +171,8 @@ The companion catalog covers designs that this basic framework does not. Cluster
 
 The catalog also covers profiling benchmark noise before making decisions, declaring the decoding configuration, aggregating scarce repetitions with interquartile means and resampled intervals, reducing an evaluation around a specific decision, using precommitted confirmatory designs, and measuring sensitivity across prompt variants. Each addresses a narrower problem than the core decisions developed in this chapter.
 
-\section{Before drawing a conclusion from a difference}\label{before-drawing-a-conclusion-from-a-difference}
+\hypertarget{before-drawing-a-conclusion-from-a-difference}{%
+\section{Before drawing a conclusion from a difference}\label{before-drawing-a-conclusion-from-a-difference}}
 
 I define the engineering threshold before running the expensive suite. The threshold is the smallest change that would alter the engineering decision, not the smallest change a statistical test might detect.
 

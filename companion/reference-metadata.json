@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T02:07:04.162Z",
+  "generated_at": "2026-08-06T14:33:14.845Z",
   "arxiv": [
     {
       "id": "1503.07170",
@@ -5634,6 +5634,183 @@
         "published": "2026-07-13",
         "updated": "2026-07-13"
       }
+    },
+    {
+      "id": "2607.22368",
+      "status": "resolved",
+      "metadata": {
+        "id": "2607.22368",
+        "title": "Do Agent Benchmarks Measure Capability? Protocol Validity in the Age of Agentic AI",
+        "authors": [
+          "Jiaqi Shao",
+          "Hanck Chen",
+          "Wei Zhang",
+          "Maxm Pan",
+          "Bing Luo"
+        ],
+        "published": "2026-07-24",
+        "updated": "2026-07-24"
+      }
+    },
+    {
+      "id": "2607.22520",
+      "status": "resolved",
+      "metadata": {
+        "id": "2607.22520",
+        "title": "The Regression Tax: Decomposing Why Skills Help and Hurt LLM Agents",
+        "authors": [
+          "Darshan Tank",
+          "Baran Nama"
+        ],
+        "published": "2026-07-24",
+        "updated": "2026-07-24"
+      }
+    },
+    {
+      "id": "2607.24882",
+      "status": "resolved",
+      "metadata": {
+        "id": "2607.24882",
+        "title": "Agent Retrieval Bench: Evaluating Repository Context Retrieval for Coding Agents",
+        "authors": [
+          "Bowen Qin",
+          "Yi Xie"
+        ],
+        "published": "2026-07-27",
+        "updated": "2026-07-27"
+      }
+    },
+    {
+      "id": "2607.25152",
+      "status": "resolved",
+      "metadata": {
+        "id": "2607.25152",
+        "title": "When Do Agent Loops Mistake Stagnation for Progress? Self-Evaluation Bias and Externally Grounded Verification in Long-Running Autonomous LLM Agent Loops",
+        "authors": [
+          "Hyundoo Park",
+          "Byungho Choi"
+        ],
+        "published": "2026-07-27",
+        "updated": "2026-07-27"
+      }
+    },
+    {
+      "id": "2607.27250",
+      "status": "resolved",
+      "metadata": {
+        "id": "2607.27250",
+        "title": "Do Context Files Help Coding Agents? A Two-Agent Ablation Study on Real Repositories",
+        "authors": [
+          "Prakhar Khatri"
+        ],
+        "published": "2026-07-28",
+        "updated": "2026-07-28"
+      }
+    },
+    {
+      "id": "2607.27294",
+      "status": "resolved",
+      "metadata": {
+        "id": "2607.27294",
+        "title": "AgentS4D: Benchmarking Runtime Risks across the Execution Lifecycle of LLM-Based Workspace Agents",
+        "authors": [
+          "Jiajun Zhou",
+          "Zhaoxuan Ke",
+          "Jihang Ye",
+          "Xuanze Chen",
+          "Shanqing Yu",
+          "Qi Xuan"
+        ],
+        "published": "2026-07-29",
+        "updated": "2026-07-29"
+      }
+    },
+    {
+      "id": "2607.28587",
+      "status": "resolved",
+      "metadata": {
+        "id": "2607.28587",
+        "title": "PAIChecker: Uncovering and Checking PR-Issue Misalignment in SWE-Bench-Like Benchmarks",
+        "authors": [
+          "Manyi Wang",
+          "Junjielong Xu",
+          "Pinjia He"
+        ],
+        "published": "2026-07-30",
+        "updated": "2026-08-04"
+      }
+    },
+    {
+      "id": "2607.28802",
+      "status": "resolved",
+      "metadata": {
+        "id": "2607.28802",
+        "title": "Model or Harness? An Interaction-Centric Taxonomy for Localizing Agent Failures",
+        "authors": [
+          "Harsh Raj",
+          "Vipul Gupta",
+          "Anas Mahmoud",
+          "Razvan-Gabriel Dumitru",
+          "Darvin Yi",
+          "Aakash Sabharwal",
+          "Yunzhong He"
+        ],
+        "published": "2026-07-30",
+        "updated": "2026-07-30"
+      }
+    },
+    {
+      "id": "2608.00101",
+      "status": "resolved",
+      "metadata": {
+        "id": "2608.00101",
+        "title": "Agentic Coding in the Wild: Characterizing GitHub Copilot Traces at Production Scale",
+        "authors": [
+          "Banruo Liu",
+          "Haoran Qiu",
+          "Íñigo Goiri",
+          "Rodrigo Fonseca",
+          "Ricardo Bianchini",
+          "Esha Choukse"
+        ],
+        "published": "2026-07-30",
+        "updated": "2026-07-30"
+      }
+    },
+    {
+      "id": "2608.01507",
+      "status": "resolved",
+      "metadata": {
+        "id": "2608.01507",
+        "title": "Deep Agentic Search for Repository-Level Code Question Answering: An Empirical Study",
+        "authors": [
+          "Amirkia Rafiei Oskooei",
+          "Bora Ilci",
+          "Alperen Kayim",
+          "Mehmet Egemen Uzun",
+          "Berat Can",
+          "Kaan Emre Kara",
+          "Ozan Orhan",
+          "Mehmet S. Aktas"
+        ],
+        "published": "2026-08-02",
+        "updated": "2026-08-02"
+      }
+    },
+    {
+      "id": "2608.04804",
+      "status": "resolved",
+      "metadata": {
+        "id": "2608.04804",
+        "title": "Scrouting: Cost-Aware Routing of Coding Agents by Scouting the Repository First",
+        "authors": [
+          "Ishaan Bhola",
+          "Adithyan Krishnan",
+          "Mukunda NS"
+        ],
+        "published": "2026-08-05",
+        "updated": "2026-08-05"
+      }
     }
   ],
   "dois": [
@@ -5782,10 +5959,10 @@
     },
     {
       "url": "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified",
-      "status": "http_error",
-      "http_status": 403,
-      "final_url": "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified",
-      "title": null
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/",
+      "title": "Why SWE-bench Verified no longer measures frontier coding capabilities | OpenAI"
     },
     {
       "url": "https://pushtoprod.substack.com/p/my-ai-agent-didnt-do-anything",
@@ -5800,6 +5977,13 @@
       "http_status": 200,
       "final_url": "https://xcancel.com/GergelyOrosz/status/2077434907274428914",
       "title": "Verifying your browser…"
+    },
+    {
+      "url": "https://scixplorer.org/scixabout/",
+      "status": "resolved",
+      "http_status": 202,
+      "final_url": "https://scixplorer.org/scixabout/",
+      "title": null
     },
     {
       "url": "https://scixplorer.org/scixhelp/api-scix/",
@@ -5898,6 +6082,13 @@
       "http_status": 200,
       "final_url": "https://www.reddit.com/r/programming/comments/1p70pol/",
       "title": "Reddit"
+    },
+    {
+      "url": "https://www.sjarmak.ai/projects/code-intelligence-digest",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://www.sjarmak.ai/projects/code-intelligence-digest",
+      "title": "Code Intelligence Digest — Stephanie Jarmak"
     },
     {
       "url": "https://www.turingpost.com",

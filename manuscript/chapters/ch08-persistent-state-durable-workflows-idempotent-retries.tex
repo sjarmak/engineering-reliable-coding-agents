@@ -8,7 +8,8 @@ An agent that dies after step nine of a fourteen-step run presents the same coor
 
 The difficult case is a process that changes the world and dies before recording the change. A plan held only in model context, a tool result retained only in memory, or a completion record scheduled as the next write all disappear precisely when recovery needs them. The surviving system must then distinguish work known to be complete, work known to be incomplete, and work whose outcome is uncertain. Without that distinction, a restart inherits the old run identity without the evidence needed to resume it safely.
 
-\section{Declare the state that outlives the worker}\label{declare-the-state-that-outlives-the-worker}
+\hypertarget{declare-the-state-that-outlives-the-worker}{%
+\section{Declare the state that outlives the worker}\label{declare-the-state-that-outlives-the-worker}}
 
 Consider the step-nine failure when no completion record reached durable storage. The first eight results may exist only in the lost context, while the ninth step may already have changed an external system. Historical stream-processing research, self-evaluated systems, and practitioner accounts support explicit state as an architectural boundary to test, not as a measured guarantee across open-ended agent workloads.
 
@@ -68,7 +69,8 @@ Persistence leaves several agent problems unsolved. It does not limit model cost
 
 Its narrower benefit is recoverability. After process death, the replacement worker can determine what the system knew, what it accepted as complete, and where uncertainty begins.
 
-\section{When coordination belongs in an engine}\label{when-coordination-belongs-in-an-engine}
+\hypertarget{when-coordination-belongs-in-an-engine}{%
+\section{When coordination belongs in an engine}\label{when-coordination-belongs-in-an-engine}}
 
 The orchestration code Netflix deleted is as informative as the reported reduction in failures. Before the migration, application code coordinated retries, compensating actions, and service state. Afterward, a workflow engine recorded execution history and scheduled application operations from that history. The practitioner account strongly supports the result for this cloud-operations service. It does not isolate which part of the migration caused the improvement or establish the same effect for agent workloads.
 
@@ -113,7 +115,8 @@ The integration boundary often costs more than the workflow definition. A second
 
 An engine should own coordination without absorbing domain behavior. Application code still determines what constitutes a valid deployment, payment, or agent result. The platform owns durable history, retry scheduling, waiting, and transitions between recorded step states. Keeping that boundary explicit makes engine replacement possible and prevents application correctness from depending on undocumented behavior inside a particular worker.
 
-\section{The interval that cannot be closed}\label{the-interval-that-cannot-be-closed}
+\hypertarget{the-interval-that-cannot-be-closed}{%
+\section{The interval that cannot be closed}\label{the-interval-that-cannot-be-closed}}
 
 A worker sends a merge request, receives success, and dies before recording the completed step. The engine sees an unfinished attempt and sends the step again. My treatment of this interval rests on directional systems research and practitioner accounts. No controlled result establishes that one idempotency design makes agent workflows reliable across workloads.
 
@@ -171,7 +174,8 @@ Trofimov et al.~(\href{https://arxiv.org/abs/1907.06250}{2019}) propose describi
 
 Repeated execution can still converge perfectly on the wrong result. The step needs postconditions that verify its domain outcome, and the workflow needs compensation or escalation when the external system cannot make the operation idempotent. Retry machinery satisfies neither responsibility.
 
-\section{Companion patterns}\label{companion-patterns}
+\hypertarget{companion-patterns}{%
+\section{Companion patterns}\label{companion-patterns}}
 
 Eleven adjacent entries in the companion catalog refine this recovery contract without introducing another architectural decision. They cover external writes that carry receipts, idempotency keys, and compensating actions; retry behavior expressed as falsifiable invariants; snapshots taken outside the critical path at declared consistency boundaries; and checkpoint cadence chosen from measured recovery costs and failure rates.
 
@@ -179,7 +183,8 @@ Other entries cover committing execution records with the corresponding data cha
 
 Three entries have thin support and contribute no evidence to the claims made in this chapter. They propose stating event-coordination guarantees explicitly, attaching postconditions to stochastic steps, and turning repeated plans into reusable blueprints.
 
-\section{Run the crash check}\label{run-the-crash-check}
+\hypertarget{run-the-crash-check}{%
+\section{Run the crash check}\label{run-the-crash-check}}
 
 Choose the agent workflow whose failure midway through a run would have the greatest consequence. Give the run a stable identity, and store its plan, progress, and append-only event history as declared artifacts with named owners. Stop the process after several steps and delete nothing. A replacement worker should be able to identify completed work, pending work, and uncertain external effects from those artifacts alone.
 

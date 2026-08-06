@@ -12,7 +12,8 @@ The available evidence supports comparison design rather than a universal cost t
 
 An elaborate system is worth keeping only when both comparisons support it. Its components must contribute something that remains when the rest of the experiment is held fixed, and the full configuration must beat the simple alternatives at a cost the operator is willing to pay. These are separate tests. Component removal addresses causal attribution. Direct-call and retry baselines address engineering value.
 
-\section{Remove the component and rerun the evaluation}\label{remove-the-component-and-rerun-the-evaluation}
+\hypertarget{remove-the-component-and-rerun-the-evaluation}{%
+\section{Remove the component and rerun the evaluation}\label{remove-the-component-and-rerun-the-evaluation}}
 
 An \textbf{ablation} removes one component and reruns the evaluation with the rest of the system and procedure held fixed. If a memory-enabled agent outperforms an agent without memory, the missing-memory arm estimates what the memory system contributed. If the comparison changes the model, prompt, task subset, token budget, harness version, or scoring procedure at the same time, the subtraction no longer isolates memory. It measures an unspecified bundle of changes. Without the missing-component arm, base-model capability and item difficulty remain plausible explanations for the observed score.
 
@@ -31,6 +32,8 @@ One-factor sweeps matter because agent components interact. Retrieval can change
 An ablation result is conditional on the configuration in which the removal occurred. If retrieval helps only when a summarizer compresses its output, removing retrieval from the full system estimates retrieval's contribution with that summarizer present. The result does not show whether retrieval would help without summarization, or whether summarization would help without retrieval. Those questions require the corresponding component combinations as separate arms.
 
 Skills and multi-agent structures need the same discipline, but their removal needs a more precise intervention. Deleting a skill while also shortening the prompt changes both procedural guidance and context length. Replacing several agents with one while reducing the call budget changes topology and sampling opportunity together. A useful control preserves the available information and budget wherever the design permits and removes only the coordination or representation being credited. When that preservation is impossible, an intermediate arm lets the comparison separate fewer model calls from a different arrangement of those calls.
+
+Tank and Nama (\href{https://arxiv.org/abs/2607.22520}{2026}) compared agents with and without procedural skills across nearly 6,000 runs on two office-automation benchmarks and three model-harness stacks. The best-performing skills won primarily by causing fewer regressions, a distinction concealed by net task-success change. The study strongly supports decomposing a skill intervention into gains, regressions, and residual failures in those settings; transfer to coding-agent skill libraries remains directional.
 
 The paired design from Chapter 1 belongs here. Each arm runs on the same tasks, task ordering and other sources of randomness are matched across arms wherever the execution system permits it, and the outcomes are analyzed as pairs. Otherwise, item difficulty can dominate the component effect. A retrieval arm that happens to receive more questions answerable by lexical lookup may appear superior even when the tool adds nothing on matched items.
 
@@ -56,7 +59,8 @@ An ablation cannot remove every threat to inference, and it does not show that a
 
 The completed record should make the subtraction reproducible. Name the component removed, list every configuration field that remained fixed, identify the coverage-matched task subset, report component usage per task, and preserve the paired results. When multiple factors changed, describe the arm as a bundle and resist assigning its effect to one member of that bundle.
 
-\section{Select on accuracy and cost together}\label{select-on-accuracy-and-cost-together}
+\hypertarget{select-on-accuracy-and-cost-together}{%
+\section{Select on accuracy and cost together}\label{select-on-accuracy-and-cost-together}}
 
 The support for this entry is one directional re-evaluation study and no strong evidence item. Kapoor et al.~(2024) covered a small set of benchmark families, including function-level coding, multi-hop question answering, and web-agent tasks. They did not establish the same result for repository-scale software work. Their contribution here is a comparison design that can be applied beyond those tasks. Evaluate the elaborate system against direct model calls and retries, then place accuracy and inference cost in the same result.
 
@@ -84,7 +88,7 @@ This rule is stronger than ranking by score per dollar alone. A ratio can favor 
 
 \begin{figure}[htbp]
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Schematic of a cost-accuracy frontier, dominated configurations, and minimum-accuracy and cost-ceiling feasibility constraints.}]{figures/ch02-cost-accuracy-frontier.pdf}}
+\includegraphics{figures/ch02-cost-accuracy-frontier.pdf}
 \caption{Schematic of a cost-accuracy frontier, dominated configurations, and minimum-accuracy and cost-ceiling feasibility constraints.}
 \end{figure}
 
@@ -110,7 +114,8 @@ Search budget belongs in the accounting as well. If one architecture received hu
 
 The companion catalog carries six related procedures. They cover expected best performance by tuning budget, repeated-sampling budgets based on coverage and verifier error, frozen-memory evaluation, a pinned scoring target, human-verified synthesis of evaluation instances, and baseline gates against random selection. Each refines a particular part of the experiment. None replaces the direct-call, retry, ablation, cost, and iteration-holdout controls developed here.
 
-\section{Build the next comparison}\label{build-the-next-comparison}
+\hypertarget{build-the-next-comparison}{%
+\section{Build the next comparison}\label{build-the-next-comparison}}
 
 Start the next architecture comparison with the inexpensive arms. Run the base model directly, then run it with one retry under a failure signal the deployed system can observe. These controls establish how much of the candidate's accuracy another sample produces on its own, before a planner, memory writer, retriever, or second agent enters the design.
 
@@ -136,6 +141,8 @@ Reserve the iteration holdout before the first scaffold change. Decide who can i
   Directional evidence: \emph{TIAP} (arXiv:2605.24060); no figure carried.
 \item
   Directional evidence: \emph{MemConflict} (arXiv:2605.20926); no figure carried.
+\item
+  Strong evidence for the narrower transition analysis: Tank, D., and Nama, B. (2026), ``The Regression Tax: Decomposing Why Skills Help and Hurt LLM Agents,'' arXiv:2607.22520. Nearly 6,000 runs across two office-automation benchmarks and three model-harness stacks; transfer to coding-agent skill libraries is directional.
 \end{itemize}
 
 \textbf{Report cost-accuracy tradeoffs}

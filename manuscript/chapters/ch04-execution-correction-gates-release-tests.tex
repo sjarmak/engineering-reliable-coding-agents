@@ -6,7 +6,7 @@ The study provides directional evidence rather than a general estimate of coding
 
 \begin{figure}[htbp]
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Across 1,750 trajectories covering 50 tasks and four models, one model submitted work in 100\% of its trials but resolved only 44\% under an external oracle.}]{figures/ch04-submission-resolution.pdf}}
+\includegraphics{figures/ch04-submission-resolution.pdf}
 \caption{Across 1,750 trajectories covering 50 tasks and four models, one model submitted work in 100\% of its trials but resolved only 44\% under an external oracle.}
 \end{figure}
 
@@ -18,7 +18,8 @@ The practical unit is a gate that can stop candidate work from propagating. The 
 
 Four adjacent controls appear in the companion catalog rather than in this chapter. For an agent that submits on nearly every trial, score verified resolution separately from submission and include tasks that test whether it can abstain. For a tool that can fail while returning a plausible success string, detect silent tool errors explicitly. For a loop that can retry indefinitely, impose a turn budget. When per-candidate verification cost determines how often a gate can run, include that cost in the system's accounting.
 
-\section{Make execution decide whether work moves}\label{make-execution-decide-whether-work-moves}
+\hypertarget{make-execution-decide-whether-work-moves}{%
+\section{Make execution decide whether work moves}\label{make-execution-decide-whether-work-moves}}
 
 Two directional synthesis items support execution-gated evaluation, but neither is a controlled estimate of its effect. AgentForge, from Kumar et al.~(\href{https://arxiv.org/abs/2604.13120}{2026}), describes an evaluator that runs candidate work in resource-bounded, network-isolated sandboxes and permits propagation only after successful execution. SWE-bench, from Jimenez et al.~(\href{https://arxiv.org/abs/2310.06770}{2023}), establishes executable repository repair as an evaluation form.
 
@@ -27,6 +28,8 @@ The AgentForge preprint is unrefereed, evaluates a single configuration, and rep
 A plausible patch is only text until the repository accepts it. It may fail to compile, violate a type constraint, pass a visible test while failing the broader suite, produce the wrong output, or depend on undeclared state left in the workspace. Reading the patch can reveal some of these defects. Executing it produces evidence from the system the change is supposed to affect.
 
 This changes the acceptance question. A confidence score asks the process that produced an answer to characterize its own answer. An execution check asks a compiler, test runner, package builder, schema validator, or deployment probe whether a specified transition occurred.
+
+Park and Choi (\href{https://arxiv.org/abs/2607.25152}{2026}) held an agent and its tool surface fixed while changing the evaluator's information channel. Across 54 cycles, the agent claimed improvement every time, although 56 percent of measured deltas were zero or negative; the self-verdict gate accepted every cycle and eroded the best reached state by 19 percent. On a boundary task whose success was verifiable from the artifact, the same judge's gap disappeared. This is strong evidence within the preregistered testbed that a gate must observe the state in which success is defined.
 
 The result is an oracle only for the behavior the check observes. A passing unit test does not establish safe deployment, and a successful build does not establish semantic correctness. Its evidentiary value comes from being produced causally downstream of the candidate artifact rather than by the process that proposed it.
 
@@ -92,7 +95,8 @@ Record only the narrowest downstream claim justified by the run: test-eligible, 
 
 The run record also provides the evidence needed for correction. A failed command, assertion diff, resource termination, or missing artifact gives the next attempt information that was unavailable when the candidate was produced. Without new evidence, another model pass is repetition presented as diagnosis.
 
-\section{Let failed runs change the next attempt}\label{let-failed-runs-change-the-next-attempt}
+\hypertarget{let-failed-runs-change-the-next-attempt}{%
+\section{Let failed runs change the next attempt}\label{let-failed-runs-change-the-next-attempt}}
 
 A retry that begins with the same prompt, evidence, and workspace state has learned nothing about the failure. Sampling may produce a different answer, but it does not direct the model toward the error. The next pass may repeat the faulty premise, replace a correct intermediate step, or elaborate the same mistaken conclusion. Calling that pass ``reflection'' does not add information.
 
@@ -171,7 +175,8 @@ A new observation may justify another attempt, but it does not justify unlimited
 
 Correction belongs to the evaluation architecture, not to a personality attributed to the model. The model proposes revisions. The surrounding system determines whether the evidence changed, whether another attempt may run, and whether the resulting artifact may propagate. That division continues to hold when the model, prompt, or language of correction changes.
 
-\section{Turn repeated trials into a release test}\label{turn-repeated-trials-into-a-release-test}
+\hypertarget{turn-repeated-trials-into-a-release-test}{%
+\section{Turn repeated trials into a release test}\label{turn-repeated-trials-into-a-release-test}}
 
 Support for the repeated-trial metric comes from one source. tau-bench, from Yao et al.~(\href{https://arxiv.org/abs/2406.12045}{2024}), evaluates interactive, multi-turn tool use with executable oracles across repeated trials and introduces \(\mathrm{pass}^{k}\) as a reliability measure.
 
@@ -264,7 +269,8 @@ The local release test answers a narrower question: did this fully specified sys
 
 Once the set participates in release, a failure should trigger diagnosis before any threshold is revised. Determine whether the candidate changed, the case changed, or the evaluator changed. Route valid candidate failures through the external-feedback correction loop, then rerun the entire required sequence for the revised candidate. Reusing passing trials from before a modification would attach evidence to a system that no longer exists.
 
-\section{Build the first gate}\label{build-the-first-gate}
+\hypertarget{build-the-first-gate}{%
+\section{Build the first gate}\label{build-the-first-gate}}
 
 Begin with five to ten tasks drawn from merged work rather than from a generic capability suite. Choose tasks whose starting states can be reconstructed and whose acceptable outcomes can be verified without interpretive judgment. The first set can remain small because its purpose is to establish a release path that produces trustworthy evidence. Expand it when production failures reveal behaviors the initial sample did not cover.
 
@@ -298,6 +304,8 @@ Keep tasks without executable checks in a separate lane. They are not lesser tas
   Directional evidence: AgentForge (Kumar et al.~2026, arXiv:2604.13120). Execution-grounded evaluation in resource-bounded, network-isolated sandboxes, with propagation gated on execution results. Unrefereed preprint; single configuration; one sample per agent.
 \item
   Directional evidence: SWE-bench (arXiv:2310.06770), from Jimenez et al.~2023. No figure carried.
+\item
+  Strong evidence for externally grounded gating in the measured testbed: Park, H., and Choi, B. (2026), ``When Do Agent Loops Mistake Stagnation for Progress?'' arXiv:2607.25152. The 54-cycle result does not estimate a general agent failure rate.
 \end{itemize}
 
 \textbf{\texttt{gate-self-correction-on-external-feedback}}

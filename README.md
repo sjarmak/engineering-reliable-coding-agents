@@ -16,8 +16,8 @@ fault-testing protocols.
 
 | Path | Contents |
 | --- | --- |
-| [`manuscript/`](manuscript/) | Complete, compilable LaTeX source with 18 chapters, closing chapter, 13 figures, and 183 references |
-| [`companion/`](companion/) | Human-readable learnings plus the machine-readable practice catalog, evidence ledger, chapter crosswalk, benchmark catalog, schemas, web-source preservation record, checksums, citation metadata, and provenance |
+| [`manuscript/`](manuscript/) | Complete, compilable LaTeX source with 18 chapters, closing chapter, 13 figures, and 196 references |
+| [`companion/`](companion/) | Human-readable learnings plus the machine-readable practice catalog, evidence ledger, chapter crosswalk, benchmark catalog, review-method records, schemas, web-source preservation record, checksums, citation metadata, and provenance |
 | [`skills/`](skills/) | Five reusable agent skills derived from the evaluation, verification, failure-analysis, and durable-execution practices |
 | [`SUBMISSION.md`](SUBMISSION.md) | Paste-ready arXiv metadata, packaging decisions, license and endorsement notes, audit results, and upload checklist |
 | [`CITATION.cff`](CITATION.cff) | Repository-level citation metadata |
@@ -37,7 +37,7 @@ cd manuscript
 tectonic main.tex
 ```
 
-The generated PDF is 254 pages on US letter paper. The source uses standard
+The generated PDF is 258 pages on US letter paper. The source uses standard
 LaTeX packages and contains all required figures locally.
 
 ## Validate the companion
@@ -54,9 +54,12 @@ cd companion
 sha256sum -c SHA256SUMS
 ```
 
-The release candidate contains 192 practice records, 563 evidence or
-corroboration records, and 29 benchmark records. Author-system cases are marked
-as illustrations and are not counted as independent external evidence.
+The release candidate contains 192 practice records, 574 evidence or
+corroboration records, and 29 benchmark records. Its methodology directory
+records the corpus snapshots, common search protocol, 118 retained thread-source
+identities, and all 39 decisions in the bounded August update audit.
+Author-system cases are marked as illustrations and are not counted as
+independent external evidence.
 
 ## Reusable agent skills
 
@@ -82,6 +85,6 @@ system before use.
 
 ## Release status
 
-The files currently represent the `1.0.0-rc.7` release candidate prepared on
-August 5, 2026. The archival DOI and final license choices must be recorded
+The files currently represent the `1.0.0-rc.8` release candidate prepared on
+August 6, 2026. The archival DOI and final license choices must be recorded
 before the first stable release and arXiv submission.

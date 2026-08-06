@@ -1,6 +1,6 @@
 # Engineering Reliable Coding Agents: companion research artifact
 
-Release candidate 1.0.0-rc.7, prepared August 5, 2026.
+Release candidate 1.0.0-rc.8, prepared August 6, 2026.
 
 This package accompanies *Engineering Reliable Coding Agents: Evaluation, Recovery, Context, and Control Beyond the Model*. It is designed to be archived as a separate, citable research artifact. The final archival release should receive its own DOI and should be cited alongside the manuscript.
 
@@ -13,12 +13,13 @@ Canonical repository: [https://github.com/sjarmak/engineering-reliable-coding-ag
 ## Contents
 
 - `LEARNINGS.md`: human-readable, chapter-organized presentation of all 192 practices, including actions, mechanisms, evidence, and boundaries.
-- `catalog.json`: all 192 bounded practices in machine-readable form.
+- `catalog.json`: all 192 bounded practices in machine-readable form, including the bounded August 6 evidence additions.
 - `evidence-ledger.csv`: one row per evidence item or corroborating item.
 - `chapter-crosswalk.json`: the 55 practices developed in the manuscript and the 137 companion-only entries.
 - `benchmark-catalog.json`: 29 coding-agent benchmark records.
 - `reference-metadata.json`: resolved arXiv, DOI, and web-source metadata from the manuscript audit.
 - `WEB-SOURCE-PRESERVATION.md`: canonical and archived URLs for retained practitioner sources on mutable hosts.
+- `methodology/`: corpus snapshots, thread protocols and source identities, search records, record-level update decisions, and the human/automated adjudication boundary.
 - `schemas/`: JSON Schemas for the catalog and benchmark records.
 - `PROVENANCE.md`: source snapshot, transformations, evidence definitions, and release exclusions.
 - `CITATION.cff`: citation metadata for GitHub and archival services.

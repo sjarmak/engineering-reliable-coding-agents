@@ -8,13 +8,15 @@ The measurement problem comes before the choice of threshold. A grader may agree
 
 Chapter 4 separated tasks whose correctness cannot be established through execution alone. Model grading can provide a validation lane for some of them, but only when the grader is treated as an instrument under test. Before its decisions control releases, rankings, rewards, or training data, the evaluation must establish that those decisions track the judgment the system actually needs. That test must reflect the class balance and error costs the grader will encounter in operation.
 
-\section{Build the reference labels before the grader}\label{build-the-reference-labels-before-the-grader}
+\hypertarget{build-the-reference-labels-before-the-grader}{%
+\section{Build the reference labels before the grader}\label{build-the-reference-labels-before-the-grader}}
 
 Calibration begins with a \textbf{rubric}, the written criteria used to assign a score or label. Domain experts should define its categories, decision rules, exclusions, and examples because the resulting labels encode domain judgment. A prompt engineer can make the wording consistent, but only someone with the relevant expertise can decide which omission is material in a medical summary or which behavioral mismatch makes a migration unsafe.
 
 The categories must be specific enough for two experts to apply independently. ``High quality'' leaves the standard inside the rater's judgment. ``PASS if every requested behavior is present, no stated constraint is violated, and every factual claim is supported by the supplied record'' identifies observations that raters can compare. The examples should include boundary cases and counterexamples, especially cases on which experts initially disagreed.
 
-\section{Agreement before automation}\label{agreement-before-automation}
+\hypertarget{agreement-before-automation}{%
+\section{Agreement before automation}\label{agreement-before-automation}}
 
 \textbf{Inter-rater reliability} measures how consistently independent raters assign labels to the same items. It is a prerequisite for treating their labels as a reference. When experts cannot apply the rubric consistently, a model that reproduces one expert's decisions may be learning an unstable convention rather than measuring the intended property.
 
@@ -51,7 +53,7 @@ The always-PASS pair is the degenerate limit of this calculation. Observed agree
 
 \begin{figure}[htbp]
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Cells of 85, 5, 5, and 5 produce 90\% observed versus 82\% expected agreement and kappa about 0.44; two always-PASS graders produce 100\% observed and expected agreement but undefined kappa.}]{figures/ch05-agreement-kappa.pdf}}
+\includegraphics{figures/ch05-agreement-kappa.pdf}
 \caption{Cells of 85, 5, 5, and 5 produce 90\% observed versus 82\% expected agreement and kappa about 0.44; two always-PASS graders produce 100\% observed and expected agreement but undefined kappa.}
 \end{figure}
 
@@ -75,7 +77,7 @@ The balanced sample does not, by itself, estimate aggregate deployment performan
 
 \begin{figure}[htbp]
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Equal-length bars compare 950 routine, 30 borderline, and 20 defect deployment items with natural 95, 3, and 2 and stratified 40 each requiring reweighting; one missed defect changes detection by 50 percentage points.}]{figures/ch05-sampling-prevalence.pdf}}
+\includegraphics{figures/ch05-sampling-prevalence.pdf}
 \caption{Equal-length bars compare 950 routine, 30 borderline, and 20 defect deployment items with natural 95, 3, and 2 and stratified 40 each requiring reweighting; one missed defect changes detection by 50 percentage points.}
 \end{figure}
 
@@ -111,7 +113,8 @@ Threshold selection and final reporting should use separate data, or a design th
 
 Together, these components define the measuring instrument. Expert agreement establishes whether the reference labels have a stable meaning. Stratified sampling places rare and consequential cases under observation. Class-specific rates separate errors that aggregate accuracy combines. The operating point then weighs those errors against the review capacity and failure costs of the deployed system.
 
-\section{Calibrate the judge, then scale}\label{calibrate-the-judge-then-scale}
+\hypertarget{calibrate-the-judge-then-scale}{%
+\section{Calibrate the judge, then scale}\label{calibrate-the-judge-then-scale}}
 
 Panthi and Abdelfattah (\href{https://arxiv.org/abs/2605.24060}{2026}) provide a compact example of the full protocol. They needed to adjudicate cases in which two systems received the same rank even though a downstream rule could still select different winners. They first defined a three-way rubric, then drew a 115-case human-annotated subset from the contested cases, stratified by credited-rank bucket.
 
@@ -155,7 +158,8 @@ Calibration must be repeated whenever the domain, rubric, response format, or mo
 
 The result remains bounded. Scaled judging reduces the amount of unmeasured error relative to deploying an untested judge. It does not certify that every accepted output is correct, and the expert reference itself contains disagreement. Its value is that those errors become observable before the labels begin controlling releases, rankings, rewards, or training data.
 
-\section{What a panel's vote establishes}\label{what-a-panels-vote-establishes}
+\hypertarget{what-a-panels-vote-establishes}{%
+\section{What a panel's vote establishes}\label{what-a-panels-vote-establishes}}
 
 Bertalani\v{c} (\href{https://arxiv.org/abs/2605.00914}{2026}) reports an oracle gap of up to 32.3 percentage points between plurality voting and selecting a correct answer already present among the candidates. The candidate set contained a correct answer, but the vote discarded it. The synthesis is exploratory, and the current evidence record contains no corroborating result. The figure therefore establishes a reported failure mode, not its prevalence across panel designs.
 
@@ -195,7 +199,8 @@ The always-PASS pair from the opening is the degenerate panel. A larger group of
 
 The companion catalog contains two narrower controls for implementations of this architecture: retain an exact auditor beside heuristic graders, and combine judge labels with a human-labeled subset. Each addresses a smaller problem than the core decisions developed here.
 
-\section{Rebuild the grader as a measured system}\label{rebuild-the-grader-as-a-measured-system}
+\hypertarget{rebuild-the-grader-as-a-measured-system}{%
+\section{Rebuild the grader as a measured system}\label{rebuild-the-grader-as-a-measured-system}}
 
 Begin by discarding the assumption that the current judge prompt defines the target. The people whose judgment the system is meant to encode should write the categories and apply them independently to fresh cases. Their disagreements reveal missing rules, conflicting interpretations, and cases that should permit abstention.
 

@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "companion_version": "1.0.0-rc.8",
+  "consolidated_at": "2026-07-26",
+  "update_cutoff": "2026-08-06",
+  "manuscript_source_counts": {
+    "scholarly": 129,
+    "scholarly_at_consolidation": 118,
+    "scholarly_admitted_in_update": 11,
+    "practitioner": 91,
+    "benchmarks": 29,
+    "author_system_cases": 17
+  },
+  "scholarly_retrieval": {
+    "official_service": "SciX, operated by the Smithsonian Astrophysical Observatory under a NASA cooperative agreement",
+    "official_about": "https://scixplorer.org/scixabout/",
+    "official_api": "https://scixplorer.org/scixhelp/api-scix/",
+    "local_layer": "SciX Agent",
+    "records": 32400000,
+    "citation_edges": 299300000,
+    "full_text_records": 14900000,
+    "retrieval": "INDUS dense retrieval and BM25 lexical retrieval fused by reciprocal rank",
+    "retained_revision_nearest_consolidation": "dd618037f61035bd62f1e7a620029c6b4867ab6a",
+    "release_audit_revision": "14c8dea19a80494e9a64dc76afb8c0cb64483701",
+    "revision_note": "The nearest pre-cutoff repository revision is reconstructed from version history; it is not represented as an exact execution-environment lockfile."
+  },
+  "practitioner_retrieval": {
+    "corpus": "Code Intelligence Digest",
+    "public_description": "https://www.sjarmak.ai/projects/code-intelligence-digest",
+    "snapshot_at": "2026-07-27T00:00:00Z",
+    "normalized_records": 162350,
+    "retained_full_text_records": 43953,
+    "normalized_source_labels": 149,
+    "categories": {
+      "research": 62870,
+      "community": 39133,
+      "newsletters": 29360,
+      "tech_articles": 17850,
+      "product_news": 9446,
+      "ai_dev": 1602,
+      "marketing": 1413,
+      "ai_news": 365,
+      "podcasts": 311
+    },
+    "retained_revision_nearest_consolidation": "efa3dba247c8c8c3f47c572078747df63b1fae3c",
+    "release_audit_revision": "0d4b707c8465d2b5d08137563a87718648d927bd",
+    "revision_note": "Counts are the retained cutoff snapshot. The revision fields identify inspected repository states and do not imply that current corpus contents equal the cutoff snapshot."
+  },
+  "thread_syntheses": [
+    {
+      "thread_id": 1,
+      "file": "thread-1-benchmark-validity.md",
+      "source_count": 17,
+      "sha256": "5bc402b22e9e14647074f902d5a6406437588b35f48e53a5b98846376c2854a5"
+    },
+    {
+      "thread_id": 2,
+      "file": "thread-2-failure-taxonomies.md",
+      "source_count": 17,
+      "sha256": "8eb18d1d19b63fd1cae983d179a01695a84be2e2efdb7cd9cd1aa3cc4655a517"
+    },
+    {
+      "thread_id": 3,
+      "file": "thread-3-eval-statistics.md",
+      "source_count": 17,
+      "sha256": "e8c2abad5b45d2042d16ad7199537bd5a5c91fe01825505e83f1bf4e070e680f"
+    },
+    {
+      "thread_id": 4,
+      "file": "thread-4-oversight-accountability.md",
+      "source_count": 17,
+      "sha256": "ad02bd490780c2682ab53949dd3b9af9302fc10d7b785875cbf65fb60ee8b8c0"
+    },
+    {
+      "thread_id": 5,
+      "file": "thread-5-context-retrieval.md",
+      "source_count": 17,
+      "sha256": "569304f5e99fb93c12e5f4f81f4fee7a4a7fdde87e0899ab71893e94a5f1542b"
+    },
+    {
+      "thread_id": 6,
+      "file": "thread-6-durable-execution.md",
+      "source_count": 17,
+      "sha256": "d469b8e90868a54003445c58657fe93cc12c07b6d5f7427b180ebe0422172353"
+    },
+    {
+      "thread_id": 7,
+      "file": "thread-7-scheduling-and-repo-scoping.md",
+      "source_count": 16,
+      "sha256": "f5ee817a2ae69b6fb867e9643bad6d8f5bba76a7adeeaccb3c9fb208b330e14f"
+    }
+  ],
+  "provenance_boundary": "Retrieval systems ordered candidates. The author made final inclusion, evidence-group, practice, chapter, and prose decisions."
+}

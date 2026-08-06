@@ -32,7 +32,8 @@ The useful unit is the transfer of control for one action class. Each transfer h
 
 Once those elements are explicit, autonomy can be calibrated from observations, provenance can travel with the artifact, and the gate can be tested as an executable control. Accountability can then be assigned to a role that actually holds authority.
 
-\section{Widen authority one action class at a time}\label{widen-authority-one-action-class-at-a-time}
+\hypertarget{widen-authority-one-action-class-at-a-time}{%
+\section{Widen authority one action class at a time}\label{widen-authority-one-action-class-at-a-time}}
 
 An autonomy ladder widens control one rung at a time for a defined action class. Each class keeps its own approval, modification, and outcome record. A \textbf{promotion threshold} is the criterion for moving that action to a wider rung.
 
@@ -173,7 +174,8 @@ The executable decision is narrower:
 
 Two companion entries sit beside this practice. \texttt{measure-oversight-with-decomposed-metrics} separates overreliance from underreliance and classifies review interactions before counting coverage. The evidence for \texttt{attach-reliance-disclaimers} supports only its inclusion as a marked design option.
 
-\section{Put provenance where review happens}\label{put-provenance-where-review-happens}
+\hypertarget{put-provenance-where-review-happens}{%
+\section{Put provenance where review happens}\label{put-provenance-where-review-happens}}
 
 Tang et al.~(\href{https://arxiv.org/abs/2405.16081}{2024}) observed 28 developers in a laboratory study and found that they were unreliable at recognizing machine-generated code without assistance. When told that the code was generated, participants searched and verified more, and their repair performance improved. Cognitive workload also increased.
 
@@ -306,7 +308,8 @@ The relevant question is whether provenance changes verification in the deployed
 
 The companion entry \texttt{write-an-agent-contribution-policy} covers repository rules for disclosure, attribution, and accepted contribution paths. A policy can standardize the wire format. It cannot make the marker effective. Effectiveness remains an observed relationship among the label, verification surface, reviewer behavior, and repair outcome.
 
-\section{Prove that a gate can change execution}\label{prove-that-a-gate-can-change-execution}
+\hypertarget{prove-that-a-gate-can-change-execution}{%
+\section{Prove that a gate can change execution}\label{prove-that-a-gate-can-change-execution}}
 
 Human gates have only directional support in this chapter and no strong evidence item. Sterz et al.~(\href{https://arxiv.org/abs/2404.04059}{2024}) propose an interdisciplinary framework for effective human oversight but provide no empirical validation of a universal test. Green (\href{https://arxiv.org/abs/2109.05067}{2022}) compared 41 government oversight policies with findings from human-computer interaction research and concluded that the human functions prescribed by those policies were generally not performable.
 
@@ -335,10 +338,10 @@ The interdisciplinary framework identifies four conditions for effective oversig
 Evaluate those conditions against an execution trace rather than the policy document. For every named gate, follow the proposed action through approval, mutation, dispatch, and durable state change. Inject the failures the gate claims to handle. Observe whether the reviewer receives the required evidence, whether rejection blocks every path, and whether a modified action requires renewed approval.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Condition
@@ -414,7 +417,8 @@ Three companion entries sit beside this practice: \texttt{separate-control-from-
 
 None establishes that a particular gate works. That requires a trace showing that the reviewer had the evidence, authority, and execution path needed to change the outcome.
 
-\section{Assign responsibility only where control exists}\label{assign-responsibility-only-where-control-exists}
+\hypertarget{assign-responsibility-only-where-control-exists}{%
+\section{Assign responsibility only where control exists}\label{assign-responsibility-only-where-control-exists}}
 
 Cavalcante Siebert et al.~(\href{https://arxiv.org/abs/2112.01298}{2023}) provide a conceptual bridge from responsibility theory to engineering practice: responsibility should be commensurate with the ability and authority to control an outcome. Suryana et al.~(2025) operationalized related questions in another domain through interviews with 103 users of partially automated driving systems, identifying gaps between expected and actual behavior and inconsistent adherence to operating protocols.
 
@@ -583,11 +587,13 @@ Collective work complicates responsibility without removing it. Models propose a
 
 Neither should diffuse answerability so widely that no role owns a state transition it can actually stop.
 
-\section{Audit the path from policy to execution}\label{audit-the-path-from-policy-to-execution}
+\hypertarget{audit-the-path-from-policy-to-execution}{%
+\section{Audit the path from policy to execution}\label{audit-the-path-from-policy-to-execution}}
 
 Run four checks against one defined action class and one real repository workflow.
 
-\section{Test the autonomy transfer}\label{test-the-autonomy-transfer}
+\hypertarget{test-the-autonomy-transfer}{%
+\section{Test the autonomy transfer}\label{test-the-autonomy-transfer}}
 
 \Needspace{5\baselineskip}
 
@@ -611,7 +617,8 @@ Record every proposed transfer, including rejected, modified, timed-out, abandon
 
 Calculate uncertainty around approval, modification, and outcome rates. Test whether reviewers understand the affected state, evidence, and rollback path. Widen authority by one rung only when those observations support the change.
 
-\section{Test whether provenance survives review and integration}\label{test-whether-provenance-survives-review-and-integration}
+\hypertarget{test-whether-provenance-survives-review-and-integration}{%
+\section{Test whether provenance survives review and integration}\label{test-whether-provenance-survives-review-and-integration}}
 
 Choose the smallest provenance unit that can survive the repository workflow while still representing the review decision it is intended to affect.
 
@@ -641,7 +648,8 @@ Verify that a reviewer can distinguish generation, human revision, and integrati
 
 Keep the count semantics narrow. The 14.5 percent trailer-signed floor described earlier is a lower bound on visible trailer-marked authorship. It must not be combined with an inferred contribution share.
 
-\section{Test the gate as a failure experiment}\label{test-the-gate-as-a-failure-experiment}
+\hypertarget{test-the-gate-as-a-failure-experiment}{%
+\section{Test the gate as a failure experiment}\label{test-the-gate-as-a-failure-experiment}}
 
 Run the gate audit in a contained environment. Name the action, gate, and decision owner, then capture the complete execution trace.
 
@@ -675,9 +683,11 @@ Inspect the evidence available to the reviewer and verify the durable state prod
 
 Interview the assigned reviewer about the risk they believe they are checking, then compare that account with the actual execution path. Repair or remove a gate that cannot demonstrate causal power and epistemic access. Decide explicitly how queue pressure, defaults, incentives, and emergency procedures will preserve self-control and fitting intentions.
 
-\section{Audit accountability in two passes}\label{audit-accountability-in-two-passes}
+\hypertarget{audit-accountability-in-two-passes}{%
+\section{Audit accountability in two passes}\label{audit-accountability-in-two-passes}}
 
-\paragraph{Pass one: verify operational control}\label{pass-one-verify-operational-control}
+\hypertarget{pass-one-verify-operational-control}{%
+\paragraph{Pass one: verify operational control}\label{pass-one-verify-operational-control}}
 
 For each role named as accountable, select a real action and test the role's deployed permissions.
 
@@ -705,7 +715,8 @@ Record the state transitions outside that role's authority, the information it c
 
 Where control is missing, either repair the role within least-privilege constraints or reassign responsibility to the role that holds the necessary authority.
 
-\paragraph{Pass two: compare the stated and experienced control models}\label{pass-two-compare-the-stated-and-experienced-control-models}
+\hypertarget{pass-two-compare-the-stated-and-experienced-control-models}{%
+\paragraph{Pass two: compare the stated and experienced control models}\label{pass-two-compare-the-stated-and-experienced-control-models}}
 
 Interview actual users, operators, reviewers, and owners using tracking and tracing questions. Compare their justified expectations with policy and execution traces.
 

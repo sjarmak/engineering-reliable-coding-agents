@@ -10,7 +10,8 @@ Four items support the chapter's two entries: two synthesized sources and two di
 
 Chapter 8 established that recorded state can make a run resumable. Replay imposes a stricter requirement. The system must know which events produced that state, which work may safely repeat, and where a changed decision invalidates the prior path. Recovery testing adds a third requirement: the runtime must demonstrate the claimed behavior when faults occur at inconvenient points, not only when a demonstration script stops a worker at a clean boundary.
 
-\section{What a transcript cannot answer}\label{what-a-transcript-cannot-answer}
+\hypertarget{what-a-transcript-cannot-answer}{%
+\section{What a transcript cannot answer}\label{what-a-transcript-cannot-answer}}
 
 After an agent sends the same payment instruction twice, the first operational question is whether the tool executed twice or one execution produced two visible records. A transcript may show two assistant messages and two tool-shaped responses. It usually cannot establish whether the first request reached the payment service, whether the service committed it, whether the runtime received the response, or whether that response became durable before restart.
 
@@ -46,7 +47,8 @@ These identifier fields come from governance analysis rather than deployment mea
 
 The same analysis identifies costs. Stable identifiers can reveal sensitive relationships among users, agents, and actions, while a centralized trace store concentrates observational power. A useful trace design specifies access control, retention, and redaction together with joinability. Otherwise improved operational visibility becomes an unbounded surveillance record.
 
-\section{Replay from a changed step}\label{replay-from-a-changed-step}
+\hypertarget{replay-from-a-changed-step}{%
+\section{Replay from a changed step}\label{replay-from-a-changed-step}}
 
 Replay reconstructs a run from recorded events while re-executing only the portion that must change. In the simple case, the runtime begins from durable state at step 16, replaces the decision logic or input at step 17, and executes the resulting suffix. The earlier prefix remains evidence of what happened. It is not regenerated as plausible prose.
 
@@ -74,7 +76,8 @@ A prose log could state that recovery succeeded. The event record allows a verif
 
 Neither example establishes that typed traces outperform transcripts in a controlled setting. They show what becomes mechanically queryable when the runtime preserves event type, identity, order, and provenance. That distinction supports an instrumentation decision when the required question cannot be answered from the existing artifact. It does not establish that the instrumentation will reduce incident duration or improve recovery correctness by a predictable amount.
 
-\section{A shared vocabulary and its limits}\label{a-shared-vocabulary-and-its-limits}
+\hypertarget{a-shared-vocabulary-and-its-limits}{%
+\section{A shared vocabulary and its limits}\label{a-shared-vocabulary-and-its-limits}}
 
 The OpenTelemetry GenAI semantic conventions define common names and attributes for telemetry emitted by generative-AI systems. Their value is syntactic coordination. A runtime, collector, storage system, and analysis tool can exchange records without every pair inventing its own translation for model identity, operation type, token usage, or agent activity. Shared conventions reduce the bespoke assumptions that otherwise become hidden dependencies in an observability pipeline.
 
@@ -94,7 +97,8 @@ Long histories introduce a cost that correctness arguments can obscure. Replayin
 
 Transcript-only observability remains attractive because it is easy to render and resembles the interface through which people interact with a model. I still retain transcripts, but as derived views rather than recovery records. The durable artifact is the typed event stream. A transcript is one projection over selected event types. This preserves readability without allowing a presentation format to erase the causal information that recovery requires.
 
-\section{Recovery is a measured property}\label{recovery-is-a-measured-property}
+\hypertarget{recovery-is-a-measured-property}{%
+\section{Recovery is a measured property}\label{recovery-is-a-measured-property}}
 
 Vogel et al.~(2024) did more than show that injected faults degrade performance. Their direct recovery measurements reversed conclusions from earlier published comparisons, and the effect of a fault changed across successive failures. Software configuration, workload, accumulated recovery state, and fault timing all contributed to the observed result. A useful recovery claim must therefore include those conditions.
 
@@ -102,7 +106,8 @@ An architecture diagram describes intended control flow. It may show a worker lo
 
 Fault injection forces that interaction to occur on demand. Kill a worker or pod, interrupt an external call, terminate the process during persistence, and repeat those disturbances while representative work is active. The purpose is to measure recovery over a declared fault menu and operating envelope, with faults placed at the intervals the design claims to protect.
 
-\section{Specify the claim before the kill}\label{specify-the-claim-before-the-kill}
+\hypertarget{specify-the-claim-before-the-kill}{%
+\section{Specify the claim before the kill}\label{specify-the-claim-before-the-kill}}
 
 \Needspace{5\baselineskip}
 
@@ -180,7 +185,8 @@ The first exposes accumulated effects such as queue growth, leaked leases, enlar
 
 Recurring failures should retain their sequence position in the data. If the third kill produces a longer outage than the first, a pooled mean conceals stateful degradation. Plot or tabulate recovery metrics by failure ordinal and preserve the individual observations. The sample may remain too small for a stable population estimate, but the sequence can still show whether recovery changes as faults accumulate.
 
-\section{Strike the interval the design claims to protect}\label{strike-the-interval-the-design-claims-to-protect}
+\hypertarget{strike-the-interval-the-design-claims-to-protect}{%
+\section{Strike the interval the design claims to protect}\label{strike-the-interval-the-design-claims-to-protect}}
 
 The most informative fault point is rarely the boundary between steps. Chapter 8 identified the execute-then-log interval: an external system may commit an effect after receiving the request but before the runtime durably records completion. A design that claims safe retry or exactly-once visible effects must hold when the process dies inside that gap.
 
@@ -233,7 +239,7 @@ These points test different properties. The first asks whether unstarted work ca
 
 \begin{figure}[htbp]
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Five lifecycle kill points test recovery from unstarted work through ambiguous commitment gaps to durable completion, including recognition and suppression of repeated external effects.}]{figures/ch09-kill-points.pdf}}
+\includegraphics{figures/ch09-kill-points.pdf}
 \caption{Five lifecycle kill points test recovery from unstarted work through ambiguous commitment gaps to durable completion, including recognition and suppression of repeated external effects.}
 \end{figure}
 
@@ -251,7 +257,8 @@ The fault menu should ultimately come from observed production failures rather t
 
 The companion catalog's realistic-fault-menu pattern develops the fuller construction method. The narrower requirement here is to publish the menu so readers can see which failures the recovery claim includes and which it excludes.
 
-\section{Keep the result attached to its envelope}\label{keep-the-result-attached-to-its-envelope}
+\hypertarget{keep-the-result-attached-to-its-envelope}{%
+\section{Keep the result attached to its envelope}\label{keep-the-result-attached-to-its-envelope}}
 
 My kill demonstration, a \textbf{local artifact}, illustrates the protocol without extending the literature evidence. In one run, the worker was killed during an activity after a retryable fault had already been injected. The recovered execution passed all 13 invariant checks. The interrupted activity resumed after a heartbeat-timeout retry, reused a cached result, and produced output identical to the clean reference by content hash.
 
@@ -323,7 +330,8 @@ Resource use and additional model calls belong to cost. An operator's ability to
 
 A recovery system may also need to withhold action when it cannot classify a failure safely. The companion pattern on diagnosing before gating recovery addresses that policy. Another companion pattern asks whether recovery remains invisible to downstream observers except as monotonic progress. Neither property follows from a successful restart, so I exclude both from the basic pass criterion unless the system claims them explicitly.
 
-\section{A protocol for trusting recovery}\label{a-protocol-for-trusting-recovery}
+\hypertarget{a-protocol-for-trusting-recovery}{%
+\section{A protocol for trusting recovery}\label{a-protocol-for-trusting-recovery}}
 
 Before accepting a recovery claim about an agent runtime, I look for two linked artifacts.
 

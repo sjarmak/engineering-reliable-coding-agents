@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.0.0-rc.8 — 2026-08-06
+
+- Defined SciX, the local SciX Agent retrieval layer, and Code Intelligence
+  Digest in the manuscript's review method; added the human and automated
+  decision boundary for source curation and practice selection.
+- Published corpus snapshots, seven thread protocols, 118 retained scholarly
+  source identities, and 39 record-level decisions from the bounded update
+  audit without representing reconstructed queries as historical logs.
+- Admitted 11 recent scholarly works with claim-specific evidence groups across
+  evaluation validity, gating, safety, diagnosis, retrieval, context files,
+  topology, workload characterization, and routing.
+- Expanded the reference audit to 319 arXiv identifiers and the bibliography to
+  196 entries; all arXiv and DOI identifiers resolve, and 66 strong-evidence
+  entries pass the composite-claim audit.
+- Rebuilt and independently compiled the arXiv package: 258 pages, 13 figures,
+  no overfull boxes, undefined references, or missing characters.
+
 ## 1.0.0-rc.7 — 2026-08-05
 
 - Established once that some practices are engineering controls justified by

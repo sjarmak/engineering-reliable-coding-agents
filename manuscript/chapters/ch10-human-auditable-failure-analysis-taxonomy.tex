@@ -8,7 +8,8 @@ Attribution is the scarce capability in this sequence. Logging preserves evidenc
 
 Three practices follow. I derive the initial failure taxonomy from traces produced by the system I operate. I keep a person responsible for consequential causal assignments. I structure the trace so that person can inspect and defend the evidence. Automation can organize and extend the work after those conditions exist. It should not be assumed to create them.
 
-\section{Build the taxonomy from the failures you can inspect}\label{build-the-taxonomy-from-the-failures-you-can-inspect}
+\hypertarget{build-the-taxonomy-from-the-failures-you-can-inspect}{%
+\section{Build the taxonomy from the failures you can inspect}\label{build-the-taxonomy-from-the-failures-you-can-inspect}}
 
 The protocol in this section has limited evidentiary support. Its basis is one directional observational study and one practitioner-authored method. Neither is a controlled result showing that the procedure improves an agent system. I still use it because it provides an auditable process for turning local traces into measurement categories. The method comes from Orosz and Husain (\href{https://newsletter.pragmaticengineer.com/p/evals}{2025}), and their recommendation to begin with at least one hundred traces is an unmeasured protocol choice.
 
@@ -30,7 +31,7 @@ A clear no makes the step a plausible causal boundary. A yes suggests that the a
 
 \begin{figure}[htbp]
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={A planning error is the first upstream failure linking four visible defects, while a counterfactual test distinguishes a plausible causal boundary from a symptom.}]{figures/ch10-first-upstream-failure.pdf}}
+\includegraphics{figures/ch10-first-upstream-failure.pdf}
 \caption{A planning error is the first upstream failure linking four visible defects, while a counterfactual test distinguishes a plausible causal boundary from a symptom.}
 \end{figure}
 
@@ -66,7 +67,8 @@ Frequency informs priority without determining it. I count first-upstream assign
 
 Several narrower methods remain in the companion catalog. Constraint-violation logs can localize failure when a task has explicit invariants. Trajectory canonicalization can support structural comparisons across runs. Another entry recommends detecting environment errors before execution because they can consume disproportionate effort. These techniques may sharpen a local taxonomy, but none removes the need to discover which categories the operated system actually produces.
 
-\section{Keep causal assignment under human control}\label{keep-causal-assignment-under-human-control}
+\hypertarget{keep-causal-assignment-under-human-control}{%
+\section{Keep causal assignment under human control}\label{keep-causal-assignment-under-human-control}}
 
 Attribution becomes consequential when it changes what happens next. An engineer may rewrite a prompt, repair a tool adapter, remove a benchmark task, retrain a model, or revise an incident report based on the assigned cause. The same label may also affect accountability when different people or services own different parts of the run. In those cases, an automated guess is not a harmless summary.
 
@@ -138,6 +140,8 @@ Concurrency creates another ambiguity. Two workers may read the same starting st
 
 Before assigning fault to an agent, I rule out the evaluator and execution environment. A broken dependency, stale fixture, permission mismatch, nondeterministic test, or malformed task can make a correct action appear defective. Differential testing runs the same candidate under a controlled change in agent, harness, or environment and asks whether the failure follows the candidate. The companion catalog treats this as a separate diagnostic control because attribution without apparatus checks can turn measurement error into a model failure.
 
+Raj et al.~(\href{https://arxiv.org/abs/2607.28802}{2026}) organize 41 failure modes by the interaction edge where a fault originates and the component that owns the repair. The strongest of four automated judges reached Cohen's \(\kappa=0.76\) against human category labels. The taxonomy is directional evidence for an interaction-centered diagnostic structure; the agreement result strongly supports reproducibility of those labels in the evaluated set, not causal correctness of an attribution.
+
 Human control does not require every reviewer to read every trace from the beginning. Automated systems can rank likely decisive steps, group similar incidents, retrieve related cases, prefill observed events, and flag assignments inconsistent with the recorded state transitions. The reviewer remains responsible for accepting, revising, or abstaining. The stored record distinguishes the automated proposal from the signed attribution.
 
 I used the same authority boundary in my internal benchmark-curation process, which determined whether generated software tasks were sound enough to evaluate. Candidate decisions retained an explicit provisional label until a project lead approved them. The pipeline could assemble evidence and run checks, but it could not finalize whether a defect belonged to the task or the evaluated system. This methodology example supplies no accuracy evidence.
@@ -150,7 +154,8 @@ Aggregating several automated readers does not by itself make attribution reliab
 
 Repeated local categories can expose a structural defect. When the same failure class survives prompt patches and model upgrades, the remedy is likely architectural, and Chapter 17 develops how to test that redesign. Recurrence identifies the problem; an intervention still requires its own evaluation.
 
-\section{Design the record for a skeptical reader}\label{design-the-record-for-a-skeptical-reader}
+\hypertarget{design-the-record-for-a-skeptical-reader}{%
+\section{Design the record for a skeptical reader}\label{design-the-record-for-a-skeptical-reader}}
 
 Deshpande et al.~(\href{https://arxiv.org/abs/2505.08638}{2025}) reported that the strongest evaluated long-context model correctly localized issues in 11 percent of 148 expert-annotated traces. The traces were benchmark-derived but ecologically valid and more complex than short synthetic sequences designed to isolate one error. Reasoning, tool calls, outputs, retries, and state changes appeared in the same record. A large context window could contain the transcript, but containment did not make the decisive event legible.
 
@@ -264,7 +269,8 @@ The schema should evolve from failed investigations. Common gaps concern the sta
 
 Trajectory shape can provide an early signal while a run remains active. The companion catalog describes monitoring duration, variance, tool-call count, and other structural changes because failed trajectories may run longer or become more variable. Such a signal can preserve a suspicious run or request earlier review. It cannot identify the cause without the structured events that explain what occurred inside that shape.
 
-\section{Turn failed runs into an operating record}\label{turn-failed-runs-into-an-operating-record}
+\hypertarget{turn-failed-runs-into-an-operating-record}{%
+\section{Turn failed runs into an operating record}\label{turn-failed-runs-into-an-operating-record}}
 
 I begin with the twenty most recent failed runs and read each one from the initial request through the terminal state. My notes remain open-ended, and each case receives one primary assignment: the first upstream failure that materially changed its path to success. I also include apparent successes whose verification was skipped, because an unverified outcome cannot provide clean evidence of success.
 
@@ -312,6 +318,8 @@ Part IV turns to the evidence available when the model acts: retrieval, context 
   Strong evidence: Deshpande, D., et al.~(2025), ``TRAIL: Trace Reasoning and Agentic Issue Localization,'' Patronus AI, arXiv:2505.08638. (Best evaluated model localized issues in 11\% of 148 expert-annotated traces; a 2025 capability snapshot.)
 \item
   Corroborating case: \href{https://www.reddit.com/r/LLMDevs/comments/1q7avil/}{``What actually broke when we put AI agents into real production workflows''}, /u/saurabhjain1592, r/LLMDevs, 2026-01-08.
+\item
+  Directional evidence for interaction-centered failure localization, with strong evidence for label reproducibility in the evaluated set: Raj, H., et al.~(2026), ``Model or Harness? An Interaction-Centric Taxonomy for Localizing Agent Failures,'' arXiv:2607.28802. The strongest automated judge reached Cohen's \(\kappa=0.76\) against human labels.
 \end{itemize}
 
 \textbf{Author-system illustration cited inline}

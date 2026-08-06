@@ -12,7 +12,8 @@ I treat the complete chronological record of a session's inputs, actions, output
 
 Six items support the chapter's three design entries; two are strong, and five are syntheses rather than controlled experiments. The contested storage recommendation has no strong supporting item. The evidence defines architectures and measurement decisions, but supplies no defensible retention period, retrieval threshold, or compression ratio.
 
-\section{Keep the source record rebuildable}\label{keep-the-source-record-rebuildable}
+\hypertarget{keep-the-source-record-rebuildable}{%
+\section{Keep the source record rebuildable}\label{keep-the-source-record-rebuildable}}
 
 Continuous rewriting can leave the latest memory without evidence that earlier versions contained. Support for this mechanism comes from one source study retained as strong by the evidence audit, one directional synthesis, and the Slack production account described above. The directional synthesis, Agentic Context Engineering (2025), reports no quantitative result and therefore supports only the direction of the practice. No controlled comparison of storage architectures is available.
 
@@ -192,7 +193,8 @@ The design requires each loss to be explicit and testable, without requiring uni
 
 \textbf{Companion catalog note (limited support).} Durable project state survived crashes and context loss in the long-horizon engineering system evaluated by Chen (\href{https://arxiv.org/abs/2604.13018}{2026}). This provides directional support for handing artifact references between agents. No controlled comparison with transcript-summary handoff is available, so any fidelity advantage remains an inference. The receiving agent must still verify artifact identity, version, and permissions.
 
-\section{Add memory infrastructure only for measured retrieval failures}\label{add-memory-infrastructure-only-for-measured-retrieval-failures}
+\hypertarget{add-memory-infrastructure-only-for-measured-retrieval-failures}{%
+\section{Add memory infrastructure only for measured retrieval failures}\label{add-memory-infrastructure-only-for-measured-retrieval-failures}}
 
 At an architecture review for a new agent project, the proposed design already included a vector database and a knowledge graph. The query log was empty. Nobody had yet asked the system a question, but the retrieval architecture had already been chosen.
 
@@ -428,7 +430,8 @@ Such material should retain explicit source and time semantics. Code search shou
 
 \textbf{Companion catalog note (limited support).} Memory portability favors exportable events, explicit schemas, and provenance another system can audit. The support from Munirathinam (\href{https://arxiv.org/abs/2606.01138}{2026}) is anecdotal. A portability claim should therefore be tested by exporting and importing an actual corpus. A feature statement in product documentation is not a portability test.
 
-\section{Let observed failures determine what compaction preserves}\label{let-observed-failures-determine-what-compaction-preserves}
+\hypertarget{let-observed-failures-determine-what-compaction-preserves}{%
+\section{Let observed failures determine what compaction preserves}\label{let-observed-failures-determine-what-compaction-preserves}}
 
 A reviewer opens a failed trace annotated under Chapter 10's protocol and finds that the first upstream error followed a condensed-history update. \textbf{Compaction} replaces working history with a shorter representation so a run can remain inside its context budget. When a fixed summarization prompt is treated as routine maintenance, its failure profile remains unmeasured.
 
@@ -532,7 +535,8 @@ The tuning loop cannot begin on the first day because no local failure evidence 
 
 Optimization begins only after the traces show which omissions, distortions, and distractions caused consequential errors. This dependence on Chapter 10's failure corpus is why compaction tuning follows the broader retrieval and context architecture rather than preceding it.
 
-\section{Build memory in reversible stages}\label{build-memory-in-reversible-stages}
+\hypertarget{build-memory-in-reversible-stages}{%
+\section{Build memory in reversible stages}\label{build-memory-in-reversible-stages}}
 
 Storage and retention decisions take effect from the first session. Compaction-policy optimization waits for the failure corpus from Chapter 10. The sequence below separates controls required immediately from those that depend on observed failures.
 

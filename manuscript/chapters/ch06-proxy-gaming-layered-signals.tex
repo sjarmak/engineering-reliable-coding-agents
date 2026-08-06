@@ -1,6 +1,7 @@
 \chapter{Proxy metric gaming and layered evaluation signals}
 \label{ch06-proxy-gaming-layered-signals}
-\section{When perfect recall rewards returning everything}\label{when-perfect-recall-rewards-returning-everything}
+\hypertarget{when-perfect-recall-rewards-returning-everything}{%
+\section{When perfect recall rewards returning everything}\label{when-perfect-recall-rewards-returning-everything}}
 
 CodeProbe (\href{https://github.com/sjarmak/codeprobe}{public repository}) scores agent runs on tasks mined from our own repositories. For one day, its scorer included a recall-family reward under which an agent could earn a ``perfect'' 1.0 by returning the entire repository. A response containing everything cannot omit a relevant item. The strategy was degenerate, but it was correct under the proxy because recall measures how much relevant material was returned and ignores how much irrelevant material accompanied it.
 
@@ -66,7 +67,8 @@ I therefore assign different jobs to different signals:
 
 The design remains fallible. Its narrower guarantee is that no single optimizable score both defines success and decides acceptance.
 
-\section{Watch the relationship, not the rising score}\label{watch-the-relationship-not-the-rising-score}
+\hypertarget{watch-the-relationship-not-the-rising-score}{%
+\section{Watch the relationship, not the rising score}\label{watch-the-relationship-not-the-rising-score}}
 
 Gao et al.~(\href{https://arxiv.org/abs/2210.10760}{2022}) increased the optimization pressure applied to a learned proxy reward model while measuring a separate gold reward model. Gold reward improved at first, reached a peak, and then declined even as the proxy reward continued to rise. Reinforcement learning and best-of-n candidate selection produced different smooth trajectories. Measuring the full path exposed a divergence that a single endpoint would have missed.
 
@@ -80,7 +82,7 @@ The observed pattern does transfer: proxy improvement can precede, accompany, an
 
 \begin{figure}[htbp]
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Schematic of proxy performance continuing to rise after independent quality has peaked.}]{figures/ch06-proxy-divergence.pdf}}
+\includegraphics{figures/ch06-proxy-divergence.pdf}
 \caption{Schematic of proxy performance continuing to rise after independent quality has peaked.}
 \end{figure}
 
@@ -110,7 +112,8 @@ The operational rule is to investigate the mapping before changing the threshold
 
 Until that relationship is re-established, the proxy may remain diagnostic, but it should lose authority over acceptance and publication.
 
-\section{Preserve the channel that reveals intent}\label{preserve-the-channel-that-reveals-intent}
+\hypertarget{preserve-the-channel-that-reveals-intent}{%
+\section{Preserve the channel that reveals intent}\label{preserve-the-channel-that-reveals-intent}}
 
 Users of hosted models sometimes receive a visible reasoning trace alongside an agent's coding actions even though they do not train the model themselves. Baker et al.~(\href{https://arxiv.org/abs/2503.11926}{2025}) had a separate model inspect such traces for evidence of reward hacking during agentic coding. Trace inspection detected hacks substantially better than inspection limited to actions, and a weaker general model successfully monitored a stronger reasoning model. The inspected artifact was the agent's exposed intermediate reasoning while selecting its actions.
 
@@ -156,7 +159,8 @@ Several adjacent controls remain in the companion catalog because they answer na
 
 A thinly supported aside also proposes multi-objective acceptance with an independent judge. It carries no evidentiary weight in the layered system argued here.
 
-\section{Rebuild the acceptance path}\label{rebuild-the-acceptance-path}
+\hypertarget{rebuild-the-acceptance-path}{%
+\section{Rebuild the acceptance path}\label{rebuild-the-acceptance-path}}
 
 I rebuild an acceptance pipeline by tracing one recently accepted agent change from candidate generation through deployment. At each transition, I identify any value that could have ended the decision by itself: a passing test suite, clean lint result, judge score, approval label, or post-run summary.
 

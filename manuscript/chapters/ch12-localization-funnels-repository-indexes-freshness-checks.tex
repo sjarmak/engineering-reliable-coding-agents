@@ -8,7 +8,8 @@ Repository work presents three related architectural decisions. Some tasks benef
 
 Each decision carries a different cost. A funnel adds handoffs, and an early omission propagates through every later stage. A typed index requires construction, language coverage, storage, query tools, and continuing maintenance. A freshness gate can reject useful evidence when its identity checks are too coarse. I therefore treat all three as architecture choices with observable failure modes rather than as retrieval features to add by default.
 
-\section{Stage localization before repair}\label{stage-localization-before-repair}
+\hypertarget{stage-localization-before-repair}{%
+\section{Stage localization before repair}\label{stage-localization-before-repair}}
 
 Hierarchical localization determines where each comparison occurs and what evidence crosses the boundary between stages. Xia et al.~(\href{https://arxiv.org/abs/2407.01489}{2024}) removed open-ended tool-use autonomy from repository repair and retained three fixed phases: hierarchical localization, repair, and patch validation. On SWE-bench Lite, a curated subset of SWE-bench, that pipeline outperformed the autonomous agents evaluated alongside it while costing substantially less.
 
@@ -34,7 +35,7 @@ The stages have asymmetric consequences. Validation can sometimes correct a mist
 
 \begin{figure}[htbp]
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={The localization funnel progressively narrows repository evidence, while candidate file selection caps recall because any omitted file remains unavailable to every later inspection and edit stage.}]{figures/ch12-localization-funnel.pdf}}
+\includegraphics{figures/ch12-localization-funnel.pdf}
 \caption{The localization funnel progressively narrows repository evidence, while candidate file selection caps recall because any omitted file remains unavailable to every later inspection and edit stage.}
 \end{figure}
 
@@ -76,7 +77,8 @@ Later agent systems that surpassed the fixed pipeline also limit any claim that 
 
 The companion material covers narrower implementation choices: structural retrieval as a lane beside text search, stable structural anchors injected into context, and query-time graph walks when stored expansion would become too large. Those choices follow the architectural decision developed here. Preserve granularity, validate each handoff, and measure file selection as the stage capable of foreclosing every later success.
 
-\section{Build a typed index only when someone will maintain it}\label{build-a-typed-index-only-when-someone-will-maintain-it}
+\hypertarget{build-a-typed-index-only-when-someone-will-maintain-it}{%
+\section{Build a typed index only when someone will maintain it}\label{build-a-typed-index-only-when-someone-will-maintain-it}}
 
 Consider an issue reporting that cancelling one export leaves later exports blocked. The change belongs in a generic state-transition helper reached through a queue consumer and shared lifecycle component. None of those artifacts uses the language of exports or cancellation.
 
@@ -199,7 +201,8 @@ Readers unwilling to fund that admission and maintenance path should choose a ge
 
 The maintenance cost is justified only while a named owner can show which repository state each answer describes.
 
-\section{Admit only evidence tied to the current state}\label{admit-only-evidence-tied-to-the-current-state}
+\hypertarget{admit-only-evidence-tied-to-the-current-state}{%
+\section{Admit only evidence tied to the current state}\label{admit-only-evidence-tied-to-the-current-state}}
 
 Weng et al.~(\href{https://arxiv.org/abs/2605.14478}{2026}) changed Python helper signatures in 17 curated examples and compared stale with current retrieved snippets. This small diagnostic study is the only literature support for the practice developed here. It establishes the direction of the failure, but one form of staleness tested on two models supplies neither a general effect size nor a safe refresh cadence.
 
@@ -297,7 +300,8 @@ My published literature-review index provides the less flattering example. One s
 
 Freshness does not determine authorization. Permission policy requires separate identities, rules, and audit records. The evidence here supports refusing obsolete repository states. It does not establish who may retrieve a current one.
 
-\section{Choose the next retrieval intervention}\label{choose-the-next-retrieval-intervention}
+\hypertarget{choose-the-next-retrieval-intervention}{%
+\section{Choose the next retrieval intervention}\label{choose-the-next-retrieval-intervention}}
 
 Begin with Chapter 11's decomposed measurements and determine which stage is limiting the operated system. Inspect file-level retrieval before changing the agent architecture.
 

@@ -8,7 +8,8 @@ The patch changed the wrong variable. The preamble instructed the agent to synth
 
 Prompt changes are cheap, visible, and easy to isolate in an experiment. Structural changes alter component boundaries: which worker retrieves evidence, which worker interprets it, what crosses the handoff, and which component can reject the result. They are more expensive to implement and harder to evaluate because several causal paths may move together. They are also sometimes the only intervention aimed at the point where the failure is produced.
 
-\section{Move from prompt changes to structural repair only after persistence}\label{move-from-prompt-changes-to-structural-repair-only-after-persistence}
+\hypertarget{move-from-prompt-changes-to-structural-repair-only-after-persistence}{%
+\section{Move from prompt changes to structural repair only after persistence}\label{move-from-prompt-changes-to-structural-repair-only-after-persistence}}
 
 A failure class does not become persistent merely because it occurred more than once. I call a class persistent only after a paired comparison across model versions, with repeated trials, shows that it survives. One successful run on the newer model proves no more than one failed run on the older one.
 
@@ -27,6 +28,8 @@ Kim et al.~(\href{https://arxiv.org/abs/2602.09937}{2026}) provide a stronger cr
 That is evidence that an architectural failure can survive a more capable model. It does not establish a coding-agent failure rate or show that prompt engineering is generally ineffective.
 
 The OpenRCA result separates two failure mechanisms. Protocol enrichment addressed communication failures, whereas hallucinated interpretation required another intervention. A structured handoff cannot repair a worker that invents the meaning of accurate evidence, and a stronger verifier cannot recover evidence no upstream component retrieved.
+
+Oskooei et al.~(\href{https://arxiv.org/abs/2608.01507}{2026}) measured one such boundary on SWE-QA. Semantic search answered 65.2 percent of repository questions correctly, compared with 46.2 percent for planner-to-subagent search, at less than half the cost per correct answer. Handoff loss accounted for 41.8 percent of the subagent system's failures. This is strong evidence for the compared configurations on SWE-QA and directional evidence for topology selection beyond read-only repository questions.
 
 ``Change the structure'' is therefore not a remedy. It is an instruction to revisit the causal boundary that produced the observed class.
 
@@ -131,7 +134,8 @@ The repair criterion is causal and comparative:
 
 If the class does not change, the new structure added coordination without repairing the cause.
 
-\section{Require fan-out to beat the live single-agent baseline}\label{require-fan-out-to-beat-the-live-single-agent-baseline}
+\hypertarget{require-fan-out-to-beat-the-live-single-agent-baseline}{%
+\section{Require fan-out to beat the live single-agent baseline}\label{require-fan-out-to-beat-the-live-single-agent-baseline}}
 
 Every proposal to add debate, delegation, or parallel workers needs a live single-agent control.
 
@@ -299,7 +303,8 @@ decision:
 
 This gate answers whether to divide the work. Topology selection answers how. A multi-agent design that cannot clear the gate should return to structural diagnosis. The next experiment may require a narrower specialist boundary, a different aggregator, or no additional worker.
 
-\section{Choose topology by task shape and fault propagation}\label{choose-topology-by-task-shape-and-fault-propagation}
+\hypertarget{choose-topology-by-task-shape-and-fault-propagation}{%
+\section{Choose topology by task shape and fault propagation}\label{choose-topology-by-task-shape-and-fault-propagation}}
 
 Jia et al.~(\href{https://arxiv.org/abs/2602.19843}{2026}) injected synthetic faults into three multi-agent architectures in MAS-FIRE. Closed-loop architectures neutralized more than 40 percent of faults that caused the linear pipeline to collapse, and stronger foundation models did not uniformly produce greater robustness.
 
@@ -372,7 +377,7 @@ In a hierarchy, a lead's inaccurate summary can erase correct subordinate findin
 
 \begin{figure}[htbp]
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Fault propagation depends on collaboration topology, ranging from downstream contamination in pipelines to contained local errors when shared systems preserve provenance and state labels.}]{figures/ch17-topology-faults.pdf}}
+\includegraphics{figures/ch17-topology-faults.pdf}
 \caption{Fault propagation depends on collaboration topology, ranging from downstream contamination in pipelines to contained local errors when shared systems preserve provenance and state labels.}
 \end{figure}
 
@@ -484,7 +489,8 @@ The acceptable topology is the simplest one that:
   clears the live single-agent gate on the target workload.
 \end{itemize}
 
-\section{Dispatch only work whose dependencies are satisfied}\label{dispatch-only-work-whose-dependencies-are-satisfied}
+\hypertarget{dispatch-only-work-whose-dependencies-are-satisfied}{%
+\section{Dispatch only work whose dependencies are satisfied}\label{dispatch-only-work-whose-dependencies-are-satisfied}}
 
 In a narrative reconstruction from my workflow harness, six planned work items initially appeared ready to run together. A pre-dispatch overlap check showed that four touched the same adapter file and its test. The schedule therefore became two waves. Three items could run in parallel, including two disjoint changes and one low-risk item from the colliding group. The remaining three ran sequentially in increasing risk order.
 
@@ -590,7 +596,8 @@ Dynamic graphs are most useful when they expose decisions that were previously i
 
 If those answers cannot be reconstructed, the graph has become another hidden coordinator rather than an observable allocation mechanism.
 
-\section{Promote topology from a topology-specific record}\label{promote-topology-from-a-topology-specific-record}
+\hypertarget{promote-topology-from-a-topology-specific-record}{%
+\section{Promote topology from a topology-specific record}\label{promote-topology-from-a-topology-specific-record}}
 
 Chapter 1 defines the paired comparison, Chapter 2 the baseline and cost coordinates, Chapter 9 the fault-injection method, and Chapter 10 the first-upstream-failure label. A topology experiment should reuse those protocols rather than restating them.
 
@@ -634,6 +641,8 @@ The record should remain intelligible without the architecture's label. ``Hierar
   Jain, Prateek. 2026. ``Harness Engineering: The New DevOps Layer for AI Agents.'' r/devops, May 27. Anecdotal practitioner account.
 \item
   Kim, T., et al.~2026. ``Why Do AI Agents Systematically Fail at Cloud Root Cause Analysis?'' arXiv:2602.09937. OpenRCA evidence on failure persistence across capability tiers and protocol intervention.
+\item
+  Oskooei, A. R., et al.~2026. ``Deep Agentic Search for Repository-Level Code Question Answering: An Empirical Study.'' arXiv:2608.01507. Strong evidence for the SWE-QA comparison and its measured handoff failures; broader topology transfer is directional.
 \item
   Kumar, et al.~2026. \emph{AgentForge}. arXiv:2604.13120. Directional evidence on multi-agent design.
 \item

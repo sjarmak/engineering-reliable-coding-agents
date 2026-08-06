@@ -69,7 +69,8 @@ The useful questions are concrete:
   What happens after that person decides?
 \end{itemize}
 
-\section{Make correctness cheap to challenge}\label{make-correctness-cheap-to-challenge}
+\hypertarget{make-correctness-cheap-to-challenge}{%
+\section{Make correctness cheap to challenge}\label{make-correctness-cheap-to-challenge}}
 
 An explanation describes why an output might be right. A verification interface gives the reviewer a practical way to discover that it is wrong.
 
@@ -187,7 +188,8 @@ The design objective is not to make every check effortless. Some claims have no 
 
 An explanation without a practical check is context. It may orient the reviewer, but it should not be recorded as evidence that the change is safe.
 
-\section{Interrupt acceptance where overreliance occurs}\label{interrupt-acceptance-where-overreliance-occurs}
+\hypertarget{interrupt-acceptance-where-overreliance-occurs}{%
+\section{Interrupt acceptance where overreliance occurs}\label{interrupt-acceptance-where-overreliance-occurs}}
 
 Cheap verification does not ensure that anyone performs it. A reviewer may adopt a global heuristic such as ``this agent is usually right'' and apply it to the next output without examining the particulars. The interface must then interrupt the act of acceptance rather than add ceremony to every earlier step.
 
@@ -332,7 +334,8 @@ A gate with no exception can become unsafe when delay carries greater cost. A ga
 
 Chapter 16 examines how to determine whether documented gates continue to affect execution. The narrower conclusion here is that friction is unpopular by construction. Its existence and actual use cannot be inferred from the workflow diagram.
 
-\section{Allocate review where it can change the outcome}\label{allocate-review-where-it-can-change-the-outcome}
+\hypertarget{allocate-review-where-it-can-change-the-outcome}{%
+\section{Allocate review where it can change the outcome}\label{allocate-review-where-it-can-change-the-outcome}}
 
 Kale et al.~(\href{https://arxiv.org/abs/2508.19461}{2025}) reported that targeted escalation improved true-positive rate over blanket oversight at a false-positive rate of 0.01, with a gain of approximately 15 percent. Blanket oversight does not guarantee greater detection at fixed human capacity. Spreading attention across every case reduces the scrutiny available to each one, while targeting concentrates the same attention on fewer cases. The study's hierarchical and sequential monitor scaffolds also allowed weaker models to oversee stronger agents.
 
@@ -523,7 +526,8 @@ These audits do not require human review of every action. They require enough in
 
 The correct response depends on the failure mechanism. ``Use a stronger judge'' is not a diagnosis.
 
-\section{Build the review and escalation path}\label{build-the-review-and-escalation-path}
+\hypertarget{build-the-review-and-escalation-path}{%
+\section{Build the review and escalation path}\label{build-the-review-and-escalation-path}}
 
 Start with one consequential agent workflow. Identify the decision that transfers authority from proposed work to an external effect, such as merge, deployment, publication, data modification, customer contact, or a change to another system.
 
