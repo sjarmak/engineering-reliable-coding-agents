@@ -2,29 +2,29 @@
 
 This human-readable edition presents all 192 practices in chapter context. For navigation, filtering, and graph exploration, use the [website companion](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion).
 
-This catalog indexes all 192 practices in the book’s corpus. Fifty-five are taught in the book’s eighteen chapters, and 137 are attached to those chapters’ mechanisms without being taught there. The catalog brings both groups together so that a reader scanning one chapter’s neighborhood can see every related practice, not only those the chapter leaves to the catalog. It also makes visible the difference between practices the book argues in full and practices it records as additional possibilities.
+This catalog indexes all 192 practices in the book’s corpus. Fifty-five are developed in the book’s eighteen chapters, and 137 are attached to those chapters’ mechanisms without being developed there. The catalog brings both groups together so that a reader scanning one chapter’s neighborhood can see every related practice, not only those the chapter leaves to the catalog. It also makes visible the difference between practices the book argues in full and practices it records as additional possibilities.
 
 Read the relevant chapter before using its catalog section. The chapter establishes the mechanism, develops the reasoning, examines the evidence, and sets the boundaries needed to judge whether a practice fits a measured problem or operating constraint. The catalog helps locate and compare practices around that mechanism, but it does not make the chapter’s argument optional. Begin with a problem you have observed, not with a practice you would like to adopt.
 
-Under each chapter heading, the taught practices and the untaught practices appear in separate groups. The taught practices are represented by short pointer entries of two or three sentences. Each pointer identifies the action, states its relationship to the chapter, and directs the reader to the chapter for the developed account. Its brevity is deliberate. Compressing the chapter’s argument, evidence, and boundary into a catalog summary would create a weaker duplicate and might make the practice seem transferable without the qualifications that justify it. A pointer therefore tells you what the chapter teaches and where to read it, while leaving the teaching itself intact.
+Under each chapter heading, the developed practices and the companion-only practices appear in separate groups. The developed practices are represented by short pointer entries of two or three sentences. Each pointer identifies the action, states its relationship to the chapter, and directs the reader to the chapter for the developed account. Its brevity is deliberate. Compressing the chapter’s argument, evidence, and boundary into a catalog summary would create a weaker duplicate and might make the practice seem transferable without the qualifications that justify it. A pointer therefore tells you what the chapter develops and where to read it, while leaving the development itself intact.
 
-The 137 practices not taught by any chapter appear as full compact entries. Every practice has an action title and a stable identifier that can be cited, linked, or tracked across revisions. A compact entry then uses two or three paragraphs to describe what to do, how the action produces its intended result, what evidence supports it, and where its use stops being justified. The evidence appears in prose with a plain-language marker of its strength and scope. The entry closes on a boundary such as a cost, dependency, transfer risk, failure condition, or limit in the available support. The group labels and the visibly different entry lengths allow readers to distinguish pointers from compact entries at a glance.
+The 137 practices not developed by any chapter appear as full compact entries. Every practice has an action title and a stable identifier that can be cited, linked, or tracked across revisions. A compact entry then uses two or three paragraphs to describe what to do, how the action produces its intended result, what evidence supports it, and where its use stops being justified. The evidence appears in prose with a plain-language marker of its strength and scope. The entry closes on a boundary such as a cost, dependency, transfer risk, failure condition, or limit in the available support. The group labels and the visibly different entry lengths allow readers to distinguish pointers from compact entries at a glance.
 
-Entries are grouped by chapter because the chapter is where the relevant mechanism is established. A topic-based arrangement might place superficially similar practices together while separating a variant from the assumptions that make it intelligible. Keeping every practice beside its underlying mechanism gives taught and untaught options a common reference point for comparison. It also prevents a compact description from appearing more self-sufficient than it is.
+Entries are grouped by chapter because the chapter is where the relevant mechanism is established. A topic-based arrangement might place superficially similar practices together while separating a variant from the assumptions that make it intelligible. Keeping every practice beside its underlying mechanism gives developed and companion-only options a common reference point for comparison. It also prevents a compact description from appearing more self-sufficient than it is.
 
 Read each evidence marker as a constraint on the adoption decision. A measured result supports a claim only within the conditions under which it was observed. Transferring that result requires checking whether the workload, system, and failure mechanism remain comparable. Evidence that supports a direction without establishing a magnitude can justify trying a change, but it cannot determine how large the change should be or how much improvement to expect. A single reported case establishes that a failure or intervention can occur; it does not establish how common, typical, or likely it is.
 
 Negative and conflicting findings narrow a recommendation further. When a test found no supported result, the surrounding advice must remain compatible with that outcome and cannot quietly assume the missing benefit. When the evidence corpus contains a counterweight, the compact entry names it so adoption does not depend on seeing only the favorable side. These markers should shape the commitment. Limited support calls for a smaller, more observable trial, while closer agreement between your conditions and the measured conditions permits a firmer decision.
 
-Twenty-nine of the 137 compact entries are marked as thin-support asides. I excluded these practices from the taught set because their support does not justify recommending them. They remain as leads for investigation: possible experiments, unmeasured controls, instrumentable failure modes, or questions that current evidence leaves open. I include them because visible uncertainty serves the reader better than silent omission, provided they are treated as prompts rather than guidance.
+Twenty-nine of the 137 compact entries are marked as thin-support asides. I excluded these practices from the developed set because their support does not justify recommending them. They remain as leads for investigation: possible experiments, unmeasured controls, instrumentable failure modes, or questions that current evidence leaves open. I include them because visible uncertainty serves the reader better than silent omission, provided they are treated as prompts rather than guidance.
 
 Use the catalog after diagnosis, as an index and comparison aid rather than a menu for indiscriminate adoption. Start with the chapter that explains the mechanism behind the problem you measured. Use its pointer entries to recognize what the book develops in full, then assess the neighboring compact entries through their actions, mechanisms, evidence markers, and closing boundaries.
 
 ## Chapter 1: Run-to-run variance, statistical power, and paired comparisons
 
-3 taught in the chapter, 10 carried here. 13 practices in total.
+3 developed in the chapter, 10 carried here. 13 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 1, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 1, where their full arguments, evidence, and boundaries are developed.
 
 ### Compare distributions across randomized repeated runs
 
@@ -44,7 +44,7 @@ Determine the sample size needed to detect the smallest difference that would ch
 
 Compare systems evaluated on the same items by analyzing per-item score differences, and report the paired difference, its standard error, and the correlation between scores. Match the significance test to the metric so the comparison respects how that metric is constructed and how uncertainty should be sampled. Chapter 1 explains the paired design and appropriate testing choices in full.
 
-The following compact entries record practices attached to Chapter 1’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 1’s mechanism but not developed in full by any chapter.
 
 ### Report correlation-aware standard errors with every evaluation score
 
@@ -140,9 +140,9 @@ Prompt variants multiply evaluation cost. Bandit-style sampling can recover spre
 
 ## Chapter 2: Baselines, ablations, and cost-accuracy tradeoffs
 
-2 taught in the chapter, 6 carried here. 8 practices in total.
+2 developed in the chapter, 6 carried here. 8 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 2, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 2, where their full arguments, evidence, and boundaries are developed.
 
 ### Run controls that isolate each component’s contribution
 
@@ -156,7 +156,7 @@ Isolate the contribution of memory, retrieval, or tools by running controls that
 
 Evaluate an agent on accuracy and inference cost together, plotting the configurations that form the Pareto frontier and recording dollars, token counts, and the applicable pricing snapshot. Include simple baselines and preserve a holdout that development never targets, so system selection reflects both useful performance and resource use. Chapter 2 develops this joint evaluation and comparison framework.
 
-The following compact entries record practices attached to Chapter 2’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 2’s mechanism but not developed in full by any chapter.
 
 ### Report expected best performance across tuning budgets
 
@@ -208,9 +208,9 @@ A null-result study by Williams and colleagues ([2026](https://arxiv.org/abs/260
 
 ## Chapter 3: Benchmark contamination, oracle strength, and workload validity
 
-4 taught in the chapter, 18 carried here. 22 practices in total.
+4 developed in the chapter, 18 carried here. 22 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 3, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 3, where their full arguments, evidence, and boundaries are developed.
 
 ### Measure public benchmark inflation with matched private controls
 
@@ -236,7 +236,7 @@ Strengthen the tests that determine whether a solution passes by adding generate
 
 Build evaluation sets from the work the production system is expected to perform, including real prompts, repository changes, tests, and domain-specific task lifecycles. Use those results to select systems according to the construct and conditions that match deployment, rather than substituting general leaderboard rank for workload validity. Chapter 3 develops how to turn production experience into a defensible workload evaluation.
 
-The following compact entries record practices attached to Chapter 3’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 3’s mechanism but not developed in full by any chapter.
 
 ### Probe memorization before crediting benchmark gains to capability
 
@@ -326,7 +326,7 @@ Reserve agent tasks that developers cannot inspect or tune against, then choose 
 
 Repeated scaffold, prompt, and tool tuning converts visible evaluation tasks into development data even when model weights remain fixed. Kapoor and colleagues ([2024](https://arxiv.org/abs/2407.01502)) provide directional evidence from agent benchmarks with inadequate or missing holdouts and shortcut-overfit systems, including lookup-style behavior. They prescribe matching the holdout to the claimed generalization level. Practitioner illustrations include conditioning diagnostic metrics on hidden-task success and using an unseen migration family to reveal that the evaluation schema itself failed to transfer.
 
-This entry supplies a generalization-level split, not separation in time from a model’s training cutoff. The chapter already teaches that temporal control separately. Hidden tasks can still leak through related artifacts, and an unseen-family split can change the task distribution enough to expose benchmark-design defects rather than agent capability. When that happens, revise the instrument and withhold the capability score.
+This entry supplies a generalization-level split, not separation in time from a model’s training cutoff. The chapter already develops that temporal control separately. Hidden tasks can still leak through related artifacts, and an unseen-family split can change the task distribution enough to expose benchmark-design defects rather than agent capability. When that happens, revise the instrument and withhold the capability score.
 
 ### Pin the eval harness and publish its complete artifacts
 
@@ -418,9 +418,9 @@ A checklist can detect known defect classes only. Novel interactions among agent
 
 ## Chapter 4: Execution-based evaluation, correction gates, and release tests
 
-3 taught in the chapter, 4 carried here. 7 practices in total.
+3 developed in the chapter, 4 carried here. 7 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 4, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 4, where their full arguments, evidence, and boundaries are developed.
 
 ### Gate candidate work on execution results
 
@@ -440,7 +440,7 @@ Couple each model revision to new information from a test, tool, verifier, or ot
 
 Curate representative real tasks with unambiguous oracles, replay them for every release, and measure whether the system succeeds consistently across repeated trials. This turns release evaluation into a check of operational reliability rather than a report of one favorable run. Chapter 4 develops the complete golden-set and pass^k practice.
 
-The following compact entries record practices attached to Chapter 4’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 4’s mechanism but not developed in full by any chapter.
 
 ### Score verified resolution separately and reward abstention
 
@@ -484,9 +484,9 @@ The measured magnitudes come from two mid-size open model families, customer-ser
 
 ## Chapter 5: Calibrating model graders and separating agreement from correctness
 
-2 taught in the chapter, 2 carried here. 4 practices in total.
+2 developed in the chapter, 2 carried here. 4 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 5, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 5, where their full arguments, evidence, and boundaries are developed.
 
 ### Calibrate model judges against expert labels
 
@@ -500,7 +500,7 @@ Define judgment categories with experts, establish dependable human labeling, an
 
 Treat consensus among models or candidates as a measure of agreement, never as verification that a claim is correct. Ground typed claims in checkable sources and use principled abstention when the available support is insufficient. Chapter 5 develops the verification approach and shows how it fits into calibrated evaluation.
 
-The following compact entries record practices attached to Chapter 5’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 5’s mechanism but not developed in full by any chapter.
 
 ### Keep an exact auditor beside heuristic graders
 
@@ -524,9 +524,9 @@ The gain depends on correlation between judge and human labels. A weak judge pro
 
 ## Chapter 6: Proxy metric gaming and layered evaluation signals
 
-3 taught in the chapter, 7 carried here. 10 practices in total.
+3 developed in the chapter, 7 carried here. 10 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 6, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 6, where their full arguments, evidence, and boundaries are developed.
 
 ### Layer independent signals into every acceptance gate
 
@@ -546,7 +546,7 @@ Track an independent quality signal alongside every optimized proxy, and compare
 
 Use a trusted model to inspect chain-of-thought traces for signs of reward hacking while keeping that monitor outside the training reward and strong selection pressure. This preserves a separate transparency channel that can reveal problematic strategies rather than becoming another target for optimization. Chapter 6 develops the monitoring design and how it supports oversight.
 
-The following compact entries record practices attached to Chapter 6’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 6’s mechanism but not developed in full by any chapter.
 
 ### Escalate oversight at the first sign of gaming
 
@@ -606,9 +606,9 @@ A survey by Chen and colleagues ([2020](https://arxiv.org/abs/2001.08236)) provi
 
 ## Chapter 7: Agent isolation, injection defenses, and independent verification
 
-3 taught in the chapter, 6 carried here. 9 practices in total.
+3 developed in the chapter, 6 carried here. 9 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 7, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 7, where their full arguments, evidence, and boundaries are developed.
 
 ### Contain each agent’s blast radius
 
@@ -628,7 +628,7 @@ Treat every completion claim as a hypothesis to verify against the actual worksp
 
 Layer input and output controls, allowlists, adversarial testing, and human approval around high-impact actions, with protections mapped to a recognized threat model. The goal is to contain what an injected instruction can cause the agent to do, even when hostile content reaches its context. Chapter 7 develops this defense-in-depth approach to prompt injection.
 
-The following compact entries record practices attached to Chapter 7’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 7’s mechanism but not developed in full by any chapter.
 
 ### Make orchestration topology part of the security design
 
@@ -682,9 +682,9 @@ The controlled result came from security tasks using the suggestion-era codex-da
 
 ## Chapter 8: Persistent agent state, durable workflows, and idempotent retries
 
-3 taught in the chapter, 11 carried here. 14 practices in total.
+3 developed in the chapter, 11 carried here. 14 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 8, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 8, where their full arguments, evidence, and boundaries are developed.
 
 ### Make agent state a persistent artifact
 
@@ -704,7 +704,7 @@ Put multi-step, multi-service, and multi-agent coordination under a durable work
 
 Design every retryable step so repeated execution produces the same observable result as one execution. Carry an idempotency key with side effects and retain results by invocation identity, allowing redelivered work to return the prior result instead of repeating the action. Chapter 8 develops the guarantees and implementation mechanics for safe retries.
 
-The following compact entries record practices attached to Chapter 8’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 8’s mechanism but not developed in full by any chapter.
 
 ### Give every external effect a receipt and a compensator
 
@@ -818,9 +818,9 @@ The support is too thin to recommend this practice, making the entry a lead for 
 
 ## Chapter 9: Replayable traces and fault-injection recovery testing
 
-2 taught in the chapter, 7 carried here. 9 practices in total.
+2 developed in the chapter, 7 carried here. 9 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 9, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 9, where their full arguments, evidence, and boundaries are developed.
 
 ### Record every run as a replayable typed trace
 
@@ -834,7 +834,7 @@ Represent each run as a persistent typed event stream that records model, tool, 
 
 Test recovery by deliberately injecting failures into the running system and observing how it returns to useful, stable operation. Measure recovery behavior, restored performance, and the effects of repeated disruptions so fault-tolerance claims rest on demonstrated behavior rather than system diagrams. Chapter 9 develops the experimental method for turning recovery into a benchmark.
 
-The following compact entries record practices attached to Chapter 9’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 9’s mechanism but not developed in full by any chapter.
 
 ### Record nondeterministic results and replay only deterministic code
 
@@ -908,9 +908,9 @@ Synthetic injection cannot establish the production frequency of any fault or ce
 
 ## Chapter 10: Human-auditable failure analysis and taxonomy development
 
-3 taught in the chapter, 7 carried here. 10 practices in total.
+3 developed in the chapter, 7 carried here. 10 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 10, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 10, where their full arguments, evidence, and boundaries are developed.
 
 ### Derive the failure taxonomy from your own traces
 
@@ -930,7 +930,7 @@ Keep people responsible for determining which agent and decision produced a fail
 
 Structure traces around step boundaries, tool calls, decision points, inputs, retries, and outcomes so a person can reconstruct what happened and replay the relevant decision. Design the audit experience for factual inspection rather than asking a model to infer the cause from an undifferentiated transcript. Chapter 10 develops the trace design needed for rigorous human failure analysis.
 
-The following compact entries record practices attached to Chapter 10’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 10’s mechanism but not developed in full by any chapter.
 
 ### Localize failures from a constraint-violation log
 
@@ -998,9 +998,9 @@ The support is too thin to recommend this practice; this entry is a lead for inv
 
 ## Chapter 11: Measuring and designing repository retrieval
 
-3 taught in the chapter, 5 carried here. 8 practices in total.
+3 developed in the chapter, 5 carried here. 8 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 11, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 11, where their full arguments, evidence, and boundaries are developed.
 
 ### Score retrieval separately from final answers
 
@@ -1020,7 +1020,7 @@ Run lexical and semantic retrieval as parallel, first-class channels, then combi
 
 Construct retrieval chunks from syntactic units by recursively splitting large AST nodes and combining small related siblings within a size budget. The resulting chunks preserve coherent functions, classes, and declarations so retrieved code remains understandable and useful for generation. Chapter 11 develops the structure-aware chunking procedure and its role in repository retrieval.
 
-The following compact entries record practices attached to Chapter 11’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 11’s mechanism but not developed in full by any chapter.
 
 ### Bridge lexical gaps before generation
 
@@ -1068,9 +1068,9 @@ Sweep shortlist depth against first-stage recall, final localization quality, an
 
 ## Chapter 12: Localization funnels, repository indexes, and freshness checks
 
-3 taught in the chapter, 8 carried here. 11 practices in total.
+3 developed in the chapter, 8 carried here. 11 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 12, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 12, where their full arguments, evidence, and boundaries are developed.
 
 ### Localize repository changes through a staged funnel
 
@@ -1090,7 +1090,7 @@ Represent directories, files, classes, functions, and linked development artifac
 
 Refresh retrieval indexes against the working tree and verify that returned evidence reflects the repository’s current state before placing it in model context. Apply authorization checks at the same gate so only current, permitted material can influence reasoning or edits. Chapter 12 develops the freshness and access controls required for dependable repository retrieval.
 
-The following compact entries record practices attached to Chapter 12’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 12’s mechanism but not developed in full by any chapter.
 
 ### Retrieve completion context through structural relations
 
@@ -1168,9 +1168,9 @@ Strong evidence from file-level localization experiments by Caumartin and collea
 
 ## Chapter 13: Usable context budgets, consolidated-spec restarts, and file-based tool output
 
-4 taught in the chapter, 6 carried here. 10 practices in total.
+4 developed in the chapter, 6 carried here. 10 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 13, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 13, where their full arguments, evidence, and boundaries are developed.
 
 ### Budget context using measured effective capacity
 
@@ -1196,7 +1196,7 @@ Write long tool results, terminal transcripts, and pre-compaction conversation h
 
 A/B-test repository context files against a no-file baseline before adopting them, and measure both task outcomes and inference cost. Keep retained files focused on nonstandard repository constraints, then evolve them through small, reviewed changes that include commonly neglected security and performance requirements. Chapter 13 develops the evaluation and maintenance discipline for these files.
 
-The following compact entries record practices attached to Chapter 13’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 13’s mechanism but not developed in full by any chapter.
 
 ### Put load-bearing evidence at the edges of the context
 
@@ -1260,9 +1260,9 @@ Neither account provides a controlled comparison between budgeted and unbudgeted
 
 ## Chapter 14: Cross-session memory, raw traces, and compaction policies
 
-3 taught in the chapter, 6 carried here. 9 practices in total.
+3 developed in the chapter, 6 carried here. 9 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 14, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 14, where their full arguments, evidence, and boundaries are developed.
 
 ### Retain raw traces and distill them separately
 
@@ -1282,7 +1282,7 @@ Build cross-session memory first around a transcript store using SQLite and full
 
 Treat the agent’s compression policy as an artifact that can be evaluated and improved. Identify failures caused by missing or distracting context, revise the natural-language compaction guidance against those cases, and use the resulting examples to strengthen or distill the compressor. Chapter 14 develops this failure-driven process for improving context retention and task performance.
 
-The following compact entries record practices attached to Chapter 14’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 14’s mechanism but not developed in full by any chapter.
 
 ### Persist explored repository context between reasoning steps
 
@@ -1342,9 +1342,9 @@ The added substrate inherits every maintenance problem of an agent memory store.
 
 ## Chapter 15: Efficient verification interfaces and risk-based human escalation
 
-3 taught in the chapter, 8 carried here. 11 practices in total.
+3 developed in the chapter, 8 carried here. 11 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 15, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 15, where their full arguments, evidence, and boundaries are developed.
 
 ### Make Verification Cheaper Than Blind Acceptance
 
@@ -1364,7 +1364,7 @@ Place cognitive forcing functions at the accept decision, such as requiring revi
 
 Direct human attention to anomalies identified by automated monitors, while ensuring a person with real authority retains responsibility for the final verdict. Build the monitoring system in layers, moving from deterministic checks to rubric-based model judgments and trace-aware agent review, with humans calibrating the system. Chapter 15 develops this escalation architecture and its operational requirements.
 
-The following compact entries record practices attached to Chapter 15’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 15’s mechanism but not developed in full by any chapter.
 
 ### Place human checkpoints at measured failure points with an owned escalation route
 
@@ -1448,9 +1448,9 @@ The support is too thin to recommend planning or staffing around this hypothesis
 
 ## Chapter 16: Autonomy calibration, provenance, effective gates, and accountability
 
-4 taught in the chapter, 13 carried here. 17 practices in total.
+4 developed in the chapter, 13 carried here. 17 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 16, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 16, where their full arguments, evidence, and boundaries are developed.
 
 ### Graduate Each Action’s Autonomy from Its Track Record
 
@@ -1476,7 +1476,7 @@ Examine every human approval gate to confirm that the designated person can unde
 
 Assign responsibility for agent outcomes only to people who possess the authority, tools, time, and access needed to influence those outcomes. Evaluate deployed systems with actual users to determine whether behavior matches justified expectations and whether responsibility can be traced to a capable, informed decision-maker. Chapter 16 develops this control-accountability alignment and the methods used to examine it.
 
-The following compact entries record practices attached to Chapter 16’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 16’s mechanism but not developed in full by any chapter.
 
 ### Test plain reliance disclaimers before stronger interventions
 
@@ -1598,9 +1598,9 @@ Apply the same separation to LLM-generated refactors, dependency-update bots, co
 
 ## Chapter 17: Agent topology selection and dynamic task allocation
 
-4 taught in the chapter, 5 carried here. 9 practices in total.
+4 developed in the chapter, 5 carried here. 9 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 17, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 17, where their full arguments, evidence, and boundaries are developed.
 
 ### Fix recurring failure classes through system structure
 
@@ -1626,7 +1626,7 @@ Choose the communication and control structure that fits how the work decomposes
 
 Represent work as an evolving graph of dependencies, releasing independent branches as soon as their prerequisites are satisfied and bounding each step’s execution. This gives the scheduler a live model of what can proceed, what must wait, and where concurrency is available. Chapter 17 develops the mechanisms for building and operating these dynamic graphs.
 
-The following compact entries record practices attached to Chapter 17’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 17’s mechanism but not developed in full by any chapter.
 
 ### Oversee multi-agent execution at node, edge, and path levels
 
@@ -1670,9 +1670,9 @@ Zhu and colleagues ([2025](https://arxiv.org/abs/2509.25370)) reported that Agen
 
 ## Chapter 18: Cost-aware fleet scheduling and model routing
 
-3 taught in the chapter, 8 carried here. 11 practices in total.
+3 developed in the chapter, 8 carried here. 11 practices in total.
 
-The following pointer entries identify the practices taught in Chapter 18, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 18, where their full arguments, evidence, and boundaries are developed.
 
 ### Recompute schedules cheaply and ship the incumbent
 
@@ -1692,7 +1692,7 @@ Estimate model cost and task performance explicitly, then assign each request to
 
 Evaluate proposed scheduling policies by replaying the same recorded arrivals, priorities, durations, outcomes, and review results through each contender. Holding the workload fixed makes policy comparisons interpretable and gives simple baselines and constructed test cases a consistent role in validation. Chapter 18 develops the replay protocol used to assess scheduling changes before deployment.
 
-The following compact entries record practices attached to Chapter 18’s mechanism but not taught in full by any chapter.
+The following compact entries record practices attached to Chapter 18’s mechanism but not developed in full by any chapter.
 
 ### Formalize work as constraints and solve the allocation globally
 

@@ -8,8 +8,8 @@ Derived agent skills: [https://github.com/sjarmak/engineering-reliable-coding-ag
 
 ## Source snapshot
 
-- Public manuscript chapter snapshot: packaged with companion version `1.0.0-rc.10` in the canonical repository.
-- Human-readable companion input SHA-256: `d4e53b1a8fe0c53cb1152b5118f35024a2a36cdc0bba63b9a5b8a6283891975f`.
+- Public manuscript chapter snapshot: packaged with companion version `1.0.0-rc.11` in the canonical repository.
+- Human-readable companion input SHA-256: `1e01ccd0cafd92d526b4b86cc688647f740c4e1f84133b3d75f832f9a109bef3`.
 - Practice catalog input SHA-256: `1709cc2216d46cf41cedbd580e6b7b9f424815a7ee2f8259f6e546e8a0500019`.
 - Companion chapter-map input SHA-256: `b31599ac15bbb7747a704d0f9691c6f02fd6a7f72bb7d505fb5826c65fac7ffe`.
 - Developed-practice map input SHA-256: `ce0100e923059ffbd2799af59a472454e8b4ea75893c22b765685eaa7e153513`.

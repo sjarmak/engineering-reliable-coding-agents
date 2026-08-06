@@ -87,7 +87,7 @@ system before use.
 
 ## Release status
 
-The files currently represent the `1.0.0-rc.10` release candidate prepared on
+The files currently represent the `1.0.0-rc.11` release candidate prepared on
 August 6, 2026. Archival v1 remains gated on two measured additions: blinded
 external grading of the packaged 20-practice sample and a supplementary search
 of ACM Digital Library, IEEE Xplore, and Scopus (or a justified database

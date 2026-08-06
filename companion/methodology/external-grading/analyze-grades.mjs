@@ -62,7 +62,7 @@ const disagreementPattern = allowed.map((label) => ({
   label,
   assignments: responses.reduce((sum, response) => sum + response.labels.filter((value) => value === label).length, 0),
 }));
-const unanimous = ids.filter((id, index) => responses.every((response) => response.labels[index] === responses[0].labels[index])).length;
+const unanimous = ids.filter((_, index) => responses.every((response) => response.labels[index] === responses[0].labels[index])).length;
 
 console.log(JSON.stringify({
   response_files: responsePaths,

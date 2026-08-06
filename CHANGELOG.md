@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.0-rc.11 — 2026-08-06
+
+- Preserved the `rc.10` release and advanced the candidate after repairing the
+  website's cached empty chapter and companion render.
+- Standardized reader-facing companion language on “developed” and
+  “companion-only” while retaining the internal classification fields used by
+  the parser and graph filters.
+- Made the companion importer attach all stable `ERCA` identifiers itself, so
+  a content refresh cannot silently remove direct-link and cross-artifact IDs.
+- Corrected the review-flow SVG's accessibility and theme metadata, rebuilt the
+  exact 270-page TeX archive, and revalidated the companion checksums.
+
 ## 1.0.0-rc.10 — 2026-08-06
 
 - Reframed the review as a multivocal software-engineering secondary study,
