@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "source_lane": "index_native_scopus",
+  "purpose": "Bounded Scopus supplement for Engineering Reliable Coding Agents; this is review provenance, not a SciX corpus ingest.",
+  "years": [
+    2018,
+    2026
+  ],
+  "retention_boundary": "Retain query provenance and DOI/Scopus EID identifiers only. Do not retain or redistribute Scopus-returned titles, abstracts, authors, or full text.",
+  "screening_boundary": "Scopus-returned content is reserved for human screening. Automated analysis may use independently obtained, appropriately licensed metadata while preserving its source lane.",
+  "syntax_sources": [
+    "https://service.elsevier.com/app/answers/detail/a_id/11365/supporthub/scopus/",
+    "https://dev.elsevier.com/documentation/SCOPUSSearchAPI.wadl"
+  ],
+  "topics": [
+    {
+      "id": "secondary-study-method",
+      "query": "TITLE-ABS-KEY((\"systematic literature review\" OR \"systematic mapping study\" OR \"multivocal literature review\" OR \"grey literature\") AND \"software engineering\")"
+    },
+    {
+      "id": "evaluation-validity",
+      "query": "TITLE-ABS-KEY((\"coding agent\" OR \"program repair\" OR \"code generation\") AND (benchmark OR evaluation OR contamination OR oracle))"
+    },
+    {
+      "id": "grader-validity",
+      "query": "TITLE-ABS-KEY((\"automated evaluation\" OR \"human evaluation\" OR \"inter-rater agreement\") AND (software OR code))"
+    },
+    {
+      "id": "human-review",
+      "query": "TITLE-ABS-KEY((\"code review\" OR \"pull request review\") AND (\"artificial intelligence\" OR automation OR human))"
+    },
+    {
+      "id": "operations-recovery",
+      "query": "TITLE-ABS-KEY((agent OR automation) AND (\"fault injection\" OR recovery OR reliability OR idempotent))"
+    },
+    {
+      "id": "retrieval-context",
+      "query": "TITLE-ABS-KEY((\"code search\" OR \"repository retrieval\" OR \"issue localization\") AND (context OR developer))"
+    },
+    {
+      "id": "topology",
+      "query": "TITLE-ABS-KEY((\"multi-agent\" OR \"multi agent\") AND (\"software engineering\" OR programming) AND (coordination OR delegation))"
+    },
+    {
+      "id": "adoption-governance",
+      "query": "TITLE-ABS-KEY((\"generative AI\" OR \"artificial intelligence\") AND (\"software engineering\" OR programming) AND (adoption OR governance OR accountability))"
+    }
+  ],
+  "venues": [
+    {
+      "id": "tse",
+      "filter": "EXACTSRCTITLE(\"IEEE Transactions on Software Engineering\")"
+    },
+    {
+      "id": "tosem",
+      "filter": "EXACTSRCTITLE(\"ACM Transactions on Software Engineering and Methodology\")"
+    },
+    {
+      "id": "emse",
+      "filter": "EXACTSRCTITLE(\"Empirical Software Engineering\")"
+    },
+    {
+      "id": "icse",
+      "filter": "CONFNAME(\"International Conference on Software Engineering\")"
+    },
+    {
+      "id": "fse",
+      "filter": "CONFNAME(\"Foundations of Software Engineering\")"
+    },
+    {
+      "id": "ase",
+      "filter": "CONFNAME(\"Automated Software Engineering\")"
+    },
+    {
+      "id": "issta",
+      "filter": "CONFNAME(\"Software Testing and Analysis\")"
+    },
+    {
+      "id": "cscw",
+      "filter": "EXACTSRCTITLE(\"Proceedings of the ACM on Human-Computer Interaction\") OR CONFNAME(\"Computer Supported Cooperative Work\")"
+    }
+  ]
+}

@@ -10,7 +10,7 @@ Prepared August 6, 2026 for the August 2026 edition of *Engineering Reliable Cod
 
 - `engineering-reliable-coding-agents-arxiv-source.zip`: LaTeX release candidate for arXiv.
 - `engineering-reliable-coding-agents-preview.pdf`: PDF compiled from that source.
-- `engineering-reliable-coding-agents-companion-1.0.0-rc.12.zip`: separate companion research artifact release candidate.
+- `engineering-reliable-coding-agents-companion-1.0.0-rc.13.zip`: separate companion research artifact release candidate.
 - `engineering-reliable-coding-agents-skills-0.1.0.zip`: reusable agent workflows derived from selected companion practices.
 - `reference-audit/README.md`: reference-audit summary.
 
@@ -64,7 +64,7 @@ The repository currently has a root Apache-2.0 license. Before adding the manusc
 2. Choose a companion license separately from the manuscript license. `CITATION.cff` intentionally has no license field yet.
 3. Complete the blinded 20-practice external-grading pass and report agreement and disagreement patterns.
 4. Complete the supplementary publisher-native ACM Digital Library, IEEE Xplore, and Scopus search, or document a justified database substitution and what it added.
-5. Replace release-candidate version `1.0.0-rc.12` with `1.0.0` in the build script and citation metadata.
+5. Replace release-candidate version `1.0.0-rc.13` with `1.0.0` in the build script and citation metadata.
 6. Publish the exact package in the book repository and create a `v1.0.0` release.
 7. Connect that repository to Zenodo or another DOI-granting archive and archive the exact tag.
 8. Add the DOI to `CITATION.cff`, the companion README, the manuscript’s Data and materials availability statement, and the arXiv Comments field.
@@ -78,8 +78,8 @@ The companion release contains:
 - a crosswalk separating 55 manuscript-developed practices from 137 companion-only practices;
 - 29 benchmark records;
 - resolved metadata for 319 arXiv identifiers, 14 DOIs, and other web sources;
-- source snapshots, seven literature-review thread protocols, a 138-work scholarly corpus, 39 record-level update-screening decisions, a 148-record software-engineering coverage probe, and a deterministic 40-DOI SciX comparison;
-- a blinded external-grading packet for 20 practices, reviewer instructions, and a script for Cohen's and Fleiss's kappa plus disagreement analysis;
+- source snapshots, seven literature-review thread protocols, a 138-work scholarly corpus, 39 record-level update-screening decisions, a 148-record software-engineering coverage probe, a deterministic 40-DOI SciX comparison, a complete 26-record TSE known-set audit, and the prepared ACM, IEEE, and Scopus plans;
+- a blinded external-grading packet for 20 practices, a self-contained reviewer form, and a strict analyzer for Cohen's and Fleiss's kappa, confusion matrices, and item-level disagreement analysis;
 - JSON Schemas, provenance hashes, citation metadata, and checksums.
 
 The separately packaged skills bundle contains five derived operational
@@ -143,7 +143,7 @@ Identifier resolution verifies that the cited record exists and captures current
 - Archive hygiene: 43 required files (46 ZIP entries including directories); no generated manuscript PDF, log, auxiliary file, Markdown source, dataset, or private note.
 - TeX diagnostics: no errors, missing files, missing characters, undefined commands, or overfull boxes. A small number of harmless underfull-box warnings remain in source-list paragraphs.
 - Prose review: all 21 source files were reviewed for academic register, casual framing, unsupported certainty, promotional language, and unexplained internal evidence shorthand.
-- Companion checks: catalog and benchmark JSON validate against their schemas; checksums pass; the CSV contains 578 records with a consistent 11-column structure. The update-screening decisions total 39: 11 admitted, one already present, and 27 deferred or excluded. The 148-record SE coverage probe admitted nine works and retains the 40-DOI comparison used to diagnose SciX coverage.
+- Companion checks: catalog and benchmark JSON validate against their schemas; checksums pass; the evidence ledger contains 578 records with a consistent 13-column structure. The update-screening decisions total 39: 11 admitted, one already present, and 27 deferred or excluded. The 148-record SE coverage probe admitted nine works, retains the 40-DOI diagnostic sample, and records that all 26 TSE candidates in the known set match SciX exactly by DOI.
 
 ## Official arXiv guidance
 

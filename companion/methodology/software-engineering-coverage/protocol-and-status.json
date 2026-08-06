@@ -55,27 +55,32 @@
     "unique_candidates": 148,
     "not_already_in_manuscript_by_doi_or_normalized_title": 147,
     "deterministic_scix_doi_sample": 40,
-    "exact_doi_matches_in_scix": 8
+    "exact_doi_matches_in_scix": 8,
+    "tse_candidates_in_probe": 26,
+    "tse_exact_doi_matches_in_scix": 26
   },
   "provider_checks": [
     {
-      "name": "ACM Digital Library search",
-      "url": "https://dl.acm.org/action/doSearch?AllField=AI%20coding%20agents",
+      "name": "ACM Digital Library manual search",
+      "url": "https://www.acm.org/publications/policies/usage-old",
       "http_status": 403,
-      "accessible": false
+      "accessible": false,
+      "status": "Automated access rejected and prohibited by the end-user policy; a 48-cell manual institutional search plan is prepared but not yet executed."
     },
     {
-      "name": "IEEE Xplore metadata API without a configured key",
+      "name": "IEEE Xplore Metadata Search API",
       "url": "https://ieeexploreapi.ieee.org/api/v1/search/articles?querytext=AI%20coding%20agents&max_records=1",
       "http_status": 403,
-      "accessible": false
+      "accessible": false,
+      "status": "Key configured locally; provider returns Developer Inactive while application activation is pending. The 64-cell bounded plan and client are ready."
     },
     {
-      "name": "Scopus Search API without a configured key",
+      "name": "Scopus Search API",
       "url": "https://api.elsevier.com/content/search/scopus?query=TITLE-ABS-KEY%28AI%20coding%20agents%29&count=1",
       "http_status": 401,
-      "accessible": false
+      "accessible": false,
+      "status": "A 64-cell bounded plan and identifier-only client are ready; ELSEVIER_API_KEY and any required institutional token are not configured."
     }
   ],
-  "interpretation": "A missing exact DOI in this deterministic sample demonstrates a coverage gap but does not estimate recall for all software-engineering literature. The archival edition remains conditional on a native ACM/IEEE/Scopus search or a justified database substitution with documented equivalence."
+  "interpretation": "A missing exact DOI in the deterministic sample demonstrates a coverage gap but does not estimate recall for all software-engineering literature. A follow-up known-set audit found all 26 TSE candidates from the probe in SciX by exact DOI; that result does not estimate topic-search recall within TSE or replace IEEE Xplore. The archival edition remains conditional on the prepared ACM, IEEE, and Scopus searches, or a justified database substitution with documented equivalence."
 }

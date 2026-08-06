@@ -1,6 +1,6 @@
 # Engineering Reliable Coding Agents: companion research artifact
 
-Release candidate 1.0.0-rc.12, prepared August 6, 2026.
+Release candidate 1.0.0-rc.13, prepared August 6, 2026.
 
 This package accompanies *Engineering Reliable Coding Agents: Evaluation, Recovery, Context, and Control Beyond the Model*. It is designed to be archived as a separate, citable research artifact. The final archival release should receive its own DOI and should be cited alongside the manuscript.
 
@@ -19,7 +19,7 @@ Canonical repository: [https://github.com/sjarmak/engineering-reliable-coding-ag
 - `benchmark-catalog.json`: 29 coding-agent benchmark records.
 - `reference-metadata.json`: resolved arXiv, DOI, and web-source metadata from the manuscript audit.
 - `WEB-SOURCE-PRESERVATION.md`: canonical and archived URLs for retained practitioner sources on mutable hosts.
-- `methodology/`: corpus snapshots, thread protocols and source identities, search records, record-level update decisions, the external-grading packet, and the human/automated adjudication boundary.
+- `methodology/`: corpus snapshots, thread protocols and source identities, search records, record-level update decisions, the self-contained external-grading form and analyzer, the supplementary software-engineering search plans, and the human/automated adjudication boundary.
 - `schemas/`: JSON Schemas for the catalog and benchmark records.
 - `PROVENANCE.md`: source snapshot, transformations, evidence definitions, and release exclusions.
 - `CITATION.cff`: citation metadata for GitHub and archival services.
@@ -33,4 +33,4 @@ Author-system cases are labeled `author_system_illustration` and set `independen
 
 ## Before public release
 
-Complete the publisher-native ACM Digital Library, IEEE Xplore, and Scopus search described under `methodology/software-engineering-coverage/`, then complete the blinded external calibration described in `methodology/external-grading/README.md` and report both results in the manuscript. Then replace this release-candidate version with `1.0.0`, add the selected license, publish a tagged release in the canonical repository, archive that exact tag with Zenodo or another DOI-granting repository, and add the resulting DOI to this file and `CITATION.cff`. Do not archive internal review notes, rejected candidates, private receipts, or unpublished operational data.
+Complete the publisher-native ACM Digital Library, IEEE Xplore, and Scopus search described under `methodology/software-engineering-coverage/`. In parallel, send `methodology/external-grading/review-form.html` to two or three independent readers and analyze their completed responses as described in that directory's README. Report both results in the manuscript. Then replace this release-candidate version with `1.0.0`, add the selected license, publish a tagged release in the canonical repository, archive that exact tag with Zenodo or another DOI-granting repository, and add the resulting DOI to this file and `CITATION.cff`. Do not archive internal review notes, rejected candidates, private receipts, or unpublished operational data.

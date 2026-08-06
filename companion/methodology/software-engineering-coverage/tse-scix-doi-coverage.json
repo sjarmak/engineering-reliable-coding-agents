@@ -1,0 +1,410 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-06",
+  "source_lane": "scix_local_exact_doi",
+  "source_corpus": "SciX local corpus populated from NASA Science Explorer metadata",
+  "candidate_source": "The 2026-08-06 OpenAlex software-engineering coverage probe",
+  "venue": "IEEE Transactions on Software Engineering",
+  "method": "Exact normalized DOI identity match against the SciX papers.doi field",
+  "results": {
+    "candidates_with_doi": 26,
+    "exact_doi_matches": 26,
+    "exact_doi_nonmatches": 0,
+    "overlap_share": 1
+  },
+  "records": [
+    {
+      "doi": "10.1109/tse.2017.2786222",
+      "title": "Effectively Incorporating Expert Knowledge in Automated Software Remodularisation",
+      "year": 2018,
+      "query_ids": [
+        "grader-validity"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2018ITSEn..44..613H",
+        "title": "Effectively Incorporating Expert Knowledge in Automated Software Remodularisation",
+        "doi": "10.1109/tse.2017.2786222"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2019.2891715",
+      "title": "App Store Effects on Software Engineering Practices",
+      "year": 2019,
+      "query_ids": [
+        "retrieval-context"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2021ITSEn..47..300A",
+        "title": "App Store Effects on Software Engineering Practices",
+        "doi": "10.1109/tse.2019.2891715"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2019.2930519",
+      "title": "Exploiting Natural Language Structures in Software Informal Documentation",
+      "year": 2019,
+      "query_ids": [
+        "grader-validity"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2021ITSEn..47.1587D",
+        "title": "Exploiting Natural Language Structures in Software Informal Documentation",
+        "doi": "10.1109/tse.2019.2930519"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2019.2956941",
+      "title": "Where2Change: Change Request Localization for App Reviews",
+      "year": 2019,
+      "query_ids": [
+        "retrieval-context"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2021ITSEn..47.2590Z",
+        "title": "Where2Change: Change Request Localization for App Reviews",
+        "doi": "10.1109/tse.2019.2956941"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2020.2998503",
+      "title": "Automatic Generation of Acceptance Test Cases From Use Case Specifications: An NLP-Based Approach",
+      "year": 2020,
+      "query_ids": [
+        "grader-validity"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2022ITSEn..48..585W",
+        "title": "Automatic Generation of Acceptance Test Cases From Use Case Specifications: An NLP-Based Approach",
+        "doi": "10.1109/tse.2020.2998503"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2020.3023177",
+      "title": "Predicting Defective Lines Using a Model-Agnostic Technique",
+      "year": 2020,
+      "query_ids": [
+        "grader-validity"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2022ITSEn..48.1480W",
+        "title": "Predicting Defective Lines Using a Model-Agnostic Technique",
+        "doi": "10.1109/tse.2020.3023177"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2021.3067156",
+      "title": "Evaluating Automatic Program Repair Capabilities to Repair API Misuses",
+      "year": 2021,
+      "query_ids": [
+        "grader-validity"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2022ITSEn..48.2658K",
+        "title": "Evaluating Automatic Program Repair Capabilities to Repair API Misuses",
+        "doi": "10.1109/tse.2021.3067156"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2021.3069039",
+      "title": "Comparing Methods for Large-Scale Agile Software Development: A Systematic Literature Review",
+      "year": 2021,
+      "query_ids": [
+        "secondary-study-method",
+        "grader-validity",
+        "topology"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2022ITSEn..48.2709E",
+        "title": "Comparing Methods for Large-Scale Agile Software Development: A Systematic Literature Review",
+        "doi": "10.1109/tse.2021.3069039"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2021.3082074",
+      "title": "In Search of Socio-Technical Congruence: A Large-Scale Longitudinal Study",
+      "year": 2021,
+      "query_ids": [
+        "retrieval-context"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2022ITSEn..48.3159M",
+        "title": "In Search of Socio-Technical Congruence: A Large-Scale Longitudinal Study",
+        "doi": "10.1109/tse.2021.3082074"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2021.3113558",
+      "title": "Use and Misuse of the Term “Experiment” in Mining Software Repositories Research",
+      "year": 2021,
+      "query_ids": [
+        "retrieval-context"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2022ITSEn..48.4229A",
+        "title": "Use and Misuse of the Term Experiment in Mining Software Repositories Research",
+        "doi": "10.1109/tse.2021.3113558"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2021.3116808",
+      "title": "Challenges and Common Solutions in Smart Contract Development",
+      "year": 2021,
+      "query_ids": [
+        "retrieval-context"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2022ITSEn..48.4291K",
+        "title": "Challenges and Common Solutions in Smart Contract Development",
+        "doi": "10.1109/tse.2021.3116808"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2022.3147265",
+      "title": "Neural Transfer Learning for Repairing Security Vulnerabilities in C Code",
+      "year": 2022,
+      "query_ids": [
+        "retrieval-context"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2023ITSEn..49..147C",
+        "title": "Neural Transfer Learning for Repairing Security Vulnerabilities in C Code",
+        "doi": "10.1109/tse.2022.3147265"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2022.3165938",
+      "title": "How Should Software Engineering Secondary Studies Include Grey Material?",
+      "year": 2022,
+      "query_ids": [
+        "secondary-study-method"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2023ITSEn..49..872K",
+        "title": "How Should Software Engineering Secondary Studies Include Grey Material?",
+        "doi": "10.1109/tse.2022.3165938"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2022.3170087",
+      "title": "Applying Human Values Theory to Software Engineering Practice: Lessons and Implications",
+      "year": 2022,
+      "query_ids": [
+        "grader-validity"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2023ITSEn..49..973F",
+        "title": "Applying Human Values Theory to Software Engineering Practice: Lessons and Implications",
+        "doi": "10.1109/tse.2022.3170087"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2022.3170122",
+      "title": "Finding Critical Scenarios for Automated Driving Systems: A Systematic Mapping Study",
+      "year": 2022,
+      "query_ids": [
+        "grader-validity"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2023ITSEn..49..991Z",
+        "title": "Finding Critical Scenarios for Automated Driving Systems: A Systematic Mapping Study",
+        "doi": "10.1109/tse.2022.3170122"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2022.3184842",
+      "title": "Scalable and Accurate Test Case Prioritization in Continuous Integration Contexts",
+      "year": 2022,
+      "query_ids": [
+        "retrieval-context"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2023ITSEn..49.1615Y",
+        "title": "Scalable and Accurate Test Case Prioritization in Continuous Integration Contexts",
+        "doi": "10.1109/tse.2022.3184842"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2022.3187689",
+      "title": "Revisiting Binary Code Similarity Analysis Using Interpretable Feature Engineering and Lessons Learned",
+      "year": 2022,
+      "query_ids": [
+        "retrieval-context"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2023ITSEn..49.1661K",
+        "title": "Revisiting Binary Code Similarity Analysis Using Interpretable Feature Engineering and Lessons Learned",
+        "doi": "10.1109/tse.2022.3187689"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2022.3194188",
+      "title": "How do Developers <i>Really</i> Feel About Bug Fixing? Directions for Automatic Program Repair",
+      "year": 2022,
+      "query_ids": [
+        "human-review"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2023ITSEn..49.1823W",
+        "title": "How do Developers Really Feel About Bug Fixing? Directions for Automatic Program Repair",
+        "doi": "10.1109/tse.2022.3194188"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2023.3267848",
+      "title": "JavaScript Dead Code Identification, Elimination, and Empirical Assessment",
+      "year": 2023,
+      "query_ids": [
+        "retrieval-context"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2023ITSEn..49.3692M",
+        "title": "JavaScript Dead Code Identification, Elimination, and Empirical Assessment",
+        "doi": "10.1109/tse.2023.3267848"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2023.3287297",
+      "title": "Decomposition of Monolith Applications Into Microservices Architectures: A Systematic Review",
+      "year": 2023,
+      "query_ids": [
+        "secondary-study-method"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2023ITSEn..49.4213A",
+        "title": "Decomposition of Monolith Applications Into Microservices Architectures: A Systematic Review",
+        "doi": "10.1109/tse.2023.3287297"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2023.3288901",
+      "title": "NLP-Based Automated Compliance Checking of Data Processing Agreements Against GDPR",
+      "year": 2023,
+      "query_ids": [
+        "grader-validity"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2023ITSEn..49.4282C",
+        "title": "NLP-Based Automated Compliance Checking of Data Processing Agreements Against GDPR",
+        "doi": "10.1109/tse.2023.3288901"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2023.3310874",
+      "title": "DexBERT: Effective, Task-Agnostic and Fine-Grained Representation Learning of Android Bytecode",
+      "year": 2023,
+      "query_ids": [
+        "retrieval-context"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2023ITSEn..49.4691S",
+        "title": "DexBERT: Effective, Task-Agnostic and Fine-Grained Representation Learning of Android Bytecode",
+        "doi": "10.1109/tse.2023.3310874"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2024.3364675",
+      "title": "Automatic Commit Message Generation: A Critical Review and Directions for Future Work",
+      "year": 2024,
+      "query_ids": [
+        "retrieval-context"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2024ITSEn..50..816Z",
+        "title": "Automatic Commit Message Generation: A Critical Review and Directions for Future Work",
+        "doi": "10.1109/tse.2024.3364675"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2024.3382365",
+      "title": "ChatGPT vs SBST: A Comparative Assessment of Unit Test Suite Generation",
+      "year": 2024,
+      "query_ids": [
+        "retrieval-context"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2024ITSEn..50.1340T",
+        "title": "ChatGPT vs SBST: A Comparative Assessment of Unit Test Suite Generation",
+        "doi": "10.1109/tse.2024.3382365"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2024.3403042",
+      "title": "Fusing Code Searchers",
+      "year": 2024,
+      "query_ids": [
+        "retrieval-context"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2024ITSEn..50.1852W",
+        "title": "Fusing Code Searchers",
+        "doi": "10.1109/tse.2024.3403042"
+      }
+    },
+    {
+      "doi": "10.1109/tse.2024.3414672",
+      "title": "Practical, Automated Scenario-Based Mobile App Testing",
+      "year": 2024,
+      "query_ids": [
+        "grader-validity"
+      ],
+      "already_in_manuscript": false,
+      "in_scix_by_exact_doi": true,
+      "scix_match": {
+        "bibcode": "2024ITSEn..50.1949Y",
+        "title": "Practical, Automated Scenario-Based Mobile App Testing",
+        "doi": "10.1109/tse.2024.3414672"
+      }
+    }
+  ],
+  "interpretation": "This known-corpus audit measures whether SciX contains the DOI-bearing TSE records surfaced by the OpenAlex probe. It does not estimate topic-search recall within TSE, coverage of TSE as a whole, or equivalence to a publisher-native IEEE Xplore search."
+}

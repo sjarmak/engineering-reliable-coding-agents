@@ -1,4 +1,5 @@
 \chapter*{Introduction}
+\markboth{Introduction}{}
 \addcontentsline{toc}{chapter}{Introduction}
 \hypertarget{problem-and-scope}{%
 \section{Problem and scope}\label{problem-and-scope}}
@@ -52,7 +53,9 @@ The benchmark collection was assembled separately from benchmark documentation a
 
 The initial scholarly search did not establish adequate coverage of the core software-engineering venue literature. A subsequent OpenAlex metadata probe searched eight topic formulations across ICSE, FSE, ASE, ISSTA, \emph{Empirical Software Engineering}, \emph{IEEE Transactions on Software Engineering}, \emph{ACM Transactions on Software Engineering and Methodology}, and \emph{Computer Supported Cooperative Work}. It surfaced 148 unique candidates. Nine methodologically material works were admitted after title-and-abstract screening, including the SEGRESS reporting guideline (\href{https://doi.org/10.1109/TSE.2022.3174092}{Kitchenham et al.~2022}), the ABC framework for software-engineering research (\href{https://doi.org/10.1145/3241743}{Stol and Fitzgerald 2018}), and work on construct validity in software engineering (\href{https://doi.org/10.1109/TSE.2022.3176725}{Sjøberg and Bergersen 2023}).
 
-That probe diagnosed coverage; it did not replace a publisher-native search. In a deterministic sample of 40 candidate DOIs, SciX contained eight exact DOI matches. The sample is too small and topical to estimate corpus recall, but the missing records are sufficient to reject an assumption of complete SE venue coverage. ACM Digital Library returned HTTP 403 to the automated search client, while the IEEE Xplore and Scopus APIs required credentials not configured in the review environment. The archival first edition is therefore conditional on a supplementary search executed against ACM Digital Library, IEEE Xplore, and Scopus, or on a documented database substitution whose coverage is justified. The companion preserves the probe protocol, all 148 candidates, and the exact SciX comparison.
+That probe diagnosed coverage; it did not replace a publisher-native search. In a deterministic sample of 40 candidate DOIs, SciX contained eight exact DOI matches. All eight were TSE records. A follow-up known-set check found exact SciX DOI matches for all 26 TSE candidates surfaced by the probe, while the sample's 32 records from other venue families remained absent. These comparisons show record-level gaps and a venue-specific difference in the known candidate set; they are too topical to estimate corpus recall, topic-search recall within TSE, or equivalence to a publisher index.
+
+ACM Digital Library returned HTTP 403 to the automated search client, and ACM's end-user policy excludes automated agents, so its prepared supplement is manual. An IEEE Xplore metadata key is configured but awaits provider activation. A credentialed, identifier-only Scopus lane is prepared but not yet configured with an API key or any institutional token required by the host's entitlement. The archival first edition is therefore conditional on executing the preserved ACM Digital Library, IEEE Xplore, and Scopus plans, or on a documented database substitution whose coverage is justified. The companion preserves the probe protocol, all 148 candidates, both exact-DOI comparisons, and the pending search plans.
 
 \begin{figure}[htbp]
 \centering

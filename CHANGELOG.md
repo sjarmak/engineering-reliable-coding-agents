@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.0.0-rc.13 — 2026-08-06
+
+- Added a self-contained blinded-review form for the 20-practice external
+  calibration and strengthened the analyzer to reject incomplete responses and
+  report confusion matrices and item-level disagreements.
+- Audited every TSE record surfaced by the software-engineering coverage probe;
+  all 26 candidates matched SciX by exact DOI, without treating that known-set
+  overlap as a recall estimate.
+- Added preserved 64-cell IEEE and Scopus plans, an API-ready identifier-only
+  Scopus client, and a 48-cell manual ACM Digital Library protocol that follows
+  ACM's end-user automation restrictions.
+- Corrected the release-candidate methods text and front-matter running head,
+  rebuilt the 270-page manuscript, and expanded the companion methodology and
+  release documentation.
+
 ## 1.0.0-rc.12 — 2026-08-06
 
 - Corrected four author attributions introduced by the software-engineering

@@ -59,7 +59,10 @@ The release candidate contains 192 practice records, 578 evidence or
 corroboration records, and 29 benchmark records. Its methodology directory
 records the corpus snapshots, common search protocol, 138 retained scholarly
 works, all 39 decisions in the bounded August update audit, a 148-record
-software-engineering coverage probe, and a deterministic 40-DOI SciX comparison.
+software-engineering coverage probe, a deterministic 40-DOI SciX comparison,
+a complete 26-record TSE known-set comparison, and the prepared ACM, IEEE, and
+Scopus search plans. The external-calibration package includes a self-contained
+reviewer form and strict agreement analyzer.
 Author-system cases are marked as illustrations and are not counted as
 independent external evidence.
 
@@ -87,7 +90,7 @@ system before use.
 
 ## Release status
 
-The files currently represent the `1.0.0-rc.12` release candidate prepared on
+The files currently represent the `1.0.0-rc.13` release candidate prepared on
 August 6, 2026. Archival v1 remains gated on two measured additions: blinded
 external grading of the packaged 20-practice sample and a supplementary search
 of ACM Digital Library, IEEE Xplore, and Scopus (or a justified database

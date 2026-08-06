@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "source_lane": "publisher_native_ieee",
+  "purpose": "Bounded publisher-native supplement for Engineering Reliable Coding Agents; this is review provenance, not a SciX corpus ingest.",
+  "years": [
+    2018,
+    2026
+  ],
+  "retention_boundary": "Retain query provenance and DOI/article identifiers only. Do not retain or redistribute IEEE-returned titles, abstracts, authors, or full text.",
+  "screening_boundary": "IEEE-returned content is reserved for human screening. Automated analysis may use independently obtained, appropriately licensed metadata while preserving its source lane.",
+  "topics": [
+    {
+      "id": "secondary-study-method",
+      "querytext": "(\"systematic literature review\" OR \"systematic mapping study\" OR \"multivocal literature review\" OR \"grey literature\") AND \"software engineering\""
+    },
+    {
+      "id": "evaluation-validity",
+      "querytext": "(\"coding agent\" OR \"program repair\" OR \"code generation\") AND (benchmark OR evaluation OR contamination OR oracle)"
+    },
+    {
+      "id": "grader-validity",
+      "querytext": "(\"automated evaluation\" OR \"human evaluation\" OR \"inter-rater agreement\") AND (software OR code)"
+    },
+    {
+      "id": "human-review",
+      "querytext": "(\"code review\" OR \"pull request review\") AND (\"artificial intelligence\" OR automation OR human)"
+    },
+    {
+      "id": "operations-recovery",
+      "querytext": "(agent OR automation) AND (\"fault injection\" OR recovery OR reliability OR idempotent)"
+    },
+    {
+      "id": "retrieval-context",
+      "querytext": "(\"code search\" OR \"repository retrieval\" OR \"issue localization\") AND (context OR developer)"
+    },
+    {
+      "id": "topology",
+      "querytext": "(\"multi-agent\" OR \"multi agent\") AND (\"software engineering\" OR programming) AND (coordination OR delegation)"
+    },
+    {
+      "id": "adoption-governance",
+      "querytext": "(\"generative AI\" OR \"artificial intelligence\") AND (\"software engineering\" OR programming) AND (adoption OR governance OR accountability)"
+    }
+  ],
+  "venues": [
+    {
+      "id": "tse",
+      "publication_title": "IEEE Transactions on Software Engineering",
+      "content_type": "Journals"
+    },
+    {
+      "id": "icse",
+      "publication_title": "International Conference on Software Engineering",
+      "content_type": "Conferences"
+    },
+    {
+      "id": "ase",
+      "publication_title": "International Conference on Automated Software Engineering",
+      "content_type": "Conferences"
+    },
+    {
+      "id": "fse",
+      "publication_title": "International Symposium on Foundations of Software Engineering",
+      "content_type": "Conferences"
+    },
+    {
+      "id": "issta",
+      "publication_title": "International Symposium on Software Testing and Analysis",
+      "content_type": "Conferences"
+    },
+    {
+      "id": "icst",
+      "publication_title": "International Conference on Software Testing, Verification and Validation",
+      "content_type": "Conferences"
+    },
+    {
+      "id": "msr",
+      "publication_title": "International Conference on Mining Software Repositories",
+      "content_type": "Conferences"
+    },
+    {
+      "id": "saner",
+      "publication_title": "International Conference on Software Analysis, Evolution and Reengineering",
+      "content_type": "Conferences"
+    }
+  ]
+}

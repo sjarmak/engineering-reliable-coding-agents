@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "source_lane": "publisher_native_acm_manual",
+  "purpose": "Bounded manual ACM Digital Library supplement for Engineering Reliable Coding Agents. Automated agents are excluded by the ACM Digital Library end-user policy.",
+  "years": [
+    2018,
+    2026
+  ],
+  "collection": "ACM Full-Text Collection, not the broader Guide to Computing Literature",
+  "retention_boundary": "Retain the executed query, filters, date, result count, and citation identifiers exported through the user interface. Do not bulk-download or redistribute ACM full text.",
+  "policy_sources": [
+    "https://www.acm.org/publications/policies/usage-old",
+    "https://libraries.acm.org/binaries/content/assets/libraries/acm-digital-library-user-guide.pdf"
+  ],
+  "topics": [
+    {
+      "id": "secondary-study-method",
+      "query": "(\"systematic literature review\" OR \"systematic mapping study\" OR \"multivocal literature review\" OR \"grey literature\") AND \"software engineering\""
+    },
+    {
+      "id": "evaluation-validity",
+      "query": "(\"coding agent\" OR \"program repair\" OR \"code generation\") AND (benchmark OR evaluation OR contamination OR oracle)"
+    },
+    {
+      "id": "grader-validity",
+      "query": "(\"automated evaluation\" OR \"human evaluation\" OR \"inter-rater agreement\") AND (software OR code)"
+    },
+    {
+      "id": "human-review",
+      "query": "(\"code review\" OR \"pull request review\") AND (\"artificial intelligence\" OR automation OR human)"
+    },
+    {
+      "id": "operations-recovery",
+      "query": "(agent OR automation) AND (\"fault injection\" OR recovery OR reliability OR idempotent)"
+    },
+    {
+      "id": "retrieval-context",
+      "query": "(\"code search\" OR \"repository retrieval\" OR \"issue localization\") AND (context OR developer)"
+    },
+    {
+      "id": "topology",
+      "query": "(\"multi-agent\" OR \"multi agent\") AND (\"software engineering\" OR programming) AND (coordination OR delegation)"
+    },
+    {
+      "id": "adoption-governance",
+      "query": "(\"generative AI\" OR \"artificial intelligence\") AND (\"software engineering\" OR programming) AND (adoption OR governance OR accountability)"
+    }
+  ],
+  "venues": [
+    {
+      "id": "tosem",
+      "publication_filter": "ACM Transactions on Software Engineering and Methodology"
+    },
+    {
+      "id": "icse",
+      "publication_filter": "International Conference on Software Engineering proceedings"
+    },
+    {
+      "id": "fse",
+      "publication_filter": "Foundations of Software Engineering or ESEC/FSE proceedings"
+    },
+    {
+      "id": "ase",
+      "publication_filter": "Automated Software Engineering conference proceedings"
+    },
+    {
+      "id": "issta",
+      "publication_filter": "International Symposium on Software Testing and Analysis proceedings"
+    },
+    {
+      "id": "cscw",
+      "publication_filter": "Proceedings of the ACM on Human-Computer Interaction, CSCW issues"
+    }
+  ]
+}
