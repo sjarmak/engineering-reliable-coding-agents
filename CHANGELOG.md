@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.0.0-rc.7 — 2026-08-05
+
+- Established once that some practices are engineering controls justified by
+  a structural mechanism and observable boundary rather than a measured trial
+  effect, then materially reduced repeated chapter-level caveat templates.
+- Consolidated repeated topology, provenance, freshness, and dependency-chain
+  procedures; added clearly labeled personal defaults, an apparatus-cost
+  ledger, and a constrained-budget removal order.
+- Corrected the LongCodeBench capacity account, GSM1k correlation notation,
+  benchmark percentage wording, Skalse theorem scope, and several garbled or
+  unfinished passages.
+- Removed five low-information or cross-study figures, leaving 13 conceptual
+  and data-explanatory figures; verified that the Chapter 9 connector renders
+  behind its nodes.
+- Removed unstable unsupported citations, archived four retained mutable web
+  sources, and documented unreleased author-system data and its constraints.
+- Fixed mathematical typesetting for `pass@k`, `pass^k`, and retrieval metrics;
+  the final candidate is 254 pages with 183 full references.
+
 ## 1.0.0-rc.6 — 2026-08-05
 
 - Audited all 58 strong-evidence entries against the manuscript's

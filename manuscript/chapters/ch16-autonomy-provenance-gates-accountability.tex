@@ -237,7 +237,7 @@ A provenance control that disappears during the ordinary merge path creates a co
 
 My authorship-measurement project illustrates why provenance counts must remain narrow. I measured a 14.5 percent trailer-signed floor, a lower bound on visible trailer-marked authorship, because every detected trailer was treated as a true positive. The figure says nothing about total agent contribution and cannot be averaged with an inferred share.
 
-An earlier exploratory range was superseded when a preregistered replication returned \texttt{Not\ identified}. The estimator targeted agent authorship beyond the trailer-marked floor and failed to identify that quantity under the specified design. Only the measured floor remains defensible.
+A preregistered replication could not estimate the share of agent-authored code beyond commits carrying the trailer. I therefore discard the earlier exploratory range and report only the directly observed trailer-marked floor.
 
 Provenance is also distinct from answerability. In my maintainer practice, an adoption pull request can preserve a contributor's commits while stating:
 
@@ -248,7 +248,7 @@ Credit: original fix by @X (commit preserved with original authorship)
 
 The original author remains attached to the work. The maintainer who adopts and submits it becomes answerable for the integration decision. Both facts survive in the artifact.
 
-The format does not establish correctness. It removes the need for a later reviewer to infer who produced the change and who accepted responsibility for putting it forward.
+The format establishes attribution rather than correctness. It removes the need for a later reviewer to infer who produced the change and who accepted responsibility for putting it forward.
 
 Persistent provenance also supports incident reconstruction. A reviewer investigating a regression can ask whether the failure arose during generation, human modification, integration, or a later environmental change. That distinction is harder when provenance exists only in an editor and disappears before merge.
 
@@ -256,7 +256,7 @@ The companion entry \texttt{record-steps-in-hash-chained-ledger} describes one t
 
 Tang et al.'s measured workload cost limits the recommendation. Increased cognitive effort may be acceptable when a marker directs attention to occasional generated work. In a codebase where nearly every change carries the label, constant exposure may tax reviewers and lose salience.
 
-The study does not establish how large diffs, persistent queues, or experienced teams respond over time. Local evaluation should therefore measure reviewer behavior and repair, not label coverage alone.
+Large diffs, persistent queues, and experienced teams may respond differently over time. Local evaluation should therefore measure reviewer behavior and repair, not label coverage alone.
 
 \Needspace{5\baselineskip}
 
@@ -463,7 +463,7 @@ Leaving the responsibility label in place while operational control remains else
 
 The check should include the identity that executes the action. In my enterprise data-access service, mutations are unavailable, requests use the caller's identity, and the audit log records that person. The agent cannot silently accumulate authority beyond what its operator already holds.
 
-This design aligns execution and identity more closely than a shared privileged service account. It does not establish that every read is justified or that the caller understands the returned information.
+This design aligns execution and identity more closely than a shared privileged service account. Access justification and caller understanding remain separate checks.
 
 \Needspace{5\baselineskip}
 
@@ -493,7 +493,7 @@ Tracking asks whether system behavior follows the relevant and justified reasons
 
 These concepts become operational only after the team translates them into observable behavior for its own system.
 
-Suryana et al.~applied tracking and tracing through interviews with 103 users of Tesla Autopilot and Full Self-Driving features. The interviews revealed expectation-reality gaps and inconsistent adherence to operating protocols. The findings do not establish equivalent failure rates or causes in software delivery. They show that interviews can reveal an operational control model different from the one described in design documents.
+Suryana et al.~applied tracking and tracing through interviews with 103 users of Tesla Autopilot and Full Self-Driving features. The interviews revealed expectation-reality gaps and inconsistent adherence to operating protocols. This evidence comes from driving rather than software delivery; its transferable contribution is the interview method for revealing an operational control model different from the one described in design documents.
 
 \Needspace{5\baselineskip}
 

@@ -4655,7 +4655,7 @@
     "id": "benchmark-on-your-own-workload",
     "name": "Evaluate on your own workload, not public leaderboards",
     "practice": "Build your evaluation set from real sessions with your production assistant (verbatim prompts, committed changes, fail-to-pass tests) or a domain-lifecycle benchmark; expect general-leaderboard rankings to change, and when a leaderboard delta contradicts sustained field experience, trust the eval whose construct matches the work.",
-    "rationale": "Public benchmarks diverge from production workloads in language distribution, prompt style, and codebase structure; production-derived tasks restore fidelity. A 90th-percentile general-reasoning model still failed basic mortgage-underwriting tasks, and rankings shift considerably between general and domain evals. When SWE Bench Pro and METR's long-horizon eval disagreed on Opus 4.5, the construct-valid long-horizon eval was vindicated by developer experience a month later.",
+    "rationale": "Public benchmarks diverge from production workloads in language distribution, prompt style, and codebase structure; production-derived tasks restore fidelity. One lending-domain account reports that a model near the 90th percentile on a general measure still failed basic domain tasks and that rankings changed on a domain-lifecycle evaluation. The account motivates a local construct-validity test without supplying a population rate.",
     "boundary_conditions": "Requires an existing production assistant with logging and consent; curation is expensive and stability checks bias toward well-tested code areas. Contamination resistance is hard when domain knowledge is public. Field experience arrives with a lag and is itself noisy; long-horizon evals get sparse in the tail.",
     "transfers_to": "Model selection and regression testing for any team deploying agents in a specific domain or codebase.",
     "chapter": 3,
@@ -4696,17 +4696,6 @@
         "arxiv": null,
         "url": "https://www.reddit.com/r/compsci/comments/1rqcmu8/",
         "claim_support": "90th-percentile general model failed basic domain tasks; rankings shift considerably on domain-lifecycle evals.",
-        "resolved_metadata": null
-      },
-      {
-        "evidence_id": "benchmark-on-your-own-workload:e3",
-        "source_kind": "practitioner",
-        "evidence_group": "corroborating",
-        "citation": "swyx (@swyx, Latent Space / AI.Engineer) on METR's long-horizon evals, X post, 2026-01-14, https://x.com/swyx/status/2011344788486774942",
-        "bibcode": null,
-        "arxiv": null,
-        "url": "https://x.com/swyx/status/2011344788486774942",
-        "claim_support": "When headline benchmark and long-horizon eval disagreed, the construct-valid eval matched later developer experience.",
         "resolved_metadata": null
       }
     ],

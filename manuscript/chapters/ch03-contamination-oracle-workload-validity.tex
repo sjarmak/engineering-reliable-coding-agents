@@ -1,6 +1,6 @@
 \chapter{Benchmark contamination, oracle strength, and workload validity}
 \label{ch03-contamination-oracle-workload-validity}
-In February 2026, OpenAI (\href{https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified}{Feb 2026}) stopped reporting results on a benchmark subset it had helped create. In July 2026, it retracted its subsequent recommendation to use SWE-Bench Pro after an audit estimated that roughly 30 percent of its tasks were broken (\href{https://openai.com/index/separating-signal-from-noise-coding-evaluations/}{Jul 2026}). SWE-bench Verified had become one of the most cited measures of coding-agent performance. Its 500 tasks had survived screening by 93 paid professional developers, a process intended to remove ambiguous issues and defective tests. Less than two years later, a practitioner breakdown of the sponsor's audit reported that at least 16.4 percent of the full subset was unsolvable as shipped. That figure is derived from the audited sample rather than stated in the sponsor's own summary. The same audit showed frontier models reproducing solution details verbatim when given only a task identifier.
+In February 2026, OpenAI (\href{https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified}{Feb 2026}) stopped reporting results on a benchmark subset it had helped create. In July 2026, it retracted its subsequent recommendation to use SWE-Bench Pro after an audit estimated that roughly 30 percent of its tasks were broken (\href{https://openai.com/index/separating-signal-from-noise-coding-evaluations/}{Jul 2026}). SWE-bench Verified had become one of the most cited measures of coding-agent performance. Its 500 tasks had survived screening by 93 paid professional developers, a process intended to remove ambiguous issues and defective tests. The sponsor later reported that 59.4 percent of 138 audited tasks had flawed tests: about 82 tasks, or 16.4 percent of the full 500-task subset. The same audit showed frontier models reproducing solution details verbatim when given only a task identifier.
 
 Human screening had improved the original collection, but it could not control what happened after publication. \textbf{Contamination} is exposure to evaluation material before testing. Once tasks, issue discussions, reference patches, tests, and leaderboard results are public, they can enter training corpora, retrieval systems, fine-tuning sets, prompt libraries, and repeated development cycles. A clean review at release establishes nothing about those later paths.
 
@@ -65,7 +65,7 @@ Retroactive twins make the matching problem especially visible. Haimes et al.~(\
 
 Those results do not establish a comparable gap for repository-scale coding. The twins were constructed and validated for question answering, and the method applies only when the model's training cutoff predates publication of the twin set. The 16-point result is the largest gap observed under that study's design. It is not a bound on coding benchmarks and should not be used as a correction factor for coding scores.
 
-A controlled arithmetic study provides another boundary. Zhang et al.~(\href{https://arxiv.org/abs/2405.00332}{2024}) reconstructed a grade-school arithmetic benchmark as a private mirror and measured accuracy drops of up to 8 percent. The model-level gap was also associated with the probability that a model would reproduce public items verbatim, with a reported squared Spearman correlation of 0.36.
+A controlled arithmetic study provides another boundary. Zhang et al.~(\href{https://arxiv.org/abs/2405.00332}{2024}) reconstructed a grade-school arithmetic benchmark as a private mirror and measured accuracy drops of up to eight percentage points. The model-level gap was also associated with the probability that a model would reproduce public items verbatim; the results section reports Spearman's rank correlation as \(\rho=0.36\) with \(p=0.03\).
 
 Many frontier systems showed little overfitting, and every evaluated model generalized to the novel items. That variation is why the audit must be performed separately for each model. Exposure and score inflation are properties of a particular model-benchmark pair. Applying one average correction across models would erase the model-specific signal the audit is intended to measure.
 
@@ -122,7 +122,7 @@ All three failures can produce a successful-looking transcript. A model may repr
 
 I therefore treat a passing patch as a hypothesis about correctness. The test oracle is the ordinary continuous-integration mechanism that decides whether the candidate passes or fails. Its strength is the range of plausible wrong behavior it can reject. A suite is stronger when it checks more of the behavior implied by the task, especially behavior that superficially reasonable patches get wrong.
 
-Function-level code generation provides a controlled example. Liu et al.~(\href{https://arxiv.org/abs/2305.01210}{2023}) expanded a widely used suite's tests by 80x with generated inputs and mutation-based cases. Across 26 models, the stronger suite reduced \(\mathrm{pass}@k\) by up to roughly 19 to 29 percent and reshuffled rankings. The models and the generated programs were held fixed. Only the set of observations used to decide correctness changed. The original ranking had partly measured which wrong programs happened to fit sparse tests.
+Function-level code generation provides a controlled example. Liu et al.~(\href{https://arxiv.org/abs/2305.01210}{2023}) expanded a widely used suite's tests by 80x with generated inputs and mutation-based cases. Across 26 models, the largest relative reductions in \(\mathrm{pass}@k\) ranged from roughly 19 to 29 percent across the reported values of \(k\), and model rankings changed. The models and generated programs were fixed; only the observations used to decide correctness changed. The original ranking had partly measured which wrong programs happened to fit sparse tests.
 
 Repository-scale results show the same mechanism under more realistic state. Yu et al.~(\href{https://arxiv.org/abs/2506.09289}{2025}) augmented SWE-bench tests retroactively and found 36 under-tested tasks and 345 patches that had been labeled as passing incorrectly. Re-adjudication corrected 40.9 percent of entries on the smaller suite and 24.4 percent on the human-screened suite, changing 29 rankings. This was an audit of already reported results, so oracle weakness had propagated beyond individual tasks into system comparisons.
 
@@ -130,13 +130,7 @@ The problem predates current coding models. Ye et al.~(\href{https://arxiv.org/a
 
 Adversarial strengthening begins from the candidate failures a benchmark should reject. Construct plausible patches that implement only the common case, hard-code a fixture, change an unrelated return value, suppress an exception, or satisfy the visible assertion while violating the issue's broader contract. Then retain the tests that kill those patches. Yu et al.~(\href{https://arxiv.org/abs/2603.00520}{2026}) built suites that way, rejected 19.71 percent of patches that had passed previously, and reported a top score falling from 78.80 percent to 62.20 percent.
 
-\begin{figure}[htbp]
-\centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Stronger oracles cut SWE-ABS from 78.80\% to 62.20\% and SWE-Bench+ resolution from 12.47\% to 3.97\%; 40.9\% corrections, 29 ranking changes, 80x test expansion, 19\% to 29\% pass@k reductions, 32.67\% leakage, and 31.08\% weak-test passes.}]{figures/ch03-oracle-strength.pdf}}
-\caption{Stronger oracles cut SWE-ABS from 78.80\% to 62.20\% and SWE-Bench+ resolution from 12.47\% to 3.97\%; 40.9\% corrections, 29 ranking changes, 80x test expansion, 19\% to 29\% \href{mailto:pass@k}{\nolinkurl{pass@k}} reductions, 32.67\% leakage, and 31.08\% weak-test passes.}
-\end{figure}
-
-Four audits test apparent benchmark success under stronger oracles; SWE-Bench+ covers one agent-model pair, so its percentages cannot estimate prevalence for other agents or models.
+Four audits test apparent benchmark success under stronger oracles. SWE-Bench+ covers one agent-model pair, so its percentages remain specific to that evaluation.
 
 This process searches a different space from ordinary coverage expansion. Generated inputs explore more executions of a trusted implementation. Mutation-based cases perturb code to reveal assertions that fail to notice behavioral changes. Differential tests run the candidate and a trusted reference on the same inputs, then compare the results. Wrong-patch construction starts from foreseeable shortcuts and asks whether the suite detects them. A strong audit combines these approaches, because each makes a different assumption about where missing behavior resides.
 
@@ -160,7 +154,7 @@ The practical stopping rule follows the decision being made. For a research comp
 
 \section{Move the instrument onto your work}\label{move-the-instrument-onto-your-work}
 
-When a public ranking conflicts with sustained field behavior, the first question is whether the two measurements represent the same work. The evidence behind this practice is the thinnest in the chapter. It rests on one directional, practitioner-authored production benchmark and two anecdotal practitioner accounts, with no strong item standing behind it. The prescription asks the reader to build and measure on the relevant workload. It supplies no vendor score to adopt.
+When a public ranking conflicts with sustained field behavior, the first question is whether the two measurements represent the same work. The evidence behind this practice is the thinnest in the chapter. It rests on one directional, practitioner-authored production benchmark and one anecdotal practitioner account, with no strong item standing behind it. The prescription asks the reader to build and measure on the relevant workload. It supplies no vendor score to adopt.
 
 Construct validity asks whether an instrument measures the property named in the claim. Bean et al.~(\href{https://arxiv.org/abs/2511.04703}{2025}) used that question as the checklist for a systematic review of 445 benchmarks. A coding benchmark can measure repository issue resolution while offering weak evidence about migration work, security remediation, build repair, or long-running feature development. Passing tests establish performance on the sampled tasks under the specified harness. Generalizing that result to another workload requires a reason to believe the task distributions and operating conditions overlap.
 
@@ -170,9 +164,7 @@ Construction should start with the work product and trace backward. For a coding
 
 Jha et al.~(\href{https://arxiv.org/abs/2604.01527}{2026}) demonstrated one curation approach for a production-derived benchmark. They built tasks from sessions with their own coding assistant, classified the work, checked that tests were relevant to each task, and required stability across repeated runs. This is directional evidence from one vendor's environment. It shows that production traces can be converted into repeatable tasks. It does not establish that the resulting distribution represents another organization, or even every kind of work inside the source organization.
 
-The two anecdotal accounts identify transfer failures worth testing. Bytesfortruth (\href{https://www.reddit.com/r/compsci/comments/1rqcmu8/}{2026}), a lending-domain practitioner, reported that a model near the 90th percentile on a general-reasoning measure failed basic mortgage-underwriting tasks, and that rankings changed considerably on a domain-lifecycle evaluation. The account covers one team and reports no failure frequencies. It establishes one transfer failure and supplies no population rate for domain mismatch.
-
-In the second account, a headline coding benchmark and a long-horizon evaluation disagreed about a model, and swyx (\href{https://x.com/swyx/status/2011344788486774942}{2026}) reported that later developer experience followed the construct-matched long-horizon result. This is retrospective interpretation from one observer. It supports the choice of a hypothesis to test. Evaluations that preserve task duration and acceptance conditions may predict field experience better than short public tasks.
+The anecdotal account identifies a transfer failure worth testing. Bytesfortruth (\href{https://www.reddit.com/r/compsci/comments/1rqcmu8/}{2026}), a lending-domain practitioner, reported that a model near the 90th percentile on a general-reasoning measure failed basic mortgage-underwriting tasks, and that rankings changed considerably on a domain-lifecycle evaluation. The account covers one team and reports no failure frequencies. It establishes one transfer failure and supplies no population rate for domain mismatch.
 
 The task-sampling frame should follow the deployment claim. A tool meant to fix failing tests needs a distribution of actual failures, including the hard and unresolved ones. A tool meant to draft small maintenance changes needs accepted small changes plus representative rejections. Mixing those claims into one private score recreates the ambiguity of a general leaderboard under local ownership.
 
@@ -219,10 +211,6 @@ These answers do not yield a universal correction formula. They turn one impress
   OpenAI, ``Why SWE-bench Verified no longer measures frontier coding capabilities,'' 2026-02-23, \url{https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified}. {[}Corroborating evidence{]}
 \item
   OpenAI, ``Separating signal from noise in coding evaluations,'' 2026-07-08, \url{https://openai.com/index/separating-signal-from-noise-coding-evaluations/}. {[}Corroborating evidence{]}
-\item
-  swyx, ``SWE-Bench Verified is dead!!'', 2026-02-23, breakdown of the OpenAI audit. {[}Corroborating evidence{]} Source of the 16.4\% full-set figure, which is derived from the audited sample and does not appear verbatim in the post summary.
-\item
-  Tejal Patwardhan, public statement on frontier evaluations, 2026-06-16: ``saturated or gamed.'' {[}Corroborating evidence{]}
 \item
   SWE-bench Verified card: 500 instances, 93 professional screeners. {[}Benchmark record{]}
 \end{itemize}
@@ -281,8 +269,6 @@ These answers do not yield a universal correction formula. They turn one impress
   Jha, Paltenghi, Maddila, Murali, Ugare, and Chandra (2026), \emph{REAP: Automatic Curation of Coding Agent Benchmarks from Interactive Production Usage}, arXiv:2604.01527; the resulting benchmark is Harvest. {[}Directional evidence{]} The title and benchmark name were verified against the arXiv record on 2026-07-29; earlier working records used the name ProdCodeBench.
 \item
   Bytesfortruth (2026), lending-domain benchmark account, r/compsci, 2026-03-10, \url{https://www.reddit.com/r/compsci/comments/1rqcmu8/}. {[}Corroborating case{]}
-\item
-  swyx (2026), long-horizon evaluation account, X, 2026-01-14, \url{https://x.com/swyx/status/2011344788486774942}. {[}Corroborating case{]}
 \item
   Bean, A.M. et al.~(2025), Measuring what Matters, arXiv:2511.04703. {[}Directional evidence{]} Carried in the companion catalog as the construct-validity record; named inline for the construct-validity definition that opens this section.
 \end{itemize}

@@ -6,7 +6,7 @@ Visible reasoning is an incomplete observation of model state, so absence from t
 
 Only about half of the 17 models evaluated by Hsieh et al.~(\href{https://arxiv.org/abs/2404.06654}{2024}) maintained satisfactory performance at 32,000 tokens, even though every model advertised a context window at least that large. Their RULER benchmark combined 13 task types, including retrieval and aggregation.
 
-Rando et al.~(\href{https://arxiv.org/abs/2505.07897}{2025}) found a sharper decline on realistic repository issues at the much larger context sizes vendors had begun advertising. Claude 3.5 Sonnet fell from 29 percent to 3 percent as supplied context approached one million tokens, while Qwen2.5 fell from 70.2 percent to 40 percent. Every input remained within the model's advertised capacity.
+Rando et al.~(\href{https://arxiv.org/abs/2505.07897}{2025}) found a sharper decline on realistic repository issues as supplied context increased. On LongSWE-Bench, Claude 3.5 Sonnet fell from 29 percent at 32,000 tokens to 3 percent at 256,000 tokens, the model's maximum context in that study. On the separate LongCodeQA task, Qwen2.5-14B-Instruct scored 70.2 percent at 512,000 tokens and 40.0 percent at one million.
 
 The measurement problem is clearer than the prescription. I ranked ten candidate context-assembly practices three times: by how much each would change an engineering decision, how much of the problem it covered, and how teachable it was. The three rankings agreed on only one practice. Five practices appeared in exactly one ranking, and three appeared in none. I take that spread as evidence that the field has not converged. Every recommendation in this chapter is therefore either measured locally or identified as a convention.
 
@@ -42,17 +42,11 @@ The benchmark record shows why these distinctions matter. RULER found that adver
 
 Code work depends more heavily on relationships among units than simple fact retrieval does. Li et al.~(\href{https://arxiv.org/abs/2503.04359}{2025}) introduced LONGCODEU, covering nine models and eight long-code understanding tasks, and found substantial degradation beyond 32,000 tokens despite advertised windows of 128,000 to one million tokens. Understanding relationships among code units was the weakest area.
 
-LongCodeBench, the source of the million-token declines described above, evaluated issue answering and bug fixing rather than document retrieval. A successful long-document question-answering result therefore does not establish a safe context budget for a coding agent.
+LongCodeBench evaluated issue answering and bug fixing rather than document retrieval. Its model-task pairs also covered different maximum lengths, so the reported declines belong to those pairs and should not be compared as one curve.
 
 These studies do not identify a universal ceiling. Their results depend on the model generation, prompts, tasks, and scoring rules. The durable finding is the repeated gap between capacity and competence, together with a protocol for measuring it. The knee can move with a new model and may differ between retrieval and code modification even within the same release.
 
-\begin{figure}[htbp]
-\centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Across incomparable metrics, RULER is about half-satisfactory at 32k, long-context RAG saturates near 64k, LONGCODEU degrades beyond 32k, and toward 1M Claude 3.5 Sonnet falls 29\% to 3\% while Qwen2.5 falls 70.2\% to 40\%.}]{figures/ch13-capacity-competence.pdf}}
-\caption{Across incomparable metrics, RULER is about half-satisfactory at 32k, long-context RAG saturates near 64k, LONGCODEU degrades beyond 32k, and toward 1M Claude 3.5 Sonnet falls 29\% to 3\% while Qwen2.5 falls 70.2\% to 40\%.}
-\end{figure}
-
-Each study finds degradation within the tested or advertised window. Differences in tasks and metrics prevent direct comparison, and the evidence supplies no universal ceiling.
+Each study finds degradation within the tested or advertised window. Differences in tasks and metrics prevent direct comparison; the practical response is the local context-size sweep below.
 
 I qualify a model using context-size strata around the range I might deploy. A first pass can include a small condition, two intermediate conditions, and one near the advertised limit. The exact token values depend on the model and workload.
 
@@ -244,7 +238,7 @@ The 39 percent result helps explain why repeated correction messages can fail ev
 
 In my agent fleet, a snapshot of the shared skill catalog once traveled between sessions through an environment variable. As sessions inherited, transformed, and re-emitted it, the snapshot drifted. Moving the same context surface into a fingerprinted file made each session's copy atomic and allowed every reload to validate its identity.
 
-The incident shows that turning transient text into a named artifact can make ownership, validation, and retrieval explicit. It does not show that files improve model performance.
+The incident illustrates how a named artifact can make ownership, validation, and retrieval explicit. Model-performance effects require a separate comparison.
 
 The evidence for file-backed tool output is limited to two directional practitioner accounts and no strong studies. I treat it as a convention because it is a simple way to control raw-output growth. Long terminal sessions, search results, test logs, tool responses, and pre-compaction history move into session-scoped artifacts. The active context retains a concise description, a stable pointer, and enough metadata for the agent to decide whether loading more is worth the cost.
 
@@ -349,11 +343,11 @@ This is a null result from one study. It should reverse the assumption that a st
 
 Instruction adherence and task completion measure different effects. A file can cause an agent to run a command, follow a naming rule, or avoid a directory while leaving the final task score unchanged. It can also consume context, provoke additional tool calls, or direct attention toward an overview the model did not need.
 
-Evidence that the file was read and followed establishes treatment delivery. It does not establish benefit.
+Evidence that the file was read and followed establishes treatment delivery; task and cost outcomes determine benefit.
 
 The null result must be interpreted through the power analysis from Chapter 1. Failure to detect improvement may mean that the average effect is small, that positive and negative effects cancel across the task mix, or that the experiment could not resolve the effect it sought.
 
-The measured cost remains part of the result, as does the evidence that the files changed agent behavior. The study does not establish that every repository, instruction category, model, or safety outcome will reproduce the same balance.
+The measured cost remains part of the result, as does the evidence that the files changed agent behavior. Repositories, instruction categories, models, and safety outcomes may produce a different balance.
 
 The local decision requires a no-file baseline. The same representative tasks and repository states run under the same model, prompts, tools, harness, and evaluator with and without the standing file. The comparison is paired by task, and repeated runs remain necessary when model variation is material.
 
@@ -405,7 +399,7 @@ An all-or-nothing comparison may hide which content helps or harms. When the tas
 
 The categories can interact, so the decomposition is imperfect. It is still more informative than concluding that the entire file either works or does not.
 
-The Gloaguen et al.~result gives narrow failure-prevention rules a plausible role because agents followed the instructions even when aggregate task success did not improve. It does not show that any particular rule deserves permanent inclusion.
+The Gloaguen et al.~result gives narrow failure-prevention rules a plausible role because agents followed the instructions even when aggregate task success did not improve. Permanent inclusion still requires a rule-specific outcome and cost test.
 
 A rule such as ``do not regenerate this checked-in directory manually'' names a concrete failure and can be tested on tasks that encounter that directory. A page describing the repository architecture may duplicate information that search can retrieve only when needed.
 
@@ -415,7 +409,7 @@ One of my repositories uses its context file as a failure-mode ledger. Each proh
 
 Actual context files are broader. Chatlatanagulchai et al.~(\href{https://arxiv.org/abs/2511.12884}{2025}) analyzed 2,303 files from 1,925 repositories. Implementation details appeared in 69.9 percent, architecture information in 67.7 percent, and build or execution guidance in 62.3 percent. Security and performance guidance each appeared in 14.5 percent.
 
-Those percentages describe what maintainers wrote, not what improved outcomes. The relative absence of security and performance guidance is a useful review prompt because coding agents can execute commands and modify production-relevant code. It does not show that generic security or performance text should be added.
+Those percentages describe what maintainers wrote, not what improved outcomes. The relative absence of security and performance guidance is a useful review prompt because coding agents can execute commands and modify production-relevant code; it is not a reason to add generic text without a concrete local failure mode.
 
 \Needspace{5\baselineskip}
 

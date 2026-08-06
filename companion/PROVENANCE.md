@@ -8,7 +8,7 @@ Derived agent skills: [https://github.com/sjarmak/engineering-reliable-coding-ag
 
 ## Source snapshot
 
-- Public manuscript chapter snapshot: packaged with companion version `1.0.0-rc.6` in the canonical repository.
+- Public manuscript chapter snapshot: packaged with companion version `1.0.0-rc.7` in the canonical repository.
 - Human-readable companion input SHA-256: `939e019098672bc34678367abfabbeb8670eb8bcfff3fad350e3859b68ef59bb`.
 - Practice catalog input SHA-256: `1709cc2216d46cf41cedbd580e6b7b9f424815a7ee2f8259f6e546e8a0500019`.
 - Companion chapter-map input SHA-256: `b31599ac15bbb7747a704d0f9691c6f02fd6a7f72bb7d505fb5826c65fac7ffe`.
@@ -23,7 +23,7 @@ The hashes identify the exact build inputs without exposing workstation paths or
 
 The separately packaged skills retain their own practice maps and evidence boundaries. They are derived operational artifacts and are not counted as independent evidence.
 
-Corroborating author-system records remain available for reproducibility but are explicitly excluded from independent external evidence. Records previously removed from supporting evidence are retained as null or conflicting material with their limitation.
+Corroborating author-system records remain available for reproducibility but are explicitly excluded from independent external evidence. Records previously removed from supporting evidence are retained as null or conflicting material with their limitation. Mutable practitioner pages retained by the manuscript have canonical and archived locations in `WEB-SOURCE-PRESERVATION.md`; unstable unsupported records removed during review are named there for auditability.
 
 ## Excluded material
 

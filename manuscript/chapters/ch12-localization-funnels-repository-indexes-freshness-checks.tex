@@ -44,7 +44,7 @@ Sepidband et al.~(\href{https://arxiv.org/abs/2604.05481}{2026}) measured this a
 
 The same experiment found that successful repairs clustered around approximately six to ten relevant files for the model family studied. That range is useful as a diagnostic band, not as a quota for other models, repositories, or task distributions. Both findings come from one benchmark and one sweep of context configurations.
 
-The practical implication is to measure file selection before adding more reasoning downstream. Chapter 11's decomposed scoring makes that diagnosis possible. When file \href{mailto:Recall@k}{\nolinkurl{Recall@k}} is low, a stronger patch generator is being evaluated on a candidate set that often excludes the answer. When file recall is already high and repair still fails, additional localization machinery may move cost into a stage that is no longer limiting the system.
+The practical implication is to measure file selection before adding more reasoning downstream. Chapter 11's decomposed scoring makes that diagnosis possible. When file \(\mathrm{Recall}@k\) is low, a stronger patch generator is being evaluated on a candidate set that often excludes the answer. When file recall is already high and repair still fails, additional localization machinery may move cost into a stage that is no longer limiting the system.
 
 \Needspace{5\baselineskip}
 
@@ -139,13 +139,7 @@ Ma et al.~(\href{https://arxiv.org/abs/2406.01422}{2024}) measured this tension 
 
 The patch-application rate, which measured whether generated diffs applied cleanly, peaked at 200 iterations and then declined through 600. Clean application was necessary but not sufficient for resolution. Fewer patches could apply while more tasks were resolved if the patches that did apply were more often correct. The result suggests that additional exploration continued to improve localization while making the downstream generation problem harder.
 
-\begin{figure}[htbp]
-\centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Separate axes reflect different denominators; resolution rises from 16.0\% at zero iterations to 21.3\% at 600 on a zero-based scale, while unquantified patch application peaks at 200 and declines through 600.}]{figures/ch12-exploration-budget.pdf}}
-\caption{Separate axes reflect different denominators; resolution rises from 16.0\% at zero iterations to 21.3\% at 600 on a zero-based scale, while unquantified patch application peaks at 200 and declines through 600.}
-\end{figure}
-
-Both curves come from one benchmark configuration. The 200-iteration application peak is configuration-specific, and the application curve reports shape without published values.
+Both measurements come from one benchmark configuration. The paper reports the 200-iteration location of the application-rate peak but not the curve's values, so the peak is useful only as a prompt to measure the local stopping point.
 
 A traversal budget must therefore be evaluated against both localization and patch application. It may stop after a fixed number of expansions, when no new relationship type appears, or when the candidate set reaches the repair budget. The literature does not identify one stopping rule that dominates across repositories.
 
@@ -307,7 +301,7 @@ Freshness does not determine authorization. Permission policy requires separate 
 
 Begin with Chapter 11's decomposed measurements and determine which stage is limiting the operated system. Inspect file-level retrieval before changing the agent architecture.
 
-File \href{mailto:Recall@k}{\nolinkurl{Recall@k}} asks whether the repair stage receives the necessary files at all. When those files rarely appear, improve file selection and staged localization before adding more open-ended reasoning. A stronger repair model cannot act on evidence the retrieval path excluded.
+File \(\mathrm{Recall}@k\) asks whether the repair stage receives the necessary files at all. When those files rarely appear, improve file selection and staged localization before adding more open-ended reasoning. A stronger repair model cannot act on evidence the retrieval path excluded.
 
 \Needspace{5\baselineskip}
 
@@ -346,7 +340,7 @@ Chapter 13 turns from which evidence the system retrieves to how much of that ev
 \item
   Strong evidence: Xia, C. S., et al.~(2024), ``Agentless: Demystifying LLM-based Software Engineering Agents,'' arXiv:2407.01489.
 \item
-  Directional evidence: Chang, J., et al.~(2025), ``BugCerberus: Bridging Bug Localization and Issue Fixing,'' arXiv:2502.15292. (Per-hierarchy-level specialization; direction only.)
+  Directional evidence: Chang, J., et al.~(2025), ``BugCerberus: Bridging Bug Localization and Issue Fixing,'' arXiv:2502.15292. (Per-hierarchy-level specialization.)
 \item
   Strong evidence: Sepidband, M., Viet Pham, H., Hemmati, H. (2026), ``On the Role of Fault Localization Context for LLM-Based Program Repair,'' arXiv:2604.05481.
 \item
@@ -370,7 +364,7 @@ Chapter 13 turns from which evidence the system retrieves to how much of that ev
 \item
   Strong evidence: AOCI AI-oriented code indexing (Liu 2026), arXiv:2605.02421.
 \item
-  Directional evidence: MAGIS (Tao 2024), arXiv:2403.17927. Direction only.
+  Directional evidence: MAGIS (Tao 2024), arXiv:2403.17927.
 \end{itemize}
 
 \textbf{Gate retrieval on freshness}

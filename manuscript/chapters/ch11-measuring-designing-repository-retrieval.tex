@@ -1,6 +1,6 @@
 \chapter{Measuring and designing repository retrieval}
 \label{ch11-measuring-designing-repository-retrieval}
-In my benchmark built from tasks across 73 repositories, two instruments gave different accounts of the same retrieval tool. \href{mailto:Precision@10}{\nolinkurl{Precision@10}}, the proportion of the first ten results judged relevant, rose from 0.095 to 0.313. \textbf{\href{mailto:Recall@k}{\nolinkurl{Recall@k}}}, the fraction of judged necessary items found among the first \(k\) results, rose at \(k = 10\) from 0.120 to 0.272. The share of tasks for which at least one needed file appeared rose from 0.33 to 0.56.
+In my benchmark built from tasks across 73 repositories, two instruments gave different accounts of the same retrieval tool. \(\mathrm{Precision}@10\), the proportion of the first ten results judged relevant, rose from 0.095 to 0.313. \textbf{\(\mathrm{Recall}@k\)}, the fraction of judged necessary items found among the first \(k\) results, rose at \(k = 10\) from 0.120 to 0.272. The share of tasks for which at least one needed file appeared rose from 0.33 to 0.56.
 
 The paired end-to-end reward across 370 tasks moved by only +0.0349, with a bootstrap 95 percent confidence interval of {[}+0.0130, +0.0579{]}, \(n = 370\).
 
@@ -70,13 +70,13 @@ Three newer studies provide directional support for the same measurement shape. 
 
 \section{Retrieval metrics}\label{retrieval-metrics}
 
-When a task requires one item, its \href{mailto:Recall@k}{\nolinkurl{Recall@k}} value is binary: the item either appears among the first \(k\) results or it does not. When several items are required, \href{mailto:Recall@k}{\nolinkurl{Recall@k}} is the fraction found within those results.
+When a task requires one item, its \(\mathrm{Recall}@k\) value is binary: the item either appears among the first \(k\) results or it does not. When several items are required, \(\mathrm{Recall}@k\) is the fraction found within those results.
 
 The aggregate may be computed as the mean of per-task recall values or as the pooled fraction across all required items. These are different estimands when tasks require unequal numbers of items, so the report should name which one it uses. It must also state what counts as relevant.
 
 A file-level measure asks whether the needed file appeared. A chunk-level measure may require the particular definition, implementation, or surrounding block. Those targets answer different questions and should not share one unlabeled score.
 
-The \textbf{rank} of a needed item is its position in the ordered results, with position one returned first. Items at positions one and ten both count as retrieved at \(k = 10\), although the first consumes less context and is less vulnerable to truncation. \href{mailto:Recall@k}{\nolinkurl{Recall@k}} does not preserve that difference.
+The \textbf{rank} of a needed item is its position in the ordered results, with position one returned first. Items at positions one and ten both count as retrieved at \(k = 10\), although the first consumes less context and is less vulnerable to truncation. \(\mathrm{Recall}@k\) does not preserve that difference.
 
 When several items are required, I retain each position or report a declared aggregate. One rank value rarely describes the full set.
 
@@ -88,7 +88,7 @@ Multiple retrieval channels produce ordered lists whose numeric scores may have 
 
 \textbf{Reciprocal-rank fusion} combines lists by position instead. Each item receives a contribution such as \(1/(c+r)\) from each channel, where \(r\) is its rank and \(c\) is a fixed damping constant. The fused order reflects agreement and placement across lists without assuming comparable score scales.
 
-Each metric remains incomplete. \href{mailto:Recall@10}{\nolinkurl{Recall@10}} does not show whether ten falls before or after the recall plateau. Mean rank excludes or obscures tasks in which the target never appeared unless missing results receive an explicit convention. A fused list may preserve coverage when one channel fails, but that failure remains visible only if the original channel results are retained.
+Each metric remains incomplete. \(\mathrm{Recall}@10\) does not show whether ten falls before or after the recall plateau. Mean rank excludes or obscures tasks in which the target never appeared unless missing results receive an explicit convention. A fused list may preserve coverage when one channel fails, but that failure remains visible only if the original channel results are retained.
 
 Stage-level evaluation requires relevance judgments. In a curated benchmark, maintainers may identify the file, symbol, span, or dependency set needed for each task. In a production repository, relevance may be plural and conditional. One correct patch may rely on an interface declaration and a caller. Another may use the implementation and a test. Declaring only one path relevant can penalize an equally valid evidence route.
 
@@ -180,9 +180,9 @@ The strongest code-specific evidence for retaining both lanes comes from an indu
 
 That result does not establish the same ordering for every repository agent or newer embedding model. The workload was industrial, dominated by large C++ codebases and completion-style tasks. The experimental design transfers more readily than the result: run each lane independently on the operated corpus and measure which relevant items each uniquely recovers.
 
-Production reports and late-interaction research point in the same direction without settling the question. A production account of agent memory from Trautmann (2026) describes parallel channels fused by rank as a deployed default. Adaptive memory retrieval, from Yan et al.~(\href{https://arxiv.org/abs/2603.16496}{2026}), and late-interaction retrieval, from Khattab and Zaharia (\href{https://arxiv.org/abs/2004.12832}{2020}), support retaining complementary representations rather than any specific fusion policy. None provides code-specific evidence for the effect of fusion.
+Production reports and late-interaction research point in the same direction without settling the question. A production account of agent memory from Trautmann and Sutter (\href{https://blog.cloudflare.com/introducing-agent-memory/}{2026}) describes parallel channels fused by rank as a deployed default. Adaptive memory retrieval, from Yan et al.~(\href{https://arxiv.org/abs/2603.16496}{2026}), and late-interaction retrieval, from Khattab and Zaharia (\href{https://arxiv.org/abs/2004.12832}{2020}), support retaining complementary representations rather than any specific fusion policy. None provides code-specific evidence for the effect of fusion.
 
-I execute the channels separately and preserve their original result lists. The lexical lane records its query, tokenizer, filters, and index version. The semantic lane records its query, embedding model, filters, and vector-index version. Per-lane \href{mailto:Recall@k}{\nolinkurl{Recall@k}} and target ranks show what each channel contributes. The fused list is a separate stage with its own recall, ranks, context consumption, and downstream completion score.
+I execute the channels separately and preserve their original result lists. The lexical lane records its query, tokenizer, filters, and index version. The semantic lane records its query, embedding model, filters, and vector-index version. Per-lane \(\mathrm{Recall}@k\) and target ranks show what each channel contributes. The fused list is a separate stage with its own recall, ranks, context consumption, and downstream completion score.
 
 Rank fusion is necessary because channel scores do not share a unit. Suppose lexical search returns an exact symbol with a BM25 score of 18, while semantic search returns a related file with cosine similarity 0.84. The difference between 18 and 0.84 says nothing about their relative relevance. Multiplying the cosine score by 100 would reverse the implicit weighting without changing the semantic order. Any sum of raw scores therefore embeds an arbitrary scaling decision.
 
@@ -225,11 +225,11 @@ The operational test is whether fusion recovers relevant evidence that the curre
 
 \section{Preserve code structure inside the retrieval unit}\label{preserve-code-structure-inside-the-retrieval-unit}
 
-Replacing fixed line windows with syntax-aware chunks increased \href{mailto:Recall@5}{\nolinkurl{Recall@5}} by 4.3 percentage points on RepoEval, a repository-level retrieval and completion benchmark, in the cAST study from Zhang et al.~(\href{https://arxiv.org/abs/2506.15655}{2025}). The same study reported a 2.67-percentage-point \href{mailto:Pass@1}{\nolinkurl{Pass@1}} gain on SWE-bench generation across languages.
+Replacing fixed line windows with syntax-aware chunks increased \(\mathrm{Recall}@5\) by 4.3 percentage points on RepoEval, a repository-level retrieval and completion benchmark, in the cAST study from Zhang et al.~(\href{https://arxiv.org/abs/2506.15655}{2025}). The same study reported a 2.67-percentage-point \(\mathrm{Pass}@1\) gain on SWE-bench generation across languages.
 
 These are modest end-to-end changes. They are still large enough to investigate at the chunking-policy layer because the intervention changes neither the model nor the information present in the repository.
 
-The chunking policy defines the units a retriever can rank and a context builder can select. An index rarely stores an entire repository as one document. It divides files into spans, attaches identifiers and metadata, and represents each span for lexical or semantic search. Those spans become the objects over which \href{mailto:Recall@k}{\nolinkurl{Recall@k}} is measured. A relevant function cannot rank as one coherent item when the chunker separates its signature, body, and surrounding contract into unrelated records.
+The chunking policy defines the units a retriever can rank and a context builder can select. An index rarely stores an entire repository as one document. It divides files into spans, attaches identifiers and metadata, and represents each span for lexical or semantic search. Those spans become the objects over which \(\mathrm{Recall}@k\) is measured. A relevant function cannot rank as one coherent item when the chunker separates its signature, body, and surrounding contract into unrelated records.
 
 Fixed windows choose boundaries by line or token count. They are simple, deterministic, and applicable to any text format. Their weakness follows from ignoring code structure. A 100-line window may end after a function signature and place its body in the next chunk. Another may combine the end of one class, several imports, and the beginning of an unrelated helper merely because those lines are adjacent.
 
@@ -275,7 +275,7 @@ Relevance judgments identify both the required symbol and acceptable supporting 
 
 Chunk recall requires a declared unit. If the target is a method, a chunk containing one line from that method should not count as fully relevant. The chunk must contain the task-specific evidence named in the judgment, such as the complete signature and relevant branch. Partial matches can be reported separately when they help explain a failure. File-level recall remains useful for corpus and coarse-retrieval diagnosis, but it cannot establish that the returned chunk is interpretable.
 
-Chunk size needs its own sweep. Very small syntax-aware chunks improve isolation but can remove relationships required to understand state changes. Very large chunks preserve local structure while consuming more context and reducing the number of distinct candidates the model can inspect. I sweep size together with retrieval depth because the two controls interact. Ten 200-token chunks and ten 1,500-token chunks impose different costs even though both are reported as \href{mailto:Recall@10}{\nolinkurl{Recall@10}}.
+Chunk size needs its own sweep. Very small syntax-aware chunks improve isolation but can remove relationships required to understand state changes. Very large chunks preserve local structure while consuming more context and reducing the number of distinct candidates the model can inspect. I sweep size together with retrieval depth because the two controls interact. Ten 200-token chunks and ten 1,500-token chunks impose different costs even though both are reported as \(\mathrm{Recall}@10\).
 
 The implementation should also preserve ordering and provenance. When several chunks from one file enter context, source order can help the model reconstruct control flow. Every chunk should identify its file, symbol path, source revision, and line range so a failed completion can be traced back to the exact indexed representation.
 
@@ -382,11 +382,11 @@ Chapter 12 turns to the architecture around these measurements: cheap retrieval 
 \item
   Strong evidence: Memory Circuit Analysis (Mao et al.~2026), arXiv:2605.03354. (Stage-level diagnostic localizing a silent failure to the responsible memory operation; extraction/retention/retrieval fail silently behind fluent answers.)
 \item
-  Directional evidence: SkillEvolBench (Lei 2026), arXiv:2605.24117. Direction only.
+  Directional evidence: SkillEvolBench (Lei 2026), arXiv:2605.24117.
 \item
-  Directional evidence: EngramaBench (Acuna 2026), arXiv:2604.21229. Direction only.
+  Directional evidence: EngramaBench (Acuna 2026), arXiv:2604.21229.
 \item
-  Directional evidence: Cost-and-Accuracy study (Wolff \& Bennati 2026), arXiv:2601.07978. Direction only.
+  Directional evidence: Cost-and-Accuracy study (Wolff \& Bennati 2026), arXiv:2601.07978.
 \item
   Corroborating case: Vishnyakova, O. (2026), arXiv:2603.09619. (Names the five context-quality criteria; position paper.)
 \end{itemize}
@@ -400,11 +400,11 @@ Chapter 12 turns to the architecture around these measurements: cheap retrieval 
 \item
   Strong evidence for the vocabulary-gap claim: CodeSearchNet (Husain 2019), arXiv:1909.09436. The study establishes the mismatch between natural-language queries and code vocabulary. It does not test the chapter's rank-fusion protocol; Yang et al.~supply the direct comparison of combined lexical and semantic retrieval.
 \item
-  Directional evidence: Cloudflare ``Agents that remember'' (Trautmann 2026), the production account carrying the shipped default of parallel channels fused with reciprocal-rank fusion. No canonical URL is on record for this item. Direction only.
+  Directional evidence: Trautmann \& Sutter (2026), \href{https://blog.cloudflare.com/introducing-agent-memory/}{``Agents that remember: introducing Agent Memory''}, Cloudflare. Production account carrying the shipped default of parallel channels fused with reciprocal-rank fusion.
 \item
-  Directional evidence: AdaMem (Yan et al.~2026), arXiv:2603.16496, carried in the same evidence record as the Cloudflare account. Its own retrieval route is semantic retrieval with conditional graph expansion rather than rank fusion, so it supports retaining a complementary semantic lane only. Direction only.
+  Directional evidence: AdaMem (Yan et al.~2026), arXiv:2603.16496, carried in the same evidence record as the Cloudflare account. Its own retrieval route is semantic retrieval with conditional graph expansion rather than rank fusion, so it supports retaining a complementary semantic lane only.
 \item
-  Directional evidence: ColBERT (Khattab and Zaharia 2020), arXiv:2004.12832. Direction only.
+  Directional evidence: ColBERT (Khattab and Zaharia 2020), arXiv:2004.12832.
 \end{itemize}
 
 \textbf{Chunk on AST boundaries}

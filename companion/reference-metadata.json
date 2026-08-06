@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T22:50:22.347Z",
+  "generated_at": "2026-08-06T02:07:04.162Z",
   "arxiv": [
     {
       "id": "1503.07170",
@@ -5704,6 +5704,13 @@
       "title": "Long-running Agents - by Addy Osmani - Elevate"
     },
     {
+      "url": "https://blog.cloudflare.com/introducing-agent-memory/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://blog.cloudflare.com/introducing-agent-memory/",
+      "title": "Agents that remember: introducing Agent Memory | The Cloudflare Blog"
+    },
+    {
       "url": "https://cursor.com/blog/dynamic-context-discovery",
       "status": "resolved",
       "http_status": 200,
@@ -5905,13 +5912,6 @@
       "http_status": 200,
       "final_url": "https://x.com/cursor_ai/status/2032148129038950779",
       "title": "Cursor on X: \"We use a combination of offline benchmarks and online evals to measure model quality. This makes results more useful, especially as public benchmarks are increasingly saturated. https://t.co/lMKCkOyXyW\" / X"
-    },
-    {
-      "url": "https://x.com/swyx/status/2011344788486774942",
-      "status": "resolved",
-      "http_status": 200,
-      "final_url": "https://x.com/swyx/status/2011344788486774942",
-      "title": "swyx on X: \"evals should be validated by vibes. i think not enough people give sufficient credit to @METR_Evals (@joel_bkr et al) for clearly identifying/quantifying the Opus 4.5 outperformance. on paper, GPT 5.2 Thinking outperforms Opus 4.5 by 55.6 vs 52% on SWE Bench Pro. in practice https://t.co/sc9tLqst82\" / X"
     }
   ]
 }

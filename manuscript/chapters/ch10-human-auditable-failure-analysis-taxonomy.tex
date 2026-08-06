@@ -44,9 +44,9 @@ Generic metric packages often begin with categories that are convenient for the 
 
 Published phase-aligned classifications provide useful comparisons. Lu et al.~(\href{https://arxiv.org/abs/2508.13143}{2025}) classified failures by phase across 34 programmable tasks executed by off-the-shelf frameworks operating near 50 percent completion.
 
-Their distribution does not establish base rates for frontier coding agents. It describes the tasks, systems, permissions, and operating point in that study. A production repository with different tools, review gates, task durations, and authority boundaries may concentrate failures elsewhere.
+Their distribution describes the tasks, systems, permissions, and operating point in that study; it is not a base-rate estimate for frontier coding agents. A production repository with different tools, review gates, task durations, and authority boundaries may concentrate failures elsewhere.
 
-I encountered this mismatch in my own trial-annotation pipeline for experimental agent runs. An early taxonomy omitted failure modes that dominated the project's traces even though public taxonomies covered related categories. The third revision grew from annotation of the local corpus and separated failures along more dimensions. This is narrative illustration only. It does not establish that the resulting taxonomy is complete, and the published export cannot independently reproduce the category counts because its manifest contains no annotations.
+I encountered this mismatch in my own trial-annotation pipeline for experimental agent runs. An early taxonomy omitted failure modes that dominated the project's traces even though public taxonomies covered related categories. The third revision grew from annotation of the local corpus and separated failures along more dimensions. This local illustration also exposes its own limit: the published manifest contains no annotations, so the category counts cannot be reproduced from the export.
 
 The unit of analysis is a complete case. I keep the request, relevant starting state, trace, terminal outcome, verification result, and annotation together. When several retries belong to one attempt, I preserve their order and identities so that a later successful retry does not erase the original failure. When the system forks work, I retain the parent-child relationship. Otherwise an error imported from another branch may appear to originate where it was first observed.
 
@@ -74,7 +74,7 @@ I separate triage from verdict. Triage ranks cases or candidate steps for invest
 
 The opening result shows the current limit. An agent-level accuracy of 53.5 percent leaves nearly half of responsible-agent assignments wrong. A step-level accuracy of 14.2 percent misses the point at which most failures became decisive.
 
-Those figures do not establish a general ceiling for automated attribution. They come from one annotated dataset of multi-agent failures. Single-agent coding traces may be easier, other workloads may be harder, and later methods may improve substantially. The percentages should not be converted into a staffing ratio or a universal automation threshold.
+Those figures are a capability snapshot from one annotated multi-agent dataset, not a staffing ratio or universal automation threshold. Single-agent coding traces may be easier, other workloads may be harder, and later methods may improve substantially.
 
 Ma et al.~(\href{https://arxiv.org/abs/2509.08682}{2025}) later reached 36.2 percent step-level accuracy on the same benchmark family, compared with less than 15 percent for prior methods. Counterfactually validated fixes derived from that analysis increased task success by an average of 22.4 percent, although the source does not state whether that gain is absolute or relative. The result suggests that causal structure can narrow the search more effectively than an undifferentiated reading of the transcript. The method still assigned most decisive steps incorrectly.
 
@@ -146,23 +146,17 @@ The review threshold should follow consequence. A low-stakes transient failure m
 
 When the evidence cannot distinguish among plausible causes, the correct verdict is unresolved. The record should state which missing observation would have separated them.
 
-Aggregating several automated readers does not by itself make attribution reliable. The companion catalog describes independent attribution judges as an aside, but agreement among several weak or dependent readers does not establish causation. It also treats consistency across repeated runs as a risk signal. Both may help decide where a person looks first. Neither should determine what that person must conclude.
+Aggregating several automated readers does not by itself make attribution reliable. Agreement among weak or dependent readers is a triage signal, not a causal verdict. The same applies to consistency across repeated runs: both signals may direct attention, while the signed attribution remains a human decision.
 
-Repeated local categories can eventually expose a structural defect. When the same failure class survives prompt patches and model upgrades, the remedy is likely architectural, and Chapter 17 develops that redesign question. This chapter stops at diagnosis because recurrence alone does not establish the correct intervention.
+Repeated local categories can expose a structural defect. When the same failure class survives prompt patches and model upgrades, the remedy is likely architectural, and Chapter 17 develops how to test that redesign. Recurrence identifies the problem; an intervention still requires its own evaluation.
 
 \section{Design the record for a skeptical reader}\label{design-the-record-for-a-skeptical-reader}
 
 Deshpande et al.~(\href{https://arxiv.org/abs/2505.08638}{2025}) reported that the strongest evaluated long-context model correctly localized issues in 11 percent of 148 expert-annotated traces. The traces were benchmark-derived but ecologically valid and more complex than short synthetic sequences designed to isolate one error. Reasoning, tool calls, outputs, retries, and state changes appeared in the same record. A large context window could contain the transcript, but containment did not make the decisive event legible.
 
-\begin{figure}[htbp]
-\centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Responsible-agent attribution is 53.5\%; decisive-step attribution is 14.2\% earlier, below 15\% for prior methods, and 36.2\% later; the top long-context model localizes 11\% of 148 traces, and some methods underperform random.}]{figures/ch10-attribution-accuracy.pdf}}
-\caption{Responsible-agent attribution is 53.5\%; decisive-step attribution is 14.2\% earlier, below 15\% for prior methods, and 36.2\% later; the top long-context model localizes 11\% of 148 traces, and some methods underperform random.}
-\end{figure}
-
 These results span different tasks and benchmarks. The first two use one annotated dataset of multi-agent failures. They are capability snapshots, not a general automation ceiling.
 
-The model scores will change as trace readers improve, and the benchmark cannot establish performance for every production workload. The more durable implication comes from the structure of the task. A record built for human audit should expose the units a causal investigation requires. Raw chronological text forces every reader, human or model, to reconstruct those units before diagnosis begins.
+The model scores will change as trace readers improve, and production workloads will differ. The more durable implication comes from the structure of the task: a record built for human audit should expose the units a causal investigation requires. Raw chronological text forces every reader, human or model, to reconstruct those units before diagnosis begins.
 
 Chapter 9's typed event stream supported replay and recovery. Human audit adds a different requirement. A reviewer must be able to follow step boundaries, decisions, inputs, state transitions, retries, and outcomes without inferring their identities from prose. The same event stream can support both purposes when its schema records semantic boundaries. Timestamps on messages alone do not preserve them.
 
@@ -250,7 +244,7 @@ Identity must remain stable across resumed work. A display name such as \texttt{
 
 The review interface should support competing explanations. A reviewer should be able to move from an annotated failure to the suspected upstream event, inspect its input state, follow affected descendants, and compare a neighboring successful run. Filtering by actor or event type is useful, but the default view should preserve causal context around each selection. A viewer that hides retries or collapses repeated tool output may improve readability by removing the evidence under dispute.
 
-CodeProbe (\href{https://github.com/sjarmak/codeprobe}{public repository}) publishes complete transcripts and preserves quarantined runs separately. Its successor adds a side-by-side trace browser for audited comparisons. These choices illustrate preservation and review practices. They do not establish that the schema is optimal, and publication alone does not prevent incorrect conclusions.
+CodeProbe (\href{https://github.com/sjarmak/codeprobe}{public repository}) publishes complete transcripts and preserves quarantined runs separately. Its successor adds a side-by-side trace browser for audited comparisons. These author-system choices illustrate preservation and review practices; they make competing conclusions reviewable without claiming an optimal schema.
 
 Quarantined runs are worth preserving because evaluation pipelines often remove timeouts, rate limits, infrastructure failures, and malformed outputs before analysis. Some exclusions are methodologically justified, but deletion prevents a later reviewer from distinguishing an agent failure from an apparatus failure. I retain the raw run, exclusion reason, decision owner, and any replacement attempt. Aggregate reporting can then follow the declared policy without erasing the cases that test it.
 
@@ -317,7 +311,7 @@ Part IV turns to the evidence available when the model acts: retrieval, context 
 \item
   Strong evidence: Deshpande, D., et al.~(2025), ``TRAIL: Trace Reasoning and Agentic Issue Localization,'' Patronus AI, arXiv:2505.08638. (Best evaluated model localized issues in 11\% of 148 expert-annotated traces; a 2025 capability snapshot.)
 \item
-  Corroborating case: ``What actually broke when we put AI agents into real production workflows'', /u/saurabhjain1592, r/LLMDevs, 2026-01-08.
+  Corroborating case: \href{https://www.reddit.com/r/LLMDevs/comments/1q7avil/}{``What actually broke when we put AI agents into real production workflows''}, /u/saurabhjain1592, r/LLMDevs, 2026-01-08.
 \end{itemize}
 
 \textbf{Author-system illustration cited inline}
