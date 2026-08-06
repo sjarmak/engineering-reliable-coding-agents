@@ -123,6 +123,12 @@ A passing patch can fail to support the capability claim for three independent r
 
 All three failures can produce a successful-looking transcript. A model may reproduce a reference patch it saw during training, copy an answer supplied in the prompt, or find a shortcut that satisfies shallow assertions. The final test process records the same state in each case: pass. Transcript inspection and contamination probes cannot compensate for a test suite that accepts wrong behavior, and added tests cannot establish whether the model recalled the right behavior.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{figures/ch03-validity-chain.pdf}
+\caption{A passing score supports a capability claim only when the benchmark matches the target workload, the solution is independent of prior or in-task exposure, and the oracle rejects incorrect artifacts. A failure at any link invalidates a different inference.}
+\end{figure}
+
 Shao et al.~(\href{https://arxiv.org/abs/2607.22368}{2026}) make this broader condition explicit as protocol validity: the intended capability must remain necessary for success under the evaluation protocol. Their HackDetect audit covered 2,385 traces across 15 agent benchmarks and found exposures or reward hacking in 67.0 percent of Frontier Science traces and 66.7 percent of AutoLab tasks; paired audits measured score inflation of 0.45 to 1.00 on their Mislead-gap scale. These are strong measurements for the audited protocols, not prevalence estimates for agent benchmarks as a whole.
 
 I therefore treat a passing patch as a hypothesis about correctness. The test oracle is the ordinary continuous-integration mechanism that decides whether the candidate passes or fails. Its strength is the range of plausible wrong behavior it can reject. A suite is stronger when it checks more of the behavior implied by the task, especially behavior that superficially reasonable patches get wrong.

@@ -319,6 +319,12 @@ In a workflow diagram, the word ``gate'' implies causal control. In execution, a
 
 \textbf{Compliance theater} is a control whose visible form satisfies the policy description while its execution path does not mitigate the named risk. A \textbf{fail-open gate} stops enforcing its boundary when a dependency, validation step, or error path fails.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{figures/ch16-effective-gate.pdf}
+\caption{An advisory review can record rejection while leaving execution reachable. An effective gate connects the review decision to an enforcement point, so rejection or modification changes the next reachable state.}
+\end{figure}
+
 \Needspace{5\baselineskip}
 
 The interdisciplinary framework identifies four conditions for effective oversight:

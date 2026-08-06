@@ -128,23 +128,11 @@ The invocation identity must cross that boundary. Attempt B must send the same i
 
 An operation is idempotent when repeating it converges on the same observable state as applying it once. The useful contract is that a duplicate becomes indistinguishable from no duplicate.
 
-\begin{verbatim}
-runtime sends request
-    -> external system may commit an effect
-        -> runtime durably records completion
-           ^                          ^
-           |<-- execute-then-log gap->|
-
-process dies inside the gap
-    -> status uncertain
-
-request known not to have executed
-    -> retry safely
-
-status uncertain
-    -> retry only through an idempotency contract
-       or stop for reconciliation
-\end{verbatim}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{figures/ch08-durable-effects.pdf}
+\caption{A first attempt records a durable intent and operation identity before an external commit. If the worker dies before recording completion, a replacement reads the pending intent and retries with the same identity; the external boundary must return the prior result, converge, or force explicit reconciliation.}
+\end{figure}
 
 Key design determines which work the contract covers. A fresh attempt identifier fails because the downstream system sees attempt B as new work. A key scoped only to the user can collapse two legitimate operations into one. The stable key should identify the logical invocation and include enough input or version identity to distinguish genuinely different work. Retries reuse it. New logical work receives a new key.
 

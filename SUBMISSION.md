@@ -10,7 +10,7 @@ Prepared August 6, 2026 for the August 2026 edition of *Engineering Reliable Cod
 
 - `engineering-reliable-coding-agents-arxiv-source.zip`: LaTeX release candidate for arXiv.
 - `engineering-reliable-coding-agents-preview.pdf`: PDF compiled from that source.
-- `engineering-reliable-coding-agents-companion-1.0.0-rc.8.zip`: separate companion research artifact release candidate.
+- `engineering-reliable-coding-agents-companion-1.0.0-rc.9.zip`: separate companion research artifact release candidate.
 - `engineering-reliable-coding-agents-skills-0.1.0.zip`: reusable agent workflows derived from selected companion practices.
 - `reference-audit/README.md`: reference-audit summary.
 
@@ -34,7 +34,7 @@ AI coding agents are commonly evaluated as models but deployed as systems whose 
 
 ### Comments
 
-Technical review and engineering monograph, 258 pages, 13 figures. Includes an evidence audit, a 192-practice companion research artifact, and runnable protocols for evaluating and operating AI coding agents. August 2026. Source, companion, and reusable protocols: https://github.com/sjarmak/engineering-reliable-coding-agents.
+Technical review and engineering monograph, 258 pages, 16 figures. Includes an evidence audit, a 192-practice companion research artifact, and runnable protocols for evaluating and operating AI coding agents. August 2026. Source, companion, and reusable protocols: https://github.com/sjarmak/engineering-reliable-coding-agents.
 
 If the companion receives a DOI before submission, append `Companion DOI: <DOI>.` Otherwise use the text above without a DOI placeholder.
 
@@ -62,7 +62,7 @@ The repository currently has a root Apache-2.0 license. Before adding the manusc
 
 1. Complete the author review of `companion-release/`.
 2. Choose a companion license separately from the manuscript license. `CITATION.cff` intentionally has no license field yet.
-3. Replace release-candidate version `1.0.0-rc.8` with `1.0.0` in the build script and citation metadata.
+3. Replace release-candidate version `1.0.0-rc.9` with `1.0.0` in the build script and citation metadata.
 4. Publish the exact package in the book repository and create a `v1.0.0` release.
 5. Connect that repository to Zenodo or another DOI-granting archive and archive the exact tag.
 6. Add the DOI to `CITATION.cff`, the companion README, the manuscript’s Data and materials availability statement, and the arXiv Comments field.
@@ -118,7 +118,7 @@ Identifier resolution verifies that the cited record exists and captures current
 4. Upload `engineering-reliable-coding-agents-arxiv-source.zip`.
 5. Confirm that arXiv identifies `main.tex` as the top-level file and compiles it in PDF mode.
 6. Compare arXiv’s generated PDF with `engineering-reliable-coding-agents-preview.pdf`.
-7. Inspect the title page, abstract, table of contents, all part and chapter starts, equations, hyperlinks, and all 13 figures.
+7. Inspect the title page, abstract, table of contents, all part and chapter starts, equations, hyperlinks, and all 16 figures.
 8. Paste the metadata above without the Markdown headings or any unresolved placeholder.
 9. Choose the license only after the publisher/funder check.
 10. Submit for moderation. After announcement, record the arXiv identifier and DOI on the website and in the companion metadata.
@@ -127,12 +127,12 @@ Identifier resolution verifies that the cited record exists and captures current
 
 - Exact source ZIP compiled in a fresh temporary directory with Tectonic 0.16.9.
 - Output: 258 letter-size pages, single-spaced, one-inch margins, PDF 1.5.
-- Figures: 13 of 13 included as PDF.
+- Figures: 16 of 16 included as PDF.
 - Chapter sources: 19 unnumbered chapter-end source blocks, excluded from the numbered section hierarchy and table of contents.
 - Full references: 196 alphabetized entries; all manuscript-cited arXiv identifiers, five DOI records, and audited web sources are represented, with additional named sources and author illustrations identified separately.
 - Text extraction: approximately 106,000 machine-readable words.
 - PDF security: no encryption, JavaScript, forms, or embedded multimedia.
-- Archive hygiene: 38 required files; no generated PDF, log, auxiliary file, Markdown source, dataset, or private note.
+- Archive hygiene: 41 required files; no generated PDF, log, auxiliary file, Markdown source, dataset, or private note.
 - TeX diagnostics: no errors, missing files, missing characters, undefined commands, or overfull boxes. A small number of harmless underfull-box warnings remain in source-list paragraphs.
 - Prose review: all 20 source files were reviewed for academic register, casual framing, unsupported certainty, promotional language, and unexplained internal evidence shorthand.
 - Companion checks: catalog and benchmark JSON validate against their schemas; checksums pass; the CSV contains 574 records with a consistent 11-column structure. The update-screening decisions total 39: 11 admitted, one already present, and 27 deferred or excluded.

@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.0-rc.9 — 2026-08-06
+
+- Added three high-information conceptual figures: the benchmark validity
+  chain in Chapter 3, durable execution across the execute-then-log gap in
+  Chapter 8, and the distinction between an advisory review and an effective
+  human gate in Chapter 16.
+- Replaced Chapter 8's text-only execution sketch with the durable-effects
+  figure, keeping the mechanism in one place instead of restating it.
+- Corrected the LaTeX conversion pipeline to preserve aspect ratios whenever
+  Markdown constrains figure dimensions.
+- Rebuilt and independently compiled the exact arXiv archive: 258 pages, 16
+  figures, 196 references, and no overfull boxes or undefined references.
+
 ## 1.0.0-rc.8 — 2026-08-06
 
 - Defined SciX, the local SciX Agent retrieval layer, and Code Intelligence
