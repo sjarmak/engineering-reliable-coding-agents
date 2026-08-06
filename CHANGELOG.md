@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.0-rc.12 — 2026-08-06
+
+- Corrected four author attributions introduced by the software-engineering
+  coverage probe: Stol and Fitzgerald, Sjøberg and Bergersen, Sun et al., and
+  Johnson et al.; aligned the latter record with its 2026 publication year.
+- Regenerated the manuscript, companion catalog, evidence ledger, reference
+  audit, checksums, and exact arXiv archive from the corrected source records.
+- Recompiled the 270-page source archive in a fresh directory and reran the
+  65-entry strong-evidence audit and companion validation gates.
+
 ## 1.0.0-rc.11 — 2026-08-06
 
 - Preserved the `rc.10` release and advanced the candidate after repairing the

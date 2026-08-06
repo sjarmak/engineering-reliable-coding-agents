@@ -10,7 +10,7 @@ Prepared August 6, 2026 for the August 2026 edition of *Engineering Reliable Cod
 
 - `engineering-reliable-coding-agents-arxiv-source.zip`: LaTeX release candidate for arXiv.
 - `engineering-reliable-coding-agents-preview.pdf`: PDF compiled from that source.
-- `engineering-reliable-coding-agents-companion-1.0.0-rc.11.zip`: separate companion research artifact release candidate.
+- `engineering-reliable-coding-agents-companion-1.0.0-rc.12.zip`: separate companion research artifact release candidate.
 - `engineering-reliable-coding-agents-skills-0.1.0.zip`: reusable agent workflows derived from selected companion practices.
 - `reference-audit/README.md`: reference-audit summary.
 
@@ -64,7 +64,7 @@ The repository currently has a root Apache-2.0 license. Before adding the manusc
 2. Choose a companion license separately from the manuscript license. `CITATION.cff` intentionally has no license field yet.
 3. Complete the blinded 20-practice external-grading pass and report agreement and disagreement patterns.
 4. Complete the supplementary publisher-native ACM Digital Library, IEEE Xplore, and Scopus search, or document a justified database substitution and what it added.
-5. Replace release-candidate version `1.0.0-rc.11` with `1.0.0` in the build script and citation metadata.
+5. Replace release-candidate version `1.0.0-rc.12` with `1.0.0` in the build script and citation metadata.
 6. Publish the exact package in the book repository and create a `v1.0.0` release.
 7. Connect that repository to Zenodo or another DOI-granting archive and archive the exact tag.
 8. Add the DOI to `CITATION.cff`, the companion README, the manuscript’s Data and materials availability statement, and the arXiv Comments field.

@@ -185,7 +185,7 @@ Each retrieval lane has characteristic blind spots. Lexical systems rank through
 
 CodeSearchNet, from Husain et al.~(\href{https://arxiv.org/abs/1909.09436}{2019}), framed this as a vocabulary gap between natural-language intent and source code. Repository agents face a wider form of the same problem because their queries combine prose, symbols, stack traces, and partial hypotheses. An embedding lane can connect semantically related text with little token overlap. It may retrieve a lease-recovery routine for the duplicate-job request even when the task never uses the routine's identifiers.
 
-The software-engineering venue audit found two reviews that sharpen this stage boundary. Rahman et al.~(\href{https://doi.org/10.1145/3607179}{2023}) screened 2,970 candidates and synthesized 70 primary studies on automated query reformulation for source-code search. Liu et al.~(\href{https://doi.org/10.1145/3656341}{2024}) organized 68 code-search studies around query understanding, code understanding, and query-code matching. Their taxonomies support recording query formation as its own stage rather than attributing every miss to ranking. Neither review tests the hybrid rank-fusion protocol developed here.
+The software-engineering venue audit found two reviews that sharpen this stage boundary. Rahman et al.~(\href{https://doi.org/10.1145/3607179}{2023}) screened 2,970 candidates and synthesized 70 primary studies on automated query reformulation for source-code search. Sun et al.~(\href{https://doi.org/10.1145/3656341}{2024}) organized 68 code-search studies around query understanding, code understanding, and query-code matching. Their taxonomies support recording query formation as its own stage rather than attributing every miss to ranking. Neither review tests the hybrid rank-fusion protocol developed here.
 
 The complement runs in the other direction. Semantic retrieval may place conceptually similar utilities near one another while missing the exact declaration that governs an edit. A query containing \texttt{ERR\_REPLAY\_DIVERGED}, a database column name, or a generated type gives lexical search unusually discriminating evidence. Mapping those characters into a semantic neighborhood can discard the rarity that made them useful.
 
@@ -427,7 +427,7 @@ Chapter 12 turns to the architecture around these measurements: cheap retrieval 
 \item
   Directional evidence: Rahman, M. M., et al.~(2023), ``A Systematic Review of Automated Query Reformulations in Source Code Search,'' \emph{ACM Transactions on Software Engineering and Methodology}, \href{https://doi.org/10.1145/3607179}{DOI:10.1145/3607179}. The review supports treating query formation as a distinct retrieval stage, not the chapter's fusion policy.
 \item
-  Directional evidence: Liu, C., et al.~(2024), ``A Survey of Source Code Search: A 3-Dimensional Perspective,'' \emph{ACM Transactions on Software Engineering and Methodology}, \href{https://doi.org/10.1145/3656341}{DOI:10.1145/3656341}. The survey separates query, code, and matching components; transfer to repository agents remains directional.
+  Directional evidence: Sun, W., et al.~(2024), ``A Survey of Source Code Search: A 3-Dimensional Perspective,'' \emph{ACM Transactions on Software Engineering and Methodology}, \href{https://doi.org/10.1145/3656341}{DOI:10.1145/3656341}. The survey separates query, code, and matching components; transfer to repository agents remains directional.
 \end{itemize}
 
 \textbf{Chunk on AST boundaries}

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T18:28:58.618Z",
+  "generated_at": "2026-08-06T20:20:54.441Z",
   "method": {
     "arxiv": "Official arXiv Atom API, queried by identifier in batches of 20; previously resolved official-API metadata is reused if the API becomes temporarily unavailable.",
     "arxiv_cache_used": false,
@@ -10354,7 +10354,7 @@
         {
           "file": "introduction.md",
           "line": 47,
-          "context": "The initial scholarly search did not establish adequate coverage of the core software-engineering venue literature. A subsequent OpenAlex metadata probe searched eight topic formulations across ICSE, FSE, ASE, ISSTA, *Empirical Software Engineering*, *IEEE Transactions on Software Engineering*, *ACM Transactions on Software Engineering and Methodology*, and *Computer Supported Cooperative Work*. It surfaced 148 unique candidates. Nine methodologically material works were admitted after title-and-abstract screening, including the SEGRESS reporting guideline ([Kitchenham et al. 2022](https://doi.org/10.1109/TSE.2022.3174092)), the ABC framework for software-engineering research ([Ralph et al. 2018](https://doi.org/10.1145/3241743)), and work on construct validity in software engineering ([Ralph and Tempero 2022](https://doi.org/10.1109/TSE.2022.3176725))."
+          "context": "The initial scholarly search did not establish adequate coverage of the core software-engineering venue literature. A subsequent OpenAlex metadata probe searched eight topic formulations across ICSE, FSE, ASE, ISSTA, *Empirical Software Engineering*, *IEEE Transactions on Software Engineering*, *ACM Transactions on Software Engineering and Methodology*, and *Computer Supported Cooperative Work*. It surfaced 148 unique candidates. Nine methodologically material works were admitted after title-and-abstract screening, including the SEGRESS reporting guideline ([Kitchenham et al. 2022](https://doi.org/10.1109/TSE.2022.3174092)), the ABC framework for software-engineering research ([Stol and Fitzgerald 2018](https://doi.org/10.1145/3241743)), and work on construct validity in software engineering ([Sjøberg and Bergersen 2023](https://doi.org/10.1109/TSE.2022.3176725))."
         }
       ]
     },
@@ -10373,7 +10373,7 @@
         {
           "file": "introduction.md",
           "line": 47,
-          "context": "The initial scholarly search did not establish adequate coverage of the core software-engineering venue literature. A subsequent OpenAlex metadata probe searched eight topic formulations across ICSE, FSE, ASE, ISSTA, *Empirical Software Engineering*, *IEEE Transactions on Software Engineering*, *ACM Transactions on Software Engineering and Methodology*, and *Computer Supported Cooperative Work*. It surfaced 148 unique candidates. Nine methodologically material works were admitted after title-and-abstract screening, including the SEGRESS reporting guideline ([Kitchenham et al. 2022](https://doi.org/10.1109/TSE.2022.3174092)), the ABC framework for software-engineering research ([Ralph et al. 2018](https://doi.org/10.1145/3241743)), and work on construct validity in software engineering ([Ralph and Tempero 2022](https://doi.org/10.1109/TSE.2022.3176725))."
+          "context": "The initial scholarly search did not establish adequate coverage of the core software-engineering venue literature. A subsequent OpenAlex metadata probe searched eight topic formulations across ICSE, FSE, ASE, ISSTA, *Empirical Software Engineering*, *IEEE Transactions on Software Engineering*, *ACM Transactions on Software Engineering and Methodology*, and *Computer Supported Cooperative Work*. It surfaced 148 unique candidates. Nine methodologically material works were admitted after title-and-abstract screening, including the SEGRESS reporting guideline ([Kitchenham et al. 2022](https://doi.org/10.1109/TSE.2022.3174092)), the ABC framework for software-engineering research ([Stol and Fitzgerald 2018](https://doi.org/10.1145/3241743)), and work on construct validity in software engineering ([Sjøberg and Bergersen 2023](https://doi.org/10.1109/TSE.2022.3176725))."
         }
       ]
     },
@@ -10395,7 +10395,7 @@
         {
           "file": "verification-interfaces-risk-based-escalation.md",
           "line": 15,
-          "context": "Software-engineering studies locate the same problem closer to the operated tools. Drosos et al. ([2025](https://doi.org/10.1145/3772370)) derived a trust framework from 18 practitioner interviews and tested its factors in a 368-response Microsoft survey. Tufano et al. ([2024](https://doi.org/10.1109/TSE.2023.3348172)) manually inspected 2,291 predictions from code-review automation techniques, identifying task-specific success and failure classes along with dataset defects. These studies support showing reviewers the conditions under which a tool succeeds and the evidence behind a particular output. They do not test the patch-gate interfaces proposed in this chapter, so that transfer remains directional."
+          "context": "Software-engineering studies locate the same problem closer to the operated tools. Johnson et al. ([2026](https://doi.org/10.1145/3772370)) derived a trust framework from 18 practitioner interviews and tested its factors in a 368-response Microsoft survey. Tufano et al. ([2024](https://doi.org/10.1109/TSE.2023.3348172)) manually inspected 2,291 predictions from code-review automation techniques, identifying task-specific success and failure classes along with dataset defects. These studies support showing reviewers the conditions under which a tool succeeds and the evidence behind a particular output. They do not test the patch-gate interfaces proposed in this chapter, so that transfer remains directional."
         },
         {
           "file": "verification-interfaces-risk-based-escalation.md",
@@ -10419,7 +10419,7 @@
         {
           "file": "introduction.md",
           "line": 47,
-          "context": "The initial scholarly search did not establish adequate coverage of the core software-engineering venue literature. A subsequent OpenAlex metadata probe searched eight topic formulations across ICSE, FSE, ASE, ISSTA, *Empirical Software Engineering*, *IEEE Transactions on Software Engineering*, *ACM Transactions on Software Engineering and Methodology*, and *Computer Supported Cooperative Work*. It surfaced 148 unique candidates. Nine methodologically material works were admitted after title-and-abstract screening, including the SEGRESS reporting guideline ([Kitchenham et al. 2022](https://doi.org/10.1109/TSE.2022.3174092)), the ABC framework for software-engineering research ([Ralph et al. 2018](https://doi.org/10.1145/3241743)), and work on construct validity in software engineering ([Ralph and Tempero 2022](https://doi.org/10.1109/TSE.2022.3176725))."
+          "context": "The initial scholarly search did not establish adequate coverage of the core software-engineering venue literature. A subsequent OpenAlex metadata probe searched eight topic formulations across ICSE, FSE, ASE, ISSTA, *Empirical Software Engineering*, *IEEE Transactions on Software Engineering*, *ACM Transactions on Software Engineering and Methodology*, and *Computer Supported Cooperative Work*. It surfaced 148 unique candidates. Nine methodologically material works were admitted after title-and-abstract screening, including the SEGRESS reporting guideline ([Kitchenham et al. 2022](https://doi.org/10.1109/TSE.2022.3174092)), the ABC framework for software-engineering research ([Stol and Fitzgerald 2018](https://doi.org/10.1145/3241743)), and work on construct validity in software engineering ([Sjøberg and Bergersen 2023](https://doi.org/10.1109/TSE.2022.3176725))."
         }
       ]
     },
@@ -10438,7 +10438,7 @@
         {
           "file": "measuring-designing-repository-retrieval.md",
           "line": 141,
-          "context": "The software-engineering venue audit found two reviews that sharpen this stage boundary. Rahman et al. ([2023](https://doi.org/10.1145/3607179)) screened 2,970 candidates and synthesized 70 primary studies on automated query reformulation for source-code search. Liu et al. ([2024](https://doi.org/10.1145/3656341)) organized 68 code-search studies around query understanding, code understanding, and query-code matching. Their taxonomies support recording query formation as its own stage rather than attributing every miss to ranking. Neither review tests the hybrid rank-fusion protocol developed here."
+          "context": "The software-engineering venue audit found two reviews that sharpen this stage boundary. Rahman et al. ([2023](https://doi.org/10.1145/3607179)) screened 2,970 candidates and synthesized 70 primary studies on automated query reformulation for source-code search. Sun et al. ([2024](https://doi.org/10.1145/3656341)) organized 68 code-search studies around query understanding, code understanding, and query-code matching. Their taxonomies support recording query formation as its own stage rather than attributing every miss to ranking. Neither review tests the hybrid rank-fusion protocol developed here."
         },
         {
           "file": "measuring-designing-repository-retrieval.md",
@@ -10469,12 +10469,12 @@
         {
           "file": "measuring-designing-repository-retrieval.md",
           "line": 141,
-          "context": "The software-engineering venue audit found two reviews that sharpen this stage boundary. Rahman et al. ([2023](https://doi.org/10.1145/3607179)) screened 2,970 candidates and synthesized 70 primary studies on automated query reformulation for source-code search. Liu et al. ([2024](https://doi.org/10.1145/3656341)) organized 68 code-search studies around query understanding, code understanding, and query-code matching. Their taxonomies support recording query formation as its own stage rather than attributing every miss to ranking. Neither review tests the hybrid rank-fusion protocol developed here."
+          "context": "The software-engineering venue audit found two reviews that sharpen this stage boundary. Rahman et al. ([2023](https://doi.org/10.1145/3607179)) screened 2,970 candidates and synthesized 70 primary studies on automated query reformulation for source-code search. Sun et al. ([2024](https://doi.org/10.1145/3656341)) organized 68 code-search studies around query understanding, code understanding, and query-code matching. Their taxonomies support recording query formation as its own stage rather than attributing every miss to ranking. Neither review tests the hybrid rank-fusion protocol developed here."
         },
         {
           "file": "measuring-designing-repository-retrieval.md",
           "line": 313,
-          "context": "- Directional evidence: Liu, C., et al. (2024), \"A Survey of Source Code Search: A 3-Dimensional Perspective,\" *ACM Transactions on Software Engineering and Methodology*, [DOI:10.1145/3656341](https://doi.org/10.1145/3656341). The survey separates query, code, and matching components; transfer to repository agents remains directional."
+          "context": "- Directional evidence: Sun, W., et al. (2024), \"A Survey of Source Code Search: A 3-Dimensional Perspective,\" *ACM Transactions on Software Engineering and Methodology*, [DOI:10.1145/3656341](https://doi.org/10.1145/3656341). The survey separates query, code, and matching components; transfer to repository agents remains directional."
         }
       ]
     },
@@ -10497,12 +10497,12 @@
         {
           "file": "verification-interfaces-risk-based-escalation.md",
           "line": 15,
-          "context": "Software-engineering studies locate the same problem closer to the operated tools. Drosos et al. ([2025](https://doi.org/10.1145/3772370)) derived a trust framework from 18 practitioner interviews and tested its factors in a 368-response Microsoft survey. Tufano et al. ([2024](https://doi.org/10.1109/TSE.2023.3348172)) manually inspected 2,291 predictions from code-review automation techniques, identifying task-specific success and failure classes along with dataset defects. These studies support showing reviewers the conditions under which a tool succeeds and the evidence behind a particular output. They do not test the patch-gate interfaces proposed in this chapter, so that transfer remains directional."
+          "context": "Software-engineering studies locate the same problem closer to the operated tools. Johnson et al. ([2026](https://doi.org/10.1145/3772370)) derived a trust framework from 18 practitioner interviews and tested its factors in a 368-response Microsoft survey. Tufano et al. ([2024](https://doi.org/10.1109/TSE.2023.3348172)) manually inspected 2,291 predictions from code-review automation techniques, identifying task-specific success and failure classes along with dataset defects. These studies support showing reviewers the conditions under which a tool succeeds and the evidence behind a particular output. They do not test the patch-gate interfaces proposed in this chapter, so that transfer remains directional."
         },
         {
           "file": "verification-interfaces-risk-based-escalation.md",
           "line": 400,
-          "context": "- Directional evidence: Drosos, I., et al. (2025). \"Facilitating Trust in AI-assisted Software Tools.\" *ACM Transactions on Software Engineering and Methodology*. [DOI:10.1145/3772370](https://doi.org/10.1145/3772370). Eighteen interviews and a 368-response survey identify factors shaping trust in software tools; autonomous patch-gate transfer remains untested."
+          "context": "- Directional evidence: Johnson, B., et al. (2026). \"Facilitating Trust in AI-assisted Software Tools.\" *ACM Transactions on Software Engineering and Methodology*. [DOI:10.1145/3772370](https://doi.org/10.1145/3772370). Eighteen interviews and a 368-response survey identify factors shaping trust in software tools; autonomous patch-gate transfer remains untested."
         }
       ]
     },
