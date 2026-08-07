@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "release_version": "1.0.0-rc.13",
+  "release_version": "1.0.0-rc.14",
   "status": "not-performed-with-disclosed-source-limitations",
   "as_of": "2026-08-07",
   "lanes": {
@@ -8,20 +8,20 @@
       "status": "not-searched-with-disclosed-source-limitation",
       "planned_cells": 48,
       "completed_cells": 0,
-      "limitation": "ACM policy requires policy-compliant manual execution through an authorized interface; the retained plan is future work rather than a v1 release requirement."
+      "limitation": "ACM policy requires policy-compliant manual execution through an authorized interface; the retained plan is incomplete in this release candidate and required for stable v1."
     },
     "ieee": {
       "status": "not-searched-with-disclosed-source-limitation",
       "planned_cells": 64,
       "completed_cells": 0,
-      "limitation": "The prior inactive credential was exposed in local diagnostic output and must be rotated before any future request; the retained plan is not a v1 release requirement."
+      "limitation": "The prior inactive credential was exposed in local diagnostic output and must be rotated before another request; the retained plan is incomplete in this release candidate and required for stable v1."
     },
     "scopus": {
       "status": "not-searched-with-disclosed-source-limitation",
       "planned_cells": 64,
       "completed_cells": 0,
       "replacement": "dblp-title-census",
-      "limitation": "No Elsevier API key or required institutional token is configured; DBLP is non-equivalent replacement evidence and the retained Scopus plan is future work."
+      "limitation": "No Elsevier API key or required institutional token is configured; DBLP is non-equivalent replacement evidence, and the retained Scopus plan is incomplete in this release candidate and required for stable v1."
     },
     "dblp": {
       "status": "replacement-screening-complete",
@@ -62,5 +62,5 @@
     "complete_with_documented_exclusions": false,
     "source_limitations_disclosed": true
   },
-  "interpretation_boundary": "ACM Digital Library, IEEE Xplore, and Scopus were not searched. Prepared plans, web-surrogate candidate discovery, and DBLP replacement evidence do not establish publisher- or index-native coverage, provider equivalence, or exhaustive recall. The plans are retained for future updates and do not block archival v1. The 51 unique candidates across the DBLP and web-surrogate queues were adjudicated under the August 6 cutoff and deferred to the next edition; none was admitted to v1."
+  "interpretation_boundary": "ACM Digital Library, IEEE Xplore, and Scopus were not searched. Prepared plans, web-surrogate candidate discovery, and DBLP replacement evidence do not establish publisher- or index-native coverage, provider equivalence, or exhaustive recall. All three native searches remain stable-v1 gates. The 51 unique candidates across the DBLP and web-surrogate queues were adjudicated under the August 6 cutoff and deferred to the next edition; none was admitted to v1."
 }

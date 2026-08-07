@@ -1,6 +1,6 @@
 # Engineering Reliable Coding Agents: companion research artifact
 
-Release candidate 1.0.0-rc.13, prepared August 6, 2026.
+Release candidate 1.0.0-rc.14, prepared August 7, 2026.
 
 This package accompanies *Engineering Reliable Coding Agents: Evaluation, Recovery, Context, and Control Beyond the Model*. It is designed to be archived as a separate, citable research artifact. The final archival release should receive its own DOI and should be cited alongside the manuscript.
 
@@ -31,6 +31,6 @@ Canonical repository: [https://github.com/sjarmak/engineering-reliable-coding-ag
 
 Author-system cases are labeled `author_system_illustration` and set `independent_external_evidence` to `false`. They illustrate mechanisms and failure cases but do not support general claims independently.
 
-## Before public release
+## Before stable release
 
-Complete the author adjudication of the bounded software-engineering candidate queue under `methodology/software-engineering-coverage/`. Preserve the disclosed source limitation: ACM Digital Library, IEEE Xplore, and Scopus were not searched, their plans are retained for future updates, and DBLP, OpenAlex, and web-surrogate discovery are not provider-equivalent. Preserve the explicit v1 boundary in `methodology/external-grading/status.json`: no external graders were commissioned, no agreement statistic is reported, and no independent-calibration claim is made. Then replace this release-candidate version with `1.0.0`, add the selected license, rebuild the exact archives, regenerate `methodology/release-verification/arxiv-compile-report.json`, publish a tagged release in the canonical repository, archive those exact objects with Zenodo or another DOI-granting repository, and add the resulting DOI to this file and `CITATION.cff`. Do not archive internal review notes, rejected candidates, private receipts, or unpublished operational data.
+Have at least two independent readers complete the blinded external-grading packet, run the analyzer, and report agreement and disagreement patterns. Execute and adjudicate every planned ACM Digital Library, IEEE Xplore, and Scopus cell; DBLP, OpenAlex, and web-surrogate discovery are useful diagnostics but are not provider-equivalent substitutes. Then replace this release-candidate version with `1.0.0`, add the selected license, rebuild the exact source and companion archives, regenerate `methodology/release-verification/arxiv-compile-report.json`, verify the PDF extraction and running headers, freeze all repository and website metadata to the same immutable version, publish the authorized tag, archive those exact objects with a DOI-granting repository, and submit the verified LaTeX source ZIP to arXiv. Do not archive internal review notes, rejected candidates, private receipts, or unpublished operational data.

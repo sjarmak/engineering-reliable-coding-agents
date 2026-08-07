@@ -33,15 +33,8 @@ const STABLE_STATE_VALUES = Object.freeze({
   "arxiv.endorsement": Object.freeze(["confirmed", "not-required"]),
   "arxiv.orcid": Object.freeze(["linked", "not-linked-by-choice"]),
   "companion.license": Object.freeze(["CC-BY-4.0", "CC0-1.0", "Apache-2.0", "MIT"]),
-  "methodology_gates.external_grading": Object.freeze([
-    "complete",
-    "not-performed-with-disclosed-limitation",
-  ]),
-  "methodology_gates.publisher_native_search": Object.freeze([
-    "complete",
-    "complete-with-documented-exclusions",
-    "not-performed-with-disclosed-source-limitations",
-  ]),
+  "methodology_gates.external_grading": Object.freeze(["complete"]),
+  "methodology_gates.publisher_native_search": Object.freeze(["complete"]),
 });
 
 const REQUIRED_DOI_FILES = [
@@ -235,21 +228,34 @@ function arxivProcessorErrors(files) {
 function versionErrors(manifest, files) {
   const version = manifest.version;
   const date = manifest.freeze_date;
+  let skillsVersion = "";
+  try {
+    skillsVersion = JSON.parse(files.skillsManifest ?? "{}").derived_from?.companion_version ?? "";
+  } catch {
+    skillsVersion = "";
+  }
   const checks = [
     ["CITATION.cff", files.rootCitation, `version: "${version}"`],
     ["CITATION.cff", files.rootCitation, `date-released: ${date}`],
     ["companion/CITATION.cff", files.companionCitation, `version: "${version}"`],
+    ["companion/CITATION.cff", files.companionCitation, `date-released: ${date}`],
     ["manuscript/main.tex", files.manuscriptMain, `Version ${version}`],
     ["README.md", files.rootReadme, version],
     ["companion/README.md", files.companionReadme, version],
     ["companion/README.md", files.companionReadme, humanDate(date)],
     ["SUBMISSION.md", files.submission, version],
+    ["CHANGELOG.md", files.changelog, `## ${version} — ${date}`],
   ];
-  return checks.flatMap(([name, content, expected]) =>
-    content?.includes(expected)
+  return [
+    ...checks.flatMap(([name, content, expected]) =>
+      content?.includes(expected)
+        ? []
+        : [`${name}: expected release value ${JSON.stringify(expected)}`],
+    ),
+    ...(skillsVersion === version
       ? []
-      : [`${name}: expected release value ${JSON.stringify(expected)}`],
-  );
+      : [`skills/manifest.json: expected derived companion version ${JSON.stringify(version)}`]),
+  ];
 }
 
 function stableReleaseErrors(manifest, files) {
@@ -289,30 +295,7 @@ function stableReleaseErrors(manifest, files) {
   const licenseErrors = provisionalLicense
     ? ["LICENSE-SCOPE.md: replace provisional manuscript and companion terms before stable release"]
     : [];
-  const externalGradingState = manifest.methodology_gates?.external_grading;
-  const externalGradingErrors =
-    externalGradingState === "complete"
-      ? externalGradingArtifactErrors(files.externalGradingReport)
-      : externalGradingState === "not-performed-with-disclosed-limitation"
-        ? [
-            ...externalGradingNonperformanceArtifactErrors(
-              files.externalGradingStatus,
-              manifest,
-            ),
-            ...(files.externalGradingReportExists || files.externalGradingReport
-              ? [
-                  "companion/methodology/external-grading/calibration-report.json: must be absent when external grading was not performed",
-                ]
-              : []),
-          ]
-        : [];
   const methodologyArtifactErrors = [
-    ...externalGradingErrors,
-    ...publisherCoverageArtifactErrors(
-      manifest.version,
-      manifest.methodology_gates?.publisher_native_search,
-      files,
-    ),
     ...adjudicationArtifactErrors(
       files.dblpAuthorAdjudication,
       files.dblpScreeningTriage,
@@ -330,11 +313,41 @@ function stableReleaseErrors(manifest, files) {
   return [...stateErrors, ...doiErrors, ...licenseErrors, ...methodologyArtifactErrors];
 }
 
+function methodologyArtifactErrors(manifest, files) {
+  const externalGradingState = manifest.methodology_gates?.external_grading;
+  const externalGradingErrors =
+    externalGradingState === "complete"
+      ? externalGradingArtifactErrors(files.externalGradingReport)
+      : externalGradingState === "not-performed-with-disclosed-limitation"
+        ? [
+            ...externalGradingNonperformanceArtifactErrors(
+              files.externalGradingStatus,
+              manifest,
+            ),
+            ...(files.externalGradingReportExists || files.externalGradingReport
+              ? [
+                  "companion/methodology/external-grading/calibration-report.json: must be absent when external grading was not performed",
+                ]
+              : []),
+          ]
+        : [];
+  const publisherSearchState = manifest.methodology_gates?.publisher_native_search;
+  const publisherSearchErrors = [
+    "complete",
+    "complete-with-documented-exclusions",
+    "not-performed-with-disclosed-source-limitations",
+  ].includes(publisherSearchState)
+    ? publisherCoverageArtifactErrors(manifest.version, publisherSearchState, files)
+    : [];
+  return [...externalGradingErrors, ...publisherSearchErrors];
+}
+
 export function collectReleaseErrors(manifest, files) {
   return [
     ...metadataErrors(manifest),
     ...arxivProcessorErrors(files),
     ...versionErrors(manifest, files),
+    ...methodologyArtifactErrors(manifest, files),
     ...stableReleaseErrors(manifest, files),
   ];
 }
@@ -415,11 +428,18 @@ export function verifyZipMirror({ archivePath, archiveRoot, sourceRoot, relative
 }
 
 export function validatePreview({ version, pdfInfo, text, pages = 270 }) {
+  const listOfTablesHeaderPages = text
+    .split("\f")
+    .map((page) => page.split("\n").find((line) => line.trim())?.trim())
+    .filter((heading) => heading === "List of Tables").length;
   const checks = [
     [pdfInfo.includes(`Pages:           ${pages}`) || pdfInfo.includes(`Pages: ${pages}`), `${pages} pages`],
     [pdfInfo.includes("612 x 792 pts (letter)"), "US letter page size"],
     [/Encrypted:\s+no/i.test(pdfInfo), "unencrypted PDF"],
     [text.includes(`Version ${version}`), `version ${version}`],
+    [!text.includes("ů"), "no U+016F glyph substitutions"],
+    [!text.includes("Œ"), "no U+0152 glyph substitutions"],
+    [listOfTablesHeaderPages <= 1, "only one List of Tables page header"],
   ];
   return checks.flatMap(([passed, expectation]) =>
     passed ? [] : [`dist/${PREVIEW_PDF}: expected ${expectation}`],
@@ -465,6 +485,8 @@ async function loadContractFiles(root) {
     rootReadme: "README.md",
     companionReadme: "companion/README.md",
     submission: "SUBMISSION.md",
+    changelog: "CHANGELOG.md",
+    skillsManifest: "skills/manifest.json",
     licenseScope: "LICENSE-SCOPE.md",
     acmPlan:
       "companion/methodology/software-engineering-coverage/plans/erca_acm_dl_manual_plan_2026-08.json",

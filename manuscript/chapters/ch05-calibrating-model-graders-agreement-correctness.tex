@@ -1,7 +1,7 @@
 \chapter{Calibrating model graders and separating agreement from correctness}
 \label{ch05-calibrating-model-graders-agreement-correctness}
 \begin{quote}
-\textbf{Evidence profile.} 5 strong · 7 directional · 0 corroborating evidence items across 2 developed practices (ERCA-096, ERCA-111).
+\textbf{Evidence profile.} 5 strong \(\cdot\) 7 directional \(\cdot\) 0 corroborating evidence items across 2 developed practices (ERCA-096, ERCA-111).
 
 \textbf{Chapter claim.} Agreement is a calibration result, not a correctness verdict.
 \end{quote}
@@ -32,11 +32,12 @@ Consider 100 items evaluated by two raters. Each assigns PASS to 90 items and FA
 
 That number appears strong until label prevalence is taken into account. Given the raters' marginal label frequencies, independent assignments would be expected to agree on 82 items:
 
-\begin{verbatim}
-expected PASS agreement: 0.90 × 0.90 = 0.81
-expected FAIL agreement: 0.10 × 0.10 = 0.01
+\begin{quote}
+\ttfamily
+expected PASS agreement: \(0.90 \times 0.90 = 0.81\)\\
+expected FAIL agreement: \(0.10 \times 0.10 = 0.01\)\\
 total expected agreement: 0.82
-\end{verbatim}
+\end{quote}
 
 Cohen (\href{https://doi.org/10.1177/001316446002000104}{1960}) defined kappa as the proportion of possible agreement beyond chance that the raters achieved:
 

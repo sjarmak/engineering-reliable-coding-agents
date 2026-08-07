@@ -4,6 +4,6 @@ import test from "node:test";
 
 import { verifyRelease } from "./release-gate.mjs";
 
-test("the published rc.13 archives satisfy the repository release contract", async () => {
+test("the prepared rc.14 archives satisfy the repository release contract", async () => {
   assert.deepEqual(await verifyRelease(path.resolve(".")), []);
 });

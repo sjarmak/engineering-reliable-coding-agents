@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "version": "1.0.0-rc.13",
-  "freeze_date": "2026-08-06",
+  "version": "1.0.0-rc.14",
+  "freeze_date": "2026-08-07",
   "manuscript": {
     "pages": 271,
     "figures": 17,
@@ -14,7 +14,7 @@
     ],
     "processor": "xelatex",
     "texlive_version": 2025,
-    "category_check": "verified_2026-08-06",
+    "category_check": "verified_2026-08-07",
     "license": "pending",
     "endorsement": "pending",
     "orcid": "pending"

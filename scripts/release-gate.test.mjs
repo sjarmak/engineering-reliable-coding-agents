@@ -91,13 +91,15 @@ function fixtureFiles({ version, date, doi = "", provisional = false }) {
   return {
     ...publisherCoverageFixture(version),
     rootCitation: `version: "${version}"\ndate-released: ${date}${doiText}\n`,
-    companionCitation: `version: "${version}"${doiText}\n`,
+    companionCitation: `version: "${version}"\ndate-released: ${date}${doiText}\n`,
     manuscriptMain: `Version ${version} --- August 2026`,
     manuscriptMaterials: `Replication package ${doiText}`,
     arxivReadme: "Top-level file: main.tex\nEngine: XeLaTeX\nTeX Live: 2025\n",
     rootReadme: `The files represent ${version}.${doiText}`,
     companionReadme: `Release ${version}, prepared ${prepared}.${doiText}`,
     submission: `### Comments\nPrepared metadata for ${version}.${doiText}\n\n### Categories\n- cs.SE`,
+    changelog: `## ${version} — ${date}\n`,
+    skillsManifest: JSON.stringify({ derived_from: { companion_version: version } }),
     licenseScope: provisional
       ? "Manuscript and companion remain all rights reserved until explicit licenses are selected."
       : "Manuscript: CC BY 4.0. Companion: CC BY 4.0.",
@@ -242,7 +244,7 @@ test("stable v1 rejects a publisher-search completion flag without execution evi
   assert.ok(errors.some((error) => error.includes("publisher-coverage-status.json")));
 });
 
-test("stable v1 accepts a documented Scopus exclusion without claiming equivalence", () => {
+test("stable v1 rejects a documented Scopus exclusion in place of native execution", () => {
   const complete = completedStableManifest();
   const manifest = {
     ...complete,
@@ -259,10 +261,11 @@ test("stable v1 accepts a documented Scopus exclusion without claiming equivalen
     ),
   };
 
-  assert.deepEqual(collectReleaseErrors(manifest, files), []);
+  const errors = collectReleaseErrors(manifest, files);
+  assert.ok(errors.some((error) => error.includes("methodology_gates.publisher_native_search")));
 });
 
-test("stable v1 accepts disclosed proprietary-source limitations", () => {
+test("stable v1 rejects disclosed proprietary-source limitations in place of native execution", () => {
   const complete = completedStableManifest();
   const state = "not-performed-with-disclosed-source-limitations";
   const manifest = {
@@ -277,7 +280,8 @@ test("stable v1 accepts disclosed proprietary-source limitations", () => {
     ...publisherCoverageFixture(manifest.version, state),
   };
 
-  assert.deepEqual(collectReleaseErrors(manifest, files), []);
+  const errors = collectReleaseErrors(manifest, files);
+  assert.ok(errors.some((error) => error.includes("methodology_gates.publisher_native_search")));
 });
 
 test("stable v1 rejects a Scopus report artifact when Scopus is documented as excluded", () => {
@@ -302,7 +306,7 @@ test("stable v1 rejects a Scopus report artifact when Scopus is documented as ex
   assert.ok(errors.some((error) => error.includes("must be absent")));
 });
 
-test("stable v1 accepts external grading nonperformance only as a disclosed limitation", () => {
+test("stable v1 rejects external grading nonperformance in place of calibration", () => {
   const manifest = disclosedNonperformanceStableManifest();
   const files = {
     ...fixtureFiles({ version: manifest.version, date: manifest.freeze_date, doi: DOI }),
@@ -310,7 +314,8 @@ test("stable v1 accepts external grading nonperformance only as a disclosed limi
     externalGradingReportExists: false,
   };
 
-  assert.deepEqual(collectReleaseErrors(manifest, files), []);
+  const errors = collectReleaseErrors(manifest, files);
+  assert.ok(errors.some((error) => error.includes("methodology_gates.external_grading")));
 });
 
 test("stable v1 rejects an external-grading waiver without exact nonperformance evidence", () => {
@@ -625,6 +630,24 @@ test("metadata drift is reported with the affected artifact", () => {
   assert.ok(errors.some((error) => error.includes("manuscript/main.tex")));
 });
 
+test("release metadata rejects stale companion dates, changelog versions, and skill provenance", () => {
+  const manifest = fixtureManifest();
+  const files = {
+    ...fixtureFiles({ version: manifest.version, date: manifest.freeze_date }),
+    companionCitation: `version: "${manifest.version}"\ndate-released: 2026-08-05\n`,
+    changelog: "## 1.0.0-rc.12 — 2026-08-05\n",
+    skillsManifest: JSON.stringify({
+      derived_from: { companion_version: "1.0.0-rc.6" },
+    }),
+  };
+
+  const errors = collectReleaseErrors(manifest, files);
+
+  assert.ok(errors.some((error) => error.includes("companion/CITATION.cff")));
+  assert.ok(errors.some((error) => error.includes("CHANGELOG.md")));
+  assert.ok(errors.some((error) => error.includes("skills/manifest.json")));
+});
+
 test("the release contract rejects a processor that does not match the verified arXiv build", () => {
   const manifest = fixtureManifest();
   const files = {
@@ -797,6 +820,41 @@ test("preview validation checks release identity and PDF structure without requi
   assert.ok(errors.some((error) => error.includes("US letter")));
   assert.ok(errors.some((error) => error.includes("unencrypted")));
   assert.ok(errors.some((error) => error.includes("1.0.0-rc.13")));
+});
+
+test("preview validation rejects observed glyph substitutions and leaked front-matter headers", () => {
+  const errors = validatePreview({
+    version: "1.0.0-rc.14",
+    pdfInfo: "Pages: 271\nPage size: 612 x 792 pts (letter)\nEncrypted: no\nPDF version: 1.7\n",
+    pages: 271,
+    text: [
+      "Engineering Reliable Coding Agents\nVersion 1.0.0-rc.14 — August 2026\n",
+      "\fList of Tables\nTable 1\n",
+      "\fList of Tables\nEvidence profile. 10 strong ů 1 directional ů 0 corroborating.\n",
+      "expected PASS agreement: 0.90 Œ 0.90 = 0.81\n",
+    ].join(""),
+  });
+
+  assert.ok(errors.some((error) => error.includes("U+016F")));
+  assert.ok(errors.some((error) => error.includes("U+0152")));
+  assert.ok(errors.some((error) => error.includes("List of Tables")));
+});
+
+test("preview validation accepts intended centered dots, multiplication signs, and Introduction headers", () => {
+  assert.deepEqual(
+    validatePreview({
+      version: "1.0.0-rc.14",
+      pdfInfo: "Pages: 271\nPage size: 612 x 792 pts (letter)\nEncrypted: no\nPDF version: 1.7\n",
+      pages: 271,
+      text: [
+        "Engineering Reliable Coding Agents\nVersion 1.0.0-rc.14 — August 2026\n",
+        "\fList of Tables\nTable 1\n",
+        "\fIntroduction\nEvidence profile. 10 strong · 1 directional · 0 corroborating.\n",
+        "expected PASS agreement: 0.90 × 0.90 = 0.81\n",
+      ].join(""),
+    }),
+    [],
+  );
 });
 
 test("checksum verification rejects a modified companion file", async () => {

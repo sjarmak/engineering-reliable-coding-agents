@@ -7,8 +7,9 @@ This directory separates three activities that answer different questions:
 2. Exact-DOI checks measure whether SciX contains records already known from
    the probe. They are identity-overlap diagnostics, not recall estimates.
 3. The publisher- and index-native ACM Digital Library, IEEE Xplore, and Scopus
-   plans document a reproducible future extension. They were not executed for
-   v1, and no result or provider-equivalence claim is inferred from them.
+   plans document the remaining stable-v1 search. They were not executed for
+   this release candidate, and no result or provider-equivalence claim is
+   inferred from them.
 4. A credential-free DBLP title census records replacement evidence for the
    unavailable Scopus lane. It exposed conference records absent from the
    earlier OpenAlex probe, but it is title-only and is not treated as
@@ -87,17 +88,19 @@ descriptive content that the companion is not licensed to redistribute.
 
 ## Stable-release evidence contract
 
-Stable v1 may report `not-performed-with-disclosed-source-limitations` when
-ACM Digital Library, IEEE Xplore, and Scopus are all recorded as not searched,
-their completed-cell counts remain zero, the manuscript makes no provider
-coverage or exhaustive-recall claim, and no contradictory execution report is
-present. The prepared plans remain reproducible future work.
+Release candidates may report
+`not-performed-with-disclosed-source-limitations` when ACM Digital Library,
+IEEE Xplore, and Scopus are all recorded as not searched, their completed-cell
+counts remain zero, the manuscript makes no provider-coverage or
+exhaustive-recall claim, and no contradictory execution report is present.
+That state cannot satisfy stable v1.
 
-The stronger `complete` state requires `acm-dl-execution-2026-08.json`,
+Stable v1 requires the `complete` state and
+`acm-dl-execution-2026-08.json`,
 `ieee-xplore-execution-2026-08.json`, and `scopus-execution-2026-08.json`. The
-intermediate `complete-with-documented-exclusions` state requires ACM and IEEE
-reports and permits no Scopus report only when the fallback decision identifies
-DBLP as non-equivalent replacement evidence.
+`complete-with-documented-exclusions` state and DBLP replacement evidence remain
+useful for a release candidate or future methodological comparison, but neither
+substitutes for Scopus execution in stable v1.
 
 Every execution report is bound to the SHA-256 of its exact plan and preserves
 each planned topic-by-venue cell once, including zero-result cells. Each cell

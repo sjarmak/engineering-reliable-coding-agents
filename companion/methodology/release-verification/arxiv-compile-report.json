@@ -3,10 +3,10 @@
   "engine": "xelatex",
   "texlive_version": 2025,
   "container_image": "texlive/texlive:TL2025-historic@sha256:5912d6a33798957f4cd6ff1673819209f59300c378033d25066feb93270b90ce",
-  "source_date_epoch": 1785974400,
+  "source_date_epoch": 1786060800,
   "compiler_version": "XeTeX 3.141592653-2.6-0.999997 (TeX Live 2025)",
-  "archive_sha256": "a0797bdf46a96a95b0a9e685f2122dd255bf0b090bf7901631cab64a8bda7257",
-  "pdf_sha256": "9920067a6d7a94fc109aa1c126c271656e3408b74abda05f15c338cb6b9966b8",
+  "archive_sha256": "8ed2c92c9bac3f4a68245286ca05dbc67d9dd2b851fc38ff69ccc4a426195188",
+  "pdf_sha256": "b11ef5c86eeef4a1deeabbeb9743b4258ebaea708f457fe736541de0f9270e76",
   "pdf": {
     "pages": 271,
     "encrypted": false,

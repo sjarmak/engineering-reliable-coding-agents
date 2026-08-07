@@ -49,17 +49,17 @@ test("retrieval systems remain discovery instruments rather than evidence grader
   assert.match(frontmatter, /author made the final inclusion, evidence-group, and practice-admission decisions/i);
 });
 
-test("v1 discloses that external grading was not performed without claiming calibration", async () => {
+test("the release candidate discloses missing external grading while stable v1 requires it", async () => {
   const frontmatter = await readFile("manuscript/frontmatter.tex", "utf8");
   const abstract = await readFile("manuscript/abstract.tex", "utf8");
   const submission = await readFile("SUBMISSION.md", "utf8");
 
-  assert.match(frontmatter, /did not commission external graders/i);
+  assert.match(frontmatter, /has not commissioned external graders/i);
   assert.match(frontmatter, /does not claim independent calibration/i);
-  assert.doesNotMatch(frontmatter, /At least two external readers must complete.*before archival v1/i);
+  assert.match(frontmatter, /At least two external readers must complete.*before archival v1/i);
   for (const artifact of [abstract, submission]) {
-    assert.match(artifact, /External graders were not commissioned/i);
-    assert.match(artifact, /makes no independent-calibration claim/i);
+    assert.match(artifact, /has not received blinded external calibration/i);
+    assert.match(artifact, /claims neither provider coverage nor independent calibration/i);
   }
 });
 

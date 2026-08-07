@@ -38,7 +38,7 @@ cd manuscript
 tectonic main.tex
 ```
 
-The generated PDF is 270 pages on US letter paper. The source uses standard
+The generated PDF is 271 pages on US letter paper. The source uses standard
 LaTeX packages and contains all required figures locally.
 
 The arXiv compatibility contract uses XeLaTeX under TeX Live 2025. The
@@ -49,6 +49,11 @@ diagnostics, and prints a report bound to the archive and generated PDF hashes:
 ```sh
 node scripts/arxiv-compile.mjs
 ```
+
+Submit the verified LaTeX source ZIP to arXiv, not the locally generated PDF.
+arXiv normally rejects PDFs generated from TeX when source is available and
+compiles the submitted source itself; inspect that generated result before
+submission.
 
 ## Validate the companion
 
@@ -74,8 +79,9 @@ and the prepared ACM, IEEE, and Scopus search plans. The DBLP census exposed 50
 records absent from both prior comparison sets, but remains a title-screening
 queue rather than a publisher-native or Scopus-equivalent result. The
 independent-grading replication packet includes a self-contained reviewer form,
-strict agreement analyzer, and a status record disclosing that v1 did not
-commission external graders and makes no independent-calibration claim.
+strict agreement analyzer, and a status record disclosing that this release
+candidate has not commissioned external graders and makes no
+independent-calibration claim.
 Author-system cases are marked as illustrations and are not counted as
 independent external evidence.
 
@@ -96,14 +102,13 @@ node scripts/release-gate.mjs
 node scripts/arxiv-compile.mjs
 ```
 
-Release candidates may record account- and provider-dependent gates as
-`pending`. A stable semantic version accepts external grading only when it is
-either complete with a valid calibration report or explicitly not performed
-with a machine-readable disclosed limitation. It also fails until the
-publisher- and index-native coverage gate is resolved, the arXiv license, endorsement, and ORCID
-states are resolved, the provisional content-license notice is replaced, and a
-valid companion DOI appears in every required citation and availability
-surface.
+Release candidates may record uncompleted gates with machine-readable
+limitations. Stable `1.0.0` accepts external grading only when at least two
+readers have completed the blinded packet and a valid calibration report is
+present. It also requires complete execution evidence for all planned ACM
+Digital Library, IEEE Xplore, and Scopus cells. The stable gate continues to
+reject unresolved arXiv license, endorsement, ORCID, provisional content
+licensing, and companion DOI state.
 
 ## Reusable agent skills
 
@@ -129,14 +134,13 @@ system before use.
 
 ## Release status
 
-The files currently represent the `1.0.0-rc.13` release candidate prepared on
-August 6, 2026. External grading is not a remaining v1 gate: the author did not
-commission external graders, reports no inter-rater statistic, and makes no
-independent-calibration claim. The reusable packet is retained for later
-independent replication. Archival v1 remains gated on supplementary
-publisher-native ACM Digital Library and IEEE Xplore searches plus the
-index-native Scopus search (or its documented exclusion). A DBLP title-only
-fallback has been executed, but its 50 new
-candidates still require screening and its limitations must be accepted if
-Scopus remains excluded. The archival DOI and final license choices must also
-be recorded before the first stable release and arXiv submission.
+The files currently represent the `1.0.0-rc.14` release candidate prepared on
+August 7, 2026. It is explicitly unfinished: no external readers have completed
+the blinded packet, and the ACM Digital Library, IEEE Xplore, and Scopus plans
+have not been executed. The release candidate reports those limitations and
+makes neither an independent-calibration nor provider-coverage claim. Both
+measured additions remain gates for archival `1.0.0`; DBLP, OpenAlex, and web
+surrogates do not substitute for the native searches. The final immutable
+version, licenses, ORCID and endorsement state, companion DOI, exact source
+archive, preview, checksums, GitHub tag, and website metadata must also be
+synchronized before stable release and arXiv submission.

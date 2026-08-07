@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.0-rc.14 — 2026-08-07
+
+- Repaired XeLaTeX character encoding for all chapter evidence profiles and the
+  Chapter 5 multiplication example; added release regressions for the observed
+  `ů` and `Œ` substitutions and leaked front-matter running headers.
+- Restored blinded external calibration and completed ACM Digital Library,
+  IEEE Xplore, and Scopus searches as mandatory stable-v1 gates. Disclosure of
+  nonperformance remains valid only for an explicitly unfinished release
+  candidate.
+- Bound the source ZIP, preview PDF, companion, checksums, README, submission
+  handoff, citation metadata, and derived skills to the rc.14 identity. The
+  arXiv handoff now explicitly requires submitting verified LaTeX source.
+
 ## 1.0.0-rc.13 — 2026-08-06
 
 - Added a self-contained blinded-review form for the 20-practice external
