@@ -14,6 +14,33 @@ import {
   fetchDblpBindings,
 } from "./run-dblp-title-census.mjs";
 
+test("publisher coverage status matches the checked-in plans and pending lane evidence", async () => {
+  const readJson = async (relative) =>
+    JSON.parse(await readFile(new URL(relative, new URL(".", import.meta.url)), "utf8"));
+  const [status, acm, ieee, scopus, dblp] = await Promise.all([
+    readJson("publisher-coverage-status.json"),
+    readJson("plans/erca_acm_dl_manual_plan_2026-08.json"),
+    readJson("plans/erca_ieee_xplore_search_plan_2026-08.json"),
+    readJson("plans/erca_scopus_search_plan_2026-08.json"),
+    readJson("dblp-title-census-2026-08.json"),
+  ]);
+  const cells = (plan) => plan.topics.length * plan.venues.length;
+
+  assert.equal(status.status, "pending");
+  assert.equal(status.lanes.acm.planned_cells, cells(acm));
+  assert.equal(status.lanes.ieee.planned_cells, cells(ieee));
+  assert.equal(status.lanes.scopus.planned_cells, cells(scopus));
+  assert.equal(status.lanes.dblp.completed_cells, dblp.results.query_cells);
+  assert.equal(status.lanes.dblp.unique_publications, dblp.results.unique_publications);
+  assert.equal(status.lanes.dblp.new_to_prior_sets, dblp.results.new_to_both_prior_sets);
+  assert.equal(status.lanes.dblp.publisher_native, false);
+  assert.equal(status.lanes.dblp.scopus_equivalent, false);
+  assert.deepEqual(
+    [status.claims.acm_searched, status.claims.ieee_searched, status.claims.scopus_searched],
+    [false, false, false],
+  );
+});
+
 const DBLP_FIXTURE_PLAN = {
   schema_version: 1,
   source_lane: "open_bibliography_dblp_title_census",

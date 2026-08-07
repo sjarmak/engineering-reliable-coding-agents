@@ -25,6 +25,8 @@ This directory separates three activities that answer different questions:
   SciX metadata corpus.
 - `protocol-and-status.json`: provider status, bounded interpretation, and
   result summary.
+- `publisher-coverage-status.json`: release-state summary for the ACM, IEEE,
+  Scopus, and DBLP lanes. A prepared plan never counts as an executed search.
 - `dblp-title-census-2026-08.json`: exact 64-cell DBLP query, returned SPARQL
   bindings and their hash, upstream comparison hashes, and all zero-result cells.
 - `dblp-screening-enrichment-2026-08.json`: exact-DOI OpenAlex enrichment
@@ -65,6 +67,24 @@ The private IEEE and Scopus checkpoints retain DOI and provider identifiers
 only and are not part of this release candidate. After screening, publish the
 aggregate query report and record-level inclusion decisions, not provider
 descriptive content that the companion is not licensed to redistribute.
+
+## Stable-release evidence contract
+
+Stable v1 requires `acm-dl-execution-2026-08.json` and
+`ieee-xplore-execution-2026-08.json`. A `complete` coverage state also requires
+`scopus-execution-2026-08.json`. The narrower
+`complete-with-documented-exclusions` state permits no Scopus report only when
+the fallback decision says Scopus was not searched, DBLP screening is complete,
+and neither the status nor manuscript implies that DBLP is Scopus-equivalent.
+
+Every execution report is bound to the SHA-256 of its exact plan and preserves
+each planned topic-by-venue cell once, including zero-result cells. Each cell
+records the planned and executed query, UTC execution time, complete result
+count, and a checkpoint reference. The record set preserves a reasoned
+screening disposition; included records also identify a bounded claim,
+evidence group, and manuscript placement. The release gate recomputes the cell
+matrix and PRISMA arithmetic and rejects a completion flag without these
+artifacts.
 
 The DBLP census found 55 unique publications, including 50 absent from both
 the resolved manuscript-reference set and the OpenAlex probe. Those records

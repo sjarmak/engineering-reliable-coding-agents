@@ -15,6 +15,7 @@ test("manuscript methods link claims to concrete companion evidence artifacts", 
     "companion/methodology/screening-decisions.csv",
     "companion/methodology/source-snapshot.json",
     "companion/methodology/software-engineering-coverage/protocol-and-status.json",
+    "companion/methodology/software-engineering-coverage/publisher-coverage-status.json",
     "companion/methodology/software-engineering-coverage/dblp-author-adjudication-2026-08.csv",
     "companion/methodology/external-grading/review-form.html",
     "companion/methodology/external-grading/analyze-grades.mjs",
@@ -27,6 +28,17 @@ test("manuscript methods link claims to concrete companion evidence artifacts", 
       `frontmatter does not link ${artifactPath}`,
     );
     await assert.doesNotReject(readFile(artifactPath), `${artifactPath} does not exist`);
+  }
+});
+
+test("venue coverage distinguishes publisher-native and index-native lanes", async () => {
+  const frontmatter = await readFile("manuscript/frontmatter.tex", "utf8");
+  const abstract = await readFile("manuscript/abstract.tex", "utf8");
+  const submission = await readFile("SUBMISSION.md", "utf8");
+
+  for (const artifact of [frontmatter, abstract, submission]) {
+    assert.match(artifact, /publisher- and index-native/i);
+    assert.doesNotMatch(artifact, /publisher-native ACM(?: Digital Library)?, IEEE(?: Xplore)?, and Scopus/i);
   }
 });
 

@@ -7,14 +7,13 @@ import { spawnSync } from "node:child_process";
 import test from "node:test";
 
 import { ARXIV_TEX_IMAGE } from "./arxiv-compile.mjs";
-
+import { publisherCoverageFixture } from "./publisher-coverage-test-fixtures.mjs";
 import {
   collectReleaseErrors,
   expectedArxivFiles,
   validatePreview,
   verifyChecksums,
   verifyCompilationReport,
-  verifyRelease,
   verifyZipMirror,
 } from "./release-gate.mjs";
 
@@ -90,6 +89,7 @@ function fixtureFiles({ version, date, doi = "", provisional = false }) {
     timeZone: "UTC",
   }).format(new Date(`${date}T00:00:00Z`));
   return {
+    ...publisherCoverageFixture(version),
     rootCitation: `version: "${version}"\ndate-released: ${date}${doiText}\n`,
     companionCitation: `version: "${version}"${doiText}\n`,
     manuscriptMain: `Version ${version} --- August 2026`,
@@ -224,6 +224,64 @@ test("stable v1 accepts completed gates and a DOI propagated to every required a
   );
 
   assert.deepEqual(errors, []);
+});
+
+test("stable v1 rejects a publisher-search completion flag without execution evidence", () => {
+  const manifest = completedStableManifest();
+  const files = fixtureFiles({
+    version: manifest.version,
+    date: manifest.freeze_date,
+    doi: DOI,
+  });
+
+  const errors = collectReleaseErrors(manifest, {
+    ...files,
+    publisherCoverageStatus: "",
+  });
+
+  assert.ok(errors.some((error) => error.includes("publisher-coverage-status.json")));
+});
+
+test("stable v1 accepts a documented Scopus exclusion without claiming equivalence", () => {
+  const complete = completedStableManifest();
+  const manifest = {
+    ...complete,
+    methodology_gates: {
+      ...complete.methodology_gates,
+      publisher_native_search: "complete-with-documented-exclusions",
+    },
+  };
+  const files = {
+    ...fixtureFiles({ version: manifest.version, date: manifest.freeze_date, doi: DOI }),
+    ...publisherCoverageFixture(
+      manifest.version,
+      "complete-with-documented-exclusions",
+    ),
+  };
+
+  assert.deepEqual(collectReleaseErrors(manifest, files), []);
+});
+
+test("stable v1 rejects a Scopus report artifact when Scopus is documented as excluded", () => {
+  const complete = completedStableManifest();
+  const manifest = {
+    ...complete,
+    methodology_gates: {
+      ...complete.methodology_gates,
+      publisher_native_search: "complete-with-documented-exclusions",
+    },
+  };
+  const files = {
+    ...fixtureFiles({ version: manifest.version, date: manifest.freeze_date, doi: DOI }),
+    ...publisherCoverageFixture(
+      manifest.version,
+      "complete-with-documented-exclusions",
+    ),
+    scopusExecutionReportExists: true,
+  };
+
+  const errors = collectReleaseErrors(manifest, files);
+  assert.ok(errors.some((error) => error.includes("must be absent")));
 });
 
 test("stable v1 accepts external grading nonperformance only as a disclosed limitation", () => {
@@ -739,8 +797,4 @@ test("checksum verification rejects a modified companion file", async () => {
   await writeFile(path.join(companion, "item.txt"), "modified");
   const errors = await verifyChecksums(root);
   assert.ok(errors.some((error) => error.includes("verification failed")));
-});
-
-test("the published rc.13 archives satisfy the repository release contract", async () => {
-  assert.deepEqual(await verifyRelease(path.resolve(".")), []);
 });

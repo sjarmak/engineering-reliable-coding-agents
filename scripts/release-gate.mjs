@@ -14,6 +14,7 @@ import {
   isValidIsoDate,
   supplementalArtifactErrors,
 } from "./dblp-release-evidence.mjs";
+import { publisherCoverageArtifactErrors } from "./publisher-coverage-evidence.mjs";
 
 const ARXIV_ARCHIVE = "engineering-reliable-coding-agents-arxiv-source.zip";
 const ARXIV_ROOT = "engineering-reliable-coding-agents-arxiv-source";
@@ -306,6 +307,11 @@ function stableReleaseErrors(manifest, files) {
         : [];
   const methodologyArtifactErrors = [
     ...externalGradingErrors,
+    ...publisherCoverageArtifactErrors(
+      manifest.version,
+      manifest.methodology_gates?.publisher_native_search,
+      files,
+    ),
     ...adjudicationArtifactErrors(
       files.dblpAuthorAdjudication,
       files.dblpScreeningTriage,
@@ -455,6 +461,14 @@ async function loadContractFiles(root) {
     companionReadme: "companion/README.md",
     submission: "SUBMISSION.md",
     licenseScope: "LICENSE-SCOPE.md",
+    acmPlan:
+      "companion/methodology/software-engineering-coverage/plans/erca_acm_dl_manual_plan_2026-08.json",
+    ieeePlan:
+      "companion/methodology/software-engineering-coverage/plans/erca_ieee_xplore_search_plan_2026-08.json",
+    scopusPlan:
+      "companion/methodology/software-engineering-coverage/plans/erca_scopus_search_plan_2026-08.json",
+    scopusFallbackDecision:
+      "companion/methodology/software-engineering-coverage/plans/erca_scopus_fallback_decision_2026-08.md",
   };
   const pairs = await Promise.all(
     Object.entries(entries).map(async ([key, relative]) => [
@@ -467,6 +481,14 @@ async function loadContractFiles(root) {
       "companion/methodology/external-grading/calibration-report.json",
     externalGradingStatus:
       "companion/methodology/external-grading/status.json",
+    publisherCoverageStatus:
+      "companion/methodology/software-engineering-coverage/publisher-coverage-status.json",
+    acmExecutionReport:
+      "companion/methodology/software-engineering-coverage/acm-dl-execution-2026-08.json",
+    ieeeExecutionReport:
+      "companion/methodology/software-engineering-coverage/ieee-xplore-execution-2026-08.json",
+    scopusExecutionReport:
+      "companion/methodology/software-engineering-coverage/scopus-execution-2026-08.json",
     dblpScreeningTriage:
       "companion/methodology/software-engineering-coverage/dblp-screening-triage-2026-08.csv",
     dblpAuthorAdjudication:
@@ -496,10 +518,19 @@ async function loadContractFiles(root) {
       if (error.code === "ENOENT") return false;
       throw error;
     });
+  const scopusExecutionReportExists = await stat(
+    path.join(root, optionalEntries.scopusExecutionReport),
+  )
+    .then(() => true)
+    .catch((error) => {
+      if (error.code === "ENOENT") return false;
+      throw error;
+    });
   return Object.fromEntries([
     ...pairs,
     ...optionalPairs,
     ["externalGradingReportExists", externalGradingReportExists],
+    ["scopusExecutionReportExists", scopusExecutionReportExists],
   ]);
 }
 

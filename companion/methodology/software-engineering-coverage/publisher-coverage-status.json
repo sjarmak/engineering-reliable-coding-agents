@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "release_version": "1.0.0-rc.13",
+  "status": "pending",
+  "as_of": "2026-08-07",
+  "lanes": {
+    "acm": {
+      "status": "not-started-manual-execution-required",
+      "planned_cells": 48,
+      "completed_cells": 0,
+      "blocker": "ACM policy requires policy-compliant manual execution through an authorized interface."
+    },
+    "ieee": {
+      "status": "blocked-credential-rotation-and-activation",
+      "planned_cells": 64,
+      "completed_cells": 0,
+      "blocker": "The prior inactive credential was exposed in local diagnostic output and must be rotated and activated before any request."
+    },
+    "scopus": {
+      "status": "blocked-missing-credentials",
+      "planned_cells": 64,
+      "completed_cells": 0,
+      "exclusion_accepted": false,
+      "replacement": "dblp-title-census",
+      "blocker": "No Elsevier API key or required institutional token is configured."
+    },
+    "dblp": {
+      "status": "replacement-evidence-complete-screening-pending",
+      "planned_cells": 64,
+      "completed_cells": 64,
+      "unique_publications": 55,
+      "new_to_prior_sets": 50,
+      "author_decisions_completed": 0,
+      "publisher_native": false,
+      "scopus_equivalent": false
+    }
+  },
+  "claims": {
+    "acm_searched": false,
+    "ieee_searched": false,
+    "scopus_searched": false,
+    "scopus_equivalence_claimed": false,
+    "complete_with_documented_exclusions": false
+  },
+  "interpretation_boundary": "Prepared plans and replacement evidence do not establish completed publisher- and index-native coverage. Stable v1 requires completed ACM and IEEE execution plus either completed Scopus execution or an accepted, explicitly non-equivalent Scopus exclusion after DBLP author screening."
+}

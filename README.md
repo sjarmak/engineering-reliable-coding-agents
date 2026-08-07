@@ -100,7 +100,7 @@ Release candidates may record account- and provider-dependent gates as
 `pending`. A stable semantic version accepts external grading only when it is
 either complete with a valid calibration report or explicitly not performed
 with a machine-readable disclosed limitation. It also fails until the
-publisher-native search is resolved, the arXiv license, endorsement, and ORCID
+publisher- and index-native coverage gate is resolved, the arXiv license, endorsement, and ORCID
 states are resolved, the provisional content-license notice is replaced, and a
 valid companion DOI appears in every required citation and availability
 surface.
@@ -133,9 +133,10 @@ The files currently represent the `1.0.0-rc.13` release candidate prepared on
 August 6, 2026. External grading is not a remaining v1 gate: the author did not
 commission external graders, reports no inter-rater statistic, and makes no
 independent-calibration claim. The reusable packet is retained for later
-independent replication. Archival v1 remains gated on a supplementary search of
-ACM Digital Library, IEEE Xplore, and Scopus (or a justified database
-substitution). A DBLP title-only fallback has been executed, but its 50 new
+independent replication. Archival v1 remains gated on supplementary
+publisher-native ACM Digital Library and IEEE Xplore searches plus the
+index-native Scopus search (or its documented exclusion). A DBLP title-only
+fallback has been executed, but its 50 new
 candidates still require screening and its limitations must be accepted if
 Scopus remains excluded. The archival DOI and final license choices must also
 be recorded before the first stable release and arXiv submission.
