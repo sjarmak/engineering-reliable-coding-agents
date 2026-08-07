@@ -17,6 +17,7 @@ fault-testing protocols.
 | Path | Contents |
 | --- | --- |
 | [`manuscript/`](manuscript/) | Complete, compilable LaTeX source with 18 chapters, a closing chapter, 17 figures, 7 numbered tables, a glossary, and 213 references |
+| [`editing/engineering-reliable-coding-agents.md`](editing/engineering-reliable-coding-agents.md) | Complete human-editable Markdown rendering with section-level mappings back to the canonical TeX files |
 | [`companion/`](companion/) | Human-readable learnings plus the machine-readable practice catalog, evidence ledger, chapter crosswalk, benchmark catalog, review-method records, schemas, web-source preservation record, checksums, citation metadata, and provenance |
 | [`protocols/`](protocols/) | Six runnable protocols and a minimum reliability pass, each with a decision, inputs, bounded procedure, pass condition, retained artifact, and stable practice mappings |
 | [`skills/`](skills/) | Five reusable agent skills derived from the evaluation, verification, failure-analysis, and durable-execution practices |
@@ -27,6 +28,19 @@ fault-testing protocols.
 Read the [browser-based book](https://sjarmak.ai/books/engineering-reliable-coding-agents)
 or use the [interactive companion catalog](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion)
 for chapter navigation, filtering, and graph exploration.
+
+## Edit the manuscript in Markdown
+
+Use [`editing/engineering-reliable-coding-agents.md`](editing/engineering-reliable-coding-agents.md)
+for prose editing. Its `tex-sync` comments map every section to the exact TeX file that must
+receive the approved change. After editing, run:
+
+```sh
+node scripts/editable-manuscript.mjs --status
+```
+
+The status report distinguishes Markdown-only edits, TeX-only drift, and conflicts. See
+[`editing/README.md`](editing/README.md) for the reconciliation and regeneration workflow.
 
 ## Build the manuscript
 
