@@ -27,6 +27,8 @@ This directory separates three activities that answer different questions:
   result summary.
 - `publisher-coverage-status.json`: release-state summary for the ACM, IEEE,
   Scopus, and DBLP lanes. A prepared plan never counts as an executed search.
+- `chatgpt-search-handoff.md`: copy-ready provider prompts, exact topic and
+  venue matrices, required evidence fields, and the ACM manual-only boundary.
 - `dblp-title-census-2026-08.json`: exact 64-cell DBLP query, returned SPARQL
   bindings and their hash, upstream comparison hashes, and all zero-result cells.
 - `dblp-screening-enrichment-2026-08.json`: exact-DOI OpenAlex enrichment
