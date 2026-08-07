@@ -1,56 +1,66 @@
 {
   "schema_version": 1,
   "release_version": "1.0.0-rc.13",
-  "status": "pending",
+  "status": "not-performed-with-disclosed-source-limitations",
   "as_of": "2026-08-07",
   "lanes": {
     "acm": {
-      "status": "not-started-manual-execution-required",
+      "status": "not-searched-with-disclosed-source-limitation",
       "planned_cells": 48,
       "completed_cells": 0,
-      "blocker": "ACM policy requires policy-compliant manual execution through an authorized interface."
+      "limitation": "ACM policy requires policy-compliant manual execution through an authorized interface; the retained plan is future work rather than a v1 release requirement."
     },
     "ieee": {
-      "status": "blocked-credential-rotation-and-activation",
+      "status": "not-searched-with-disclosed-source-limitation",
       "planned_cells": 64,
       "completed_cells": 0,
-      "blocker": "The prior inactive credential was exposed in local diagnostic output and must be rotated and activated before any request."
+      "limitation": "The prior inactive credential was exposed in local diagnostic output and must be rotated before any future request; the retained plan is not a v1 release requirement."
     },
     "scopus": {
-      "status": "blocked-missing-credentials",
+      "status": "not-searched-with-disclosed-source-limitation",
       "planned_cells": 64,
       "completed_cells": 0,
-      "exclusion_accepted": false,
       "replacement": "dblp-title-census",
-      "blocker": "No Elsevier API key or required institutional token is configured."
+      "limitation": "No Elsevier API key or required institutional token is configured; DBLP is non-equivalent replacement evidence and the retained Scopus plan is future work."
     },
     "dblp": {
-      "status": "replacement-evidence-complete-screening-pending",
+      "status": "replacement-screening-complete",
       "planned_cells": 64,
       "completed_cells": 64,
       "unique_publications": 55,
       "new_to_prior_sets": 50,
-      "author_decisions_completed": 0,
+      "author_decisions_completed": 34,
       "publisher_native": false,
       "scopus_equivalent": false
     }
   },
   "web_surrogate": {
-    "status": "candidate-discovery-only",
+    "status": "candidate-discovery-adjudicated",
     "workbook": "erca_publisher_coverage_with_web_surrogate_2026-08.xlsx",
     "workbook_sha256": "5d04442bac5ca4c61450e5e7a12035e58a095dceac739fd2c68e3fb88362920b",
     "candidate_records": 19,
     "records_with_doi": 12,
     "records_without_doi": 7,
     "provider_native": false,
-    "closes_planned_cells": 0
+    "closes_planned_cells": 0,
+    "adjudication_file": "web-surrogate-adjudication-2026-08.csv",
+    "adjudication_sha256": "488a365597986d65f783802f9a71a870865b633061e01e750e41a6f9b398c402",
+    "adjudication": {
+      "decisions_completed": 19,
+      "deferred": 19,
+      "admitted": 0,
+      "factual_corrections_identified": 0,
+      "duplicates_with_dblp_queue": 2,
+      "unique_candidates_across_retained_queues": 51
+    }
   },
   "claims": {
     "acm_searched": false,
     "ieee_searched": false,
     "scopus_searched": false,
     "scopus_equivalence_claimed": false,
-    "complete_with_documented_exclusions": false
+    "complete_with_documented_exclusions": false,
+    "source_limitations_disclosed": true
   },
-  "interpretation_boundary": "Prepared plans, web-surrogate candidate discovery, and replacement evidence do not establish completed publisher- and index-native coverage. Stable v1 requires completed ACM and IEEE execution plus either completed Scopus execution or an accepted, explicitly non-equivalent Scopus exclusion after DBLP author screening."
+  "interpretation_boundary": "ACM Digital Library, IEEE Xplore, and Scopus were not searched. Prepared plans, web-surrogate candidate discovery, and DBLP replacement evidence do not establish publisher- or index-native coverage, provider equivalence, or exhaustive recall. The plans are retained for future updates and do not block archival v1. The 51 unique candidates across the DBLP and web-surrogate queues were adjudicated under the August 6 cutoff and deferred to the next edition; none was admitted to v1."
 }

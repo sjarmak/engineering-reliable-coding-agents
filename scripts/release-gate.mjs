@@ -40,6 +40,7 @@ const STABLE_STATE_VALUES = Object.freeze({
   "methodology_gates.publisher_native_search": Object.freeze([
     "complete",
     "complete-with-documented-exclusions",
+    "not-performed-with-disclosed-source-limitations",
   ]),
 });
 
@@ -522,19 +523,24 @@ async function loadContractFiles(root) {
       if (error.code === "ENOENT") return false;
       throw error;
     });
-  const scopusExecutionReportExists = await stat(
-    path.join(root, optionalEntries.scopusExecutionReport),
-  )
-    .then(() => true)
-    .catch((error) => {
-      if (error.code === "ENOENT") return false;
-      throw error;
-    });
+  const executionReportExistence = await Promise.all(
+    ["acmExecutionReport", "ieeeExecutionReport", "scopusExecutionReport"].map(
+      async (key) => [
+        `${key}Exists`,
+        await stat(path.join(root, optionalEntries[key]))
+          .then(() => true)
+          .catch((error) => {
+            if (error.code === "ENOENT") return false;
+            throw error;
+          }),
+      ],
+    ),
+  );
   return Object.fromEntries([
     ...pairs,
     ...optionalPairs,
     ["externalGradingReportExists", externalGradingReportExists],
-    ["scopusExecutionReportExists", scopusExecutionReportExists],
+    ...executionReportExistence,
   ]);
 }
 

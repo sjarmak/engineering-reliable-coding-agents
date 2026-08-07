@@ -3,7 +3,7 @@
   "version": "1.0.0-rc.13",
   "freeze_date": "2026-08-06",
   "manuscript": {
-    "pages": 270,
+    "pages": 271,
     "figures": 17,
     "numbered_tables": 7
   },
@@ -26,6 +26,6 @@
   },
   "methodology_gates": {
     "external_grading": "not-performed-with-disclosed-limitation",
-    "publisher_native_search": "pending"
+    "publisher_native_search": "not-performed-with-disclosed-source-limitations"
   }
 }

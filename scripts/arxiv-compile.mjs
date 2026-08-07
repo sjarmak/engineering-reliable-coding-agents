@@ -163,7 +163,7 @@ export async function compileArxivArchive(root) {
       compilerVersion,
       log,
       pdf: pdfInfo,
-      expectedPages: 270,
+      expectedPages: manifest.manuscript.pages,
     });
     if (errors.length) throw new Error(`arXiv compilation failed:\n- ${errors.join("\n- ")}`);
 

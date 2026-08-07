@@ -43,24 +43,36 @@ function minimalPublisherReport(version, provider, sourceLane, planContent) {
 
 function minimalPublisherStatus(version, overallState) {
   const excluded = overallState === "complete-with-documented-exclusions";
+  const disclosed = overallState === "not-performed-with-disclosed-source-limitations";
   return JSON.stringify({
     schema_version: 1, release_version: version, status: overallState, as_of: "2026-08-07",
     lanes: {
-      acm: { status: "complete", planned_cells: 1, completed_cells: 1 },
-      ieee: { status: "complete", planned_cells: 1, completed_cells: 1 },
+      acm: {
+        status: disclosed ? "not-searched-with-disclosed-source-limitation" : "complete",
+        planned_cells: 1, completed_cells: disclosed ? 0 : 1,
+      },
+      ieee: {
+        status: disclosed ? "not-searched-with-disclosed-source-limitation" : "complete",
+        planned_cells: 1, completed_cells: disclosed ? 0 : 1,
+      },
       scopus: {
-        status: excluded ? "excluded-with-documented-replacement" : "complete",
-        planned_cells: 1, completed_cells: excluded ? 0 : 1,
-        exclusion_accepted: excluded, replacement: excluded ? "dblp-title-census" : null,
+        status: disclosed
+          ? "not-searched-with-disclosed-source-limitation"
+          : excluded ? "excluded-with-documented-replacement" : "complete",
+        planned_cells: 1, completed_cells: excluded || disclosed ? 0 : 1,
+        exclusion_accepted: excluded,
+        replacement: excluded || disclosed ? "dblp-title-census" : null,
       },
       dblp: {
-        status: excluded ? "replacement-screening-complete" : "supplemental",
+        status: excluded || disclosed ? "replacement-screening-complete" : "supplemental",
         publisher_native: false, scopus_equivalent: false,
       },
     },
     claims: {
-      acm_searched: true, ieee_searched: true, scopus_searched: !excluded,
+      acm_searched: !disclosed, ieee_searched: !disclosed,
+      scopus_searched: !excluded && !disclosed,
       scopus_equivalence_claimed: false, complete_with_documented_exclusions: excluded,
+      source_limitations_disclosed: disclosed,
     },
     interpretation_boundary: "This fixture establishes bounded coverage, not recall.",
   });
@@ -71,21 +83,24 @@ export function publisherCoverageFixture(version, overallState = "complete") {
   const ieeePlan = minimalPublisherPlan("publisher_native_ieee");
   const scopusPlan = minimalPublisherPlan("index_native_scopus");
   const complete = overallState === "complete";
+  const disclosed = overallState === "not-performed-with-disclosed-source-limitations";
   return {
     publisherCoverageStatus: minimalPublisherStatus(version, overallState),
     acmPlan,
     ieeePlan,
     scopusPlan,
-    acmExecutionReport: minimalPublisherReport(
+    acmExecutionReport: disclosed ? "" : minimalPublisherReport(
       version, "acm_dl", "publisher_native_acm_manual", acmPlan,
     ),
-    ieeeExecutionReport: minimalPublisherReport(
+    ieeeExecutionReport: disclosed ? "" : minimalPublisherReport(
       version, "ieee_xplore", "publisher_native_ieee", ieeePlan,
     ),
     scopusExecutionReport: complete
       ? minimalPublisherReport(version, "scopus", "index_native_scopus", scopusPlan)
       : "",
     scopusExecutionReportExists: complete,
+    acmExecutionReportExists: !disclosed,
+    ieeeExecutionReportExists: !disclosed,
     scopusFallbackDecision:
       "DBLP is replacement evidence and is not Scopus-equivalent.",
   };

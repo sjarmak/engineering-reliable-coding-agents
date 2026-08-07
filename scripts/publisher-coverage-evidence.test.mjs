@@ -178,6 +178,55 @@ test("documented Scopus exclusion requires completed ACM/IEEE lanes and a non-eq
   assert.ok(errors.some((error) => error.includes("not Scopus-equivalent")));
 });
 
+test("disclosed source limitations permit zero provider execution without completion claims", () => {
+  const overallState = "not-performed-with-disclosed-source-limitations";
+  const files = fixture("complete-with-documented-exclusions");
+  const coverageStatus = JSON.parse(files.publisherCoverageStatus);
+  coverageStatus.status = overallState;
+  for (const lane of ["acm", "ieee", "scopus"]) {
+    coverageStatus.lanes[lane].status = "not-searched-with-disclosed-source-limitation";
+    coverageStatus.lanes[lane].completed_cells = 0;
+  }
+  coverageStatus.lanes.dblp.status = "replacement-screening-complete";
+  coverageStatus.claims = {
+    acm_searched: false,
+    ieee_searched: false,
+    scopus_searched: false,
+    scopus_equivalence_claimed: false,
+    complete_with_documented_exclusions: false,
+    source_limitations_disclosed: true,
+  };
+  const disclosedFiles = {
+    ...files,
+    publisherCoverageStatus: JSON.stringify(coverageStatus),
+    acmExecutionReport: "",
+    ieeeExecutionReport: "",
+    scopusExecutionReport: "",
+    acmExecutionReportExists: false,
+    ieeeExecutionReportExists: false,
+    scopusExecutionReportExists: false,
+  };
+
+  assert.deepEqual(
+    publisherCoverageArtifactErrors(VERSION, overallState, disclosedFiles),
+    [],
+  );
+
+  const contradictory = publisherCoverageArtifactErrors(VERSION, overallState, {
+    ...disclosedFiles,
+    acmExecutionReport: files.acmExecutionReport,
+    acmExecutionReportExists: true,
+  });
+  assert.ok(contradictory.some((error) => error.includes("must be absent")));
+
+  coverageStatus.claims.source_limitations_disclosed = false;
+  const undisclosed = publisherCoverageArtifactErrors(VERSION, overallState, {
+    ...disclosedFiles,
+    publisherCoverageStatus: JSON.stringify(coverageStatus),
+  });
+  assert.ok(undisclosed.some((error) => error.includes("source_limitations_disclosed")));
+});
+
 test("lane reports are bound to the exact plan and full topic-by-venue matrix", () => {
   const files = fixture();
   const invalidReport = JSON.parse(files.acmExecutionReport);

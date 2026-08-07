@@ -47,7 +47,7 @@ Research records found through Code Intelligence Digest entered the scholarly la
 
 The consolidation cutoff was July 26, 2026. A bounded audit through August 6 screened 39 candidate records: 38 surfaced in published Digest editions and one in a targeted release check. Eleven new works were admitted, one was already present, and 27 were deferred. Newness alone did not justify admission. The source had to correct, materially qualify, or directly strengthen a claim already in scope. Later records enter the next-edition queue unless they correct a factual error.
 
-A separate software-engineering coverage probe searched eight preserved topic formulations across metadata for ICSE, FSE, ASE, ISSTA, EMSE, TSE, TOSEM, and CSCW. It surfaced 148 unique candidates and admitted nine methodologically material records after title-and-abstract screening. A deterministic 40-DOI comparison found eight exact matches in SciX. A follow-up check of all 26 TSE candidates found 26 exact DOI matches, showing that the known TSE subset was present even though records from other venue families were absent from the sample. Neither comparison estimates topic-search recall or replaces the pending ACM Digital Library, IEEE Xplore, and Scopus search. The full probe, known-set audit, and prepared search plans appear under `software-engineering-coverage/`.
+A separate software-engineering coverage probe searched eight preserved topic formulations across metadata for ICSE, FSE, ASE, ISSTA, EMSE, TSE, TOSEM, and CSCW. It surfaced 148 unique candidates and admitted nine methodologically material records after title-and-abstract screening. A deterministic 40-DOI comparison found eight exact matches in SciX. A follow-up check of all 26 TSE candidates found 26 exact DOI matches, showing that the known TSE subset was present even though records from other venue families were absent from the sample. Neither comparison estimates topic-search recall or establishes ACM Digital Library, IEEE Xplore, or Scopus coverage. Those sources were not searched for v1; the full probe, known-set audit, disclosed limitation, and future search plans appear under `software-engineering-coverage/`.
 
 Because Scopus credentials remained unavailable, a credential-free DBLP title
 census applied the same eight topic boundaries to eight named venue streams.
@@ -60,22 +60,22 @@ query, returned SPARQL bindings, comparison hashes, zero cells, and fallback dec
 preserved under `software-engineering-coverage/`.
 
 An exact-DOI OpenAlex enrichment matched all 50 new-to-both records and supplied
-abstracts for 47. Model-assisted preliminary triage recommends 34 for full-text
-review and defers or excludes 16 with record-level reasons. The author-decision
-column remains blank; these recommendations are not admissions and do not
-satisfy the screening gate.
+abstracts for 47. Model-assisted preliminary triage recommended 34 for full-text
+review and deferred or excluded 16 with record-level reasons. The retained
+candidates were discovered after the August 6 cutoff. None identified a factual
+correction, so all 34 were deferred to the next-edition queue under the published
+update policy rather than admitted to the frozen v1 corpus.
 
-For the 34 full-text recommendations, a separate author packet records a
-bounded candidate claim, proposed manuscript placement, evidence basis, and
-full-text access route. Every author decision and note remains blank. The packet
-is decision support, not an author screening decision. A separate verification
+For the 34 full-text recommendations, a separate adjudication packet records a
+bounded candidate claim, proposed manuscript placement, evidence basis,
+full-text access route, disposition, and reason. A separate verification
 file identifies the exact public full-text bytes and page-level support notes
 for all 18 open-routed candidates. A supplemental verification file records the
 same evidence for 13 candidates that the provider had routed as closed but a
 bounded exact-title search subsequently located. A separate exception file
 records the three remaining access failures without treating metadata or a
 browser extract as source-hashed full text. The papers are not redistributed,
-and all 34 candidates still require author adjudication.
+and all 34 records remain available for next-edition review.
 
 ## Reproducibility boundary
 

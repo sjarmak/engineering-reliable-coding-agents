@@ -5,10 +5,10 @@
   "container_image": "texlive/texlive:TL2025-historic@sha256:5912d6a33798957f4cd6ff1673819209f59300c378033d25066feb93270b90ce",
   "source_date_epoch": 1785974400,
   "compiler_version": "XeTeX 3.141592653-2.6-0.999997 (TeX Live 2025)",
-  "archive_sha256": "151614dc42fef002010d4f0016bc558deb9b8f9adfb0ee77dfbbdeafc8bf5821",
-  "pdf_sha256": "b1ae9b3720a39f00b21edc7b73b5812ea3486bc4b3cb2b03797311d563038895",
+  "archive_sha256": "0232ab340651ed1409e5e3b8478e8f4a5152b54a828e08b9150c7ebd9e90346a",
+  "pdf_sha256": "9328761d2f1358f7914b15b09c83506ebbe3cf7f9ba6bb7f7c7af2f223f0856d",
   "pdf": {
-    "pages": 270,
+    "pages": 271,
     "encrypted": false,
     "page_size": "612 x 792 pts (letter)",
     "pdf_version": "1.7"

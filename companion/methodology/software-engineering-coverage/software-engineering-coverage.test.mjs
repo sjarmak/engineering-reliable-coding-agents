@@ -14,7 +14,7 @@ import {
   fetchDblpBindings,
 } from "./run-dblp-title-census.mjs";
 
-test("publisher coverage status matches the checked-in plans and pending lane evidence", async () => {
+test("publisher coverage status binds the disclosed source limitations to the plans", async () => {
   const readJson = async (relative) =>
     JSON.parse(await readFile(new URL(relative, new URL(".", import.meta.url)), "utf8"));
   const [status, acm, ieee, scopus, dblp] = await Promise.all([
@@ -26,7 +26,7 @@ test("publisher coverage status matches the checked-in plans and pending lane ev
   ]);
   const cells = (plan) => plan.topics.length * plan.venues.length;
 
-  assert.equal(status.status, "pending");
+  assert.equal(status.status, "not-performed-with-disclosed-source-limitations");
   assert.equal(status.lanes.acm.planned_cells, cells(acm));
   assert.equal(status.lanes.ieee.planned_cells, cells(ieee));
   assert.equal(status.lanes.scopus.planned_cells, cells(scopus));
@@ -35,6 +35,11 @@ test("publisher coverage status matches the checked-in plans and pending lane ev
   assert.equal(status.lanes.dblp.new_to_prior_sets, dblp.results.new_to_both_prior_sets);
   assert.equal(status.lanes.dblp.publisher_native, false);
   assert.equal(status.lanes.dblp.scopus_equivalent, false);
+  for (const lane of ["acm", "ieee", "scopus"]) {
+    assert.equal(status.lanes[lane].status, "not-searched-with-disclosed-source-limitation");
+    assert.equal(status.lanes[lane].completed_cells, 0);
+  }
+  assert.equal(status.claims.source_limitations_disclosed, true);
   const workbook = await readFile(new URL(status.web_surrogate.workbook, new URL(".", import.meta.url)));
   assert.equal(
     createHash("sha256").update(workbook).digest("hex"),
@@ -54,6 +59,44 @@ test("publisher coverage status matches the checked-in plans and pending lane ev
     [status.claims.acm_searched, status.claims.ieee_searched, status.claims.scopus_searched],
     [false, false, false],
   );
+});
+
+test("post-cutoff adjudication covers the DBLP and web-surrogate queues without admissions", async () => {
+  const directory = new URL(".", import.meta.url);
+  const [status, webContent, dblpContent] = await Promise.all([
+    readFile(new URL("publisher-coverage-status.json", directory), "utf8").then(JSON.parse),
+    readFile(new URL("web-surrogate-adjudication-2026-08.csv", directory), "utf8"),
+    readFile(new URL("dblp-author-adjudication-2026-08.csv", directory), "utf8"),
+  ]);
+  const web = parseCsv(webContent);
+  const dblp = parseCsv(dblpContent);
+  const normalize = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "");
+  const dblpDois = new Set(dblp.map((record) => normalize(record.doi)).filter(Boolean));
+  const dblpTitles = new Set(dblp.map((record) => normalize(record.title)));
+  const overlaps = web.filter((record) =>
+    record.doi
+      ? dblpDois.has(normalize(record.doi))
+      : dblpTitles.has(normalize(record.title)),
+  );
+
+  assert.equal(web.length, 19);
+  assert.equal(web.filter((record) => record.doi).length, 12);
+  assert.equal(overlaps.length, 2);
+  assert.equal(dblp.length + web.length - overlaps.length, 51);
+  assert.ok([...web, ...dblp].every((record) => record.author_decision === "defer" || record.decision === "defer"));
+  assert.ok([...web, ...dblp].every((record) => (record.author_note || record.decision_note).trim()));
+  assert.equal(
+    createHash("sha256").update(webContent).digest("hex"),
+    status.web_surrogate.adjudication_sha256,
+  );
+  assert.deepEqual(status.web_surrogate.adjudication, {
+    decisions_completed: 19,
+    deferred: 19,
+    admitted: 0,
+    factual_corrections_identified: 0,
+    duplicates_with_dblp_queue: 2,
+    unique_candidates_across_retained_queues: 51,
+  });
 });
 
 const DBLP_FIXTURE_PLAN = {
@@ -337,7 +380,7 @@ test("DBLP triage covers the full new-to-both queue without claiming author deci
   );
 });
 
-test("DBLP author packet covers every full-text recommendation without deciding for the author", async function () {
+test("DBLP adjudication applies the post-cutoff deferral to every retained recommendation", async function () {
   const directory = fileURLToPath(new URL(".", import.meta.url));
   const [triageContent, packetContent] = await Promise.all([
     readFile(`${directory}/dblp-screening-triage-2026-08.csv`, "utf8"),
@@ -361,7 +404,12 @@ test("DBLP author packet covers every full-text recommendation without deciding 
   assert.ok(packet.every((record) => allowedEffects.has(record.candidate_effect)));
   assert.ok(packet.every((record) => allowedRoutes.has(record.full_text_route)));
   assert.ok(packet.every((record) => record.proposed_placement && record.bounded_candidate_claim));
-  assert.ok(packet.every((record) => record.author_decision === "" && record.author_note === ""));
+  assert.ok(packet.every((record) => record.author_decision === "defer"));
+  assert.ok(
+    packet.every((record) =>
+      record.author_note.startsWith("Deferred under the 2026-08-06 cutoff:"),
+    ),
+  );
   assert.ok(
     packet.every(
       (record) => !/\badmi(?:t|ts|tted|tting|ssion|ssions)\b/i.test(Object.values(record).join(" ")),

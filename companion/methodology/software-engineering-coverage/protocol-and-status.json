@@ -1,7 +1,7 @@
 {
   "run_date": "2026-08-07",
-  "status": "dblp_replacement_evidence_complete_publisher_native_supplement_pending",
-  "purpose": "Test whether the existing SciX plus arXiv review can assume coverage of core software-engineering venues and prepare a publisher-native supplementary search.",
+  "status": "bounded_coverage_complete_source_limitations_disclosed",
+  "purpose": "Test whether the existing SciX plus arXiv review can assume coverage of core software-engineering venues, preserve bounded replacement evidence, and disclose unexecuted provider-native plans.",
   "discovery_source": "OpenAlex public metadata, used as a coverage probe rather than a substitute for ACM DL, IEEE Xplore, or Scopus.",
   "venues": [
     "S4306419842",
@@ -73,7 +73,7 @@
     "dblp_supplemental_full_text_sources_verified": 13,
     "dblp_full_text_access_exceptions": 3,
     "dblp_closed_or_no_open_location": 16,
-    "dblp_author_decisions_completed": 0
+    "dblp_author_decisions_completed": 34
   },
   "provider_checks": [
     {
@@ -105,5 +105,5 @@
       "status": "A 64-cell title-only census completed on 2026-08-07. The exact query and 55 unique returned publications are preserved; 50 were absent from both prior comparison sets. DBLP is replacement evidence, not a publisher-native or Scopus-equivalent source."
     }
   ],
-  "interpretation": "A missing exact DOI in the deterministic sample demonstrates a coverage gap but does not estimate recall for all software-engineering literature. A follow-up known-set audit found all 26 TSE candidates from the probe in SciX by exact DOI; that result does not estimate topic-search recall within TSE or replace IEEE Xplore. The DBLP census exposed 50 title-matched publications absent from both the manuscript reference set and the OpenAlex probe, especially in conference streams, but lacks abstract and keyword search and is not equivalent to Scopus. Exact-DOI enrichment supported preliminary model triage. Source-hashed, page-level verification now covers all 18 open-routed candidates plus 13 of the 16 records initially routed as closed; the other three have explicit access exceptions. All author decisions remain pending and no recommendation is an admission. The archival edition remains conditional on author screening of that queue and completing the prepared ACM and IEEE searches plus either Scopus execution or an explicitly accepted documented exclusion."
+  "interpretation": "A missing exact DOI in the deterministic sample demonstrates a coverage gap but does not estimate recall for all software-engineering literature. A follow-up known-set audit found all 26 TSE candidates from the probe in SciX by exact DOI; that result does not estimate topic-search recall within TSE or establish IEEE Xplore coverage. The DBLP census exposed 50 title-matched publications absent from both the manuscript reference set and the OpenAlex probe, especially in conference streams, but lacks abstract and keyword search and is not equivalent to Scopus. Exact-DOI enrichment supported preliminary model triage. Source-hashed, page-level verification covers all 18 open-routed candidates plus 13 of the 16 records initially routed as closed; the other three have explicit access exceptions. The 34 retained candidates were discovered after the August 6 cutoff and were deferred to the next-edition queue because none identified a factual correction; no candidate was represented as an admission. ACM Digital Library, IEEE Xplore, and Scopus were not searched; their plans are retained for future updates and do not block archival v1."
 }

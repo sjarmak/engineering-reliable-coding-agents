@@ -77,14 +77,18 @@ stable DOI or other bibliographic identity before deduplication and citation:
 - *Explaining Explanations: An Empirical Study of Explanations in Code Reviews*
   (FSE 2025, Journal First)
 
-## Required next handling
+## V1 disposition and next-edition handling
+
+The workbook postdates the August 6 evidence cutoff. None of its candidate
+records identified a factual correction, so all 19 were deferred to the
+next-edition queue. Two duplicate records overlap the DBLP adjudication packet,
+leaving 51 unique late candidates across both queues. Record-level dispositions
+and overlap markers appear in `web-surrogate-adjudication-2026-08.csv`.
+
+For a future edition:
 
 1. Resolve the seven incomplete identities and the one publication-year
    boundary through primary bibliographic sources.
-2. Deduplicate every candidate against the full evidence corpus, not DOI-only
-   subsets.
-3. Retrieve and assess full text before making any support or inclusion claim.
-4. Preserve author decisions separately from ChatGPT's preliminary relevance
-   prose.
-5. Execute the provider-native plans separately if their coverage claims are
-   to close; never rename this workbook as an execution report.
+2. Retrieve and assess full text before making any support or inclusion claim.
+3. Execute provider-native plans only if provider coverage is to be claimed;
+   never rename this workbook as an execution report.

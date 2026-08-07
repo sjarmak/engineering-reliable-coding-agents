@@ -8,13 +8,11 @@ research environment on 2026-08-07. No Scopus result count, coverage result,
 or publisher/index-native search claim is inferred from that absence.
 
 A credential-free DBLP title census was executed as replacement evidence. It
-is useful but not equivalent to Scopus. The archival gate therefore remains
-open until the resulting candidate queue is screened and the author either:
-
-1. executes the preserved Scopus plan; or
-2. accepts a stable-release state of
-   `complete-with-documented-exclusions` and reports explicitly that Scopus was
-   not searched.
+is useful but not equivalent to Scopus. The preserved Scopus plan is future
+work rather than a v1 release requirement. Stable v1 instead uses
+`not-performed-with-disclosed-source-limitations`, reports explicitly that
+Scopus was not searched, and remains conditional on adjudicating the candidates
+already surfaced.
 
 ## Replacement evidence executed
 
@@ -70,6 +68,10 @@ The 50 records absent from both prior sets require title and, for retained
 candidates, abstract/full-text screening. Every exclusion needs a reason;
 admitted sources require a bounded claim, evidence-group adjudication, and
 manuscript placement. Exact-DOI enrichment supplied abstracts for 47 records,
-and the companion preserves preliminary model recommendations for all 50, but
-the author-decision column remains blank. The ACM manual lane and a rotated, active IEEE API key
-remain separate requirements and are not affected by this decision.
+and the companion preserves preliminary model recommendations for all 50. The
+34 retained candidates were discovered after the August 6 cutoff; none
+identified a factual correction, so all were deferred to the next-edition
+queue. The ACM manual lane and a future IEEE API run remain optional
+extensions. If executed later, the IEEE credential must first be rotated.
+Neither provider plan blocks archival v1, and neither may be represented as
+executed from its prepared plan alone.

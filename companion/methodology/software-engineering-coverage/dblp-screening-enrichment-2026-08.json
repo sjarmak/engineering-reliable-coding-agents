@@ -39,6 +39,6 @@
     "closed_or_no_open_location_records": 16,
     "interpretation": "Open-access status routes full-text verification; it is not an inclusion criterion. Closed records can still be adjudicated from authorized access or bounded abstract-level claims."
   },
-  "retention_boundary": "No OpenAlex abstract text is redistributed in the companion. The record-level triage file retains only source identities, stages, recommendations, and bounded rationales. Final author decisions remain blank until adjudication.",
+  "retention_boundary": "No OpenAlex abstract text is redistributed in the companion. The record-level triage file retains only source identities, stages, recommendations, and bounded rationales. Final dispositions are preserved separately in dblp-author-adjudication-2026-08.csv.",
   "interpretation": "Exact-DOI enrichment supplied abstracts for screening known records. It does not estimate topic-search recall, make DBLP equivalent to Scopus, or convert model recommendations into admissions."
 }

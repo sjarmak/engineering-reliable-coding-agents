@@ -30,11 +30,11 @@ Add an affiliation only if it is current and should be public. Use the same name
 
 ### Abstract
 
-AI coding agents are commonly evaluated as models but deployed as systems whose behavior also depends on evaluation harnesses, execution state, retrieval, permissions, review interfaces, and resource allocation. This technical review and engineering monograph examines reliability at those system boundaries. A structured multivocal search, bounded update audit, and software-engineering coverage probe assembled 138 scholarly works, 91 practitioner records, 29 benchmark records, and 17 author-system case records. Sources were screened through stated inclusion and exclusion criteria, assigned claim-scoped quality assessments, and challenged through targeted audits; ambiguous classifications defaulted to the lower group. The study contributes an evidence ledger, a versioned catalog of 192 practice records with 55 developed in depth, a dependency chain and repair asymmetry across evaluation and operation, scoped measurements and failure cases from author-operated systems, runnable protocols, and five reusable skills with evidence maps. The search is structured rather than exhaustive, and publisher- and index-native ACM, IEEE, and Scopus searching remains a release gate for archival v1. External graders were not commissioned; the edition reports no inter-rater statistic and makes no independent-calibration claim. Evidence is uneven across topics, capability results remain time- and workload-dependent, and author-system cases are illustrations rather than independent external evidence.
+AI coding agents are commonly evaluated as models but deployed as systems whose behavior also depends on evaluation harnesses, execution state, retrieval, permissions, review interfaces, and resource allocation. This technical review and engineering monograph examines reliability at those system boundaries. A structured multivocal search, bounded update audit, and software-engineering coverage probe assembled 138 scholarly works, 91 practitioner records, 29 benchmark records, and 17 author-system case records. Sources were screened through stated inclusion and exclusion criteria, assigned claim-scoped quality assessments, and challenged through targeted audits; ambiguous classifications defaulted to the lower group. The study contributes an evidence ledger, a versioned catalog of 192 practice records with 55 developed in depth, a dependency chain and repair asymmetry across evaluation and operation, scoped measurements and failure cases from author-operated systems, runnable protocols, and five reusable skills with evidence maps. The search is structured rather than exhaustive; publisher- and index-native ACM, IEEE, and Scopus searches were not performed, and this edition claims neither provider coverage nor exhaustive recall. External graders were not commissioned; the edition reports no inter-rater statistic and makes no independent-calibration claim. Evidence is uneven across topics, capability results remain time- and workload-dependent, and author-system cases are illustrations rather than independent external evidence.
 
 ### Comments
 
-Technical review and engineering monograph, 270 pages, 17 figures. Includes an evidence audit, a 192-practice companion research artifact, and runnable protocols for evaluating and operating AI coding agents. August 2026. Source, companion, and reusable protocols: https://github.com/sjarmak/engineering-reliable-coding-agents.
+Technical review and engineering monograph, 271 pages, 17 figures. Includes an evidence audit, a 192-practice companion research artifact, and runnable protocols for evaluating and operating AI coding agents. August 2026. Source, companion, and reusable protocols: https://github.com/sjarmak/engineering-reliable-coding-agents.
 
 If the companion receives a DOI before submission, append `Companion DOI: <DOI>.` Otherwise use the text above without a DOI placeholder.
 
@@ -63,7 +63,7 @@ The repository currently has a root Apache-2.0 license. Before adding the manusc
 1. Complete the author review of `companion-release/`.
 2. Choose a companion license separately from the manuscript license. `CITATION.cff` intentionally has no license field yet.
 3. Verify that the manuscript, companion, and `methodology/external-grading/status.json` consistently disclose that external grading was not performed and make no independent-calibration claim.
-4. Complete the supplementary publisher- and index-native ACM Digital Library, IEEE Xplore, and Scopus searches, or document the bounded Scopus exclusion and non-equivalent replacement evidence.
+4. Preserve the disclosed source limitation: ACM Digital Library, IEEE Xplore, and Scopus were not searched, their prepared plans remain future work, and no replacement source is described as provider-equivalent.
 5. Create a draft Zenodo deposit for the companion and reserve its DOI. Do not publish the deposit yet.
 6. Replace release-candidate version `1.0.0-rc.13` with `1.0.0`, record the final freeze date, and add the reserved DOI to both `CITATION.cff` files, the companion README, the manuscript’s Data and materials availability statement, and the arXiv Comments field.
 7. Replace the provisional directory-license notice with the selected manuscript and companion terms, then update `release-metadata.json` with the resolved license, endorsement, ORCID, DOI, and methodology-gate states.
@@ -117,7 +117,7 @@ Identifier resolution verifies that the cited record exists and captures current
 
 External grading is resolved as a methodological boundary: the author will not commission external graders for v1. The edition reports no inter-rater agreement statistic and makes no independent-calibration claim. The reusable blinded packet remains available for later independent replication.
 
-1. **Publisher- and index-native SE search.** Run the supplementary publisher-native searches in ACM Digital Library and IEEE Xplore plus the index-native Scopus search. If Scopus remains unavailable, use the documented exclusion state and identify DBLP as non-equivalent replacement evidence. Screen its 50 records absent from both prior sets and record every decision before resolving this gate. Record exact plan hashes, query cells, execution timestamps, result counts, deduplication, screening decisions, and every source or claim change.
+1. **Bounded SE candidate adjudication.** The publisher- and index-native ACM Digital Library, IEEE Xplore, and Scopus plans are retained for future updates and are not v1 execution requirements. Preserve the structured disclosure that those sources were not searched and that DBLP, OpenAlex, and web-surrogate discovery are not provider-equivalent. Screen the already surfaced candidate queue and record every decision and material source or claim change.
 2. **Structural freeze.** Read the generated PDF as a permanent, citable edition. Check every chapter start, figure, table, equation, source section, and the closing chapter.
 3. **Manuscript license.** If a commercial or university-press edition remains possible, arXiv’s perpetual non-exclusive license is the conservative starting point unless a publisher or funder requires a Creative Commons license. Check the intended publisher’s preprint policy first. The selected arXiv license is irrevocable for that version.
 4. **Companion license.** Decide independently whether the catalog and benchmark metadata should permit adaptation and redistribution. The repository currently has a root Apache-2.0 license; confirm or scope it before publishing the companion.
@@ -156,8 +156,10 @@ Verified against the official arXiv and Zenodo documentation on August 6,
 
 The machine-readable state is in `release-metadata.json`. Category and
 cross-list choices are verified. External grading is recorded as
-`not-performed-with-disclosed-limitation`; license, endorsement, ORCID, DOI,
-and publisher-native search remain explicitly pending.
+`not-performed-with-disclosed-limitation`; publisher-native search is recorded
+as `not-performed-with-disclosed-source-limitations`. Candidate adjudication is
+complete under the August 6 cutoff. License, endorsement, ORCID, and DOI remain
+pending.
 
 ## Submission sequence
 
@@ -175,7 +177,7 @@ and publisher-native search remain explicitly pending.
 ## Technical validation
 
 - Exact source ZIP compiled twice in fresh temporary directories with XeLaTeX under the digest-pinned TeX Live 2025 container recorded in `companion/methodology/release-verification/arxiv-compile-report.json`. Both offline runs produced the same PDF SHA-256.
-- Output: 270 letter-size pages, single-spaced, one-inch margins, PDF 1.7. A separate `pdflatex` diagnostic compiled without material errors but produced 269 pages, so it is not the release processor.
+- Output: 271 letter-size pages, single-spaced, one-inch margins, PDF 1.7. A separate `pdflatex` diagnostic is not the release processor.
 - Figures: 17 of 17 included as PDF; tables: 7 numbered and listed.
 - Chapter sources: 19 unnumbered chapter-end source blocks, excluded from the numbered section hierarchy and table of contents.
 - Full references: 213 alphabetized entries; all manuscript-cited arXiv identifiers, 14 DOI records, and audited web sources are represented, with additional named sources and author illustrations identified separately.
@@ -185,7 +187,7 @@ and publisher-native search remain explicitly pending.
 - TeX diagnostics: no errors, missing files, missing characters, undefined commands, or overfull boxes. A small number of harmless underfull-box warnings remain in source-list paragraphs.
 - Prose review: all 21 source files were reviewed for academic register, casual framing, unsupported certainty, promotional language, and unexplained internal evidence shorthand.
 - Companion checks: catalog and benchmark JSON validate against their schemas; checksums pass; the evidence ledger contains 578 records with a consistent 13-column structure. The update-screening decisions total 39: 11 admitted, one already present, and 27 deferred or excluded. The 148-record SE coverage probe admitted nine works, retains the 40-DOI diagnostic sample, and records that all 26 TSE candidates in the known set match SciX exactly by DOI.
-- Release contract: `release-metadata.json` agrees with rc.13 metadata; every file in the arXiv source and companion ZIPs matches the repository byte-for-byte; the preview is an unencrypted 270-page letter-size PDF carrying the rc.13 identity; the TeX Live report binds a clean 270-page XeLaTeX build to the exact source ZIP; the stable-mode gate rejects pending methodology, licensing, identity, endorsement, or DOI state.
+- Release contract: `release-metadata.json` agrees with rc.13 metadata; every file in the arXiv source and companion ZIPs matches the repository byte-for-byte; the preview is an unencrypted 271-page letter-size PDF carrying the rc.13 identity; the TeX Live report binds a clean 271-page XeLaTeX build to the exact source ZIP; the stable-mode gate rejects pending methodology, licensing, identity, endorsement, or DOI state.
 
 ## Official arXiv guidance
 

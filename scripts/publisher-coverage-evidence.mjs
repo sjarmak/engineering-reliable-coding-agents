@@ -319,15 +319,20 @@ function laneStatusErrors(lane, expectedCells, expectedStatus, name) {
   );
 }
 
-function statusHeaderErrors(status, version, overallState, excluded, name) {
+function statusHeaderErrors(status, version, overallState, name) {
+  const excluded = overallState === "complete-with-documented-exclusions";
+  const disclosed = overallState === "not-performed-with-disclosed-source-limitations";
   const checks = [
     [status?.schema_version === 1, "schema_version must be 1"],
     [status?.release_version === version, "release_version must match release metadata"],
     [status?.status === overallState, "status must match release metadata"],
     [isValidIsoDate(status?.as_of), "as_of must be a valid YYYY-MM-DD date"],
-    [status?.claims?.acm_searched === true, "claims.acm_searched must be true"],
-    [status?.claims?.ieee_searched === true, "claims.ieee_searched must be true"],
-    [status?.claims?.scopus_searched === !excluded, "claims.scopus_searched is inconsistent"],
+    [status?.claims?.acm_searched === !disclosed, "claims.acm_searched is inconsistent"],
+    [status?.claims?.ieee_searched === !disclosed, "claims.ieee_searched is inconsistent"],
+    [
+      status?.claims?.scopus_searched === (overallState === "complete"),
+      "claims.scopus_searched is inconsistent",
+    ],
     [
       status?.claims?.scopus_equivalence_claimed === false,
       "claims.scopus_equivalence_claimed must be false",
@@ -335,6 +340,12 @@ function statusHeaderErrors(status, version, overallState, excluded, name) {
     [
       status?.claims?.complete_with_documented_exclusions === excluded,
       "claims.complete_with_documented_exclusions is inconsistent",
+    ],
+    [
+      disclosed
+        ? status?.claims?.source_limitations_disclosed === true
+        : status?.claims?.source_limitations_disclosed !== true,
+      "claims.source_limitations_disclosed is inconsistent",
     ],
     [
       typeof status?.interpretation_boundary === "string" &&
@@ -345,15 +356,16 @@ function statusHeaderErrors(status, version, overallState, excluded, name) {
   return checks.flatMap(([passed, message]) => (passed ? [] : [`${name}: ${message}`]));
 }
 
-function replacementStatusErrors(status, excluded, name) {
+function replacementStatusErrors(status, replacementRequired, name) {
   return [
-    ...(excluded && status?.lanes?.scopus?.exclusion_accepted !== true
-      ? [`${name}: lanes.scopus.exclusion_accepted must be true`]
-      : []),
-    ...(excluded && status?.lanes?.scopus?.replacement !== "dblp-title-census"
+    ...(replacementRequired && status?.lanes?.scopus?.replacement !== "dblp-title-census"
       ? [`${name}: lanes.scopus.replacement must be dblp-title-census`]
       : []),
-    ...(excluded && status?.lanes?.dblp?.status !== "replacement-screening-complete"
+    ...(status?.status === "complete-with-documented-exclusions" &&
+    status?.lanes?.scopus?.exclusion_accepted !== true
+      ? [`${name}: lanes.scopus.exclusion_accepted must be true`]
+      : []),
+    ...(replacementRequired && status?.lanes?.dblp?.status !== "replacement-screening-complete"
       ? [`${name}: lanes.dblp.status must be replacement-screening-complete`]
       : []),
     ...(status?.lanes?.dblp?.publisher_native !== false ||
@@ -367,17 +379,21 @@ function statusErrors(status, version, overallState, expectedCells) {
   const name =
     "companion/methodology/software-engineering-coverage/publisher-coverage-status.json";
   const excluded = overallState === "complete-with-documented-exclusions";
+  const disclosed = overallState === "not-performed-with-disclosed-source-limitations";
+  const providerStatus = disclosed ? "not-searched-with-disclosed-source-limitation" : "complete";
   return [
-    ...statusHeaderErrors(status, version, overallState, excluded, name),
-    ...laneStatusErrors(status?.lanes?.acm, expectedCells.acm, "complete", "acm"),
-    ...laneStatusErrors(status?.lanes?.ieee, expectedCells.ieee, "complete", "ieee"),
+    ...statusHeaderErrors(status, version, overallState, name),
+    ...laneStatusErrors(status?.lanes?.acm, expectedCells.acm, providerStatus, "acm"),
+    ...laneStatusErrors(status?.lanes?.ieee, expectedCells.ieee, providerStatus, "ieee"),
     ...laneStatusErrors(
       status?.lanes?.scopus,
       expectedCells.scopus,
-      excluded ? "excluded-with-documented-replacement" : "complete",
+      disclosed
+        ? "not-searched-with-disclosed-source-limitation"
+        : excluded ? "excluded-with-documented-replacement" : "complete",
       "scopus",
     ),
-    ...replacementStatusErrors(status, excluded, name),
+    ...replacementStatusErrors(status, excluded || disclosed, name),
   ];
 }
 
@@ -399,8 +415,9 @@ export function publisherCoverageArtifactErrors(version, overallState, files) {
   );
   const planErrors = Object.values(planCounts).flatMap((entry) => entry.errors);
   if (!parsedStatus.value || planErrors.length) return [...parsedStatus.errors, ...planErrors];
-  const requiredReports =
-    overallState === "complete" ? ["acm", "ieee", "scopus"] : ["acm", "ieee"];
+  const requiredReports = overallState === "complete"
+    ? ["acm", "ieee", "scopus"]
+    : overallState === "complete-with-documented-exclusions" ? ["acm", "ieee"] : [];
   const reportErrors = requiredReports.flatMap((lane) => {
     const config = LANE_CONFIG[lane];
     return laneReportErrors(
@@ -417,13 +434,15 @@ export function publisherCoverageArtifactErrors(version, overallState, files) {
           "companion/methodology/software-engineering-coverage/plans/erca_scopus_fallback_decision_2026-08.md: must state that replacement evidence is not Scopus-equivalent",
         ]
       : [];
-  const contradictoryScopusErrors =
-    overallState === "complete-with-documented-exclusions" &&
-    files.scopusExecutionReportExists
-      ? [
-          "companion/methodology/software-engineering-coverage/scopus-execution-2026-08.json: must be absent when Scopus is documented as not searched",
-        ]
+  const prohibitedReports = overallState === "not-performed-with-disclosed-source-limitations"
+    ? ["acm", "ieee", "scopus"]
+    : overallState === "complete-with-documented-exclusions" ? ["scopus"] : [];
+  const contradictoryReportErrors = prohibitedReports.flatMap((lane) => {
+    const config = LANE_CONFIG[lane];
+    return files[`${config.reportKey}Exists`] || files[config.reportKey]
+      ? [`${config.reportName}: must be absent when the source is documented as not searched`]
       : [];
+  });
   return [
     ...statusErrors(parsedStatus.value, version, overallState, {
       acm: planCounts.acm.count,
@@ -432,6 +451,6 @@ export function publisherCoverageArtifactErrors(version, overallState, files) {
     }),
     ...reportErrors,
     ...fallbackErrors,
-    ...contradictoryScopusErrors,
+    ...contradictoryReportErrors,
   ];
 }

@@ -262,6 +262,24 @@ test("stable v1 accepts a documented Scopus exclusion without claiming equivalen
   assert.deepEqual(collectReleaseErrors(manifest, files), []);
 });
 
+test("stable v1 accepts disclosed proprietary-source limitations", () => {
+  const complete = completedStableManifest();
+  const state = "not-performed-with-disclosed-source-limitations";
+  const manifest = {
+    ...complete,
+    methodology_gates: {
+      ...complete.methodology_gates,
+      publisher_native_search: state,
+    },
+  };
+  const files = {
+    ...fixtureFiles({ version: manifest.version, date: manifest.freeze_date, doi: DOI }),
+    ...publisherCoverageFixture(manifest.version, state),
+  };
+
+  assert.deepEqual(collectReleaseErrors(manifest, files), []);
+});
+
 test("stable v1 rejects a Scopus report artifact when Scopus is documented as excluded", () => {
   const complete = completedStableManifest();
   const manifest = {
