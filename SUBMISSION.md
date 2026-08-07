@@ -30,7 +30,7 @@ Add an affiliation only if it is current and should be public. Use the same name
 
 ### Abstract
 
-AI coding agents are commonly evaluated as models but deployed as systems whose behavior also depends on evaluation harnesses, execution state, retrieval, permissions, review interfaces, and resource allocation. This technical review and engineering monograph examines reliability at those system boundaries. A structured multivocal search, bounded update audit, and software-engineering coverage probe assembled 138 scholarly works, 91 practitioner records, 29 benchmark records, and 17 author-system case records. Sources were screened through stated inclusion and exclusion criteria, assigned claim-scoped quality assessments, and challenged through targeted audits; ambiguous classifications defaulted to the lower group. The study contributes an evidence ledger, a versioned catalog of 192 practice records with 55 developed in depth, a dependency chain and repair asymmetry across evaluation and operation, scoped measurements and failure cases from author-operated systems, runnable protocols, and five reusable skills with evidence maps. The search is structured rather than exhaustive. Publisher-native ACM, IEEE, and Scopus searching and blinded external calibration of a 20-practice sample remain release gates for archival v1. Evidence is uneven across topics, capability results remain time- and workload-dependent, and author-system cases are illustrations rather than independent external evidence.
+AI coding agents are commonly evaluated as models but deployed as systems whose behavior also depends on evaluation harnesses, execution state, retrieval, permissions, review interfaces, and resource allocation. This technical review and engineering monograph examines reliability at those system boundaries. A structured multivocal search, bounded update audit, and software-engineering coverage probe assembled 138 scholarly works, 91 practitioner records, 29 benchmark records, and 17 author-system case records. Sources were screened through stated inclusion and exclusion criteria, assigned claim-scoped quality assessments, and challenged through targeted audits; ambiguous classifications defaulted to the lower group. The study contributes an evidence ledger, a versioned catalog of 192 practice records with 55 developed in depth, a dependency chain and repair asymmetry across evaluation and operation, scoped measurements and failure cases from author-operated systems, runnable protocols, and five reusable skills with evidence maps. The search is structured rather than exhaustive, and publisher-native ACM, IEEE, and Scopus searching remains a release gate for archival v1. External graders were not commissioned; the edition reports no inter-rater statistic and makes no independent-calibration claim. Evidence is uneven across topics, capability results remain time- and workload-dependent, and author-system cases are illustrations rather than independent external evidence.
 
 ### Comments
 
@@ -62,13 +62,20 @@ The repository currently has a root Apache-2.0 license. Before adding the manusc
 
 1. Complete the author review of `companion-release/`.
 2. Choose a companion license separately from the manuscript license. `CITATION.cff` intentionally has no license field yet.
-3. Complete the blinded 20-practice external-grading pass and report agreement and disagreement patterns.
+3. Verify that the manuscript, companion, and `methodology/external-grading/status.json` consistently disclose that external grading was not performed and make no independent-calibration claim.
 4. Complete the supplementary publisher-native ACM Digital Library, IEEE Xplore, and Scopus search, or document a justified database substitution and what it added.
-5. Replace release-candidate version `1.0.0-rc.13` with `1.0.0` in the build script and citation metadata.
-6. Publish the exact package in the book repository and create a `v1.0.0` release.
-7. Connect that repository to Zenodo or another DOI-granting archive and archive the exact tag.
-8. Add the DOI to `CITATION.cff`, the companion README, the manuscript’s Data and materials availability statement, and the arXiv Comments field.
-9. Rebuild both ZIPs and compile the exact final manuscript archive before uploading.
+5. Create a draft Zenodo deposit for the companion and reserve its DOI. Do not publish the deposit yet.
+6. Replace release-candidate version `1.0.0-rc.13` with `1.0.0`, record the final freeze date, and add the reserved DOI to both `CITATION.cff` files, the companion README, the manuscript’s Data and materials availability statement, and the arXiv Comments field.
+7. Replace the provisional directory-license notice with the selected manuscript and companion terms, then update `release-metadata.json` with the resolved license, endorsement, ORCID, DOI, and methodology-gate states.
+8. Rebuild both ZIPs and compile the exact final manuscript archive. Run `node --test scripts/release-gate.test.mjs scripts/arxiv-compile.test.mjs`, `node --test scripts/arxiv-compile.e2e.test.mjs`, `node scripts/release-gate.mjs`, and `node scripts/arxiv-compile.mjs`; the stable gate must pass without pending fields and the new compilation report must be included in the companion.
+9. Commit the exact verified objects, create the immutable `v1.0.0` tag and GitHub release, then upload those exact release objects to the reserved Zenodo record and publish it.
+10. Confirm that the published DOI resolves to the same version and files before uploading the arXiv source archive.
+
+Reserving the DOI before the freeze avoids a circular release sequence: Zenodo
+documents that a reserved DOI may be included in files before the record is
+published, and registers it when the deposit is published. For this research
+artifact, use a direct Zenodo deposit of the exact release objects rather than
+assuming GitHub integration metadata will bind every companion asset.
 
 The companion release contains:
 
@@ -78,7 +85,7 @@ The companion release contains:
 - a crosswalk separating 55 manuscript-developed practices from 137 companion-only practices;
 - 29 benchmark records;
 - resolved metadata for 319 arXiv identifiers, 14 DOIs, and other web sources;
-- source snapshots, seven literature-review thread protocols, a 138-work scholarly corpus, 39 record-level update-screening decisions, a 148-record software-engineering coverage probe, a deterministic 40-DOI SciX comparison, a complete 26-record TSE known-set audit, and the prepared ACM, IEEE, and Scopus plans;
+- source snapshots, seven literature-review thread protocols, a 138-work scholarly corpus, 39 record-level update-screening decisions, a 148-record software-engineering coverage probe, a deterministic 40-DOI SciX comparison, a complete 26-record TSE known-set audit, a 55-record DBLP title census with 50 records absent from both prior comparison sets, and the prepared ACM, IEEE, and Scopus plans;
 - a blinded external-grading packet for 20 practices, a self-contained reviewer form, and a strict analyzer for Cohen's and Fleiss's kappa, confusion matrices, and item-level disagreement analysis;
 - JSON Schemas, provenance hashes, citation metadata, and checksums.
 
@@ -108,15 +115,49 @@ Identifier resolution verifies that the cited record exists and captures current
 
 ## Decisions required before v1
 
-1. **External grading calibration.** Have at least two independent readers grade the packaged 20-practice sample while the author labels remain hidden. Run the analyzer and report the agreement and disagreement pattern in the manuscript and companion.
-2. **Publisher-native SE search.** Run the supplementary search in ACM Digital Library, IEEE Xplore, and Scopus, or justify a database substitution. Record queries, dates, screening decisions, deduplication, and the sources or claim changes it adds.
-3. **Structural freeze.** Read the generated PDF as a permanent, citable edition. Check every chapter start, figure, table, equation, source section, and the closing chapter.
-4. **Manuscript license.** If a commercial or university-press edition remains possible, arXiv’s perpetual non-exclusive license is the conservative starting point unless a publisher or funder requires a Creative Commons license. Check the intended publisher’s preprint policy first. The selected arXiv license is irrevocable for that version.
-5. **Companion license.** Decide independently whether the catalog and benchmark metadata should permit adaptation and redistribution. The repository currently has a root Apache-2.0 license; confirm or scope it before publishing the companion.
-6. **Endorsement.** Start a draft submission and select `cs.SE` early. A prior record in another archive may not satisfy endorsement for a new computer-science category.
-7. **Identity.** Link ORCID and confirm author name and affiliation.
-8. **Reference exceptions.** The four HTTP 403 results are access restrictions rather than unresolved identifiers. Recheck them manually at structural freeze if their claims remain material.
-9. **Companion DOI.** Archive the final replication package through Zenodo, then append its DOI to the Comments field and data-availability statement.
+External grading is resolved as a methodological boundary: the author will not commission external graders for v1. The edition reports no inter-rater agreement statistic and makes no independent-calibration claim. The reusable blinded packet remains available for later independent replication.
+
+1. **Publisher-native SE search.** Run the supplementary search in ACM Digital Library, IEEE Xplore, and Scopus, or justify a database substitution. The DBLP title census is preserved replacement evidence, not a Scopus-equivalence claim; screen its 50 records absent from both prior sets and record every decision before resolving this gate. Record queries, dates, screening decisions, deduplication, and the sources or claim changes each lane adds.
+2. **Structural freeze.** Read the generated PDF as a permanent, citable edition. Check every chapter start, figure, table, equation, source section, and the closing chapter.
+3. **Manuscript license.** If a commercial or university-press edition remains possible, arXiv’s perpetual non-exclusive license is the conservative starting point unless a publisher or funder requires a Creative Commons license. Check the intended publisher’s preprint policy first. The selected arXiv license is irrevocable for that version.
+4. **Companion license.** Decide independently whether the catalog and benchmark metadata should permit adaptation and redistribution. The repository currently has a root Apache-2.0 license; confirm or scope it before publishing the companion.
+5. **Endorsement.** Start a draft submission and select `cs.SE` early. A prior record in another archive may not satisfy endorsement for a new computer-science category.
+6. **Identity.** Link ORCID and confirm author name and affiliation.
+7. **Reference exceptions.** The four HTTP 403 results are access restrictions rather than unresolved identifiers. Recheck them manually at structural freeze if their claims remain material.
+8. **Companion DOI.** Archive the final replication package through Zenodo, then append its DOI to the Comments field and data-availability statement.
+
+## Requirement verification status
+
+Verified against the official arXiv and Zenodo documentation on August 6,
+2026:
+
+- `cs.SE` is the correct primary category because arXiv defines it to cover
+  software metrics, testing and debugging, and programming environments.
+  `cs.AI` remains the only cross-list; arXiv says one or two justified
+  cross-lists are normally the practical limit.
+- The title, authors, and abstract are required metadata. Comments are optional
+  but recommended and should carry the page and figure counts plus the
+  companion location. The manuscript DOI field remains blank because that
+  field is reserved for a publication DOI, not the companion DOI.
+- Endorsement cannot be proven from repository state. arXiv reveals the need
+  after a submitter starts a submission and selects the category; a new
+  category may require endorsement even for an existing account.
+- ORCID linkage is an arXiv account action and remains pending until confirmed
+  on the user page.
+- The arXiv license remains a human decision. arXiv states that the license for
+  each version is irrevocable and recommends checking funder and intended
+  publisher policies first. The perpetual non-exclusive license remains the
+  conservative candidate when no external policy requires a Creative Commons
+  grant.
+- Zenodo permits a DOI to be reserved in a draft and embedded in files before
+  publication. Publication registers the DOI. The reserved-DOI-first sequence
+  above therefore binds the identifier to the exact stable package without a
+  post-release metadata rewrite.
+
+The machine-readable state is in `release-metadata.json`. Category and
+cross-list choices are verified. External grading is recorded as
+`not-performed-with-disclosed-limitation`; license, endorsement, ORCID, DOI,
+and publisher-native search remain explicitly pending.
 
 ## Submission sequence
 
@@ -124,7 +165,7 @@ Identifier resolution verifies that the cited record exists and captures current
 2. Select `cs.SE` as primary and `cs.AI` as the only cross-list.
 3. Resolve any endorsement prompt.
 4. Upload `engineering-reliable-coding-agents-arxiv-source.zip`.
-5. Confirm that arXiv identifies `main.tex` as the top-level file and compiles it in PDF mode.
+5. Confirm that arXiv identifies `main.tex` as the top-level file. Select XeLaTeX with TeX Live 2025; this is the verified processor recorded in `manuscript/00README` and `release-metadata.json`.
 6. Compare arXiv’s generated PDF with `engineering-reliable-coding-agents-preview.pdf`.
 7. Inspect the title page, abstract, table of contents, all part and chapter starts, equations, hyperlinks, all 17 figures, and all 7 numbered tables.
 8. Paste the metadata above without the Markdown headings or any unresolved placeholder.
@@ -133,8 +174,8 @@ Identifier resolution verifies that the cited record exists and captures current
 
 ## Technical validation
 
-- Exact source ZIP compiled in a fresh temporary directory with Tectonic 0.16.9.
-- Output: 270 letter-size pages, single-spaced, one-inch margins, PDF 1.5.
+- Exact source ZIP compiled twice in fresh temporary directories with XeLaTeX under the digest-pinned TeX Live 2025 container recorded in `companion/methodology/release-verification/arxiv-compile-report.json`. Both offline runs produced the same PDF SHA-256.
+- Output: 270 letter-size pages, single-spaced, one-inch margins, PDF 1.7. A separate `pdflatex` diagnostic compiled without material errors but produced 269 pages, so it is not the release processor.
 - Figures: 17 of 17 included as PDF; tables: 7 numbered and listed.
 - Chapter sources: 19 unnumbered chapter-end source blocks, excluded from the numbered section hierarchy and table of contents.
 - Full references: 213 alphabetized entries; all manuscript-cited arXiv identifiers, 14 DOI records, and audited web sources are represented, with additional named sources and author illustrations identified separately.
@@ -144,6 +185,7 @@ Identifier resolution verifies that the cited record exists and captures current
 - TeX diagnostics: no errors, missing files, missing characters, undefined commands, or overfull boxes. A small number of harmless underfull-box warnings remain in source-list paragraphs.
 - Prose review: all 21 source files were reviewed for academic register, casual framing, unsupported certainty, promotional language, and unexplained internal evidence shorthand.
 - Companion checks: catalog and benchmark JSON validate against their schemas; checksums pass; the evidence ledger contains 578 records with a consistent 13-column structure. The update-screening decisions total 39: 11 admitted, one already present, and 27 deferred or excluded. The 148-record SE coverage probe admitted nine works, retains the 40-DOI diagnostic sample, and records that all 26 TSE candidates in the known set match SciX exactly by DOI.
+- Release contract: `release-metadata.json` agrees with rc.13 metadata; every file in the arXiv source and companion ZIPs matches the repository byte-for-byte; the preview is an unencrypted 270-page letter-size PDF carrying the rc.13 identity; the TeX Live report binds a clean 270-page XeLaTeX build to the exact source ZIP; the stable-mode gate rejects pending methodology, licensing, identity, endorsement, or DOI state.
 
 ## Official arXiv guidance
 
@@ -155,3 +197,4 @@ Identifier resolution verifies that the cited record exists and captures current
 - Licenses: https://info.arxiv.org/help/license/index.html
 - ORCID: https://info.arxiv.org/help/orcid.html
 - Announcement schedule: https://info.arxiv.org/help/availability.html
+- Reserve a Zenodo DOI: https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/

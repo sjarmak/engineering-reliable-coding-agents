@@ -49,6 +49,34 @@ The consolidation cutoff was July 26, 2026. A bounded audit through August 6 scr
 
 A separate software-engineering coverage probe searched eight preserved topic formulations across metadata for ICSE, FSE, ASE, ISSTA, EMSE, TSE, TOSEM, and CSCW. It surfaced 148 unique candidates and admitted nine methodologically material records after title-and-abstract screening. A deterministic 40-DOI comparison found eight exact matches in SciX. A follow-up check of all 26 TSE candidates found 26 exact DOI matches, showing that the known TSE subset was present even though records from other venue families were absent from the sample. Neither comparison estimates topic-search recall or replaces the pending ACM Digital Library, IEEE Xplore, and Scopus search. The full probe, known-set audit, and prepared search plans appear under `software-engineering-coverage/`.
 
+Because Scopus credentials remained unavailable, a credential-free DBLP title
+census applied the same eight topic boundaries to eight named venue streams.
+Its 64 cells returned 55 unique publications; 50 were absent from both the
+resolved manuscript-reference set and the OpenAlex probe. These are candidates,
+not admissions. DBLP supplies titles but not the abstract and author-keyword
+search planned for Scopus, so the census exposes a conference-coverage gap and
+creates a review queue without establishing provider equivalence. The exact
+query, returned SPARQL bindings, comparison hashes, zero cells, and fallback decision are
+preserved under `software-engineering-coverage/`.
+
+An exact-DOI OpenAlex enrichment matched all 50 new-to-both records and supplied
+abstracts for 47. Model-assisted preliminary triage recommends 34 for full-text
+review and defers or excludes 16 with record-level reasons. The author-decision
+column remains blank; these recommendations are not admissions and do not
+satisfy the screening gate.
+
+For the 34 full-text recommendations, a separate author packet records a
+bounded candidate claim, proposed manuscript placement, evidence basis, and
+full-text access route. Every author decision and note remains blank. The packet
+is decision support, not an author screening decision. A separate verification
+file identifies the exact public full-text bytes and page-level support notes
+for all 18 open-routed candidates. A supplemental verification file records the
+same evidence for 13 candidates that the provider had routed as closed but a
+bounded exact-title search subsequently located. A separate exception file
+records the three remaining access failures without treating metadata or a
+browser extract as source-hashed full text. The papers are not redistributed,
+and all 34 candidates still require author adjudication.
+
 ## Reproducibility boundary
 
 The retained thread syntheses, source identities, corpus counts, update window, and update decisions are recorded here. Every machine-issued query from the original interactive searches was not preserved. The release therefore labels reconstructed protocol records as reconstructions and does not claim byte-for-byte replay of the original searches.

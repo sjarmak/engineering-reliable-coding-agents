@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "source_lane": "open_bibliography_dblp_title_census",
+  "purpose": "Credential-free title census over named DBLP venue streams. This provides replacement evidence while Scopus is unavailable, but it is not publisher-native and is not treated as equivalent to Scopus title/abstract/keyword retrieval.",
+  "years": [
+    2018,
+    2026
+  ],
+  "metadata_boundary": "Retain DBLP publication identifiers, titles, years, and DOI values. DBLP metadata is released under CC0 1.0.",
+  "method_boundary": "Each topic is a conjunction of title groups. A title matches when it contains at least one literal phrase from every required group. DBLP does not supply abstracts, so this lane cannot reproduce Scopus TITLE-ABS-KEY behavior.",
+  "source_references": [
+    "https://sparql.dblp.org/",
+    "https://dblp.org/rdf/docu/",
+    "https://dblp.org/db/about/copyright",
+    "https://dblp.org/faq/4621382"
+  ],
+  "topics": [
+    {
+      "id": "secondary-study-method",
+      "required_title_groups": [
+        [
+          "systematic literature review",
+          "systematic mapping study",
+          "multivocal literature review",
+          "grey literature"
+        ],
+        [
+          "software engineering"
+        ]
+      ]
+    },
+    {
+      "id": "evaluation-validity",
+      "required_title_groups": [
+        [
+          "coding agent",
+          "program repair",
+          "code generation"
+        ],
+        [
+          "benchmark",
+          "evaluation",
+          "contamination",
+          "oracle"
+        ]
+      ]
+    },
+    {
+      "id": "grader-validity",
+      "required_title_groups": [
+        [
+          "automated evaluation",
+          "human evaluation",
+          "inter-rater agreement"
+        ],
+        [
+          "software",
+          "code"
+        ]
+      ]
+    },
+    {
+      "id": "human-review",
+      "required_title_groups": [
+        [
+          "code review",
+          "pull request review"
+        ],
+        [
+          "artificial intelligence",
+          "automation",
+          "human"
+        ]
+      ]
+    },
+    {
+      "id": "operations-recovery",
+      "required_title_groups": [
+        [
+          "agent",
+          "automation"
+        ],
+        [
+          "fault injection",
+          "recovery",
+          "reliability",
+          "idempotent"
+        ]
+      ]
+    },
+    {
+      "id": "retrieval-context",
+      "required_title_groups": [
+        [
+          "code search",
+          "repository retrieval",
+          "issue localization"
+        ],
+        [
+          "context",
+          "developer"
+        ]
+      ]
+    },
+    {
+      "id": "topology",
+      "required_title_groups": [
+        [
+          "multi-agent",
+          "multi agent"
+        ],
+        [
+          "software engineering",
+          "programming"
+        ],
+        [
+          "coordination",
+          "delegation"
+        ]
+      ]
+    },
+    {
+      "id": "adoption-governance",
+      "required_title_groups": [
+        [
+          "generative AI",
+          "artificial intelligence"
+        ],
+        [
+          "software engineering",
+          "programming"
+        ],
+        [
+          "adoption",
+          "governance",
+          "accountability"
+        ]
+      ]
+    }
+  ],
+  "venues": [
+    {
+      "id": "tse",
+      "label": "IEEE Transactions on Software Engineering",
+      "streams": [
+        "https://dblp.org/streams/journals/tse"
+      ]
+    },
+    {
+      "id": "tosem",
+      "label": "ACM Transactions on Software Engineering and Methodology",
+      "streams": [
+        "https://dblp.org/streams/journals/tosem"
+      ]
+    },
+    {
+      "id": "emse",
+      "label": "Empirical Software Engineering",
+      "streams": [
+        "https://dblp.org/streams/journals/ese"
+      ]
+    },
+    {
+      "id": "icse",
+      "label": "International Conference on Software Engineering",
+      "streams": [
+        "https://dblp.org/streams/conf/icse"
+      ]
+    },
+    {
+      "id": "fse",
+      "label": "Foundations of Software Engineering",
+      "streams": [
+        "https://dblp.org/streams/conf/sigsoft"
+      ]
+    },
+    {
+      "id": "ase",
+      "label": "Automated Software Engineering conference",
+      "streams": [
+        "https://dblp.org/streams/conf/kbse"
+      ]
+    },
+    {
+      "id": "issta",
+      "label": "International Symposium on Software Testing and Analysis",
+      "streams": [
+        "https://dblp.org/streams/conf/issta"
+      ]
+    },
+    {
+      "id": "cscw",
+      "label": "Computer-Supported Cooperative Work and Social Computing",
+      "streams": [
+        "https://dblp.org/streams/conf/cscw"
+      ]
+    }
+  ]
+}

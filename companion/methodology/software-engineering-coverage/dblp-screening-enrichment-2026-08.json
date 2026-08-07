@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-07",
+  "source_lane": "openalex_exact_doi_screening_support",
+  "purpose": "Supply independently obtained abstracts for second-stage screening of the 50 DBLP candidates absent from both prior comparison sets. This is screening support, not a new topic search or a publisher-native result.",
+  "input": {
+    "artifact": "dblp-title-census-2026-08.json",
+    "artifact_sha256": "f28b0bf1703c9d9d527875b3ab80b3a843d433c378cbbd2ed6e35e9c82cce69b",
+    "selection": "Unique DOI-bearing records where already_in_reference_metadata and already_in_openalex_probe are both false, in source-artifact record order.",
+    "doi_count": 50,
+    "doi_filter_sha256": "9e0dcfe9fadc77836f8cdeff47f13f271709790659a5d93a94c72745dea5b8fc"
+  },
+  "request": {
+    "method": "GET",
+    "endpoint": "https://api.openalex.org/works",
+    "filter_construction": "doi:https://doi.org/<doi-1>|https://doi.org/<doi-2>|... in input order",
+    "per_page": 100,
+    "select": "id,doi,title,abstract_inverted_index",
+    "request_url_sha256": "70e73a5fa8df55ba545421353fd5baadd22fb9719ea355e1983bcf35d17e9323"
+  },
+  "response_summary": {
+    "returned_records": 51,
+    "matched_input_dois": 50,
+    "input_dois_with_abstract": 47,
+    "input_dois_without_abstract": 3,
+    "duplicate_provider_doi": "10.1109/ase63991.2025.00028",
+    "duplicate_provider_record_ids": [
+      "https://openalex.org/W4404356447",
+      "https://openalex.org/W7125917890"
+    ]
+  },
+  "full_text_routing": {
+    "input": "The 34 records with model_recommendation=retain_for_full_text in dblp-screening-triage-2026-08.csv, in file order.",
+    "doi_count": 34,
+    "doi_filter_sha256": "ec4fa9f17f307988d5970beea7400bc76cbd9242aeb8bcb7ccd94921f181b7e7",
+    "select": "id,doi,title,open_access,best_oa_location,primary_location",
+    "request_url_sha256": "e934687eba59270191885bbc3f1b1801c913f7eaa0e27cb887dce68ef927dfb6",
+    "open_access_records": 18,
+    "closed_or_no_open_location_records": 16,
+    "interpretation": "Open-access status routes full-text verification; it is not an inclusion criterion. Closed records can still be adjudicated from authorized access or bounded abstract-level claims."
+  },
+  "retention_boundary": "No OpenAlex abstract text is redistributed in the companion. The record-level triage file retains only source identities, stages, recommendations, and bounded rationales. Final author decisions remain blank until adjudication.",
+  "interpretation": "Exact-DOI enrichment supplied abstracts for screening known records. It does not estimate topic-search recall, make DBLP equivalent to Scopus, or convert model recommendations into admissions."
+}

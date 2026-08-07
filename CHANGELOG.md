@@ -49,8 +49,9 @@
 - Ran a software-engineering venue coverage probe over 148 OpenAlex candidates,
   admitted nine methodologically material works, and made publisher-native ACM,
   IEEE, and Scopus searching an explicit archival-v1 gate.
-- Added a blinded 20-practice external-grading packet and agreement analyzer;
-  no agreement value is reported until independent readers return labels.
+- Added a blinded 20-practice independent-replication packet and agreement
+  analyzer. No external graders were commissioned for v1, no agreement value is
+  reported, and the edition makes no independent-calibration claim.
 - Added six runnable protocols plus a minimum reliability pass, and connected
   every protocol and reusable skill to stable practice IDs.
 - Completed the composite-claim audit with 65 of 65 strong-evidence entries

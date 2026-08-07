@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "version": "1.0.0-rc.13",
+  "freeze_date": "2026-08-06",
+  "manuscript": {
+    "pages": 270,
+    "figures": 17,
+    "numbered_tables": 7
+  },
+  "arxiv": {
+    "primary_category": "cs.SE",
+    "cross_lists": [
+      "cs.AI"
+    ],
+    "processor": "xelatex",
+    "texlive_version": 2025,
+    "category_check": "verified_2026-08-06",
+    "license": "pending",
+    "endorsement": "pending",
+    "orcid": "pending"
+  },
+  "companion": {
+    "license": "pending",
+    "doi": "pending",
+    "doi_strategy": "reserve_before_final_freeze"
+  },
+  "methodology_gates": {
+    "external_grading": "not-performed-with-disclosed-limitation",
+    "publisher_native_search": "pending"
+  }
+}

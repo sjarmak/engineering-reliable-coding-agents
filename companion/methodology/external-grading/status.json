@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "release_version": "1.0.0-rc.13",
+  "status": "not-performed-with-disclosed-limitation",
+  "decision_date": "2026-08-07",
+  "commissioned_reader_count": 0,
+  "completed_response_count": 0,
+  "agreement_statistics_reported": false,
+  "claims_independent_calibration": false,
+  "protocol_retained_for_independent_reuse": true,
+  "limitation": "The author did not commission external graders; this edition makes no independent-calibration or inter-rater-agreement claim."
+}

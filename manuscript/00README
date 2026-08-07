@@ -1,5 +1,6 @@
 Top-level file: main.tex
-Engine: pdfLaTeX
+Engine: XeLaTeX
+TeX Live: 2025
 Prepared for arXiv from the verified August 6, 2026 chapter revisions.
 The archive contains only TeX source, 213 full reference entries, and the 17 required PDF figures.
 Canonical project repository: https://github.com/sjarmak/engineering-reliable-coding-agents

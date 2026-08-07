@@ -1,0 +1,2462 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-07",
+  "source_lane": "open_bibliography_dblp_title_census",
+  "source": {
+    "provider": "dblp computer science bibliography",
+    "endpoint": "https://sparql.dblp.org/sparql",
+    "response_date": "Fri, 07 Aug 2026 02:16:59 GMT",
+    "metadata_license": "CC0-1.0",
+    "snapshot_boundary": "Live SPARQL service; exact returned result bindings, their hash, and the query hash are preserved here.",
+    "response_binding_count": 55,
+    "response_bindings_sha256": "919ca157e569d697c7ad5f086b4d40efd3cfb62d3474ea5e9f6270b08a63c2d3",
+    "response_bindings": [
+      {
+        "topic": {
+          "type": "literal",
+          "value": "adoption-governance"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "fse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/sigsoft/FelderEFWC26"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Adoption of Generative Artificial Intelligence in the German Software Engineering Industry: An Empirical Study."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2026"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3803437.3805207"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "adoption-governance"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tosem"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tosem/Russo24"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Navigating the Complexity of Generative AI Adoption in Software Engineering."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2024"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3652154"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "adoption-governance"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tosem"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tosem/Russo24a"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Navigating the Complexity of Generative AI Adoption in Software Engineering - RCR Report."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2024"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3680471"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "ase"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/kbse/CaoCWC024"
+        },
+        "title": {
+          "type": "literal",
+          "value": "JavaBench: A Benchmark of Object-Oriented Code Generation for Evaluating Large Language Models."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2024"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3691620.3695470"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "ase"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/kbse/DandamudiR24"
+        },
+        "title": {
+          "type": "literal",
+          "value": "A Preliminary Study of Multilingual Code Language Models for Code Generation Task Using Translated Benchmarks."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2024"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3691621.3694939"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "ase"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/kbse/GuoWZ25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "QuanBench: Benchmarking Quantum Code Generation with Large Language Models."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/ASE63991.2025.00218"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "ase"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/kbse/WangHGPG25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "An Agent-based Evaluation Framework for Complex Code Generation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/ASE63991.2025.00200"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "ase"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/kbse/XiaoWHWXWXWL25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Interaction2Code: Benchmarking MLLM-based Interactive Webpage Code Generation from Interactive Prototyping."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/ASE63991.2025.00028"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "ase"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/kbse/YangZCZHZLC25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Code-DiTing: Automatic Evaluation of Code Generation without References or Test Cases."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/ASE63991.2025.00021"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "ase"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/kbse/YeCSBYL25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "SolContractEval: A Benchmark for Evaluating Contract-Level Solidity Code Generation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/ASE63991.2025.00235"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "ase"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/kbse/YuCLHKX25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "RealisticCodeBench: Towards More Realistic Evaluation of Large Language Models for Code Generation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/ASE63991.2025.00248"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "emse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/ese/ErkusYD26"
+        },
+        "title": {
+          "type": "literal",
+          "value": "ArkTS code generation: A comprehensive evaluation with large language models."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2026"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1007/S10664-026-10844-0"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "emse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/ese/LiuXYSZZYXM26"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Robustness evaluation and enhancement of LLMs in code generation: an empirical study."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2026"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1007/S10664-026-10856-W"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "fse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/sigsoft/PetkeMKAS24"
+        },
+        "title": {
+          "type": "literal",
+          "value": "The Patch Overfitting Problem in Automated Program Repair: Practical Magnitude and a Baseline for Realistic Benchmarking."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2024"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3663529.3663776"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "fse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/pacmse/ChenFH0024"
+        },
+        "title": {
+          "type": "literal",
+          "value": "PPM: Automated Generation of Diverse Programming Problems for Benchmarking Code Generation Models."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2024"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3643780"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "fse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/pacmse/PengWLR25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "COFFE: A Code Efficiency Benchmark for Code Generation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3715727"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "icse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/icse/FakhouryNSCML24"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Exploring the Effectiveness of LLM based Test-driven Interactive Code Generation: User Study and Empirical Evaluation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2024"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3639478.3643525"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "icse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/icse/YuSRZZMLLWX24"
+        },
+        "title": {
+          "type": "literal",
+          "value": "CoderEval: A Benchmark of Pragmatic Code Generation with Generative Pre-trained Models."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2024"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3597503.3623316"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "icse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/icse/ZhengWSZM0Z25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "HumanEvo: An Evolution-Aware Benchmark for More Realistic Evaluation of Repository-Level Code Generation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/ICSE55347.2025.00228"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "issta"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/issta/PinconschiB0AS22"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Maestro: a platform for benchmarking automatic program repair tools on software vulnerabilities."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2022"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3533767.3543291"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "issta"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/issta/OuyangY024"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Benchmarking Automated Program Repair: An Extensive Study on Both Real-World and Artificial Bugs."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2024"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3650212.3652140"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "issta"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/pacmse/FuLLZX25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "The First Prompt Counts the Most! An Evaluation of Large Language Models on Iterative Example-Based Code Generation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3728947"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "issta"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/pacmse/JiMLWW25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Causality-Aided Evaluation and Explanation of Large Language Model-Based Code Generation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3728938"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tosem"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tosem/YangLMQY23"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Seeing the Whole Elephant: Systematically Understanding and Uncovering Evaluation Biases in Automated Program Repair."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2023"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3561382"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tosem"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tosem/IsmayilzadaRKY24"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Poracle: Testing Patches under Preservation Conditions to Combat the Overfitting Problem of Program Repair."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2024"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3625293"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tosem"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tosem/LeCongNLM25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Towards Reliable Evaluation of Neural Program Repair with Natural Robustness Testing."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3716167"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tosem"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tosem/WuF25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "HumanEvalComm: Benchmarking the Communication Competence of Code Generation for LLMs and LLM Agents."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3715109"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tosem"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tosem/ZhongLLGLBN25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Benchmarking and Categorizing the Performance of Neural Program Repair Systems for Java."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3688834"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tse/CassanoGNNPPYZAFGGJ23"
+        },
+        "title": {
+          "type": "literal",
+          "value": "MultiPL-E: A Scalable and Polyglot Approach to Benchmarking Neural Code Generation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2023"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/TSE.2023.3267446"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "evaluation-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tse/FakhouryNSCL24"
+        },
+        "title": {
+          "type": "literal",
+          "value": "LLM-Based Test-Driven Interactive Code Generation: User Study and Empirical Evaluation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2024"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/TSE.2024.3428972"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "grader-validity"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tosem"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tosem/HuCWXLZ22"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Correlating Automated and Human Evaluation of Code Documentation Generation Quality."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2022"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3502853"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "human-review"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "ase"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/kbse/Turzo22"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Towards Improving Code Review Effectiveness Through Task Automation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2022"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3551349.3559565"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "human-review"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "emse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/ese/RuangwanTIM19"
+        },
+        "title": {
+          "type": "literal",
+          "value": "The impact of human factors on the participation decision of reviewers in modern code review."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2019"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1007/S10664-018-9646-1"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "human-review"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "emse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/ese/PanichellaZ20"
+        },
+        "title": {
+          "type": "literal",
+          "value": "An Empirical Investigation of Relevant Changes and Automation Needs in Modern Code Review."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2020"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1007/S10664-020-09870-3"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "human-review"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "fse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/sigsoft/0015LSMSW20"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Biases and differences in code review using medical imaging and eye-tracking: genders, humans, and machines."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2020"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3368089.3409681"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "human-review"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "fse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/sigsoft/HeanderSR25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Support, Not Automation: Towards AI-supported Code Review For Code Quality and Beyond."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3696630.3728505"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "human-review"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "fse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/sigsoft/Tantithamthavorn26"
+        },
+        "title": {
+          "type": "literal",
+          "value": "HalluJudge: A Reference-Free Hallucination Detection for Context Misalignment in Code Review Automation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2026"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3803437.3805236"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "human-review"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "icse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/icse/TufanoMMPPB22"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Using Pre-Trained Models to Boost Code Review Automation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2022"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3510003.3510621"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "human-review"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "icse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/icse/Sghaier25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "On the Automation of Code Review Tasks Through Cross-Task Knowledge Distillation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/ICSE-COMPANION66252.2025.00072"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "human-review"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tse/TufanoDMCB24"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Code Review Automation: Strengths and Weaknesses of the State of the Art."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2024"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/TSE.2023.3348172"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "operations-recovery"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "icse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/icse/Ke25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "NIODebugger: A Novel Approach to Repair Non-Idempotent-Outcome Tests with LLM-Based Agent."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/ICSE55347.2025.00226"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "retrieval-context"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "icse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/icse/Rahman19"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Supporting code search with context-aware, analytics-driven, effective query reformulation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2019"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/ICSE-COMPANION.2019.00088"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "retrieval-context"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "icse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/icse/SunFCTHZ22"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Code Search based on Context-aware Code Translation."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2022"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3510003.3510140"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "secondary-study-method"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "emse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/ese/Rodriguez-Perez21"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Perceived diversity in software engineering: a systematic literature review."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2021"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1007/S10664-021-09992-2"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "secondary-study-method"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "emse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/ese/DabrowskiLPS22"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Analysing app reviews for software engineering: a systematic literature review."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2022"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1007/S10664-021-10065-7"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "secondary-study-method"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "emse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/ese/DabrowskiLPS22a"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Correction to: Analysing app reviews for software engineering: a systematic literature review."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2022"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1007/S10664-022-10135-4"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "secondary-study-method"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "icse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/icse/CicoJ19"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Industry trends in software engineering education: a systematic mapping study."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2019"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/ICSE-COMPANION.2019.00120"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "secondary-study-method"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "icse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/conf/icse/0001ZHHB20"
+        },
+        "title": {
+          "type": "literal",
+          "value": "An evidence-based inquiry into the use of grey literature in software engineering."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2020"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3377811.3380336"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "secondary-study-method"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tosem"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tosem/WatsonCNMP22"
+        },
+        "title": {
+          "type": "literal",
+          "value": "A Systematic Literature Review on the Use of Deep Learning in Software Engineering Research."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2022"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3485275"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "secondary-study-method"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tosem"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tosem/HouZLYWLLLGW24"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Large Language Models for Software Engineering: A Systematic Literature Review."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2024"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3695988"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "secondary-study-method"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tosem"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tosem/HamalainenDM25"
+        },
+        "title": {
+          "type": "literal",
+          "value": "A Systematic Literature Review of Multi-Label Learning in Software Engineering."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2025"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3708532"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "secondary-study-method"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tosem"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tosem/CerqueiraBNCSFSM26"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Exploring Empathy in Software Engineering: Insights from a Grey Literature Analysis of Practitioners' Perspectives."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2026"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1145/3748721"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "secondary-study-method"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tse/MohananiSTRR20"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Cognitive Biases in Software Engineering: A Systematic Mapping Study."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2020"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/TSE.2018.2877759"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "secondary-study-method"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tse/GuRZS23"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Logging Practices in Software Engineering: A Systematic Mapping Study."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2023"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/TSE.2022.3166924"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "secondary-study-method"
+        },
+        "venue": {
+          "type": "literal",
+          "value": "tse"
+        },
+        "publication": {
+          "type": "uri",
+          "value": "https://dblp.org/rec/journals/tse/WangHGGZFSLZN23"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Machine/Deep Learning for Software Engineering: A Systematic Literature Review."
+        },
+        "year": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "type": "literal",
+          "value": "2023"
+        },
+        "doi": {
+          "type": "uri",
+          "value": "https://doi.org/10.1109/TSE.2022.3173346"
+        }
+      }
+    ]
+  },
+  "query": {
+    "sha256": "c0b1e072946af192e95c4e59a74334c360f4aac424803127da40f148e95e53fa",
+    "sparql": "PREFIX dblp: <https://dblp.org/rdf/schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nSELECT DISTINCT ?topic ?venue ?publication ?title ?year ?doi WHERE {\n  VALUES (?topic ?group1 ?group2 ?group3) {\n    (\"secondary-study-method\" \"systematic literature review|systematic mapping study|multivocal literature review|grey literature\" \"software engineering\" \"\")\n    (\"evaluation-validity\" \"coding agent|program repair|code generation\" \"benchmark|evaluation|contamination|oracle\" \"\")\n    (\"grader-validity\" \"automated evaluation|human evaluation|inter-rater agreement\" \"software|code\" \"\")\n    (\"human-review\" \"code review|pull request review\" \"artificial intelligence|automation|human\" \"\")\n    (\"operations-recovery\" \"agent|automation\" \"fault injection|recovery|reliability|idempotent\" \"\")\n    (\"retrieval-context\" \"code search|repository retrieval|issue localization\" \"context|developer\" \"\")\n    (\"topology\" \"multi-agent|multi agent\" \"software engineering|programming\" \"coordination|delegation\")\n    (\"adoption-governance\" \"generative AI|artificial intelligence\" \"software engineering|programming\" \"adoption|governance|accountability\")\n  }\n  VALUES (?venue ?stream) {\n    (\"tse\" <https://dblp.org/streams/journals/tse>)\n    (\"tosem\" <https://dblp.org/streams/journals/tosem>)\n    (\"emse\" <https://dblp.org/streams/journals/ese>)\n    (\"icse\" <https://dblp.org/streams/conf/icse>)\n    (\"fse\" <https://dblp.org/streams/conf/sigsoft>)\n    (\"ase\" <https://dblp.org/streams/conf/kbse>)\n    (\"issta\" <https://dblp.org/streams/conf/issta>)\n    (\"cscw\" <https://dblp.org/streams/conf/cscw>)\n  }\n  ?publication dblp:publishedInStream ?stream ;\n               dblp:title ?title ;\n               dblp:yearOfPublication ?year .\n  OPTIONAL { ?publication dblp:doi ?doi }\n  FILTER (?year >= \"2018\"^^xsd:gYear && ?year <= \"2026\"^^xsd:gYear)\n    FILTER (?group1 = \"\" || regex(str(?title), ?group1, \"i\"))\n    FILTER (?group2 = \"\" || regex(str(?title), ?group2, \"i\"))\n    FILTER (?group3 = \"\" || regex(str(?title), ?group3, \"i\"))\n}\nORDER BY ?topic ?venue ?year ?publication",
+    "years": [
+      2018,
+      2026
+    ]
+  },
+  "comparison_inputs": {
+    "plan_sha256": "c8140c34a0969a26730829d0cac240fb4b18f841a5bde53c20951a4a8f74044c",
+    "reference_metadata_sha256": "996dca62f887a02bfafc92332c71a86359530aa464e68276f809e1afce033d20",
+    "openalex_probe_sha256": "b0bb0d5157e763594ef01baedca10d74e4a3929161377db65f4ac9f2cb49affa"
+  },
+  "results": {
+    "query_cells": 64,
+    "cells_with_matches": 21,
+    "record_cell_matches": 55,
+    "unique_publications": 55,
+    "already_in_reference_metadata": 1,
+    "already_in_openalex_probe": 4,
+    "new_to_both_prior_sets": 50
+  },
+  "cells": [
+    {
+      "id": "secondary-study-method--tse",
+      "topic": "secondary-study-method",
+      "venue": "tse",
+      "matches": 3
+    },
+    {
+      "id": "secondary-study-method--tosem",
+      "topic": "secondary-study-method",
+      "venue": "tosem",
+      "matches": 4
+    },
+    {
+      "id": "secondary-study-method--emse",
+      "topic": "secondary-study-method",
+      "venue": "emse",
+      "matches": 3
+    },
+    {
+      "id": "secondary-study-method--icse",
+      "topic": "secondary-study-method",
+      "venue": "icse",
+      "matches": 2
+    },
+    {
+      "id": "secondary-study-method--fse",
+      "topic": "secondary-study-method",
+      "venue": "fse",
+      "matches": 0
+    },
+    {
+      "id": "secondary-study-method--ase",
+      "topic": "secondary-study-method",
+      "venue": "ase",
+      "matches": 0
+    },
+    {
+      "id": "secondary-study-method--issta",
+      "topic": "secondary-study-method",
+      "venue": "issta",
+      "matches": 0
+    },
+    {
+      "id": "secondary-study-method--cscw",
+      "topic": "secondary-study-method",
+      "venue": "cscw",
+      "matches": 0
+    },
+    {
+      "id": "evaluation-validity--tse",
+      "topic": "evaluation-validity",
+      "venue": "tse",
+      "matches": 2
+    },
+    {
+      "id": "evaluation-validity--tosem",
+      "topic": "evaluation-validity",
+      "venue": "tosem",
+      "matches": 5
+    },
+    {
+      "id": "evaluation-validity--emse",
+      "topic": "evaluation-validity",
+      "venue": "emse",
+      "matches": 2
+    },
+    {
+      "id": "evaluation-validity--icse",
+      "topic": "evaluation-validity",
+      "venue": "icse",
+      "matches": 3
+    },
+    {
+      "id": "evaluation-validity--fse",
+      "topic": "evaluation-validity",
+      "venue": "fse",
+      "matches": 3
+    },
+    {
+      "id": "evaluation-validity--ase",
+      "topic": "evaluation-validity",
+      "venue": "ase",
+      "matches": 8
+    },
+    {
+      "id": "evaluation-validity--issta",
+      "topic": "evaluation-validity",
+      "venue": "issta",
+      "matches": 4
+    },
+    {
+      "id": "evaluation-validity--cscw",
+      "topic": "evaluation-validity",
+      "venue": "cscw",
+      "matches": 0
+    },
+    {
+      "id": "grader-validity--tse",
+      "topic": "grader-validity",
+      "venue": "tse",
+      "matches": 0
+    },
+    {
+      "id": "grader-validity--tosem",
+      "topic": "grader-validity",
+      "venue": "tosem",
+      "matches": 1
+    },
+    {
+      "id": "grader-validity--emse",
+      "topic": "grader-validity",
+      "venue": "emse",
+      "matches": 0
+    },
+    {
+      "id": "grader-validity--icse",
+      "topic": "grader-validity",
+      "venue": "icse",
+      "matches": 0
+    },
+    {
+      "id": "grader-validity--fse",
+      "topic": "grader-validity",
+      "venue": "fse",
+      "matches": 0
+    },
+    {
+      "id": "grader-validity--ase",
+      "topic": "grader-validity",
+      "venue": "ase",
+      "matches": 0
+    },
+    {
+      "id": "grader-validity--issta",
+      "topic": "grader-validity",
+      "venue": "issta",
+      "matches": 0
+    },
+    {
+      "id": "grader-validity--cscw",
+      "topic": "grader-validity",
+      "venue": "cscw",
+      "matches": 0
+    },
+    {
+      "id": "human-review--tse",
+      "topic": "human-review",
+      "venue": "tse",
+      "matches": 1
+    },
+    {
+      "id": "human-review--tosem",
+      "topic": "human-review",
+      "venue": "tosem",
+      "matches": 0
+    },
+    {
+      "id": "human-review--emse",
+      "topic": "human-review",
+      "venue": "emse",
+      "matches": 2
+    },
+    {
+      "id": "human-review--icse",
+      "topic": "human-review",
+      "venue": "icse",
+      "matches": 2
+    },
+    {
+      "id": "human-review--fse",
+      "topic": "human-review",
+      "venue": "fse",
+      "matches": 3
+    },
+    {
+      "id": "human-review--ase",
+      "topic": "human-review",
+      "venue": "ase",
+      "matches": 1
+    },
+    {
+      "id": "human-review--issta",
+      "topic": "human-review",
+      "venue": "issta",
+      "matches": 0
+    },
+    {
+      "id": "human-review--cscw",
+      "topic": "human-review",
+      "venue": "cscw",
+      "matches": 0
+    },
+    {
+      "id": "operations-recovery--tse",
+      "topic": "operations-recovery",
+      "venue": "tse",
+      "matches": 0
+    },
+    {
+      "id": "operations-recovery--tosem",
+      "topic": "operations-recovery",
+      "venue": "tosem",
+      "matches": 0
+    },
+    {
+      "id": "operations-recovery--emse",
+      "topic": "operations-recovery",
+      "venue": "emse",
+      "matches": 0
+    },
+    {
+      "id": "operations-recovery--icse",
+      "topic": "operations-recovery",
+      "venue": "icse",
+      "matches": 1
+    },
+    {
+      "id": "operations-recovery--fse",
+      "topic": "operations-recovery",
+      "venue": "fse",
+      "matches": 0
+    },
+    {
+      "id": "operations-recovery--ase",
+      "topic": "operations-recovery",
+      "venue": "ase",
+      "matches": 0
+    },
+    {
+      "id": "operations-recovery--issta",
+      "topic": "operations-recovery",
+      "venue": "issta",
+      "matches": 0
+    },
+    {
+      "id": "operations-recovery--cscw",
+      "topic": "operations-recovery",
+      "venue": "cscw",
+      "matches": 0
+    },
+    {
+      "id": "retrieval-context--tse",
+      "topic": "retrieval-context",
+      "venue": "tse",
+      "matches": 0
+    },
+    {
+      "id": "retrieval-context--tosem",
+      "topic": "retrieval-context",
+      "venue": "tosem",
+      "matches": 0
+    },
+    {
+      "id": "retrieval-context--emse",
+      "topic": "retrieval-context",
+      "venue": "emse",
+      "matches": 0
+    },
+    {
+      "id": "retrieval-context--icse",
+      "topic": "retrieval-context",
+      "venue": "icse",
+      "matches": 2
+    },
+    {
+      "id": "retrieval-context--fse",
+      "topic": "retrieval-context",
+      "venue": "fse",
+      "matches": 0
+    },
+    {
+      "id": "retrieval-context--ase",
+      "topic": "retrieval-context",
+      "venue": "ase",
+      "matches": 0
+    },
+    {
+      "id": "retrieval-context--issta",
+      "topic": "retrieval-context",
+      "venue": "issta",
+      "matches": 0
+    },
+    {
+      "id": "retrieval-context--cscw",
+      "topic": "retrieval-context",
+      "venue": "cscw",
+      "matches": 0
+    },
+    {
+      "id": "topology--tse",
+      "topic": "topology",
+      "venue": "tse",
+      "matches": 0
+    },
+    {
+      "id": "topology--tosem",
+      "topic": "topology",
+      "venue": "tosem",
+      "matches": 0
+    },
+    {
+      "id": "topology--emse",
+      "topic": "topology",
+      "venue": "emse",
+      "matches": 0
+    },
+    {
+      "id": "topology--icse",
+      "topic": "topology",
+      "venue": "icse",
+      "matches": 0
+    },
+    {
+      "id": "topology--fse",
+      "topic": "topology",
+      "venue": "fse",
+      "matches": 0
+    },
+    {
+      "id": "topology--ase",
+      "topic": "topology",
+      "venue": "ase",
+      "matches": 0
+    },
+    {
+      "id": "topology--issta",
+      "topic": "topology",
+      "venue": "issta",
+      "matches": 0
+    },
+    {
+      "id": "topology--cscw",
+      "topic": "topology",
+      "venue": "cscw",
+      "matches": 0
+    },
+    {
+      "id": "adoption-governance--tse",
+      "topic": "adoption-governance",
+      "venue": "tse",
+      "matches": 0
+    },
+    {
+      "id": "adoption-governance--tosem",
+      "topic": "adoption-governance",
+      "venue": "tosem",
+      "matches": 2
+    },
+    {
+      "id": "adoption-governance--emse",
+      "topic": "adoption-governance",
+      "venue": "emse",
+      "matches": 0
+    },
+    {
+      "id": "adoption-governance--icse",
+      "topic": "adoption-governance",
+      "venue": "icse",
+      "matches": 0
+    },
+    {
+      "id": "adoption-governance--fse",
+      "topic": "adoption-governance",
+      "venue": "fse",
+      "matches": 1
+    },
+    {
+      "id": "adoption-governance--ase",
+      "topic": "adoption-governance",
+      "venue": "ase",
+      "matches": 0
+    },
+    {
+      "id": "adoption-governance--issta",
+      "topic": "adoption-governance",
+      "venue": "issta",
+      "matches": 0
+    },
+    {
+      "id": "adoption-governance--cscw",
+      "topic": "adoption-governance",
+      "venue": "cscw",
+      "matches": 0
+    }
+  ],
+  "records": [
+    {
+      "topic": "adoption-governance",
+      "venue": "fse",
+      "publication": "https://dblp.org/rec/conf/sigsoft/FelderEFWC26",
+      "title": "Adoption of Generative Artificial Intelligence in the German Software Engineering Industry: An Empirical Study.",
+      "year": 2026,
+      "doi": "10.1145/3803437.3805207",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "adoption-governance",
+      "venue": "tosem",
+      "publication": "https://dblp.org/rec/journals/tosem/Russo24",
+      "title": "Navigating the Complexity of Generative AI Adoption in Software Engineering.",
+      "year": 2024,
+      "doi": "10.1145/3652154",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": true
+    },
+    {
+      "topic": "adoption-governance",
+      "venue": "tosem",
+      "publication": "https://dblp.org/rec/journals/tosem/Russo24a",
+      "title": "Navigating the Complexity of Generative AI Adoption in Software Engineering - RCR Report.",
+      "year": 2024,
+      "doi": "10.1145/3680471",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "ase",
+      "publication": "https://dblp.org/rec/conf/kbse/CaoCWC024",
+      "title": "JavaBench: A Benchmark of Object-Oriented Code Generation for Evaluating Large Language Models.",
+      "year": 2024,
+      "doi": "10.1145/3691620.3695470",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "ase",
+      "publication": "https://dblp.org/rec/conf/kbse/DandamudiR24",
+      "title": "A Preliminary Study of Multilingual Code Language Models for Code Generation Task Using Translated Benchmarks.",
+      "year": 2024,
+      "doi": "10.1145/3691621.3694939",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "ase",
+      "publication": "https://dblp.org/rec/conf/kbse/GuoWZ25",
+      "title": "QuanBench: Benchmarking Quantum Code Generation with Large Language Models.",
+      "year": 2025,
+      "doi": "10.1109/ase63991.2025.00218",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "ase",
+      "publication": "https://dblp.org/rec/conf/kbse/WangHGPG25",
+      "title": "An Agent-based Evaluation Framework for Complex Code Generation.",
+      "year": 2025,
+      "doi": "10.1109/ase63991.2025.00200",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "ase",
+      "publication": "https://dblp.org/rec/conf/kbse/XiaoWHWXWXWL25",
+      "title": "Interaction2Code: Benchmarking MLLM-based Interactive Webpage Code Generation from Interactive Prototyping.",
+      "year": 2025,
+      "doi": "10.1109/ase63991.2025.00028",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "ase",
+      "publication": "https://dblp.org/rec/conf/kbse/YangZCZHZLC25",
+      "title": "Code-DiTing: Automatic Evaluation of Code Generation without References or Test Cases.",
+      "year": 2025,
+      "doi": "10.1109/ase63991.2025.00021",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "ase",
+      "publication": "https://dblp.org/rec/conf/kbse/YeCSBYL25",
+      "title": "SolContractEval: A Benchmark for Evaluating Contract-Level Solidity Code Generation.",
+      "year": 2025,
+      "doi": "10.1109/ase63991.2025.00235",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "ase",
+      "publication": "https://dblp.org/rec/conf/kbse/YuCLHKX25",
+      "title": "RealisticCodeBench: Towards More Realistic Evaluation of Large Language Models for Code Generation.",
+      "year": 2025,
+      "doi": "10.1109/ase63991.2025.00248",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "emse",
+      "publication": "https://dblp.org/rec/journals/ese/ErkusYD26",
+      "title": "ArkTS code generation: A comprehensive evaluation with large language models.",
+      "year": 2026,
+      "doi": "10.1007/s10664-026-10844-0",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "emse",
+      "publication": "https://dblp.org/rec/journals/ese/LiuXYSZZYXM26",
+      "title": "Robustness evaluation and enhancement of LLMs in code generation: an empirical study.",
+      "year": 2026,
+      "doi": "10.1007/s10664-026-10856-w",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "fse",
+      "publication": "https://dblp.org/rec/conf/sigsoft/PetkeMKAS24",
+      "title": "The Patch Overfitting Problem in Automated Program Repair: Practical Magnitude and a Baseline for Realistic Benchmarking.",
+      "year": 2024,
+      "doi": "10.1145/3663529.3663776",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "fse",
+      "publication": "https://dblp.org/rec/journals/pacmse/ChenFH0024",
+      "title": "PPM: Automated Generation of Diverse Programming Problems for Benchmarking Code Generation Models.",
+      "year": 2024,
+      "doi": "10.1145/3643780",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "fse",
+      "publication": "https://dblp.org/rec/journals/pacmse/PengWLR25",
+      "title": "COFFE: A Code Efficiency Benchmark for Code Generation.",
+      "year": 2025,
+      "doi": "10.1145/3715727",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "icse",
+      "publication": "https://dblp.org/rec/conf/icse/FakhouryNSCML24",
+      "title": "Exploring the Effectiveness of LLM based Test-driven Interactive Code Generation: User Study and Empirical Evaluation.",
+      "year": 2024,
+      "doi": "10.1145/3639478.3643525",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "icse",
+      "publication": "https://dblp.org/rec/conf/icse/YuSRZZMLLWX24",
+      "title": "CoderEval: A Benchmark of Pragmatic Code Generation with Generative Pre-trained Models.",
+      "year": 2024,
+      "doi": "10.1145/3597503.3623316",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "icse",
+      "publication": "https://dblp.org/rec/conf/icse/ZhengWSZM0Z25",
+      "title": "HumanEvo: An Evolution-Aware Benchmark for More Realistic Evaluation of Repository-Level Code Generation.",
+      "year": 2025,
+      "doi": "10.1109/icse55347.2025.00228",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "issta",
+      "publication": "https://dblp.org/rec/conf/issta/OuyangY024",
+      "title": "Benchmarking Automated Program Repair: An Extensive Study on Both Real-World and Artificial Bugs.",
+      "year": 2024,
+      "doi": "10.1145/3650212.3652140",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "issta",
+      "publication": "https://dblp.org/rec/conf/issta/PinconschiB0AS22",
+      "title": "Maestro: a platform for benchmarking automatic program repair tools on software vulnerabilities.",
+      "year": 2022,
+      "doi": "10.1145/3533767.3543291",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "issta",
+      "publication": "https://dblp.org/rec/journals/pacmse/FuLLZX25",
+      "title": "The First Prompt Counts the Most! An Evaluation of Large Language Models on Iterative Example-Based Code Generation.",
+      "year": 2025,
+      "doi": "10.1145/3728947",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "issta",
+      "publication": "https://dblp.org/rec/journals/pacmse/JiMLWW25",
+      "title": "Causality-Aided Evaluation and Explanation of Large Language Model-Based Code Generation.",
+      "year": 2025,
+      "doi": "10.1145/3728938",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "tosem",
+      "publication": "https://dblp.org/rec/journals/tosem/IsmayilzadaRKY24",
+      "title": "Poracle: Testing Patches under Preservation Conditions to Combat the Overfitting Problem of Program Repair.",
+      "year": 2024,
+      "doi": "10.1145/3625293",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "tosem",
+      "publication": "https://dblp.org/rec/journals/tosem/LeCongNLM25",
+      "title": "Towards Reliable Evaluation of Neural Program Repair with Natural Robustness Testing.",
+      "year": 2025,
+      "doi": "10.1145/3716167",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "tosem",
+      "publication": "https://dblp.org/rec/journals/tosem/WuF25",
+      "title": "HumanEvalComm: Benchmarking the Communication Competence of Code Generation for LLMs and LLM Agents.",
+      "year": 2025,
+      "doi": "10.1145/3715109",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "tosem",
+      "publication": "https://dblp.org/rec/journals/tosem/YangLMQY23",
+      "title": "Seeing the Whole Elephant: Systematically Understanding and Uncovering Evaluation Biases in Automated Program Repair.",
+      "year": 2023,
+      "doi": "10.1145/3561382",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "tosem",
+      "publication": "https://dblp.org/rec/journals/tosem/ZhongLLGLBN25",
+      "title": "Benchmarking and Categorizing the Performance of Neural Program Repair Systems for Java.",
+      "year": 2025,
+      "doi": "10.1145/3688834",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "tse",
+      "publication": "https://dblp.org/rec/journals/tse/CassanoGNNPPYZAFGGJ23",
+      "title": "MultiPL-E: A Scalable and Polyglot Approach to Benchmarking Neural Code Generation.",
+      "year": 2023,
+      "doi": "10.1109/tse.2023.3267446",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "evaluation-validity",
+      "venue": "tse",
+      "publication": "https://dblp.org/rec/journals/tse/FakhouryNSCL24",
+      "title": "LLM-Based Test-Driven Interactive Code Generation: User Study and Empirical Evaluation.",
+      "year": 2024,
+      "doi": "10.1109/tse.2024.3428972",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "grader-validity",
+      "venue": "tosem",
+      "publication": "https://dblp.org/rec/journals/tosem/HuCWXLZ22",
+      "title": "Correlating Automated and Human Evaluation of Code Documentation Generation Quality.",
+      "year": 2022,
+      "doi": "10.1145/3502853",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "human-review",
+      "venue": "ase",
+      "publication": "https://dblp.org/rec/conf/kbse/Turzo22",
+      "title": "Towards Improving Code Review Effectiveness Through Task Automation.",
+      "year": 2022,
+      "doi": "10.1145/3551349.3559565",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "human-review",
+      "venue": "emse",
+      "publication": "https://dblp.org/rec/journals/ese/PanichellaZ20",
+      "title": "An Empirical Investigation of Relevant Changes and Automation Needs in Modern Code Review.",
+      "year": 2020,
+      "doi": "10.1007/s10664-020-09870-3",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "human-review",
+      "venue": "emse",
+      "publication": "https://dblp.org/rec/journals/ese/RuangwanTIM19",
+      "title": "The impact of human factors on the participation decision of reviewers in modern code review.",
+      "year": 2019,
+      "doi": "10.1007/s10664-018-9646-1",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "human-review",
+      "venue": "fse",
+      "publication": "https://dblp.org/rec/conf/sigsoft/0015LSMSW20",
+      "title": "Biases and differences in code review using medical imaging and eye-tracking: genders, humans, and machines.",
+      "year": 2020,
+      "doi": "10.1145/3368089.3409681",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "human-review",
+      "venue": "fse",
+      "publication": "https://dblp.org/rec/conf/sigsoft/HeanderSR25",
+      "title": "Support, Not Automation: Towards AI-supported Code Review For Code Quality and Beyond.",
+      "year": 2025,
+      "doi": "10.1145/3696630.3728505",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "human-review",
+      "venue": "fse",
+      "publication": "https://dblp.org/rec/conf/sigsoft/Tantithamthavorn26",
+      "title": "HalluJudge: A Reference-Free Hallucination Detection for Context Misalignment in Code Review Automation.",
+      "year": 2026,
+      "doi": "10.1145/3803437.3805236",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "human-review",
+      "venue": "icse",
+      "publication": "https://dblp.org/rec/conf/icse/Sghaier25",
+      "title": "On the Automation of Code Review Tasks Through Cross-Task Knowledge Distillation.",
+      "year": 2025,
+      "doi": "10.1109/icse-companion66252.2025.00072",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "human-review",
+      "venue": "icse",
+      "publication": "https://dblp.org/rec/conf/icse/TufanoMMPPB22",
+      "title": "Using Pre-Trained Models to Boost Code Review Automation.",
+      "year": 2022,
+      "doi": "10.1145/3510003.3510621",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "human-review",
+      "venue": "tse",
+      "publication": "https://dblp.org/rec/journals/tse/TufanoDMCB24",
+      "title": "Code Review Automation: Strengths and Weaknesses of the State of the Art.",
+      "year": 2024,
+      "doi": "10.1109/tse.2023.3348172",
+      "already_in_reference_metadata": true,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "operations-recovery",
+      "venue": "icse",
+      "publication": "https://dblp.org/rec/conf/icse/Ke25",
+      "title": "NIODebugger: A Novel Approach to Repair Non-Idempotent-Outcome Tests with LLM-Based Agent.",
+      "year": 2025,
+      "doi": "10.1109/icse55347.2025.00226",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "retrieval-context",
+      "venue": "icse",
+      "publication": "https://dblp.org/rec/conf/icse/Rahman19",
+      "title": "Supporting code search with context-aware, analytics-driven, effective query reformulation.",
+      "year": 2019,
+      "doi": "10.1109/icse-companion.2019.00088",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "retrieval-context",
+      "venue": "icse",
+      "publication": "https://dblp.org/rec/conf/icse/SunFCTHZ22",
+      "title": "Code Search based on Context-aware Code Translation.",
+      "year": 2022,
+      "doi": "10.1145/3510003.3510140",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "secondary-study-method",
+      "venue": "emse",
+      "publication": "https://dblp.org/rec/journals/ese/DabrowskiLPS22",
+      "title": "Analysing app reviews for software engineering: a systematic literature review.",
+      "year": 2022,
+      "doi": "10.1007/s10664-021-10065-7",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": true
+    },
+    {
+      "topic": "secondary-study-method",
+      "venue": "emse",
+      "publication": "https://dblp.org/rec/journals/ese/DabrowskiLPS22a",
+      "title": "Correction to: Analysing app reviews for software engineering: a systematic literature review.",
+      "year": 2022,
+      "doi": "10.1007/s10664-022-10135-4",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "secondary-study-method",
+      "venue": "emse",
+      "publication": "https://dblp.org/rec/journals/ese/Rodriguez-Perez21",
+      "title": "Perceived diversity in software engineering: a systematic literature review.",
+      "year": 2021,
+      "doi": "10.1007/s10664-021-09992-2",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": true
+    },
+    {
+      "topic": "secondary-study-method",
+      "venue": "icse",
+      "publication": "https://dblp.org/rec/conf/icse/0001ZHHB20",
+      "title": "An evidence-based inquiry into the use of grey literature in software engineering.",
+      "year": 2020,
+      "doi": "10.1145/3377811.3380336",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "secondary-study-method",
+      "venue": "icse",
+      "publication": "https://dblp.org/rec/conf/icse/CicoJ19",
+      "title": "Industry trends in software engineering education: a systematic mapping study.",
+      "year": 2019,
+      "doi": "10.1109/icse-companion.2019.00120",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "secondary-study-method",
+      "venue": "tosem",
+      "publication": "https://dblp.org/rec/journals/tosem/CerqueiraBNCSFSM26",
+      "title": "Exploring Empathy in Software Engineering: Insights from a Grey Literature Analysis of Practitioners' Perspectives.",
+      "year": 2026,
+      "doi": "10.1145/3748721",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "secondary-study-method",
+      "venue": "tosem",
+      "publication": "https://dblp.org/rec/journals/tosem/HamalainenDM25",
+      "title": "A Systematic Literature Review of Multi-Label Learning in Software Engineering.",
+      "year": 2025,
+      "doi": "10.1145/3708532",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": true
+    },
+    {
+      "topic": "secondary-study-method",
+      "venue": "tosem",
+      "publication": "https://dblp.org/rec/journals/tosem/HouZLYWLLLGW24",
+      "title": "Large Language Models for Software Engineering: A Systematic Literature Review.",
+      "year": 2024,
+      "doi": "10.1145/3695988",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "secondary-study-method",
+      "venue": "tosem",
+      "publication": "https://dblp.org/rec/journals/tosem/WatsonCNMP22",
+      "title": "A Systematic Literature Review on the Use of Deep Learning in Software Engineering Research.",
+      "year": 2022,
+      "doi": "10.1145/3485275",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "secondary-study-method",
+      "venue": "tse",
+      "publication": "https://dblp.org/rec/journals/tse/GuRZS23",
+      "title": "Logging Practices in Software Engineering: A Systematic Mapping Study.",
+      "year": 2023,
+      "doi": "10.1109/tse.2022.3166924",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "secondary-study-method",
+      "venue": "tse",
+      "publication": "https://dblp.org/rec/journals/tse/MohananiSTRR20",
+      "title": "Cognitive Biases in Software Engineering: A Systematic Mapping Study.",
+      "year": 2020,
+      "doi": "10.1109/tse.2018.2877759",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    },
+    {
+      "topic": "secondary-study-method",
+      "venue": "tse",
+      "publication": "https://dblp.org/rec/journals/tse/WangHGGZFSLZN23",
+      "title": "Machine/Deep Learning for Software Engineering: A Systematic Literature Review.",
+      "year": 2023,
+      "doi": "10.1109/tse.2022.3173346",
+      "already_in_reference_metadata": false,
+      "already_in_openalex_probe": false
+    }
+  ],
+  "interpretation": "This credential-free DBLP lane is a title-only census over named venue streams. It broadens and audits venue coverage, but it is not a publisher-native ACM or IEEE search, is not equivalent to Scopus title/abstract/keyword retrieval, and does not establish exhaustive recall. Zero-match cells are preserved rather than silently omitted."
+}

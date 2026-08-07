@@ -98,8 +98,20 @@
     "deterministic_scix_exact_doi_matches": 8,
     "tse_known_set_candidates": 26,
     "tse_known_set_exact_doi_matches": 26,
-    "publisher_native_status": "ACM manual, IEEE activation pending, Scopus credentials pending",
-    "interpretation": "The DOI checks measure identity overlap in known candidate sets. They do not estimate search recall or replace the preserved ACM, IEEE, and Scopus plans."
+    "dblp_title_census_query_cells": 64,
+    "dblp_title_census_unique_publications": 55,
+    "dblp_title_census_new_to_prior_sets": 50,
+    "dblp_exact_doi_enriched": 50,
+    "dblp_candidates_with_abstract": 47,
+    "dblp_model_recommended_for_full_text": 34,
+    "dblp_author_packet_candidates": 34,
+    "dblp_open_full_text_sources_verified": 18,
+    "dblp_supplemental_full_text_sources_verified": 13,
+    "dblp_full_text_access_exceptions": 3,
+    "dblp_closed_or_no_open_location": 16,
+    "dblp_author_decisions_completed": 0,
+    "publisher_native_status": "ACM manual pending; IEEE key rotation and activation pending; Scopus unavailable; DBLP title-only replacement executed",
+    "interpretation": "The DOI checks measure identity overlap in known candidate sets. The DBLP replacement broadens named-venue title coverage but is not a recall estimate, publisher-native search, or Scopus equivalent."
   },
   "provenance_boundary": "Retrieval systems ordered candidates. The author made final inclusion, evidence-group, practice, chapter, and prose decisions."
 }

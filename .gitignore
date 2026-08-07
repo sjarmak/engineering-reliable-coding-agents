@@ -1,4 +1,5 @@
 dist/
+graphify-out/
 manuscript/main.aux
 manuscript/main.log
 manuscript/main.out
