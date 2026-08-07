@@ -35,6 +35,21 @@ test("publisher coverage status matches the checked-in plans and pending lane ev
   assert.equal(status.lanes.dblp.new_to_prior_sets, dblp.results.new_to_both_prior_sets);
   assert.equal(status.lanes.dblp.publisher_native, false);
   assert.equal(status.lanes.dblp.scopus_equivalent, false);
+  const workbook = await readFile(new URL(status.web_surrogate.workbook, new URL(".", import.meta.url)));
+  assert.equal(
+    createHash("sha256").update(workbook).digest("hex"),
+    status.web_surrogate.workbook_sha256,
+  );
+  assert.deepEqual(
+    {
+      candidates: status.web_surrogate.candidate_records,
+      withDoi: status.web_surrogate.records_with_doi,
+      withoutDoi: status.web_surrogate.records_without_doi,
+      providerNative: status.web_surrogate.provider_native,
+      closedCells: status.web_surrogate.closes_planned_cells,
+    },
+    { candidates: 19, withDoi: 12, withoutDoi: 7, providerNative: false, closedCells: 0 },
+  );
   assert.deepEqual(
     [status.claims.acm_searched, status.claims.ieee_searched, status.claims.scopus_searched],
     [false, false, false],

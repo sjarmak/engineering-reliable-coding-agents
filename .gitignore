@@ -1,5 +1,6 @@
 dist/
 graphify-out/
+.DS_Store
 manuscript/main.aux
 manuscript/main.log
 manuscript/main.out

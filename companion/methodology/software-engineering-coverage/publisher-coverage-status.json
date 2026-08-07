@@ -35,6 +35,16 @@
       "scopus_equivalent": false
     }
   },
+  "web_surrogate": {
+    "status": "candidate-discovery-only",
+    "workbook": "erca_publisher_coverage_with_web_surrogate_2026-08.xlsx",
+    "workbook_sha256": "5d04442bac5ca4c61450e5e7a12035e58a095dceac739fd2c68e3fb88362920b",
+    "candidate_records": 19,
+    "records_with_doi": 12,
+    "records_without_doi": 7,
+    "provider_native": false,
+    "closes_planned_cells": 0
+  },
   "claims": {
     "acm_searched": false,
     "ieee_searched": false,
@@ -42,5 +52,5 @@
     "scopus_equivalence_claimed": false,
     "complete_with_documented_exclusions": false
   },
-  "interpretation_boundary": "Prepared plans and replacement evidence do not establish completed publisher- and index-native coverage. Stable v1 requires completed ACM and IEEE execution plus either completed Scopus execution or an accepted, explicitly non-equivalent Scopus exclusion after DBLP author screening."
+  "interpretation_boundary": "Prepared plans, web-surrogate candidate discovery, and replacement evidence do not establish completed publisher- and index-native coverage. Stable v1 requires completed ACM and IEEE execution plus either completed Scopus execution or an accepted, explicitly non-equivalent Scopus exclusion after DBLP author screening."
 }

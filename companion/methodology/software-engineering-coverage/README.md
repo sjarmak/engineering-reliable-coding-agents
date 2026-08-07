@@ -29,6 +29,13 @@ This directory separates three activities that answer different questions:
   Scopus, and DBLP lanes. A prepared plan never counts as an executed search.
 - `chatgpt-search-handoff.md`: copy-ready provider prompts, exact topic and
   venue matrices, required evidence fields, and the ACM manual-only boundary.
+- `erca_publisher_coverage_with_web_surrogate_2026-08.xlsx`: returned ChatGPT
+  workbook containing the unexecuted 48-cell ACM worksheet, incomplete web
+  surrogate logs, and a 19-record candidate queue. It is discovery evidence,
+  not an ACM, IEEE, or Scopus execution report.
+- `chatgpt-web-surrogate-audit-2026-08.md`: structural, identifier, and local
+  overlap audit of that workbook, including the unresolved bibliographic and
+  screening work.
 - `dblp-title-census-2026-08.json`: exact 64-cell DBLP query, returned SPARQL
   bindings and their hash, upstream comparison hashes, and all zero-result cells.
 - `dblp-screening-enrichment-2026-08.json`: exact-DOI OpenAlex enrichment

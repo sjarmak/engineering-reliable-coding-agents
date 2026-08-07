@@ -364,8 +364,12 @@ export function expectedArxivFiles(root) {
   );
 }
 
-function expectedCompanionFiles(root) {
-  return regularFiles(path.join(root, "companion"), () => true);
+function isReleaseArtifact(relative) {
+  return path.basename(relative) !== ".DS_Store";
+}
+
+export function expectedCompanionFiles(root) {
+  return regularFiles(path.join(root, "companion"), isReleaseArtifact);
 }
 
 function command(commandName, args, options = {}) {
@@ -543,7 +547,10 @@ export async function verifyChecksums(root) {
     match ? [] : [`companion/SHA256SUMS: malformed line ${index + 1}`],
   );
   const listed = parsedLines.flatMap((match) => (match ? [match[1]] : [])).sort();
-  const actual = await regularFiles(companionRoot, (relative) => relative !== "SHA256SUMS");
+  const actual = await regularFiles(
+    companionRoot,
+    (relative) => relative !== "SHA256SUMS" && isReleaseArtifact(relative),
+  );
   const unlisted = actual.filter((relative) => !listed.includes(relative));
   const stale = listed.filter((relative) => !actual.includes(relative));
   const coverageErrors = [
