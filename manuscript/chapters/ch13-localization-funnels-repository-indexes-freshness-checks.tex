@@ -210,7 +210,7 @@ The maintenance cost is justified only while a named owner can show which reposi
 \hypertarget{admit-only-evidence-tied-to-the-current-state}{%
 \section{Admit only evidence tied to the current state}\label{admit-only-evidence-tied-to-the-current-state}}
 
-Freshness is one instance of the state-consistency problem Chapter 7 states for the whole factory. A derived index, cache, or repository map describes a particular version of the world, and invariant I7 makes retrieved evidence valid only for the state it observed. Before that evidence may influence a mutation against another version, the consumer must know which version it describes. The retrieval system is therefore not a special case with its own freshness rules. It is one more producer of versioned records inside a system whose other components, workers, verifiers, and schedulers, already carry the same obligation.
+Freshness is one instance of the state-consistency problem Chapter 7 states for the whole factory. A derived index, cache, or repository map describes a particular version of the world, and contract I7 makes retrieved evidence valid only for the state it observed. Before that evidence may influence a mutation against another version, the consumer must know which version it describes. The retrieval system is therefore not a special case with its own freshness rules. It is one more producer of versioned records inside a system whose other components, workers, verifiers, and schedulers, already carry the same obligation.
 
 That framing also sharpens the observability question. What code exists is only part of it; the operable question is which state the agent, the scheduler, the verifier, and the publisher each observed when they acted. The mechanisms in this section, identity checks at the retrieval boundary, atomic generation publication, and periodic reconciliation, exist to make that question answerable for the retrieval component.
 
@@ -218,7 +218,7 @@ Weng et al.~(\href{https://arxiv.org/abs/2605.14478}{2026}) changed Python helpe
 
 Under stale-only retrieval, Qwen2.5-Coder-7B-Instruct produced 15 outputs incompatible with the current helper signature, and gpt-4.1-mini produced 13. Both models received the same 17 examples. Under current-only retrieval, neither produced an incompatible output.
 
-These paired results support a narrow architectural rule: retrieved code should enter model context only when the system can tie it to the repository state the worker is allowed to modify. Rejecting evidence whose state identity does not match is invariant I7 enforced at admission, and it follows invariant I6's discipline: a record that contradicts the current state triggers reconciliation, not a guess about which version is right.
+These paired results support a narrow architectural rule: retrieved code should enter model context only when the system can tie it to the repository state the worker is allowed to modify. Rejecting evidence whose state identity does not match is contract I7 enforced at admission, and it follows contract I6's discipline: a record that contradicts the current state triggers reconciliation, not a guess about which version is right.
 
 A stale result is an active hazard rather than an ordinary retrieval miss. It offers a concrete and plausible description of an API that no longer exists. High rank cannot compensate for evidence drawn from the wrong state.
 
@@ -246,11 +246,11 @@ A freshness gate needs two identities:
   the repository state the worker is allowed to edit.
 \end{itemize}
 
-A commit identity can represent a clean tree. When relevant files contain uncommitted changes, the commit alone is insufficient because it describes a state different from the worker's current view. The gate then needs content identities for the affected files or another representation of the working state. The commit-plus-working-tree pair also names where authority actually lives. The mutable target invariant I2 protects is the working tree the worker can change, not the commit behind it, so the identity the gate compares against must describe that target, not an ancestor of it.
+A commit identity can represent a clean tree. When relevant files contain uncommitted changes, the commit alone is insufficient because it describes a state different from the worker's current view. The gate then needs content identities for the affected files or another representation of the working state. The commit-plus-working-tree pair also names where authority actually lives. The mutable target contract I2 protects is the working tree the worker can change, not the commit behind it, so the identity the gate compares against must describe that target, not an ancestor of it.
 
 Every retrieval response should carry its indexed state identity so the caller can compare it with the working state before exposing any snippet to the model.
 
-The comparison belongs at the retrieval boundary. Checking only when indexing begins leaves a race in which files change during construction or after a long-running query starts. A safe builder reads from a fixed snapshot, constructs the new index privately, and atomically publishes the completed generation together with its state identity. Queries then observe one complete generation rather than a mixture of old and new records. Atomic publication with a state identity in every response is invariant I7 in mechanism form: each answer names the version it is bound to, and no reader can observe a version that never coherently existed.
+The comparison belongs at the retrieval boundary. Checking only when indexing begins leaves a race in which files change during construction or after a long-running query starts. A safe builder reads from a fixed snapshot, constructs the new index privately, and atomically publishes the completed generation together with its state identity. Queries then observe one complete generation rather than a mixture of old and new records. Atomic publication with a state identity in every response is contract I7 in mechanism form: each answer names the version it is bound to, and no reader can observe a version that never coherently existed.
 
 Suppose an index was built from a clean commit and a worker later edits a helper without committing it. A query returns the old signature together with the index commit. The gate checks the in-scope working file, detects that its content no longer matches the indexed state, and withholds the snippet before generation begins.
 
@@ -288,7 +288,7 @@ The literature reviewed for this chapter supplies no universal refresh cadence. 
 
 \Needspace{5\baselineskip}
 
-Event-driven refresh can shorten the stale window after ordinary edits, although missed events and parser failures still require reconciliation. Scheduled rebuilding can provide that reconciliation, but its period should follow measured drift and recovery cost. Periodic reconciliation after missed events is invariant I6 applied to the index's own records, and invariant I10 governs the reconciler itself: it runs with authority over the index and is production code, tested under the same invariants as the normal ingestion path. Useful retrieval metrics include:
+Event-driven refresh can shorten the stale window after ordinary edits, although missed events and parser failures still require reconciliation. Scheduled rebuilding can provide that reconciliation, but its period should follow measured drift and recovery cost. Periodic reconciliation after missed events is contract I6 applied to the index's own records, and contract I10 governs the reconciler itself: it runs with authority over the index and is production code, tested under the same invariants as the normal ingestion path. Useful retrieval metrics include:
 
 \begin{itemize}
 \tightlist

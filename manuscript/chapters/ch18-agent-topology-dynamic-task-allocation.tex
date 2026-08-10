@@ -1,7 +1,7 @@
 \chapter{Agent topology selection and dynamic task allocation}
 \label{ch18-agent-topology-dynamic-task-allocation}
 \begin{quote}
-\textbf{Evidence profile.} 6 strong \(\cdot\) 16 directional \(\cdot\) 1 corroborating \(\cdot\) 1 historical evidence items across 4 developed practices (ERCA-044, ERCA-093, ERCA-101, ERCA-107).
+\textbf{Evidence profile.} 6 strong \(\cdot\) 16 directional \(\cdot\) 1 corroborating \(\cdot\) 0 null or conflicting evidence items across 4 developed practices (ERCA-044, ERCA-093, ERCA-101, ERCA-107). One additional source establishes historical lineage.
 
 \textbf{Chapter claim.} Coordination must earn its cost against a live single-agent baseline.
 \end{quote}
@@ -548,15 +548,22 @@ File overlap is only one conflict signal. Work may also conflict through:
   logical invariants spanning disjoint files.
 \end{itemize}
 
+A task graph is not enough for repository work. Its edges record which work items the planner believes depend on one another. Dispatch also needs a versioned view of the code those items may affect. Each dependency or conflict claim should identify the repository, branch, source revision, index version, and affected entity. Each running attempt should publish the same information for its in-flight artifact. Otherwise two tasks can appear independent in the work ledger while changing disjoint files that implement the same interface, or while an unmerged change on another host has already invalidated one worker's base. Code understanding is an observability input for the factory control plane, not only context supplied to the coding agent. This is a proposed control-plane requirement rather than a measured performance result. Test it by retaining predicted conflict edges and comparing them with observed rebase failures, overlapping verification failures, stale-base rejections, and missed migration targets.
+
 Each node therefore needs enough state to support both scheduling and recovery:
 
 \begin{verbatim}
 node_id: stable logical identity
 inputs: immutable artifact versions
+repositories: the repositories the node may affect
+input_revisions: branch and revision per repository
+code_index_version: the index generation conflict claims were computed from
+affected_entities: files, symbols, or interfaces the node claims to touch
 depends_on: prerequisite nodes that must succeed
 conflicts_with: resources or nodes that cannot overlap
 owner: currently assigned worker
 attempt: retry identity
+in_flight_artifacts: published state of the running attempt's artifact
 status: blocked | ready | running | succeeded | failed
 outputs: versioned artifacts and supporting evidence
 \end{verbatim}
@@ -589,9 +596,9 @@ Retries require the same discipline. A retry creates a new attempt for the same 
 
 The owner field in the node record is commonly implemented with a lease: a worker holds a time-bounded claim on the work and renews it while making progress, and when renewals stop, the control plane may reassign. That reading is correct, and it is the only question a lease answers. A lease resolves a liveness and allocation question: after the timeout, the control plane is permitted to give the work to someone else. It does not establish that the previous worker is dead. A process paused under memory pressure resumes after its lease has expired. A network partition heals after reassignment has already happened. A mutation issued before expiry arrives at its target after it.
 
-I therefore never write that a lease guarantees a single writer. Safety comes from a separate mechanism at the boundary being protected, and describing that mechanism requires three identities from Chapter 7. The \texttt{work\_id} names the stable logical work, the intent that should happen once logically. The \texttt{ownership\_epoch} is a monotonic generation of write authority, incremented each time the control plane reassigns the work. The \texttt{attempt\_id} names one execution attempt under that work and epoch. The attempt field in the node record above is this third identity; the epoch completes the picture the earlier paragraph on late responses began. Preventing an expired worker's late response from overwriting a successful retry is exactly the fencing problem, stated at the scheduler. The general form states it at every protected boundary.
+A lease does not guarantee a single writer. Safety comes from a separate mechanism at the boundary being protected, described with the \texttt{work\_id}, \texttt{ownership\_epoch}, and \texttt{attempt\_id} identities from Chapter 7. This is the mechanism for which the ownership epoch exists: a monotonic generation of write authority, incremented each time the control plane reassigns the work. The attempt field in the node record above is the attempt identity; the epoch completes the picture the earlier paragraph on late responses began. Preventing an expired worker's late response from overwriting a successful retry is exactly the fencing problem, stated at the scheduler. The general form states it at every protected boundary.
 
-The rule is invariant I2 from Chapter 7: only the current ownership generation may commit a mutation at a protected boundary, and a superseded worker must be rejected even if it is still running. Every mutation to a protected shared target carries the current \texttt{ownership\_epoch}, and the target itself, or an authoritative mutation gateway in front of it, rejects any older epoch. Invariant I3 follows at the ledger: a durable state transition validates generation and attempt identity rather than trusting the scheduler's belief about who is active.
+The rule is contract I2 from Chapter 7: only the current ownership generation may commit a mutation at a protected boundary, and a superseded worker must be rejected even if it is still running. Every mutation to a protected shared target carries the current \texttt{ownership\_epoch}, and the target itself, or an authoritative mutation gateway in front of it, rejects any older epoch. Contract I3 follows at the ledger: a durable state transition validates generation and attempt identity rather than trusting the scheduler's belief about who is active.
 
 The worked sequence in the figure below makes the mechanism concrete.
 

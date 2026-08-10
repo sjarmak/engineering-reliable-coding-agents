@@ -1,6 +1,6 @@
 # Engineering Reliable Coding Agents: companion research artifact
 
-Release candidate 1.0.0-rc.15, prepared August 9, 2026.
+Release candidate 1.0.0-rc.16, prepared August 9, 2026.
 
 This package accompanies *Engineering Reliable Coding Agents: Evaluation, Recovery, Context, and Control Beyond the Model*. It is designed to be archived as a separate, citable research artifact. The final archival release should receive its own DOI and should be cited alongside the manuscript.
 
@@ -13,7 +13,7 @@ Canonical repository: [https://github.com/sjarmak/engineering-reliable-coding-ag
 ## Contents
 
 - `LEARNINGS.md`: human-readable, chapter-organized presentation of the practice records in this edition, including stable IDs, actions, mechanisms, evidence, and boundaries.
-- `catalog.json`: the 205 bounded practice records in this edition in machine-readable form, including the bounded August 6 evidence additions and the distributed-systems catalog-level entries (ERCA-193 through ERCA-205). The count reflects this edition's granularity decisions; it is not an estimate of how many reliability practices exist.
+- `catalog.json`: the 206 bounded practice records in this edition in machine-readable form, including the bounded August 6 evidence additions and the distributed-systems catalog-level entries (ERCA-193 through ERCA-205). The count reflects this edition's granularity decisions; it is not an estimate of how many reliability practices exist.
 - `evidence-ledger.csv`: one row per evidence item or corroborating item.
 - `chapter-crosswalk.json`: the 55 practices developed in the manuscript and the 137 companion-only entries.
 - `benchmark-catalog.json`: 29 coding-agent benchmark records.

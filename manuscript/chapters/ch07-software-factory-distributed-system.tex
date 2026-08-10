@@ -1,33 +1,21 @@
 \chapter{The software factory as a distributed system}
 \label{ch07-software-factory-distributed-system}
 \begin{quote}
-\textbf{Evidence profile.} 0 strong \(\cdot\) 3 directional \(\cdot\) 1 preprint measurement \(\cdot\) 4 historical-lineage \(\cdot\) 2 practitioner items; no developed practices. This chapter supplies the system model that the practices in Chapters 8 through 19 attach to.
+\textbf{Evidence profile.} 0 strong \(\cdot\) 4 directional \(\cdot\) 2 corroborating \(\cdot\) 0 null or conflicting evidence items. Four additional sources establish historical lineage but do not provide evidence about agent-system outcomes. This chapter supplies the system model that the practices in Chapters 8 through 19 attach to; it develops no practice of its own.
 
 \textbf{Chapter claim.} The factory, not the worker, owns the reliability promise.
 \end{quote}
 
-A worker finished its task, opened the pull request, and died before its completion record reached durable storage. The scheduler saw an unfinished attempt and, correctly by its own lights, scheduled another. The second attempt produced a second branch and a second pull request for the same change. The operator's summary read ``the agent duplicated its work,'' and the retrospective spent an hour on prompt wording before anyone read the trace. The model had behaved well twice. The failure lived in the interval between an external effect and the internal record of it, an interval no model improvement can close.
+In one local fault demonstration, described with its limitations in Chapter 9, the worker was killed after an external mutation had been requested and before completion became durable. The naive recovery path sent the request again and reported success. The guarded path issued one request, retained the unresolved state, and stopped for reconciliation. That trial does not estimate a general failure rate. It identifies the boundary this chapter develops: the factory must preserve logical work and effect identity across the failure of the process executing them.
 
-I have traced many incidents with that shape, and the reported cause is usually ``the agent failed'' while the trace shows something else. The model produced a plausible patch; the process hosting it was evicted before recording completion. The model finished; a second worker on the same task had already pushed a conflicting branch. The tests passed; they passed against a repository revision three merges old. These are failures of coordination, durability, versioning, and effect management, and they belong to the machinery around the trajectory, not to the trajectory itself.
+Now consider the same fault without the guard, as a constructed sequence. A worker finishes its task, opens the pull request, and dies before its completion record reaches durable storage. The scheduler sees an unfinished attempt and, correctly by its own lights, schedules another. The second attempt produces a second branch and a second pull request for the same change. The operator's summary reads ``the agent duplicated its work.'' Both attempts may have produced valid work; the duplicate effect arose at the coordination boundary, in the interval between an external effect and the internal record of it, an interval no model improvement can close. The same shape recurs with different surface reports: the model produced a plausible patch, but the process hosting it was evicted before recording completion; the model finished, but a second worker on the same task had already pushed a conflicting branch; the tests passed, but against a repository revision three merges old. These are failures of coordination, durability, versioning, and effect management, and they belong to the machinery around the trajectory, not to the trajectory itself.
 
-\hypertarget{the-model-is-not-the-system}{%
-\section{The model is not the system}\label{the-model-is-not-the-system}}
+\hypertarget{when-this-framing-becomes-necessary}{%
+\section{When this framing becomes necessary}\label{when-this-framing-becomes-necessary}}
 
-A single agent trajectory is one execution component. It starts, reads state, produces an artifact, and stops. Everything that makes that trajectory count as work belongs to machinery the trajectory does not contain: the scheduler that assigned it, the store that remembers what it was asked to do, the repository state it read and will write, the verifier that decides whether its output is acceptable, the publisher that turns an accepted artifact into an external effect, the external services that accept or reject that effect, and the resource policy that decided this work deserved compute at all.
+A single agent trajectory is one execution component. It starts, reads state, produces an artifact, and stops. Everything that makes that trajectory count as work belongs to machinery the trajectory does not contain: the scheduler that assigned it, the store that remembers what it was asked to do, the repository state it read and will write, the verifier that decides whether its output is acceptable, the publisher that turns an accepted artifact into an external effect, the external services that accept or reject that effect, and the resource policy that decided this work deserved compute at all. I call the whole arrangement a \textbf{software factory}: the durable system that accepts logical work, schedules attempts, runs workers, verifies artifacts, publishes effects, and reconciles disagreement between its records and the world. The agent is one worker inside it.
 
-Part II ended with grading: how an observation becomes an acceptance decision. Part III and the parts after it operate inside a larger frame, and this chapter states that frame once so the later chapters can use it. I call the whole arrangement a \textbf{software factory}: the durable system that accepts logical work, schedules attempts, runs workers, verifies artifacts, publishes effects, and reconciles disagreement between its records and the world. The agent is one worker inside it.
-
-\hypertarget{this-framing-has-a-history}{%
-\section{This framing has a history}\label{this-framing-has-a-history}}
-
-Treating the machinery around software production as an engineered system is not a new idea, and I do not claim it as one. Osterweil (\href{https://dl.acm.org/doi/10.5555/41765.41766}{1987}) argued that software processes are software too: a development process is a program with control flow, state, and defects, and it deserves the same engineering scrutiny as the product it produces. His retrospective (\href{https://dl.acm.org/doi/10.1145/253228.253440}{1997}) reviewed a decade of process-programming work and defended the position against the objection that human-centered processes resist formalization. Choi and Scacchi (\href{https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf}{1991}) went further and described the software factory itself as distributed infrastructure: heterogeneous tools, repositories, and people coordinating through shared state across a network, with the coordination substrate treated as a first-class engineering object. The CNCF's Secure Software Factory reference architecture (\href{https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/}{CNCF TAG Security}) supplies the contemporary vocabulary: pipelines, attestations, and policy enforcement points arranged as a factory. Its scope is supply-chain security rather than fault tolerance, so I borrow its vocabulary and not its guarantees. I classify all four as historical or conceptual lineage rather than evidence about agent systems.
-
-What is different now is the worker. The processes Osterweil programmed and the infrastructure Choi and Scacchi described coordinated deterministic tools and human developers who could be asked what they meant. The modern factory schedules autonomous, nondeterministic workers that edit persistent code, call external APIs, run concurrently with one another, and can claim completion incorrectly. A compiler does not assert that it succeeded when it failed. An agent can, fluently and in detail. That combination of direct effect authority with unreliable self-report is the modern synthesis this book addresses; the distributed-infrastructure framing itself predates it by more than three decades.
-
-Practitioner systems have converged on the same shape. OpenAI's Symphony orchestration (\href{https://openai.com/index/open-source-codex-orchestration-symphony/}{OpenAI 2026}) and Cloudflare's issue-triage factory (\href{https://blog.cloudflare.com/astro-issue-triage/}{Cloudflare 2026}) both separate a durable work ledger, a scheduler, disposable workers, and gated publication. These are practitioner cases from the operating teams, useful as corroborating convergence on the decomposition, not as controlled evidence that the decomposition improves any measured outcome.
-
-\hypertarget{when-an-agent-system-becomes-a-distributed-systems-problem}{%
-\section{When an agent system becomes a distributed-systems problem}\label{when-an-agent-system-becomes-a-distributed-systems-problem}}
+Treating that machinery as an engineered system is not a new idea, and I do not claim it as one. Osterweil (\href{https://dl.acm.org/doi/10.5555/41765.41766}{1987}, \href{https://dl.acm.org/doi/10.1145/253228.253440}{1997}) argued that software processes are software too, and Choi and Scacchi (\href{https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf}{1991}) described the software factory itself as distributed infrastructure, with the coordination substrate treated as a first-class engineering object; the CNCF's Secure Software Factory reference architecture (\href{https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/}{CNCF TAG Security}) supplies the contemporary vocabulary, scoped to supply-chain security rather than fault tolerance. The Sources and evidence section places each of these. Autonomous workers change the failure model. The processes Osterweil programmed and the infrastructure Choi and Scacchi described coordinated deterministic tools and human developers who could be asked what they meant. The modern factory schedules autonomous, nondeterministic workers that edit persistent code, call external APIs, run concurrently with one another, and can claim completion incorrectly. A compiler does not assert that it succeeded when it failed. An agent can, fluently and in detail. Practitioner systems have converged on the same decomposition: OpenAI's Symphony orchestration (\href{https://openai.com/index/open-source-codex-orchestration-symphony/}{OpenAI 2026}) and Cloudflare's issue-triage factory (\href{https://blog.cloudflare.com/astro-issue-triage/}{Cloudflare 2026}) both separate a durable work ledger, a scheduler, disposable workers, and gated publication. These are practitioner cases from the operating teams, corroborating convergence on the decomposition, not controlled evidence that the decomposition improves any measured outcome.
 
 Not every agent deployment needs this frame. A local assistant that reads a repository, proposes a patch in an interactive session, and exits has one process, one human, and no durable coordination state. If the process dies, the human restarts it and loses only convenience. Modeling that as a distributed system adds vocabulary without adding safety.
 
@@ -49,10 +37,10 @@ The frame becomes load-bearing when any of the following hold:
 
 Once any of these conditions holds, I do not claim the factory \emph{is} a distributed system in some essential sense. I claim it exhibits distributed-systems failure modes: lost updates, stale authority, duplicate effects, split-brain records, partial failure. Those failure modes have known engineering treatments, and model capability is then only one contributor to reliability among several.
 
-\hypertarget{five-things-the-factory-must-not-confuse}{%
-\section{Five things the factory must not confuse}\label{five-things-the-factory-must-not-confuse}}
+\hypertarget{the-distinctions-recovery-depends-on}{%
+\section{The distinctions recovery depends on}\label{the-distinctions-recovery-depends-on}}
 
-Most factory failures I have traced reduce to a conflation of two things the system treated as one. Five distinctions carry most of the weight.
+Most factory failures reduce to a conflation of two things the system treated as one. Five distinctions carry most of the weight.
 
 \textbf{Logical work versus execution attempt.} The user's intent, fix this bug once, is logical work. A worker process trying to satisfy it is an attempt. One work item may consume many attempts; a retry is a new attempt at the same logical work, not new work. A system that identifies work with its current attempt loses the work when the attempt dies.
 
@@ -60,39 +48,14 @@ Most factory failures I have traced reduce to a conflation of two things the sys
 
 \textbf{Candidate artifact versus accepted completion.} A worker producing a branch, a diff, or a message saying the task is done has produced a candidate. Acceptance is a separate event that only independent evidence should trigger. An agent's completion claim is input to verification, never a substitute for it.
 
-\textbf{Local completion record versus external commitment.} The factory recording ``pull request opened'' and the code host having opened the pull request are two facts in two failure domains. Either can exist without the other, as the duplicate pull request that opened this chapter shows. A crash between the external effect and the internal record leaves the effect real and the record absent; a crash in the other order leaves the record present and the effect absent. Both cases are normal, and recovery must handle both.
+\textbf{Local completion record versus external commitment.} The factory recording ``pull request opened'' and the code host having opened the pull request are two facts in two failure domains. Either can exist without the other, as the constructed duplicate-pull-request sequence in the opening shows. A crash between the external effect and the internal record leaves the effect real and the record absent; a crash in the other order leaves the record present and the effect absent. Both cases are normal, and recovery must handle both.
 
-\textbf{Verifier output versus semantic truth.} A green verifier establishes that a specific check, in a specific configuration, against a specific artifact version, did not fail. It does not establish that the change is correct, and a red verifier does not establish that the change is wrong; the verifier itself can time out, flake, or test the wrong revision. Ge and Zhang (\href{https://arxiv.org/abs/2602.02307}{2026}) measured this directly in 1,960 open-source Java projects: 3.2 percent of GitHub Actions builds were rerun, and 67.73 percent of those rerun builds were flaky, affecting 1,055 projects. I read that as a preprint measurement of rerun builds specifically, not a claim that two-thirds of all builds are flaky, but it is enough to establish that verifier output and software state are distinct signals.
+\textbf{Verifier output versus semantic truth.} A green verifier establishes that a specific check, in a specific configuration, against a specific artifact version, did not fail. It does not establish that the change is correct, and a red verifier does not establish that the change is wrong; the verifier itself can time out, flake, or test the wrong revision. Ge and Zhang (\href{https://arxiv.org/abs/2602.02307}{2026}) measured this directly in 1,960 open-source Java projects: 3.2 percent of GitHub Actions builds were rerun, and 67.73 percent of those rerun builds were flaky, affecting 1,055 projects. I read that as a measurement of rerun builds specifically, not a claim that two-thirds of all builds are flaky, but it is enough to establish that verifier output and software state are distinct signals.
 
-\hypertarget{the-logical-factory-decomposition}{%
-\section{The logical factory decomposition}\label{the-logical-factory-decomposition}}
+\hypertarget{a-reference-lifecycle-for-logical-work}{%
+\section{A reference lifecycle for logical work}\label{a-reference-lifecycle-for-logical-work}}
 
-The responsibilities in Figure \ref{fig:ch07-decomposition} are logical, not physical. A small deployment can host all of them in one process and one database; a large one can distribute them across services. What matters is that each responsibility exists, has an owner, and is not silently fused with its neighbors. This is not a microservice count.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{figures/ch07-factory-decomposition.pdf}
-\caption{The eight logical responsibilities of a software factory: admission policy decides what work is accepted at what priority and budget; the durable work ledger is the source of truth for logical work, states, epochs, and attempt history; the control plane assigns attempts, tracks liveness, and grants ownership epochs; disposable workers execute attempts with no authority of their own; versioned artifacts bind each branch, diff, or image to the attempt that produced it; independent verification binds evidence to the artifact version it observed; the publication boundary is the only fenced, idempotent path to external commitment; and reconciliation reads actual external state and resolves record-world conflict as a standing loop, not an incident procedure.}
-\label{fig:ch07-decomposition}
-\end{figure}
-
-Two structural points. First, workers sit in the middle of the decomposition and own nothing durable. They read from the ledger, write candidate artifacts, and report. Every consequential transition happens above or below them, in components designed to survive their death. Second, reconciliation is a standing component, not an incident procedure. Any factory whose publication boundary can crash mid-effect will accumulate record-world disagreements at some background rate, and something must own resolving them.
-
-\hypertarget{the-factory-state-machine}{%
-\section{The factory state machine}\label{the-factory-state-machine}}
-
-Logical work moves through a state machine that the ledger owns, shown in Figure \ref{fig:ch07-state-machine}.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{figures/ch07-factory-state-machine.pdf}
-\caption{The ledger-owned state machine for logical work. The main path runs accepted, eligible, claimed under an ownership epoch, executing under an attempt, outcome\_ready, verifying, publishing, complete. A worker's self-report can move an attempt only to outcome\_ready; only independently observed evidence moves work through verifying and publishing to complete. Side states absorb reality: blocked for unmet dependencies, failed and cancelled as terminal outcomes, superseded for work overtaken by newer intent, unknown\_external\_state for effects whose success cannot be established safely, and reconcile\_required for contradictory durable records.}
-\label{fig:ch07-state-machine}
-\end{figure}
-
-\texttt{accepted} means admission recorded the work durably. \texttt{eligible} means its dependencies and budget allow scheduling. \texttt{claimed} binds the work to an ownership epoch; \texttt{executing} binds it further to a specific attempt. \texttt{outcome\_ready} means an attempt has produced a candidate artifact. \texttt{verifying} and \texttt{publishing} are separate states because they are separate failure domains.
-
-The transitions are keyed to a small identity vocabulary, used consistently through the rest of the book:
+The distinctions become operational as identities. Each names one fact the factory must be able to recover without asking the failed worker:
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3000}}
@@ -117,63 +80,83 @@ Names
 \bottomrule\noalign{}
 \endlastfoot
 \texttt{work\_id} & stable logical work; the intent that should happen once logically \\
+\texttt{input\_state\_id} & the repository or repositories, branches, and revisions against which the attempt was planned and executed \\
 \texttt{ownership\_epoch} & monotonic generation of write authority over that work \\
 \texttt{attempt\_id} & one execution attempt under a given work and epoch \\
 \texttt{artifact\_version} & concrete code or state produced by an attempt \\
-\texttt{verification\_id} & verifier configuration and inputs used to accept or reject an artifact version \\
-\texttt{effect\_id} & one logical externally visible effect; the idempotency key at the boundary \\
+\texttt{verification\_id} & one verification execution, including the artifact, verifier version, environment, and inputs it observed \\
+\texttt{effect\_id} & one logical externally visible mutation; an idempotency key may represent this identity at a boundary \\
 \end{longtable}
 
-The line that matters most: a model saying ``done'' can move an attempt to \texttt{outcome\_ready}. Only independently observed evidence should move logical work through \texttt{verifying} and \texttt{publishing} to \texttt{complete}. The agent's self-report is a scheduling signal, telling the factory an artifact exists and is worth verifying. It is never an acceptance signal.
+\texttt{input\_state\_id} is the identity most specific to code work. Without it, the failure ``tests passed against a repository revision three merges old'' can be described but not expressed: nothing in the record says which state the attempt actually observed. For cross-repository work it can point to a manifest of several repository-and-revision pairs. An \texttt{effect\_id} is not itself the destination's idempotency key; the key is one implementation of the identity contract at a boundary that supports it.
 
-\hypertarget{factory-invariants}{%
-\section{Factory invariants}\label{factory-invariants}}
+Figure \ref{fig:ch07-decomposition} shows how the identities relate. It is a model of identities and boundaries, not a required service architecture. Three obligations follow from it, stated here in their architecture-neutral form. First, no authoritative fact required for recovery or publication should exist only in a worker. A worker may create durable checkpoints, commits, logs, or private attempt references; it cannot unilaterally make them authoritative, and recovery must not depend on the failed worker's private memory. Second, every externally visible effect crosses a named, protected boundary. Third, whenever local and external state can diverge, an owned reconciliation path must exist, because any factory whose publication boundary can crash mid-effect will accumulate record-world disagreements at some background rate.
 
-Later chapters reference these by identifier, so I state them compactly here.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{figures/ch07-factory-decomposition.pdf}
+\caption{The identity and boundary model. Logical work carries an ownership epoch granting authority to an attempt, an input state the attempt observes, and an effect identity for each external commitment. The attempt produces a candidate artifact bound to a verification record; the external commitment is paired with an owned reconciliation path. Authoritative facts live on the work side of each boundary, never only in the worker.}
+\label{fig:ch07-decomposition}
+\end{figure}
 
-\begin{itemize}
+Logical work and attempts move through separate lifecycles, shown in Figure \ref{fig:ch07-state-machine}. The distinction the figure enforces is the one the opening case turned on: the death of an attempt is an event in the attempt lifecycle, and by itself it moves logical work nowhere. Work under an ownership epoch stays owned across a retryable attempt failure; an ordinary retry creates a new \texttt{attempt\_id} under the same epoch, while reassignment to a different executor creates a new epoch. A terminal attempt failure does not terminate the work either; work policy decides whether the work re-enters eligibility, blocks, or fails. Read-only work whose accepted outcome requires no external effect can complete without publication; work whose outcome requires one passes through the effect boundary, and an unresolvable outcome parks the work in \texttt{unknown\_external\_state} or \texttt{reconcile\_required} rather than guessing.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{figures/ch07-factory-state-machine.pdf}
+\caption{Separate lifecycles for logical work and for attempts. Logical work runs accepted, eligible, owned under an epoch, complete, with side states for blocked, unknown external state, and reconciliation. Attempts run created, executing, outcome ready, verification under the current epoch; a retryable failure produces a new attempt under the same work, a terminal failure defers to work policy, and reassignment opens a new epoch. A worker's self-report can move an attempt only to outcome ready; only independently observed evidence completes logical work.}
+\label{fig:ch07-state-machine}
+\end{figure}
+
+A model saying ``done'' can move an attempt to outcome ready. Only independently observed evidence should complete logical work. The agent's self-report is a scheduling signal, telling the factory an artifact exists and is worth verifying. It is never an acceptance signal.
+
+\hypertarget{six-factory-contracts}{%
+\section{Six factory contracts}\label{six-factory-contracts}}
+
+The lifecycle holds only if the factory enforces a set of obligations. Later chapters cite them by identifier (I1 through I11), so the identifiers are stated here; the full normative statements, in machine-testable form, live in the repository artifact \href{https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/factory-contracts.yaml}{\texttt{protocols/factory-contracts.yaml}}. They are not all properties of the same kind: some are safety properties, some are liveness or visibility obligations, and some are design rules about recovery code and evidence, so I group them as six contract families rather than presenting them as a uniform formal list.
+
+\textbf{Work continuity and retry identity (I1, I4).} Accepted work cannot silently disappear: every accepted \texttt{work\_id} reaches a terminal state or remains visibly pending. A retry is a new \texttt{attempt\_id} under the same \texttt{work\_id}, never a duplicate work item.
+
+\textbf{Generation-scoped authority (I2, I3).} Only the current \texttt{ownership\_epoch} may commit a mutation at a protected boundary, and a superseded worker must be rejected even if it is still running; this is fencing, enforced at the boundary, not inferred from the lease (I2). A stale completion cannot advance logical state: a durable transition validates generation and attempt identity, not the scheduler's belief about who is running (I3).
+
+\textbf{External-effect safety (I5).} Externally visible effects are safe under redelivery or explicitly uncertain: an idempotency key, an atomic effect-plus-dedup record, natural convergence, adapter-owned reconciliation, or an explicit \texttt{unknown\_external\_state}. No generic exactly-once claim across a boundary that cannot provide it.
+
+\textbf{Record and evidence consistency (I6, I7, I8).} Contradictory durable records trigger reconciliation under declared authority precedence, not guesswork (I6). Evidence is version-bound: a verifier result or retrieved fact is valid only for the \texttt{artifact\_version} or input state it observed (I7). Verifier failure is distinct from software failure: an infrastructure timeout or flake is not a semantic defect, and a pass establishes only what that verifier can detect (I8).
+
+\textbf{Visible liveness and safe recovery (I9, I10).} Admissible work cannot starve invisibly (I9). Recovery preserves the same obligations as normal execution: recovery paths are production code with authority and must be tested as such (I10).
+
+\textbf{Causal attribution (I11).} Consequential transitions are causally attributable: work, attempt, actor, input state, authority generation, requested effect, observed response, and resulting durable state.
+
+None of these contracts mention model quality. A factory can hold all of them while running a mediocre model, and the result is a system that reliably produces mediocre candidates and accurately reports their status. A factory that violates them while running an excellent model produces excellent candidates it loses, duplicates, or misreports. Model capability does not discharge any of these obligations. A stronger model may change their load and the frequency with which they are exercised, but the factory still owns the controls, durable state, and evidence required to enforce them.
+
+The distributed-systems literature I draw on through Parts III to VI transfers directionally to agent factories unless a claim is restricted to the evaluated system. Chubby's lock generations (\href{https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems}{Burrows 2006}) supply the fencing mechanism behind I2, developed in Chapter 18; Borg and Omega (\href{https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/}{Verma et al. 2015}; \href{https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/}{Schwarzkopf et al. 2013}) supply admission and shared-state scheduling mechanisms behind I1 and I9, developed in Chapter 19. I transfer their mechanisms, not their constants, and none of this machinery addresses model nondeterminism: durability preserves which stochastic decision occurred, not its correctness.
+
+\hypertarget{audit-one-logical-work-item}{%
+\section{Audit one logical work item}\label{audit-one-logical-work-item}}
+
+The model earns its place only if it can be checked against a running system. The following procedure audits one work item and requires no new infrastructure, only the records the factory already keeps.
+
+\begin{enumerate}
 \tightlist
 \item
-  \textbf{I1} Accepted work cannot silently disappear. The ledger is durable and live: every accepted \texttt{work\_id} reaches a terminal state or remains visibly pending.
+  Select one recent work item that produced or attempted an external effect.
 \item
-  \textbf{I2} Authority is generation-scoped. Only the current \texttt{ownership\_epoch} may commit a mutation at a protected boundary, and a superseded worker must be rejected even if it is still running. This is fencing, and it is enforced at the boundary, not inferred from the lease.
+  Recover its \texttt{work\_id}, \texttt{input\_state\_id}, \texttt{ownership\_epoch}, \texttt{attempt\_id}, \texttt{artifact\_version}, \texttt{verification\_id}, and \texttt{effect\_id}.
 \item
-  \textbf{I3} Stale completions cannot advance logical state. A durable transition validates generation and attempt identity, not the scheduler's belief about who is running.
+  Name the authoritative owner of each fact and the boundary at which each consequential mutation is accepted.
 \item
-  \textbf{I4} Retries preserve logical identity. A retry is a new \texttt{attempt\_id} under the same \texttt{work\_id}, never a duplicate work item.
+  Determine whether a stale attempt can still mutate the ledger, branch, artifact pointer, or external system.
 \item
-  \textbf{I5} Externally visible effects are safe under redelivery or explicitly uncertain: an idempotency key, an atomic effect-plus-dedup record, natural convergence, adapter-owned reconciliation, or an explicit \texttt{unknown\_external\_state}. No generic exactly-once claim across a boundary that cannot provide it.
+  Determine what the factory records when the external effect may have committed but acknowledgement is absent.
 \item
-  \textbf{I6} Contradictory durable records trigger reconciliation, not guesswork. Precedence follows declared authority.
+  Verify that the accepted artifact and its verification record refer to the same immutable version.
 \item
-  \textbf{I7} Evidence is version-bound. A verifier result or retrieved fact is valid only for the \texttt{artifact\_version} or state it observed.
+  Inject either a late completion or a lost acknowledgement, using the fault harness from Chapter 10, and retain the resulting event record.
 \item
-  \textbf{I8} Verifier failure is distinct from software failure. An infrastructure timeout or flake is not a semantic defect, and a pass establishes only what that verifier can detect.
-\item
-  \textbf{I9} Admissible work cannot starve invisibly.
-\item
-  \textbf{I10} Recovery preserves the same invariants as normal execution. Recovery paths are production code with authority and must be tested as such.
-\item
-  \textbf{I11} Consequential transitions are causally attributable: work, attempt, actor, input state, authority generation, requested effect, observed response, and resulting durable state.
-\end{itemize}
+  Record every question the existing trace cannot answer.
+\end{enumerate}
 
-None of these invariants mention model quality. A factory can hold all eleven while running a mediocre model, and the result is a system that reliably produces mediocre candidates and accurately reports their status. A factory that violates them while running an excellent model produces excellent candidates it loses, duplicates, or misreports.
-
-\hypertarget{reliability-dimensions}{%
-\section{Reliability dimensions}\label{reliability-dimensions}}
-
-The invariants partition into dimensions an operator can assess separately: control-plane reliability (I1, I9), execution reliability (I4), authority and concurrency safety (I2, I3), external-effect reliability (I5), artifact and record consistency (I6, I7), verification reliability (I8), semantic correctness (the model's contribution, gated by verification and review), capacity and recovery (I9, I10), and auditability (I11). A deployment can be strong on one dimension and weak on another, and an aggregate success rate hides which.
-
-\begin{quote}
-\textbf{Agent reliability is not factory reliability.} Improving the model improves one dimension, semantic correctness of candidate artifacts. Every other dimension is determined by the surrounding system, and a defect in any of them can convert a correct candidate into a lost, duplicated, stale, or falsely reported result.
-\end{quote}
-
-The distributed-systems literature I draw on through Parts III to VI transfers directionally to agent factories unless a claim is restricted to the evaluated system. Chubby's lock generations (\href{https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems}{Burrows 2006}) supply the fencing mechanism behind I2; Borg and Omega (\href{https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/}{Verma et al. 2015}; \href{https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/}{Schwarzkopf et al. 2013}) supply admission and shared-state scheduling mechanisms behind I1 and I9. I transfer their mechanisms, not their constants, and none of this machinery addresses model nondeterminism: durability preserves which stochastic decision occurred, not its correctness.
-
-\hypertarget{where-the-rest-of-the-book-fits}{%
-\section{Where the rest of the book fits}\label{where-the-rest-of-the-book-fits}}
-
-The chapters that follow each own part of this frame. Chapter 8 engineers the containment and authority boundary around a worker: what an attempt can reach and what evidence acceptance requires. Chapter 9 engineers the ledger side: durable state, effect contracts, and idempotent retries (I1, I4, I5). Chapter 10 tests the claims through replay and fault injection, including the recovery paths that I10 promotes to production code. Chapter 11 builds the causal diagnosis that I11 makes possible. Chapter 13 applies version-bound evidence (I7) to repository retrieval and freshness. Chapters 16 and 17 place independent verification and human authority at the acceptance and publication boundaries. Chapter 18 addresses concurrency and task topology under I2 and I3, and Chapter 19 addresses capacity, admission, and scheduling under I1 and I9. Where a chapter tightens or restates an invariant, it cites the identifier given here rather than redefining it.
+Retain the output: an identity map, an authority map, an effect contract, one fault result, and the list of unobservable assumptions. The unanswerable questions in step 8 are the audit's most valuable product; each is a fact the factory would need during a real incident and does not record. Chapter 8 begins the engineering work, at the containment and authority boundary around a single worker, and the chapters after it develop the ledger, replay, diagnosis, verification, topology, and capacity machinery that these contracts require.
 
 \textbf{Portable claim.} The factory, not the worker, owns the reliability promise.
 
@@ -191,7 +174,7 @@ The chapters that follow each own part of this frame. Chapter 8 engineers the co
   CNCF TAG Security, \href{https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/}{Secure Software Factory reference architecture}. Contemporary factory vocabulary, scoped to supply-chain security rather than fault tolerance; I borrow the vocabulary, not the guarantees.
 \end{itemize}
 
-\textbf{Directional systems evidence}
+\textbf{Directional evidence}
 
 \begin{itemize}
 \tightlist
@@ -199,17 +182,11 @@ The chapters that follow each own part of this frame. Chapter 8 engineers the co
   Burrows (\href{https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems}{2006}), Chubby, OSDI. The lock-generation sequencer behind fencing (I2); a coordination-service mechanism, not agent evidence, developed in Chapter 18.
 \item
   Schwarzkopf et al.~(\href{https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/}{2013}), Omega, and Verma et al.~(\href{https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/}{2015}), Borg. Shared-state scheduling and admission-control mechanisms behind I1 and I9; their measured parameters do not transfer.
-\end{itemize}
-
-\textbf{Preprint measurement}
-
-\begin{itemize}
-\tightlist
 \item
-  Ge and Zhang (\href{https://arxiv.org/abs/2602.02307}{2026}), flaky GitHub Actions builds, arXiv:2602.02307. 1,960 Java projects; 3.2 percent of builds rerun; 67.73 percent of rerun builds flaky; 1,055 projects affected. Cited for the verifier-output-versus-software-state distinction within its rerun-build scope only.
+  Ge and Zhang (\href{https://arxiv.org/abs/2602.02307}{2026}), flaky GitHub Actions builds, arXiv:2602.02307. 1,960 Java projects; 3.2 percent of builds rerun; 67.73 percent of rerun builds flaky; 1,055 projects affected. A preprint; cited for the verifier-output-versus-software-state distinction within its rerun-build scope only.
 \end{itemize}
 
-\textbf{Practitioner cases}
+\textbf{Corroborating practitioner cases}
 
 \begin{itemize}
 \tightlist

@@ -15013,5 +15013,73 @@
       }
     ],
     "corroborating_material": []
+  },
+  {
+    "practice_id": "ERCA-206",
+    "id": "bound-admission-and-recovery-traffic",
+    "name": "Bound admitted demand, isolate demand domains, and release recovery traffic at a controlled rate",
+    "practice": "Place overload policy above individual queues with three responsibilities: bound total admitted demand with explicit admission and bounded queues (reject, shed by declared class, or wait visibly); partition capacity by tenant, repository, and work class so one demand domain cannot consume the fleet; and give retry and recovery traffic budgets, jitter, and reserved or rate-limited capacity so backlog release cannot re-saturate a recovering dependency. Measure the live-work/recovery division with the recovery-capacity experiment rather than adopting a universal fraction.",
+    "rationale": "Overload in an agent fleet is mechanical: retries raise demand exactly when capacity falls, and recovery work competes for the same models, runners, and reviewers as live work. Without admission bounds and a recovery-release policy, the fleet spends capacity on demand its own policies manufactured, and reconciliation that would shrink the backlog never gets scheduled.",
+    "boundary_conditions": "Developed from directional cluster-management and multi-tenant resource-management evidence plus practitioner overload guidance; no controlled result from a software-agent fleet. No capacity fraction, retry multiplier, or threshold transfers; the recovery-capacity experiment in Chapter 19 is the measurement procedure. Retry policy is safe only over the effect-identity contracts of I4/I5.",
+    "transfers_to": "Fleet schedulers, admission layers, retry middleware, and recovery/reconciliation planners in multi-worker agent factories.",
+    "chapter": 19,
+    "chapter_title": "Cost-aware fleet scheduling and model routing",
+    "treatment": "developed_in_manuscript",
+    "thin_support": false,
+    "evidence": [
+      {
+        "evidence_id": "bound-admission-and-recovery-traffic:e1",
+        "source_kind": "scholarly",
+        "evidence_group": "directional",
+        "citation": "Abhishek Verma, Luis Pedrosa, Madhukar Korupolu, David Oppenheimer, Eric Tune, John Wilkes (2015). Large-Scale Cluster Management at Google with Borg. EuroSys 2015.",
+        "bibcode": null,
+        "arxiv": null,
+        "url": "https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/",
+        "claim_support": "Borg separates accepting work (pending until admission) from running it, packs against declared requirements, isolates tenants, and treats overcommitment as explicit policy; the separation transfers, the parameters do not.",
+        "independent_external_evidence": true,
+        "limitation": "Cluster-management evidence, not agent systems; packing algorithms and utilization figures do not transfer.",
+        "resolved_metadata": null
+      },
+      {
+        "evidence_id": "bound-admission-and-recovery-traffic:e2",
+        "source_kind": "scholarly",
+        "evidence_group": "directional",
+        "citation": "Jonathan Mace, Peter Bodik, Rodrigo Fonseca, Madanlal Musuvathi (2015). Retro: Targeted Resource Management in Multi-tenant Distributed Systems. NSDI 2015.",
+        "bibcode": null,
+        "arxiv": null,
+        "url": "https://www.usenix.org/conference/nsdi15/technical-sessions/presentation/mace",
+        "claim_support": "Retro throttles at tenant granularity from per-tenant resource attribution and observed that maintenance traffic itself becomes the overload source; the agent-fleet analogue of maintenance traffic is recovery, reconciliation, and retry work.",
+        "independent_external_evidence": true,
+        "limitation": "Multi-tenant storage/compute evidence; mechanisms transfer directionally.",
+        "resolved_metadata": null
+      },
+      {
+        "evidence_id": "bound-admission-and-recovery-traffic:e3",
+        "source_kind": "practitioner",
+        "evidence_group": "corroborating",
+        "citation": "AWS Builders' Library. Timeouts, Retries, and Backoff with Jitter.",
+        "bibcode": null,
+        "arxiv": null,
+        "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+        "claim_support": "Retry budgets, exponential backoff, and jitter prevent synchronized retry waves from re-saturating a recovering dependency.",
+        "independent_external_evidence": true,
+        "limitation": "Practitioner guidance; multipliers and caps are AWS's parameters.",
+        "resolved_metadata": null
+      },
+      {
+        "evidence_id": "bound-admission-and-recovery-traffic:e4",
+        "source_kind": "practitioner",
+        "evidence_group": "corroborating",
+        "citation": "Google SRE Book. Addressing Cascading Failures.",
+        "bibcode": null,
+        "arxiv": null,
+        "url": "https://sre.google/sre-book/addressing-cascading-failures/",
+        "claim_support": "Cascading failures are sustained by retry amplification and synchronized recovery demand; deliberate shedding and bounded recovery release are the documented exits.",
+        "independent_external_evidence": true,
+        "limitation": "Practitioner guidance, not controlled evidence.",
+        "resolved_metadata": null
+      }
+    ],
+    "corroborating_material": []
   }
 ]

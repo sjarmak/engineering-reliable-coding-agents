@@ -1,8 +1,8 @@
 # Companion learnings
 
-This human-readable edition presents all 205 practices in chapter context. For navigation, filtering, and graph exploration, use the [website companion](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion).
+This human-readable edition presents all 206 practices in chapter context. For navigation, filtering, and graph exploration, use the [website companion](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion).
 
-This catalog indexes all 205 practices in the book’s corpus. Fifty-five are developed in the book’s nineteen chapters, and 150 are attached to those chapters’ mechanisms without being developed there. The catalog brings both groups together so that a reader scanning one chapter’s neighborhood can see every related practice, not only those the chapter leaves to the catalog. It also makes visible the difference between practices the book argues in full and practices it records as additional possibilities.
+This catalog indexes all 206 practices in the book’s corpus. Fifty-six are developed in the book’s nineteen chapters, and 150 are attached to those chapters’ mechanisms without being developed there. The catalog brings both groups together so that a reader scanning one chapter’s neighborhood can see every related practice, not only those the chapter leaves to the catalog. It also makes visible the difference between practices the book argues in full and practices it records as additional possibilities.
 
 Read the relevant chapter before using its catalog section. The chapter establishes the mechanism, develops the reasoning, examines the evidence, and sets the boundaries needed to judge whether a practice fits a measured problem or operating constraint. The catalog helps locate and compare practices around that mechanism, but it does not make the chapter’s argument optional. Begin with a problem you have observed, not with a practice you would like to adopt.
 
@@ -1755,6 +1755,12 @@ Estimate model cost and task performance explicitly, then assign each request to
 `ERCA-191` · `replay-traces-before-policy-changes`
 
 Evaluate proposed scheduling policies by replaying the same recorded arrivals, priorities, durations, outcomes, and review results through each contender. Holding the workload fixed makes policy comparisons interpretable and gives simple baselines and constructed test cases a consistent role in validation. Chapter 19 develops the replay protocol used to assess scheduling changes before deployment.
+
+### Bound admitted demand, isolate demand domains, and release recovery traffic at a controlled rate
+
+`ERCA-206` · `bound-admission-and-recovery-traffic`
+
+Place overload policy above individual queues: bound total admitted demand with explicit admission and bounded queues, partition capacity so one tenant or repository cannot consume the fleet, and give retry and recovery traffic budgets, jitter, and reserved or rate-limited capacity. Chapter 19 develops the mechanisms and the recovery-capacity experiment that measures the live-work and recovery division for a specific fleet.
 
 The following compact entries record practices attached to Chapter 19’s mechanism but not developed in full by any chapter.
 

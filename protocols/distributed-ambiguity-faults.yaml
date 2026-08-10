@@ -1,0 +1,113 @@
+# Distributed ambiguity faults
+# The full fault matrix behind the representative table in Chapter 10,
+# "Distributed ambiguity faults". Each entry defines a fault the test menu
+# adds alongside the kill sweep, the factory contract it tests (see
+# protocols/factory-contracts.yaml), and the observable behavior an
+# acceptable runtime must exhibit. This is a protocol definition, not an
+# executed result: run each fault with the kill-sweep discipline (specify
+# the claim, place the fault at the named interval, run the clean control
+# with the same anchors, check the typed event stream).
+version: 1.0.0-rc.16
+source_chapter: 10
+
+faults:
+  - name: response-lost-after-external-commit
+    contracts: [I5]
+    in_book_table: true
+    expected: >-
+      The runtime treats the call as uncertain, reconciles against external
+      state before re-sending, and records the reconciliation outcome; no
+      blind re-send.
+  - name: delayed-response-delivered-after-retry-started
+    contracts: [I5]
+    in_book_table: true
+    expected: >-
+      The late response and the retry resolve to one logical effect; the
+      effect ledger shows one committed effect_id or an explicit
+      unknown_external_state, never two commits.
+  - name: worker-loses-lease-but-continues-running
+    contracts: [I2]
+    in_book_table: true
+    expected: >-
+      The protected mutation boundary rejects the superseded worker's
+      writes by ownership_epoch; the rejection appears in the trace as a
+      fencing event, not a silent success.
+  - name: stale-completion-after-replacement-succeeds
+    contracts: [I3]
+    in_book_table: true
+    expected: >-
+      The stale completion is rejected by generation and attempt identity;
+      logical state reflects the new attempt only, and the rejection is
+      recorded.
+  - name: repository-state-changes-between-validation-and-publication
+    contracts: [I6]
+    in_book_table: true
+    expected: >-
+      Publication fails closed: the runtime detects that the validated
+      version is no longer the head, refuses to publish against changed
+      state, and routes to re-validation or reconciliation.
+  - name: control-plane-restarts-while-workers-continue
+    contracts: [I6]
+    in_book_table: false
+    expected: >-
+      The restarted controller reconciles against durable worker and
+      repository state before issuing new authority; no work item is
+      double-assigned or orphaned by controller amnesia.
+  - name: control-plane-observes-stale-artifact-state
+    contracts: [I6]
+    in_book_table: false
+    expected: >-
+      Decisions taken on the stale view are detected at the next protected
+      boundary and trigger reconciliation; the differential oracle shows no
+      divergent committed transition.
+  - name: verifier-times-out-flakes-or-contradicts-itself
+    contracts: [I8]
+    in_book_table: false
+    expected: >-
+      The runtime classifies the outcome as verifier failure, not software
+      failure; no defect record is created from an infra timeout, and
+      contradictory verdicts trigger rerun or escalation rather than
+      acceptance of either verdict.
+  - name: external-service-reachable-from-worker-but-not-controller
+    contracts: [I6]
+    in_book_table: false
+    expected: >-
+      The two components' contradictory observations are reconciled by
+      declared authority; the controller does not mark the effect failed
+      while the worker's committed effect record stands.
+  - name: schema-or-workflow-version-changes-during-recovery
+    contracts: [I10]
+    in_book_table: false
+    expected: >-
+      Recovery either completes under an explicit compatibility path or
+      fails closed with the version mismatch recorded; it never resumes by
+      misreading old state under the new schema.
+  - name: history-compaction-boundary-crossed-before-failure
+    contracts: [I10]
+    in_book_table: false
+    expected: >-
+      Recovery from the compacted summary preserves the same contract
+      checks as recovery from full history; effects committed before
+      compaction are still recognized and not repeated.
+  - name: recovery-queue-competes-with-new-work
+    contracts: [I10]
+    in_book_table: false
+    expected: >-
+      Recovery work and new admissions are both observable in queue
+      metrics; recovery completes without starving admitted work
+      indefinitely and without itself being starved invisibly.
+  - name: synchronized-retry-wave-after-dependency-recovers
+    contracts: [I5, I10]
+    in_book_table: false
+    expected: >-
+      Retries are jittered or admission-limited; the dependency's recovery
+      does not trigger a duplicate-effect burst, and each retried effect
+      still deduplicates by its idempotency key.
+
+requirements:
+  I5: effect ledger
+  I2: fencing and identity checks at the mutation boundary
+  I3: fencing and identity checks at the mutation boundary
+  I6: declared reconciliation authority
+  I8: verifier-failure classification
+  I10: recovery-path tests in the kill sweep, including the naive negative control

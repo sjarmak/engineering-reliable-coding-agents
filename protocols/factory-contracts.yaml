@@ -1,0 +1,162 @@
+# Factory contracts I1-I11
+# Full normative statements for the contract identifiers cited in the
+# manuscript (Chapter 7, "Six factory contracts"). The chapter groups these
+# into six contract families; this file is the complete, machine-testable
+# catalog. Each contract names the identities it constrains and an
+# observable check. Identity definitions follow the contracts.
+version: 1.0.0-rc.16
+source_chapter: 7
+
+contract_families:
+  - family: work-continuity-and-retry-identity
+    contracts: [I1, I4]
+  - family: generation-scoped-authority
+    contracts: [I2, I3]
+  - family: external-effect-safety
+    contracts: [I5]
+  - family: record-and-evidence-consistency
+    contracts: [I6, I7, I8]
+  - family: visible-liveness-and-safe-recovery
+    contracts: [I9, I10]
+  - family: causal-attribution
+    contracts: [I11]
+
+contracts:
+  I1:
+    kind: liveness
+    statement: >-
+      Accepted work cannot silently disappear. The ledger is durable and
+      live: every accepted work_id reaches a terminal state or remains
+      visibly pending.
+    identities: [work_id]
+    check: >-
+      Enumerate accepted work_ids over a window; every id is in a terminal
+      state or visible in a pending queue with age and position.
+  I2:
+    kind: safety
+    statement: >-
+      Authority is generation-scoped. Only the current ownership_epoch may
+      commit a mutation at a protected boundary, and a superseded worker
+      must be rejected even if it is still running. This is fencing,
+      enforced at the boundary, not inferred from the lease.
+    identities: [work_id, ownership_epoch]
+    check: >-
+      Submit a mutation carrying a stale epoch at each protected boundary;
+      the boundary rejects it and records a fencing event.
+  I3:
+    kind: safety
+    statement: >-
+      Stale completions cannot advance logical state. A durable transition
+      validates generation and attempt identity, not the scheduler's belief
+      about who is running.
+    identities: [work_id, ownership_epoch, attempt_id]
+    check: >-
+      Deliver a superseded attempt's completion after a replacement attempt
+      has succeeded; logical state reflects the replacement only and the
+      rejection is recorded.
+  I4:
+    kind: safety
+    statement: >-
+      Retries preserve logical identity. A retry is a new attempt_id under
+      the same work_id, never a duplicate work item.
+    identities: [work_id, attempt_id]
+    check: >-
+      Force a retryable failure; the ledger shows one work_id with multiple
+      attempt_ids and no duplicate work item.
+  I5:
+    kind: safety
+    statement: >-
+      Externally visible effects are safe under redelivery or explicitly
+      uncertain: an idempotency key, an atomic effect-plus-dedup record,
+      natural convergence, adapter-owned reconciliation, or an explicit
+      unknown_external_state. No generic exactly-once claim across a
+      boundary that cannot provide it.
+    identities: [effect_id]
+    check: >-
+      Redeliver each effect class; the effect ledger shows one committed
+      effect_id or an explicit unknown_external_state, never two commits.
+  I6:
+    kind: safety
+    statement: >-
+      Contradictory durable records trigger reconciliation, not guesswork.
+      Precedence follows declared authority.
+    identities: [work_id, effect_id]
+    check: >-
+      Construct a record-world disagreement; the system routes to a
+      reconciliation path whose authority precedence is declared in
+      configuration, and records the outcome.
+  I7:
+    kind: safety
+    statement: >-
+      Evidence is version-bound. A verifier result or retrieved fact is
+      valid only for the artifact_version or input state it observed.
+    identities: [artifact_version, input_state_id, verification_id]
+    check: >-
+      Attempt to reuse a verification record against a changed
+      artifact_version or input_state_id; acceptance refuses the inherited
+      result.
+  I8:
+    kind: classification
+    statement: >-
+      Verifier failure is distinct from software failure. An infrastructure
+      timeout or flake is not a semantic defect, and a pass establishes
+      only what that verifier can detect.
+    identities: [verification_id]
+    check: >-
+      Inject a verifier timeout; the outcome is recorded as indeterminate
+      verifier failure, and no defect record is created for the artifact.
+  I9:
+    kind: liveness
+    statement: >-
+      Admissible work cannot starve invisibly. Bounded queues, declared
+      shedding classes, and visible position and age are the acceptable
+      alternatives to silent starvation.
+    identities: [work_id]
+    check: >-
+      Under sustained overload, every admitted work_id is either running,
+      visibly queued with position and age, or explicitly rejected or shed
+      with the caller informed.
+  I10:
+    kind: design-rule
+    statement: >-
+      Recovery preserves the same obligations as normal execution. Recovery
+      paths are production code with authority and must be tested as such,
+      including their capacity allocation.
+    identities: [work_id, ownership_epoch, attempt_id, effect_id]
+    check: >-
+      Run the fault-injection sweep with recovery paths as subjects; every
+      contract above holds during and after recovery, under live load.
+  I11:
+    kind: auditability
+    statement: >-
+      Consequential transitions are causally attributable: work, attempt,
+      actor, input state, authority generation, requested effect, observed
+      response, and resulting durable state.
+    identities:
+      [work_id, attempt_id, input_state_id, ownership_epoch, effect_id]
+    check: >-
+      Sample consequential transitions; each record answers who acted,
+      under which authority generation, against which input state, with
+      which requested effect and observed response.
+
+identities:
+  work_id: >-
+    Stable logical work; the intent that should happen once logically.
+  input_state_id: >-
+    The repository or repositories, branches, and revisions against which
+    the attempt was planned and executed. For cross-repository work, a
+    manifest of repository-and-revision pairs.
+  ownership_epoch: >-
+    Monotonic generation of write authority over that work, incremented on
+    reassignment.
+  attempt_id: >-
+    One execution attempt under a given work and epoch.
+  artifact_version: >-
+    Concrete code or state produced by an attempt; immutable once recorded.
+  verification_id: >-
+    One verification execution, including the artifact, verifier version,
+    environment, and inputs it observed.
+  effect_id: >-
+    One logical externally visible mutation. An idempotency key may
+    represent this identity at a boundary; the key is one implementation of
+    the identity contract, not the identity itself.

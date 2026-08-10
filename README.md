@@ -148,7 +148,7 @@ system before use.
 
 ## Release status
 
-The files currently represent the `1.0.0-rc.15` release candidate prepared on
+The files currently represent the `1.0.0-rc.16` release candidate prepared on
 August 7, 2026. It is explicitly unfinished: no external readers have completed
 the blinded packet, and the ACM Digital Library, IEEE Xplore, and Scopus plans
 have not been executed. The release candidate reports those limitations and

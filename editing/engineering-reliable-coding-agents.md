@@ -6,33 +6,33 @@
 > `node scripts/editable-manuscript.mjs --status` to list the sections that need to be
 > transferred back to TeX. Do not regenerate this file while it contains unapplied edits.
 >
-> Baseline: version `1.0.0-rc.15`, repository revision `bc9adc1ac5456e486187b4edc8acde4725d0035f`.
+> Baseline: version `1.0.0-rc.16`, repository revision `9c1fadab3e7c8b08de7eedcb1eb62c9b51d8ef08`.
 
 The `tex-sync` comments delimit exact file mappings and carry baseline hashes. Leave those
 comments in place; edit the prose between them.
 
-<!-- tex-sync:start {"path":"manuscript/main.tex","tex_sha256":"9547f4d048844c1bd149ebbfeb1bf87d680beb6037f654ebb0bdf43c7ebbb4b6","markdown_sha256":"0bd304a436a55c94b8fae62bc3d2b8a3bf3930b29a20a908bd660842be05be61"} -->
+<!-- tex-sync:start {"path":"manuscript/main.tex","tex_sha256":"1fa58a42d3a82afa68f6be912bce5ab1bb6bc421d51f80f0188de6a14bcbdf4d","markdown_sha256":"48daa4e23b959e9b9991674dce440bb5e81dc472aff29b19ce722baa14545a2e"} -->
 # Title-page metadata
 
 - **Title:** Engineering Reliable Coding Agents
 - **Subtitle:** Evaluation, Recovery, Context, and Control Beyond the Model
 - **Author:** Stephanie Jarmak
-- **Version line:** Version 1.0.0-rc.15 --- August 2026
+- **Version line:** Version 1.0.0-rc.16 --- August 2026
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/abstract.tex","tex_sha256":"bba30628ddc0b8654be704964d6192743435c7ac23eb1710cb1af9de30652ef1","markdown_sha256":"b02265e06453d19c7cc05e2705b5d6bb73a19c54019fa419eeb098e1a6ca648a"} -->
+<!-- tex-sync:start {"path":"manuscript/abstract.tex","tex_sha256":"5ff3b20f18841de8061bacca6f5f6242353ab1c46165c5a72776f63421612ca7","markdown_sha256":"7245c4d4634ccc5e8f5397d8a8293268ebc7dd557aaf206e9906350df99e361b"} -->
 # Abstract
 
 AI coding agents are commonly evaluated as models but deployed as systems. Their reliability depends not only on model capability, but on the harness, execution state, retrieval, memory and state management, permissions, review interfaces, and resource allocation around the model. This technical review and engineering monograph examines those system boundaries and develops a practical framework for evaluating and operating coding agents reliably.
 
 The study synthesizes 138 scholarly works, 91 practitioner records, 29 benchmark records, and 17 author-system case records through a structured multivocal review, targeted update audits, and software-engineering coverage analysis. Across this evidence, a consistent pattern emerges: many apparent model failures originate elsewhere in the system, while improvements measured at one layer often fail to propagate to end-to-end task outcomes. Evaluation and operation are therefore treated as a dependency chain in which weaknesses in task construction, execution environments, retrieval, state management, verification, or observability can invalidate conclusions made downstream.
 
-The monograph contributes a versioned catalog of 205 reliability practices, including 55 developed in depth; an evidence ledger linking claims to their support; a framework for reasoning about dependency and repair asymmetry across the agent lifecycle; empirical measurements and failure cases from operated agent systems; runnable evaluation and reliability protocols; and five reusable agent skills with evidence maps. Together, these provide a system-level methodology for distinguishing model capability from infrastructure effects, designing evaluations that support defensible conclusions, and building agent systems that can recover safely when components fail.
+The monograph contributes a versioned catalog of 206 reliability practices, including 56 developed in depth; an evidence ledger linking claims to their support; a framework for reasoning about dependency and repair asymmetry across the agent lifecycle; empirical measurements and failure cases from operated agent systems; runnable evaluation and reliability protocols; and five reusable agent skills with evidence maps. Together, these provide a system-level methodology for distinguishing model capability from infrastructure effects, designing evaluations that support defensible conclusions, and building agent systems that can recover safely when components fail.
 
 The review is structured rather than exhaustive, evidence strength varies by topic, and empirical results remain dependent on workload and system configuration. The publisher- and index-native search supplement remains incomplete in this release candidate: ACM Digital Library and IEEE Xplore were not searched through their publisher lanes, Scopus was not searched through its index, and the practice taxonomy has not received blinded external calibration. All four remain release gates for archival v1. The release candidate therefore claims neither provider coverage nor independent calibration and reports no inter-rater statistic.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/frontmatter.tex","tex_sha256":"9f466a3792d97fb9545e7555a4de13309d119a7c511bfeab1bc550d12d5c2696","markdown_sha256":"d525840e4694ab14dc0897c2cf4d5e30b07aa5d4c7fbf04d5b0a6a6301d38356"} -->
+<!-- tex-sync:start {"path":"manuscript/frontmatter.tex","tex_sha256":"25862b9a33fb33b7683c8e15967a947e4ab896794e3d4964e3ed4e5637edfef8","markdown_sha256":"80e5089c62826cefc9b4f10c6863cdfd1acb792def968b2e2dfb9b367da311d4"} -->
 # Introduction
 
 ## Problem and scope
@@ -55,7 +55,7 @@ Each layer determines what the next may trust. A weak measurement can become a c
 
 This creates a repair asymmetry. Later machinery is often easier to add than the earlier instrument is to repair, yet it is evaluated through that earlier instrument. More samples cannot repair a task distribution that excludes production work. More judges cannot repair a rubric experts apply inconsistently. More agents cannot repair a retrieval boundary that treats an empty result as authoritative. The dependency chain is therefore a sequence of evidence obligations, not a list of subsystems.
 
-The chain carries a system-level claim. Coding agents are evaluated as models and deployed as production systems. Once a run can outlive the worker that started it, wait on another service, compete with another run, mutate shared code, or publish a durable external effect, reliability stops being a property of the model and becomes a property of the system that preserves intent, authority, state, evidence, ordering, and recovery across components that fail independently. The framing is not new. Osterweil ([1987](https://dl.acm.org/doi/10.5555/41765.41766)) argued that software processes are themselves software, and Choi and Scacchi ([1991](https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf)) built a software factory as distributed infrastructure. Autonomous workers change the failure model, not the problem: today's workers are nondeterministic, edit persistent code, call external services, run concurrently, and can claim completion incorrectly. Chapter 7 develops this factory model and the invariants the operating chapters enforce.
+The chain carries a system-level claim. Coding agents are evaluated as models and deployed as production systems. Once a run can outlive the worker that started it, wait on another service, compete with another run, mutate shared code, or publish a durable external effect, reliability stops being a property of the model and becomes a property of the system that preserves intent, authority, state, evidence, ordering, and recovery across components that fail independently. The framing is not new. Osterweil ([1987](https://dl.acm.org/doi/10.5555/41765.41766)) argued that software processes are themselves software, and Choi and Scacchi ([1991](https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf)) built a software factory as distributed infrastructure. Autonomous workers change the failure model, not the problem: today's workers are nondeterministic, edit persistent code, call external services, run concurrently, and can claim completion incorrectly. Chapter 7 develops this factory model and the contracts the operating chapters enforce.
 
 For any given guarantee, the useful question is therefore not whether the model is capable. It is which promise the surrounding system makes, which component owns that promise, what state survives failure, and what experiment would falsify the guarantee. The chapters are organized to make each of those questions answerable in turn.
 
@@ -208,7 +208,7 @@ The reader-facing instrument is preserved as [`review-form.html`](https://github
 
 ### Practice derivation and chapter selection
 
-Candidate practices were derived through bounded-claim extraction and synthesis, then passed through a separate admission gate. A record qualified at the final gate through at least one scholarly item, a non-author synthesis with a resolvable scholarly identity, or at least two practitioner items with distinct independence keys. Hardening separated bundled claims, removed redundant or self-defeating records, preserved contrary findings, and repaired provenance. The resulting catalog contains 205 edition records, each with a stable identifier: 192 that passed this admission gate, and 13 catalog-level thin-support records (ERCA-193 through ERCA-205) added with the distributed-systems synthesis, which are marked as leads rather than gated practices. That total reflects the chosen claim granularity and editorial boundaries; it is not an estimate of how many reliability practices exist. The companion preserves the full record arithmetic and identifies which hardening operations overlap.
+Candidate practices were derived through bounded-claim extraction and synthesis, then passed through a separate admission gate. A record qualified at the final gate through at least one scholarly item, a non-author synthesis with a resolvable scholarly identity, or at least two practitioner items with distinct independence keys. Hardening separated bundled claims, removed redundant or self-defeating records, preserved contrary findings, and repaired provenance. The resulting catalog contains 206 edition records, each with a stable identifier: 193 that passed this admission gate, and 13 catalog-level thin-support records (ERCA-193 through ERCA-205) added with the distributed-systems synthesis, which are marked as leads rather than gated practices. That total reflects the chosen claim granularity and editorial boundaries; it is not an estimate of how many reliability practices exist. The companion preserves the full record arithmetic and identifies which hardening operations overlap.
 
 Three selection passes ranked the catalog by different criteria: teachability through a bounded case, consequence for an engineering decision, and coverage of the fourteen mechanism clusters. Practices selected by at least two passes formed the base of the developed set. Individual adjudication then repaired thin mechanism coverage and one provenance defect. The resulting 55 practices receive full treatment in the 19 chapters; the remaining 137 appear in the companion catalog.
 
@@ -232,9 +232,9 @@ This work makes six contributions:
 
 1.  a multivocal evidence audit and machine-readable ledger that distinguish direct support, directional findings, corroborating cases, and null or conflicting results;
 
-2.  a versioned catalog of 205 bounded practice records in this edition, including 55 developed in depth and stable identifiers that connect the manuscript, companion, and implementation artifacts;
+2.  a versioned catalog of 206 bounded practice records in this edition, including 56 developed in depth and stable identifiers that connect the manuscript, companion, and implementation artifacts;
 
-3.  a system-level reliability model, stated as a dependency chain with its repair asymmetry and as an explicit set of invariants, that connects evaluation, containment, durable execution, repository state, verification, human control, and fleet allocation through the ownership, identity, persistence, ordering, authority, and observation boundaries a coding-agent system must preserve;
+3.  a system-level reliability model, stated as a dependency chain with its repair asymmetry and as an explicit set of factory contracts, that connects evaluation, containment, durable execution, repository state, verification, human control, and fleet allocation through the ownership, identity, persistence, ordering, authority, and observation boundaries a coding-agent system must preserve;
 
 4.  original measurements and failure cases from author-operated systems, explicitly separated from external evidence;
 
@@ -268,9 +268,9 @@ The monograph has six parts and nineteen chapters. Measurement comes first becau
 
 This order places three chapters of experiment design before the agent-specific operating chapters. Later recommendations depend on those definitions and comparison methods.
 
-Part I establishes how I compare systems when runs vary and scores can mislead. Part II turns those measurements into grading and release decisions. Part III opens with Chapter 7, which states the software-factory model and the invariants (I1 through I11) the later chapters reference, then addresses containment, persistent state, recovery, and failure analysis. Part IV examines how repository information enters, survives, and leaves an agent run. Part V treats human review as an engineered control with interfaces, escalation rules, and accountable ownership. Part VI is a research agenda for allocating work across agents and models under cost and capacity constraints. Its questions transfer methods from adjacent scheduling and multi-agent literatures rather than presenting settled coding-agent effects.
+Part I establishes how I compare systems when runs vary and scores can mislead. Part II turns those measurements into grading and release decisions. Part III opens with Chapter 7, which states the software-factory model and the contracts (I1 through I11) the later chapters reference, then addresses containment, persistent state, recovery, and failure analysis. Part IV examines how repository information enters, survives, and leaves an agent run. Part V treats human review as an engineered control with interfaces, escalation rules, and accountable ownership. Part VI is a research agenda for allocating work across agents and models under cost and capacity constraints. Its questions transfer methods from adjacent scheduling and multi-agent literatures rather than presenting settled coding-agent effects.
 
-Parts III, IV, and VI are not independent collections of practices; they examine one system at three boundaries. Part III establishes how work, authority, effects, and recovery survive the failure of the process that was executing them. Part IV establishes how evidence and repository-derived state remain tied to the code state they describe. Part VI asks how the same work and ownership records behave under concurrency and finite capacity. Part II supplies the verification machinery those parts depend on, and Part V supplies the human authority that gates their consequential transitions. Chapter 7 states the model and invariants that connect them.
+Parts III, IV, and VI are not independent collections of practices; they examine one system at three boundaries. Part III establishes how work, authority, effects, and recovery survive the failure of the process that was executing them. Part IV establishes how evidence and repository-derived state remain tied to the code state they describe. Part VI asks how the same work and ownership records behave under concurrency and finite capacity. Part II supplies the verification machinery those parts depend on, and Part V supplies the human authority that gates their consequential transitions. Chapter 7 states the model and contracts that connect them.
 
 <table>
 <caption>Parts and chapters in the dependency-chain order.</caption>
@@ -419,7 +419,7 @@ The evidence legend in the methods section applies throughout. Chapter text rest
 
 ## The companion catalog
 
-The [companion site](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion) indexes all 205 practices under the chapter whose mechanism each extends. The 55 developed in the main chapters appear as short pointers into the chapter; the remaining 137 appear as compact entries. The catalog broadens the set of available options without forcing the main text to explain every variation. The [project repository](https://github.com/sjarmak/engineering-reliable-coding-agents) contains the versioned manuscript, evidence ledger, benchmark catalog, schemas, provenance data, and release checksums. The [web edition](https://sjarmak.ai/books/engineering-reliable-coding-agents) provides the browser-oriented reading version.
+The [companion site](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion) indexes all 206 practices under the chapter whose mechanism each extends. The 56 developed in the main chapters appear as short pointers into the chapter; the remaining 150 appear as compact entries. The catalog broadens the set of available options without forcing the main text to explain every variation. The [project repository](https://github.com/sjarmak/engineering-reliable-coding-agents) contains the versioned manuscript, evidence ledger, benchmark catalog, schemas, provenance data, and release checksums. The [web edition](https://sjarmak.ai/books/engineering-reliable-coding-agents) provides the browser-oriented reading version.
 
 Use the relevant chapter as the foundation, then consult the catalog for practices that match a specific constraint. A compact entry cannot reproduce the chapter's full treatment of mechanism, evidence, tradeoffs, and failure boundaries. The chapter provides the reasoning needed to decide whether a neighboring practice applies to your workload.
 
@@ -1697,7 +1697,7 @@ That first stratum tests one grading decision and identifies which category shou
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the dual-curator calibration gate described in the closing section, which is narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch06-proxy-gaming-layered-signals.tex","tex_sha256":"2eea370329442dc99e3359fa6625e1415693dee0ede12c73095e52630b779002","markdown_sha256":"a778c889d68992e371789141c662e51b4aec4df9d7f30d2ad757dc6a49990483"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch06-proxy-gaming-layered-signals.tex","tex_sha256":"f28cabbdd0c9dadaa69571cedaaa4d53fcc958400eacd2df61c858461d90d3fc","markdown_sha256":"00ce7b1d38a2372a2c542945fd481fc00b8faf233e1f496607131a7fbe4abe2d"} -->
 # Proxy metric gaming and layered evaluation signals
 
 > **Evidence profile.** 3 strong $\cdot$ 3 directional $\cdot$ 0 corroborating evidence items across 3 developed practices (ERCA-038, ERCA-039, ERCA-042).
@@ -1849,11 +1849,11 @@ A thinly supported aside also proposes multi-objective acceptance with an indepe
 
 ## Did the verifier run, and did it run on this artifact?
 
-Everything in this chapter so far concerns oracle adequacy: whether the signal, once observed, distinguishes acceptable from unacceptable behavior. A second axis sits underneath it and fails independently: whether the verifier executed reliably against the intended artifact at all. A test suite that timed out on an exhausted runner, a lint job that ran against a stale checkout, and a judge invocation that silently received a truncated diff all produce verdicts, and none of those verdicts says anything about the code. Treating such a verdict as an oracle failure misdiagnoses it; treating it as a semantic result corrupts the acceptance record. Chapter 7 states this separation as invariant I8: verifier failure is distinct from software failure. An infrastructure timeout or flake is not a semantic defect, and a pass establishes only what that verifier can detect.
+Everything in this chapter so far concerns oracle adequacy: whether the signal, once observed, distinguishes acceptable from unacceptable behavior. A second axis sits underneath it and fails independently: whether the verifier executed reliably against the intended artifact at all. A test suite that timed out on an exhausted runner, a lint job that ran against a stale checkout, and a judge invocation that silently received a truncated diff all produce verdicts, and none of those verdicts says anything about the code. Treating such a verdict as an oracle failure misdiagnoses it; treating it as a semantic result corrupts the acceptance record. Chapter 7 states this separation as contract I8: verifier failure is distinct from software failure. An infrastructure timeout or flake is not a semantic defect, and a pass establishes only what that verifier can detect.
 
 The execution axis is not a marginal concern in real CI. Ge and Zhang ([2026](https://arxiv.org/abs/2602.02307)) mined GitHub Actions histories from 1,960 open-source Java projects and studied builds that developers reran on the same commit. Reruns were rare, 3.2 percent of builds, but among those rerun builds 67.73 percent changed outcome and were therefore flaky, and 1,055 of the projects, more than half, contained at least one such build. The study is a preprint and its population is Java projects on one CI platform, so the rates do not transfer as constants to any particular pipeline. The structural finding does transfer: when a developer suspects a verdict enough to rerun it, that suspicion is usually vindicated, which means verdicts from CI infrastructure carry a nontrivial probability of reflecting the runner rather than the code. A human developer absorbs this by squinting at the log and clicking rerun. An acceptance pipeline that feeds verdicts to an optimizing agent has no squint. It must model CI and test infrastructure as one more fallible dependency whose outputs need provenance and retry semantics, exactly as it treats a flaky external API.
 
-The consequence for acceptance is a versioned acceptance record. Every acceptance decision binds together: a verification_id naming the verifier configuration and inputs; the artifact_version under judgment; the repository base it was applied to; the verifier's own version; the configuration and environment identity of the run; timestamps; a reference to the raw result; and a status of accepted, rejected, or indeterminate. Indeterminate is a first-class status, not a euphemism for failure: it is the correct record when the verifier did not demonstrably execute against the intended artifact, and its remedy is a retry of the verification, not a rejection of the work. Two rules follow from the record's shape. A passing result for artifact version X is never inherited by artifact version Y, however small the diff between them; this is invariant I7, evidence is version-bound, defined with I8 in Chapter 7. And a retry of a flaky verifier is a new verification_id against the same artifact_version, so the record preserves how many attempts a pass required, which is itself a health signal for the verifier.
+The consequence for acceptance is a versioned acceptance record. Every acceptance decision binds together: a verification_id naming the verifier configuration and inputs; the artifact_version under judgment; the repository base it was applied to; the verifier's own version; the configuration and environment identity of the run; timestamps; a reference to the raw result; and a status of accepted, rejected, or indeterminate. Indeterminate is a first-class status, not a euphemism for failure: it is the correct record when the verifier did not demonstrably execute against the intended artifact, and its remedy is a retry of the verification, not a rejection of the work. Two rules follow from the record's shape. A passing result for artifact version X is never inherited by artifact version Y, however small the diff between them; this is contract I7, evidence is version-bound, defined with I8 in Chapter 7. And a retry of a flaky verifier is a new verification_id against the same artifact_version, so the record preserves how many attempts a pass required, which is itself a health signal for the verifier.
 
 This axis interacts with the gaming argument rather than merely sitting beside it. A pipeline that retries verification until it passes, without recording the attempts, has built best-of-n selection against its own infrastructure noise: the accepted population is enriched with artifacts that passed by flake. Separating the axes closes that path. Infrastructure retries are legitimate precisely when the record shows the artifact and verifier were identical across attempts and the environment differed; the same retry loop against a deterministic oracle is score-shopping.
 
@@ -1929,34 +1929,24 @@ Part III begins at that observable boundary and turns to containing what happens
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the recall-family scorer and its replacement default, both of which are narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch07-software-factory-distributed-system.tex","tex_sha256":"cb8330afbc80c072cfdf9300274e78f81f3e9aeff98f98b30627bfb580bc0b62","markdown_sha256":"4411076fef320251dc8fe7a04553a99c090ac55ada226bc0a5c570ebe1e701a5"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch07-software-factory-distributed-system.tex","tex_sha256":"62d916a5c271c84c947207ece291e710f920859657eaab41e58637e972e52ebd","markdown_sha256":"726a040b2ad8575abed3a2b0184dfea201952f13057ab8c4ecae877c561931f7"} -->
 # Part III: Containment, durable execution, and recovery engineering
 
 # The software factory as a distributed system
 
-> **Evidence profile.** 0 strong $\cdot$ 3 directional $\cdot$ 1 preprint measurement $\cdot$ 4 historical-lineage $\cdot$ 2 practitioner items; no developed practices. This chapter supplies the system model that the practices in Chapters 8 through 19 attach to.
+> **Evidence profile.** 0 strong $\cdot$ 4 directional $\cdot$ 2 corroborating $\cdot$ 0 null or conflicting evidence items. Four additional sources establish historical lineage but do not provide evidence about agent-system outcomes. This chapter supplies the system model that the practices in Chapters 8 through 19 attach to; it develops no practice of its own.
 >
 > **Chapter claim.** The factory, not the worker, owns the reliability promise.
 
-A worker finished its task, opened the pull request, and died before its completion record reached durable storage. The scheduler saw an unfinished attempt and, correctly by its own lights, scheduled another. The second attempt produced a second branch and a second pull request for the same change. The operator's summary read "the agent duplicated its work," and the retrospective spent an hour on prompt wording before anyone read the trace. The model had behaved well twice. The failure lived in the interval between an external effect and the internal record of it, an interval no model improvement can close.
+In one local fault demonstration, described with its limitations in Chapter 9, the worker was killed after an external mutation had been requested and before completion became durable. The naive recovery path sent the request again and reported success. The guarded path issued one request, retained the unresolved state, and stopped for reconciliation. That trial does not estimate a general failure rate. It identifies the boundary this chapter develops: the factory must preserve logical work and effect identity across the failure of the process executing them.
 
-I have traced many incidents with that shape, and the reported cause is usually "the agent failed" while the trace shows something else. The model produced a plausible patch; the process hosting it was evicted before recording completion. The model finished; a second worker on the same task had already pushed a conflicting branch. The tests passed; they passed against a repository revision three merges old. These are failures of coordination, durability, versioning, and effect management, and they belong to the machinery around the trajectory, not to the trajectory itself.
+Now consider the same fault without the guard, as a constructed sequence. A worker finishes its task, opens the pull request, and dies before its completion record reaches durable storage. The scheduler sees an unfinished attempt and, correctly by its own lights, schedules another. The second attempt produces a second branch and a second pull request for the same change. The operator's summary reads "the agent duplicated its work." Both attempts may have produced valid work; the duplicate effect arose at the coordination boundary, in the interval between an external effect and the internal record of it, an interval no model improvement can close. The same shape recurs with different surface reports: the model produced a plausible patch, but the process hosting it was evicted before recording completion; the model finished, but a second worker on the same task had already pushed a conflicting branch; the tests passed, but against a repository revision three merges old. These are failures of coordination, durability, versioning, and effect management, and they belong to the machinery around the trajectory, not to the trajectory itself.
 
-## The model is not the system
+## When this framing becomes necessary
 
-A single agent trajectory is one execution component. It starts, reads state, produces an artifact, and stops. Everything that makes that trajectory count as work belongs to machinery the trajectory does not contain: the scheduler that assigned it, the store that remembers what it was asked to do, the repository state it read and will write, the verifier that decides whether its output is acceptable, the publisher that turns an accepted artifact into an external effect, the external services that accept or reject that effect, and the resource policy that decided this work deserved compute at all.
+A single agent trajectory is one execution component. It starts, reads state, produces an artifact, and stops. Everything that makes that trajectory count as work belongs to machinery the trajectory does not contain: the scheduler that assigned it, the store that remembers what it was asked to do, the repository state it read and will write, the verifier that decides whether its output is acceptable, the publisher that turns an accepted artifact into an external effect, the external services that accept or reject that effect, and the resource policy that decided this work deserved compute at all. I call the whole arrangement a **software factory**: the durable system that accepts logical work, schedules attempts, runs workers, verifies artifacts, publishes effects, and reconciles disagreement between its records and the world. The agent is one worker inside it.
 
-Part II ended with grading: how an observation becomes an acceptance decision. Part III and the parts after it operate inside a larger frame, and this chapter states that frame once so the later chapters can use it. I call the whole arrangement a **software factory**: the durable system that accepts logical work, schedules attempts, runs workers, verifies artifacts, publishes effects, and reconciles disagreement between its records and the world. The agent is one worker inside it.
-
-## This framing has a history
-
-Treating the machinery around software production as an engineered system is not a new idea, and I do not claim it as one. Osterweil ([1987](https://dl.acm.org/doi/10.5555/41765.41766)) argued that software processes are software too: a development process is a program with control flow, state, and defects, and it deserves the same engineering scrutiny as the product it produces. His retrospective ([1997](https://dl.acm.org/doi/10.1145/253228.253440)) reviewed a decade of process-programming work and defended the position against the objection that human-centered processes resist formalization. Choi and Scacchi ([1991](https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf)) went further and described the software factory itself as distributed infrastructure: heterogeneous tools, repositories, and people coordinating through shared state across a network, with the coordination substrate treated as a first-class engineering object. The CNCF's Secure Software Factory reference architecture ([CNCF TAG Security](https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/)) supplies the contemporary vocabulary: pipelines, attestations, and policy enforcement points arranged as a factory. Its scope is supply-chain security rather than fault tolerance, so I borrow its vocabulary and not its guarantees. I classify all four as historical or conceptual lineage rather than evidence about agent systems.
-
-What is different now is the worker. The processes Osterweil programmed and the infrastructure Choi and Scacchi described coordinated deterministic tools and human developers who could be asked what they meant. The modern factory schedules autonomous, nondeterministic workers that edit persistent code, call external APIs, run concurrently with one another, and can claim completion incorrectly. A compiler does not assert that it succeeded when it failed. An agent can, fluently and in detail. That combination of direct effect authority with unreliable self-report is the modern synthesis this book addresses; the distributed-infrastructure framing itself predates it by more than three decades.
-
-Practitioner systems have converged on the same shape. OpenAI's Symphony orchestration ([OpenAI 2026](https://openai.com/index/open-source-codex-orchestration-symphony/)) and Cloudflare's issue-triage factory ([Cloudflare 2026](https://blog.cloudflare.com/astro-issue-triage/)) both separate a durable work ledger, a scheduler, disposable workers, and gated publication. These are practitioner cases from the operating teams, useful as corroborating convergence on the decomposition, not as controlled evidence that the decomposition improves any measured outcome.
-
-## When an agent system becomes a distributed-systems problem
+Treating that machinery as an engineered system is not a new idea, and I do not claim it as one. Osterweil ([1987](https://dl.acm.org/doi/10.5555/41765.41766), [1997](https://dl.acm.org/doi/10.1145/253228.253440)) argued that software processes are software too, and Choi and Scacchi ([1991](https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf)) described the software factory itself as distributed infrastructure, with the coordination substrate treated as a first-class engineering object; the CNCF's Secure Software Factory reference architecture ([CNCF TAG Security](https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/)) supplies the contemporary vocabulary, scoped to supply-chain security rather than fault tolerance. The Sources and evidence section places each of these. Autonomous workers change the failure model. The processes Osterweil programmed and the infrastructure Choi and Scacchi described coordinated deterministic tools and human developers who could be asked what they meant. The modern factory schedules autonomous, nondeterministic workers that edit persistent code, call external APIs, run concurrently with one another, and can claim completion incorrectly. A compiler does not assert that it succeeded when it failed. An agent can, fluently and in detail. Practitioner systems have converged on the same decomposition: OpenAI's Symphony orchestration ([OpenAI 2026](https://openai.com/index/open-source-codex-orchestration-symphony/)) and Cloudflare's issue-triage factory ([Cloudflare 2026](https://blog.cloudflare.com/astro-issue-triage/)) both separate a durable work ledger, a scheduler, disposable workers, and gated publication. These are practitioner cases from the operating teams, corroborating convergence on the decomposition, not controlled evidence that the decomposition improves any measured outcome.
 
 Not every agent deployment needs this frame. A local assistant that reads a repository, proposes a patch in an interactive session, and exits has one process, one human, and no durable coordination state. If the process dies, the human restarts it and loses only convenience. Modeling that as a distributed system adds vocabulary without adding safety.
 
@@ -1974,9 +1964,9 @@ The frame becomes load-bearing when any of the following hold:
 
 Once any of these conditions holds, I do not claim the factory *is* a distributed system in some essential sense. I claim it exhibits distributed-systems failure modes: lost updates, stale authority, duplicate effects, split-brain records, partial failure. Those failure modes have known engineering treatments, and model capability is then only one contributor to reliability among several.
 
-## Five things the factory must not confuse
+## The distinctions recovery depends on
 
-Most factory failures I have traced reduce to a conflation of two things the system treated as one. Five distinctions carry most of the weight.
+Most factory failures reduce to a conflation of two things the system treated as one. Five distinctions carry most of the weight.
 
 **Logical work versus execution attempt.** The user's intent, fix this bug once, is logical work. A worker process trying to satisfy it is an attempt. One work item may consume many attempts; a retry is a new attempt at the same logical work, not new work. A system that identifies work with its current attempt loses the work when the attempt dies.
 
@@ -1984,33 +1974,13 @@ Most factory failures I have traced reduce to a conflation of two things the sys
 
 **Candidate artifact versus accepted completion.** A worker producing a branch, a diff, or a message saying the task is done has produced a candidate. Acceptance is a separate event that only independent evidence should trigger. An agent's completion claim is input to verification, never a substitute for it.
 
-**Local completion record versus external commitment.** The factory recording "pull request opened" and the code host having opened the pull request are two facts in two failure domains. Either can exist without the other, as the duplicate pull request that opened this chapter shows. A crash between the external effect and the internal record leaves the effect real and the record absent; a crash in the other order leaves the record present and the effect absent. Both cases are normal, and recovery must handle both.
+**Local completion record versus external commitment.** The factory recording "pull request opened" and the code host having opened the pull request are two facts in two failure domains. Either can exist without the other, as the constructed duplicate-pull-request sequence in the opening shows. A crash between the external effect and the internal record leaves the effect real and the record absent; a crash in the other order leaves the record present and the effect absent. Both cases are normal, and recovery must handle both.
 
-**Verifier output versus semantic truth.** A green verifier establishes that a specific check, in a specific configuration, against a specific artifact version, did not fail. It does not establish that the change is correct, and a red verifier does not establish that the change is wrong; the verifier itself can time out, flake, or test the wrong revision. Ge and Zhang ([2026](https://arxiv.org/abs/2602.02307)) measured this directly in 1,960 open-source Java projects: 3.2 percent of GitHub Actions builds were rerun, and 67.73 percent of those rerun builds were flaky, affecting 1,055 projects. I read that as a preprint measurement of rerun builds specifically, not a claim that two-thirds of all builds are flaky, but it is enough to establish that verifier output and software state are distinct signals.
+**Verifier output versus semantic truth.** A green verifier establishes that a specific check, in a specific configuration, against a specific artifact version, did not fail. It does not establish that the change is correct, and a red verifier does not establish that the change is wrong; the verifier itself can time out, flake, or test the wrong revision. Ge and Zhang ([2026](https://arxiv.org/abs/2602.02307)) measured this directly in 1,960 open-source Java projects: 3.2 percent of GitHub Actions builds were rerun, and 67.73 percent of those rerun builds were flaky, affecting 1,055 projects. I read that as a measurement of rerun builds specifically, not a claim that two-thirds of all builds are flaky, but it is enough to establish that verifier output and software state are distinct signals.
 
-## The logical factory decomposition
+## A reference lifecycle for logical work
 
-The responsibilities in Figure [1.1](#fig:ch07-decomposition){reference-type="ref" reference="fig:ch07-decomposition"} are logical, not physical. A small deployment can host all of them in one process and one database; a large one can distribute them across services. What matters is that each responsibility exists, has an owner, and is not silently fused with its neighbors. This is not a microservice count.
-
-<figure id="fig:ch07-decomposition">
-<embed src="../manuscript/figures/ch07-factory-decomposition.pdf" style="width:100.0%" />
-<figcaption>The eight logical responsibilities of a software factory: admission policy decides what work is accepted at what priority and budget; the durable work ledger is the source of truth for logical work, states, epochs, and attempt history; the control plane assigns attempts, tracks liveness, and grants ownership epochs; disposable workers execute attempts with no authority of their own; versioned artifacts bind each branch, diff, or image to the attempt that produced it; independent verification binds evidence to the artifact version it observed; the publication boundary is the only fenced, idempotent path to external commitment; and reconciliation reads actual external state and resolves record-world conflict as a standing loop, not an incident procedure.</figcaption>
-</figure>
-
-Two structural points. First, workers sit in the middle of the decomposition and own nothing durable. They read from the ledger, write candidate artifacts, and report. Every consequential transition happens above or below them, in components designed to survive their death. Second, reconciliation is a standing component, not an incident procedure. Any factory whose publication boundary can crash mid-effect will accumulate record-world disagreements at some background rate, and something must own resolving them.
-
-## The factory state machine
-
-Logical work moves through a state machine that the ledger owns, shown in Figure [1.2](#fig:ch07-state-machine){reference-type="ref" reference="fig:ch07-state-machine"}.
-
-<figure id="fig:ch07-state-machine">
-<embed src="../manuscript/figures/ch07-factory-state-machine.pdf" style="width:100.0%" />
-<figcaption>The ledger-owned state machine for logical work. The main path runs accepted, eligible, claimed under an ownership epoch, executing under an attempt, outcome_ready, verifying, publishing, complete. A worker’s self-report can move an attempt only to outcome_ready; only independently observed evidence moves work through verifying and publishing to complete. Side states absorb reality: blocked for unmet dependencies, failed and cancelled as terminal outcomes, superseded for work overtaken by newer intent, unknown_external_state for effects whose success cannot be established safely, and reconcile_required for contradictory durable records.</figcaption>
-</figure>
-
-`accepted` means admission recorded the work durably. `eligible` means its dependencies and budget allow scheduling. `claimed` binds the work to an ownership epoch; `executing` binds it further to a specific attempt. `outcome_ready` means an attempt has produced a candidate artifact. `verifying` and `publishing` are separate states because they are separate failure domains.
-
-The transitions are keyed to a small identity vocabulary, used consistently through the rest of the book:
+The distinctions become operational as identities. Each names one fact the factory must be able to recover without asking the failed worker:
 
 <table>
 <caption>Identity vocabulary used through the rest of the book.</caption>
@@ -2038,6 +2008,10 @@ The transitions are keyed to a small identity vocabulary, used consistently thro
 <td style="text-align: left;">stable logical work; the intent that should happen once logically</td>
 </tr>
 <tr>
+<td style="text-align: left;"><code>input_state_id</code></td>
+<td style="text-align: left;">the repository or repositories, branches, and revisions against which the attempt was planned and executed</td>
+</tr>
+<tr>
 <td style="text-align: left;"><code>ownership_epoch</code></td>
 <td style="text-align: left;">monotonic generation of write authority over that work</td>
 </tr>
@@ -2051,56 +2025,74 @@ The transitions are keyed to a small identity vocabulary, used consistently thro
 </tr>
 <tr>
 <td style="text-align: left;"><code>verification_id</code></td>
-<td style="text-align: left;">verifier configuration and inputs used to accept or reject an artifact version</td>
+<td style="text-align: left;">one verification execution, including the artifact, verifier version, environment, and inputs it observed</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>effect_id</code></td>
-<td style="text-align: left;">one logical externally visible effect; the idempotency key at the boundary</td>
+<td style="text-align: left;">one logical externally visible mutation; an idempotency key may represent this identity at a boundary</td>
 </tr>
 </tbody>
 </table>
 
-The line that matters most: a model saying "done" can move an attempt to `outcome_ready`. Only independently observed evidence should move logical work through `verifying` and `publishing` to `complete`. The agent's self-report is a scheduling signal, telling the factory an artifact exists and is worth verifying. It is never an acceptance signal.
+`input_state_id` is the identity most specific to code work. Without it, the failure "tests passed against a repository revision three merges old" can be described but not expressed: nothing in the record says which state the attempt actually observed. For cross-repository work it can point to a manifest of several repository-and-revision pairs. An `effect_id` is not itself the destination's idempotency key; the key is one implementation of the identity contract at a boundary that supports it.
 
-## Factory invariants
+Figure [1.1](#fig:ch07-decomposition){reference-type="ref" reference="fig:ch07-decomposition"} shows how the identities relate. It is a model of identities and boundaries, not a required service architecture. Three obligations follow from it, stated here in their architecture-neutral form. First, no authoritative fact required for recovery or publication should exist only in a worker. A worker may create durable checkpoints, commits, logs, or private attempt references; it cannot unilaterally make them authoritative, and recovery must not depend on the failed worker's private memory. Second, every externally visible effect crosses a named, protected boundary. Third, whenever local and external state can diverge, an owned reconciliation path must exist, because any factory whose publication boundary can crash mid-effect will accumulate record-world disagreements at some background rate.
 
-Later chapters reference these by identifier, so I state them compactly here.
+<figure id="fig:ch07-decomposition">
+<embed src="../manuscript/figures/ch07-factory-decomposition.pdf" style="width:100.0%" />
+<figcaption>The identity and boundary model. Logical work carries an ownership epoch granting authority to an attempt, an input state the attempt observes, and an effect identity for each external commitment. The attempt produces a candidate artifact bound to a verification record; the external commitment is paired with an owned reconciliation path. Authoritative facts live on the work side of each boundary, never only in the worker.</figcaption>
+</figure>
 
-- **I1** Accepted work cannot silently disappear. The ledger is durable and live: every accepted `work_id` reaches a terminal state or remains visibly pending.
+Logical work and attempts move through separate lifecycles, shown in Figure [1.2](#fig:ch07-state-machine){reference-type="ref" reference="fig:ch07-state-machine"}. The distinction the figure enforces is the one the opening case turned on: the death of an attempt is an event in the attempt lifecycle, and by itself it moves logical work nowhere. Work under an ownership epoch stays owned across a retryable attempt failure; an ordinary retry creates a new `attempt_id` under the same epoch, while reassignment to a different executor creates a new epoch. A terminal attempt failure does not terminate the work either; work policy decides whether the work re-enters eligibility, blocks, or fails. Read-only work whose accepted outcome requires no external effect can complete without publication; work whose outcome requires one passes through the effect boundary, and an unresolvable outcome parks the work in `unknown_external_state` or `reconcile_required` rather than guessing.
 
-- **I2** Authority is generation-scoped. Only the current `ownership_epoch` may commit a mutation at a protected boundary, and a superseded worker must be rejected even if it is still running. This is fencing, and it is enforced at the boundary, not inferred from the lease.
+<figure id="fig:ch07-state-machine">
+<embed src="../manuscript/figures/ch07-factory-state-machine.pdf" style="width:100.0%" />
+<figcaption>Separate lifecycles for logical work and for attempts. Logical work runs accepted, eligible, owned under an epoch, complete, with side states for blocked, unknown external state, and reconciliation. Attempts run created, executing, outcome ready, verification under the current epoch; a retryable failure produces a new attempt under the same work, a terminal failure defers to work policy, and reassignment opens a new epoch. A worker’s self-report can move an attempt only to outcome ready; only independently observed evidence completes logical work.</figcaption>
+</figure>
 
-- **I3** Stale completions cannot advance logical state. A durable transition validates generation and attempt identity, not the scheduler's belief about who is running.
+A model saying "done" can move an attempt to outcome ready. Only independently observed evidence should complete logical work. The agent's self-report is a scheduling signal, telling the factory an artifact exists and is worth verifying. It is never an acceptance signal.
 
-- **I4** Retries preserve logical identity. A retry is a new `attempt_id` under the same `work_id`, never a duplicate work item.
+## Six factory contracts
 
-- **I5** Externally visible effects are safe under redelivery or explicitly uncertain: an idempotency key, an atomic effect-plus-dedup record, natural convergence, adapter-owned reconciliation, or an explicit `unknown_external_state`. No generic exactly-once claim across a boundary that cannot provide it.
+The lifecycle holds only if the factory enforces a set of obligations. Later chapters cite them by identifier (I1 through I11), so the identifiers are stated here; the full normative statements, in machine-testable form, live in the repository artifact [`protocols/factory-contracts.yaml`](https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/factory-contracts.yaml). They are not all properties of the same kind: some are safety properties, some are liveness or visibility obligations, and some are design rules about recovery code and evidence, so I group them as six contract families rather than presenting them as a uniform formal list.
 
-- **I6** Contradictory durable records trigger reconciliation, not guesswork. Precedence follows declared authority.
+**Work continuity and retry identity (I1, I4).** Accepted work cannot silently disappear: every accepted `work_id` reaches a terminal state or remains visibly pending. A retry is a new `attempt_id` under the same `work_id`, never a duplicate work item.
 
-- **I7** Evidence is version-bound. A verifier result or retrieved fact is valid only for the `artifact_version` or state it observed.
+**Generation-scoped authority (I2, I3).** Only the current `ownership_epoch` may commit a mutation at a protected boundary, and a superseded worker must be rejected even if it is still running; this is fencing, enforced at the boundary, not inferred from the lease (I2). A stale completion cannot advance logical state: a durable transition validates generation and attempt identity, not the scheduler's belief about who is running (I3).
 
-- **I8** Verifier failure is distinct from software failure. An infrastructure timeout or flake is not a semantic defect, and a pass establishes only what that verifier can detect.
+**External-effect safety (I5).** Externally visible effects are safe under redelivery or explicitly uncertain: an idempotency key, an atomic effect-plus-dedup record, natural convergence, adapter-owned reconciliation, or an explicit `unknown_external_state`. No generic exactly-once claim across a boundary that cannot provide it.
 
-- **I9** Admissible work cannot starve invisibly.
+**Record and evidence consistency (I6, I7, I8).** Contradictory durable records trigger reconciliation under declared authority precedence, not guesswork (I6). Evidence is version-bound: a verifier result or retrieved fact is valid only for the `artifact_version` or input state it observed (I7). Verifier failure is distinct from software failure: an infrastructure timeout or flake is not a semantic defect, and a pass establishes only what that verifier can detect (I8).
 
-- **I10** Recovery preserves the same invariants as normal execution. Recovery paths are production code with authority and must be tested as such.
+**Visible liveness and safe recovery (I9, I10).** Admissible work cannot starve invisibly (I9). Recovery preserves the same obligations as normal execution: recovery paths are production code with authority and must be tested as such (I10).
 
-- **I11** Consequential transitions are causally attributable: work, attempt, actor, input state, authority generation, requested effect, observed response, and resulting durable state.
+**Causal attribution (I11).** Consequential transitions are causally attributable: work, attempt, actor, input state, authority generation, requested effect, observed response, and resulting durable state.
 
-None of these invariants mention model quality. A factory can hold all eleven while running a mediocre model, and the result is a system that reliably produces mediocre candidates and accurately reports their status. A factory that violates them while running an excellent model produces excellent candidates it loses, duplicates, or misreports.
+None of these contracts mention model quality. A factory can hold all of them while running a mediocre model, and the result is a system that reliably produces mediocre candidates and accurately reports their status. A factory that violates them while running an excellent model produces excellent candidates it loses, duplicates, or misreports. Model capability does not discharge any of these obligations. A stronger model may change their load and the frequency with which they are exercised, but the factory still owns the controls, durable state, and evidence required to enforce them.
 
-## Reliability dimensions
+The distributed-systems literature I draw on through Parts III to VI transfers directionally to agent factories unless a claim is restricted to the evaluated system. Chubby's lock generations ([Burrows 2006](https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems)) supply the fencing mechanism behind I2, developed in Chapter 18; Borg and Omega ([Verma et al. 2015](https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/); [Schwarzkopf et al. 2013](https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/)) supply admission and shared-state scheduling mechanisms behind I1 and I9, developed in Chapter 19. I transfer their mechanisms, not their constants, and none of this machinery addresses model nondeterminism: durability preserves which stochastic decision occurred, not its correctness.
 
-The invariants partition into dimensions an operator can assess separately: control-plane reliability (I1, I9), execution reliability (I4), authority and concurrency safety (I2, I3), external-effect reliability (I5), artifact and record consistency (I6, I7), verification reliability (I8), semantic correctness (the model's contribution, gated by verification and review), capacity and recovery (I9, I10), and auditability (I11). A deployment can be strong on one dimension and weak on another, and an aggregate success rate hides which.
+## Audit one logical work item
 
-> **Agent reliability is not factory reliability.** Improving the model improves one dimension, semantic correctness of candidate artifacts. Every other dimension is determined by the surrounding system, and a defect in any of them can convert a correct candidate into a lost, duplicated, stale, or falsely reported result.
+The model earns its place only if it can be checked against a running system. The following procedure audits one work item and requires no new infrastructure, only the records the factory already keeps.
 
-The distributed-systems literature I draw on through Parts III to VI transfers directionally to agent factories unless a claim is restricted to the evaluated system. Chubby's lock generations ([Burrows 2006](https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems)) supply the fencing mechanism behind I2; Borg and Omega ([Verma et al. 2015](https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/); [Schwarzkopf et al. 2013](https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/)) supply admission and shared-state scheduling mechanisms behind I1 and I9. I transfer their mechanisms, not their constants, and none of this machinery addresses model nondeterminism: durability preserves which stochastic decision occurred, not its correctness.
+1.  Select one recent work item that produced or attempted an external effect.
 
-## Where the rest of the book fits
+2.  Recover its `work_id`, `input_state_id`, `ownership_epoch`, `attempt_id`, `artifact_version`, `verification_id`, and `effect_id`.
 
-The chapters that follow each own part of this frame. Chapter 8 engineers the containment and authority boundary around a worker: what an attempt can reach and what evidence acceptance requires. Chapter 9 engineers the ledger side: durable state, effect contracts, and idempotent retries (I1, I4, I5). Chapter 10 tests the claims through replay and fault injection, including the recovery paths that I10 promotes to production code. Chapter 11 builds the causal diagnosis that I11 makes possible. Chapter 13 applies version-bound evidence (I7) to repository retrieval and freshness. Chapters 16 and 17 place independent verification and human authority at the acceptance and publication boundaries. Chapter 18 addresses concurrency and task topology under I2 and I3, and Chapter 19 addresses capacity, admission, and scheduling under I1 and I9. Where a chapter tightens or restates an invariant, it cites the identifier given here rather than redefining it.
+3.  Name the authoritative owner of each fact and the boundary at which each consequential mutation is accepted.
+
+4.  Determine whether a stale attempt can still mutate the ledger, branch, artifact pointer, or external system.
+
+5.  Determine what the factory records when the external effect may have committed but acknowledgement is absent.
+
+6.  Verify that the accepted artifact and its verification record refer to the same immutable version.
+
+7.  Inject either a late completion or a lost acknowledgement, using the fault harness from Chapter 10, and retain the resulting event record.
+
+8.  Record every question the existing trace cannot answer.
+
+Retain the output: an identity map, an authority map, an effect contract, one fault result, and the list of unobservable assumptions. The unanswerable questions in step 8 are the audit's most valuable product; each is a fact the factory would need during a real incident and does not record. Chapter 8 begins the engineering work, at the containment and authority boundary around a single worker, and the chapters after it develop the ledger, replay, diagnosis, verification, topology, and capacity machinery that these contracts require.
 
 **Portable claim.** The factory, not the worker, owns the reliability promise.
 
@@ -2114,17 +2106,15 @@ The chapters that follow each own part of this frame. Chapter 8 engineers the co
 
 - CNCF TAG Security, [Secure Software Factory reference architecture](https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/). Contemporary factory vocabulary, scoped to supply-chain security rather than fault tolerance; I borrow the vocabulary, not the guarantees.
 
-**Directional systems evidence**
+**Directional evidence**
 
 - Burrows ([2006](https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems)), Chubby, OSDI. The lock-generation sequencer behind fencing (I2); a coordination-service mechanism, not agent evidence, developed in Chapter 18.
 
 - Schwarzkopf et al. ([2013](https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/)), Omega, and Verma et al. ([2015](https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/)), Borg. Shared-state scheduling and admission-control mechanisms behind I1 and I9; their measured parameters do not transfer.
 
-**Preprint measurement**
+- Ge and Zhang ([2026](https://arxiv.org/abs/2602.02307)), flaky GitHub Actions builds, arXiv:2602.02307. 1,960 Java projects; 3.2 percent of builds rerun; 67.73 percent of rerun builds flaky; 1,055 projects affected. A preprint; cited for the verifier-output-versus-software-state distinction within its rerun-build scope only.
 
-- Ge and Zhang ([2026](https://arxiv.org/abs/2602.02307)), flaky GitHub Actions builds, arXiv:2602.02307. 1,960 Java projects; 3.2 percent of builds rerun; 67.73 percent of rerun builds flaky; 1,055 projects affected. Cited for the verifier-output-versus-software-state distinction within its rerun-build scope only.
-
-**Practitioner cases**
+**Corroborating practitioner cases**
 
 - OpenAI ([2026](https://openai.com/index/open-source-codex-orchestration-symphony/)), Symphony orchestration, and Cloudflare ([2026](https://blog.cloudflare.com/astro-issue-triage/)), Astro issue-triage factory. Corroborating convergence on the ledger-scheduler-worker-gate decomposition from the operating teams; not controlled evidence that the decomposition improves any measured outcome.
 <!-- tex-sync:end -->
@@ -2425,7 +2415,7 @@ Containment limits the damage a live process can cause. Chapter 9 turns to what 
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the container refusal, disabled networking, and recorded isolation posture described above, all of which are narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch09-persistent-state-durable-workflows-idempotent-retries.tex","tex_sha256":"c5edb45bdbc6cb3825c56005b5bc89ed368efe51a02ba6e7ea49724974b47baa","markdown_sha256":"bd9ebea95cf4fa21a652e69e8f757151d8a5fb1d3a2e8af67280b5e3a7a3f514"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch09-persistent-state-durable-workflows-idempotent-retries.tex","tex_sha256":"a55366e0074bef5de41fc2a67c1dd526f00281efd4f183baada8647b4b186faa","markdown_sha256":"f7071296c15a1866ab896aef79200d92d4dbee04f978c36908b64cdcb0c3d584"} -->
 # Persistent agent state, durable workflows, and idempotent retries
 
 > **Evidence profile.** 0 strong $\cdot$ 12 directional $\cdot$ 3 corroborating $\cdot$ 1 null or conflicting evidence items across 3 developed practices (ERCA-124, ERCA-128, ERCA-130).
@@ -2576,7 +2566,7 @@ The discussion so far uses several words whose distinctions carry the argument. 
 </tr>
 <tr>
 <td style="text-align: left;">Attempt</td>
-<td style="text-align: left;">One execution of that work; a retry is a new attempt at the same logical work (invariant I4, retries preserve logical identity).</td>
+<td style="text-align: left;">One execution of that work; a retry is a new attempt at the same logical work (contract I4, retries preserve logical identity).</td>
 </tr>
 <tr>
 <td style="text-align: left;">Delivery</td>
@@ -2592,7 +2582,7 @@ The discussion so far uses several words whose distinctions carry the argument. 
 </tr>
 <tr>
 <td style="text-align: left;">Idempotency</td>
-<td style="text-align: left;">The contract under which a repeated external commit is indistinguishable from a single one (invariant I5, effects are safe under redelivery or explicitly uncertain).</td>
+<td style="text-align: left;">The contract under which a repeated external commit is indistinguishable from a single one (contract I5, effects are safe under redelivery or explicitly uncertain).</td>
 </tr>
 <tr>
 <td style="text-align: left;">Reconciliation</td>
@@ -2614,13 +2604,13 @@ Key design determines which work the contract covers. A fresh attempt identifier
 
 The downstream implementation also needs an atomic claim on that key. Two workers may receive the same step concurrently after a timeout or lease dispute. If both check for a cached result and then perform the effect before either stores the result, the lookup adds latency without preventing duplication. A unique transactional record, compare-and-set operation, or equivalent mechanism must decide which worker owns the invocation before the effect occurs.
 
-The lease dispute behind that scenario has a canonical precedent. Burrows ([2006](https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems)) describes how Chubby, Google's lock service, handles exactly this: a lease expiration tells the control plane that authority over a resource may be reassigned. It does not stop the old process, and it does not retract a request that process sent before losing the lease and that is still delayed in the network. Safety therefore requires the mutation boundary itself to reject obsolete authority, which Chubby supports with a sequencer, a lock generation number that the receiving server validates before applying the request. Retries and recovery in an agent factory create the same overlap: attempt B can hold current authority while attempt A's delayed external request is still in flight. The idempotency key and the authority generation answer different questions. The key deduplicates repeated attempts at the same logical work; the generation lets a protected boundary reject a superseded owner even while that owner is still running (invariant I2, authority is generation-scoped). This is directional evidence from a coordination service, not from agent systems, and Chapter 18 develops the fencing mechanism fully. Here it marks the limit of what retry machinery alone can make safe.
+The lease dispute behind that scenario has a canonical precedent. Burrows ([2006](https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems)) describes how Chubby, Google's lock service, handles exactly this: a lease expiration tells the control plane that authority over a resource may be reassigned. It does not stop the old process, and it does not retract a request that process sent before losing the lease and that is still delayed in the network. Safety therefore requires the mutation boundary itself to reject obsolete authority, which Chubby supports with a sequencer, a lock generation number that the receiving server validates before applying the request. Retries and recovery in an agent factory create the same overlap: attempt B can hold current authority while attempt A's delayed external request is still in flight. The idempotency key and the authority generation answer different questions. The key deduplicates repeated attempts at the same logical work; the generation lets a protected boundary reject a superseded owner even while that owner is still running (contract I2, authority is generation-scoped). This is directional evidence from a coordination service, not from agent systems, and Chapter 18 develops the fencing mechanism fully. Here it marks the limit of what retry machinery alone can make safe.
 
 Execution caching can extend the same rule through a call graph. Psarakis et al. ([2023](https://arxiv.org/abs/2312.06893)) describe a runtime that caches results by invocation identity so a repeated parent call reuses completed child calls. Within that runtime's transactional boundary, retried failed calls, recorded completed results, and call ordering can compose into a strong guarantee. An external service that ignores the invocation identity remains outside that boundary, regardless of the runtime's delivery terminology.
 
 This scope rules out a blanket claim that a completed invocation never runs twice. A step that succeeded externally but remained unrecorded may execute again because the runtime has no completion record to consult. Execution is at least once. Results committed within the runtime boundary may be recorded exactly once. Safety for an in-flight external effect still depends on the contract at that effect's boundary. ExoFlow's design, discussed above, states the same scope from the runtime's side: exactly-once is a recovery-layer contract over tasks whose nondeterminism and external communication have been declared, not a property that task execution acquires by running under a workflow engine.
 
-Some external systems provide this contract directly. Payment APIs may accept a client-supplied key and bind it to the first accepted request. A database can commit the business change and invocation record in one transaction. A content-addressed object store can make repeated writes of identical content under the same name converge. When a tool offers no equivalent mechanism, the workflow must add an adapter that owns deduplication or treat recovery as an unknown-state decision (invariant I5).
+Some external systems provide this contract directly. Payment APIs may accept a client-supplied key and bind it to the first accepted request. A database can commit the business change and invocation record in one transaction. A content-addressed object store can make repeated writes of identical content under the same name converge. When a tool offers no equivalent mechanism, the workflow must add an adapter that owns deduplication or treat recovery as an unknown-state decision (contract I5).
 
 Meyers and Zienert (2025) also report that rewriting operations for idempotency exposed and corrected pre-existing retry defects. The rewrite changed application behavior at the engine boundary. The engine could not infer the required contract from the old code. This remains directional evidence from the adopting team.
 
@@ -2634,7 +2624,7 @@ Idempotence also belongs at the durable step boundary before the external side-e
 
 The boundary should not surround every function call. Each durable step adds scheduling, serialization, storage, and history-reading work. Cheap, deterministic calculations can simply run again. A durable boundary is justified when work is expensive, slow, externally visible, or impossible to reproduce from recorded inputs.
 
-Huang et al. ([2026](https://www.usenix.org/conference/nsdi26/presentation/huang)) arrive at the same partition from a different direction. Fractal distributes shell scripts fault-tolerantly, and to do so it must classify what a script does: work that can simply be recomputed, state that can be reconstructed from recorded inputs, and side-effectful regions whose repeated execution is not observationally harmless. The classification maps directly onto agent tool execution. Rerunning grep, a parser, or a compiler is recomputable work; its repetition costs time and nothing else. Rerunning git push, pull-request creation, ticket creation, or a deployment is a side-effectful region, and repeating it changes what the world observes. The durable-boundary guidance above is this same partition stated as placement advice: recomputable work can sit outside the boundary, while side-effectful regions need a recorded identity and an effect contract (invariant I5). Fractal is systems evidence about shell-script distribution; I transfer the classification, not any measured overhead or recovery rate.
+Huang et al. ([2026](https://www.usenix.org/conference/nsdi26/presentation/huang)) arrive at the same partition from a different direction. Fractal distributes shell scripts fault-tolerantly, and to do so it must classify what a script does: work that can simply be recomputed, state that can be reconstructed from recorded inputs, and side-effectful regions whose repeated execution is not observationally harmless. The classification maps directly onto agent tool execution. Rerunning grep, a parser, or a compiler is recomputable work; its repetition costs time and nothing else. Rerunning git push, pull-request creation, ticket creation, or a deployment is a side-effectful region, and repeating it changes what the world observes. The durable-boundary guidance above is this same partition stated as placement advice: recomputable work can sit outside the boundary, while side-effectful regions need a recorded identity and an effect contract (contract I5). Fractal is systems evidence about shell-script distribution; I transfer the classification, not any measured overhead or recovery rate.
 
 A boundary can also be too broad. In another **local artifact**, a transient read shared one deduplication unit with an irreversible mutation. When the read failed, the system marked the whole unit terminal, poisoned the claim, and stopped reporting work it had never performed. A watchdog consulted the same fail-closed store and also went silent. This is narrative illustration rather than evidence for the general design. Separating the retryable read from the mutation claim would have preserved an accurate pending state.
 
@@ -2713,10 +2703,10 @@ Recorded state makes a run resumable. Chapter 10 makes the recovery claim replay
 - Directional evidence: Trofimov, Kuralenok, Marshalkin & Novikov (2019). Delivery, consistency, and determinism: rethinking guarantees in distributed stream processing. arXiv:1907.06250.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch10-replayable-traces-fault-injection-recovery.tex","tex_sha256":"8a52466834e619b6c50cdcfc0f5336df7bbdaed0b9a93f79a58b7658ab44fee3","markdown_sha256":"17325dfc835fe0aab076e0b0ad8576b94bdd263bc60c5e4734079d876b0e5c75"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch10-replayable-traces-fault-injection-recovery.tex","tex_sha256":"42a21113548a92f9b8d23e523503f0f645df71068842ecee8c7c1a22071ba7a6","markdown_sha256":"309150f33bda7e9f6ba1d6eac038bcd55c67714052aedefb6915972bba191119"} -->
 # Replayable traces and fault-injection recovery testing
 
-> **Evidence profile.** 1 strong $\cdot$ 8 directional $\cdot$ 1 direct preprint $\cdot$ 0 corroborating evidence items across 2 developed practices (ERCA-097, ERCA-127).
+> **Evidence profile.** 1 strong $\cdot$ 9 directional $\cdot$ 0 corroborating $\cdot$ 0 null or conflicting evidence items across 2 developed practices (ERCA-097, ERCA-127). One directional item is a preprint.
 >
 > **Chapter claim.** Recovery is a measured property.
 
@@ -2910,7 +2900,7 @@ If it passes, the harness may be:
 
 A control expected to fail is useful because a false pass is otherwise easy to mistake for fault tolerance. It detects only the defect it was designed to expose, however, and a subtler recovery failure may still pass both variants.
 
-The recovery path itself deserves the same suspicion as the failure. Li, Cai, and Lou ([2026](https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu)) studied production incidents in which the recovery action, not the original fault, caused the severe failure, and proposed previewing the effects of high-risk recovery operations before executing them. Their evidence comes from cloud infrastructure, so it transfers directionally, but the rule it supports is one this book already states as invariant I10: a recovery path is production code with authority. Test it against the same invariants as the normal path, and preview high-risk recovery effects when practical. The naive negative control above is one instance of this rule. The general instance is that every non-naive recovery adapter belongs in the kill-point sweep as a subject, not only as the mechanism under whose protection the sweep runs. A reconciliation routine that deletes a "duplicate" artifact, a cleanup step that releases a lease still held by live work, and a retry policy that re-sends an uncertain external call are all recovery actions capable of causing the incident they exist to prevent.
+The recovery path itself deserves the same suspicion as the failure. Li, Cai, and Lou ([2026](https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu)) studied production incidents in which the recovery action, not the original fault, caused the severe failure, and proposed previewing the effects of high-risk recovery operations before executing them. Their evidence comes from cloud infrastructure, so it transfers directionally, but the rule it supports is one this book already states as contract I10: a recovery path is production code with authority. Test it against the same invariants as the normal path, and preview high-risk recovery effects when practical. The naive negative control above is one instance of this rule. The general instance is that every non-naive recovery adapter belongs in the kill-point sweep as a subject, not only as the mechanism under whose protection the sweep runs. A reconciliation routine that deletes a "duplicate" artifact, a cleanup step that releases a lease still held by live work, and a retry policy that re-sends an uncertain external call are all recovery actions capable of causing the incident they exist to prevent.
 
 The kill-point sweep should include:
 
@@ -2951,17 +2941,17 @@ The five kill points strike one worker's lifecycle. Once a factory runs multiple
 
 Sun et al. ([2022](https://www.usenix.org/system/files/osdi22-sun.pdf)) tested this family directly for Kubernetes reconciliation controllers. Sieve perturbs the controller's view of cluster state, feeding it stale, intermediate, or unobserved states, and detects bugs with differential oracles that compare state transitions between perturbed and unperturbed executions. The evaluated systems are cluster controllers, so the transfer is directional, but the factory analogue is exact: a factory control plane is a reconciliation controller over work items, and the corresponding fault is a controller that believes a worker still owns a task while the repository or another controller has moved on. The differential oracle also transfers: run the same workload with and without the view perturbation and compare the resulting state transitions, rather than asking only whether the perturbed run ended in a passing state.
 
-The table below lists the ambiguity faults I inject alongside the kill sweep. Invariant identifiers refer to the factory invariants defined in Chapter 7. Each row names the fault, the invariant it tests, and the observable behavior an acceptable runtime must exhibit.
+The table below defines the ambiguity faults I add to the test menu; it is a protocol, not an executed result. Contract identifiers refer to the factory contracts defined in Chapter 7. Each row names the fault, the contract it tests, and the observable behavior an acceptable runtime must exhibit. Five representative rows appear here; the full matrix, including controller-recovery, verifier-failure, schema-compatibility, history-compaction, and retry-storm faults that Chapters 10 and 19 develop in their own sections, is published as a machine-readable protocol in the repository artifact [`protocols/distributed-ambiguity-faults.yaml`](https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/distributed-ambiguity-faults.yaml).
 
 <table>
-<caption>Distributed ambiguity faults, the invariant each tests, and the observable behavior an acceptable runtime must exhibit.</caption>
+<caption>Representative distributed ambiguity faults, the contract each tests, and the observable behavior an acceptable runtime must exhibit. The full matrix is published in the companion repository.</caption>
 <thead>
 <tr>
 <th style="text-align: left;"><div class="minipage">
 <p>Fault</p>
 </div></th>
 <th style="text-align: left;"><div class="minipage">
-<p>Invariant</p>
+<p>Contract</p>
 </div></th>
 <th style="text-align: left;"><div class="minipage">
 <p>Expected observable behavior</p>
@@ -2974,21 +2964,21 @@ The table below lists the ambiguity faults I inject alongside the kill sweep. In
 <p>Fault</p>
 </div></td>
 <td style="text-align: left;"><div class="minipage">
-<p>Invariant</p>
+<p>Contract</p>
 </div></td>
 <td style="text-align: left;"><div class="minipage">
 <p>Expected observable behavior</p>
 </div></td>
 </tr>
 <tr>
-<td style="text-align: left;">Delayed response delivered after the retry has started</td>
-<td style="text-align: left;">I5</td>
-<td style="text-align: left;">The late response and the retry resolve to one logical effect; the effect ledger shows one committed <code>effect_id</code> or an explicit <code>unknown_external_state</code>, never two commits.</td>
-</tr>
-<tr>
 <td style="text-align: left;">Response lost after external commit</td>
 <td style="text-align: left;">I5</td>
 <td style="text-align: left;">The runtime treats the call as uncertain, reconciles against external state before re-sending, and records the reconciliation outcome; no blind re-send.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Delayed response delivered after the retry has started</td>
+<td style="text-align: left;">I5</td>
+<td style="text-align: left;">The late response and the retry resolve to one logical effect; the effect ledger shows one committed <code>effect_id</code> or an explicit <code>unknown_external_state</code>, never two commits.</td>
 </tr>
 <tr>
 <td style="text-align: left;">Worker loses its lease but continues running</td>
@@ -3001,54 +2991,14 @@ The table below lists the ambiguity faults I inject alongside the kill sweep. In
 <td style="text-align: left;">The stale completion is rejected by generation and attempt identity; logical state reflects the new attempt only, and the rejection is recorded.</td>
 </tr>
 <tr>
-<td style="text-align: left;">Control plane restarts while workers continue</td>
-<td style="text-align: left;">I6</td>
-<td style="text-align: left;">The restarted controller reconciles against durable worker and repository state before issuing new authority; no work item is double-assigned or orphaned by controller amnesia.</td>
-</tr>
-<tr>
-<td style="text-align: left;">Control plane observes stale artifact state</td>
-<td style="text-align: left;">I6</td>
-<td style="text-align: left;">Decisions taken on the stale view are detected at the next protected boundary and trigger reconciliation; the differential oracle shows no divergent committed transition.</td>
-</tr>
-<tr>
 <td style="text-align: left;">Repository state changes between validation and publication</td>
 <td style="text-align: left;">I6</td>
 <td style="text-align: left;">Publication fails closed: the runtime detects that the validated version is no longer the head, refuses to publish against changed state, and routes to re-validation or reconciliation.</td>
 </tr>
-<tr>
-<td style="text-align: left;">Verifier times out, flakes, or contradicts itself on rerun</td>
-<td style="text-align: left;">I8</td>
-<td style="text-align: left;">The runtime classifies the outcome as verifier failure, not software failure; no defect record is created from an infra timeout, and contradictory verdicts trigger rerun or escalation rather than acceptance of either verdict.</td>
-</tr>
-<tr>
-<td style="text-align: left;">External service reachable from the worker but not the controller</td>
-<td style="text-align: left;">I6</td>
-<td style="text-align: left;">The two components’ contradictory observations are reconciled by declared authority; the controller does not mark the effect failed while the worker’s committed effect record stands.</td>
-</tr>
-<tr>
-<td style="text-align: left;">Schema or workflow version changes during recovery</td>
-<td style="text-align: left;">I10</td>
-<td style="text-align: left;">Recovery either completes under an explicit compatibility path or fails closed with the version mismatch recorded; it never resumes by misreading old state under the new schema.</td>
-</tr>
-<tr>
-<td style="text-align: left;">History compaction boundary crossed before the failure</td>
-<td style="text-align: left;">I10</td>
-<td style="text-align: left;">Recovery from the compacted summary preserves the same invariant checks as recovery from full history; effects committed before compaction are still recognized and not repeated.</td>
-</tr>
-<tr>
-<td style="text-align: left;">Recovery queue competes with new work</td>
-<td style="text-align: left;">I10</td>
-<td style="text-align: left;">Recovery work and new admissions are both observable in queue metrics; recovery completes without starving admitted work indefinitely and without itself being starved invisibly.</td>
-</tr>
-<tr>
-<td style="text-align: left;">Synchronized retry wave after a dependency recovers</td>
-<td style="text-align: left;">I5, I10</td>
-<td style="text-align: left;">Retries are jittered or admission-limited; the dependency’s recovery does not trigger a duplicate-effect burst, and each retried effect still deduplicates by its idempotency key.</td>
-</tr>
 </tbody>
 </table>
 
-Each row is testable with the same discipline as the kill sweep: specify the claim, place the fault at the named interval, run the clean control with the same anchors, and check the typed event stream for the expected records. The rows referencing I5 need the effect ledger; the rows referencing I2 and I3 need fencing and identity checks at the mutation boundary; the rows referencing I6 need a declared reconciliation authority; the rows referencing I8 need the verifier-failure classification; the rows referencing I10 are recovery-path tests in the sense of the previous section and belong in the same sweep as the naive negative control.
+Each row is testable with the same discipline as the kill sweep: specify the claim, place the fault at the named interval, run the clean control with the same anchors, and check the typed event stream for the expected records. The rows referencing I5 need the effect ledger; the rows referencing I2 and I3 need fencing and identity checks at the mutation boundary; the row referencing I6 needs a declared reconciliation authority. The repository matrix extends the menu with controller-recovery and stale-view faults (I6), verifier-failure classification (I8), and schema-compatibility, history-compaction, recovery-queue, and retry-storm faults (I10), which are recovery-path tests in the sense of the previous section and belong in the same sweep as the naive negative control.
 
 ## Keep the result attached to its envelope
 
@@ -3170,14 +3120,14 @@ A trace detailed enough to replay is also the artifact a person reads when recov
 
 - Directional evidence: Sun et al. (2022), "Sieve," OSDI 2022. Evaluated on Kubernetes controllers; the view-perturbation faults and differential state-transition oracles transfer to factory control planes.
 
-- Directional evidence: Li, Cai, and Lou (2026), "Pilot Execution," NSDI 2026. Cloud-infrastructure incident evidence that recovery actions cause severe failures; supports treating recovery paths as production code under invariant I10.
+- Directional evidence: Li, Cai, and Lou (2026), "Pilot Execution," NSDI 2026. Cloud-infrastructure incident evidence that recovery actions cause severe failures; supports treating recovery paths as production code under contract I10.
 
 - Direct evidence, preprint: Zhao et al. (2026), "Failure as a Process," arXiv:2607.09510. 3,843 trajectories collected, 1,794 complete valid runs annotated across more than 63,000 steps; failure modeled as onset, evolution, and recovery.
 
 Author-system cases are narrative illustration, not evidence. The kill demonstration and publish-gate protocol are local artifacts.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch11-human-auditable-failure-analysis-taxonomy.tex","tex_sha256":"973a3c75e689ec6a51142e66181102b45d86f0970f2066e9f80594edd58d210a","markdown_sha256":"6a95c8f65cdd2c15eebc8c30cb4f117a91386c1df9bc53f527a7ff2affeccda0"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch11-human-auditable-failure-analysis-taxonomy.tex","tex_sha256":"defa0a48ad859e227621eab438d1e364d49b681d78e2a2592cb102aff853d39c","markdown_sha256":"cfada857d385349fdb0f600c6ec697b34bd602f878aada39d321d35e253e4861"} -->
 # Human-auditable failure analysis and taxonomy development
 
 > **Evidence profile.** 2 strong $\cdot$ 4 directional $\cdot$ 1 corroborating evidence items across 3 developed practices (ERCA-045, ERCA-046, ERCA-047).
@@ -3339,7 +3289,7 @@ Phase labels answer where in the run's reasoning a failure entered. The factory 
 
 This is a vocabulary, not a forced partition. Many failures form a chain across boundaries: stale retrieval induces a plausible but wrong plan, a worker implements it faithfully, and an adequate verifier detects it late. The annotation should preserve that chain rather than compress it into one exclusive category, and when the trace does not isolate a single originating boundary, the assignment stays unresolved with the missing observation named. The trace, not the taxonomy, is the ground truth; the categories exist to organize evidence the trace already contains.
 
-The vocabulary also sharpens the first-upstream rule. The benchmark that opened this chapter frames attribution as identifying the responsible agent, but an agent is sometimes the wrong causal unit. When the defect entered through shared state, a stale authority grant, a verifier gap, or a control-plane decision, naming the worker that touched the failure last, or first, misdirects the repair toward a component that behaved correctly given its inputs and obligations. That is the same argument this chapter already makes against blaming the detecting actor, extended across component boundaries. Invariant I11 in Chapter 7 states the precondition: consequential transitions must record work, attempt, actor, input state, and authority generation, or the boundary-level assignment cannot be made from evidence at all. Chapter 10's discussion of Zhao et al.'s trajectory annotations, which model failure as onset, evolution, and recovery rather than a terminal label, describes the process view this chain-preserving annotation depends on.
+The vocabulary also sharpens the first-upstream rule. The benchmark that opened this chapter frames attribution as identifying the responsible agent, but an agent is sometimes the wrong causal unit. When the defect entered through shared state, a stale authority grant, a verifier gap, or a control-plane decision, naming the worker that touched the failure last, or first, misdirects the repair toward a component that behaved correctly given its inputs and obligations. That is the same argument this chapter already makes against blaming the detecting actor, extended across component boundaries. Contract I11 in Chapter 7 states the precondition: consequential transitions must record work, attempt, actor, input state, and authority generation, or the boundary-level assignment cannot be made from evidence at all. Chapter 10's discussion of Zhao et al.'s trajectory annotations, which model failure as onset, evolution, and recovery rather than a terminal label, describes the process view this chain-preserving annotation depends on.
 
 Raj et al. ([2026](https://arxiv.org/abs/2607.28802)) organize 41 failure modes by the interaction edge where a fault originates and the component that owns the repair. The strongest of four automated judges reached Cohen's $\kappa=0.76$ against human category labels. The taxonomy is directional evidence for an interaction-centered diagnostic structure; the agreement result strongly supports reproducibility of those labels in the evaluated set, not causal correctness of an attribution.
 
@@ -3871,7 +3821,7 @@ Chapter 13 turns to the architecture around these measurements: cheap retrieval 
 - Corroboration for this entry: none on record. The other two entries in this chapter include author-system cases as illustrations rather than independent sources.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch13-localization-funnels-repository-indexes-freshness-checks.tex","tex_sha256":"563147b34b24b31eef10bfbc7e9cefd9fd0f51a4e07429fdcb75eb74b2de79aa","markdown_sha256":"b682ecfb636a81e57030ee13bb5765379f72f5c380f1b627f1d1581e3b018981"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch13-localization-funnels-repository-indexes-freshness-checks.tex","tex_sha256":"e5e9677e898063e54fbb9d1a85808b8434a40f9f6c0a1b63223474a37ef0c7bf","markdown_sha256":"7ca9717ea137569c5fa5324fb9e0a8f0cc3e9f991f90d4388df0dd0d10389c3d"} -->
 # Localization funnels, repository indexes, and freshness checks
 
 > **Evidence profile.** 6 strong $\cdot$ 5 directional $\cdot$ 0 corroborating evidence items across 3 developed practices (ERCA-078, ERCA-084, ERCA-174).
@@ -4050,7 +4000,7 @@ The maintenance cost is justified only while a named owner can show which reposi
 
 ## Admit only evidence tied to the current state
 
-Freshness is one instance of the state-consistency problem Chapter 7 states for the whole factory. A derived index, cache, or repository map describes a particular version of the world, and invariant I7 makes retrieved evidence valid only for the state it observed. Before that evidence may influence a mutation against another version, the consumer must know which version it describes. The retrieval system is therefore not a special case with its own freshness rules. It is one more producer of versioned records inside a system whose other components, workers, verifiers, and schedulers, already carry the same obligation.
+Freshness is one instance of the state-consistency problem Chapter 7 states for the whole factory. A derived index, cache, or repository map describes a particular version of the world, and contract I7 makes retrieved evidence valid only for the state it observed. Before that evidence may influence a mutation against another version, the consumer must know which version it describes. The retrieval system is therefore not a special case with its own freshness rules. It is one more producer of versioned records inside a system whose other components, workers, verifiers, and schedulers, already carry the same obligation.
 
 That framing also sharpens the observability question. What code exists is only part of it; the operable question is which state the agent, the scheduler, the verifier, and the publisher each observed when they acted. The mechanisms in this section, identity checks at the retrieval boundary, atomic generation publication, and periodic reconciliation, exist to make that question answerable for the retrieval component.
 
@@ -4058,7 +4008,7 @@ Weng et al. ([2026](https://arxiv.org/abs/2605.14478)) changed Python helper si
 
 Under stale-only retrieval, Qwen2.5-Coder-7B-Instruct produced 15 outputs incompatible with the current helper signature, and gpt-4.1-mini produced 13. Both models received the same 17 examples. Under current-only retrieval, neither produced an incompatible output.
 
-These paired results support a narrow architectural rule: retrieved code should enter model context only when the system can tie it to the repository state the worker is allowed to modify. Rejecting evidence whose state identity does not match is invariant I7 enforced at admission, and it follows invariant I6's discipline: a record that contradicts the current state triggers reconciliation, not a guess about which version is right.
+These paired results support a narrow architectural rule: retrieved code should enter model context only when the system can tie it to the repository state the worker is allowed to modify. Rejecting evidence whose state identity does not match is contract I7 enforced at admission, and it follows contract I6's discipline: a record that contradicts the current state triggers reconciliation, not a guess about which version is right.
 
 A stale result is an active hazard rather than an ordinary retrieval miss. It offers a concrete and plausible description of an API that no longer exists. High rank cannot compensate for evidence drawn from the wrong state.
 
@@ -4080,11 +4030,11 @@ A freshness gate needs two identities:
 
 - the repository state the worker is allowed to edit.
 
-A commit identity can represent a clean tree. When relevant files contain uncommitted changes, the commit alone is insufficient because it describes a state different from the worker's current view. The gate then needs content identities for the affected files or another representation of the working state. The commit-plus-working-tree pair also names where authority actually lives. The mutable target invariant I2 protects is the working tree the worker can change, not the commit behind it, so the identity the gate compares against must describe that target, not an ancestor of it.
+A commit identity can represent a clean tree. When relevant files contain uncommitted changes, the commit alone is insufficient because it describes a state different from the worker's current view. The gate then needs content identities for the affected files or another representation of the working state. The commit-plus-working-tree pair also names where authority actually lives. The mutable target contract I2 protects is the working tree the worker can change, not the commit behind it, so the identity the gate compares against must describe that target, not an ancestor of it.
 
 Every retrieval response should carry its indexed state identity so the caller can compare it with the working state before exposing any snippet to the model.
 
-The comparison belongs at the retrieval boundary. Checking only when indexing begins leaves a race in which files change during construction or after a long-running query starts. A safe builder reads from a fixed snapshot, constructs the new index privately, and atomically publishes the completed generation together with its state identity. Queries then observe one complete generation rather than a mixture of old and new records. Atomic publication with a state identity in every response is invariant I7 in mechanism form: each answer names the version it is bound to, and no reader can observe a version that never coherently existed.
+The comparison belongs at the retrieval boundary. Checking only when indexing begins leaves a race in which files change during construction or after a long-running query starts. A safe builder reads from a fixed snapshot, constructs the new index privately, and atomically publishes the completed generation together with its state identity. Queries then observe one complete generation rather than a mixture of old and new records. Atomic publication with a state identity in every response is contract I7 in mechanism form: each answer names the version it is bound to, and no reader can observe a version that never coherently existed.
 
 Suppose an index was built from a clean commit and a worker later edits a helper without committing it. A query returns the old signature together with the index commit. The gate checks the in-scope working file, detects that its content no longer matches the indexed state, and withholds the snippet before generation begins.
 
@@ -4114,7 +4064,7 @@ Refusal has an operational cost. Live exact search may remain current while a st
 
 The literature reviewed for this chapter supplies no universal refresh cadence. Repository change rate, index-build duration, query latency, and the consequence of stale evidence can inform a local policy, but they do not yield an evidence-backed interval.
 
-Event-driven refresh can shorten the stale window after ordinary edits, although missed events and parser failures still require reconciliation. Scheduled rebuilding can provide that reconciliation, but its period should follow measured drift and recovery cost. Periodic reconciliation after missed events is invariant I6 applied to the index's own records, and invariant I10 governs the reconciler itself: it runs with authority over the index and is production code, tested under the same invariants as the normal ingestion path. Useful retrieval metrics include:
+Event-driven refresh can shorten the stale window after ordinary edits, although missed events and parser failures still require reconciliation. Scheduled rebuilding can provide that reconciliation, but its period should follow measured drift and recovery cost. Periodic reconciliation after missed events is contract I6 applied to the index's own records, and contract I10 governs the reconciler itself: it runs with authority over the index and is production code, tested under the same invariants as the normal ingestion path. Useful retrieval metrics include:
 
 - the age of admitted results;
 
@@ -6287,12 +6237,12 @@ Support is thin across the chapter: four developed practices carry seven evidenc
 - Directional evidence: Suryana, L. E., Nordhoff, S., Calvert, S., Zgonnikov, A., van Arem, B. (2025). Meaningful human control of partially automated driving systems: Insights from interviews with Tesla users. Transportation Research Part F 113, 213-236. Applies tracking and tracing criteria to 103 users to localize expectation-reality gaps and inconsistent protocol adherence. The method requires case-specific operationalization, yields failure localization rather than a compliance score, and is evidenced here in the driving domain. No arXiv identifier or DOI is carried in the catalog record, so the inline citation is unlinked.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch18-agent-topology-dynamic-task-allocation.tex","tex_sha256":"e4d319f125358659e32cd82f5a9fcb6af6ae617a6e37453d223fa8e13bfd40e1","markdown_sha256":"4fef2afffedfd73a7b1d5c0ad990bb5db0dd7671cace6574e41b149a40c2e214"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch18-agent-topology-dynamic-task-allocation.tex","tex_sha256":"5f3155324234219c8c1cf3e409aceccca648c0ce98fb17501930a056aee46cd0","markdown_sha256":"a945c40f0e119fcf716fc0f6867132b928b9db50fbda3e6d88d13ab43ffc98a6"} -->
 # Part VI: Research agenda: work allocation and cost engineering
 
 # Agent topology selection and dynamic task allocation
 
-> **Evidence profile.** 6 strong $\cdot$ 16 directional $\cdot$ 1 corroborating $\cdot$ 1 historical evidence items across 4 developed practices (ERCA-044, ERCA-093, ERCA-101, ERCA-107).
+> **Evidence profile.** 6 strong $\cdot$ 16 directional $\cdot$ 1 corroborating $\cdot$ 0 null or conflicting evidence items across 4 developed practices (ERCA-044, ERCA-093, ERCA-101, ERCA-107). One additional source establishes historical lineage.
 >
 > **Chapter claim.** Coordination must earn its cost against a live single-agent baseline.
 
@@ -6727,14 +6677,21 @@ File overlap is only one conflict signal. Work may also conflict through:
 
 - logical invariants spanning disjoint files.
 
+A task graph is not enough for repository work. Its edges record which work items the planner believes depend on one another. Dispatch also needs a versioned view of the code those items may affect. Each dependency or conflict claim should identify the repository, branch, source revision, index version, and affected entity. Each running attempt should publish the same information for its in-flight artifact. Otherwise two tasks can appear independent in the work ledger while changing disjoint files that implement the same interface, or while an unmerged change on another host has already invalidated one worker's base. Code understanding is an observability input for the factory control plane, not only context supplied to the coding agent. This is a proposed control-plane requirement rather than a measured performance result. Test it by retaining predicted conflict edges and comparing them with observed rebase failures, overlapping verification failures, stale-base rejections, and missed migration targets.
+
 Each node therefore needs enough state to support both scheduling and recovery:
 
     node_id: stable logical identity
     inputs: immutable artifact versions
+    repositories: the repositories the node may affect
+    input_revisions: branch and revision per repository
+    code_index_version: the index generation conflict claims were computed from
+    affected_entities: files, symbols, or interfaces the node claims to touch
     depends_on: prerequisite nodes that must succeed
     conflicts_with: resources or nodes that cannot overlap
     owner: currently assigned worker
     attempt: retry identity
+    in_flight_artifacts: published state of the running attempt's artifact
     status: blocked | ready | running | succeeded | failed
     outputs: versioned artifacts and supporting evidence
 
@@ -6763,9 +6720,9 @@ Retries require the same discipline. A retry creates a new attempt for the same 
 
 The owner field in the node record is commonly implemented with a lease: a worker holds a time-bounded claim on the work and renews it while making progress, and when renewals stop, the control plane may reassign. That reading is correct, and it is the only question a lease answers. A lease resolves a liveness and allocation question: after the timeout, the control plane is permitted to give the work to someone else. It does not establish that the previous worker is dead. A process paused under memory pressure resumes after its lease has expired. A network partition heals after reassignment has already happened. A mutation issued before expiry arrives at its target after it.
 
-I therefore never write that a lease guarantees a single writer. Safety comes from a separate mechanism at the boundary being protected, and describing that mechanism requires three identities from Chapter 7. The `work_id` names the stable logical work, the intent that should happen once logically. The `ownership_epoch` is a monotonic generation of write authority, incremented each time the control plane reassigns the work. The `attempt_id` names one execution attempt under that work and epoch. The attempt field in the node record above is this third identity; the epoch completes the picture the earlier paragraph on late responses began. Preventing an expired worker's late response from overwriting a successful retry is exactly the fencing problem, stated at the scheduler. The general form states it at every protected boundary.
+A lease does not guarantee a single writer. Safety comes from a separate mechanism at the boundary being protected, described with the `work_id`, `ownership_epoch`, and `attempt_id` identities from Chapter 7. This is the mechanism for which the ownership epoch exists: a monotonic generation of write authority, incremented each time the control plane reassigns the work. The attempt field in the node record above is the attempt identity; the epoch completes the picture the earlier paragraph on late responses began. Preventing an expired worker's late response from overwriting a successful retry is exactly the fencing problem, stated at the scheduler. The general form states it at every protected boundary.
 
-The rule is invariant I2 from Chapter 7: only the current ownership generation may commit a mutation at a protected boundary, and a superseded worker must be rejected even if it is still running. Every mutation to a protected shared target carries the current `ownership_epoch`, and the target itself, or an authoritative mutation gateway in front of it, rejects any older epoch. Invariant I3 follows at the ledger: a durable state transition validates generation and attempt identity rather than trusting the scheduler's belief about who is active.
+The rule is contract I2 from Chapter 7: only the current ownership generation may commit a mutation at a protected boundary, and a superseded worker must be rejected even if it is still running. Every mutation to a protected shared target carries the current `ownership_epoch`, and the target itself, or an authoritative mutation gateway in front of it, rejects any older epoch. Contract I3 follows at the ledger: a durable state transition validates generation and attempt identity rather than trusting the scheduler's belief about who is active.
 
 The worked sequence in the figure below makes the mechanism concrete.
 
@@ -6873,10 +6830,10 @@ The record should remain intelligible without the architecture's label. "Hierarc
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the preamble rerun described in the opening, which is narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch19-cost-aware-fleet-scheduling-model-routing.tex","tex_sha256":"ce5d783f0b272426d3437cc059e3e3a81bb3bcd064ba3d321657e21515c457e5","markdown_sha256":"bcd9048b5c19c8ca119a7d35ee820b9fda99e72c0af13ae7d715838cf0d3c5f7"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch19-cost-aware-fleet-scheduling-model-routing.tex","tex_sha256":"78af314e51a7ccaf71e33ec7c95fc909458f9905d1faa3980a9f4cdb12817970","markdown_sha256":"bf3e65078d6745f332d536558dc95de3704594b5421da5a482424fc762142b1d"} -->
 # Cost-aware fleet scheduling and model routing
 
-> **Evidence profile.** 2 strong $\cdot$ 13 directional $\cdot$ 2 practitioner $\cdot$ 0 corroborating evidence items across 4 developed practices (ERCA-171, ERCA-187, ERCA-191, and the admission-and-recovery-capacity practice added in this revision).
+> **Evidence profile.** 2 strong $\cdot$ 13 directional $\cdot$ 2 corroborating $\cdot$ 0 null or conflicting evidence items across 4 developed practices (ERCA-171, ERCA-187, ERCA-191, ERCA-206).
 >
 > **Chapter claim.** Re-decide from observed state, then ship the best feasible incumbent on time.
 
@@ -7051,28 +7008,26 @@ Its value remains an empirical question until the fleet's traces answer it.
 
 ## Admission, backpressure, and recovery capacity
 
-A queue records demand; it does not create capacity. Retry policy can increase demand precisely when capacity has fallen. A reliable factory therefore needs admission, prioritization, rate limits, retry budgets, and recovery-capacity policy above individual queues. I treat these as overload policy, distinct from the re-decision and routing questions elsewhere in this chapter: those decide which work runs where, and overload policy decides how much work is allowed to exist inside the system at all.
+In the eleven-week replay described later in this chapter, the scheduling effect concentrated entirely in one contended pool, where eligible work regularly exceeded available capacity; the uncontended pool showed almost no difference across policies. That retained observation locates where overload policy matters: not everywhere, but at the resources where demand exceeds capacity, and most acutely when capacity has just fallen. A queue records demand; it does not create capacity. Retry policy can increase demand precisely when capacity has fallen. A reliable factory therefore needs overload policy above individual queues, distinct from the re-decision and routing questions elsewhere in this chapter: those decide which work runs where, and overload policy decides how much work is allowed to exist inside the system at all.
 
-The failure mode this section guards against is mechanical. A dependency slows, tasks time out, retries multiply the request rate against the slowed dependency, queues grow, work waits long enough that its callers retry the whole task, and the fleet spends its capacity on demand that its own policies manufactured. Nothing in that sequence requires a model to misbehave. The Google SRE chapters on [cascading failures](https://sre.google/sre-book/addressing-cascading-failures/) and [handling overload](https://sre.google/sre-book/handling-overload/) describe this pattern across production services; I cite them as practitioner guidance rather than controlled evidence, and none of their capacity or threshold figures transfer to an agent fleet. The figure below shows the amplification loop and the policies that bound it.
+The failure mode this section guards against is mechanical. A dependency slows, tasks time out, retries multiply the request rate against the slowed dependency, queues grow, work waits long enough that its callers retry the whole task, and the fleet spends its capacity on demand that its own policies manufactured. Nothing in that sequence requires a model to misbehave. The Google SRE chapters on [cascading failures](https://sre.google/sre-book/addressing-cascading-failures/) and [handling overload](https://sre.google/sre-book/handling-overload/) describe this pattern across production services; I cite them as practitioner guidance rather than controlled evidence, and none of their capacity or threshold figures transfer to an agent fleet. The figure below shows the amplification loop and the policies that bound it. Overload policy has three responsibilities: bound total admitted demand, prevent one ownership or workload domain from consuming the fleet, and release retry and recovery traffic at a controlled rate.
 
 <figure>
 <embed src="../manuscript/figures/ch19-recovery-backpressure.pdf" style="width:100.0%" />
 <figcaption>Live arrivals and retry-driven recovery traffic compete for the same constrained dependency; unrestricted retries amplify load exactly when capacity has fallen, while admission limits, jitter, and reserved recovery capacity bound the interference.</figcaption>
 </figure>
 
-**Admission control.** The first policy decision is whether new work enters the system at all. Verma et al. ([2015](https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/)) describe Borg holding submitted jobs in a pending state until admission, packing admitted work against declared resource requirements, isolating tenants, and treating overcommitment as an explicit cluster policy rather than an accident of scheduling. The transfer is directional: an agent fleet benefits from the same separation between accepting work and running it, and from making overcommitment a decision with an owner. Borg's packing algorithms, machine-share targets, and utilization figures do not transfer as parameters.
+**Bounding admitted demand.** The first policy decision is whether new work enters the system at all. Verma et al. ([2015](https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/)) describe Borg holding submitted jobs in a pending state until admission, packing admitted work against declared resource requirements, isolating tenants, and treating overcommitment as an explicit cluster policy rather than an accident of scheduling. The transfer is directional: an agent fleet benefits from the same separation between accepting work and running it, and from making overcommitment a decision with an owner. Borg's packing algorithms, machine-share targets, and utilization figures do not transfer as parameters.
 
-Admission requires bounded queue growth. An unbounded queue converts overload into unbounded latency, and by invariant I9 admissible work cannot starve invisibly. A bounded queue forces the honest alternatives into view: reject explicitly, shed load by declared class, or wait with a visible position and age. Explicit rejection at admission is cheaper than the same rejection discovered hours later as a timeout, because the caller learns immediately and the system spends nothing executing work it will abandon.
+Admission requires bounded queue growth. An unbounded queue converts overload into unbounded latency, and by contract I9 admissible work cannot starve invisibly. A bounded queue forces the honest alternatives into view: reject explicitly, shed load by declared class, or wait with a visible position and age. Explicit rejection at admission is cheaper than the same rejection discovered hours later as a timeout, because the caller learns immediately and the system spends nothing executing work it will abandon. When a downstream stage saturates, the signal must propagate upstream as backpressure rather than accumulate in an intermediate queue; when slowing is not enough, the system sheds load by explicit policy, rejecting the lowest declared class first and telling the caller. Silent degradation, where work is accepted and then quietly never runs, violates I9 directly.
 
-**Allocation by tenant, repository, and work class.** Aggregate capacity limits are not enough, because a single hot tenant or repository can fill a shared queue and starve unrelated work while the aggregate limit is still respected. Partitioning queues by tenant, repository, or work class bounds the damage one demand source can do to another. Mace et al. ([2015](https://www.usenix.org/conference/nsdi15/technical-sessions/presentation/mace)) built Retro around per-tenant resource monitoring and central control points that throttle at the granularity of the tenant, and they observed that maintenance traffic itself can become the overload source. Both observations transfer directionally. The second matters more than it first appears: in an agent fleet, the analogue of maintenance traffic is recovery, reconciliation, and retry work, and it competes for the same models, runners, and reviewers as live work.
+**Isolating demand domains.** Aggregate capacity limits are not enough, because a single hot tenant or repository can fill a shared queue and starve unrelated work while the aggregate limit is still respected. Partitioning queues by tenant, repository, or work class bounds the damage one demand source can do to another. Mace et al. ([2015](https://www.usenix.org/conference/nsdi15/technical-sessions/presentation/mace)) built Retro around per-tenant resource monitoring and central control points that throttle at the granularity of the tenant, and they observed that maintenance traffic itself can become the overload source. Both observations transfer directionally. In an agent fleet, the analogue of maintenance traffic is recovery, reconciliation, and retry work, and it competes for the same models, runners, and reviewers as live work.
 
 **Concurrency limits by constrained resource.** Concurrency limits belong on the resource that is actually constrained, not on an arbitrary global worker count. Model-tier tokens per minute, repository leases, reviewer attention, and external API rate limits are separate constraints with separate saturation points. A single fleet-wide concurrency number either wastes the uncontended resources or oversubscribes the contended one. The contended-pool observation from my replay applies here in reverse: limits matter where eligible work exceeds capacity, and a limit on an uncontended resource is dead configuration.
 
-**Retry budgets, backoff, and jitter.** Retries are the mechanism by which demand rises as capacity falls, so they need a budget, not just a count. A per-attempt retry cap still permits a retry storm when many attempts fail together; a budget bounds the fraction of total traffic that retries may consume. Individual retries should back off exponentially, and backoff must carry jitter, because deterministic backoff synchronizes the failed population into retry waves that arrive together and re-saturate the recovering dependency. The AWS Builders' Library articles on [timeouts, retries, and backoff with jitter](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/) and on [making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) state both mechanisms clearly; they are practitioner guidance, and their specific multipliers and cap values are their systems' parameters, not this book's. The idempotency requirement is not optional decoration here. A retry is a new attempt at the same logical work (invariant I4), and a retried external effect is safe only under the effect-identity contracts of I5. A retry policy layered over non-idempotent effects converts overload into duplicated external commits.
+**Retry budgets, backoff, and jitter.** Retries are the mechanism by which demand rises as capacity falls, so they need a budget, not just a count. A per-attempt retry cap still permits a retry storm when many attempts fail together; a budget bounds the fraction of total traffic that retries may consume. Individual retries should back off exponentially, and backoff must carry jitter, because deterministic backoff synchronizes the failed population into retry waves that arrive together and re-saturate the recovering dependency. The AWS Builders' Library articles on [timeouts, retries, and backoff with jitter](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/) and on [making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) state both mechanisms clearly; they are practitioner guidance, and their specific multipliers and cap values are their systems' parameters, not this book's. The idempotency requirement is not optional decoration here. A retry is a new attempt at the same logical work (contract I4), and a retried external effect is safe only under the effect-identity contracts of I5. A retry policy layered over non-idempotent effects converts overload into duplicated external commits.
 
-**Backpressure and load shedding.** When a downstream stage saturates, the signal must propagate upstream rather than accumulate in an intermediate queue. Backpressure means the producer slows because the consumer said so; without it, every intermediate buffer becomes a place where latency hides. When slowing is not enough, the system sheds load by explicit policy: reject the lowest declared class first, and tell the caller. Silent degradation, where work is accepted and then quietly never runs, violates I9 directly. Rate limiting at the boundary is the complement of admission control inside it: the boundary limit protects the system from external demand spikes, and admission decides what the system commits to among the work the boundary let through.
-
-**Recovery capacity.** The policy decision most specific to this book is reserving capacity for recovery and reconciliation, so that backlog cannot consume every worker needed to recover it. After a worker loss or a dependency outage, the system holds a backlog of interrupted attempts, orphaned leases, and unreconciled external effects. Recovering those requires the same constrained resources as live work. If the backlog is admitted at full priority into an undifferentiated queue, recovery work and live work starve each other, and the reconciliation that would shrink the backlog never gets scheduled. Invariant I10 requires that recovery preserve the same invariants as normal execution and be tested as production code; that includes its capacity allocation. A recovery path that only works when the fleet is idle has not been tested under the one condition where it runs. Pilot-execution work by Li, Cai, and Lou ([2026](https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu)) adds the sharper directional warning that recovery actions themselves cause severe failures, which is a second reason to bound the rate at which recovery traffic is released rather than replaying the entire backlog at once. I do not prescribe what fraction of capacity recovery should hold. That is a measured deployment decision, and the experiment below is how to measure it.
+**Recovery capacity.** Recovery and reconciliation need their own capacity policy, so that backlog cannot consume every worker needed to recover it. After a worker loss or a dependency outage, the system holds a backlog of interrupted attempts, orphaned leases, and unreconciled external effects. Recovering those requires the same constrained resources as live work. If the backlog is admitted at full priority into an undifferentiated queue, recovery work and live work starve each other, and the reconciliation that would shrink the backlog never gets scheduled. Contract I10 requires that recovery preserve the same obligations as normal execution and be tested as production code; that includes its capacity allocation. A recovery path that only works when the fleet is idle has not been tested under the one condition where it runs. Pilot-execution work by Li, Cai, and Lou ([2026](https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu)) adds the sharper directional warning that recovery actions themselves cause severe failures, which is a second reason to bound the rate at which recovery traffic is released rather than replaying the entire backlog at once. I do not prescribe what fraction of capacity recovery should hold. That is a measured deployment decision, and the experiment below is how to measure it.
 
 The global-allocation versus worker-local-dispatch separation defended earlier in this chapter has a precedent in this literature. Schwarzkopf et al. ([2013](https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/)) built Omega as parallel schedulers operating over shared cluster state with optimistic concurrency control, precisely because a single monolithic scheduler conflated policies with different cadences and stakes. Hindman et al. ([2011](https://www.usenix.org/conference/nsdi11/mesos-platform-fine-grained-resource-sharing-data-center)) reached a related two-level split in Mesos, with a central allocator offering resources and frameworks deciding what to run on them. Both are directional support for keeping capacity allocation and dispatch as separately auditable layers; neither system's conflict rates, offer semantics, or scale figures describe an agent fleet.
 
@@ -7428,12 +7383,18 @@ When the ledger does not preserve decision state, add fields in dependency order
 <td style="text-align: left;">Policy estimates</td>
 <td style="text-align: left;">Predicted cost, predicted task performance, routing uncertainty, expected duration, solver objective value, and optimality gap.</td>
 </tr>
+<tr>
+<td style="text-align: left;">Code-estate state</td>
+<td style="text-align: left;">Campaign identity, repository, base revision, host or workspace, affected entities, artifact version, code index version, conflict evidence, and publication state.</td>
+</tr>
 </tbody>
 </table>
 
 The observed fields reconstruct demand, occupancy, and accepted work. They also expose missing or contradictory histories before policy-specific estimates complicate the schema.
 
 Record the route selected and the reason for that route in the same decision event. State and reason need a shared decision identity and timestamp. Without them, later analysis cannot determine which alternatives were feasible or distinguish worker performance from the policy that selected the work.
+
+The code-estate fields carry the same versioned view of the code that Chapter 18's node record gives the task graph into the allocation ledger, so that a scheduling decision can later be checked against the repository state and conflict evidence it acted on; full cross-repository campaign semantics stay in the companion repository, because the current evidence does not support a developed practice claiming one campaign protocol is generally superior.
 
 Estimates belong last because they are outputs of a policy rather than observations of what happened. Store the policy, model, feature, and reward versions that produced them. Recalibration should create a new estimate record rather than rewrite the historical one.
 

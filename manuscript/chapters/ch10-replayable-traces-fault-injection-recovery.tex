@@ -1,7 +1,7 @@
 \chapter{Replayable traces and fault-injection recovery testing}
 \label{ch10-replayable-traces-fault-injection-recovery}
 \begin{quote}
-\textbf{Evidence profile.} 1 strong \(\cdot\) 8 directional \(\cdot\) 1 direct preprint \(\cdot\) 0 corroborating evidence items across 2 developed practices (ERCA-097, ERCA-127).
+\textbf{Evidence profile.} 1 strong \(\cdot\) 9 directional \(\cdot\) 0 corroborating \(\cdot\) 0 null or conflicting evidence items across 2 developed practices (ERCA-097, ERCA-127). One directional item is a preprint.
 
 \textbf{Chapter claim.} Recovery is a measured property.
 \end{quote}
@@ -230,7 +230,7 @@ If it passes, the harness may be:
 
 A control expected to fail is useful because a false pass is otherwise easy to mistake for fault tolerance. It detects only the defect it was designed to expose, however, and a subtler recovery failure may still pass both variants.
 
-The recovery path itself deserves the same suspicion as the failure. Li, Cai, and Lou (\href{https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu}{2026}) studied production incidents in which the recovery action, not the original fault, caused the severe failure, and proposed previewing the effects of high-risk recovery operations before executing them. Their evidence comes from cloud infrastructure, so it transfers directionally, but the rule it supports is one this book already states as invariant I10: a recovery path is production code with authority. Test it against the same invariants as the normal path, and preview high-risk recovery effects when practical. The naive negative control above is one instance of this rule. The general instance is that every non-naive recovery adapter belongs in the kill-point sweep as a subject, not only as the mechanism under whose protection the sweep runs. A reconciliation routine that deletes a ``duplicate'' artifact, a cleanup step that releases a lease still held by live work, and a retry policy that re-sends an uncertain external call are all recovery actions capable of causing the incident they exist to prevent.
+The recovery path itself deserves the same suspicion as the failure. Li, Cai, and Lou (\href{https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu}{2026}) studied production incidents in which the recovery action, not the original fault, caused the severe failure, and proposed previewing the effects of high-risk recovery operations before executing them. Their evidence comes from cloud infrastructure, so it transfers directionally, but the rule it supports is one this book already states as contract I10: a recovery path is production code with authority. Test it against the same invariants as the normal path, and preview high-risk recovery effects when practical. The naive negative control above is one instance of this rule. The general instance is that every non-naive recovery adapter belongs in the kill-point sweep as a subject, not only as the mechanism under whose protection the sweep runs. A reconciliation routine that deletes a ``duplicate'' artifact, a cleanup step that releases a lease still held by live work, and a retry policy that re-sends an uncertain external call are all recovery actions capable of causing the incident they exist to prevent.
 
 \Needspace{5\baselineskip}
 
@@ -280,18 +280,18 @@ The five kill points strike one worker's lifecycle. Once a factory runs multiple
 
 Sun et al.~(\href{https://www.usenix.org/system/files/osdi22-sun.pdf}{2022}) tested this family directly for Kubernetes reconciliation controllers. Sieve perturbs the controller's view of cluster state, feeding it stale, intermediate, or unobserved states, and detects bugs with differential oracles that compare state transitions between perturbed and unperturbed executions. The evaluated systems are cluster controllers, so the transfer is directional, but the factory analogue is exact: a factory control plane is a reconciliation controller over work items, and the corresponding fault is a controller that believes a worker still owns a task while the repository or another controller has moved on. The differential oracle also transfers: run the same workload with and without the view perturbation and compare the resulting state transitions, rather than asking only whether the perturbed run ended in a passing state.
 
-The table below lists the ambiguity faults I inject alongside the kill sweep. Invariant identifiers refer to the factory invariants defined in Chapter 7. Each row names the fault, the invariant it tests, and the observable behavior an acceptable runtime must exhibit.
+The table below defines the ambiguity faults I add to the test menu; it is a protocol, not an executed result. Contract identifiers refer to the factory contracts defined in Chapter 7. Each row names the fault, the contract it tests, and the observable behavior an acceptable runtime must exhibit. Five representative rows appear here; the full matrix, including controller-recovery, verifier-failure, schema-compatibility, history-compaction, and retry-storm faults that Chapters 10 and 19 develop in their own sections, is published as a machine-readable protocol in the repository artifact \href{https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/distributed-ambiguity-faults.yaml}{\texttt{protocols/distributed-ambiguity-faults.yaml}}.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2800}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1200}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.6000}}@{}}
-\caption{Distributed ambiguity faults, the invariant each tests, and the observable behavior an acceptable runtime must exhibit.}\tabularnewline
+\caption{Representative distributed ambiguity faults, the contract each tests, and the observable behavior an acceptable runtime must exhibit. The full matrix is published in the companion repository.}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Fault
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Invariant
+Contract
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Expected observable behavior
 \end{minipage} \\
@@ -301,7 +301,7 @@ Expected observable behavior
 \begin{minipage}[b]{\linewidth}\raggedright
 Fault
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Invariant
+Contract
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Expected observable behavior
 \end{minipage} \\
@@ -309,22 +309,14 @@ Expected observable behavior
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Delayed response delivered after the retry has started & I5 & The late response and the retry resolve to one logical effect; the effect ledger shows one committed \texttt{effect\_id} or an explicit \texttt{unknown\_external\_state}, never two commits. \\
 Response lost after external commit & I5 & The runtime treats the call as uncertain, reconciles against external state before re-sending, and records the reconciliation outcome; no blind re-send. \\
+Delayed response delivered after the retry has started & I5 & The late response and the retry resolve to one logical effect; the effect ledger shows one committed \texttt{effect\_id} or an explicit \texttt{unknown\_external\_state}, never two commits. \\
 Worker loses its lease but continues running & I2 & The protected mutation boundary rejects the superseded worker's writes by \texttt{ownership\_epoch}; the rejection appears in the trace as a fencing event, not a silent success. \\
 Old worker's completion arrives after the new worker has succeeded & I3 & The stale completion is rejected by generation and attempt identity; logical state reflects the new attempt only, and the rejection is recorded. \\
-Control plane restarts while workers continue & I6 & The restarted controller reconciles against durable worker and repository state before issuing new authority; no work item is double-assigned or orphaned by controller amnesia. \\
-Control plane observes stale artifact state & I6 & Decisions taken on the stale view are detected at the next protected boundary and trigger reconciliation; the differential oracle shows no divergent committed transition. \\
 Repository state changes between validation and publication & I6 & Publication fails closed: the runtime detects that the validated version is no longer the head, refuses to publish against changed state, and routes to re-validation or reconciliation. \\
-Verifier times out, flakes, or contradicts itself on rerun & I8 & The runtime classifies the outcome as verifier failure, not software failure; no defect record is created from an infra timeout, and contradictory verdicts trigger rerun or escalation rather than acceptance of either verdict. \\
-External service reachable from the worker but not the controller & I6 & The two components' contradictory observations are reconciled by declared authority; the controller does not mark the effect failed while the worker's committed effect record stands. \\
-Schema or workflow version changes during recovery & I10 & Recovery either completes under an explicit compatibility path or fails closed with the version mismatch recorded; it never resumes by misreading old state under the new schema. \\
-History compaction boundary crossed before the failure & I10 & Recovery from the compacted summary preserves the same invariant checks as recovery from full history; effects committed before compaction are still recognized and not repeated. \\
-Recovery queue competes with new work & I10 & Recovery work and new admissions are both observable in queue metrics; recovery completes without starving admitted work indefinitely and without itself being starved invisibly. \\
-Synchronized retry wave after a dependency recovers & I5, I10 & Retries are jittered or admission-limited; the dependency's recovery does not trigger a duplicate-effect burst, and each retried effect still deduplicates by its idempotency key. \\
 \end{longtable}
 
-Each row is testable with the same discipline as the kill sweep: specify the claim, place the fault at the named interval, run the clean control with the same anchors, and check the typed event stream for the expected records. The rows referencing I5 need the effect ledger; the rows referencing I2 and I3 need fencing and identity checks at the mutation boundary; the rows referencing I6 need a declared reconciliation authority; the rows referencing I8 need the verifier-failure classification; the rows referencing I10 are recovery-path tests in the sense of the previous section and belong in the same sweep as the naive negative control.
+Each row is testable with the same discipline as the kill sweep: specify the claim, place the fault at the named interval, run the clean control with the same anchors, and check the typed event stream for the expected records. The rows referencing I5 need the effect ledger; the rows referencing I2 and I3 need fencing and identity checks at the mutation boundary; the row referencing I6 needs a declared reconciliation authority. The repository matrix extends the menu with controller-recovery and stale-view faults (I6), verifier-failure classification (I8), and schema-compatibility, history-compaction, recovery-queue, and retry-storm faults (I10), which are recovery-path tests in the sense of the previous section and belong in the same sweep as the naive negative control.
 
 \hypertarget{keep-the-result-attached-to-its-envelope}{%
 \section{Keep the result attached to its envelope}\label{keep-the-result-attached-to-its-envelope}}
@@ -475,7 +467,7 @@ A trace detailed enough to replay is also the artifact a person reads when recov
 \item
   Directional evidence: Sun et al.~(2022), ``Sieve,'' OSDI 2022. Evaluated on Kubernetes controllers; the view-perturbation faults and differential state-transition oracles transfer to factory control planes.
 \item
-  Directional evidence: Li, Cai, and Lou (2026), ``Pilot Execution,'' NSDI 2026. Cloud-infrastructure incident evidence that recovery actions cause severe failures; supports treating recovery paths as production code under invariant I10.
+  Directional evidence: Li, Cai, and Lou (2026), ``Pilot Execution,'' NSDI 2026. Cloud-infrastructure incident evidence that recovery actions cause severe failures; supports treating recovery paths as production code under contract I10.
 \item
   Direct evidence, preprint: Zhao et al.~(2026), ``Failure as a Process,'' arXiv:2607.09510. 3,843 trajectories collected, 1,794 complete valid runs annotated across more than 63,000 steps; failure modeled as onset, evolution, and recovery.
 \end{itemize}

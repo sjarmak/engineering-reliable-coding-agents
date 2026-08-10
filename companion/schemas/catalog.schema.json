@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Engineering Reliable Coding Agents practice catalog",
   "type": "array",
-  "minItems": 205,
-  "maxItems": 205,
+  "minItems": 206,
+  "maxItems": 206,
   "items": {
     "type": "object",
     "required": [

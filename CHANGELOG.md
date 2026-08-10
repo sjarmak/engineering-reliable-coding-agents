@@ -1,5 +1,40 @@
 # Changelog
 
+## 1.0.0-rc.16 — 2026-08-09
+
+- Restructured Chapter 7 to the book's chapter form after editorial review: a
+  sourced opening tied to Chapter 9's guarded-mutation fault demonstration
+  with the duplicate-pull-request incident marked as a constructed sequence,
+  the historical lineage compressed to one paragraph, the five distinctions
+  kept as the chapter's core, a closing audit procedure for one logical work
+  item, and the reliability-dimensions and book-map sections removed.
+- Renamed the eleven invariants to factory contracts, grouped them as six
+  contract families in the chapter, and published the full machine-testable
+  catalog as `protocols/factory-contracts.yaml`; all cross-chapter references
+  now cite contracts. Added `input_state_id` to the identity vocabulary and
+  revised the `verification_id` and `effect_id` definitions.
+- Replaced both Chapter 7 figures: the reference decomposition became an
+  identity-and-boundary model, and the state machine now shows separate
+  logical-work and attempt lifecycles with explicit retry and reassignment
+  transitions.
+- Normalized all evidence profiles to the declared four-group taxonomy;
+  preprint status, practitioner authorship, and historical lineage are now
+  source attributes, not evidence grades.
+- Reduced the Chapter 10 ambiguity-fault table to five representative rows,
+  published the full matrix as `protocols/distributed-ambiguity-faults.yaml`,
+  and corrected the protocol wording (faults added to the test menu, not
+  injected results).
+- Reorganized Chapter 19's overload section around three responsibilities,
+  opened it with the retained contended-pool replay observation, and assigned
+  the admission-and-recovery-capacity practice its stable identifier
+  (ERCA-206); the catalog now holds 206 records, 56 developed.
+- Added the versioned code-estate view to Chapter 18's task-node record and
+  Chapter 19's allocation ledger as a proposed control-plane requirement, with
+  full cross-repository campaign semantics kept in the repository artifacts.
+- Applied the aphorism and generic-authority prose pass across the new
+  material. The manuscript now builds to 297 pages under the pinned TeX
+  Live 2025 image.
+
 ## 1.0.0-rc.15 — 2026-08-09
 
 - Added Chapter 7, "The software factory as a distributed system": the factory

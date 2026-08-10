@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "version": "1.0.0-rc.15",
+  "version": "1.0.0-rc.16",
   "freeze_date": "2026-08-09",
   "manuscript": {
-    "pages": 299,
+    "pages": 297,
     "figures": 22,
     "numbered_tables": 9
   },
