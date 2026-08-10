@@ -1,6 +1,6 @@
 # Engineering Reliable Coding Agents
 
-*Evaluation, Recovery, Context, and Control Beyond the Model*
+*Evaluating and Operating the System Around the Model*
 
 This repository contains the manuscript source and companion research artifact
 for Stephanie Jarmak's technical review and engineering monograph on the

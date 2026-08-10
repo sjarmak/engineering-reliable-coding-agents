@@ -5,8 +5,8 @@
   "container_image": "texlive/texlive:TL2025-historic@sha256:5912d6a33798957f4cd6ff1673819209f59300c378033d25066feb93270b90ce",
   "source_date_epoch": 1786233600,
   "compiler_version": "XeTeX 3.141592653-2.6-0.999997 (TeX Live 2025)",
-  "archive_sha256": "4eb5ebf55ffbdda2add86566728d1f5baef5ff33f38cdafec8d3190502bb8d21",
-  "pdf_sha256": "e32667d56f603b2dbd6f306f3a9c105476ba1b9282bd358dc6a82a9581f6f99f",
+  "archive_sha256": "9e455d3a3994ccdda2c1dddb31fa07bc0db96a4a4055a44ca8440b560143746b",
+  "pdf_sha256": "3bcce634f65be09373b781f539181527ff5539f055a198f49d393df5a754cc71",
   "pdf": {
     "pages": 297,
     "encrypted": false,

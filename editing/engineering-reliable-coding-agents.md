@@ -6,16 +6,16 @@
 > `node scripts/editable-manuscript.mjs --status` to list the sections that need to be
 > transferred back to TeX. Do not regenerate this file while it contains unapplied edits.
 >
-> Baseline: version `1.0.0-rc.16`, repository revision `35b6bd050791fb72fca5018cecbba2de94926b5d`.
+> Baseline: version `1.0.0-rc.16`, repository revision `a60c1966c71e441eb7c25617f750f37e025c19f8`.
 
 The `tex-sync` comments delimit exact file mappings and carry baseline hashes. Leave those
 comments in place; edit the prose between them.
 
-<!-- tex-sync:start {"path":"manuscript/main.tex","tex_sha256":"1fa58a42d3a82afa68f6be912bce5ab1bb6bc421d51f80f0188de6a14bcbdf4d","markdown_sha256":"48daa4e23b959e9b9991674dce440bb5e81dc472aff29b19ce722baa14545a2e"} -->
+<!-- tex-sync:start {"path":"manuscript/main.tex","tex_sha256":"54ee0f997e575f792eca2f4259106198095aa1ed6f3cbcd48c29e5595e6ce29f","markdown_sha256":"8395703e929d9f2903c788f90edf51bc4769781f8699d23a4abfe381865e38b3"} -->
 # Title-page metadata
 
 - **Title:** Engineering Reliable Coding Agents
-- **Subtitle:** Evaluation, Recovery, Context, and Control Beyond the Model
+- **Subtitle:** Evaluating and Operating the System Around the Model
 - **Author:** Stephanie Jarmak
 - **Version line:** Version 1.0.0-rc.16 --- August 2026
 <!-- tex-sync:end -->
@@ -32,20 +32,20 @@ The monograph contributes a versioned catalog of 206 reliability practices, incl
 The review is structured rather than exhaustive, evidence strength varies by topic, and empirical results remain dependent on workload and system configuration. The publisher- and index-native search supplement remains incomplete in this release candidate: ACM Digital Library and IEEE Xplore were not searched through their publisher lanes, Scopus was not searched through its index, and the practice taxonomy has not received blinded external calibration. All four remain release gates for archival v1. The release candidate therefore claims neither provider coverage nor independent calibration and reports no inter-rater statistic.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/frontmatter.tex","tex_sha256":"143200d78596b46d08957a5f90f789ed720f292d311f7c5f0e43ca57d5035604","markdown_sha256":"51aacde1fd6372685be4ec7993db64dd36e029e81d5ef4d15583aa61be1cfad8"} -->
+<!-- tex-sync:start {"path":"manuscript/frontmatter.tex","tex_sha256":"a3d04cf592c3f6a131bc894970f7df9444f7102a4e4ce1ba8f29bf096f32e3ac","markdown_sha256":"4d93d887b3fbeee5d60620f93fa202584db6d797d82d41c49af45206a6c0f921"} -->
 # Introduction
 
 ## Problem and scope
 
-An agent has finished a change. The tests pass, and a reviewer is examining a compact diff. The run appears successful, yet the available record may not establish whether another run would produce the same result, whether the tests exercised the relevant behavior, or whether the reviewer saw the decisions that carried the most risk.
+Consider the following scenario. An agent has finished making a change to the codebase; the tests pass, and a reviewer is examining a compact diff. The run appears successful, yet the available record may not establish whether another run would produce the same result, whether the tests exercised the relevant behavior, or whether the reviewer saw the decisions that carried the most risk.
 
-The visible output is code; the uncertainty around its quality resides in the system that produced, evaluated, and approved it. A coding agent is one component in that system. Evaluation determines what counts as success, governance constrains access, context management controls the information available during a run, review defines the quality gate, and scheduling allocates compute, money, time, and human attention.
+The visible output of the agent's trajectory is code. The uncertainty around its quality resides in the system that produced, evaluated, and approved it. A coding agent is one component in that system, and evaluation determines what counts as success, governance constrains access, context management controls the information available during a run, review defines the quality gate, and scheduling allocates compute, money, time, and human attention.
 
-These functions interact. A higher score can result from an easier test rather than a better system. A reviewer can appear ineffective because the interface concealed the evidence needed for judgment. Instrumentation can record component failures while missing failures at component boundaries. A recovery procedure can pass while depending on credentials whose compromise would also destroy the recovery path.
+These functions interact, e.g. a higher score can result from an easier test rather than a better system, or a reviewer could appear ineffective because the interface concealed the evidence needed for judgment. Instrumentation can record component failures while missing failures at component boundaries and a recovery procedure can pass while depending on credentials whose compromise would also destroy the recovery path.
 
 This technical review and engineering monograph examines the evaluation, operation, and governance of AI coding-agent systems. It focuses on mechanisms that remain relevant as models and products change: measurement design, execution-based grading, containment, durable state, recovery, repository retrieval, context limits, human oversight, topology, and resource allocation. It does not compare current models or teach prompt and tool-schema design.
 
-The intended reader is a staff engineer, evaluation lead, or technical owner building a coding-agent evaluation or operations program. The statistical methods are introduced where they affect an engineering decision, but the monograph assumes comfort with experiment design, production controls, and technical review. Its practices are bounded engineering claims rather than universal rules. Their applicability depends on workload, permissions, failure costs, deployment conditions, and available review capacity.
+The intended reader is a senior engineer, evaluation lead, or technical owner building a coding-agent evaluation or operations program. The statistical methods are introduced where they affect an engineering decision, but the monograph assumes comfort with experiment design, production controls, and technical review. Its practices are intended to serve as bounded engineering claims rather than universal rules. Their applicability depends on workload, permissions, failure costs, deployment conditions, and available review capacity.
 
 ## The reliability dependency chain
 
@@ -57,14 +57,14 @@ This creates a repair asymmetry. Later machinery is often easier to add than the
 
 The chain carries a system-level claim. Coding agents are evaluated as models and deployed as production systems. Once a run can outlive the worker that started it, wait on another service, compete with another run, mutate shared code, or publish a durable external effect, reliability stops being a property of the model and becomes a property of the system that preserves intent, authority, state, evidence, ordering, and recovery across components that fail independently. The framing is not new. Osterweil ([1987](https://dl.acm.org/doi/10.5555/41765.41766)) argued that software processes are themselves software, and Choi and Scacchi ([1991](https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf)) built a software factory as distributed infrastructure. Autonomous workers change the failure model, not the problem: today's workers are nondeterministic, edit persistent code, call external services, run concurrently, and can claim completion incorrectly. Chapter 7 develops this factory model and the contracts the operating chapters enforce.
 
-For any given guarantee, the useful question is therefore not whether the model is capable. It is which promise the surrounding system makes, which component owns that promise, what state survives failure, and what experiment would falsify the guarantee. The chapters are organized to make each of those questions answerable in turn.
+To ensure reliability for any given guarantee, we must be able to answer which promise the surrounding system makes, which component owns that promise, what state survives failure, and what experiment would falsify the guarantee. The chapters are organized to make each of those questions answerable in turn.
 
 <figure>
 <embed src="../manuscript/figures/dependency-chain.pdf" style="width:100.0%" />
 <figcaption>Argument map for the reliability dependency chain: measurement, grading, containment and recovery, retrieval and context, review and accountability, and allocation and cost. Each layer supplies the evidence boundary on which the next relies.</figcaption>
 </figure>
 
-The six parts follow this order. It is not a progression from easy to difficult. It is an account of how an apparently local defect can propagate into later operational decisions while retaining the appearance of a clean score, verdict, or artifact.
+The six parts that follow are an account of how an apparently local defect can propagate into later operational decisions while retaining the appearance of a clean score, verdict, or artifact.
 
 ## Method, scope, and evidence classification
 

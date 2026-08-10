@@ -11111,7 +11111,7 @@
       "status": "resolved",
       "http_status": 200,
       "final_url": "https://www.sjarmak.ai/books/engineering-reliable-coding-agents",
-      "title": "Engineering Reliable Coding Agents: Evaluation, Recovery, Context, and Control Beyond the Model — Stephanie Jarmak",
+      "title": "Engineering Reliable Coding Agents: Evaluating and Operating the System Around the Model — Stephanie Jarmak",
       "occurrences": [
         {
           "file": "introduction.md",

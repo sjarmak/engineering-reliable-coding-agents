@@ -127,13 +127,13 @@ test("converted TeX is normalized into readable editing sections", () => {
 
 test("title-page metadata is exposed without expanding the full main TeX file", () => {
   const main = String.raw`{\Huge\bfseries Engineering Reliable Coding Agents\par}
-{\Large Evaluation, Recovery, Context, and Control Beyond the Model\par}
+{\Large Evaluating and Operating the System Around the Model\par}
 {\large Stephanie Jarmak\par}
 {\large Version 1.0.0-rc.14 --- August 2026\par}`;
 
   assert.equal(
     mainMetadataMarkdown(main),
-    "# Title-page metadata\n\n- **Title:** Engineering Reliable Coding Agents\n- **Subtitle:** Evaluation, Recovery, Context, and Control Beyond the Model\n- **Author:** Stephanie Jarmak\n- **Version line:** Version 1.0.0-rc.14 --- August 2026\n",
+    "# Title-page metadata\n\n- **Title:** Engineering Reliable Coding Agents\n- **Subtitle:** Evaluating and Operating the System Around the Model\n- **Author:** Stephanie Jarmak\n- **Version line:** Version 1.0.0-rc.14 --- August 2026\n",
   );
   assert.throws(() => mainMetadataMarkdown("\\begin{document}"), /title-page metadata/);
 });

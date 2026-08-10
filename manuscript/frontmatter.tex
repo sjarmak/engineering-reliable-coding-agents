@@ -4,15 +4,15 @@
 \hypertarget{problem-and-scope}{%
 \section{Problem and scope}\label{problem-and-scope}}
 
-An agent has finished a change. The tests pass, and a reviewer is examining a compact diff. The run appears successful, yet the available record may not establish whether another run would produce the same result, whether the tests exercised the relevant behavior, or whether the reviewer saw the decisions that carried the most risk.
+Consider the following scenario. An agent has finished making a change to the codebase; the tests pass, and a reviewer is examining a compact diff. The run appears successful, yet the available record may not establish whether another run would produce the same result, whether the tests exercised the relevant behavior, or whether the reviewer saw the decisions that carried the most risk.
 
-The visible output is code; the uncertainty around its quality resides in the system that produced, evaluated, and approved it. A coding agent is one component in that system. Evaluation determines what counts as success, governance constrains access, context management controls the information available during a run, review defines the quality gate, and scheduling allocates compute, money, time, and human attention.
+The visible output of the agent's trajectory is code. The uncertainty around its quality resides in the system that produced, evaluated, and approved it. A coding agent is one component in that system, and evaluation determines what counts as success, governance constrains access, context management controls the information available during a run, review defines the quality gate, and scheduling allocates compute, money, time, and human attention.
 
-These functions interact. A higher score can result from an easier test rather than a better system. A reviewer can appear ineffective because the interface concealed the evidence needed for judgment. Instrumentation can record component failures while missing failures at component boundaries. A recovery procedure can pass while depending on credentials whose compromise would also destroy the recovery path.
+These functions interact, e.g. a higher score can result from an easier test rather than a better system, or a reviewer could appear ineffective because the interface concealed the evidence needed for judgment. Instrumentation can record component failures while missing failures at component boundaries and a recovery procedure can pass while depending on credentials whose compromise would also destroy the recovery path.
 
 This technical review and engineering monograph examines the evaluation, operation, and governance of AI coding-agent systems. It focuses on mechanisms that remain relevant as models and products change: measurement design, execution-based grading, containment, durable state, recovery, repository retrieval, context limits, human oversight, topology, and resource allocation. It does not compare current models or teach prompt and tool-schema design.
 
-The intended reader is a staff engineer, evaluation lead, or technical owner building a coding-agent evaluation or operations program. The statistical methods are introduced where they affect an engineering decision, but the monograph assumes comfort with experiment design, production controls, and technical review. Its practices are bounded engineering claims rather than universal rules. Their applicability depends on workload, permissions, failure costs, deployment conditions, and available review capacity.
+The intended reader is a senior engineer, evaluation lead, or technical owner building a coding-agent evaluation or operations program. The statistical methods are introduced where they affect an engineering decision, but the monograph assumes comfort with experiment design, production controls, and technical review. Its practices are intended to serve as bounded engineering claims rather than universal rules. Their applicability depends on workload, permissions, failure costs, deployment conditions, and available review capacity.
 
 \hypertarget{the-reliability-dependency-chain}{%
 \section{The reliability dependency chain}\label{the-reliability-dependency-chain}}
@@ -25,7 +25,7 @@ This creates a repair asymmetry. Later machinery is often easier to add than the
 
 The chain carries a system-level claim. Coding agents are evaluated as models and deployed as production systems. Once a run can outlive the worker that started it, wait on another service, compete with another run, mutate shared code, or publish a durable external effect, reliability stops being a property of the model and becomes a property of the system that preserves intent, authority, state, evidence, ordering, and recovery across components that fail independently. The framing is not new. Osterweil (\href{https://dl.acm.org/doi/10.5555/41765.41766}{1987}) argued that software processes are themselves software, and Choi and Scacchi (\href{https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf}{1991}) built a software factory as distributed infrastructure. Autonomous workers change the failure model, not the problem: today's workers are nondeterministic, edit persistent code, call external services, run concurrently, and can claim completion incorrectly. Chapter 7 develops this factory model and the contracts the operating chapters enforce.
 
-For any given guarantee, the useful question is therefore not whether the model is capable. It is which promise the surrounding system makes, which component owns that promise, what state survives failure, and what experiment would falsify the guarantee. The chapters are organized to make each of those questions answerable in turn.
+To ensure reliability for any given guarantee, we must be able to answer which promise the surrounding system makes, which component owns that promise, what state survives failure, and what experiment would falsify the guarantee. The chapters are organized to make each of those questions answerable in turn.
 
 \begin{figure}[htbp]
 \centering
@@ -33,7 +33,7 @@ For any given guarantee, the useful question is therefore not whether the model 
 \caption{Argument map for the reliability dependency chain: measurement, grading, containment and recovery, retrieval and context, review and accountability, and allocation and cost. Each layer supplies the evidence boundary on which the next relies.}
 \end{figure}
 
-The six parts follow this order. It is not a progression from easy to difficult. It is an account of how an apparently local defect can propagate into later operational decisions while retaining the appearance of a clean score, verdict, or artifact.
+The six parts that follow are an account of how an apparently local defect can propagate into later operational decisions while retaining the appearance of a clean score, verdict, or artifact.
 
 \hypertarget{method-scope-and-evidence-classification}{%
 \section{Method, scope, and evidence classification}\label{method-scope-and-evidence-classification}}

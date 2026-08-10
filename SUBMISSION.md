@@ -20,7 +20,7 @@ The manuscript source ZIP does not contain the companion dataset. This keeps the
 
 ### Title
 
-Engineering Reliable Coding Agents: Evaluation, Recovery, Context, and Control Beyond the Model
+Engineering Reliable Coding Agents: Evaluating and Operating the System Around the Model
 
 ### Authors
 
