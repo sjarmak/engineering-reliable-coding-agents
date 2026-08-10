@@ -1,7 +1,7 @@
 \chapter{Replayable traces and fault-injection recovery testing}
 \label{ch09-replayable-traces-fault-injection-recovery}
 \begin{quote}
-\textbf{Evidence profile.} 1 strong \(\cdot\) 3 directional \(\cdot\) 0 corroborating evidence items across 2 developed practices (ERCA-097, ERCA-127).
+\textbf{Evidence profile.} 1 strong \(\cdot\) 8 directional \(\cdot\) 1 direct preprint \(\cdot\) 0 corroborating evidence items across 2 developed practices (ERCA-097, ERCA-127).
 
 \textbf{Chapter claim.} Recovery is a measured property.
 \end{quote}
@@ -12,7 +12,7 @@ Fault tolerance is often inferred from an architecture diagram. A checkpoint app
 
 Agent runtimes present the same problem. A design may preserve state, retry interrupted work, and isolate external effects, yet still recover incorrectly when the fault location, persistence boundary, timeout, or software version changes. Two practices make the recovery claim testable. A typed event stream preserves enough structure to inspect and replay a run. Fault injection forces the runtime through the intervals its recovery design claims to protect.
 
-Four items support the chapter's two entries: two synthesized sources and two direct scholarly sources. Only the fault-recovery benchmark is a strong study; no strong study supports the trace argument. Typed traces are therefore treated as an instrumentation design supported by demonstrations and a specification, with recovery established by measurement rather than a universal threshold.
+Ten items support the chapter's two entries. Only the fault-recovery benchmark is a strong study; no strong study supports the trace argument. Five distributed-systems recovery-testing papers transfer directionally: they were evaluated on databases, file systems, and cluster controllers rather than agent runtimes, so I transfer their fault-placement and specification principles, not their measured results. One agent-trajectory study is direct evidence but a recent preprint. Typed traces are therefore treated as an instrumentation design supported by demonstrations and a specification, with recovery established by measurement rather than a universal threshold.
 
 Chapter 8 established that recorded state can make a run resumable. Replay imposes a stricter requirement. The system must know which events produced that state, which work may safely repeat, and where a changed decision invalidates the prior path. Recovery testing adds a third requirement: the runtime must demonstrate the claimed behavior when faults occur at inconvenient points, not only when a demonstration script stops a worker at a clean boundary.
 
@@ -108,6 +108,8 @@ Transcript-only observability remains attractive because it is easy to render an
 
 Vogel et al.~(2024) did more than show that injected faults degrade performance. Their direct recovery measurements reversed conclusions from earlier published comparisons, and the effect of a fault changed across successive failures. Software configuration, workload, accumulated recovery state, and fault timing all contributed to the observed result. A useful recovery claim must therefore include those conditions.
 
+The same argument applies to how a failed agent run is labeled. Zhao et al.~(\href{https://arxiv.org/abs/2607.09510}{2026}), in a recent preprint, collected 3,843 agent trajectories, annotated the 1,794 complete valid runs step by step across more than 63,000 steps, and modeled failure as a process with an onset, an evolution, and a recovery phase rather than a terminal outcome. A final-outcome label records that a run failed. It does not record when the trajectory became unrecoverable or whether an available recovery action was missed. This is direct agent evidence, though preprint evidence, for treating recovery as something that happens during a run and must be observed there. A recovery experiment that reports only a final pass indicator discards the same information.
+
 An architecture diagram describes intended control flow. It may show a worker loading a checkpoint, replaying events, and resuming output. The drawing cannot establish how long fault detection takes, whether retry queues compete with live work, whether a replacement worker must rebuild caches, or whether an external effect occurred before its completion record became durable. Those behaviors emerge from the interaction among the runtime, persistence layer, network, workload, and deployment configuration.
 
 Fault injection forces that interaction to occur on demand. Kill a worker or pod, interrupt an external call, terminate the process during persistence, and repeat those disturbances while representative work is active. The purpose is to measure recovery over a declared fault menu and operating envelope, with faults placed at the intervals the design claims to protect.
@@ -138,6 +140,8 @@ After an ungraceful worker kill during ticket creation, the runtime resumes the 
 \end{quote}
 
 Each clause points to an observable event or measurement.
+
+This rule has a longer history than agent runtimes. Gunawi et al.~(\href{https://www.usenix.org/conference/nsdi11/fate-and-destini-framework-cloud-recovery-testing}{2011}) built FATE and DESTINI as a pair: FATE injects failures systematically across combinations of failure points, and DESTINI expresses the expected recovery behavior as declarative specifications checked against the observed execution. The injector without the specification only demonstrates that the system survived something; the specification without systematic injection only documents an intention. Their evaluation targeted cloud storage systems, so I transfer the pairing as a method, not their coverage or bug counts. The claim-before-kill discipline in this chapter is that pairing applied to an agent runtime: the declarative recovery specification comes first, and the injection schedule exists to test it.
 
 The control run uses the same workload and configuration without an injected fault. This applies Chapter 2's control logic to recovery. The difference between the faulted and clean runs estimates the effect of the injection within the tested conditions.
 
@@ -198,6 +202,10 @@ The most informative fault point is rarely the boundary between steps. Chapter 8
 
 The test should place the kill there deliberately.
 
+Lineage-driven fault injection gives that placement a principled basis. Alvaro, Rosen, and Hellerstein (\href{https://dl.acm.org/doi/10.1145/2723372.2723711}{2015}) reasoned backward from a successful outcome: given the lineage of events that produced a good result, which combinations of faults could have prevented it? Faults chosen this way target the support of the outcome rather than random points in the schedule. The evaluation covered distributed data-management protocols, so I transfer the reasoning direction, not the tooling. In an agent runtime the analogue is concrete: the events that support ``the ticket exists exactly once'' are the dispatch, the external commitment, and the durable completion record, so those are the events whose surrounding intervals the kills must straddle. This is why the kill points below are named commitment barriers rather than time offsets.
+
+Wu, Pan, and Huang (\href{https://www.usenix.org/conference/nsdi24/presentation/wu-haoze}{2024}) make the complementary point about precision. Legolas infers abstract execution states from system code and uses them to select fine-grained injection points, and with that placement found 20 previously unknown partial-service-failure bugs across six mature distributed systems. I transfer the fault-placement principle, not the observed bug rate, to agent runtimes: a sleep-based kill tests whatever the scheduler happened to be doing when the timer fired; a named barrier or state-aware injection tests a particular reliability claim. A harness that kills ``roughly two seconds into the step'' is sampling schedules, not testing the execute-then-log gap.
+
 A worst-case protocol sends an ungraceful kill from inside the active step, after the external call returns and before the completion marker is written. The process exit status must confirm that the intended kill occurred. If the step reaches its normal return path or the harness records another exit mode, the trial is invalid rather than a passing recovery.
 
 This check prevents an imprecise injection from striking a clean boundary while claiming to test the vulnerable interval.
@@ -221,6 +229,8 @@ If it passes, the harness may be:
 \end{itemize}
 
 A control expected to fail is useful because a false pass is otherwise easy to mistake for fault tolerance. It detects only the defect it was designed to expose, however, and a subtler recovery failure may still pass both variants.
+
+The recovery path itself deserves the same suspicion as the failure. Li, Cai, and Lou (\href{https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu}{2026}) studied production incidents in which the recovery action, not the original fault, caused the severe failure, and proposed previewing the effects of high-risk recovery operations before executing them. Their evidence comes from cloud infrastructure, so it transfers directionally, but the rule it supports is one this book already states as invariant I10: a recovery path is production code with authority. Test it against the same invariants as the normal path, and preview high-risk recovery effects when practical. The naive negative control above is one instance of this rule. The general instance is that every non-naive recovery adapter belongs in the kill-point sweep as a subject, not only as the mechanism under whose protection the sweep runs. A reconciliation routine that deletes a ``duplicate'' artifact, a cleanup step that releases a lease still held by live work, and a retry policy that re-sends an uncertain external call are all recovery actions capable of causing the incident they exist to prevent.
 
 \Needspace{5\baselineskip}
 
@@ -262,6 +272,59 @@ Compaction replaces detailed working history with a condensed representation so 
 The fault menu should ultimately come from observed production failures rather than from what the harness can inject conveniently. Worker kills are reproducible and severe, but they do not cover slow storage, stale leases, delayed acknowledgments, partial network partitions, quota errors, or malformed persisted state.
 
 The companion catalog's realistic-fault-menu pattern develops the fuller construction method. The narrower requirement here is to publish the menu so readers can see which failures the recovery claim includes and which it excludes.
+
+\hypertarget{distributed-ambiguity-faults}{%
+\section{Distributed ambiguity faults}\label{distributed-ambiguity-faults}}
+
+The five kill points strike one worker's lifecycle. Once a factory runs multiple workers, a control plane, verifiers, and external services in separate failure domains, a second fault family appears: faults that create disagreement between components about what has happened. Nothing crashes, yet two durable records or two live processes hold incompatible beliefs.
+
+Sun et al.~(\href{https://www.usenix.org/system/files/osdi22-sun.pdf}{2022}) tested this family directly for Kubernetes reconciliation controllers. Sieve perturbs the controller's view of cluster state, feeding it stale, intermediate, or unobserved states, and detects bugs with differential oracles that compare state transitions between perturbed and unperturbed executions. The evaluated systems are cluster controllers, so the transfer is directional, but the factory analogue is exact: a factory control plane is a reconciliation controller over work items, and the corresponding fault is a controller that believes a worker still owns a task while the repository or another controller has moved on. The differential oracle also transfers: run the same workload with and without the view perturbation and compare the resulting state transitions, rather than asking only whether the perturbed run ended in a passing state.
+
+The table below lists the ambiguity faults I inject alongside the kill sweep. Invariant identifiers refer to the factory invariants defined in the Part III opener. Each row names the fault, the invariant it tests, and the observable behavior an acceptable runtime must exhibit.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2800}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1200}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.6000}}@{}}
+\caption{Distributed ambiguity faults, the invariant each tests, and the observable behavior an acceptable runtime must exhibit.}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Fault
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Invariant
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Expected observable behavior
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Fault
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Invariant
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Expected observable behavior
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Delayed response delivered after the retry has started & I5 & The late response and the retry resolve to one logical effect; the effect ledger shows one committed \texttt{effect\_id} or an explicit \texttt{unknown\_external\_state}, never two commits. \\
+Response lost after external commit & I5 & The runtime treats the call as uncertain, reconciles against external state before re-sending, and records the reconciliation outcome; no blind re-send. \\
+Worker loses its lease but continues running & I2 & The protected mutation boundary rejects the superseded worker's writes by \texttt{ownership\_epoch}; the rejection appears in the trace as a fencing event, not a silent success. \\
+Old worker's completion arrives after the new worker has succeeded & I3 & The stale completion is rejected by generation and attempt identity; logical state reflects the new attempt only, and the rejection is recorded. \\
+Control plane restarts while workers continue & I6 & The restarted controller reconciles against durable worker and repository state before issuing new authority; no work item is double-assigned or orphaned by controller amnesia. \\
+Control plane observes stale artifact state & I6 & Decisions taken on the stale view are detected at the next protected boundary and trigger reconciliation; the differential oracle shows no divergent committed transition. \\
+Repository state changes between validation and publication & I6 & Publication fails closed: the runtime detects that the validated version is no longer the head, refuses to publish against changed state, and routes to re-validation or reconciliation. \\
+Verifier times out, flakes, or contradicts itself on rerun & I8 & The runtime classifies the outcome as verifier failure, not software failure; no defect record is created from an infra timeout, and contradictory verdicts trigger rerun or escalation rather than acceptance of either verdict. \\
+External service reachable from the worker but not the controller & I6 & The two components' contradictory observations are reconciled by declared authority; the controller does not mark the effect failed while the worker's committed effect record stands. \\
+Schema or workflow version changes during recovery & I10 & Recovery either completes under an explicit compatibility path or fails closed with the version mismatch recorded; it never resumes by misreading old state under the new schema. \\
+History compaction boundary crossed before the failure & I10 & Recovery from the compacted summary preserves the same invariant checks as recovery from full history; effects committed before compaction are still recognized and not repeated. \\
+Recovery queue competes with new work & I10 & Recovery work and new admissions are both observable in queue metrics; recovery completes without starving admitted work indefinitely and without itself being starved invisibly. \\
+Synchronized retry wave after a dependency recovers & I5, I10 & Retries are jittered or admission-limited; the dependency's recovery does not trigger a duplicate-effect burst, and each retried effect still deduplicates by its idempotency key. \\
+\end{longtable}
+
+Each row is testable with the same discipline as the kill sweep: specify the claim, place the fault at the named interval, run the clean control with the same anchors, and check the typed event stream for the expected records. The rows referencing I5 need the effect ledger; the rows referencing I2 and I3 need fencing and identity checks at the mutation boundary; the rows referencing I6 need a declared reconciliation authority; the rows referencing I8 need the verifier-failure classification; the rows referencing I10 are recovery-path tests in the sense of the previous section and belong in the same sweep as the naive negative control.
 
 \hypertarget{keep-the-result-attached-to-its-envelope}{%
 \section{Keep the result attached to its envelope}\label{keep-the-result-attached-to-its-envelope}}
@@ -343,9 +406,9 @@ Before accepting a recovery claim about an agent runtime, I look for two linked 
 
 The first is a durably persisted typed event stream that distinguishes model calls, tool dispatch and completion, environment changes, external commitments, and state transitions. I begin with the shared OpenTelemetry GenAI conventions, then add explicit state, branch, persistence, and effect fields where the workload requires them. Every agent action identifies its owner, and every tool call can be joined to the reasoning step and session that authorized it.
 
-The second artifact is a fault-injection result produced under representative load. I run a clean control, kill a worker from inside an active step, and place at least one kill between an external effect and its durable completion record. I repeat injections within continuing runs and across independent runs because the first restart does not characterize later recovery.
+The second artifact is a fault-injection result produced under representative load. I run a clean control, kill a worker from inside an active step, and place at least one kill between an external effect and its durable completion record. I repeat injections within continuing runs and across independent runs because the first restart does not characterize later recovery. When the runtime spans multiple workers and a control plane, I add faults from the distributed ambiguity menu, placed by the claim they test rather than by a timer.
 
-The harness must confirm that the intended kill occurred, observe recovery without supplying recovery state, and exercise a naive negative control expected to duplicate effects.
+The harness must confirm that the intended kill occurred, observe recovery without supplying recovery state, and exercise a naive negative control expected to duplicate effects. Recovery paths themselves enter the sweep as subjects, since a recovery action holds authority and can cause the failure it exists to prevent.
 
 \Needspace{5\baselineskip}
 
@@ -403,6 +466,18 @@ A trace detailed enough to replay is also the artifact a person reads when recov
 \tightlist
 \item
   Strong evidence: Vogel et al.~(2024), ``A Comprehensive Benchmarking Analysis of Fault Recovery in Stream Processing Frameworks,'' arXiv:2404.06203 (JSS line).
+\item
+  Directional evidence: Gunawi et al.~(2011), ``FATE and DESTINI: A Framework for Cloud Recovery Testing,'' NSDI 2011. Evaluated on cloud storage systems; the injection-plus-declarative-specification pairing transfers, not the coverage results.
+\item
+  Directional evidence: Alvaro, Rosen, and Hellerstein (2015), ``Lineage-Driven Fault Injection,'' SIGMOD 2015. Evaluated on distributed data-management protocols; the outcome-backward fault-selection principle transfers.
+\item
+  Directional evidence: Wu, Pan, and Huang (2024), ``Legolas,'' NSDI 2024. Found 20 previously unknown partial-service-failure bugs across six mature distributed systems; the state-aware fault-placement principle transfers, not the bug rate.
+\item
+  Directional evidence: Sun et al.~(2022), ``Sieve,'' OSDI 2022. Evaluated on Kubernetes controllers; the view-perturbation faults and differential state-transition oracles transfer to factory control planes.
+\item
+  Directional evidence: Li, Cai, and Lou (2026), ``Pilot Execution,'' NSDI 2026. Cloud-infrastructure incident evidence that recovery actions cause severe failures; supports treating recovery paths as production code under invariant I10.
+\item
+  Direct evidence, preprint: Zhao et al.~(2026), ``Failure as a Process,'' arXiv:2607.09510. 3,843 trajectories collected, 1,794 complete valid runs annotated across more than 63,000 steps; failure modeled as onset, evolution, and recovery.
 \end{itemize}
 
 Author-system cases are narrative illustration, not evidence. The kill demonstration and publish-gate protocol are local artifacts.

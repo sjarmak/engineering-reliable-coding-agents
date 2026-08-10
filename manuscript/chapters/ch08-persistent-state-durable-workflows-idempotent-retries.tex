@@ -1,7 +1,7 @@
 \chapter{Persistent agent state, durable workflows, and idempotent retries}
 \label{ch08-persistent-state-durable-workflows-idempotent-retries}
 \begin{quote}
-\textbf{Evidence profile.} 0 strong \(\cdot\) 8 directional \(\cdot\) 3 corroborating \(\cdot\) 1 null or conflicting evidence items across 3 developed practices (ERCA-124, ERCA-128, ERCA-130).
+\textbf{Evidence profile.} 0 strong \(\cdot\) 12 directional \(\cdot\) 3 corroborating \(\cdot\) 1 null or conflicting evidence items across 3 developed practices (ERCA-124, ERCA-128, ERCA-130).
 
 \textbf{Chapter claim.} Durable intent survives the worker; external effects require their own contract.
 \end{quote}
@@ -36,6 +36,8 @@ Two stores that both appear authoritative create another failure mode. If a queu
 This architecture treats the worker as disposable. A replacement worker reads the durable queue record, loads the latest valid snapshot, applies subsequent events, and reconstructs the next permitted action. It does not require the failed process's heap or model context. The agent is amnesiac. The storage layer remembers enough that the amnesia does not break the evidence chain.
 
 This division resembles a change that unfolded over roughly two decades in stream-processing systems. Fragkoulis et al.~(\href{https://arxiv.org/abs/2008.00842}{2020}) describe early systems that treated state as application-managed data and later systems that brought state, checkpoints, and recovery under runtime control. The survey provides directional evidence and contains no experiment on agents. Its useful implication is architectural: recovery became state-centric once runtimes could identify the state they needed to preserve and coordinate it with progress through the input.
+
+The same migration is visible in serverless computing. Zhang et al.~(\href{https://www.usenix.org/conference/osdi20/presentation/zhang-haoran}{2020}) built Beldi, a library and runtime that gives stateful serverless functions fault-tolerant, transactional workflow semantics: logging of intent and completion, exactly-once execution of steps within the runtime's own boundary, and transactions spanning functions, all without requiring each application to hand-manage those properties. Beldi was evaluated on serverless benchmark applications, so I transfer only the direction: fault tolerance that teams once implemented by convention can move into a runtime abstraction with declared semantics. It is systems evidence, not agent evidence, and it says nothing about the model-driven parts of an agent run.
 
 The analogy has limits. A stream processor typically applies a specified computation to structured input. An agent may revise its plan, interpret ambiguous evidence, or call a model that returns a different answer to the same prompt. Explicit state cannot make those decisions deterministic. It can preserve which decision occurred, which evidence informed it, and which work followed, preventing a replacement worker from silently inventing a different history.
 
@@ -88,6 +90,8 @@ A workflow engine makes that global view durable. A failed capacity reservation 
 
 The supporting literature is useful but limited. Laigner et al.~(\href{https://arxiv.org/abs/2103.00170}{2021}) combined a literature review, repository analysis, and a survey of more than 120 practitioners. They found reliability problems concentrated around hand-built sagas and convention-managed consistency. Nadeem and Malik (\href{https://arxiv.org/abs/2204.07210}{2022}) ported a benchmark system containing 22 known bugs to a workflow engine in a single-participant case study and reported that the bugs became easier to localize. Their debugging times were compared with figures reported separately in another study, so the result is not a controlled head-to-head measurement.
 
+The recovery layer itself can be a separable design decision. Zhuang et al.~(\href{https://www.usenix.org/conference/osdi23/presentation/zhuang}{2023}) built ExoFlow on the observation that workflow systems conflate two concerns: executing tasks and recovering from their failures. ExoFlow separates them, treating guarantees such as exactly-once as properties of a recovery layer over the execution substrate rather than of task execution itself, and requiring applications to annotate which tasks are nondeterministic and which communicate externally so that recovery knows what may safely be replayed. The evaluation covers data and ML workflow benchmarks, so this is directional systems evidence. Its transferable point is architectural: what an agent runtime can promise about recovery is a layered contract over declared task properties, not a blanket attribute of running the tasks. An unannotated nondeterministic step, and every model call is one, is exactly the case the recovery layer must be told about.
+
 Centralized history does not provide one universally correct consistency guarantee. Zhang et al.~(\href{https://arxiv.org/abs/2208.09827}{2022}) surveyed a decade of transactional stream-processing research and found no generally accepted approach, even for computations far more deterministic than agent workflows. Each system selected guarantees around its application characteristics. The absence of a generally accepted approach means that an ``exactly once'' feature label does not establish that an application's state, latency, and external effects fit the advertised guarantee.
 
 \Needspace{5\baselineskip}
@@ -134,6 +138,39 @@ The invocation identity must cross that boundary. Attempt B must send the same i
 
 An operation is idempotent when repeating it converges on the same observable state as applying it once. The useful contract is that a duplicate becomes indistinguishable from no duplicate.
 
+The discussion so far uses several words whose distinctions carry the argument. I fix them here, using the identifiers defined in the Part III opener, ``The software factory as a distributed system'':
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Term
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Meaning
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Term
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Meaning
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Logical work & The user or operator intent that should happen once logically, under a stable work identity. \\
+Attempt & One execution of that work; a retry is a new attempt at the same logical work (invariant I4, retries preserve logical identity). \\
+Delivery & The assignment or redelivery of an attempt to a worker by the runtime. \\
+Runtime commit & A result durably recorded inside the orchestration boundary. \\
+External commit & A world-changing effect accepted outside that boundary, such as a merge, deployment, or payment. \\
+Idempotency & The contract under which a repeated external commit is indistinguishable from a single one (invariant I5, effects are safe under redelivery or explicitly uncertain). \\
+Reconciliation & Reading actual external state and deciding which continuation is valid, rather than trusting internal records. \\
+Unknown state & The condition in which neither success nor failure of an effect can be established safely. \\
+\end{longtable}
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{figures/ch08-durable-effects.pdf}
@@ -144,11 +181,13 @@ Key design determines which work the contract covers. A fresh attempt identifier
 
 The downstream implementation also needs an atomic claim on that key. Two workers may receive the same step concurrently after a timeout or lease dispute. If both check for a cached result and then perform the effect before either stores the result, the lookup adds latency without preventing duplication. A unique transactional record, compare-and-set operation, or equivalent mechanism must decide which worker owns the invocation before the effect occurs.
 
+The lease dispute behind that scenario has a canonical precedent. Burrows (\href{https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems}{2006}) describes how Chubby, Google's lock service, handles exactly this: a lease expiration tells the control plane that authority over a resource may be reassigned. It does not stop the old process, and it does not retract a request that process sent before losing the lease and that is still delayed in the network. Safety therefore requires the mutation boundary itself to reject obsolete authority, which Chubby supports with a sequencer, a lock generation number that the receiving server validates before applying the request. Retries and recovery in an agent factory create the same overlap: attempt B can hold current authority while attempt A's delayed external request is still in flight. The idempotency key and the authority generation answer different questions. The key deduplicates repeated attempts at the same logical work; the generation lets a protected boundary reject a superseded owner even while that owner is still running (invariant I2, authority is generation-scoped). This is directional evidence from a coordination service, not from agent systems, and Chapter 17 develops the fencing mechanism fully. Here it marks the limit of what retry machinery alone can make safe.
+
 Execution caching can extend the same rule through a call graph. Psarakis et al.~(\href{https://arxiv.org/abs/2312.06893}{2023}) describe a runtime that caches results by invocation identity so a repeated parent call reuses completed child calls. Within that runtime's transactional boundary, retried failed calls, recorded completed results, and call ordering can compose into a strong guarantee. An external service that ignores the invocation identity remains outside that boundary, regardless of the runtime's delivery terminology.
 
-This scope rules out a blanket claim that a completed invocation never runs twice. A step that succeeded externally but remained unrecorded may execute again because the runtime has no completion record to consult. Execution is at least once. Results committed within the runtime boundary may be recorded exactly once. Safety for an in-flight external effect still depends on the contract at that effect's boundary.
+This scope rules out a blanket claim that a completed invocation never runs twice. A step that succeeded externally but remained unrecorded may execute again because the runtime has no completion record to consult. Execution is at least once. Results committed within the runtime boundary may be recorded exactly once. Safety for an in-flight external effect still depends on the contract at that effect's boundary. ExoFlow's design, discussed above, states the same scope from the runtime's side: exactly-once is a recovery-layer contract over tasks whose nondeterminism and external communication have been declared, not a property that task execution acquires by running under a workflow engine.
 
-Some external systems provide this contract directly. Payment APIs may accept a client-supplied key and bind it to the first accepted request. A database can commit the business change and invocation record in one transaction. A content-addressed object store can make repeated writes of identical content under the same name converge. When a tool offers no equivalent mechanism, the workflow must add an adapter that owns deduplication or treat recovery as an unknown-state decision.
+Some external systems provide this contract directly. Payment APIs may accept a client-supplied key and bind it to the first accepted request. A database can commit the business change and invocation record in one transaction. A content-addressed object store can make repeated writes of identical content under the same name converge. When a tool offers no equivalent mechanism, the workflow must add an adapter that owns deduplication or treat recovery as an unknown-state decision (invariant I5).
 
 Meyers and Zienert (2025) also report that rewriting operations for idempotency exposed and corrected pre-existing retry defects. The rewrite changed application behavior at the engine boundary. The engine could not infer the required contract from the old code. This remains directional evidence from the adopting team.
 
@@ -161,6 +200,8 @@ My fault demonstration makes that boundary visible. A naive pipeline was killed 
 Idempotence also belongs at the durable step boundary before the external side-effect boundary. Model calls are natural durable steps because they can be slow, costly, and irreproducible. Once a model result commits under a stable invocation identity, a retry can reuse it and continue from the same evidence. Reissuing the call may change cost and control flow even when no external database has changed.
 
 The boundary should not surround every function call. Each durable step adds scheduling, serialization, storage, and history-reading work. Cheap, deterministic calculations can simply run again. A durable boundary is justified when work is expensive, slow, externally visible, or impossible to reproduce from recorded inputs.
+
+Huang et al.~(\href{https://www.usenix.org/conference/nsdi26/presentation/huang}{2026}) arrive at the same partition from a different direction. Fractal distributes shell scripts fault-tolerantly, and to do so it must classify what a script does: work that can simply be recomputed, state that can be reconstructed from recorded inputs, and side-effectful regions whose repeated execution is not observationally harmless. The classification maps directly onto agent tool execution. Rerunning grep, a parser, or a compiler is recomputable work; its repetition costs time and nothing else. Rerunning git push, pull-request creation, ticket creation, or a deployment is a side-effectful region, and repeating it changes what the world observes. The durable-boundary guidance above is this same partition stated as placement advice: recomputable work can sit outside the boundary, while side-effectful regions need a recorded identity and an effect contract (invariant I5). Fractal is systems evidence about shell-script distribution; I transfer the classification, not any measured overhead or recovery rate.
 
 A boundary can also be too broad. In another \textbf{local artifact}, a transient read shared one deduplication unit with an irreversible mutation. When the read failed, the system marked the whole unit terminal, poisoned the claim, and stopped reporting work it had never performed. A watchdog consulted the same fail-closed store and also went silent. This is narrative illustration rather than evidence for the general design. Separating the retryable read from the mutation claim would have preserved an accurate pending state.
 
@@ -216,6 +257,8 @@ Recorded state makes a run resumable. Chapter 9 makes the recovery claim replaya
 \item
   Directional evidence: Fragkoulis, Carbone, Kalavri \& Katsifodimos (2020). A Survey on the Evolution of Stream Processing Systems. The VLDB Journal (2024). arXiv:2008.00842. (Exactly-once recovery arrived only when state became a first-class managed runtime artifact; implicit-state systems had lossy recovery.)
 \item
+  Directional evidence: Zhang, Cardoza, Chen, Angel \& Liu (2020). Fault-Tolerant and Transactional Stateful Serverless Workflows (Beldi). OSDI '20. (Hand-managed fault tolerance moved into a runtime abstraction with declared semantics; serverless benchmarks, not agent workloads.)
+\item
   Corroborating case: Hanlin (Zhou) et al.~(2026). ADEMA: A Knowledge-State Orchestration Architecture for Long-Horizon Knowledge Synthesis with LLM Agents. arXiv:2604.25849. (In a fixed 60-run matrix, removing checkpoint/resume produced the only invalid run.)
 \item
   Directional evidence: Addy Osmani (2026). ``Long-running Agents'', \href{https://addyo.substack.com/p/long-running-agents}{Elevate newsletter}, 2026-04-30. (Plan file, progress notes, append-only event log outside the context make an agent recoverable and enable full context resets rebuilt from a handoff file.)
@@ -232,6 +275,8 @@ Recorded state makes a run resumable. Chapter 9 makes the recovery claim replaya
 \item
   Directional evidence: Laigner, Zhou, Vaz Salles et al.~(2021). Data Management in Microservices: State of the Practice, Challenges, and Research Directions. PVLDB 14(13). arXiv:2103.00170. (SLR + repo analysis + 120+ practitioner survey: hand-rolled sagas and convention-managed consistency are where reliability failures concentrate.)
 \item
+  Directional evidence: Zhuang et al.~(2023). ExoFlow: A Universal Workflow System for Exactly-Once DAGs. OSDI '23. (Execution separated from recovery; exactly-once as a recovery layer over tasks with annotated nondeterminism and external communication; data/ML benchmarks, not agents.)
+\item
   Corroborating evidence for the reported service-local before-and-after measurement: Jacob Meyers and Rob Zienert (2025). ``How Temporal Powers Reliable Cloud Operations at Netflix'', \href{https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953}{Netflix TechBlog}, 2025-12-15. The vendor-adjacent account comes from the adopting team, was not independently audited, and does not isolate a causal component or measure transfer to agent workloads.
 \item
   Null or conflicting result: Zhang, Soto \& Markl (2022). A Survey on Transactional Stream Processing. The VLDB Journal. arXiv:2208.09827. (Carried as the negative result behind the engine choice; it is about deterministic data pipelines and says nothing about agents.)
@@ -242,7 +287,11 @@ Recorded state makes a run resumable. Chapter 9 makes the recovery claim replaya
 \begin{itemize}
 \tightlist
 \item
+  Directional evidence: Burrows (2006). The Chubby Lock Service for Loosely-Coupled Distributed Systems. OSDI '06. (A lease answers the allocation question only; the sequencer generation number lets the mutation boundary reject obsolete authority. Canonical stale-authority precedent; mechanism developed in Chapter 17.)
+\item
   Directional evidence: Psarakis et al.~(2023). Styx: Transactional Stateful Functions on Streaming Dataflows. SIGMOD line. arXiv:2312.06893. (Execution caching keyed by invocation identity gives exactly-once composition across call graphs.)
+\item
+  Directional evidence: Huang et al.~(2026). Fractal: Fault-Tolerant Shell-Script Distribution. NSDI '26. (Recomputable work vs reconstructable state vs side-effectful regions; the classification, not measured rates, transfers to agent tool execution.)
 \item
   Directional evidence: Meyers and Zienert (2025), \href{https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953}{Netflix TechBlog}, 2025-12-15. (The forced idempotency rewrite alone fixed pre-existing retry issues.)
 \item

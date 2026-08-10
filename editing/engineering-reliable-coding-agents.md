@@ -6,12 +6,12 @@
 > `node scripts/editable-manuscript.mjs --status` to list the sections that need to be
 > transferred back to TeX. Do not regenerate this file while it contains unapplied edits.
 >
-> Baseline: version `1.0.0-rc.14`, repository revision `02e3ed4d34a478001479c78a81475e8a75b6baf8`.
+> Baseline: version `1.0.0-rc.14`, repository revision `46a473603ad67d2797f8e7da3fb61c07fb66b012`.
 
 The `tex-sync` comments delimit exact file mappings and carry baseline hashes. Leave those
 comments in place; edit the prose between them.
 
-<!-- tex-sync:start {"path":"manuscript/main.tex","tex_sha256":"00cd9425715325adaa6c1f1044b1f3533b84f84f1355154163dc5ebb2f2d2f3f","markdown_sha256":"46f69615bb041c9089f5ebb56ee4e97a0926bec5d5d88cb9e609469ca6b75bad"} -->
+<!-- tex-sync:start {"path":"manuscript/main.tex","tex_sha256":"86dc0447a882421980e45c3fa04e6b50fce9004c11758c3413e5eec69bda6e8f","markdown_sha256":"46f69615bb041c9089f5ebb56ee4e97a0926bec5d5d88cb9e609469ca6b75bad"} -->
 # Title-page metadata
 
 - **Title:** Engineering Reliable Coding Agents
@@ -20,10 +20,16 @@ comments in place; edit the prose between them.
 - **Version line:** Version 1.0.0-rc.14 --- August 2026
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/abstract.tex","tex_sha256":"bac6346209b5bd170ab06fa27b808b8bcf255529610cd5c28d139acff37bda28","markdown_sha256":"ac1764fdf0575a5c2c1010a1fd9c359322a182dbb0284afefd1dfb7372f476c8"} -->
+<!-- tex-sync:start {"path":"manuscript/abstract.tex","tex_sha256":"2cb908c6bf35c9b5d1dae49f2d256f1347751e78684bb1f6a7d91a5978437b04","markdown_sha256":"ef46b3ec566d3d2412aada9480a05288c3d2cbe20745610b9e3c23807692dcbe"} -->
 # Abstract
 
-AI coding agents are commonly evaluated as models but deployed as systems whose behavior also depends on evaluation harnesses, execution state, retrieval, permissions, review interfaces, and resource allocation. This technical review and engineering monograph examines reliability at those system boundaries. A structured multivocal search, bounded update audit, and software-engineering coverage probe assembled 138 scholarly works, 91 practitioner records, 29 benchmark records, and 17 author-system case records. Sources were screened through stated inclusion and exclusion criteria, assigned claim-scoped quality assessments, and challenged through targeted audits; ambiguous classifications defaulted to the lower group. The study contributes an evidence ledger, a versioned catalog of 192 practice records with 55 developed in depth, a dependency chain and repair asymmetry across evaluation and operation, scoped measurements and failure cases from author-operated systems, runnable protocols, and five reusable skills with evidence maps. The search is structured rather than exhaustive. The publisher- and index-native supplement remains incomplete in this release candidate: ACM Digital Library and IEEE Xplore were not searched through their publisher lanes, Scopus was not searched through its index, and the 20-practice sample has not received blinded external calibration. All four remain release gates for archival v1. The release candidate therefore claims neither provider coverage nor independent calibration and reports no inter-rater statistic. Evidence is uneven across topics, capability results remain time- and workload-dependent, and author-system cases are illustrations rather than independent external evidence.
+AI coding agents are commonly evaluated as models but deployed as systems. Their reliability depends not only on model capability, but on the harness, execution state, retrieval, memory and state management, permissions, review interfaces, and resource allocation around the model. This technical review and engineering monograph examines those system boundaries and develops a practical framework for evaluating and operating coding agents reliably.
+
+The study synthesizes 138 scholarly works, 91 practitioner records, 29 benchmark records, and 17 author-system case records through a structured multivocal review, targeted update audits, and software-engineering coverage analysis. Across this evidence, a consistent pattern emerges: many apparent model failures originate elsewhere in the system, while improvements measured at one layer often fail to propagate to end-to-end task outcomes. Evaluation and operation are therefore treated as a dependency chain in which weaknesses in task construction, execution environments, retrieval, state management, verification, or observability can invalidate conclusions made downstream.
+
+The monograph contributes a versioned catalog of 192 reliability practices, including 55 developed in depth; an evidence ledger linking claims to their support; a framework for reasoning about dependency and repair asymmetry across the agent lifecycle; empirical measurements and failure cases from operated agent systems; runnable evaluation and reliability protocols; and five reusable agent skills with evidence maps. Together, these provide a system-level methodology for distinguishing model capability from infrastructure effects, designing evaluations that support defensible conclusions, and building agent systems that can recover safely when components fail.
+
+The review is structured rather than exhaustive, evidence strength varies by topic, and empirical results remain dependent on workload and system configuration; publisher-native ACM and IEEE searches, Scopus coverage, and external calibration of the practice taxonomy remain planned validation work.
 <!-- tex-sync:end -->
 
 <!-- tex-sync:start {"path":"manuscript/frontmatter.tex","tex_sha256":"7635c777d776133d076d0d141e736a80d8a4b1b1d9e94129f27010c90bcb18d1","markdown_sha256":"10fc1b0221ae99a61ab061aedef7b11452954655651f3b5e08d550ebe9d54e36"} -->
@@ -1891,9 +1897,221 @@ Part III begins at that observable boundary and turns to containing what happens
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the recall-family scorer and its replacement default, both of which are narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch07-isolation-injection-independent-verification.tex","tex_sha256":"40a7eb07f93c0771a9894c70a835ed6d316d5facf220a5ce3443894c123d37f8","markdown_sha256":"b56eefdfd5df517544e24f1199ef35f2911af024ca024c3dfd24506c3085ea7f"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/part3-software-factory-distributed-system.tex","tex_sha256":"665cf7bc2b9381090f8685cd781f31976180af0e3ef3188ed398e134757ce1d6","markdown_sha256":"2c0e5e6313b8bc2f07b87aa313bfad4510a9d3f9d877b0640cbb40eb0d043a1a"} -->
 # Part III: Containment, durable execution, and recovery engineering
 
+# The software factory as a distributed system
+
+## The model is not the system
+
+A single agent trajectory is one execution component. It starts, reads state, produces an artifact, and stops. Everything that makes that trajectory count as work belongs to machinery the trajectory does not contain: the scheduler that assigned it, the store that remembers what it was asked to do, the repository state it read and will write, the verifier that decides whether its output is acceptable, the publisher that turns an accepted artifact into an external effect, the external services that accept or reject that effect, and the resource policy that decided this work deserved compute at all.
+
+When operators report that "the agent failed," the trace often shows something else. The model produced a plausible patch; the process hosting it was evicted before recording completion. The model finished; a second worker on the same task had already pushed a conflicting branch. The tests passed; they passed against a repository revision three merges old. The pull request opened; the completion record did not survive, so the system opened it again. None of these are model failures. They are failures of coordination, durability, versioning, and effect management, and no improvement in model capability repairs them.
+
+Part II ended with grading: how an observation becomes an acceptance decision. Part III and the parts after it operate inside a larger frame, and this section states that frame once so the chapters can use it. I will call the whole arrangement a **software factory**: the durable system that accepts logical work, schedules attempts, runs workers, verifies artifacts, publishes effects, and reconciles disagreement between its records and the world. The agent is one worker inside it.
+
+## This framing has a history
+
+Treating the machinery around software production as an engineered system is not a new idea, and I do not claim it as one. Osterweil ([1987](https://dl.acm.org/doi/10.5555/41765.41766)) argued that software processes are software too: a development process is a program with control flow, state, and defects, and it deserves the same engineering scrutiny as the product it produces. His retrospective ([1997](https://dl.acm.org/doi/10.1145/253228.253440)) reviewed a decade of process-programming work and defended the position against the objection that human-centered processes resist formalization. Choi and Scacchi ([1991](https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf)) went further and described the software factory itself as distributed infrastructure: heterogeneous tools, repositories, and people coordinating through shared state across a network, with the coordination substrate treated as a first-class engineering object. The CNCF's Secure Software Factory reference architecture ([CNCF TAG Security](https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/)) supplies the contemporary vocabulary: pipelines, attestations, and policy enforcement points arranged as a factory. Its scope is supply-chain security rather than fault tolerance, so I borrow its vocabulary and not its guarantees. All three are historical or conceptual lineage rather than evidence about agent systems.
+
+What is different now is the worker. The processes Osterweil programmed and the infrastructure Choi and Scacchi described coordinated deterministic tools and human developers who could be asked what they meant. The modern factory schedules autonomous, nondeterministic workers that edit persistent code, call external APIs, run concurrently with one another, and can claim completion incorrectly. A compiler does not assert that it succeeded when it failed. An agent can, fluently and in detail. That combination of direct effect authority with unreliable self-report is the modern synthesis this book addresses; the distributed-infrastructure framing itself predates it by more than three decades.
+
+Practitioner systems have converged on the same shape. OpenAI's Symphony orchestration ([OpenAI 2026](https://openai.com/index/open-source-codex-orchestration-symphony/)) and Cloudflare's issue-triage factory ([Cloudflare 2026](https://blog.cloudflare.com/astro-issue-triage/)) both separate a durable work ledger, a scheduler, disposable workers, and gated publication. These are practitioner cases from the operating teams, useful as corroborating convergence on the decomposition, not as controlled evidence that the decomposition improves any measured outcome.
+
+## When an agent system becomes a distributed-systems problem
+
+Not every agent deployment needs this frame. A local assistant that reads a repository, proposes a patch in an interactive session, and exits has one process, one human, and no durable coordination state. If the process dies, the human restarts it and loses only convenience. Modeling that as a distributed system adds vocabulary without adding safety.
+
+The frame becomes load-bearing when any of the following hold:
+
+- useful work must outlive a process, so progress needs a durable record independent of any worker;
+
+- coordination spans components that fail independently, so no single crash can be assumed to take the whole system down cleanly;
+
+- multiple workers act concurrently on versioned or shared state, so ordering and ownership become contested;
+
+- external systems can commit effects asynchronously, so the factory's records and the world can disagree; or
+
+- verification and publication occur in separate failure domains, so an artifact can be verified and never published, or published and never verified.
+
+Once any of these conditions holds, I do not claim the factory *is* a distributed system in some essential sense. I claim it exhibits distributed-systems failure modes: lost updates, stale authority, duplicate effects, split-brain records, partial failure. Those failure modes have known engineering treatments, and model capability is then only one contributor to reliability among several.
+
+## Five things the factory must not confuse
+
+Most factory failures I have traced reduce to a conflation of two things the system treated as one. Five distinctions carry most of the weight.
+
+**Logical work versus execution attempt.** The user's intent, fix this bug once, is logical work. A worker process trying to satisfy it is an attempt. One work item may consume many attempts; a retry is a new attempt at the same logical work, not new work. A system that identifies work with its current attempt loses the work when the attempt dies.
+
+**Lease and liveness versus authority.** A lease, claim, or heartbeat answers an allocation question: who should be working on this now, and is that worker probably alive? It does not answer the safety question: whose writes may be accepted? A worker whose lease expired during a network partition can still be running and still be writing. The mutation boundary must be able to reject it; the lease alone cannot.
+
+**Candidate artifact versus accepted completion.** A worker producing a branch, a diff, or a message saying the task is done has produced a candidate. Acceptance is a separate event that only independent evidence should trigger. An agent's completion claim is input to verification, never a substitute for it.
+
+**Local completion record versus external commitment.** The factory recording "pull request opened" and the code host having opened the pull request are two facts in two failure domains. Either can exist without the other. A crash between the external effect and the internal record leaves the effect real and the record absent; a crash in the other order leaves the record present and the effect absent. Both cases are normal, and recovery must handle both.
+
+**Verifier output versus semantic truth.** A green verifier establishes that a specific check, in a specific configuration, against a specific artifact version, did not fail. It does not establish that the change is correct, and a red verifier does not establish that the change is wrong; the verifier itself can time out, flake, or test the wrong revision. Ge and Zhang ([2026](https://arxiv.org/abs/2602.02307)) measured this directly in 1,960 open-source Java projects: 3.2 percent of GitHub Actions builds were rerun, and 67.73 percent of those rerun builds were flaky, affecting 1,055 projects. That is a preprint measurement of rerun builds specifically, not a claim that two-thirds of all builds are flaky, but it is enough to establish that verifier output and software state are distinct signals.
+
+## The logical factory decomposition
+
+The responsibilities below are logical, not physical. A small deployment can host all of them in one process and one database; a large one can distribute them across services. What matters is that each responsibility exists, has an owner, and is not silently fused with its neighbors. This is not a microservice count.
+
+                     +---------------------------+
+       requests ---> |      admission policy     |   what work is accepted,
+                     |                           |   at what priority and budget
+                     +------------+--------------+
+                                  v
+                     +---------------------------+
+                     |    durable work ledger    |   logical work, states,
+                     |  (source of truth for     |   epochs, attempt history
+                     |   what should happen)     |
+                     +------------+--------------+
+                                  v
+                     +---------------------------+
+                     | control plane / scheduler |   assigns attempts, tracks
+                     |                           |   liveness, grants epochs
+                     +------+-------------+------+
+                            v             v
+                     +-----------+  +-----------+
+                     |  worker   |  |  worker   |    disposable, nondeterministic,
+                     | (attempt) |  | (attempt) |    no authority of their own
+                     +-----+-----+  +-----+-----+
+                           v              v
+                     +---------------------------+
+                     |    versioned artifacts    |   branches, diffs, images,
+                     |                           |   each bound to an attempt
+                     +------------+--------------+
+                                  v
+                     +---------------------------+
+                     |  independent verification |   evidence bound to the
+                     |                           |   artifact version observed
+                     +------------+--------------+
+                                  v
+                     +---------------------------+
+                     | publication / effect      |   the only path to external
+                     | boundary                  |   commitment; fenced, idempotent
+                     +------------+--------------+
+                                  v
+                     +---------------------------+
+                     |      reconciliation       |   reads actual external state,
+                     |                           |   resolves record/world conflict
+                     +---------------------------+
+
+Two structural points. First, workers sit in the middle of the diagram and own nothing durable. They read from the ledger, write candidate artifacts, and report. Every consequential transition happens above or below them, in components designed to survive their death. Second, reconciliation is a standing component, not an incident procedure. Any factory whose publication boundary can crash mid-effect will accumulate record-world disagreements at some background rate, and something must own resolving them.
+
+## The factory state machine
+
+Logical work moves through a state machine that the ledger owns:
+
+    accepted -> eligible -> claimed(epoch) -> executing(attempt)
+            -> outcome_ready -> verifying -> publishing -> complete
+
+    side states: blocked | failed | cancelled | superseded
+               | unknown_external_state | reconcile_required
+
+`accepted` means admission recorded the work durably. `eligible` means its dependencies and budget allow scheduling. `claimed` binds the work to an ownership epoch; `executing` binds it further to a specific attempt. `outcome_ready` means an attempt has produced a candidate artifact. `verifying` and `publishing` are separate states because they are separate failure domains. The side states absorb reality: `blocked` for unmet dependencies, `failed` and `cancelled` for terminal outcomes, `superseded` for work overtaken by newer intent, `unknown_external_state` for effects whose success cannot be established safely, and `reconcile_required` for contradictory durable records.
+
+The transitions are keyed to a small identity vocabulary, used consistently through the rest of the book:
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><div class="minipage">
+<p>Identity</p>
+</div></th>
+<th style="text-align: left;"><div class="minipage">
+<p>Names</p>
+</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><div class="minipage">
+<p>Identity</p>
+</div></td>
+<td style="text-align: left;"><div class="minipage">
+<p>Names</p>
+</div></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>work_id</code></td>
+<td style="text-align: left;">stable logical work; the intent that should happen once logically</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ownership_epoch</code></td>
+<td style="text-align: left;">monotonic generation of write authority over that work</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>attempt_id</code></td>
+<td style="text-align: left;">one execution attempt under a given work and epoch</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>artifact_version</code></td>
+<td style="text-align: left;">concrete code or state produced by an attempt</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>verification_id</code></td>
+<td style="text-align: left;">verifier configuration and inputs used to accept or reject an artifact version</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>effect_id</code></td>
+<td style="text-align: left;">one logical externally visible effect; the idempotency key at the boundary</td>
+</tr>
+</tbody>
+</table>
+
+The line that matters most: a model saying "done" can move an attempt to `outcome_ready`. Only independently observed evidence should move logical work through `verifying` and `publishing` to `complete`. The agent's self-report is a scheduling signal, telling the factory an artifact exists and is worth verifying. It is never an acceptance signal.
+
+## Factory invariants
+
+Later chapters reference these by identifier, so I state them compactly here.
+
+- **I1** Accepted work cannot silently disappear. The ledger is durable and live: every accepted `work_id` reaches a terminal state or remains visibly pending.
+
+- **I2** Authority is generation-scoped. Only the current `ownership_epoch` may commit a mutation at a protected boundary, and a superseded worker must be rejected even if it is still running. This is fencing, and it is enforced at the boundary, not inferred from the lease.
+
+- **I3** Stale completions cannot advance logical state. A durable transition validates generation and attempt identity, not the scheduler's belief about who is running.
+
+- **I4** Retries preserve logical identity. A retry is a new `attempt_id` under the same `work_id`, never a duplicate work item.
+
+- **I5** Externally visible effects are safe under redelivery or explicitly uncertain: an idempotency key, an atomic effect-plus-dedup record, natural convergence, adapter-owned reconciliation, or an explicit `unknown_external_state`. No generic exactly-once claim across a boundary that cannot provide it.
+
+- **I6** Contradictory durable records trigger reconciliation, not guesswork. Precedence follows declared authority.
+
+- **I7** Evidence is version-bound. A verifier result or retrieved fact is valid only for the `artifact_version` or state it observed.
+
+- **I8** Verifier failure is distinct from software failure. An infrastructure timeout or flake is not a semantic defect, and a pass establishes only what that verifier can detect.
+
+- **I9** Admissible work cannot starve invisibly.
+
+- **I10** Recovery preserves the same invariants as normal execution. Recovery paths are production code with authority and must be tested as such.
+
+- **I11** Consequential transitions are causally attributable: work, attempt, actor, input state, authority generation, requested effect, observed response, and resulting durable state.
+
+None of these invariants mention model quality. That is the point. A factory can hold all eleven while running a mediocre model, and the result is a system that reliably produces mediocre candidates and honestly reports their status. A factory that violates them while running an excellent model produces excellent candidates it loses, duplicates, or misreports.
+
+## Reliability dimensions
+
+The invariants partition into dimensions an operator can assess separately: control-plane reliability (I1, I9), execution reliability (I4), authority and concurrency safety (I2, I3), external-effect reliability (I5), artifact and record consistency (I6, I7), verification reliability (I8), semantic correctness (the model's contribution, gated by verification and review), capacity and recovery (I9, I10), and auditability (I11). A deployment can be strong on one dimension and weak on another, and an aggregate success rate hides which.
+
+> **Agent reliability is not factory reliability.** Improving the model improves one dimension, semantic correctness of candidate artifacts. Every other dimension is determined by the surrounding system, and a defect in any of them can convert a correct candidate into a lost, duplicated, stale, or falsely reported result.
+
+The distributed-systems literature I draw on through Parts III to VI transfers directionally to agent factories unless a claim is restricted to the evaluated system. Chubby's lock generations ([Burrows 2006](https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems)) supply the fencing mechanism behind I2; Borg and Omega ([Verma et al. 2015](https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/); [Schwarzkopf et al. 2013](https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/)) supply admission and shared-state scheduling mechanisms behind I1 and I9. I transfer their mechanisms, not their constants, and none of this machinery addresses model nondeterminism: durability preserves which stochastic decision occurred, not its correctness.
+
+## Where the rest of the book fits
+
+The chapters that follow each own part of this frame. Chapter 7 engineers the containment and authority boundary around a worker: what an attempt can reach and what evidence acceptance requires. Chapter 8 engineers the ledger side: durable state, effect contracts, and idempotent retries (I1, I4, I5). Chapter 9 tests the claims through replay and fault injection, including the recovery paths that I10 promotes to production code. Chapter 10 builds the causal diagnosis that I11 makes possible. Chapter 12 applies version-bound evidence (I7) to repository retrieval and freshness. Chapters 15 and 16 place independent verification and human authority at the acceptance and publication boundaries. Chapter 17 addresses concurrency and task topology under I2 and I3, and Chapter 18 addresses capacity, admission, and scheduling under I1 and I9. Where a chapter tightens or restates an invariant, it cites the identifier given here rather than redefining it.
+
+## Sources and evidence
+
+- Osterweil ([1987](https://dl.acm.org/doi/10.5555/41765.41766)), Osterweil ([1997](https://dl.acm.org/doi/10.1145/253228.253440)), Choi and Scacchi ([1991](https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf)), and the CNCF Secure Software Factory reference architecture ([CNCF TAG Security](https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/)) are historical and conceptual lineage for the factory framing; none is evidence about agent systems, and the CNCF architecture is scoped to supply-chain security rather than fault tolerance.
+
+- Ge and Zhang ([2026](https://arxiv.org/abs/2602.02307)) is a preprint measurement of rerun-build flakiness in 1,960 Java projects, cited for the distinction between verifier output and software state within its rerun-build scope.
+
+- Burrows ([2006](https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems)), Schwarzkopf et al. ([2013](https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/)), and Verma et al. ([2015](https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/)) provide directional mechanism transfer for fencing, shared-state scheduling, and admission control; their measured parameters do not transfer.
+
+- OpenAI ([2026](https://openai.com/index/open-source-codex-orchestration-symphony/)) and Cloudflare ([2026](https://blog.cloudflare.com/astro-issue-triage/)) are practitioner cases corroborating convergence on the decomposition, not controlled evidence for it.
+<!-- tex-sync:end -->
+
+<!-- tex-sync:start {"path":"manuscript/chapters/ch07-isolation-injection-independent-verification.tex","tex_sha256":"40a7eb07f93c0771a9894c70a835ed6d316d5facf220a5ce3443894c123d37f8","markdown_sha256":"f01f06b161ee41474975fef01370597c5a9d4a0721f3f9724f395a0ede6f0f74"} -->
 # Agent isolation, injection defenses, and independent verification
 
 > **Evidence profile.** 0 strong $\cdot$ 4 directional $\cdot$ 3 corroborating evidence items across 3 developed practices (ERCA-068, ERCA-069, ERCA-105).
@@ -2189,10 +2407,10 @@ Containment limits the damage a live process can cause. Chapter 8 turns to what 
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the container refusal, disabled networking, and recorded isolation posture described above, all of which are narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch08-persistent-state-durable-workflows-idempotent-retries.tex","tex_sha256":"e8bb94bca330464c8424a113e8db580e958c55b7eaf61a65c65b9beb3b6a2ebf","markdown_sha256":"5185d1a275c4ebc8156883fdde12e466935292a9ffc6de06ac39a7afe8061083"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch08-persistent-state-durable-workflows-idempotent-retries.tex","tex_sha256":"5a1c343fe077745f3bc5e6288e0019386109412c4cca301048e263906a62b392","markdown_sha256":"3c2bc9d6ae80fa661c332f14a41de496259719e7e619ea052053a13dcfab3940"} -->
 # Persistent agent state, durable workflows, and idempotent retries
 
-> **Evidence profile.** 0 strong $\cdot$ 8 directional $\cdot$ 3 corroborating $\cdot$ 1 null or conflicting evidence items across 3 developed practices (ERCA-124, ERCA-128, ERCA-130).
+> **Evidence profile.** 0 strong $\cdot$ 12 directional $\cdot$ 3 corroborating $\cdot$ 1 null or conflicting evidence items across 3 developed practices (ERCA-124, ERCA-128, ERCA-130).
 >
 > **Chapter claim.** Durable intent survives the worker; external effects require their own contract.
 
@@ -2225,6 +2443,8 @@ Two stores that both appear authoritative create another failure mode. If a queu
 This architecture treats the worker as disposable. A replacement worker reads the durable queue record, loads the latest valid snapshot, applies subsequent events, and reconstructs the next permitted action. It does not require the failed process's heap or model context. The agent is amnesiac. The storage layer remembers enough that the amnesia does not break the evidence chain.
 
 This division resembles a change that unfolded over roughly two decades in stream-processing systems. Fragkoulis et al. ([2020](https://arxiv.org/abs/2008.00842)) describe early systems that treated state as application-managed data and later systems that brought state, checkpoints, and recovery under runtime control. The survey provides directional evidence and contains no experiment on agents. Its useful implication is architectural: recovery became state-centric once runtimes could identify the state they needed to preserve and coordinate it with progress through the input.
+
+The same migration is visible in serverless computing. Zhang et al. ([2020](https://www.usenix.org/conference/osdi20/presentation/zhang-haoran)) built Beldi, a library and runtime that gives stateful serverless functions fault-tolerant, transactional workflow semantics: logging of intent and completion, exactly-once execution of steps within the runtime's own boundary, and transactions spanning functions, all without requiring each application to hand-manage those properties. Beldi was evaluated on serverless benchmark applications, so I transfer only the direction: fault tolerance that teams once implemented by convention can move into a runtime abstraction with declared semantics. It is systems evidence, not agent evidence, and it says nothing about the model-driven parts of an agent run.
 
 The analogy has limits. A stream processor typically applies a specified computation to structured input. An agent may revise its plan, interpret ambiguous evidence, or call a model that returns a different answer to the same prompt. Explicit state cannot make those decisions deterministic. It can preserve which decision occurred, which evidence informed it, and which work followed, preventing a replacement worker from silently inventing a different history.
 
@@ -2270,6 +2490,8 @@ A workflow engine makes that global view durable. A failed capacity reservation 
 
 The supporting literature is useful but limited. Laigner et al. ([2021](https://arxiv.org/abs/2103.00170)) combined a literature review, repository analysis, and a survey of more than 120 practitioners. They found reliability problems concentrated around hand-built sagas and convention-managed consistency. Nadeem and Malik ([2022](https://arxiv.org/abs/2204.07210)) ported a benchmark system containing 22 known bugs to a workflow engine in a single-participant case study and reported that the bugs became easier to localize. Their debugging times were compared with figures reported separately in another study, so the result is not a controlled head-to-head measurement.
 
+The recovery layer itself can be a separable design decision. Zhuang et al. ([2023](https://www.usenix.org/conference/osdi23/presentation/zhuang)) built ExoFlow on the observation that workflow systems conflate two concerns: executing tasks and recovering from their failures. ExoFlow separates them, treating guarantees such as exactly-once as properties of a recovery layer over the execution substrate rather than of task execution itself, and requiring applications to annotate which tasks are nondeterministic and which communicate externally so that recovery knows what may safely be replayed. The evaluation covers data and ML workflow benchmarks, so this is directional systems evidence. Its transferable point is architectural: what an agent runtime can promise about recovery is a layered contract over declared task properties, not a blanket attribute of running the tasks. An unannotated nondeterministic step, and every model call is one, is exactly the case the recovery layer must be told about.
+
 Centralized history does not provide one universally correct consistency guarantee. Zhang et al. ([2022](https://arxiv.org/abs/2208.09827)) surveyed a decade of transactional stream-processing research and found no generally accepted approach, even for computations far more deterministic than agent workflows. Each system selected guarantees around its application characteristics. The absence of a generally accepted approach means that an "exactly once" feature label does not establish that an application's state, latency, and external effects fit the advertised guarantee.
 
 The engine boundary should follow the workload. I use three questions:
@@ -2308,6 +2530,63 @@ The invocation identity must cross that boundary. Attempt B must send the same i
 
 An operation is idempotent when repeating it converges on the same observable state as applying it once. The useful contract is that a duplicate becomes indistinguishable from no duplicate.
 
+The discussion so far uses several words whose distinctions carry the argument. I fix them here, using the identifiers defined in the Part III opener, "The software factory as a distributed system":
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><div class="minipage">
+<p>Term</p>
+</div></th>
+<th style="text-align: left;"><div class="minipage">
+<p>Meaning</p>
+</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><div class="minipage">
+<p>Term</p>
+</div></td>
+<td style="text-align: left;"><div class="minipage">
+<p>Meaning</p>
+</div></td>
+</tr>
+<tr>
+<td style="text-align: left;">Logical work</td>
+<td style="text-align: left;">The user or operator intent that should happen once logically, under a stable work identity.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Attempt</td>
+<td style="text-align: left;">One execution of that work; a retry is a new attempt at the same logical work (invariant I4, retries preserve logical identity).</td>
+</tr>
+<tr>
+<td style="text-align: left;">Delivery</td>
+<td style="text-align: left;">The assignment or redelivery of an attempt to a worker by the runtime.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Runtime commit</td>
+<td style="text-align: left;">A result durably recorded inside the orchestration boundary.</td>
+</tr>
+<tr>
+<td style="text-align: left;">External commit</td>
+<td style="text-align: left;">A world-changing effect accepted outside that boundary, such as a merge, deployment, or payment.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Idempotency</td>
+<td style="text-align: left;">The contract under which a repeated external commit is indistinguishable from a single one (invariant I5, effects are safe under redelivery or explicitly uncertain).</td>
+</tr>
+<tr>
+<td style="text-align: left;">Reconciliation</td>
+<td style="text-align: left;">Reading actual external state and deciding which continuation is valid, rather than trusting internal records.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Unknown state</td>
+<td style="text-align: left;">The condition in which neither success nor failure of an effect can be established safely.</td>
+</tr>
+</tbody>
+</table>
+
 <figure>
 <embed src="../manuscript/figures/ch08-durable-effects.pdf" style="width:100.0%" />
 <figcaption>A first attempt records a durable intent and operation identity before an external commit. If the worker dies before recording completion, a replacement reads the pending intent and retries with the same identity; the external boundary must return the prior result, converge, or force explicit reconciliation.</figcaption>
@@ -2317,11 +2596,13 @@ Key design determines which work the contract covers. A fresh attempt identifier
 
 The downstream implementation also needs an atomic claim on that key. Two workers may receive the same step concurrently after a timeout or lease dispute. If both check for a cached result and then perform the effect before either stores the result, the lookup adds latency without preventing duplication. A unique transactional record, compare-and-set operation, or equivalent mechanism must decide which worker owns the invocation before the effect occurs.
 
+The lease dispute behind that scenario has a canonical precedent. Burrows ([2006](https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems)) describes how Chubby, Google's lock service, handles exactly this: a lease expiration tells the control plane that authority over a resource may be reassigned. It does not stop the old process, and it does not retract a request that process sent before losing the lease and that is still delayed in the network. Safety therefore requires the mutation boundary itself to reject obsolete authority, which Chubby supports with a sequencer, a lock generation number that the receiving server validates before applying the request. Retries and recovery in an agent factory create the same overlap: attempt B can hold current authority while attempt A's delayed external request is still in flight. The idempotency key and the authority generation answer different questions. The key deduplicates repeated attempts at the same logical work; the generation lets a protected boundary reject a superseded owner even while that owner is still running (invariant I2, authority is generation-scoped). This is directional evidence from a coordination service, not from agent systems, and Chapter 17 develops the fencing mechanism fully. Here it marks the limit of what retry machinery alone can make safe.
+
 Execution caching can extend the same rule through a call graph. Psarakis et al. ([2023](https://arxiv.org/abs/2312.06893)) describe a runtime that caches results by invocation identity so a repeated parent call reuses completed child calls. Within that runtime's transactional boundary, retried failed calls, recorded completed results, and call ordering can compose into a strong guarantee. An external service that ignores the invocation identity remains outside that boundary, regardless of the runtime's delivery terminology.
 
-This scope rules out a blanket claim that a completed invocation never runs twice. A step that succeeded externally but remained unrecorded may execute again because the runtime has no completion record to consult. Execution is at least once. Results committed within the runtime boundary may be recorded exactly once. Safety for an in-flight external effect still depends on the contract at that effect's boundary.
+This scope rules out a blanket claim that a completed invocation never runs twice. A step that succeeded externally but remained unrecorded may execute again because the runtime has no completion record to consult. Execution is at least once. Results committed within the runtime boundary may be recorded exactly once. Safety for an in-flight external effect still depends on the contract at that effect's boundary. ExoFlow's design, discussed above, states the same scope from the runtime's side: exactly-once is a recovery-layer contract over tasks whose nondeterminism and external communication have been declared, not a property that task execution acquires by running under a workflow engine.
 
-Some external systems provide this contract directly. Payment APIs may accept a client-supplied key and bind it to the first accepted request. A database can commit the business change and invocation record in one transaction. A content-addressed object store can make repeated writes of identical content under the same name converge. When a tool offers no equivalent mechanism, the workflow must add an adapter that owns deduplication or treat recovery as an unknown-state decision.
+Some external systems provide this contract directly. Payment APIs may accept a client-supplied key and bind it to the first accepted request. A database can commit the business change and invocation record in one transaction. A content-addressed object store can make repeated writes of identical content under the same name converge. When a tool offers no equivalent mechanism, the workflow must add an adapter that owns deduplication or treat recovery as an unknown-state decision (invariant I5).
 
 Meyers and Zienert (2025) also report that rewriting operations for idempotency exposed and corrected pre-existing retry defects. The rewrite changed application behavior at the engine boundary. The engine could not infer the required contract from the old code. This remains directional evidence from the adopting team.
 
@@ -2334,6 +2615,8 @@ My fault demonstration makes that boundary visible. A naive pipeline was killed 
 Idempotence also belongs at the durable step boundary before the external side-effect boundary. Model calls are natural durable steps because they can be slow, costly, and irreproducible. Once a model result commits under a stable invocation identity, a retry can reuse it and continue from the same evidence. Reissuing the call may change cost and control flow even when no external database has changed.
 
 The boundary should not surround every function call. Each durable step adds scheduling, serialization, storage, and history-reading work. Cheap, deterministic calculations can simply run again. A durable boundary is justified when work is expensive, slow, externally visible, or impossible to reproduce from recorded inputs.
+
+Huang et al. ([2026](https://www.usenix.org/conference/nsdi26/presentation/huang)) arrive at the same partition from a different direction. Fractal distributes shell scripts fault-tolerantly, and to do so it must classify what a script does: work that can simply be recomputed, state that can be reconstructed from recorded inputs, and side-effectful regions whose repeated execution is not observationally harmless. The classification maps directly onto agent tool execution. Rerunning grep, a parser, or a compiler is recomputable work; its repetition costs time and nothing else. Rerunning git push, pull-request creation, ticket creation, or a deployment is a side-effectful region, and repeating it changes what the world observes. The durable-boundary guidance above is this same partition stated as placement advice: recomputable work can sit outside the boundary, while side-effectful regions need a recorded identity and an effect contract (invariant I5). Fractal is systems evidence about shell-script distribution; I transfer the classification, not any measured overhead or recovery rate.
 
 A boundary can also be too broad. In another **local artifact**, a transient read shared one deduplication unit with an irreversible mutation. When the read failed, the system marked the whole unit terminal, poisoned the claim, and stopped reporting work it had never performed. A watchdog consulted the same fail-closed store and also went silent. This is narrative illustration rather than evidence for the general design. Separating the retryable read from the mutation claim would have preserved an accurate pending state.
 
@@ -2377,6 +2660,8 @@ Recorded state makes a run resumable. Chapter 9 makes the recovery claim replaya
 
 - Directional evidence: Fragkoulis, Carbone, Kalavri & Katsifodimos (2020). A Survey on the Evolution of Stream Processing Systems. The VLDB Journal (2024). arXiv:2008.00842. (Exactly-once recovery arrived only when state became a first-class managed runtime artifact; implicit-state systems had lossy recovery.)
 
+- Directional evidence: Zhang, Cardoza, Chen, Angel & Liu (2020). Fault-Tolerant and Transactional Stateful Serverless Workflows (Beldi). OSDI '20. (Hand-managed fault tolerance moved into a runtime abstraction with declared semantics; serverless benchmarks, not agent workloads.)
+
 - Corroborating case: Hanlin (Zhou) et al. (2026). ADEMA: A Knowledge-State Orchestration Architecture for Long-Horizon Knowledge Synthesis with LLM Agents. arXiv:2604.25849. (In a fixed 60-run matrix, removing checkpoint/resume produced the only invalid run.)
 
 - Directional evidence: Addy Osmani (2026). "Long-running Agents", [Elevate newsletter](https://addyo.substack.com/p/long-running-agents), 2026-04-30. (Plan file, progress notes, append-only event log outside the context make an agent recoverable and enable full context resets rebuilt from a handoff file.)
@@ -2389,13 +2674,19 @@ Recorded state makes a run resumable. Chapter 9 makes the recovery claim replaya
 
 - Directional evidence: Laigner, Zhou, Vaz Salles et al. (2021). Data Management in Microservices: State of the Practice, Challenges, and Research Directions. PVLDB 14(13). arXiv:2103.00170. (SLR + repo analysis + 120+ practitioner survey: hand-rolled sagas and convention-managed consistency are where reliability failures concentrate.)
 
+- Directional evidence: Zhuang et al. (2023). ExoFlow: A Universal Workflow System for Exactly-Once DAGs. OSDI '23. (Execution separated from recovery; exactly-once as a recovery layer over tasks with annotated nondeterminism and external communication; data/ML benchmarks, not agents.)
+
 - Corroborating evidence for the reported service-local before-and-after measurement: Jacob Meyers and Rob Zienert (2025). "How Temporal Powers Reliable Cloud Operations at Netflix", [Netflix TechBlog](https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953), 2025-12-15. The vendor-adjacent account comes from the adopting team, was not independently audited, and does not isolate a causal component or measure transfer to agent workloads.
 
 - Null or conflicting result: Zhang, Soto & Markl (2022). A Survey on Transactional Stream Processing. The VLDB Journal. arXiv:2208.09827. (Carried as the negative result behind the engine choice; it is about deterministic data pipelines and says nothing about agents.)
 
 **Make retried steps idempotent**
 
+- Directional evidence: Burrows (2006). The Chubby Lock Service for Loosely-Coupled Distributed Systems. OSDI '06. (A lease answers the allocation question only; the sequencer generation number lets the mutation boundary reject obsolete authority. Canonical stale-authority precedent; mechanism developed in Chapter 17.)
+
 - Directional evidence: Psarakis et al. (2023). Styx: Transactional Stateful Functions on Streaming Dataflows. SIGMOD line. arXiv:2312.06893. (Execution caching keyed by invocation identity gives exactly-once composition across call graphs.)
+
+- Directional evidence: Huang et al. (2026). Fractal: Fault-Tolerant Shell-Script Distribution. NSDI '26. (Recomputable work vs reconstructable state vs side-effectful regions; the classification, not measured rates, transfers to agent tool execution.)
 
 - Directional evidence: Meyers and Zienert (2025), [Netflix TechBlog](https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953), 2025-12-15. (The forced idempotency rewrite alone fixed pre-existing retry issues.)
 
@@ -2404,10 +2695,10 @@ Recorded state makes a run resumable. Chapter 9 makes the recovery claim replaya
 - Directional evidence: Trofimov, Kuralenok, Marshalkin & Novikov (2019). Delivery, consistency, and determinism: rethinking guarantees in distributed stream processing. arXiv:1907.06250.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch09-replayable-traces-fault-injection-recovery.tex","tex_sha256":"cbcb798f21bb4b693d2d7710cd1447eb53ca3a555e8598dffd9512edd91ab0e6","markdown_sha256":"8c62b551d9f4357a2b1abcc780476bb216cff87f62ba0f71166eb9555a8e2624"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch09-replayable-traces-fault-injection-recovery.tex","tex_sha256":"9a8c1fa5f4fbef404c06a34386b49ea25e9a31b7dcd65c0d3d5bf0184667f19d","markdown_sha256":"c4348afab5988e9a5b5b5c9600f4a033bf174381514f148da861ce9072a763b2"} -->
 # Replayable traces and fault-injection recovery testing
 
-> **Evidence profile.** 1 strong $\cdot$ 3 directional $\cdot$ 0 corroborating evidence items across 2 developed practices (ERCA-097, ERCA-127).
+> **Evidence profile.** 1 strong $\cdot$ 8 directional $\cdot$ 1 direct preprint $\cdot$ 0 corroborating evidence items across 2 developed practices (ERCA-097, ERCA-127).
 >
 > **Chapter claim.** Recovery is a measured property.
 
@@ -2417,7 +2708,7 @@ Fault tolerance is often inferred from an architecture diagram. A checkpoint app
 
 Agent runtimes present the same problem. A design may preserve state, retry interrupted work, and isolate external effects, yet still recover incorrectly when the fault location, persistence boundary, timeout, or software version changes. Two practices make the recovery claim testable. A typed event stream preserves enough structure to inspect and replay a run. Fault injection forces the runtime through the intervals its recovery design claims to protect.
 
-Four items support the chapter's two entries: two synthesized sources and two direct scholarly sources. Only the fault-recovery benchmark is a strong study; no strong study supports the trace argument. Typed traces are therefore treated as an instrumentation design supported by demonstrations and a specification, with recovery established by measurement rather than a universal threshold.
+Ten items support the chapter's two entries. Only the fault-recovery benchmark is a strong study; no strong study supports the trace argument. Five distributed-systems recovery-testing papers transfer directionally: they were evaluated on databases, file systems, and cluster controllers rather than agent runtimes, so I transfer their fault-placement and specification principles, not their measured results. One agent-trajectory study is direct evidence but a recent preprint. Typed traces are therefore treated as an instrumentation design supported by demonstrations and a specification, with recovery established by measurement rather than a universal threshold.
 
 Chapter 8 established that recorded state can make a run resumable. Replay imposes a stricter requirement. The system must know which events produced that state, which work may safely repeat, and where a changed decision invalidates the prior path. Recovery testing adds a third requirement: the runtime must demonstrate the claimed behavior when faults occur at inconvenient points, not only when a demonstration script stops a worker at a clean boundary.
 
@@ -2507,6 +2798,8 @@ Transcript-only observability remains attractive because it is easy to render an
 
 Vogel et al. (2024) did more than show that injected faults degrade performance. Their direct recovery measurements reversed conclusions from earlier published comparisons, and the effect of a fault changed across successive failures. Software configuration, workload, accumulated recovery state, and fault timing all contributed to the observed result. A useful recovery claim must therefore include those conditions.
 
+The same argument applies to how a failed agent run is labeled. Zhao et al. ([2026](https://arxiv.org/abs/2607.09510)), in a recent preprint, collected 3,843 agent trajectories, annotated the 1,794 complete valid runs step by step across more than 63,000 steps, and modeled failure as a process with an onset, an evolution, and a recovery phase rather than a terminal outcome. A final-outcome label records that a run failed. It does not record when the trajectory became unrecoverable or whether an available recovery action was missed. This is direct agent evidence, though preprint evidence, for treating recovery as something that happens during a run and must be observed there. A recovery experiment that reports only a final pass indicator discards the same information.
+
 An architecture diagram describes intended control flow. It may show a worker loading a checkpoint, replaying events, and resuming output. The drawing cannot establish how long fault detection takes, whether retry queues compete with live work, whether a replacement worker must rebuild caches, or whether an external effect occurred before its completion record became durable. Those behaviors emerge from the interaction among the runtime, persistence layer, network, workload, and deployment configuration.
 
 Fault injection forces that interaction to occur on demand. Kill a worker or pod, interrupt an external call, terminate the process during persistence, and repeat those disturbances while representative work is active. The purpose is to measure recovery over a declared fault menu and operating envelope, with faults placed at the intervals the design claims to protect.
@@ -2528,6 +2821,8 @@ A worked claim might read:
 > After an ungraceful worker kill during ticket creation, the runtime resumes the interrupted run without creating a second ticket, reproduces the deterministic state of the clean reference, and returns to the declared throughput range.
 
 Each clause points to an observable event or measurement.
+
+This rule has a longer history than agent runtimes. Gunawi et al. ([2011](https://www.usenix.org/conference/nsdi11/fate-and-destini-framework-cloud-recovery-testing)) built FATE and DESTINI as a pair: FATE injects failures systematically across combinations of failure points, and DESTINI expresses the expected recovery behavior as declarative specifications checked against the observed execution. The injector without the specification only demonstrates that the system survived something; the specification without systematic injection only documents an intention. Their evaluation targeted cloud storage systems, so I transfer the pairing as a method, not their coverage or bug counts. The claim-before-kill discipline in this chapter is that pairing applied to an agent runtime: the declarative recovery specification comes first, and the injection schedule exists to test it.
 
 The control run uses the same workload and configuration without an injected fault. This applies Chapter 2's control logic to recovery. The difference between the faulted and clean runs estimates the effect of the injection within the tested conditions.
 
@@ -2575,6 +2870,10 @@ The most informative fault point is rarely the boundary between steps. Chapter 8
 
 The test should place the kill there deliberately.
 
+Lineage-driven fault injection gives that placement a principled basis. Alvaro, Rosen, and Hellerstein ([2015](https://dl.acm.org/doi/10.1145/2723372.2723711)) reasoned backward from a successful outcome: given the lineage of events that produced a good result, which combinations of faults could have prevented it? Faults chosen this way target the support of the outcome rather than random points in the schedule. The evaluation covered distributed data-management protocols, so I transfer the reasoning direction, not the tooling. In an agent runtime the analogue is concrete: the events that support "the ticket exists exactly once" are the dispatch, the external commitment, and the durable completion record, so those are the events whose surrounding intervals the kills must straddle. This is why the kill points below are named commitment barriers rather than time offsets.
+
+Wu, Pan, and Huang ([2024](https://www.usenix.org/conference/nsdi24/presentation/wu-haoze)) make the complementary point about precision. Legolas infers abstract execution states from system code and uses them to select fine-grained injection points, and with that placement found 20 previously unknown partial-service-failure bugs across six mature distributed systems. I transfer the fault-placement principle, not the observed bug rate, to agent runtimes: a sleep-based kill tests whatever the scheduler happened to be doing when the timer fired; a named barrier or state-aware injection tests a particular reliability claim. A harness that kills "roughly two seconds into the step" is sampling schedules, not testing the execute-then-log gap.
+
 A worst-case protocol sends an ungraceful kill from inside the active step, after the external call returns and before the completion marker is written. The process exit status must confirm that the intended kill occurred. If the step reaches its normal return path or the harness records another exit mode, the trial is invalid rather than a passing recovery.
 
 This check prevents an imprecise injection from striking a clean boundary while claiming to test the vulnerable interval.
@@ -2592,6 +2891,8 @@ If it passes, the harness may be:
 - failing to place the kill where claimed.
 
 A control expected to fail is useful because a false pass is otherwise easy to mistake for fault tolerance. It detects only the defect it was designed to expose, however, and a subtler recovery failure may still pass both variants.
+
+The recovery path itself deserves the same suspicion as the failure. Li, Cai, and Lou ([2026](https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu)) studied production incidents in which the recovery action, not the original fault, caused the severe failure, and proposed previewing the effects of high-risk recovery operations before executing them. Their evidence comes from cloud infrastructure, so it transfers directionally, but the rule it supports is one this book already states as invariant I10: a recovery path is production code with authority. Test it against the same invariants as the normal path, and preview high-risk recovery effects when practical. The naive negative control above is one instance of this rule. The general instance is that every non-naive recovery adapter belongs in the kill-point sweep as a subject, not only as the mechanism under whose protection the sweep runs. A reconciliation routine that deletes a "duplicate" artifact, a cleanup step that releases a lease still held by live work, and a retry policy that re-sends an uncertain external call are all recovery actions capable of causing the incident they exist to prevent.
 
 The kill-point sweep should include:
 
@@ -2625,6 +2926,111 @@ Compaction replaces detailed working history with a condensed representation so 
 The fault menu should ultimately come from observed production failures rather than from what the harness can inject conveniently. Worker kills are reproducible and severe, but they do not cover slow storage, stale leases, delayed acknowledgments, partial network partitions, quota errors, or malformed persisted state.
 
 The companion catalog's realistic-fault-menu pattern develops the fuller construction method. The narrower requirement here is to publish the menu so readers can see which failures the recovery claim includes and which it excludes.
+
+## Distributed ambiguity faults
+
+The five kill points strike one worker's lifecycle. Once a factory runs multiple workers, a control plane, verifiers, and external services in separate failure domains, a second fault family appears: faults that create disagreement between components about what has happened. Nothing crashes, yet two durable records or two live processes hold incompatible beliefs.
+
+Sun et al. ([2022](https://www.usenix.org/system/files/osdi22-sun.pdf)) tested this family directly for Kubernetes reconciliation controllers. Sieve perturbs the controller's view of cluster state, feeding it stale, intermediate, or unobserved states, and detects bugs with differential oracles that compare state transitions between perturbed and unperturbed executions. The evaluated systems are cluster controllers, so the transfer is directional, but the factory analogue is exact: a factory control plane is a reconciliation controller over work items, and the corresponding fault is a controller that believes a worker still owns a task while the repository or another controller has moved on. The differential oracle also transfers: run the same workload with and without the view perturbation and compare the resulting state transitions, rather than asking only whether the perturbed run ended in a passing state.
+
+The table below lists the ambiguity faults I inject alongside the kill sweep. Invariant identifiers refer to the factory invariants defined in the Part III opener. Each row names the fault, the invariant it tests, and the observable behavior an acceptable runtime must exhibit.
+
+<table>
+<caption>Distributed ambiguity faults, the invariant each tests, and the observable behavior an acceptable runtime must exhibit.</caption>
+<thead>
+<tr>
+<th style="text-align: left;"><div class="minipage">
+<p>Fault</p>
+</div></th>
+<th style="text-align: left;"><div class="minipage">
+<p>Invariant</p>
+</div></th>
+<th style="text-align: left;"><div class="minipage">
+<p>Expected observable behavior</p>
+</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><div class="minipage">
+<p>Fault</p>
+</div></td>
+<td style="text-align: left;"><div class="minipage">
+<p>Invariant</p>
+</div></td>
+<td style="text-align: left;"><div class="minipage">
+<p>Expected observable behavior</p>
+</div></td>
+</tr>
+<tr>
+<td style="text-align: left;">Delayed response delivered after the retry has started</td>
+<td style="text-align: left;">I5</td>
+<td style="text-align: left;">The late response and the retry resolve to one logical effect; the effect ledger shows one committed <code>effect_id</code> or an explicit <code>unknown_external_state</code>, never two commits.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Response lost after external commit</td>
+<td style="text-align: left;">I5</td>
+<td style="text-align: left;">The runtime treats the call as uncertain, reconciles against external state before re-sending, and records the reconciliation outcome; no blind re-send.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Worker loses its lease but continues running</td>
+<td style="text-align: left;">I2</td>
+<td style="text-align: left;">The protected mutation boundary rejects the superseded worker’s writes by <code>ownership_epoch</code>; the rejection appears in the trace as a fencing event, not a silent success.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Old worker’s completion arrives after the new worker has succeeded</td>
+<td style="text-align: left;">I3</td>
+<td style="text-align: left;">The stale completion is rejected by generation and attempt identity; logical state reflects the new attempt only, and the rejection is recorded.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Control plane restarts while workers continue</td>
+<td style="text-align: left;">I6</td>
+<td style="text-align: left;">The restarted controller reconciles against durable worker and repository state before issuing new authority; no work item is double-assigned or orphaned by controller amnesia.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Control plane observes stale artifact state</td>
+<td style="text-align: left;">I6</td>
+<td style="text-align: left;">Decisions taken on the stale view are detected at the next protected boundary and trigger reconciliation; the differential oracle shows no divergent committed transition.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Repository state changes between validation and publication</td>
+<td style="text-align: left;">I6</td>
+<td style="text-align: left;">Publication fails closed: the runtime detects that the validated version is no longer the head, refuses to publish against changed state, and routes to re-validation or reconciliation.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Verifier times out, flakes, or contradicts itself on rerun</td>
+<td style="text-align: left;">I8</td>
+<td style="text-align: left;">The runtime classifies the outcome as verifier failure, not software failure; no defect record is created from an infra timeout, and contradictory verdicts trigger rerun or escalation rather than acceptance of either verdict.</td>
+</tr>
+<tr>
+<td style="text-align: left;">External service reachable from the worker but not the controller</td>
+<td style="text-align: left;">I6</td>
+<td style="text-align: left;">The two components’ contradictory observations are reconciled by declared authority; the controller does not mark the effect failed while the worker’s committed effect record stands.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Schema or workflow version changes during recovery</td>
+<td style="text-align: left;">I10</td>
+<td style="text-align: left;">Recovery either completes under an explicit compatibility path or fails closed with the version mismatch recorded; it never resumes by misreading old state under the new schema.</td>
+</tr>
+<tr>
+<td style="text-align: left;">History compaction boundary crossed before the failure</td>
+<td style="text-align: left;">I10</td>
+<td style="text-align: left;">Recovery from the compacted summary preserves the same invariant checks as recovery from full history; effects committed before compaction are still recognized and not repeated.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Recovery queue competes with new work</td>
+<td style="text-align: left;">I10</td>
+<td style="text-align: left;">Recovery work and new admissions are both observable in queue metrics; recovery completes without starving admitted work indefinitely and without itself being starved invisibly.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Synchronized retry wave after a dependency recovers</td>
+<td style="text-align: left;">I5, I10</td>
+<td style="text-align: left;">Retries are jittered or admission-limited; the dependency’s recovery does not trigger a duplicate-effect burst, and each retried effect still deduplicates by its idempotency key.</td>
+</tr>
+</tbody>
+</table>
+
+Each row is testable with the same discipline as the kill sweep: specify the claim, place the fault at the named interval, run the clean control with the same anchors, and check the typed event stream for the expected records. The rows referencing I5 need the effect ledger; the rows referencing I2 and I3 need fencing and identity checks at the mutation boundary; the rows referencing I6 need a declared reconciliation authority; the rows referencing I8 need the verifier-failure classification; the rows referencing I10 are recovery-path tests in the sense of the previous section and belong in the same sweep as the naive negative control.
 
 ## Keep the result attached to its envelope
 
@@ -2692,9 +3098,9 @@ Before accepting a recovery claim about an agent runtime, I look for two linked 
 
 The first is a durably persisted typed event stream that distinguishes model calls, tool dispatch and completion, environment changes, external commitments, and state transitions. I begin with the shared OpenTelemetry GenAI conventions, then add explicit state, branch, persistence, and effect fields where the workload requires them. Every agent action identifies its owner, and every tool call can be joined to the reasoning step and session that authorized it.
 
-The second artifact is a fault-injection result produced under representative load. I run a clean control, kill a worker from inside an active step, and place at least one kill between an external effect and its durable completion record. I repeat injections within continuing runs and across independent runs because the first restart does not characterize later recovery.
+The second artifact is a fault-injection result produced under representative load. I run a clean control, kill a worker from inside an active step, and place at least one kill between an external effect and its durable completion record. I repeat injections within continuing runs and across independent runs because the first restart does not characterize later recovery. When the runtime spans multiple workers and a control plane, I add faults from the distributed ambiguity menu, placed by the claim they test rather than by a timer.
 
-The harness must confirm that the intended kill occurred, observe recovery without supplying recovery state, and exercise a naive negative control expected to duplicate effects.
+The harness must confirm that the intended kill occurred, observe recovery without supplying recovery state, and exercise a naive negative control expected to duplicate effects. Recovery paths themselves enter the sweep as subjects, since a recovery action holds authority and can cause the failure it exists to prevent.
 
 I measure recovery time between declared application events rather than between process death and process restart. I retain:
 
@@ -2737,6 +3143,18 @@ A trace detailed enough to replay is also the artifact a person reads when recov
 **Benchmark recovery with fault injection**
 
 - Strong evidence: Vogel et al. (2024), "A Comprehensive Benchmarking Analysis of Fault Recovery in Stream Processing Frameworks," arXiv:2404.06203 (JSS line).
+
+- Directional evidence: Gunawi et al. (2011), "FATE and DESTINI: A Framework for Cloud Recovery Testing," NSDI 2011. Evaluated on cloud storage systems; the injection-plus-declarative-specification pairing transfers, not the coverage results.
+
+- Directional evidence: Alvaro, Rosen, and Hellerstein (2015), "Lineage-Driven Fault Injection," SIGMOD 2015. Evaluated on distributed data-management protocols; the outcome-backward fault-selection principle transfers.
+
+- Directional evidence: Wu, Pan, and Huang (2024), "Legolas," NSDI 2024. Found 20 previously unknown partial-service-failure bugs across six mature distributed systems; the state-aware fault-placement principle transfers, not the bug rate.
+
+- Directional evidence: Sun et al. (2022), "Sieve," OSDI 2022. Evaluated on Kubernetes controllers; the view-perturbation faults and differential state-transition oracles transfer to factory control planes.
+
+- Directional evidence: Li, Cai, and Lou (2026), "Pilot Execution," NSDI 2026. Cloud-infrastructure incident evidence that recovery actions cause severe failures; supports treating recovery paths as production code under invariant I10.
+
+- Direct evidence, preprint: Zhao et al. (2026), "Failure as a Process," arXiv:2607.09510. 3,843 trajectories collected, 1,794 complete valid runs annotated across more than 63,000 steps; failure modeled as onset, evolution, and recovery.
 
 Author-system cases are narrative illustration, not evidence. The kill demonstration and publish-gate protocol are local artifacts.
 <!-- tex-sync:end -->
@@ -5813,12 +6231,12 @@ Support is thin across the chapter: four developed practices carry seven evidenc
 - Directional evidence: Suryana, L. E., Nordhoff, S., Calvert, S., Zgonnikov, A., van Arem, B. (2025). Meaningful human control of partially automated driving systems: Insights from interviews with Tesla users. Transportation Research Part F 113, 213-236. Applies tracking and tracing criteria to 103 users to localize expectation-reality gaps and inconsistent protocol adherence. The method requires case-specific operationalization, yields failure localization rather than a compliance score, and is evidenced here in the driving domain. No arXiv identifier or DOI is carried in the catalog record, so the inline citation is unlinked.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch17-agent-topology-dynamic-task-allocation.tex","tex_sha256":"cad19896ecfed2a0ad1cc4a666221dac4c3d004b67dc43012139010284e75a9f","markdown_sha256":"5f2e0fdca7d0ce6e8d063056b1e4b79e336f1c622dd43c90bb099502d1f7e14c"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch17-agent-topology-dynamic-task-allocation.tex","tex_sha256":"90ea8e454db6a1538c3312180495cffdd5a94268fda5df5479a63f443b2e252b","markdown_sha256":"05615a0e87203e0bb05538e0e93e1b1dce0f7ab44d69c779f4d2c60992b159c2"} -->
 # Part VI: Research agenda: work allocation and cost engineering
 
 # Agent topology selection and dynamic task allocation
 
-> **Evidence profile.** 6 strong $\cdot$ 12 directional $\cdot$ 1 corroborating evidence items across 4 developed practices (ERCA-044, ERCA-093, ERCA-101, ERCA-107).
+> **Evidence profile.** 6 strong $\cdot$ 16 directional $\cdot$ 1 corroborating $\cdot$ 1 historical evidence items across 4 developed practices (ERCA-044, ERCA-093, ERCA-101, ERCA-107).
 >
 > **Chapter claim.** Coordination must earn its cost against a live single-agent baseline.
 
@@ -5895,6 +6313,8 @@ The number of agents follows from that answer. Sometimes no additional worker is
 Accounts grouped under "harness engineering" describe teams accumulating capability in execution boundaries, verification loops, repository instructions, rollback paths, and approval controls rather than in prompts alone. Böckeler ([2026](https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html)) analyzes vendor-reported practice from the OpenAI Codex team. Jain ([2026](https://www.reddit.com/r/devops/comments/1touxz4/)) writes from practitioner experience rather than a controlled evaluation.
 
 Neither source supplies enough verification detail to estimate an effect. They describe where practitioners report making repairs. Cemri et al. and Kim et al. carry the evidentiary claim that some persistent classes responded to structural intervention.
+
+Lin et al. ([2026](https://arxiv.org/abs/2604.25850)) add preprint evidence pointing the same way. Across ten harness iterations, Terminal-Bench 2 pass@1 rose from 69.7 percent to 77.0 percent with the model held fixed, and their ablations locate the gains in tools, middleware, and memory rather than in the system prompt alone. That is a benchmark result under one team's iteration process. I take from it the direction, that structural elements of the harness carried measurable capability, and I do not transfer the magnitude to production systems.
 
 My trace data adds a caution about what prompt evidence can establish. Across 1,705 visible thinking blocks from 199 traces, agents never named the two dominant tools in their written reasoning. Sixty-five explicit intentions to find references produced no use of the purpose-built reference tool.
 
@@ -6266,6 +6686,8 @@ The attempt identity prevents a late response from an expired worker from overwr
 
 These requirements come from the execution topology. Drawing the graph supplies none of them.
 
+Mokhov, Mitchell, and Peyton Jones ([2018](https://www.microsoft.com/en-us/research/wp-content/uploads/2018/03/build-systems-final.pdf)) make the same separation precise for build systems in Build Systems à la Carte. The dependency graph is not the complete execution semantics. How tasks are scheduled, whether dependencies are declared statically or discovered during execution, what triggers a rebuild, and what trace information persists across runs are separate design choices, and existing build systems occupy different points in that space. The lesson I transfer is structural: an explicit graph permits reasoning about safe parallelism only when the recorded dependencies are correct, and the scheduling and rebuild policies deserve their own decisions rather than riding in unexamined with the graph. The analogy has a limit. A coding factory operates on mutable worktrees and issues external effects, conditions that ordinary build DAGs constrain more tightly through hermetic inputs and declared outputs, so the decomposition names the design axes without supplying the fault model.
+
 In my workflow harness, notification-driven dispatch ends the coordinating turn after work is assigned and resumes it when completion events arrive. This avoids a polling loop that consumes attention while no state has changed. Mechanical parallel-set detection checks dependency layers, blocking edges, and overlapping file paths.
 
 Those rules illustrate the mechanism. They do not provide comparative performance evidence.
@@ -6280,6 +6702,35 @@ Dispatch should fail closed:
         -> retry, escalation, or cancellation policy runs
 
 Retries require the same discipline. A retry creates a new attempt for the same logical node rather than a second independent task. The scheduler must either establish that repeated execution is idempotent or isolate side effects before trying again. Otherwise a timeout can produce duplicate comments, partial writes, or two workers claiming the same resource.
+
+## A lease is not write authority
+
+The owner field in the node record is commonly implemented with a lease: a worker holds a time-bounded claim on the work and renews it while making progress, and when renewals stop, the control plane may reassign. That reading is correct, and it is the only question a lease answers. A lease resolves a liveness and allocation question: after the timeout, the control plane is permitted to give the work to someone else. It does not establish that the previous worker is dead. A process paused under memory pressure resumes after its lease has expired. A network partition heals after reassignment has already happened. A mutation issued before expiry arrives at its target after it.
+
+I therefore never write that a lease guarantees a single writer. Safety comes from a separate mechanism at the boundary being protected, and describing that mechanism requires three identities from Part III's opener. The `work_id` names the stable logical work, the intent that should happen once logically. The `ownership_epoch` is a monotonic generation of write authority, incremented each time the control plane reassigns the work. The `attempt_id` names one execution attempt under that work and epoch. The attempt field in the node record above is this third identity; the epoch completes the picture the earlier paragraph on late responses began. Preventing an expired worker's late response from overwriting a successful retry is exactly the fencing problem, stated at the scheduler. The general form states it at every protected boundary.
+
+The rule is invariant I2 from the Part III opener: only the current ownership generation may commit a mutation at a protected boundary, and a superseded worker must be rejected even if it is still running. Every mutation to a protected shared target carries the current `ownership_epoch`, and the target itself, or an authoritative mutation gateway in front of it, rejects any older epoch. Invariant I3 follows at the ledger: a durable state transition validates generation and attempt identity rather than trusting the scheduler's belief about who is active.
+
+A worked sequence makes the mechanism concrete:
+
+    work W-311, protected target: integration branch head
+    epoch 41: worker A holds the lease and prepares a mutation
+    worker A's process is paused; lease renewals stop
+    lease expires; control plane increments authority to epoch 42
+    epoch 42: worker B claims W-311 and starts a new attempt
+    worker A resumes and submits its mutation, tagged epoch 41
+    the gateway compares 41 against the current epoch 42 and rejects it
+    worker B's mutation, tagged epoch 42, is eligible for normal validation
+
+Two details in that sequence carry the safety argument. Worker A is not dead, was never told it lost authority, and behaves correctly by its own lights; only the epoch check at the target stops it. And worker B's mutation is eligible for validation, not automatically accepted; holding the current epoch confers the right to be evaluated, not a presumption of correctness.
+
+The check must occur at the mutable boundary whose integrity matters: the branch head, the work ledger, the external-effect adapter. Validating only at the scheduler before dispatch is insufficient, because the scheduler's belief about which workers are alive is precisely the information the failure invalidates. By the time worker A's late mutation arrives, the scheduler's dispatch-time check has already passed.
+
+The precedent is old. Burrows ([2006](https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems)) describes sequencers in Chubby: a lock holder obtains a generation number it passes along with its requests, and servers receiving those requests validate the number rather than trusting that the lock is still held. This is historical lineage, and I transfer the principle, not any parameter of Chubby's deployment. The stale-authority problem the sequencer solves is the same problem the paused worker A presents.
+
+Where should the epochs and lease state themselves live? Hunt et al. ([2010](https://www.usenix.org/conference/usenix-atc-10/zookeeper-wait-free-coordination-internet-scale-systems)) built ZooKeeper on the observation that coordination state belongs in a service designed to survive individual process failure rather than in the memory of any process it coordinates. I take that narrow principle and nothing more. It does not follow that every factory needs ZooKeeper, or a consensus protocol at all; a single durable database that records epochs transactionally can enforce I2 for a modest fleet. The requirement is that the record of who currently holds authority survives the failure of the workers it governs.
+
+Testing this machinery requires perturbing the controller's view of the world, not just the workers. The scheduler and any reconciling component need tests under stale work status, intermediate artifact states, transitions the controller never observed, late completion arriving after reassignment, and controller restart during active work. Sun et al. ([2022](https://www.usenix.org/system/files/osdi22-sun.pdf)) built Sieve on exactly this method for Kubernetes controllers: perturb what the controller observes, then compare resulting cluster state against an unperturbed run. They found real bugs in mature controllers whose logic was correct under an accurate view. I transfer the method, at directional strength, not the tooling. Chapter 9's fault-injection protocol supplies the harness discipline; the epoch-41 sequence above is precisely the kind of scenario such a test suite should replay on every scheduler change.
 
 Dynamic graphs are most useful when they expose decisions that were previously implicit. The runtime should be able to explain:
 
@@ -6323,17 +6774,23 @@ The record should remain intelligible without the architecture's label. "Hierarc
 
 - Böckeler, Birgitta. 2026. "Harness Engineering." MartinFowler.com, February 17. Practitioner account based partly on vendor-reported Codex-team practice.
 
+- Burrows, Mike. 2006. "The Chubby Lock Service for Loosely-Coupled Distributed Systems." OSDI. Historical lineage for generation-validated authority; sequencers let servers reject requests carrying a stale lock generation. Principle transferred, not parameters.
+
 - Cemri, M., et al. 2025. "Why Do Multi-Agent LLM Systems Fail?" arXiv:2503.13657. MAST failure taxonomy and benchmark-framework interventions.
 
 - Chun, Jina, et al. 2025. "Is Multi-Agent Debate the Silver Bullet?" arXiv:2503.12029. Audit-retained strong evidence on debate performance against task baselines; reports inference cost across debate variants and leaves the single-model cost comparison open.
 
 - Huang, Jia, and Joey Tianyi Zhou. 2026. "A Two-Dimensional Framework for AI Agent Design Patterns: Cognitive Function and Execution Topology." arXiv:2605.13850. Directional taxonomy of topology choices.
 
+- Hunt, Patrick, et al. 2010. "ZooKeeper: Wait-Free Coordination for Internet-Scale Systems." USENIX ATC. Directional; cited only for the principle that coordination state should survive individual process failure, not as a requirement that factories adopt consensus systems.
+
 - Jia, J., et al. 2026. "MAS-FIRE: Fault Injection and Reliability Evaluation for LLM-Based Multi-Agent Systems." arXiv:2602.19843. Synthetic fault injection across three architectures.
 
 - Jain, Prateek. 2026. "Harness Engineering: The New DevOps Layer for AI Agents." r/devops, May 27. Anecdotal practitioner account.
 
 - Kim, T., et al. 2026. "Why Do AI Agents Systematically Fail at Cloud Root Cause Analysis?" arXiv:2602.09937. OpenRCA evidence on failure persistence across capability tiers and protocol intervention.
+
+- Lin, et al. 2026. *Agentic Harness Engineering*. arXiv:2604.25850. Preprint; ten harness iterations raised Terminal-Bench 2 pass@1 from 69.7 to 77.0 percent, with ablations locating gains in tools, middleware, and memory. Direction transferred, not magnitude.
 
 - Oskooei, A. R., et al. 2026. "Deep Agentic Search for Repository-Level Code Question Answering: An Empirical Study." arXiv:2608.01507. Strong evidence for the SWE-QA comparison and its measured handoff failures; broader topology transfer is directional.
 
@@ -6345,11 +6802,15 @@ The record should remain intelligible without the architecture's label. "Hierarc
 
 - Masters, et al. 2025. *Manager Agent research challenge*. arXiv:2510.02557. Directional planning and scheduling example.
 
+- Mokhov, Andrey, Neil Mitchell, and Simon Peyton Jones. 2018. "Build Systems à la Carte." ICFP. Directional; separates the dependency graph from scheduling, dependency discovery, rebuild decisions, and trace persistence. The mutable-worktree, external-effect setting of a coding factory limits the analogy.
+
 - Qian, et al. 2024. *MacNet*. arXiv:2406.07155. Directional evidence on network scaling.
 
 - Rose, Evan, et al. 2026. *APWA: A Distributed Architecture for Parallelizable Agentic Workflows*. arXiv:2605.15132. Directional orchestration example.
 
 - Shang, Wenlong. 2026. *"Theater of Mind" for LLMs: A Cognitive Architecture Based on Global Workspace Theory*. arXiv:2604.08206. Directional blackboard and global-workspace design; single-author architecture proposal, not a controlled measurement.
+
+- Sun, Xudong, et al. 2022. "Sieve: Automatic Reliability Testing for Cluster Management Controllers." OSDI. Directional; perturbed-view testing of reconciliation controllers, transferred as method for scheduler and reconciler tests, not as tooling.
 
 - Tian, et al. 2025. "Beyond the Strongest LLM." arXiv:2509.23537. Directional evidence on multi-agent teams.
 
@@ -6362,10 +6823,10 @@ The record should remain intelligible without the architecture's label. "Hierarc
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the preamble rerun described in the opening, which is narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch18-cost-aware-fleet-scheduling-model-routing.tex","tex_sha256":"44515beb42f07bb2c0b3d4114fc6588cbaed7fae0e99d594ff343df5de0a4659","markdown_sha256":"f35c12fccc9e2874a6931d9a640507ceef2392cfcc679065fbcc1524286a32be"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch18-cost-aware-fleet-scheduling-model-routing.tex","tex_sha256":"29dd833c6d745f88c4b10eb6b3bec289e81b79aca0a865d664a3c29119e3fde6","markdown_sha256":"f810c18963fbfdbe4d6a22323b1a8ff916fe117383d1acc072e596682725ca50"} -->
 # Cost-aware fleet scheduling and model routing
 
-> **Evidence profile.** 2 strong $\cdot$ 8 directional $\cdot$ 0 corroborating evidence items across 3 developed practices (ERCA-171, ERCA-187, ERCA-191).
+> **Evidence profile.** 2 strong $\cdot$ 13 directional $\cdot$ 2 practitioner $\cdot$ 0 corroborating evidence items across 4 developed practices (ERCA-171, ERCA-187, ERCA-191, and the admission-and-recovery-capacity practice added in this revision).
 >
 > **Chapter claim.** Re-decide from observed state, then ship the best feasible incumbent on time.
 
@@ -6373,7 +6834,7 @@ In an eleven-week replay of my fleet ledger, 1,286 work items crossed 22 executi
 
 A fleet can increase throughput while also increasing the cost of each accepted result. Its own traces must distinguish the two. Concurrent execution, together with a willingness to attempt work a human team might have left queued, exposes more tasks to model inference, verification, review, and recovery. Throughput alone therefore does not establish an economic gain.
 
-The evidence is largely transferred from other fields. One strong software-engineering result concerns cheap baselines; observatory and compute-cluster scheduling, search-based software engineering, budget-constrained bandit theory, and router calibration supply directional mechanisms. My fleet replay remains a narrative illustration.
+The evidence is largely transferred from other fields. One strong software-engineering result concerns cheap baselines; observatory scheduling, compute-cluster management, multi-tenant resource control, search-based software engineering, budget-constrained bandit theory, and router calibration supply directional mechanisms. The telescope-scheduling lineage that opens this chapter is one transfer lineage among several, alongside cluster management and multi-tenant resource control, rather than the dominant systems foundation. My fleet replay remains a narrative illustration.
 
 These systems schedule telescopes and compute clusters, not software-agent fleets. The transferable design is narrower:
 
@@ -6537,6 +6998,42 @@ The design becomes auditable when the following are explicit:
 - the metrics used to compare them.
 
 Its value remains an empirical question until the fleet's traces answer it.
+
+## Admission, backpressure, and recovery capacity
+
+A queue records demand; it does not create capacity. Retry policy can increase demand precisely when capacity has fallen. A reliable factory therefore needs admission, prioritization, rate limits, retry budgets, and recovery-capacity policy above individual queues. I treat these as overload policy, distinct from the re-decision and routing questions elsewhere in this chapter: those decide which work runs where, and overload policy decides how much work is allowed to exist inside the system at all.
+
+The failure mode this section guards against is mechanical. A dependency slows, tasks time out, retries multiply the request rate against the slowed dependency, queues grow, work waits long enough that its callers retry the whole task, and the fleet spends its capacity on demand that its own policies manufactured. Nothing in that sequence requires a model to misbehave. The Google SRE chapters on cascading failures and handling overload ([cascading failures](https://sre.google/sre-book/addressing-cascading-failures/), [handling overload](https://sre.google/sre-book/handling-overload/)) describe this pattern across production services; I cite them as practitioner guidance rather than controlled evidence, and none of their capacity or threshold figures transfer to an agent fleet.
+
+**Admission control.** The first policy decision is whether new work enters the system at all. Verma et al. ([2015](https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/)) describe Borg holding submitted jobs in a pending state until admission, packing admitted work against declared resource requirements, isolating tenants, and treating overcommitment as an explicit cluster policy rather than an accident of scheduling. The transfer is directional: an agent fleet benefits from the same separation between accepting work and running it, and from making overcommitment a decision with an owner. Borg's packing algorithms, machine-share targets, and utilization figures do not transfer as parameters.
+
+Admission requires bounded queue growth. An unbounded queue converts overload into unbounded latency, and by invariant I9 admissible work cannot starve invisibly. A bounded queue forces the honest alternatives into view: reject explicitly, shed load by declared class, or wait with a visible position and age. Explicit rejection at admission is cheaper than the same rejection discovered hours later as a timeout, because the caller learns immediately and the system spends nothing executing work it will abandon.
+
+**Allocation by tenant, repository, and work class.** Aggregate capacity limits are not enough, because a single hot tenant or repository can fill a shared queue and starve unrelated work while the aggregate limit is still respected. Partitioning queues by tenant, repository, or work class bounds the damage one demand source can do to another. Mace et al. ([2015](https://www.usenix.org/conference/nsdi15/technical-sessions/presentation/mace)) built Retro around per-tenant resource monitoring and central control points that throttle at the granularity of the tenant, and they observed that maintenance traffic itself can become the overload source. Both observations transfer directionally. The second matters more than it first appears: in an agent fleet, the analogue of maintenance traffic is recovery, reconciliation, and retry work, and it competes for the same models, runners, and reviewers as live work.
+
+**Concurrency limits by constrained resource.** Concurrency limits belong on the resource that is actually constrained, not on an arbitrary global worker count. Model-tier tokens per minute, repository leases, reviewer attention, and external API rate limits are separate constraints with separate saturation points. A single fleet-wide concurrency number either wastes the uncontended resources or oversubscribes the contended one. The contended-pool observation from my replay applies here in reverse: limits matter where eligible work exceeds capacity, and a limit on an uncontended resource is dead configuration.
+
+**Retry budgets, backoff, and jitter.** Retries are the mechanism by which demand rises as capacity falls, so they need a budget, not just a count. A per-attempt retry cap still permits a retry storm when many attempts fail together; a budget bounds the fraction of total traffic that retries may consume. Individual retries should back off exponentially, and backoff must carry jitter, because deterministic backoff synchronizes the failed population into retry waves that arrive together and re-saturate the recovering dependency. The AWS Builders' Library articles on [timeouts, retries, and backoff with jitter](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/) and on [making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) state both mechanisms clearly; they are practitioner guidance, and their specific multipliers and cap values are their systems' parameters, not this book's. The idempotency requirement is not optional decoration here. A retry is a new attempt at the same logical work (invariant I4), and a retried external effect is safe only under the effect-identity contracts of I5. A retry policy layered over non-idempotent effects converts overload into duplicated external commits.
+
+**Backpressure and load shedding.** When a downstream stage saturates, the signal must propagate upstream rather than accumulate in an intermediate queue. Backpressure means the producer slows because the consumer said so; without it, every intermediate buffer becomes a place where latency hides. When slowing is not enough, the system sheds load by explicit policy: reject the lowest declared class first, and tell the caller. Silent degradation, where work is accepted and then quietly never runs, violates I9 directly. Rate limiting at the boundary is the complement of admission control inside it: the boundary limit protects the system from external demand spikes, and admission decides what the system commits to among the work the boundary let through.
+
+**Recovery capacity.** The policy decision most specific to this book is reserving capacity for recovery and reconciliation, so that backlog cannot consume every worker needed to recover it. After a worker loss or a dependency outage, the system holds a backlog of interrupted attempts, orphaned leases, and unreconciled external effects. Recovering those requires the same constrained resources as live work. If the backlog is admitted at full priority into an undifferentiated queue, recovery work and live work starve each other, and the reconciliation that would shrink the backlog never gets scheduled. Invariant I10 requires that recovery preserve the same invariants as normal execution and be tested as production code; that includes its capacity allocation. A recovery path that only works when the fleet is idle has not been tested under the one condition where it runs. Pilot-execution work by Li, Cai, and Lou ([2026](https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu)) adds the sharper directional warning that recovery actions themselves cause severe failures, which is a second reason to bound the rate at which recovery traffic is released rather than replaying the entire backlog at once. I do not prescribe what fraction of capacity recovery should hold. That is a measured deployment decision, and the experiment below is how to measure it.
+
+The global-allocation versus worker-local-dispatch separation defended earlier in this chapter has a precedent in this literature. Schwarzkopf et al. ([2013](https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/)) built Omega as parallel schedulers operating over shared cluster state with optimistic concurrency control, precisely because a single monolithic scheduler conflated policies with different cadences and stakes. Hindman et al. ([2011](https://www.usenix.org/conference/nsdi11/mesos-platform-fine-grained-resource-sharing-data-center)) reached a related two-level split in Mesos, with a central allocator offering resources and frameworks deciding what to run on them. Both are directional support for keeping capacity allocation and dispatch as separately auditable layers; neither system's conflict rates, offer semantics, or scale figures describe an agent fleet.
+
+The replay protocol later in this chapter tests dispatch policy under normal arrivals. Overload policy needs its own experiment, because its interesting behavior only appears when capacity falls or backlog is released. I add a recovery-capacity experiment to the protocol:
+
+1.  Establish the normal arrival rate and the capacity of each constrained resource from the ledger.
+
+2.  Inject a worker loss or a dependency failure of recorded duration.
+
+3.  Release a controlled backlog and retry population against the recovering system.
+
+4.  Compare unrestricted recovery traffic with a bounded-recovery policy that reserves declared capacity for live work and admits recovery work at a controlled rate.
+
+5.  Measure, by declared class: live-work tail latency, recovery completion time, queue depth, retry count, request rate against the recovering dependency, starvation against the existing guard, useful throughput, and duplicate external effects.
+
+The comparison should show where each policy fails, not which one wins in general. Unrestricted recovery typically minimizes recovery completion time while damaging live-work tails and re-saturating the dependency; an over-tight bound protects live work while the backlog ages past usefulness. The right division is a property of the fleet's own workload, which is why I state the experiment and not a universal recovery-capacity fraction.
 
 ## Which worker is cheapest and sufficient?
 
@@ -6817,6 +7314,8 @@ A compact replay protocol is:
 
 7.  Require shadow and canary evidence before expanding live allocation authority.
 
+8.  Run the recovery-capacity experiment from the admission and backpressure section: establish normal arrival rate and capacity, inject a worker loss or dependency failure, release a controlled backlog and retry population, and compare unrestricted recovery traffic with a bounded-recovery policy on live-work tail latency, recovery completion time, per-class queue depth, retry count, dependency request rate, starvation, useful throughput, and duplicate external effects.
+
 This protocol is stricter than asking whether the queue feels better. It asks:
 
 - whether the candidate changes a declared outcome on identical work;
@@ -6914,6 +7413,24 @@ The repository artifact [`protocols/allocation-policy-replay.md`](https://github
 - No strong result and no software-fleet measurement support this entry; all three items are observatory scheduling, and the cadence, cap, and churn charge remain deployment decisions.
 
 - Corroboration (narrative only): the author's transfer notes on observatory scheduling restate the same ZTF and MUSHROOMS results already carried above as literature evidence.
+
+**Admission, backpressure, and recovery capacity**
+
+- Directional evidence: Verma, A., et al. (2015), "Large-scale cluster management at Google with Borg," EuroSys. Admission control, packing, isolation, and overcommitment as explicit cluster policy; mechanisms transfer, parameters do not.
+
+- Directional evidence: Schwarzkopf, M., et al. (2013), "Omega: flexible, scalable schedulers for large compute clusters," EuroSys. Parallel schedulers over shared state with optimistic concurrency; supports separating global allocation from worker-local dispatch.
+
+- Directional evidence: Mace, J., et al. (2015), "Retro: Targeted Resource Management in Multi-tenant Distributed Systems," NSDI. Per-tenant resource monitoring and central control points; maintenance and recovery traffic can itself become the overload source.
+
+- Directional evidence: Hindman, B., et al. (2011), "Mesos: A Platform for Fine-Grained Resource Sharing in the Data Center," NSDI. Two-level allocation between a central allocator and per-framework dispatch.
+
+- Directional evidence: Li, Z., Cai, Q., & Lou, C. (2026), "Pilot Execution," NSDI. Recovery actions themselves cause severe failures; supports bounding the release rate of recovery traffic.
+
+- Practitioner guidance: AWS Builders' Library, "Timeouts, retries, and backoff with jitter" and "Making retries safe with idempotent APIs." Mechanism descriptions from production practice, not controlled experiments; their constants are their systems' parameters.
+
+- Practitioner guidance: Google SRE, "Addressing Cascading Failures" and "Handling Overload." Same status.
+
+- No source in this group evaluates a software-agent fleet, and no recovery-capacity fraction is prescribed; the recovery-capacity experiment in the replay protocol is how a fleet measures its own division.
 
 **Route each request to the cheapest sufficient model**
 
@@ -7199,7 +7716,7 @@ The part-level and chapter-level evidence shares restated above were recomputed 
 **Typed knowledge graph.** A graph whose nodes and edges carry explicit semantic types, provenance, and revision identity rather than only untyped similarity.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/references.tex","tex_sha256":"24b1679c51d1e62ad14cb03c4c650bb0d9e0f2cfb88488d0ddd44d1c822f7996","markdown_sha256":"e77f63dca3e4632beeba9faffec05ab02a7d6b0d06ae7f1fc125c9fcf7e03f71"} -->
+<!-- tex-sync:start {"path":"manuscript/references.tex","tex_sha256":"dd78b50c09dbb252cb999154dc5b47a882518c75659472023dded462026a0cb5","markdown_sha256":"309c75e7b7ec84cdc078290e5c2cf055242e4bfb467543838d68bbb6a2f3d4ae"} -->
 # References
 
 Julian Acuna (2026). EngramaBench: Evaluating Long-Term Conversational Memory with Structured Graph Retrieval. arXiv:2604.21229. <https://arxiv.org/abs/2604.21229>
@@ -7207,6 +7724,52 @@ Julian Acuna (2026). EngramaBench: Evaluating Long-Term Conversational Memory wi
 Pavel Adamenko, Mikhail Ivanov, Aidar Valeev, Rodion Levichev, Pavel Zadorozhny, Ivan Lopatin, Dmitry Babaev, Alena Fenogenova, et al. (2025). SWE-MERA: A Dynamic Benchmark for Agenticly Evaluating Large Language Models on Software Engineering Tasks. arXiv:2507.11059. <https://arxiv.org/abs/2507.11059>
 
 Reem Aleithan, Haoran Xue, Mohammad Mahdi Mohajer, Elijah Nnorom, Gias Uddin, Song Wang (2024). SWE-Bench+: Enhanced Coding Benchmark for LLMs. arXiv:2410.06992. <https://arxiv.org/abs/2410.06992>
+
+Peter Alvaro, Joshua Rosen, Joseph M. Hellerstein (2015). Lineage-Driven Fault Injection. SIGMOD 2015. <https://dl.acm.org/doi/10.1145/2723372.2723711>
+
+AWS Builders' Library. Making Retries Safe with Idempotent APIs. <https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/>
+
+Mike Burrows (2006). The Chubby Lock Service for Loosely-Coupled Distributed Systems. OSDI 2006. <https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems>
+
+Song C. Choi, Walt Scacchi (1991). The Software Infrastructure for a Distributed System Factory. Software Engineering Journal 6(5), 355-369. <https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf>
+
+Wenhao Ge, Chen Zhang (2026). Understanding and Detecting Flaky Builds in GitHub Actions. arXiv:2602.02307. <https://arxiv.org/abs/2602.02307>
+
+Google SRE Book. Addressing Cascading Failures. <https://sre.google/sre-book/addressing-cascading-failures/>
+
+Google SRE Book. Handling Overload. <https://sre.google/sre-book/handling-overload/>
+
+Haryadi S. Gunawi, Thanh Do, Pallavi Joshi, Peter Alvaro, Joseph M. Hellerstein, Andrea C. Arpaci-Dusseau, Remzi H. Arpaci-Dusseau, Koushik Sen, et al. (2011). FATE and DESTINI: A Framework for Cloud Recovery Testing. NSDI 2011. <https://www.usenix.org/conference/nsdi11/fate-and-destini-framework-cloud-recovery-testing>
+
+Benjamin Hindman, Andy Konwinski, Matei Zaharia, Ali Ghodsi, Anthony D. Joseph, Randy Katz, Scott Shenker, Ion Stoica (2011). Mesos: A Platform for Fine-Grained Resource Sharing in the Data Center. NSDI 2011. <https://www.usenix.org/conference/nsdi11/mesos-platform-fine-grained-resource-sharing-data-center>
+
+Zhicheng Huang, Ramiz Dundar, Yizheng Xie, Konstantinos Kallas, Nikos Vasilakis (2026). Fractal: Fault-Tolerant Shell-Script Distribution. NSDI 2026. <https://www.usenix.org/conference/nsdi26/presentation/huang>
+
+Patrick Hunt, Mahadev Konar, Flavio P. Junqueira, Benjamin Reed (2010). ZooKeeper: Wait-free Coordination for Internet-scale Systems. USENIX ATC 2010. <https://www.usenix.org/conference/usenix-atc-10/zookeeper-wait-free-coordination-internet-scale-systems>
+
+Zhenyu Li, Angting Cai, Chang Lou (2026). Pilot Execution: Simulating Failure Recovery In Situ for Production Distributed Systems. NSDI 2026. <https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu>
+
+Jiahang Lin, Shichun Liu, Chengjun Pan, Lizhi Lin, Shihan Dou, Zhiheng Xi, Xuanjing Huang, Hang Yan, et al. (2026). Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses. arXiv:2604.25850. <https://arxiv.org/abs/2604.25850>
+
+Jonathan Mace, Peter Bodik, Rodrigo Fonseca, Madanlal Musuvathi (2015). Retro: Targeted Resource Management in Multi-tenant Distributed Systems. NSDI 2015. <https://www.usenix.org/conference/nsdi15/technical-sessions/presentation/mace>
+
+Andrey Mokhov, Neil Mitchell, Simon Peyton Jones (2018). Build Systems à la Carte. ICFP 2018. <https://www.microsoft.com/en-us/research/wp-content/uploads/2018/03/build-systems-final.pdf>
+
+OpenAI (2026). An Open-Source Spec for Codex Orchestration: Symphony. <https://openai.com/index/open-source-codex-orchestration-symphony/>
+
+Leon J. Osterweil (1987). Software Processes Are Software Too. ICSE 1987. <https://dl.acm.org/doi/10.5555/41765.41766>
+
+Leon J. Osterweil (1997). Software Processes Are Software Too, Revisited: An Invited Talk on the Most Influential Paper of ICSE 9. ICSE 1997. <https://dl.acm.org/doi/10.1145/253228.253440>
+
+Matthew Phillips (2026). How We Built a Software Factory to Drive Astro's GitHub Issue Count to Zero. Cloudflare Blog. <https://blog.cloudflare.com/astro-issue-triage/>
+
+Malte Schwarzkopf, Andy Konwinski, Michael Abd-El-Malek, John Wilkes (2013). Omega: Flexible, Scalable Schedulers for Large Compute Clusters. EuroSys 2013. <https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/>
+
+CNCF TAG Security (2022). Secure Software Factory: A Reference Architecture. <https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/>
+
+Xudong Sun, Wenqing Luo, Jiawei Tyler Gu, Aishwarya Ganesan, Ramnatthan Alagappan, Michael Gasch, Lalith Suresh, Tianyin Xu (2022). Automatic Reliability Testing for Cluster Management Controllers. OSDI 2022. <https://www.usenix.org/system/files/osdi22-sun.pdf>
+
+AWS Builders' Library. Timeouts, Retries, and Backoff with Jitter. <https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/>
 
 Amplify Partners (2026). How Hightouch built its long-running agent harness. Amplify Partners. <https://www.amplifypartners.com/blog-posts/how-hightouch-built-their-long-running-agent-harness>
 
@@ -7566,6 +8129,8 @@ Upstairs_Safe2922 (2026). AI agent wiped Railway DB in 9 seconds. Reddit, r/devo
 
 Helena Vasconcelos, Matthew Jörke, Madeleine Grunde-McLaughlin, Tobias Gerstenberg, Michael Bernstein, Ranjay Krishna (2022). Explanations Can Reduce Overreliance on AI Systems During Decision-Making. arXiv:2212.06823. <https://arxiv.org/abs/2212.06823>
 
+Abhishek Verma, Luis Pedrosa, Madhukar Korupolu, David Oppenheimer, Eric Tune, John Wilkes (2015). Large-Scale Cluster Management at Google with Borg. EuroSys 2015. <https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/>
+
 Vera V. Vishnyakova (2026). Context Engineering: From Prompts to Corporate Multi-Agent Architecture. arXiv:2603.09619. <https://arxiv.org/abs/2603.09619>
 
 Adriano Vogel, Sören Henning, Esteban Perez-Wohlfeil, Otmar Ertl, Rick Rabiser (2024). A Comprehensive Benchmarking Analysis of Fault Recovery in Stream Processing Frameworks. arXiv:2404.06203. <https://arxiv.org/abs/2404.06203>
@@ -7577,6 +8142,8 @@ Mengdie Flora Wang, Haochen Xie, Guanghui Wang, Aijing Gao, Guang Yang, Ziyuan L
 Haojun Weng, Qianqian Yang, Hao Fu, Haobin Pan, Xinwei Lv (2026). When Retrieval Hurts Code Completion: A Diagnostic Study of Stale Repository Context. arXiv:2605.14478. <https://arxiv.org/abs/2605.14478>
 
 Benedict Wolff, Jacopo Bennati (2026). Cost and Accuracy of Long-Term Memory in Distributed Multi-Agent Systems Based on Large Language Models. arXiv:2601.07978. <https://arxiv.org/abs/2601.07978>
+
+Haoze Wu, Jia Pan, Peng Huang (2024). Efficient Exposure of Partial Failure Bugs in Distributed Systems with Inferred Abstract States. NSDI 2024. <https://www.usenix.org/conference/nsdi24/presentation/wu-haoze>
 
 Chunqiu Steven Xia, Yinlin Deng, Soren Dunn, Lingming Zhang (2024). Agentless: Demystifying LLM-based Software Engineering Agents. arXiv:2407.01489. <https://arxiv.org/abs/2407.01489>
 
@@ -7616,7 +8183,11 @@ Shuhao Zhang, Juan Soto, Volker Markl (2022). A Survey on Transactional Stream P
 
 Yilin Zhang, Xinran Zhao, Zora Zhiruo Wang, Chenyang Yang, Jiayi Wei, Tongshuang Wu (2025). cAST: Enhancing Code Retrieval-Augmented Generation with Structural Chunking via Abstract Syntax Tree. arXiv:2506.15655. <https://arxiv.org/abs/2506.15655>
 
+Haoran Zhang, Adney Cardoza, Peter Baile Chen, Sebastian Angel, Vincent Liu (2020). Fault-Tolerant and Transactional Stateful Serverless Workflows. OSDI 2020. <https://www.usenix.org/conference/osdi20/presentation/zhang-haoran>
+
 Xinkui Zhao, Sai Liu, Yifan Zhang, Qingyu Ma, Zewen Lin, Naibo Wang, Guanjie Cheng, Chang Liu, et al. (2026). ATOM: Instantiating Budget-Controllable Multi-Agent Collaboration via Nucleus-Electron Hierarchy. arXiv:2605.26178. <https://arxiv.org/abs/2605.26178>
+
+Xiangxin Zhao, Han Li, Shuaiting Li, Tianyi Zhao, Earl T. Barr, Federica Sarro, He Ye (2026). Failure as a Process: An Anatomy of CLI Coding Agent Trajectories. arXiv:2607.09510. <https://arxiv.org/abs/2607.09510>
 
 Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin, Zhuohan Li, et al. (2023). Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. arXiv:2306.05685. <https://arxiv.org/abs/2306.05685>
 
@@ -7625,6 +8196,8 @@ Yusheng Zheng, Yanpeng Hu, Tong Yu, Andi Quinn (2025). AgentSight: System-Level 
 Jiajun Zhou, Zhaoxuan Ke, Jihang Ye, Xuanze Chen, Shanqing Yu, Qi Xuan (2026). AgentS4D: Benchmarking Runtime Risks across the Execution Lifecycle of LLM-Based Workspace Agents. arXiv:2607.27294. <https://arxiv.org/abs/2607.27294>
 
 Kunlun Zhu, Hongyi Du, Zhaochen Hong, Xiaocheng Yang, Shuyi Guo, Zhe Wang, Zhenhailong Wang, Cheng Qian, et al. (2025). MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents. arXiv:2503.01935. <https://arxiv.org/abs/2503.01935>
+
+Siyuan Zhuang, Stephanie Wang, Eric Liang, Yi Cheng, Ion Stoica (2023). ExoFlow: A Universal Workflow System for Exactly-Once DAGs. OSDI 2023. <https://www.usenix.org/conference/osdi23/presentation/zhuang>
 
 Jacob Meyers and Rob Zienert (2025). How Temporal powers reliable cloud operations at Netflix. Netflix Technology Blog. <https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953>
 <!-- tex-sync:end -->

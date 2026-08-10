@@ -1,7 +1,7 @@
 \chapter{Cost-aware fleet scheduling and model routing}
 \label{ch18-cost-aware-fleet-scheduling-model-routing}
 \begin{quote}
-\textbf{Evidence profile.} 2 strong \(\cdot\) 8 directional \(\cdot\) 0 corroborating evidence items across 3 developed practices (ERCA-171, ERCA-187, ERCA-191).
+\textbf{Evidence profile.} 2 strong \(\cdot\) 13 directional \(\cdot\) 2 practitioner \(\cdot\) 0 corroborating evidence items across 4 developed practices (ERCA-171, ERCA-187, ERCA-191, and the admission-and-recovery-capacity practice added in this revision).
 
 \textbf{Chapter claim.} Re-decide from observed state, then ship the best feasible incumbent on time.
 \end{quote}
@@ -10,7 +10,7 @@ In an eleven-week replay of my fleet ledger, 1,286 work items crossed 22 executi
 
 A fleet can increase throughput while also increasing the cost of each accepted result. Its own traces must distinguish the two. Concurrent execution, together with a willingness to attempt work a human team might have left queued, exposes more tasks to model inference, verification, review, and recovery. Throughput alone therefore does not establish an economic gain.
 
-The evidence is largely transferred from other fields. One strong software-engineering result concerns cheap baselines; observatory and compute-cluster scheduling, search-based software engineering, budget-constrained bandit theory, and router calibration supply directional mechanisms. My fleet replay remains a narrative illustration.
+The evidence is largely transferred from other fields. One strong software-engineering result concerns cheap baselines; observatory scheduling, compute-cluster management, multi-tenant resource control, search-based software engineering, budget-constrained bandit theory, and router calibration supply directional mechanisms. The telescope-scheduling lineage that opens this chapter is one transfer lineage among several, alongside cluster management and multi-tenant resource control, rather than the dominant systems foundation. My fleet replay remains a narrative illustration.
 
 \Needspace{5\baselineskip}
 
@@ -227,6 +227,50 @@ The design becomes auditable when the following are explicit:
 \end{itemize}
 
 Its value remains an empirical question until the fleet's traces answer it.
+
+\hypertarget{admission-backpressure-and-recovery-capacity}{%
+\section{Admission, backpressure, and recovery capacity}\label{admission-backpressure-and-recovery-capacity}}
+
+A queue records demand; it does not create capacity. Retry policy can increase demand precisely when capacity has fallen. A reliable factory therefore needs admission, prioritization, rate limits, retry budgets, and recovery-capacity policy above individual queues. I treat these as overload policy, distinct from the re-decision and routing questions elsewhere in this chapter: those decide which work runs where, and overload policy decides how much work is allowed to exist inside the system at all.
+
+The failure mode this section guards against is mechanical. A dependency slows, tasks time out, retries multiply the request rate against the slowed dependency, queues grow, work waits long enough that its callers retry the whole task, and the fleet spends its capacity on demand that its own policies manufactured. Nothing in that sequence requires a model to misbehave. The Google SRE chapters on cascading failures and handling overload (\href{https://sre.google/sre-book/addressing-cascading-failures/}{cascading failures}, \href{https://sre.google/sre-book/handling-overload/}{handling overload}) describe this pattern across production services; I cite them as practitioner guidance rather than controlled evidence, and none of their capacity or threshold figures transfer to an agent fleet.
+
+\textbf{Admission control.} The first policy decision is whether new work enters the system at all. Verma et al.~(\href{https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/}{2015}) describe Borg holding submitted jobs in a pending state until admission, packing admitted work against declared resource requirements, isolating tenants, and treating overcommitment as an explicit cluster policy rather than an accident of scheduling. The transfer is directional: an agent fleet benefits from the same separation between accepting work and running it, and from making overcommitment a decision with an owner. Borg's packing algorithms, machine-share targets, and utilization figures do not transfer as parameters.
+
+Admission requires bounded queue growth. An unbounded queue converts overload into unbounded latency, and by invariant I9 admissible work cannot starve invisibly. A bounded queue forces the honest alternatives into view: reject explicitly, shed load by declared class, or wait with a visible position and age. Explicit rejection at admission is cheaper than the same rejection discovered hours later as a timeout, because the caller learns immediately and the system spends nothing executing work it will abandon.
+
+\textbf{Allocation by tenant, repository, and work class.} Aggregate capacity limits are not enough, because a single hot tenant or repository can fill a shared queue and starve unrelated work while the aggregate limit is still respected. Partitioning queues by tenant, repository, or work class bounds the damage one demand source can do to another. Mace et al.~(\href{https://www.usenix.org/conference/nsdi15/technical-sessions/presentation/mace}{2015}) built Retro around per-tenant resource monitoring and central control points that throttle at the granularity of the tenant, and they observed that maintenance traffic itself can become the overload source. Both observations transfer directionally. The second matters more than it first appears: in an agent fleet, the analogue of maintenance traffic is recovery, reconciliation, and retry work, and it competes for the same models, runners, and reviewers as live work.
+
+\textbf{Concurrency limits by constrained resource.} Concurrency limits belong on the resource that is actually constrained, not on an arbitrary global worker count. Model-tier tokens per minute, repository leases, reviewer attention, and external API rate limits are separate constraints with separate saturation points. A single fleet-wide concurrency number either wastes the uncontended resources or oversubscribes the contended one. The contended-pool observation from my replay applies here in reverse: limits matter where eligible work exceeds capacity, and a limit on an uncontended resource is dead configuration.
+
+\textbf{Retry budgets, backoff, and jitter.} Retries are the mechanism by which demand rises as capacity falls, so they need a budget, not just a count. A per-attempt retry cap still permits a retry storm when many attempts fail together; a budget bounds the fraction of total traffic that retries may consume. Individual retries should back off exponentially, and backoff must carry jitter, because deterministic backoff synchronizes the failed population into retry waves that arrive together and re-saturate the recovering dependency. The AWS Builders' Library articles on \href{https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/}{timeouts, retries, and backoff with jitter} and on \href{https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/}{making retries safe with idempotent APIs} state both mechanisms clearly; they are practitioner guidance, and their specific multipliers and cap values are their systems' parameters, not this book's. The idempotency requirement is not optional decoration here. A retry is a new attempt at the same logical work (invariant I4), and a retried external effect is safe only under the effect-identity contracts of I5. A retry policy layered over non-idempotent effects converts overload into duplicated external commits.
+
+\textbf{Backpressure and load shedding.} When a downstream stage saturates, the signal must propagate upstream rather than accumulate in an intermediate queue. Backpressure means the producer slows because the consumer said so; without it, every intermediate buffer becomes a place where latency hides. When slowing is not enough, the system sheds load by explicit policy: reject the lowest declared class first, and tell the caller. Silent degradation, where work is accepted and then quietly never runs, violates I9 directly. Rate limiting at the boundary is the complement of admission control inside it: the boundary limit protects the system from external demand spikes, and admission decides what the system commits to among the work the boundary let through.
+
+\textbf{Recovery capacity.} The policy decision most specific to this book is reserving capacity for recovery and reconciliation, so that backlog cannot consume every worker needed to recover it. After a worker loss or a dependency outage, the system holds a backlog of interrupted attempts, orphaned leases, and unreconciled external effects. Recovering those requires the same constrained resources as live work. If the backlog is admitted at full priority into an undifferentiated queue, recovery work and live work starve each other, and the reconciliation that would shrink the backlog never gets scheduled. Invariant I10 requires that recovery preserve the same invariants as normal execution and be tested as production code; that includes its capacity allocation. A recovery path that only works when the fleet is idle has not been tested under the one condition where it runs. Pilot-execution work by Li, Cai, and Lou (\href{https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu}{2026}) adds the sharper directional warning that recovery actions themselves cause severe failures, which is a second reason to bound the rate at which recovery traffic is released rather than replaying the entire backlog at once. I do not prescribe what fraction of capacity recovery should hold. That is a measured deployment decision, and the experiment below is how to measure it.
+
+The global-allocation versus worker-local-dispatch separation defended earlier in this chapter has a precedent in this literature. Schwarzkopf et al.~(\href{https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/}{2013}) built Omega as parallel schedulers operating over shared cluster state with optimistic concurrency control, precisely because a single monolithic scheduler conflated policies with different cadences and stakes. Hindman et al.~(\href{https://www.usenix.org/conference/nsdi11/mesos-platform-fine-grained-resource-sharing-data-center}{2011}) reached a related two-level split in Mesos, with a central allocator offering resources and frameworks deciding what to run on them. Both are directional support for keeping capacity allocation and dispatch as separately auditable layers; neither system's conflict rates, offer semantics, or scale figures describe an agent fleet.
+
+\Needspace{5\baselineskip}
+
+The replay protocol later in this chapter tests dispatch policy under normal arrivals. Overload policy needs its own experiment, because its interesting behavior only appears when capacity falls or backlog is released. I add a recovery-capacity experiment to the protocol:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Establish the normal arrival rate and the capacity of each constrained resource from the ledger.
+\item
+  Inject a worker loss or a dependency failure of recorded duration.
+\item
+  Release a controlled backlog and retry population against the recovering system.
+\item
+  Compare unrestricted recovery traffic with a bounded-recovery policy that reserves declared capacity for live work and admits recovery work at a controlled rate.
+\item
+  Measure, by declared class: live-work tail latency, recovery completion time, queue depth, retry count, request rate against the recovering dependency, starvation against the existing guard, useful throughput, and duplicate external effects.
+\end{enumerate}
+
+The comparison should show where each policy fails, not which one wins in general. Unrestricted recovery typically minimizes recovery completion time while damaging live-work tails and re-saturating the dependency; an over-tight bound protects live work while the backlog ages past usefulness. The right division is a property of the fleet's own workload, which is why I state the experiment and not a universal recovery-capacity fraction.
 
 \hypertarget{which-worker-is-cheapest-and-sufficient}{%
 \section{Which worker is cheapest and sufficient?}\label{which-worker-is-cheapest-and-sufficient}}
@@ -589,6 +633,8 @@ A compact replay protocol is:
   Repeat the comparison on a temporal holdout.
 \item
   Require shadow and canary evidence before expanding live allocation authority.
+\item
+  Run the recovery-capacity experiment from the admission and backpressure section: establish normal arrival rate and capacity, inject a worker loss or dependency failure, release a controlled backlog and retry population, and compare unrestricted recovery traffic with a bounded-recovery policy on live-work tail latency, recovery completion time, per-class queue depth, retry count, dependency request rate, starvation, useful throughput, and duplicate external effects.
 \end{enumerate}
 
 \Needspace{5\baselineskip}
@@ -689,6 +735,28 @@ The repository artifact \href{https://github.com/sjarmak/engineering-reliable-co
   No strong result and no software-fleet measurement support this entry; all three items are observatory scheduling, and the cadence, cap, and churn charge remain deployment decisions.
 \item
   Corroboration (narrative only): the author's transfer notes on observatory scheduling restate the same ZTF and MUSHROOMS results already carried above as literature evidence.
+\end{itemize}
+
+\textbf{Admission, backpressure, and recovery capacity}
+
+\begin{itemize}
+\tightlist
+\item
+  Directional evidence: Verma, A., et al.~(2015), ``Large-scale cluster management at Google with Borg,'' EuroSys. Admission control, packing, isolation, and overcommitment as explicit cluster policy; mechanisms transfer, parameters do not.
+\item
+  Directional evidence: Schwarzkopf, M., et al.~(2013), ``Omega: flexible, scalable schedulers for large compute clusters,'' EuroSys. Parallel schedulers over shared state with optimistic concurrency; supports separating global allocation from worker-local dispatch.
+\item
+  Directional evidence: Mace, J., et al.~(2015), ``Retro: Targeted Resource Management in Multi-tenant Distributed Systems,'' NSDI. Per-tenant resource monitoring and central control points; maintenance and recovery traffic can itself become the overload source.
+\item
+  Directional evidence: Hindman, B., et al.~(2011), ``Mesos: A Platform for Fine-Grained Resource Sharing in the Data Center,'' NSDI. Two-level allocation between a central allocator and per-framework dispatch.
+\item
+  Directional evidence: Li, Z., Cai, Q., \& Lou, C. (2026), ``Pilot Execution,'' NSDI. Recovery actions themselves cause severe failures; supports bounding the release rate of recovery traffic.
+\item
+  Practitioner guidance: AWS Builders' Library, ``Timeouts, retries, and backoff with jitter'' and ``Making retries safe with idempotent APIs.'' Mechanism descriptions from production practice, not controlled experiments; their constants are their systems' parameters.
+\item
+  Practitioner guidance: Google SRE, ``Addressing Cascading Failures'' and ``Handling Overload.'' Same status.
+\item
+  No source in this group evaluates a software-agent fleet, and no recovery-capacity fraction is prescribed; the recovery-capacity experiment in the replay protocol is how a fleet measures its own division.
 \end{itemize}
 
 \textbf{Route each request to the cheapest sufficient model}

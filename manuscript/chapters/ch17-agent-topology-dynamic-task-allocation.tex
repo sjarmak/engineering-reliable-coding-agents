@@ -1,7 +1,7 @@
 \chapter{Agent topology selection and dynamic task allocation}
 \label{ch17-agent-topology-dynamic-task-allocation}
 \begin{quote}
-\textbf{Evidence profile.} 6 strong \(\cdot\) 12 directional \(\cdot\) 1 corroborating evidence items across 4 developed practices (ERCA-044, ERCA-093, ERCA-101, ERCA-107).
+\textbf{Evidence profile.} 6 strong \(\cdot\) 16 directional \(\cdot\) 1 corroborating \(\cdot\) 1 historical evidence items across 4 developed practices (ERCA-044, ERCA-093, ERCA-101, ERCA-107).
 
 \textbf{Chapter claim.} Coordination must earn its cost against a live single-agent baseline.
 \end{quote}
@@ -90,6 +90,8 @@ The number of agents follows from that answer. Sometimes no additional worker is
 Accounts grouped under ``harness engineering'' describe teams accumulating capability in execution boundaries, verification loops, repository instructions, rollback paths, and approval controls rather than in prompts alone. Böckeler (\href{https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html}{2026}) analyzes vendor-reported practice from the OpenAI Codex team. Jain (\href{https://www.reddit.com/r/devops/comments/1touxz4/}{2026}) writes from practitioner experience rather than a controlled evaluation.
 
 Neither source supplies enough verification detail to estimate an effect. They describe where practitioners report making repairs. Cemri et al.~and Kim et al.~carry the evidentiary claim that some persistent classes responded to structural intervention.
+
+Lin et al.~(\href{https://arxiv.org/abs/2604.25850}{2026}) add preprint evidence pointing the same way. Across ten harness iterations, Terminal-Bench 2 pass@1 rose from 69.7 percent to 77.0 percent with the model held fixed, and their ablations locate the gains in tools, middleware, and memory rather than in the system prompt alone. That is a benchmark result under one team's iteration process. I take from it the direction, that structural elements of the harness carried measurable capability, and I do not transfer the magnitude to production systems.
 
 My trace data adds a caution about what prompt evidence can establish. Across 1,705 visible thinking blocks from 199 traces, agents never named the two dominant tools in their written reasoning. Sixty-five explicit intentions to find references produced no use of the purpose-built reference tool.
 
@@ -563,6 +565,8 @@ The attempt identity prevents a late response from an expired worker from overwr
 
 These requirements come from the execution topology. Drawing the graph supplies none of them.
 
+Mokhov, Mitchell, and Peyton Jones (\href{https://www.microsoft.com/en-us/research/wp-content/uploads/2018/03/build-systems-final.pdf}{2018}) make the same separation precise for build systems in Build Systems à la Carte. The dependency graph is not the complete execution semantics. How tasks are scheduled, whether dependencies are declared statically or discovered during execution, what triggers a rebuild, and what trace information persists across runs are separate design choices, and existing build systems occupy different points in that space. The lesson I transfer is structural: an explicit graph permits reasoning about safe parallelism only when the recorded dependencies are correct, and the scheduling and rebuild policies deserve their own decisions rather than riding in unexamined with the graph. The analogy has a limit. A coding factory operates on mutable worktrees and issues external effects, conditions that ordinary build DAGs constrain more tightly through hermetic inputs and declared outputs, so the decomposition names the design axes without supplying the fault model.
+
 In my workflow harness, notification-driven dispatch ends the coordinating turn after work is assigned and resumes it when completion events arrive. This avoids a polling loop that consumes attention while no state has changed. Mechanical parallel-set detection checks dependency layers, blocking edges, and overlapping file paths.
 
 Those rules illustrate the mechanism. They do not provide comparative performance evidence.
@@ -579,6 +583,38 @@ worker exceeds time limit
 \end{verbatim}
 
 Retries require the same discipline. A retry creates a new attempt for the same logical node rather than a second independent task. The scheduler must either establish that repeated execution is idempotent or isolate side effects before trying again. Otherwise a timeout can produce duplicate comments, partial writes, or two workers claiming the same resource.
+
+\hypertarget{a-lease-is-not-write-authority}{%
+\section{A lease is not write authority}\label{a-lease-is-not-write-authority}}
+
+The owner field in the node record is commonly implemented with a lease: a worker holds a time-bounded claim on the work and renews it while making progress, and when renewals stop, the control plane may reassign. That reading is correct, and it is the only question a lease answers. A lease resolves a liveness and allocation question: after the timeout, the control plane is permitted to give the work to someone else. It does not establish that the previous worker is dead. A process paused under memory pressure resumes after its lease has expired. A network partition heals after reassignment has already happened. A mutation issued before expiry arrives at its target after it.
+
+I therefore never write that a lease guarantees a single writer. Safety comes from a separate mechanism at the boundary being protected, and describing that mechanism requires three identities from Part III's opener. The \texttt{work\_id} names the stable logical work, the intent that should happen once logically. The \texttt{ownership\_epoch} is a monotonic generation of write authority, incremented each time the control plane reassigns the work. The \texttt{attempt\_id} names one execution attempt under that work and epoch. The attempt field in the node record above is this third identity; the epoch completes the picture the earlier paragraph on late responses began. Preventing an expired worker's late response from overwriting a successful retry is exactly the fencing problem, stated at the scheduler. The general form states it at every protected boundary.
+
+The rule is invariant I2 from the Part III opener: only the current ownership generation may commit a mutation at a protected boundary, and a superseded worker must be rejected even if it is still running. Every mutation to a protected shared target carries the current \texttt{ownership\_epoch}, and the target itself, or an authoritative mutation gateway in front of it, rejects any older epoch. Invariant I3 follows at the ledger: a durable state transition validates generation and attempt identity rather than trusting the scheduler's belief about who is active.
+
+A worked sequence makes the mechanism concrete:
+
+\begin{verbatim}
+work W-311, protected target: integration branch head
+epoch 41: worker A holds the lease and prepares a mutation
+worker A's process is paused; lease renewals stop
+lease expires; control plane increments authority to epoch 42
+epoch 42: worker B claims W-311 and starts a new attempt
+worker A resumes and submits its mutation, tagged epoch 41
+the gateway compares 41 against the current epoch 42 and rejects it
+worker B's mutation, tagged epoch 42, is eligible for normal validation
+\end{verbatim}
+
+Two details in that sequence carry the safety argument. Worker A is not dead, was never told it lost authority, and behaves correctly by its own lights; only the epoch check at the target stops it. And worker B's mutation is eligible for validation, not automatically accepted; holding the current epoch confers the right to be evaluated, not a presumption of correctness.
+
+The check must occur at the mutable boundary whose integrity matters: the branch head, the work ledger, the external-effect adapter. Validating only at the scheduler before dispatch is insufficient, because the scheduler's belief about which workers are alive is precisely the information the failure invalidates. By the time worker A's late mutation arrives, the scheduler's dispatch-time check has already passed.
+
+The precedent is old. Burrows (\href{https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems}{2006}) describes sequencers in Chubby: a lock holder obtains a generation number it passes along with its requests, and servers receiving those requests validate the number rather than trusting that the lock is still held. This is historical lineage, and I transfer the principle, not any parameter of Chubby's deployment. The stale-authority problem the sequencer solves is the same problem the paused worker A presents.
+
+Where should the epochs and lease state themselves live? Hunt et al.~(\href{https://www.usenix.org/conference/usenix-atc-10/zookeeper-wait-free-coordination-internet-scale-systems}{2010}) built ZooKeeper on the observation that coordination state belongs in a service designed to survive individual process failure rather than in the memory of any process it coordinates. I take that narrow principle and nothing more. It does not follow that every factory needs ZooKeeper, or a consensus protocol at all; a single durable database that records epochs transactionally can enforce I2 for a modest fleet. The requirement is that the record of who currently holds authority survives the failure of the workers it governs.
+
+Testing this machinery requires perturbing the controller's view of the world, not just the workers. The scheduler and any reconciling component need tests under stale work status, intermediate artifact states, transitions the controller never observed, late completion arriving after reassignment, and controller restart during active work. Sun et al.~(\href{https://www.usenix.org/system/files/osdi22-sun.pdf}{2022}) built Sieve on exactly this method for Kubernetes controllers: perturb what the controller observes, then compare resulting cluster state against an unperturbed run. They found real bugs in mature controllers whose logic was correct under an accurate view. I transfer the method, at directional strength, not the tooling. Chapter 9's fault-injection protocol supplies the harness discipline; the epoch-41 sequence above is precisely the kind of scenario such a test suite should replay on every scheduler change.
 
 \Needspace{5\baselineskip}
 
@@ -638,17 +674,23 @@ The record should remain intelligible without the architecture's label. ``Hierar
 \item
   Böckeler, Birgitta. 2026. ``Harness Engineering.'' MartinFowler.com, February 17. Practitioner account based partly on vendor-reported Codex-team practice.
 \item
+  Burrows, Mike. 2006. ``The Chubby Lock Service for Loosely-Coupled Distributed Systems.'' OSDI. Historical lineage for generation-validated authority; sequencers let servers reject requests carrying a stale lock generation. Principle transferred, not parameters.
+\item
   Cemri, M., et al.~2025. ``Why Do Multi-Agent LLM Systems Fail?'' arXiv:2503.13657. MAST failure taxonomy and benchmark-framework interventions.
 \item
   Chun, Jina, et al.~2025. ``Is Multi-Agent Debate the Silver Bullet?'' arXiv:2503.12029. Audit-retained strong evidence on debate performance against task baselines; reports inference cost across debate variants and leaves the single-model cost comparison open.
 \item
   Huang, Jia, and Joey Tianyi Zhou. 2026. ``A Two-Dimensional Framework for AI Agent Design Patterns: Cognitive Function and Execution Topology.'' arXiv:2605.13850. Directional taxonomy of topology choices.
 \item
+  Hunt, Patrick, et al.~2010. ``ZooKeeper: Wait-Free Coordination for Internet-Scale Systems.'' USENIX ATC. Directional; cited only for the principle that coordination state should survive individual process failure, not as a requirement that factories adopt consensus systems.
+\item
   Jia, J., et al.~2026. ``MAS-FIRE: Fault Injection and Reliability Evaluation for LLM-Based Multi-Agent Systems.'' arXiv:2602.19843. Synthetic fault injection across three architectures.
 \item
   Jain, Prateek. 2026. ``Harness Engineering: The New DevOps Layer for AI Agents.'' r/devops, May 27. Anecdotal practitioner account.
 \item
   Kim, T., et al.~2026. ``Why Do AI Agents Systematically Fail at Cloud Root Cause Analysis?'' arXiv:2602.09937. OpenRCA evidence on failure persistence across capability tiers and protocol intervention.
+\item
+  Lin, et al.~2026. \emph{Agentic Harness Engineering}. arXiv:2604.25850. Preprint; ten harness iterations raised Terminal-Bench 2 pass@1 from 69.7 to 77.0 percent, with ablations locating gains in tools, middleware, and memory. Direction transferred, not magnitude.
 \item
   Oskooei, A. R., et al.~2026. ``Deep Agentic Search for Repository-Level Code Question Answering: An Empirical Study.'' arXiv:2608.01507. Strong evidence for the SWE-QA comparison and its measured handoff failures; broader topology transfer is directional.
 \item
@@ -660,11 +702,15 @@ The record should remain intelligible without the architecture's label. ``Hierar
 \item
   Masters, et al.~2025. \emph{Manager Agent research challenge}. arXiv:2510.02557. Directional planning and scheduling example.
 \item
+  Mokhov, Andrey, Neil Mitchell, and Simon Peyton Jones. 2018. ``Build Systems à la Carte.'' ICFP. Directional; separates the dependency graph from scheduling, dependency discovery, rebuild decisions, and trace persistence. The mutable-worktree, external-effect setting of a coding factory limits the analogy.
+\item
   Qian, et al.~2024. \emph{MacNet}. arXiv:2406.07155. Directional evidence on network scaling.
 \item
   Rose, Evan, et al.~2026. \emph{APWA: A Distributed Architecture for Parallelizable Agentic Workflows}. arXiv:2605.15132. Directional orchestration example.
 \item
   Shang, Wenlong. 2026. \emph{``Theater of Mind'' for LLMs: A Cognitive Architecture Based on Global Workspace Theory}. arXiv:2604.08206. Directional blackboard and global-workspace design; single-author architecture proposal, not a controlled measurement.
+\item
+  Sun, Xudong, et al.~2022. ``Sieve: Automatic Reliability Testing for Cluster Management Controllers.'' OSDI. Directional; perturbed-view testing of reconciliation controllers, transferred as method for scheduler and reconciler tests, not as tooling.
 \item
   Tian, et al.~2025. ``Beyond the Strongest LLM.'' arXiv:2509.23537. Directional evidence on multi-agent teams.
 \item

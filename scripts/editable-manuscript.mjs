@@ -32,9 +32,13 @@ const SECTION_SPECS = Object.freeze([
   },
   { path: "manuscript/chapters/ch06-proxy-gaming-layered-signals.tex", kind: "body" },
   {
-    path: "manuscript/chapters/ch07-isolation-injection-independent-verification.tex",
+    path: "manuscript/chapters/part3-software-factory-distributed-system.tex",
     kind: "body",
     prefix: "# Part III: Containment, durable execution, and recovery engineering",
+  },
+  {
+    path: "manuscript/chapters/ch07-isolation-injection-independent-verification.tex",
+    kind: "body",
   },
   {
     path: "manuscript/chapters/ch08-persistent-state-durable-workflows-idempotent-retries.tex",
