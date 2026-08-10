@@ -1,5 +1,37 @@
 # Changelog
 
+## 1.0.0-rc.15 — 2026-08-09
+
+- Added Chapter 7, "The software factory as a distributed system": the factory
+  decomposition, the ledger-owned work state machine, the identity vocabulary
+  (work, ownership epoch, attempt, artifact version, verification, effect), and
+  invariants I1 through I11 that later chapters cite by identifier. Chapters
+  formerly numbered 7 through 18 are now 8 through 19; files, figures, labels,
+  cross-references, and the companion crosswalk were renumbered to match.
+- Integrated the distributed-systems evidence base: Chubby, ZooKeeper, Beldi,
+  ExoFlow, Fractal, FATE/DESTINI, lineage-driven fault injection, Legolas,
+  Sieve, Pilot Execution, Borg, Omega, Mesos, Retro, and Build Systems à la
+  Carte as directional systems evidence; Osterweil (1987, 1997) and Choi and
+  Scacchi (1991) as historical lineage; AWS Builders' Library, Google SRE,
+  OpenAI Symphony, Spotify, and Cloudflare as practitioner sources; and three
+  2026 preprints (Failure as a Process, Agentic Harness Engineering, flaky
+  GitHub Actions builds) as agent-specific evidence. 28 new reference entries.
+- Chapter 9 gains the effect-vocabulary table and the authority-generation
+  bridge; Chapter 10 gains the distributed-ambiguity fault table; Chapter 6
+  gains the verifier-execution-reliability axis and versioned acceptance
+  records; Chapter 13 maps freshness mechanisms to the consistency invariants;
+  Chapter 11 gains the component-boundary attribution vocabulary; Chapter 18
+  gains lease-versus-authority fencing; Chapter 19 gains admission,
+  backpressure, retry budgets, and the recovery-capacity experiment.
+- Six new hand-authored figures (factory decomposition, factory state machine,
+  verifier failure domains, epoch fencing, recovery backpressure, and a
+  rebuilt durable-effects timeline with named commitment barriers), with SVG
+  sources in the website repository.
+- Companion: 13 catalog-level thin-support practice records (ERCA-193 through
+  ERCA-205), 29 evidence-ledger rows, and reference metadata for the new
+  sources; manuscript and companion counts updated to 205.
+- Manuscript now builds to 299 pages under the pinned TeX Live 2025 image.
+
 ## 1.0.0-rc.14 — 2026-08-07
 
 - Repaired XeLaTeX character encoding for all chapter evidence profiles and the
@@ -75,9 +107,9 @@
 
 - Added three high-information conceptual figures: the benchmark validity
   chain in Chapter 3, durable execution across the execute-then-log gap in
-  Chapter 8, and the distinction between an advisory review and an effective
-  human gate in Chapter 16.
-- Replaced Chapter 8's text-only execution sketch with the durable-effects
+  Chapter 9, and the distinction between an advisory review and an effective
+  human gate in Chapter 17.
+- Replaced Chapter 9's text-only execution sketch with the durable-effects
   figure, keeping the mechanism in one place instead of restating it.
 - Corrected the LaTeX conversion pipeline to preserve aspect ratios whenever
   Markdown constrains figure dimensions.
@@ -113,7 +145,7 @@
   benchmark percentage wording, Skalse theorem scope, and several garbled or
   unfinished passages.
 - Removed five low-information or cross-study figures, leaving 13 conceptual
-  and data-explanatory figures; verified that the Chapter 9 connector renders
+  and data-explanatory figures; verified that the Chapter 10 connector renders
   behind its nodes.
 - Removed unstable unsupported citations, archived four retained mutable web
   sources, and documented unreleased author-system data and its constraints.
@@ -153,7 +185,7 @@
   monograph, compressed repeated evidence caveats, and marked Part VI as the
   most transfer-heavy section.
 - Corrected section numbering, citation metadata, academic register, list
-  spacing, and the Chapter 9 figure rendering.
+  spacing, and the Chapter 10 figure rendering.
 - Replaced the generic recall-depth figure, expanded the bibliography to 185
   entries, and linked the repository, interactive companion, web edition, and
   five reusable agent skills from the manuscript.

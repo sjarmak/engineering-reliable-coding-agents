@@ -1,14 +1,14 @@
 # Companion learnings
 
-This human-readable edition presents all 192 practices in chapter context. For navigation, filtering, and graph exploration, use the [website companion](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion).
+This human-readable edition presents all 205 practices in chapter context. For navigation, filtering, and graph exploration, use the [website companion](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion).
 
-This catalog indexes all 192 practices in the book’s corpus. Fifty-five are developed in the book’s eighteen chapters, and 137 are attached to those chapters’ mechanisms without being developed there. The catalog brings both groups together so that a reader scanning one chapter’s neighborhood can see every related practice, not only those the chapter leaves to the catalog. It also makes visible the difference between practices the book argues in full and practices it records as additional possibilities.
+This catalog indexes all 205 practices in the book’s corpus. Fifty-five are developed in the book’s nineteen chapters, and 150 are attached to those chapters’ mechanisms without being developed there. The catalog brings both groups together so that a reader scanning one chapter’s neighborhood can see every related practice, not only those the chapter leaves to the catalog. It also makes visible the difference between practices the book argues in full and practices it records as additional possibilities.
 
 Read the relevant chapter before using its catalog section. The chapter establishes the mechanism, develops the reasoning, examines the evidence, and sets the boundaries needed to judge whether a practice fits a measured problem or operating constraint. The catalog helps locate and compare practices around that mechanism, but it does not make the chapter’s argument optional. Begin with a problem you have observed, not with a practice you would like to adopt.
 
 Under each chapter heading, the developed practices and the companion-only practices appear in separate groups. The developed practices are represented by short pointer entries of two or three sentences. Each pointer identifies the action, states its relationship to the chapter, and directs the reader to the chapter for the developed account. Its brevity is deliberate. Compressing the chapter’s argument, evidence, and boundary into a catalog summary would create a weaker duplicate and might make the practice seem transferable without the qualifications that justify it. A pointer therefore tells you what the chapter develops and where to read it, while leaving the development itself intact.
 
-The 137 practices not developed by any chapter appear as full compact entries. Every practice has an action title and a stable identifier that can be cited, linked, or tracked across revisions. A compact entry then uses two or three paragraphs to describe what to do, how the action produces its intended result, what evidence supports it, and where its use stops being justified. The evidence appears in prose with a plain-language marker of its strength and scope. The entry closes on a boundary such as a cost, dependency, transfer risk, failure condition, or limit in the available support. The group labels and the visibly different entry lengths allow readers to distinguish pointers from compact entries at a glance.
+The 150 practices not developed by any chapter appear as full compact entries. Every practice has an action title and a stable identifier that can be cited, linked, or tracked across revisions. A compact entry then uses two or three paragraphs to describe what to do, how the action produces its intended result, what evidence supports it, and where its use stops being justified. The evidence appears in prose with a plain-language marker of its strength and scope. The entry closes on a boundary such as a cost, dependency, transfer risk, failure condition, or limit in the available support. The group labels and the visibly different entry lengths allow readers to distinguish pointers from compact entries at a glance.
 
 Entries are grouped by chapter because the chapter is where the relevant mechanism is established. A topic-based arrangement might place superficially similar practices together while separating a variant from the assumptions that make it intelligible. Keeping every practice beside its underlying mechanism gives developed and companion-only options a common reference point for comparison. It also prevents a compact description from appearing more self-sufficient than it is.
 
@@ -16,7 +16,7 @@ Read each evidence marker as a constraint on the adoption decision. A measured r
 
 Negative and conflicting findings narrow a recommendation further. When a test found no supported result, the surrounding advice must remain compatible with that outcome and cannot quietly assume the missing benefit. When the evidence corpus contains a counterweight, the compact entry names it so adoption does not depend on seeing only the favorable side. These markers should shape the commitment. Limited support calls for a smaller, more observable trial, while closer agreement between your conditions and the measured conditions permits a firmer decision.
 
-Twenty-nine of the 137 compact entries are marked as thin-support asides. I excluded these practices from the developed set because their support does not justify recommending them. They remain as leads for investigation: possible experiments, unmeasured controls, instrumentable failure modes, or questions that current evidence leaves open. I include them because visible uncertainty serves the reader better than silent omission, provided they are treated as prompts rather than guidance.
+Forty-two of the 150 compact entries are marked as thin-support asides. I excluded these practices from the developed set because their support does not justify recommending them. They remain as leads for investigation: possible experiments, unmeasured controls, instrumentable failure modes, or questions that current evidence leaves open. I include them because visible uncertainty serves the reader better than silent omission, provided they are treated as prompts rather than guidance.
 
 Use the catalog after diagnosis, as an index and comparison aid rather than a menu for indiscriminate adoption. Start with the chapter that explains the mechanism behind the problem you measured. Use its pointer entries to recognize what the book develops in full, then assess the neighboring compact entries through their actions, mechanisms, evidence markers, and closing boundaries.
 
@@ -604,31 +604,31 @@ As an investigatory variant, you could retain tests, diff size, coverage delta, 
 
 A survey by Chen and colleagues ([2020](https://arxiv.org/abs/2001.08236)) provides directional support for the selection mechanism: weighted-search solutions can be dominated by Pareto-search alternatives, while fixed weights can over-constrain search and create a burdensome weight-specification problem. The same survey also reports that plain Pareto dominance loses discriminating power as the number of objectives grows. Separate-author verification and multi-model checking appear in project and vendor records, but those records provide illustration rather than independent empirical support. The vendor figure of 44% fewer AI-derived outages remains unverified, and another production record shows a scalar score of 950 / 1000 against a threshold of 850 still operating as the shipped gate. The support is therefore too thin to recommend this practice. It should remain a lead for investigation in agent-generated changes, automated refactoring, and eval-driven optimization, with any adoption evaluated against scalar gates under local conditions.
 
-## Chapter 7: Agent isolation, injection defenses, and independent verification
+## Chapter 8: Agent isolation, injection defenses, and independent verification
 
 3 developed in the chapter, 6 carried here. 9 practices in total.
 
-The following pointer entries identify the practices developed in Chapter 7, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 8, where their full arguments, evidence, and boundaries are developed.
 
 ### Contain each agent’s blast radius
 
 `ERCA-068` · `contain-agent-blast-radius`
 
-Default agents to read-only access, require explicit gates for writes, and separate routine capabilities from destructive platform operations. Keep backups beyond the credentials and endpoints available to agents so an error cannot erase both production state and recovery assets. Chapter 7 develops this permission architecture and shows how to apply it to agent deployments.
+Default agents to read-only access, require explicit gates for writes, and separate routine capabilities from destructive platform operations. Keep backups beyond the credentials and endpoints available to agents so an error cannot erase both production state and recovery assets. Chapter 8 develops this permission architecture and shows how to apply it to agent deployments.
 
 ### Verify every agent completion claim
 
 `ERCA-069` · `distrust-agent-self-reports`
 
-Treat every completion claim as a hypothesis to verify against the actual workspace, branch, checklist, and persisted artifacts. Preserve failed work for inspection, assign a fresh task identity to each attempt, and make correction and resumption depend on observed state rather than inherited progress reports. Chapter 7 develops the harness and review practices that make independent verification routine.
+Treat every completion claim as a hypothesis to verify against the actual workspace, branch, checklist, and persisted artifacts. Preserve failed work for inspection, assign a fresh task identity to each attempt, and make correction and resumption depend on observed state rather than inherited progress reports. Chapter 8 develops the harness and review practices that make independent verification routine.
 
 ### Defend against prompt injection in depth
 
 `ERCA-105` · `defense-in-depth-injection`
 
-Layer input and output controls, allowlists, adversarial testing, and human approval around high-impact actions, with protections mapped to a recognized threat model. The goal is to contain what an injected instruction can cause the agent to do, even when hostile content reaches its context. Chapter 7 develops this defense-in-depth approach to prompt injection.
+Layer input and output controls, allowlists, adversarial testing, and human approval around high-impact actions, with protections mapped to a recognized threat model. The goal is to contain what an injected instruction can cause the agent to do, even when hostile content reaches its context. Chapter 8 develops this defense-in-depth approach to prompt injection.
 
-The following compact entries record practices attached to Chapter 7’s mechanism but not developed in full by any chapter.
+The following compact entries record practices attached to Chapter 8’s mechanism but not developed in full by any chapter.
 
 ### Make orchestration topology part of the security design
 
@@ -680,31 +680,31 @@ In a controlled study, Perry and colleagues ([2022/2023](https://arxiv.org/abs/2
 
 The controlled result came from security tasks using the suggestion-era codex-davinci-002 assistant, and effects varied by task. It cannot quantify the gap for current agents or ordinary application development. It does establish that confidence and quality can move in opposite directions under the studied conditions, making self-certification unsuitable as an acceptance criterion.
 
-## Chapter 8: Persistent agent state, durable workflows, and idempotent retries
+## Chapter 9: Persistent agent state, durable workflows, and idempotent retries
 
-3 developed in the chapter, 11 carried here. 14 practices in total.
+3 developed in the chapter, 14 carried here. 17 practices in total.
 
-The following pointer entries identify the practices developed in Chapter 8, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 9, where their full arguments, evidence, and boundaries are developed.
 
 ### Make agent state a persistent artifact
 
 `ERCA-130` · `make-agent-state-first-class-persistent`
 
-Externalize plans, progress, event history, context snapshots, and checkpoints into durable managed artifacts instead of leaving workflow state inside a process or model context. Use those artifacts to reconstruct the work faithfully after interruption, worker replacement, or session loss. Chapter 8 develops the state model and recovery workflow needed to make persistence a first-class property.
+Externalize plans, progress, event history, context snapshots, and checkpoints into durable managed artifacts instead of leaving workflow state inside a process or model context. Use those artifacts to reconstruct the work faithfully after interruption, worker replacement, or session loss. Chapter 9 develops the state model and recovery workflow needed to make persistence a first-class property.
 
 ### Coordinate multi-step work with a durable workflow engine
 
 `ERCA-128` · `use-durable-workflow-engine`
 
-Put multi-step, multi-service, and multi-agent coordination under a durable workflow engine that owns persisted execution state, retries, compensation, and the overall view of a run. Keep orchestration concerns in that platform layer so application code does not accumulate scattered recovery logic or instance-local coordination state. Chapter 8 develops how this architecture organizes reliable long-running work.
+Put multi-step, multi-service, and multi-agent coordination under a durable workflow engine that owns persisted execution state, retries, compensation, and the overall view of a run. Keep orchestration concerns in that platform layer so application code does not accumulate scattered recovery logic or instance-local coordination state. Chapter 9 develops how this architecture organizes reliable long-running work.
 
 ### Make every retried step idempotent
 
 `ERCA-124` · `make-retried-steps-idempotent`
 
-Design every retryable step so repeated execution produces the same observable result as one execution. Carry an idempotency key with side effects and retain results by invocation identity, allowing redelivered work to return the prior result instead of repeating the action. Chapter 8 develops the guarantees and implementation mechanics for safe retries.
+Design every retryable step so repeated execution produces the same observable result as one execution. Carry an idempotency key with side effects and retain results by invocation identity, allowing redelivered work to return the prior result instead of repeating the action. Chapter 9 develops the guarantees and implementation mechanics for safe retries.
 
-The following compact entries record practices attached to Chapter 8’s mechanism but not developed in full by any chapter.
+The following compact entries record practices attached to Chapter 9’s mechanism but not developed in full by any chapter.
 
 ### Give every external effect a receipt and a compensator
 
@@ -816,25 +816,49 @@ Singh Parmar ([2026](https://arxiv.org/abs/2605.00827)) reports one production K
 
 The support is too thin to recommend this practice, making the entry a lead for investigation only. The reported engine was single-process, and its language deliberately excluded conditionals, so branching would still require agent involvement. A task that changes shape between runs would offer little amortization and could make a frozen blueprint stale or incomplete.
 
-## Chapter 9: Replayable traces and fault-injection recovery testing
+### Separate logical work identity from attempt identity
 
-2 developed in the chapter, 7 carried here. 9 practices in total.
+`ERCA-194` · `separate-logical-work-from-attempt-identity`
 
-The following pointer entries identify the practices developed in Chapter 9, where their full arguments, evidence, and boundaries are developed.
+Give each unit of logical work a stable identity distinct from any execution attempt, so a retry is a new attempt at the same work item and duplicate or superseded attempts can be recognized at durable boundaries. Durable workflow systems obtain idempotent retries by making the work identity, not the attempt, the unit the runtime deduplicates on; conflating the two turns every retry into new work or every duplicate into silent loss.
+
+This is a catalog-level entry supported by directional workflow-system evidence rather than agent measurements. Zhang and colleagues ([2020](https://www.usenix.org/conference/osdi20/presentation/zhang-haoran)) give each logical operation in stateful serverless workflows a durable identity that retries reuse, and Zhuang and colleagues ([2023](https://www.usenix.org/conference/osdi23/presentation/zhuang)) treat exactly-once as a layer over annotated tasks with recovery aware of which attempts may be replayed; neither evaluates agent runtimes, and exactly-once holds only within the evaluated workflow layer, never generically across arbitrary boundaries. Practitioner cases corroborate the structure without controlled comparison: OpenAI's Symphony orchestration spec ([2026](https://openai.com/index/open-source-codex-orchestration-symphony/)) dispatches declared work items to workers, and Cloudflare's Astro issue-triage factory ([2026](https://blog.cloudflare.com/astro-issue-triage/)) processes logical work items through repeated automated attempts. The support is too thin to recommend this practice; the entry is a lead for investigation in durable agent workflows, task queues, retry frameworks, and orchestration ledgers.
+
+### Reconcile unknown external effects instead of assuming
+
+`ERCA-195` · `reconcile-unknown-external-effects`
+
+When an external call’s outcome cannot be established, read the actual external state and choose the continuation from what happened. Classify steps as recomputable, reconstructable, or side-effectful, and give side-effectful steps idempotency keys, adapter-owned reconciliation, or an explicit unknown-external-state disposition. External systems can commit effects after the caller’s timeout; assuming failure duplicates the effect and assuming success loses it, so only reading the external record resolves the ambiguity safely.
+
+This is a catalog-level entry whose transfer is the classification and reconciliation discipline, not measured agent outcomes. Huang and colleagues ([2026](https://www.usenix.org/conference/nsdi26/presentation/huang)) classify shell-script work into recomputable work, reconstructable state, and side-effectful regions and handle each differently under failure, a mapping that carries from grep and compile to git push, PR creation, and deploy; transfer the classification, not the performance results. AWS practitioner guidance ([Builders’ Library](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)) corroborates that retries against external APIs are safe only when the API is idempotent or the caller can establish what happened. The support is too thin to recommend the practice; it is a lead for investigation in agent tool adapters for pushes, PR creation, deploys, payments, and any external API with asynchronous commit.
+
+### Version verifier results
+
+`ERCA-203` · `version-verifier-results`
+
+Bind every verifier result to the exact artifact version and verifier configuration it observed, and invalidate the result when either changes; a pass is evidence only for the state it saw. Evidence is version-bound (invariant I7 in the manuscript’s factory framing): reusing a stale pass over a changed artifact is the caching bug that build-system theory names directly, because rebuild and trace validity are choices separate from the dependency graph.
+
+This is a catalog-level entry; neither source measures agent verifier reuse. Mokhov, Mitchell, and Peyton Jones ([2018](https://www.microsoft.com/en-us/research/wp-content/uploads/2018/03/build-systems-final.pdf)) show that the dependency graph is not the whole execution semantics: scheduling, rebuild policy, and trace validity are separate design choices, and a cached result is valid only for the inputs its trace recorded; transfer that separation, not any specific build tool’s policy. The CNCF Secure Software Factory reference architecture ([2022](https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/)) corroborates binding artifacts to signed, versioned provenance, but its scope is security and supply chain only. The support is too thin to recommend the practice; it is a lead for investigation in verifier caches, CI result reuse, and review gating over changing artifacts.
+
+## Chapter 10: Replayable traces and fault-injection recovery testing
+
+2 developed in the chapter, 11 carried here. 13 practices in total.
+
+The following pointer entries identify the practices developed in Chapter 10, where their full arguments, evidence, and boundaries are developed.
 
 ### Record every run as a replayable typed trace
 
 `ERCA-097` · `replayable-typed-traces`
 
-Represent each run as a persistent typed event stream that records model, tool, and environment effects in a replayable form. Include agent, session, and reasoning-step identifiers so decisions can be joined to the actions they caused, and use shared telemetry conventions to keep the trace interoperable. Chapter 9 develops this tracing model and its role in reliable agent operations.
+Represent each run as a persistent typed event stream that records model, tool, and environment effects in a replayable form. Include agent, session, and reasoning-step identifiers so decisions can be joined to the actions they caused, and use shared telemetry conventions to keep the trace interoperable. Chapter 10 develops this tracing model and its role in reliable agent operations.
 
 ### Benchmark recovery by injecting failures
 
 `ERCA-127` · `benchmark-recovery-with-fault-injection`
 
-Test recovery by deliberately injecting failures into the running system and observing how it returns to useful, stable operation. Measure recovery behavior, restored performance, and the effects of repeated disruptions so fault-tolerance claims rest on demonstrated behavior rather than system diagrams. Chapter 9 develops the experimental method for turning recovery into a benchmark.
+Test recovery by deliberately injecting failures into the running system and observing how it returns to useful, stable operation. Measure recovery behavior, restored performance, and the effects of repeated disruptions so fault-tolerance claims rest on demonstrated behavior rather than system diagrams. Chapter 10 develops the experimental method for turning recovery into a benchmark.
 
-The following compact entries record practices attached to Chapter 9’s mechanism but not developed in full by any chapter.
+The following compact entries record practices attached to Chapter 10’s mechanism but not developed in full by any chapter.
 
 ### Record nondeterministic results and replay only deterministic code
 
@@ -906,31 +930,63 @@ Jia and colleagues ([2026](https://arxiv.org/abs/2602.19843)) performed semantic
 
 Synthetic injection cannot establish the production frequency of any fault or certify tolerance to omitted classes. Real fault distributions may differ, agent-specific menus remain immature, and closed loops consume additional latency and tokens. The practitioner report is self-promotional and does not show that its chaos distribution matches deployed systems.
 
-## Chapter 10: Human-auditable failure analysis and taxonomy development
+### Test the controller under stale and missed state
+
+`ERCA-196` · `test-controller-under-stale-and-missed-state`
+
+Perturb the orchestrator’s view of state in tests: stale reads, intermediate states, and unobserved transitions, then check convergence with differential oracles rather than only crash-testing workers. Reconciliation controllers fail on what they observe, not only on what crashes; a controller that acts on a stale or partial view corrupts state without any process dying.
+
+This is a catalog-level entry resting on Kubernetes-controller testing evidence that transfers directionally to agent orchestrators reconciling durable state. Sun and colleagues ([2022](https://www.usenix.org/system/files/osdi22-sun.pdf)) built Sieve, which perturbs a cluster controller’s view of state and checks convergence with differential oracles, finding real bugs in reconciliation controllers without touching their code; transfer the perturbed-view testing principle and the oracles, not the tooling or bug counts. The support is too thin to recommend the practice; it is a lead for investigation in agent orchestrators and reconciliation loops over durable work state.
+
+### Place fault injections at named commit barriers
+
+`ERCA-197` · `place-faults-at-named-commit-barriers`
+
+Inject faults at named persistence and commit points chosen backward from the outcome to protect, and state the expected recovery claim before the kill, rather than injecting at random times and inferring health from survival. Random-time injection mostly samples uninteresting interleavings; the bugs live at the boundaries where state becomes durable or authority changes hands, and a recovery run without a stated claim verifies nothing.
+
+This is a catalog-level entry; the distributed-systems evidence transfers the placement and specification principle, not observed bug rates. Gunawi and colleagues ([2011](https://www.usenix.org/conference/nsdi11/fate-and-destini-framework-cloud-recovery-testing)) inject failures systematically at I/O points while expressing the expected recovery declaratively, so the claim is specified before the kill. Alvaro, Rosen, and Hellerstein ([2015](https://dl.acm.org/doi/10.1145/2723372.2723711)) reason backward from a correct outcome to the faults that could break it, replacing random fault schedules with outcome-directed placement. Wu, Pan, and Huang ([2024](https://www.usenix.org/conference/nsdi24/presentation/wu-haoze)) place partial-failure injections at inferred state boundaries, exposing 20 previously unknown bugs across six mature distributed systems. The support is too thin to recommend the practice for agent runtimes; it is a lead for investigation in fault-injection suites for agent runtimes, orchestrators, and durable workflow engines.
+
+### Test the recovery action itself
+
+`ERCA-198` · `test-the-recovery-action`
+
+Treat recovery paths as production code with authority: exercise the recovery action under test or in-situ simulation and preview its effects before trusting it in an incident. Recovery actions themselves cause severe failures, and a path that runs only during incidents is the least-tested code in the system exercising the most authority (invariant I10 in the manuscript’s factory framing).
+
+This is a catalog-level entry. Li, Cai, and Lou ([2026](https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu)) show that recovery actions cause severe production failures and simulate a recovery action in situ to preview its effects before granting it authority; production distributed-systems evidence that transfers directionally, so a worker restart alone does not demonstrate that recovery worked. Zhao and colleagues ([2026](https://arxiv.org/abs/2607.09510)) give recovery behavior in coding-agent trajectories an empirical anatomy across 1,794 annotated complete runs, but the work is an unrefereed preprint and an observation, not a controlled test of a recovery mechanism. Osterweil’s process-as-program papers ([1987](https://dl.acm.org/doi/10.5555/41765.41766), [1997](https://dl.acm.org/doi/10.1145/253228.253440)) supply the historical lineage for treating recovery paths as software deserving the same scrutiny, not empirical support for any specific mechanism. The support is too thin to recommend the practice; it is a lead for investigation in recovery and rollback paths for agent fleets, orchestrators, and CI/CD automation.
+
+### Measure recovery under live load
+
+`ERCA-204` · `measure-recovery-under-live-load`
+
+Measure recovery behavior under live or realistic load and real state, not only in isolated staging, using in-situ simulation and iterative measurement of the running harness. Recovery that works against an idle staging copy can fail against production state and concurrent traffic, and reliability gains found by measuring the running system were located in its components, not the model.
+
+This is a catalog-level entry. Li, Cai, and Lou ([2026](https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu)) run recovery actions against production state under live conditions because recovery behavior differs under real load; the evidence transfers directionally to agent fleets. Lin and colleagues ([2026](https://arxiv.org/abs/2604.25850)) report ten observability-driven harness iterations raising Terminal-Bench 2 pass@1 from 69.7% to 77.0%, with ablations locating the gains in tools, middleware, and memory rather than the system prompt; that result is an unrefereed preprint and a benchmark-harness measurement, not a live-load recovery test, so it supports only the measure-the-system direction. The support is too thin to recommend the practice; it is a lead for investigation in recovery testing for production agent fleets and harnesses.
+
+## Chapter 11: Human-auditable failure analysis and taxonomy development
 
 3 developed in the chapter, 7 carried here. 10 practices in total.
 
-The following pointer entries identify the practices developed in Chapter 10, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 11, where their full arguments, evidence, and boundaries are developed.
 
 ### Derive the failure taxonomy from your own traces
 
 `ERCA-045` · `derive-taxonomy-from-own-traces`
 
-Build the failure taxonomy from a substantial, varied sample of your own raw traces, recording open-ended human observations and labeling the first upstream failure in each run. Cluster those observations into a small set of actionable themes, then direct mitigation toward the stages and classes where failures concentrate. Chapter 10 develops this trace-led method for creating useful taxonomies.
+Build the failure taxonomy from a substantial, varied sample of your own raw traces, recording open-ended human observations and labeling the first upstream failure in each run. Cluster those observations into a small set of actionable themes, then direct mitigation toward the stages and classes where failures concentrate. Chapter 11 develops this trace-led method for creating useful taxonomies.
 
 ### Keep humans responsible for failure attribution
 
 `ERCA-046` · `keep-humans-in-failure-attribution`
 
-Keep people responsible for determining which agent and decision produced a failure, supported by instrumentation that preserves the decisive step in structured state. Use automation to organize evidence for review, not to replace human judgment with post-hoc model inference over logs. Chapter 10 develops the attribution workflow and the observability required to make it practical.
+Keep people responsible for determining which agent and decision produced a failure, supported by instrumentation that preserves the decisive step in structured state. Use automation to organize evidence for review, not to replace human judgment with post-hoc model inference over logs. Chapter 11 develops the attribution workflow and the observability required to make it practical.
 
 ### Design traces for human audit
 
 `ERCA-047` · `design-traces-for-human-audit`
 
-Structure traces around step boundaries, tool calls, decision points, inputs, retries, and outcomes so a person can reconstruct what happened and replay the relevant decision. Design the audit experience for factual inspection rather than asking a model to infer the cause from an undifferentiated transcript. Chapter 10 develops the trace design needed for rigorous human failure analysis.
+Structure traces around step boundaries, tool calls, decision points, inputs, retries, and outcomes so a person can reconstruct what happened and replay the relevant decision. Design the audit experience for factual inspection rather than asking a model to infer the cause from an undifferentiated transcript. Chapter 11 develops the trace design needed for rigorous human failure analysis.
 
-The following compact entries record practices attached to Chapter 10’s mechanism but not developed in full by any chapter.
+The following compact entries record practices attached to Chapter 11’s mechanism but not developed in full by any chapter.
 
 ### Localize failures from a constraint-violation log
 
@@ -996,31 +1052,31 @@ If you are investigating consistency as a risk signal, you could run an agent re
 
 The support is too thin to recommend this practice; this entry is a lead for investigation. Repeated execution multiplies inference cost, and evidence from question answering does not establish that the signal transfers to coding agents. The measure reports whether paths agree, while correctness still requires an independent check. Mehta’s follow-up ([2026](https://arxiv.org/abs/2606.22936)) found that its commitment signal could not separate committed-correct from committed-wrong questions. A consistently wrong agent could therefore appear low risk. Both papers are single-author preprints from the same researcher using the same ReAct and HotpotQA setting, so they do not provide independent corroboration. Any experimental use for review routing or confidence estimation would need evaluation against an external correctness check in the target system.
 
-## Chapter 11: Measuring and designing repository retrieval
+## Chapter 12: Measuring and designing repository retrieval
 
 3 developed in the chapter, 5 carried here. 8 practices in total.
 
-The following pointer entries identify the practices developed in Chapter 11, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 12, where their full arguments, evidence, and boundaries are developed.
 
 ### Score retrieval separately from final answers
 
 `ERCA-076` · `score-retrieval-and-generation-separately`
 
-Measure whether the system surfaced the needed evidence, where it ranked, and whether the generator used it, then report those diagnostics separately from completion quality. This separation makes retrieval and generation failures visible as distinct engineering problems. Chapter 11 develops the scoring design and explains how to interpret both process diagnostics and end-to-end results.
+Measure whether the system surfaced the needed evidence, where it ranked, and whether the generator used it, then report those diagnostics separately from completion quality. This separation makes retrieval and generation failures visible as distinct engineering problems. Chapter 12 develops the scoring design and explains how to interpret both process diagnostics and end-to-end results.
 
 ### Run hybrid retrieval and fuse the ranked results
 
 `ERCA-083` · `hybrid-retrieval-fused-on-ranks`
 
-Run lexical and semantic retrieval as parallel, first-class channels, then combine their ranked outputs with reciprocal-rank fusion while preserving each lane for inspection. This gives exact identifiers and paraphrased concepts independent routes into the candidate set and makes ranking faults traceable. Chapter 11 explains how the channels, fusion, and diagnostics work together.
+Run lexical and semantic retrieval as parallel, first-class channels, then combine their ranked outputs with reciprocal-rank fusion while preserving each lane for inspection. This gives exact identifiers and paraphrased concepts independent routes into the candidate set and makes ranking faults traceable. Chapter 12 explains how the channels, fusion, and diagnostics work together.
 
 ### Chunk code along AST boundaries
 
 `ERCA-085` · `chunk-on-ast-boundaries`
 
-Construct retrieval chunks from syntactic units by recursively splitting large AST nodes and combining small related siblings within a size budget. The resulting chunks preserve coherent functions, classes, and declarations so retrieved code remains understandable and useful for generation. Chapter 11 develops the structure-aware chunking procedure and its role in repository retrieval.
+Construct retrieval chunks from syntactic units by recursively splitting large AST nodes and combining small related siblings within a size budget. The resulting chunks preserve coherent functions, classes, and declarations so retrieved code remains understandable and useful for generation. Chapter 12 develops the structure-aware chunking procedure and its role in repository retrieval.
 
-The following compact entries record practices attached to Chapter 11’s mechanism but not developed in full by any chapter.
+The following compact entries record practices attached to Chapter 12’s mechanism but not developed in full by any chapter.
 
 ### Bridge lexical gaps before generation
 
@@ -1066,31 +1122,31 @@ For code localization, Suresh and colleagues ([2024](https://arxiv.org/abs/2412.
 
 Sweep shortlist depth against first-stage recall, final localization quality, and latency instead of treating 20-30 as universal. Gains also depend on how well the retriever’s training languages and issue distribution match the target repositories. Interactive systems may find the extra reranking stage too slow, while a weak candidate generator leaves expensive reranking with an irreducible ceiling.
 
-## Chapter 12: Localization funnels, repository indexes, and freshness checks
+## Chapter 13: Localization funnels, repository indexes, and freshness checks
 
 3 developed in the chapter, 8 carried here. 11 practices in total.
 
-The following pointer entries identify the practices developed in Chapter 12, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 13, where their full arguments, evidence, and boundaries are developed.
 
 ### Localize repository changes through a staged funnel
 
 `ERCA-084` · `staged-localization-funnel`
 
-Move through repository structure, candidate files, relevant symbols, and concrete edit locations as explicit narrowing stages. Give each stage the context and localization machinery suited to its granularity, with particular attention to assembling the right file set before reasoning about edits. Chapter 12 develops this funnel as a complete repository-localization workflow.
+Move through repository structure, candidate files, relevant symbols, and concrete edit locations as explicit narrowing stages. Give each stage the context and localization machinery suited to its granularity, with particular attention to assembling the right file set before reasoning about edits. Chapter 13 develops this funnel as a complete repository-localization workflow.
 
 ### Index the repository as a typed knowledge graph
 
 `ERCA-174` · `index-repository-as-knowledge-graph`
 
-Represent directories, files, classes, functions, and linked development artifacts as typed nodes connected by containment, import, invocation, inheritance, definition, and reference relationships. Search and traverse that graph to answer structural questions and reach change sites through compact multi-hop paths. Chapter 12 develops the indexing model, traversal workflow, and downstream localization design.
+Represent directories, files, classes, functions, and linked development artifacts as typed nodes connected by containment, import, invocation, inheritance, definition, and reference relationships. Search and traverse that graph to answer structural questions and reach change sites through compact multi-hop paths. Chapter 13 develops the indexing model, traversal workflow, and downstream localization design.
 
 ### Gate retrieved context on freshness and authorization
 
 `ERCA-078` · `gate-retrieval-on-freshness`
 
-Refresh retrieval indexes against the working tree and verify that returned evidence reflects the repository’s current state before placing it in model context. Apply authorization checks at the same gate so only current, permitted material can influence reasoning or edits. Chapter 12 develops the freshness and access controls required for dependable repository retrieval.
+Refresh retrieval indexes against the working tree and verify that returned evidence reflects the repository’s current state before placing it in model context. Apply authorization checks at the same gate so only current, permitted material can influence reasoning or edits. Chapter 13 develops the freshness and access controls required for dependable repository retrieval.
 
-The following compact entries record practices attached to Chapter 12’s mechanism but not developed in full by any chapter.
+The following compact entries record practices attached to Chapter 13’s mechanism but not developed in full by any chapter.
 
 ### Retrieve completion context through structural relations
 
@@ -1166,37 +1222,37 @@ Benchmark file paths, raw source, and role-aware file summaries before fixing wh
 
 Strong evidence from file-level localization experiments by Caumartin and colleagues ([2026](https://arxiv.org/abs/2607.11046)) found that role-aware summaries outperformed file-path representations by up to 40% Hit@5 while using a representation footprint 10.4-20.9x smaller than raw source. Combining complementary representations added up to 31.9% further, and LLM re-ranking added up to 42.0% further. The comparisons covered LCA and SWE-bench Verified and found no single winner across retrievers and datasets; raw source still performed best in some settings at substantially higher cost. These results apply to file-level localization and do not establish function-level or line-level precision, so representation choice must be measured again when retrieval granularity changes.
 
-## Chapter 13: Usable context budgets, consolidated-spec restarts, and file-based tool output
+## Chapter 14: Usable context budgets, consolidated-spec restarts, and file-based tool output
 
 4 developed in the chapter, 6 carried here. 10 practices in total.
 
-The following pointer entries identify the practices developed in Chapter 13, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 14, where their full arguments, evidence, and boundaries are developed.
 
 ### Budget context using measured effective capacity
 
 `ERCA-072` · `budget-to-measured-effective-context`
 
-Measure each model’s usable context on tasks resembling the actual workload, including retrieval, multi-hop reasoning, aggregation, and long-code understanding. Set harness and retrieval budgets from the observed saturation point so the working context remains useful rather than merely fitting within the advertised window. Chapter 13 develops the evaluation method and context-budgeting practice.
+Measure each model’s usable context on tasks resembling the actual workload, including retrieval, multi-hop reasoning, aggregation, and long-code understanding. Set harness and retrieval budgets from the observed saturation point so the working context remains useful rather than merely fitting within the advertised window. Chapter 14 develops the evaluation method and context-budgeting practice.
 
 ### Consolidate the specification and restart lost runs
 
 `ERCA-088` · `consolidate-spec-restart-lost-runs`
 
-Present requirements as a consolidated specification and periodically restate them when they arrive across multiple turns. If a run has committed to the wrong interpretation, restart from the consolidated context instead of extending the damaged trajectory with more corrections. Chapter 13 develops this approach to specification delivery, recovery, and reliable multi-turn execution.
+Present requirements as a consolidated specification and periodically restate them when they arrive across multiple turns. If a run has committed to the wrong interpretation, restart from the consolidated context instead of extending the damaged trajectory with more corrections. Chapter 14 develops this approach to specification delivery, recovery, and reliable multi-turn execution.
 
 ### Persist large transient outputs as files
 
 `ERCA-143` · `persist-transient-context-as-files`
 
-Write long tool results, terminal transcripts, and pre-compaction conversation history to session-scoped files, leaving concise pointers in the active context. Reopen, search, or tail those files when their details become relevant so the reasoning window stays dense without discarding recoverable information. Chapter 13 develops the file-backed context workflow and its integration with agent sessions.
+Write long tool results, terminal transcripts, and pre-compaction conversation history to session-scoped files, leaving concise pointers in the active context. Reopen, search, or tail those files when their details become relevant so the reasoning window stays dense without discarding recoverable information. Chapter 14 develops the file-backed context workflow and its integration with agent sessions.
 
 ### Evaluate and maintain context files like configuration
 
 `ERCA-178` · `measure-context-files-and-maintain-them-like-config`
 
-A/B-test repository context files against a no-file baseline before adopting them, and measure both task outcomes and inference cost. Keep retained files focused on nonstandard repository constraints, then evolve them through small, reviewed changes that include commonly neglected security and performance requirements. Chapter 13 develops the evaluation and maintenance discipline for these files.
+A/B-test repository context files against a no-file baseline before adopting them, and measure both task outcomes and inference cost. Keep retained files focused on nonstandard repository constraints, then evolve them through small, reviewed changes that include commonly neglected security and performance requirements. Chapter 14 develops the evaluation and maintenance discipline for these files.
 
-The following compact entries record practices attached to Chapter 13’s mechanism but not developed in full by any chapter.
+The following compact entries record practices attached to Chapter 14’s mechanism but not developed in full by any chapter.
 
 ### Put load-bearing evidence at the edges of the context
 
@@ -1258,31 +1314,31 @@ One reported production case from Henry Vu ([2026](https://www.reddit.com/r/LLMD
 
 Neither account provides a controlled comparison between budgeted and unbudgeted assembly, and the 10x figure comes from a single incident. An explicit budget is also meaningful only relative to the model’s measured effective context length. Accounting against the advertised maximum can produce a precise inventory while leaving the operating window overloaded. Re-audit whenever models, tools, retrieval policies, or permanent rules change.
 
-## Chapter 14: Cross-session memory, raw traces, and compaction policies
+## Chapter 15: Cross-session memory, raw traces, and compaction policies
 
 3 developed in the chapter, 6 carried here. 9 practices in total.
 
-The following pointer entries identify the practices developed in Chapter 14, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 15, where their full arguments, evidence, and boundaries are developed.
 
 ### Retain raw traces and distill them separately
 
 `ERCA-116` · `retain-raw-distill-separately`
 
-Store complete episodic traces and transcripts as immutable ground truth, while treating consolidated memories as derived artifacts that can be inspected and rebuilt. This preserves the original record even as a compact working layer is regenerated for later sessions. Chapter 14 develops the two-layer memory architecture and the lifecycle of raw and distilled information.
+Store complete episodic traces and transcripts as immutable ground truth, while treating consolidated memories as derived artifacts that can be inspected and rebuilt. This preserves the original record even as a compact working layer is regenerated for later sessions. Chapter 15 develops the two-layer memory architecture and the lifecycle of raw and distilled information.
 
 ### Start cross-session memory with a lightweight transcript store
 
 `ERCA-118` · `light-store-by-default`
 
-Build cross-session memory first around a transcript store using SQLite and full-text search, and inspect the real dependency graph of any framework added to that foundation. This keeps storage, retrieval, and operational assumptions visible before introducing more elaborate infrastructure. Chapter 14 develops the lightweight design and the architectural decisions surrounding heavier memory systems.
+Build cross-session memory first around a transcript store using SQLite and full-text search, and inspect the real dependency graph of any framework added to that foundation. This keeps storage, retrieval, and operational assumptions visible before introducing more elaborate infrastructure. Chapter 15 develops the lightweight design and the architectural decisions surrounding heavier memory systems.
 
 ### Optimize compaction rules from observed failures
 
 `ERCA-081` · `optimize-compaction-from-failures`
 
-Treat the agent’s compression policy as an artifact that can be evaluated and improved. Identify failures caused by missing or distracting context, revise the natural-language compaction guidance against those cases, and use the resulting examples to strengthen or distill the compressor. Chapter 14 develops this failure-driven process for improving context retention and task performance.
+Treat the agent’s compression policy as an artifact that can be evaluated and improved. Identify failures caused by missing or distracting context, revise the natural-language compaction guidance against those cases, and use the resulting examples to strengthen or distill the compressor. Chapter 15 develops this failure-driven process for improving context retention and task performance.
 
-The following compact entries record practices attached to Chapter 14’s mechanism but not developed in full by any chapter.
+The following compact entries record practices attached to Chapter 15’s mechanism but not developed in full by any chapter.
 
 ### Persist explored repository context between reasoning steps
 
@@ -1340,31 +1396,31 @@ A directional vendor-authored study by Dillon ([2026](https://arxiv.org/abs/2605
 
 The added substrate inherits every maintenance problem of an agent memory store. Decisions become stale, duplicate explanations diverge, and authoritative-looking records can outlive the systems or policies they describe. Ownership, source links, expiry review, and consolidation are therefore part of its operating cost. Where the repository already captures rationale reliably, a separate store may add more synchronization burden than useful context.
 
-## Chapter 15: Efficient verification interfaces and risk-based human escalation
+## Chapter 16: Efficient verification interfaces and risk-based human escalation
 
 3 developed in the chapter, 8 carried here. 11 practices in total.
 
-The following pointer entries identify the practices developed in Chapter 15, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 16, where their full arguments, evidence, and boundaries are developed.
 
 ### Make Verification Cheaper Than Blind Acceptance
 
 `ERCA-153` · `make-verification-cheaper-than-acceptance`
 
-Create tests, executable examples, types, CI gates, sandboxed runs, and inline evidence that let reviewers check an agent’s work with less effort than accepting it on trust. Use these verification surfaces to make correctness directly inspectable at the point of review. Chapter 15 develops the oversight design behind this practice and shows how to apply it.
+Create tests, executable examples, types, CI gates, sandboxed runs, and inline evidence that let reviewers check an agent’s work with less effort than accepting it on trust. Use these verification surfaces to make correctness directly inspectable at the point of review. Chapter 16 develops the oversight design behind this practice and shows how to apply it.
 
 ### Put Friction at the Moment of Acceptance
 
 `ERCA-148` · `target-friction-at-the-accept-loop`
 
-Place cognitive forcing functions at the accept decision, such as requiring reviewers to form a judgment before seeing the agent’s answer or slowing its reveal at consequential checkpoints. Target these interventions at acceleration-mode interactions, where rapid acceptance can displace active scrutiny. Chapter 15 explains how to design and position this friction within the review loop.
+Place cognitive forcing functions at the accept decision, such as requiring reviewers to form a judgment before seeing the agent’s answer or slowing its reveal at consequential checkpoints. Target these interventions at acceleration-mode interactions, where rapid acceptance can displace active scrutiny. Chapter 16 explains how to design and position this friction within the review loop.
 
 ### Escalate Flagged Cases to Human Verdict Owners
 
 `ERCA-157` · `escalate-only-flagged-cases`
 
-Direct human attention to anomalies identified by automated monitors, while ensuring a person with real authority retains responsibility for the final verdict. Build the monitoring system in layers, moving from deterministic checks to rubric-based model judgments and trace-aware agent review, with humans calibrating the system. Chapter 15 develops this escalation architecture and its operational requirements.
+Direct human attention to anomalies identified by automated monitors, while ensuring a person with real authority retains responsibility for the final verdict. Build the monitoring system in layers, moving from deterministic checks to rubric-based model judgments and trace-aware agent review, with humans calibrating the system. Chapter 16 develops this escalation architecture and its operational requirements.
 
-The following compact entries record practices attached to Chapter 15’s mechanism but not developed in full by any chapter.
+The following compact entries record practices attached to Chapter 16’s mechanism but not developed in full by any chapter.
 
 ### Place human checkpoints at measured failure points with an owned escalation route
 
@@ -1446,37 +1502,37 @@ Sarkar and colleagues ([2022](https://arxiv.org/abs/2208.06213)) offer anecdotal
 
 The support is too thin to recommend planning or staffing around this hypothesis, so this aside should serve only as a lead for local investigation. The source predates coding agents, does not quantify the magnitude of the shift, and cannot establish that verification dominates across teams or tasks. Problem formulation, integration, or other work may remain the larger cost. Any budgeting change would need evidence from the team’s own workflow.
 
-## Chapter 16: Autonomy calibration, provenance, effective gates, and accountability
+## Chapter 17: Autonomy calibration, provenance, effective gates, and accountability
 
 4 developed in the chapter, 13 carried here. 17 practices in total.
 
-The following pointer entries identify the practices developed in Chapter 16, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 17, where their full arguments, evidence, and boundaries are developed.
 
 ### Graduate Each Action’s Autonomy from Its Track Record
 
 `ERCA-145` · `graduate-autonomy-per-action-track-record`
 
-Measure approval, correctness, and human modification separately for each action type, then widen autonomy only through explicit transfer-of-control decisions supported by that record. Provide verification surfaces that make agent behavior understandable before granting greater freedom. Chapter 16 develops the graduated-autonomy model, including how evidence and review artifacts support each transition.
+Measure approval, correctness, and human modification separately for each action type, then widen autonomy only through explicit transfer-of-control decisions supported by that record. Provide verification surfaces that make agent behavior understandable before granting greater freedom. Chapter 17 develops the graduated-autonomy model, including how evidence and review artifacts support each transition.
 
 ### Label AI-Generated Code with Its Provenance
 
 `ERCA-165` · `label-ai-provenance`
 
-Mark AI-generated code explicitly wherever people validate or repair it, using mechanisms such as pull-request labels, commit trailers, or editor badges. Provenance should be visible during review so developers can recognize the origin of the work and engage with it accordingly. Chapter 16 develops this practice and its implications for verification behavior.
+Mark AI-generated code explicitly wherever people validate or repair it, using mechanisms such as pull-request labels, commit trailers, or editor badges. Provenance should be visible during review so developers can recognize the origin of the work and engage with it accordingly. Chapter 17 develops this practice and its implications for verification behavior.
 
 ### Audit Human Gates for Real Effectiveness
 
 `ERCA-154` · `audit-human-gates-for-effectiveness`
 
-Examine every human approval gate to confirm that the designated person can understand, stop, or change the action and is positioned to exercise meaningful judgment. Replace ceremonial person-gates with institutional oversight whose purpose, authority, and effectiveness are explicit and validated. Chapter 16 develops the criteria and audit approach for making these gates substantive.
+Examine every human approval gate to confirm that the designated person can understand, stop, or change the action and is positioned to exercise meaningful judgment. Replace ceremonial person-gates with institutional oversight whose purpose, authority, and effectiveness are explicit and validated. Chapter 17 develops the criteria and audit approach for making these gates substantive.
 
 ### Align Accountability with Actual Human Control
 
 `ERCA-149` · `align-accountability-with-actual-control`
 
-Assign responsibility for agent outcomes only to people who possess the authority, tools, time, and access needed to influence those outcomes. Evaluate deployed systems with actual users to determine whether behavior matches justified expectations and whether responsibility can be traced to a capable, informed decision-maker. Chapter 16 develops this control-accountability alignment and the methods used to examine it.
+Assign responsibility for agent outcomes only to people who possess the authority, tools, time, and access needed to influence those outcomes. Evaluate deployed systems with actual users to determine whether behavior matches justified expectations and whether responsibility can be traced to a capable, informed decision-maker. Chapter 17 develops this control-accountability alignment and the methods used to examine it.
 
-The following compact entries record practices attached to Chapter 16’s mechanism but not developed in full by any chapter.
+The following compact entries record practices attached to Chapter 17’s mechanism but not developed in full by any chapter.
 
 ### Test plain reliance disclaimers before stronger interventions
 
@@ -1596,37 +1652,37 @@ Require a developer to approve recommendations from metric-optimizing search bef
 
 Apply the same separation to LLM-generated refactors, dependency-update bots, configuration tuning, and agent patch pipelines: automation proposes and ranks; an authorized reviewer decides whether the result enters the system. The project dossier illustrates this separation through metric-improving moves that created fresh modules, but that account is corroboration rather than independent evidence. The study does not establish that the modularity metric was invalid, that developer preference measures architectural truth, or that human review will reliably catch every harmful change. Its finding concerns acceptance within one organization, and recommendation quality was partly tied to developer perception. Review also consumes scarce attention, so the gate needs enough context, authority, and capacity to make rejection or revision operationally meaningful.
 
-## Chapter 17: Agent topology selection and dynamic task allocation
+## Chapter 18: Agent topology selection and dynamic task allocation
 
-4 developed in the chapter, 5 carried here. 9 practices in total.
+4 developed in the chapter, 6 carried here. 10 practices in total.
 
-The following pointer entries identify the practices developed in Chapter 17, where their full arguments, evidence, and boundaries are developed.
+The following pointer entries identify the practices developed in Chapter 18, where their full arguments, evidence, and boundaries are developed.
 
 ### Fix recurring failure classes through system structure
 
 `ERCA-044` · `fix-failures-structurally-not-prompts`
 
-When a failure class persists, redesign the agent system around it by strengthening verification, clarifying communication protocols, specializing roles, or changing the conversation topology. This practice turns repeated failures into improvements to the harness instead of accumulating increasingly brittle prompt patches. Chapter 17 develops the structural interventions and design choices involved.
+When a failure class persists, redesign the agent system around it by strengthening verification, clarifying communication protocols, specializing roles, or changing the conversation topology. This practice turns repeated failures into improvements to the harness instead of accumulating increasingly brittle prompt patches. Chapter 18 develops the structural interventions and design choices involved.
 
 ### Gate multi-agent fan-out with a single-agent baseline
 
 `ERCA-093` · `single-agent-baseline-gate`
 
-Establish a measured single-agent baseline before introducing additional agents, then evaluate orchestration against that reference on the same representative tasks. The baseline makes success, cost, and added coordination complexity visible, so topology decisions rest on observed performance. Chapter 17 explains how to build and apply this gate when selecting an agent configuration.
+Establish a measured single-agent baseline before introducing additional agents, then evaluate orchestration against that reference on the same representative tasks. The baseline makes success, cost, and added coordination complexity visible, so topology decisions rest on observed performance. Chapter 18 explains how to build and apply this gate when selecting an agent configuration.
 
 ### Match the orchestration topology to the task
 
 `ERCA-107` · `match-topology-to-task-shape`
 
-Choose the communication and control structure that fits how the work decomposes, how information moves, and where integration occurs. This practice aligns pipelines, orchestrator-worker arrangements, hierarchies, and shared-state designs with the task shape they must support. Chapter 17 develops topology selection as an architectural decision rather than a generic orchestration preference.
+Choose the communication and control structure that fits how the work decomposes, how information moves, and where integration occurs. This practice aligns pipelines, orchestrator-worker arrangements, hierarchies, and shared-state designs with the task shape they must support. Chapter 18 develops topology selection as an architectural decision rather than a generic orchestration preference.
 
 ### Schedule work through dynamic task graphs
 
 `ERCA-101` · `dynamic-task-graphs`
 
-Represent work as an evolving graph of dependencies, releasing independent branches as soon as their prerequisites are satisfied and bounding each step’s execution. This gives the scheduler a live model of what can proceed, what must wait, and where concurrency is available. Chapter 17 develops the mechanisms for building and operating these dynamic graphs.
+Represent work as an evolving graph of dependencies, releasing independent branches as soon as their prerequisites are satisfied and bounding each step’s execution. This gives the scheduler a live model of what can proceed, what must wait, and where concurrency is available. Chapter 18 develops the mechanisms for building and operating these dynamic graphs.
 
-The following compact entries record practices attached to Chapter 17’s mechanism but not developed in full by any chapter.
+The following compact entries record practices attached to Chapter 18’s mechanism but not developed in full by any chapter.
 
 ### Oversee multi-agent execution at node, edge, and path levels
 
@@ -1668,31 +1724,39 @@ When investigating a failed run, identify the earliest error supported by the tr
 
 Zhu and colleagues ([2025](https://arxiv.org/abs/2509.25370)) reported that AgentDebug’s root-cause isolation and targeted feedback outperformed retry-from-scratch baselines on trajectories from ALFWorld, GAIA, and WebShop. This is directional evidence from one author group that constructed AgentErrorBench, defined the taxonomy, built the debugging system, and evaluated it. It has no independent replication and does not establish effectiveness for repository-scale coding. The support is too thin to recommend this method as a general retry policy; it is a lead for investigation in agent harnesses and human-assisted run repair. The approach also depends on reliable classification across memory, reflection, planning, action, and system errors, plus the ability to restore relevant state. When the earliest cause is ambiguous, state cannot be reconstructed, or several independent errors coexist, a targeted rerun may preserve the wrong diagnosis.
 
-## Chapter 18: Cost-aware fleet scheduling and model routing
+### Fence stale worker authority at the mutation boundary
 
-3 developed in the chapter, 8 carried here. 11 practices in total.
+`ERCA-193` · `fence-stale-worker-authority`
 
-The following pointer entries identify the practices developed in Chapter 18, where their full arguments, evidence, and boundaries are developed.
+Scope write authority to a monotonic ownership generation and have every protected mutation boundary validate that generation, rejecting commits from superseded workers even if they are still running. A lease or claim answers who should be working, a liveness and allocation question; it cannot make a paused or partitioned worker stop. Safety comes from the boundary that accepts mutations checking generation identity, the mechanism Chubby ships as sequencers.
+
+This is a catalog-level entry; distributed lock- and coordination-service evidence transfers directionally, and no agent-fleet measurement of fencing exists in this corpus. Burrows ([2006](https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems)) describes Chubby’s sequencers, whose lock generation numbers let servers reject requests issued under a superseded lock; do not infer that a lease alone guarantees a single writer. Hunt and colleagues ([2010](https://www.usenix.org/conference/usenix-atc-10/zookeeper-wait-free-coordination-internet-scale-systems)) show coordination state kept in a replicated service surviving individual process failure, so claim and generation records outlive worker crashes; the transfer is state that outlives its writers, not a requirement that a coding-agent factory run a consensus protocol. The support is too thin to recommend the practice; it is a lead for investigation in agent orchestrators with claimable work, merge queues, deployment pipelines, and any protected mutation boundary shared by concurrent workers.
+
+## Chapter 19: Cost-aware fleet scheduling and model routing
+
+3 developed in the chapter, 13 carried here. 16 practices in total.
+
+The following pointer entries identify the practices developed in Chapter 19, where their full arguments, evidence, and boundaries are developed.
 
 ### Recompute schedules cheaply and ship the incumbent
 
 `ERCA-171` · `re-decide-cheaply-ship-the-incumbent`
 
-Treat scheduling as a continuing control loop that periodically recomputes from current state while using inexpensive decisions between full solves. Preserve in-flight work, cap optimization time, and deploy the best valid schedule available when the cap arrives so planning remains responsive to change. Chapter 18 develops this approach to practical, stability-aware fleet scheduling.
+Treat scheduling as a continuing control loop that periodically recomputes from current state while using inexpensive decisions between full solves. Preserve in-flight work, cap optimization time, and deploy the best valid schedule available when the cap arrives so planning remains responsive to change. Chapter 19 develops this approach to practical, stability-aware fleet scheduling.
 
 ### Route each task to the cheapest sufficient model
 
 `ERCA-187` · `route-work-to-the-cheapest-sufficient-model`
 
-Estimate model cost and task performance explicitly, then assign each request to the least expensive model expected to meet the declared objective. Update those routing estimates from outcome feedback while retaining a dependable fallback when observations are sparse. Chapter 18 develops the static and learning-based machinery for budget-aware model selection.
+Estimate model cost and task performance explicitly, then assign each request to the least expensive model expected to meet the declared objective. Update those routing estimates from outcome feedback while retaining a dependable fallback when observations are sparse. Chapter 19 develops the static and learning-based machinery for budget-aware model selection.
 
 ### Replay recorded traces before changing dispatch policy
 
 `ERCA-191` · `replay-traces-before-policy-changes`
 
-Evaluate proposed scheduling policies by replaying the same recorded arrivals, priorities, durations, outcomes, and review results through each contender. Holding the workload fixed makes policy comparisons interpretable and gives simple baselines and constructed test cases a consistent role in validation. Chapter 18 develops the replay protocol used to assess scheduling changes before deployment.
+Evaluate proposed scheduling policies by replaying the same recorded arrivals, priorities, durations, outcomes, and review results through each contender. Holding the workload fixed makes policy comparisons interpretable and gives simple baselines and constructed test cases a consistent role in validation. Chapter 19 develops the replay protocol used to assess scheduling changes before deployment.
 
-The following compact entries record practices attached to Chapter 18’s mechanism but not developed in full by any chapter.
+The following compact entries record practices attached to Chapter 19’s mechanism but not developed in full by any chapter.
 
 ### Formalize work as constraints and solve the allocation globally
 
@@ -1771,3 +1835,43 @@ Use short-budget pilots to select among candidate optimization algorithms, then 
 Di Pompeo and Tucci ([2022](https://arxiv.org/abs/2212.08385)) conducted a controlled comparison of 3 algorithms x 3 budgets x 31 repetitions, with hypothesis testing, on model-based refactoring. Within those experiments, imposing a time budget considerably deteriorated Pareto-front quality. Increasing the budget from 15->30->60 min rarely produced significant differences, while algorithm choice produced significant differences at every budget. Their resulting protocol was to use short experiments to choose the algorithm and then commit the longer budget to it.
 
 The evidence covers two model-based case systems, TTBS and CoCoME, with model-level refactoring objectives. It does not establish that the observed algorithm rankings, including PESA2 quality and NSGA-II speed, transfer to hyperparameter tuning, agent-strategy selection, or fuzzing. The protocol also depends on short-run results predicting long-run performance. Different warm-up behavior or scaling curves can reverse the ordering, so pilot metrics should be fixed before comparison and checked for relevance to the committed run.
+
+### Budget retries as load
+
+`ERCA-199` · `budget-retries-as-load`
+
+Account for retries and reruns as real load with an explicit per-boundary budget, and bound total amplification across layers instead of letting each layer retry independently. Verifier flakiness and transient failure make rerun traffic a standing fraction of fleet load; unbudgeted layered retries multiply into storms precisely when capacity is already short.
+
+This is a catalog-level entry; the rerun-rate measurement concerns CI builds, not agent fleets. Ge and Zhang ([2026](https://arxiv.org/abs/2602.02307)) measured, across 1,960 open-source Java projects on GitHub Actions, that 3.2% of builds were rerun and 67.73% of those rerun builds were flaky, affecting 1,055 projects; the work is an unrefereed preprint, and the 67.73% figure is a share of rerun builds, not of all builds. The support is too thin to recommend the practice; it is a lead for investigation in agent fleets with automatic reruns, CI systems, and verifier pipelines.
+
+### Jitter recovery redelivery
+
+`ERCA-200` · `jitter-recovery-redelivery`
+
+Add backoff with jitter to retry timing and to recovery redelivery after an orchestrator restart, so correlated failures do not produce synchronized recovery spikes. Everything that failed together retries together; without jitter the recovery wave arrives as one synchronized spike that re-triggers the overload it is recovering from.
+
+This is a catalog-level entry supported by practitioner guidance, with no controlled agent-fleet measurement in this corpus. AWS practitioner guidance ([Builders’ Library](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/)) describes backoff with jitter desynchronizing retries so a correlated failure does not produce a synchronized retry wave, and the same reasoning applies to recovery redelivery after an orchestrator restart. The support is too thin to recommend the practice; it is a lead for investigation in retry layers and redelivery queues in agent orchestration.
+
+### Reserve or prioritize capacity for recovery work
+
+`ERCA-201` · `reserve-or-prioritize-recovery-capacity`
+
+Attribute recovery and maintenance work as its own workload and explicitly reserve or prioritize capacity for it, so recovery neither starves behind normal traffic nor overloads the system it is repairing. Recovery work competes for the same resources as normal execution; treated as free, it either queues invisibly behind foreground load or becomes the tenant that tips the system over.
+
+This is a catalog-level entry. Mace and colleagues ([2015](https://www.usenix.org/conference/nsdi15/technical-sessions/presentation/mace)) show with Retro’s per-tenant resource management that maintenance and recovery work is itself a tenant that can overload a system and that targeted throttling needs workload attribution; multi-tenant storage-system evidence whose transfer is the attribution-and-throttling mechanism, not constants. The Google SRE Book ([Handling Overload](https://sre.google/sre-book/handling-overload/)) corroborates criticality-aware admission that protects essential traffic when capacity is short, as practitioner guidance rather than controlled evidence. The support is too thin to recommend the practice; it is a lead for investigation in fleet schedulers, worker pools, and shared verifier or review capacity.
+
+### Separate global capacity from local dispatch
+
+`ERCA-202` · `separate-global-capacity-from-local-dispatch`
+
+Split fleet scheduling into a global capacity and admission layer and a local dispatch layer, using two-level offers or shared state with optimistic concurrency, so fleet-wide constraints and per-worker choice evolve independently. A single scheduler that owns both global capacity and every local choice becomes the bottleneck and the single point of policy change; mature cluster managers all separate the two.
+
+This is a catalog-level entry; cluster-scheduler evidence transfers mechanisms, not constants or scale parameters. Verma and colleagues ([2015](https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/)) describe Borg separating cell-level admission control, packing, and overcommit from task-level placement and isolation. Schwarzkopf and colleagues ([2013](https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/)) run parallel schedulers over shared state with optimistic concurrency, decoupling global state from per-scheduler policy without a single dispatch bottleneck. Hindman and colleagues ([2011](https://www.usenix.org/conference/nsdi11/mesos-platform-fine-grained-resource-sharing-data-center)) offer resources from a global allocator to framework-local schedulers in Mesos’s two-level design. Choi and Scacchi ([1991](https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf)) supply historical lineage for the software factory itself as distributed infrastructure whose coordination substrate is a first-class engineering object; do not infer modern fault-tolerance or scheduling mechanisms from that description. The support is too thin to recommend the practice; it is a lead for investigation in multi-agent fleet schedulers and dispatch layers.
+
+### Detect retry storms and recovery starvation
+
+`ERCA-205` · `detect-retry-storms-and-recovery-starvation`
+
+Instrument the fleet to detect retry amplification, synchronized recovery demand, and recovery work that is starving invisibly, and shed or defer load deliberately before the cascade completes. Retry storms and starved recovery are fleet-level failure modes no individual worker can observe; without detection the first signal is the outage (invariant I9: admissible work cannot starve invisibly).
+
+This is a catalog-level entry supported by practitioner guidance on cascading failures, with no controlled agent-fleet measurement in this corpus. The Google SRE Book ([Addressing Cascading Failures](https://sre.google/sre-book/addressing-cascading-failures/)) describes cascading failures sustained by retry amplification and synchronized recovery demand, with deliberate load shedding or deferral as the documented way out. The support is too thin to recommend the practice; it is a lead for investigation in fleet observability for agent orchestration and retry layers.

@@ -111,7 +111,7 @@
         {
           "file": "closing.md",
           "line": 105,
-          "context": "- Strong evidence: Chen, J., et al. (2016). Sampling as a Baseline Optimizer for Search-Based Software Engineering. arXiv:1608.07617. Chapter 18, `replay-traces-before-policy-changes`."
+          "context": "- Strong evidence: Chen, J., et al. (2016). Sampling as a Baseline Optimizer for Search-Based Software Engineering. arXiv:1608.07617. Chapter 19, `replay-traces-before-policy-changes`."
         },
         {
           "file": "cost-aware-fleet-scheduling-model-routing.md",
@@ -5815,7 +5815,7 @@
         {
           "file": "closing.md",
           "line": 103,
-          "context": "- Strong evidence: Zhang, S., et al. (2025). Which Agent Causes Task Failures and When? On Automated Failure Attribution of LLM Multi-Agent Systems. ICML 2025. arXiv:2505.00212. Chapter 10, `keep-humans-in-failure-attribution`."
+          "context": "- Strong evidence: Zhang, S., et al. (2025). Which Agent Causes Task Failures and When? On Automated Failure Attribution of LLM Multi-Agent Systems. ICML 2025. arXiv:2505.00212. Chapter 11, `keep-humans-in-failure-attribution`."
         },
         {
           "file": "human-auditable-failure-analysis-taxonomy.md",

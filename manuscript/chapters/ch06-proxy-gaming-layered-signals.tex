@@ -1,7 +1,7 @@
 \chapter{Proxy metric gaming and layered evaluation signals}
 \label{ch06-proxy-gaming-layered-signals}
 \begin{quote}
-\textbf{Evidence profile.} 3 strong \(\cdot\) 2 directional \(\cdot\) 0 corroborating evidence items across 3 developed practices (ERCA-038, ERCA-039, ERCA-042).
+\textbf{Evidence profile.} 3 strong \(\cdot\) 3 directional \(\cdot\) 0 corroborating evidence items across 3 developed practices (ERCA-038, ERCA-039, ERCA-042).
 
 \textbf{Chapter claim.} Any optimized proxy needs an independent signal.
 \end{quote}
@@ -165,6 +165,25 @@ Several adjacent controls remain in the companion catalog because they answer na
 
 A thinly supported aside also proposes multi-objective acceptance with an independent judge. It carries no evidentiary weight in the layered system argued here.
 
+\hypertarget{did-the-verifier-run-and-did-it-run-on-this-artifact}{%
+\section{Did the verifier run, and did it run on this artifact?}\label{did-the-verifier-run-and-did-it-run-on-this-artifact}}
+
+Everything in this chapter so far concerns oracle adequacy: whether the signal, once observed, distinguishes acceptable from unacceptable behavior. A second axis sits underneath it and fails independently: whether the verifier executed reliably against the intended artifact at all. A test suite that timed out on an exhausted runner, a lint job that ran against a stale checkout, and a judge invocation that silently received a truncated diff all produce verdicts, and none of those verdicts says anything about the code. Treating such a verdict as an oracle failure misdiagnoses it; treating it as a semantic result corrupts the acceptance record. Chapter 7 states this separation as invariant I8: verifier failure is distinct from software failure. An infrastructure timeout or flake is not a semantic defect, and a pass establishes only what that verifier can detect.
+
+The execution axis is not a marginal concern in real CI. Ge and Zhang (\href{https://arxiv.org/abs/2602.02307}{2026}) mined GitHub Actions histories from 1,960 open-source Java projects and studied builds that developers reran on the same commit. Reruns were rare, 3.2 percent of builds, but among those rerun builds 67.73 percent changed outcome and were therefore flaky, and 1,055 of the projects, more than half, contained at least one such build. The study is a preprint and its population is Java projects on one CI platform, so the rates do not transfer as constants to any particular pipeline. The structural finding does transfer: when a developer suspects a verdict enough to rerun it, that suspicion is usually vindicated, which means verdicts from CI infrastructure carry a nontrivial probability of reflecting the runner rather than the code. A human developer absorbs this by squinting at the log and clicking rerun. An acceptance pipeline that feeds verdicts to an optimizing agent has no squint. It must model CI and test infrastructure as one more fallible dependency whose outputs need provenance and retry semantics, exactly as it treats a flaky external API.
+
+The consequence for acceptance is a versioned acceptance record. Every acceptance decision binds together: a verification\_id naming the verifier configuration and inputs; the artifact\_version under judgment; the repository base it was applied to; the verifier's own version; the configuration and environment identity of the run; timestamps; a reference to the raw result; and a status of accepted, rejected, or indeterminate. Indeterminate is a first-class status, not a euphemism for failure: it is the correct record when the verifier did not demonstrably execute against the intended artifact, and its remedy is a retry of the verification, not a rejection of the work. Two rules follow from the record's shape. A passing result for artifact version X is never inherited by artifact version Y, however small the diff between them; this is invariant I7, evidence is version-bound, defined with I8 in Chapter 7. And a retry of a flaky verifier is a new verification\_id against the same artifact\_version, so the record preserves how many attempts a pass required, which is itself a health signal for the verifier.
+
+This axis interacts with the gaming argument rather than merely sitting beside it. A pipeline that retries verification until it passes, without recording the attempts, has built best-of-n selection against its own infrastructure noise: the accepted population is enriched with artifacts that passed by flake. Separating the axes closes that path. Infrastructure retries are legitimate precisely when the record shows the artifact and verifier were identical across attempts and the environment differed; the same retry loop against a deterministic oracle is score-shopping.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{figures/ch06-verifier-failure-domains.pdf}
+\caption{Two failure domains in verification. Verifier-infrastructure health asks whether the verifier executed reliably against the intended artifact; oracle adequacy asks whether its judgment distinguishes acceptable from unacceptable behavior. The verdict is bound to the artifact version, the verifier version, and the environment identity of the run.}
+\end{figure}
+
+The layered-signal design of this chapter assumes each layer's verdict is real. The execution axis is where that assumption is enforced.
+
 \hypertarget{rebuild-the-acceptance-path}{%
 \section{Rebuild the acceptance path}\label{rebuild-the-acceptance-path}}
 
@@ -238,6 +257,14 @@ Part III begins at that observable boundary and turns to containing what happens
 \tightlist
 \item
   \textbf{Strong evidence:} Baker, B., et al.~(2025). \emph{Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation}. OpenAI. arXiv:2503.11926.
+\end{itemize}
+
+\textbf{Separate verifier execution from oracle adequacy}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Directional evidence (preprint):} Ge \& Zhang (2026). Study of flaky GitHub Actions builds. arXiv:2602.02307. Scope: 1,960 open-source Java projects on GitHub Actions; 3.2 percent of builds were rerun, 67.73 percent of those rerun builds were flaky, and 1,055 projects were affected. The flakiness rate is conditional on a developer choosing to rerun, not a rate over all builds, and the population is Java projects on one CI platform. I transfer the structural finding that CI verdicts are a fallible dependency needing provenance and retry semantics, not the measured rates.
 \end{itemize}
 
 \textbf{Author-system illustration cited inline}

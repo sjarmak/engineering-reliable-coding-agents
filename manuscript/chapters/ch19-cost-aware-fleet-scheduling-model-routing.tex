@@ -1,5 +1,5 @@
 \chapter{Cost-aware fleet scheduling and model routing}
-\label{ch18-cost-aware-fleet-scheduling-model-routing}
+\label{ch19-cost-aware-fleet-scheduling-model-routing}
 \begin{quote}
 \textbf{Evidence profile.} 2 strong \(\cdot\) 13 directional \(\cdot\) 2 practitioner \(\cdot\) 0 corroborating evidence items across 4 developed practices (ERCA-171, ERCA-187, ERCA-191, and the admission-and-recovery-capacity practice added in this revision).
 
@@ -77,7 +77,7 @@ Operations may reasonably execute either. Evaluation should not treat them as eq
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{figures/ch18-redecision-loop.pdf}
+\includegraphics{figures/ch19-redecision-loop.pdf}
 \caption{The re-decision loop recomputes from observed events under fixed work and churn costs, then executes a deadline capped incumbent while retaining its optimality gap.}
 \end{figure}
 
@@ -233,7 +233,13 @@ Its value remains an empirical question until the fleet's traces answer it.
 
 A queue records demand; it does not create capacity. Retry policy can increase demand precisely when capacity has fallen. A reliable factory therefore needs admission, prioritization, rate limits, retry budgets, and recovery-capacity policy above individual queues. I treat these as overload policy, distinct from the re-decision and routing questions elsewhere in this chapter: those decide which work runs where, and overload policy decides how much work is allowed to exist inside the system at all.
 
-The failure mode this section guards against is mechanical. A dependency slows, tasks time out, retries multiply the request rate against the slowed dependency, queues grow, work waits long enough that its callers retry the whole task, and the fleet spends its capacity on demand that its own policies manufactured. Nothing in that sequence requires a model to misbehave. The Google SRE chapters on cascading failures and handling overload (\href{https://sre.google/sre-book/addressing-cascading-failures/}{cascading failures}, \href{https://sre.google/sre-book/handling-overload/}{handling overload}) describe this pattern across production services; I cite them as practitioner guidance rather than controlled evidence, and none of their capacity or threshold figures transfer to an agent fleet.
+The failure mode this section guards against is mechanical. A dependency slows, tasks time out, retries multiply the request rate against the slowed dependency, queues grow, work waits long enough that its callers retry the whole task, and the fleet spends its capacity on demand that its own policies manufactured. Nothing in that sequence requires a model to misbehave. The Google SRE chapters on \href{https://sre.google/sre-book/addressing-cascading-failures/}{cascading failures} and \href{https://sre.google/sre-book/handling-overload/}{handling overload} describe this pattern across production services; I cite them as practitioner guidance rather than controlled evidence, and none of their capacity or threshold figures transfer to an agent fleet. The figure below shows the amplification loop and the policies that bound it.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{figures/ch19-recovery-backpressure.pdf}
+\caption{Live arrivals and retry-driven recovery traffic compete for the same constrained dependency; unrestricted retries amplify load exactly when capacity has fallen, while admission limits, jitter, and reserved recovery capacity bound the interference.}
+\end{figure}
 
 \textbf{Admission control.} The first policy decision is whether new work enters the system at all. Verma et al.~(\href{https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/}{2015}) describe Borg holding submitted jobs in a pending state until admission, packing admitted work against declared resource requirements, isolating tenants, and treating overcommitment as an explicit cluster policy rather than an accident of scheduling. The transfer is directional: an agent fleet benefits from the same separation between accepting work and running it, and from making overcommitment a decision with an owner. Borg's packing algorithms, machine-share targets, and utilization figures do not transfer as parameters.
 
@@ -325,7 +331,7 @@ The sufficiency requirement must be operational rather than rhetorical. ``Good e
 
 Each defines a different routing problem.
 
-The roughly 15-fold token premium reported for some fan-out configurations in Chapter 17 makes this choice economically consequential. Token count is still not the final objective. A cheap model that triggers repeated repair, verification, and review can cost more per accepted result than a stronger model would have cost initially.
+The roughly 15-fold token premium reported for some fan-out configurations in Chapter 18 makes this choice economically consequential. Token count is still not the final objective. A cheap model that triggers repeated repair, verification, and review can cost more per accepted result than a stronger model would have cost initially.
 
 When sufficient outcome data accumulates, the router can update through a budget-constrained bandit, such as Thompson sampling, with the algorithmic details left to the companion catalog. Cayci, Eryilmaz, and Srikant establish an asymptotic regret guarantee under moment conditions that permit heavy-tailed, correlated, and even negative cost-reward pairs.
 
@@ -461,7 +467,7 @@ Fixed-arrival replay itself remains a reasoned transfer rather than a controlled
 
 An \textbf{arrival trace} is a time-ordered record of work entering the system, including the information available when each item arrived. A \textbf{dispatch policy} decides which eligible item receives a resource next. \textbf{First-come scheduling} orders eligible work by arrival time, subject to constraints that make an item impossible to run.
 
-A \textbf{replay harness} re-executes the recorded arrivals under a candidate dispatch policy without changing production state. It differs from the single-run replay used for debugging in Chapter 9. That replay reconstructs one execution. This harness holds an entire workload sequence fixed while replacing the policy that allocates it.
+A \textbf{replay harness} re-executes the recorded arrivals under a candidate dispatch policy without changing production state. It differs from the single-run replay used for debugging in Chapter 10. That replay reconstructs one execution. This harness holds an entire workload sequence fixed while replacing the policy that allocates it.
 
 \Needspace{5\baselineskip}
 

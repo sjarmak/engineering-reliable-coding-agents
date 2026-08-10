@@ -1,5 +1,5 @@
 \chapter{Replayable traces and fault-injection recovery testing}
-\label{ch09-replayable-traces-fault-injection-recovery}
+\label{ch10-replayable-traces-fault-injection-recovery}
 \begin{quote}
 \textbf{Evidence profile.} 1 strong \(\cdot\) 8 directional \(\cdot\) 1 direct preprint \(\cdot\) 0 corroborating evidence items across 2 developed practices (ERCA-097, ERCA-127).
 
@@ -14,7 +14,7 @@ Agent runtimes present the same problem. A design may preserve state, retry inte
 
 Ten items support the chapter's two entries. Only the fault-recovery benchmark is a strong study; no strong study supports the trace argument. Five distributed-systems recovery-testing papers transfer directionally: they were evaluated on databases, file systems, and cluster controllers rather than agent runtimes, so I transfer their fault-placement and specification principles, not their measured results. One agent-trajectory study is direct evidence but a recent preprint. Typed traces are therefore treated as an instrumentation design supported by demonstrations and a specification, with recovery established by measurement rather than a universal threshold.
 
-Chapter 8 established that recorded state can make a run resumable. Replay imposes a stricter requirement. The system must know which events produced that state, which work may safely repeat, and where a changed decision invalidates the prior path. Recovery testing adds a third requirement: the runtime must demonstrate the claimed behavior when faults occur at inconvenient points, not only when a demonstration script stops a worker at a clean boundary.
+Chapter 9 established that recorded state can make a run resumable. Replay imposes a stricter requirement. The system must know which events produced that state, which work may safely repeat, and where a changed decision invalidates the prior path. Recovery testing adds a third requirement: the runtime must demonstrate the claimed behavior when faults occur at inconvenient points, not only when a demonstration script stops a worker at a clean boundary.
 
 \hypertarget{what-a-transcript-cannot-answer}{%
 \section{What a transcript cannot answer}\label{what-a-transcript-cannot-answer}}
@@ -198,7 +198,7 @@ Recurring failures should retain their sequence position in the data. If the thi
 \hypertarget{strike-the-interval-the-design-claims-to-protect}{%
 \section{Strike the interval the design claims to protect}\label{strike-the-interval-the-design-claims-to-protect}}
 
-The most informative fault point is rarely the boundary between steps. Chapter 8 identified the execute-then-log interval: an external system may commit an effect after receiving the request but before the runtime durably records completion. A design that claims safe retry or exactly-once visible effects must hold when the process dies inside that gap.
+The most informative fault point is rarely the boundary between steps. Chapter 9 identified the execute-then-log interval: an external system may commit an effect after receiving the request but before the runtime durably records completion. A design that claims safe retry or exactly-once visible effects must hold when the process dies inside that gap.
 
 The test should place the kill there deliberately.
 
@@ -255,7 +255,7 @@ These points test different properties. The first asks whether unstarted work ca
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{figures/ch09-kill-points.pdf}
+\includegraphics{figures/ch10-kill-points.pdf}
 \caption{Five lifecycle kill points test recovery from unstarted work through ambiguous commitment gaps to durable completion, including recognition and suppression of repeated external effects.}
 \end{figure}
 
@@ -280,7 +280,7 @@ The five kill points strike one worker's lifecycle. Once a factory runs multiple
 
 Sun et al.~(\href{https://www.usenix.org/system/files/osdi22-sun.pdf}{2022}) tested this family directly for Kubernetes reconciliation controllers. Sieve perturbs the controller's view of cluster state, feeding it stale, intermediate, or unobserved states, and detects bugs with differential oracles that compare state transitions between perturbed and unperturbed executions. The evaluated systems are cluster controllers, so the transfer is directional, but the factory analogue is exact: a factory control plane is a reconciliation controller over work items, and the corresponding fault is a controller that believes a worker still owns a task while the repository or another controller has moved on. The differential oracle also transfers: run the same workload with and without the view perturbation and compare the resulting state transitions, rather than asking only whether the perturbed run ended in a passing state.
 
-The table below lists the ambiguity faults I inject alongside the kill sweep. Invariant identifiers refer to the factory invariants defined in the Part III opener. Each row names the fault, the invariant it tests, and the observable behavior an acceptable runtime must exhibit.
+The table below lists the ambiguity faults I inject alongside the kill sweep. Invariant identifiers refer to the factory invariants defined in Chapter 7. Each row names the fault, the invariant it tests, and the observable behavior an acceptable runtime must exhibit.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2800}}

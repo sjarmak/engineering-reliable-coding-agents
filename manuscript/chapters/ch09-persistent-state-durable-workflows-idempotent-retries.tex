@@ -1,5 +1,5 @@
 \chapter{Persistent agent state, durable workflows, and idempotent retries}
-\label{ch08-persistent-state-durable-workflows-idempotent-retries}
+\label{ch09-persistent-state-durable-workflows-idempotent-retries}
 \begin{quote}
 \textbf{Evidence profile.} 0 strong \(\cdot\) 12 directional \(\cdot\) 3 corroborating \(\cdot\) 1 null or conflicting evidence items across 3 developed practices (ERCA-124, ERCA-128, ERCA-130).
 
@@ -138,7 +138,7 @@ The invocation identity must cross that boundary. Attempt B must send the same i
 
 An operation is idempotent when repeating it converges on the same observable state as applying it once. The useful contract is that a duplicate becomes indistinguishable from no duplicate.
 
-The discussion so far uses several words whose distinctions carry the argument. I fix them here, using the identifiers defined in the Part III opener, ``The software factory as a distributed system'':
+The discussion so far uses several words whose distinctions carry the argument. I fix them here, using the identifiers defined in Chapter 7, ``The software factory as a distributed system'':
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2500}}
@@ -173,7 +173,7 @@ Unknown state & The condition in which neither success nor failure of an effect 
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{figures/ch08-durable-effects.pdf}
+\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{figures/ch09-durable-effects.pdf}
 \caption{A first attempt records a durable intent and operation identity before an external commit. If the worker dies before recording completion, a replacement reads the pending intent and retries with the same identity; the external boundary must return the prior result, converge, or force explicit reconciliation.}
 \end{figure}
 
@@ -181,7 +181,7 @@ Key design determines which work the contract covers. A fresh attempt identifier
 
 The downstream implementation also needs an atomic claim on that key. Two workers may receive the same step concurrently after a timeout or lease dispute. If both check for a cached result and then perform the effect before either stores the result, the lookup adds latency without preventing duplication. A unique transactional record, compare-and-set operation, or equivalent mechanism must decide which worker owns the invocation before the effect occurs.
 
-The lease dispute behind that scenario has a canonical precedent. Burrows (\href{https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems}{2006}) describes how Chubby, Google's lock service, handles exactly this: a lease expiration tells the control plane that authority over a resource may be reassigned. It does not stop the old process, and it does not retract a request that process sent before losing the lease and that is still delayed in the network. Safety therefore requires the mutation boundary itself to reject obsolete authority, which Chubby supports with a sequencer, a lock generation number that the receiving server validates before applying the request. Retries and recovery in an agent factory create the same overlap: attempt B can hold current authority while attempt A's delayed external request is still in flight. The idempotency key and the authority generation answer different questions. The key deduplicates repeated attempts at the same logical work; the generation lets a protected boundary reject a superseded owner even while that owner is still running (invariant I2, authority is generation-scoped). This is directional evidence from a coordination service, not from agent systems, and Chapter 17 develops the fencing mechanism fully. Here it marks the limit of what retry machinery alone can make safe.
+The lease dispute behind that scenario has a canonical precedent. Burrows (\href{https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems}{2006}) describes how Chubby, Google's lock service, handles exactly this: a lease expiration tells the control plane that authority over a resource may be reassigned. It does not stop the old process, and it does not retract a request that process sent before losing the lease and that is still delayed in the network. Safety therefore requires the mutation boundary itself to reject obsolete authority, which Chubby supports with a sequencer, a lock generation number that the receiving server validates before applying the request. Retries and recovery in an agent factory create the same overlap: attempt B can hold current authority while attempt A's delayed external request is still in flight. The idempotency key and the authority generation answer different questions. The key deduplicates repeated attempts at the same logical work; the generation lets a protected boundary reject a superseded owner even while that owner is still running (invariant I2, authority is generation-scoped). This is directional evidence from a coordination service, not from agent systems, and Chapter 18 develops the fencing mechanism fully. Here it marks the limit of what retry machinery alone can make safe.
 
 Execution caching can extend the same rule through a call graph. Psarakis et al.~(\href{https://arxiv.org/abs/2312.06893}{2023}) describe a runtime that caches results by invocation identity so a repeated parent call reuses completed child calls. Within that runtime's transactional boundary, retried failed calls, recorded completed results, and call ordering can compose into a strong guarantee. An external service that ignores the invocation identity remains outside that boundary, regardless of the runtime's delivery terminology.
 
@@ -244,7 +244,7 @@ Next, select the retried step with the most dangerous external effect. Give the 
 
 On recovery, the run should do one of three things: return the previously recorded result, converge on the same external state, or stop with an explicit unknown-state escalation. It should never silently assume either success or failure.
 
-Recorded state makes a run resumable. Chapter 9 makes the recovery claim replayable and puts it under measurement.
+Recorded state makes a run resumable. Chapter 10 makes the recovery claim replayable and puts it under measurement.
 
 \textbf{Portable claim.} Durable intent survives the worker; external effects require their own contract.
 
@@ -287,7 +287,7 @@ Recorded state makes a run resumable. Chapter 9 makes the recovery claim replaya
 \begin{itemize}
 \tightlist
 \item
-  Directional evidence: Burrows (2006). The Chubby Lock Service for Loosely-Coupled Distributed Systems. OSDI '06. (A lease answers the allocation question only; the sequencer generation number lets the mutation boundary reject obsolete authority. Canonical stale-authority precedent; mechanism developed in Chapter 17.)
+  Directional evidence: Burrows (2006). The Chubby Lock Service for Loosely-Coupled Distributed Systems. OSDI '06. (A lease answers the allocation question only; the sequencer generation number lets the mutation boundary reject obsolete authority. Canonical stale-authority precedent; mechanism developed in Chapter 18.)
 \item
   Directional evidence: Psarakis et al.~(2023). Styx: Transactional Stateful Functions on Streaming Dataflows. SIGMOD line. arXiv:2312.06893. (Execution caching keyed by invocation identity gives exactly-once composition across call graphs.)
 \item

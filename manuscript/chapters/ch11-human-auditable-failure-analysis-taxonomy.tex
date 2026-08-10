@@ -1,5 +1,5 @@
 \chapter{Human-auditable failure analysis and taxonomy development}
-\label{ch10-human-auditable-failure-analysis-taxonomy}
+\label{ch11-human-auditable-failure-analysis-taxonomy}
 \begin{quote}
 \textbf{Evidence profile.} 2 strong \(\cdot\) 4 directional \(\cdot\) 1 corroborating evidence items across 3 developed practices (ERCA-045, ERCA-046, ERCA-047).
 
@@ -8,7 +8,7 @@
 
 In a peer-reviewed study, Zhang et al.~(\href{https://arxiv.org/abs/2505.00212}{2025}) collected expert-annotated failure logs from 127 multi-agent systems, in which several model-driven workers passed work among one another. They then gave the attribution task to the strongest automated methods they could evaluate. The best method identified the responsible agent in 53.5 percent of cases but found the decisive step in only 14.2 percent. Some methods performed below random.
 
-The logs already existed before the attribution problem was posed. Chapter 9 established that recording what happened is necessary, but a complete record does not establish why a run failed. The same trace may support several causal explanations. One worker may introduce a planning error, another may act reasonably on corrupted state, and a third may expose the defect when verification finally runs. Assigning responsibility to the last visible error confuses detection with cause.
+The logs already existed before the attribution problem was posed. Chapter 10 established that recording what happened is necessary, but a complete record does not establish why a run failed. The same trace may support several causal explanations. One worker may introduce a planning error, another may act reasonably on corrupted state, and a third may expose the defect when verification finally runs. Assigning responsibility to the last visible error confuses detection with cause.
 
 Attribution is the scarce capability in this sequence. Logging preserves evidence. Attribution claims that one action materially changed the run's prospects. That claim determines what engineers instrument, which component they repair, whether a benchmark case remains valid, and sometimes who is held accountable. With weak attribution, a complete trace can become a precise record attached to the wrong explanation.
 
@@ -37,7 +37,7 @@ A clear no makes the step a plausible causal boundary. A yes suggests that the a
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{figures/ch10-first-upstream-failure.pdf}
+\includegraphics{figures/ch11-first-upstream-failure.pdf}
 \caption{A planning error is the first upstream failure linking four visible defects, while a counterfactual test distinguishes a plausible causal boundary from a symptom.}
 \end{figure}
 
@@ -146,6 +146,45 @@ Concurrency creates another ambiguity. Two workers may read the same starting st
 
 Before assigning fault to an agent, I rule out the evaluator and execution environment. A broken dependency, stale fixture, permission mismatch, nondeterministic test, or malformed task can make a correct action appear defective. Differential testing runs the same candidate under a controlled change in agent, harness, or environment and asks whether the failure follows the candidate. The companion catalog treats this as a separate diagnostic control because attribution without apparatus checks can turn measurement error into a model failure.
 
+\hypertarget{component-boundaries-as-attribution-vocabulary}{%
+\subsection{Component boundaries as an attribution vocabulary}\label{component-boundaries-as-attribution-vocabulary}}
+
+Phase labels answer where in the run's reasoning a failure entered. The factory decomposition of Chapter 7 supplies a second axis: which component boundary introduced it. When the operated system spans that decomposition, I record the originating boundary alongside the phase:
+
+\begin{itemize}
+\tightlist
+\item
+  admission and intent: the wrong work, priority, or constraint set was accepted;
+\item
+  task decomposition: the plan divided the work incorrectly or omitted a dependency;
+\item
+  coordination and ownership: overlapping or stale write authority acted on the same state;
+\item
+  worker reasoning: the model decided wrongly from adequate evidence;
+\item
+  retrieval and state freshness: the evidence supplied to a decision was stale or version-mismatched;
+\item
+  execution environment: sandbox, toolchain, or dependency defects distorted a correct action;
+\item
+  external effect: a side effect committed twice, partially, or unknowably;
+\item
+  verifier execution: the check crashed, timed out, or flaked;
+\item
+  verifier adequacy: the check ran cleanly but could not detect the defect;
+\item
+  aggregation: results from parallel work merged or joined incorrectly;
+\item
+  publication: the release boundary accepted a result it should have fenced or rejected;
+\item
+  recovery: a restart or retry violated an invariant that normal execution preserved; and
+\item
+  capacity and scheduling: admissible work starved, queued invisibly, or overloaded a shared resource.
+\end{itemize}
+
+This is a vocabulary, not a forced partition. Many failures form a chain across boundaries: stale retrieval induces a plausible but wrong plan, a worker implements it faithfully, and an adequate verifier detects it late. The annotation should preserve that chain rather than compress it into one exclusive category, and when the trace does not isolate a single originating boundary, the assignment stays unresolved with the missing observation named. The trace, not the taxonomy, is the ground truth; the categories exist to organize evidence the trace already contains.
+
+The vocabulary also sharpens the first-upstream rule. The benchmark that opened this chapter frames attribution as identifying the responsible agent, but an agent is sometimes the wrong causal unit. When the defect entered through shared state, a stale authority grant, a verifier gap, or a control-plane decision, naming the worker that touched the failure last, or first, misdirects the repair toward a component that behaved correctly given its inputs and obligations. That is the same argument this chapter already makes against blaming the detecting actor, extended across component boundaries. Invariant I11 in Chapter 7 states the precondition: consequential transitions must record work, attempt, actor, input state, and authority generation, or the boundary-level assignment cannot be made from evidence at all. Chapter 10's discussion of Zhao et al.'s trajectory annotations, which model failure as onset, evolution, and recovery rather than a terminal label, describes the process view this chain-preserving annotation depends on.
+
 Raj et al.~(\href{https://arxiv.org/abs/2607.28802}{2026}) organize 41 failure modes by the interaction edge where a fault originates and the component that owns the repair. The strongest of four automated judges reached Cohen's \(\kappa=0.76\) against human category labels. The taxonomy is directional evidence for an interaction-centered diagnostic structure; the agreement result strongly supports reproducibility of those labels in the evaluated set, not causal correctness of an attribution.
 
 Human control does not require every reviewer to read every trace from the beginning. Automated systems can rank likely decisive steps, group similar incidents, retrieve related cases, prefill observed events, and flag assignments inconsistent with the recorded state transitions. The reviewer remains responsible for accepting, revising, or abstaining. The stored record distinguishes the automated proposal from the signed attribution.
@@ -158,7 +197,7 @@ When the evidence cannot distinguish among plausible causes, the correct verdict
 
 Aggregating several automated readers does not by itself make attribution reliable. Agreement among weak or dependent readers is a triage signal, not a causal verdict. The same applies to consistency across repeated runs: both signals may direct attention, while the signed attribution remains a human decision.
 
-Repeated local categories can expose a structural defect. When the same failure class survives prompt patches and model upgrades, the remedy is likely architectural, and Chapter 17 develops how to test that redesign. Recurrence identifies the problem; an intervention still requires its own evaluation.
+Repeated local categories can expose a structural defect. When the same failure class survives prompt patches and model upgrades, the remedy is likely architectural, and Chapter 18 develops how to test that redesign. Recurrence identifies the problem; an intervention still requires its own evaluation.
 
 \hypertarget{design-the-record-for-a-skeptical-reader}{%
 \section{Design the record for a skeptical reader}\label{design-the-record-for-a-skeptical-reader}}
@@ -169,7 +208,7 @@ These results span different tasks and benchmarks. The first two use one annotat
 
 The model scores will change as trace readers improve, and production workloads will differ. The more durable implication comes from the structure of the task: a record built for human audit should expose the units a causal investigation requires. Raw chronological text forces every reader, human or model, to reconstruct those units before diagnosis begins.
 
-Chapter 9's typed event stream supported replay and recovery. Human audit adds a different requirement. A reviewer must be able to follow step boundaries, decisions, inputs, state transitions, retries, and outcomes without inferring their identities from prose. The same event stream can support both purposes when its schema records semantic boundaries. Timestamps on messages alone do not preserve them.
+Chapter 10's typed event stream supported replay and recovery. Human audit adds a different requirement. A reviewer must be able to follow step boundaries, decisions, inputs, state transitions, retries, and outcomes without inferring their identities from prose. The same event stream can support both purposes when its schema records semantic boundaries. Timestamps on messages alone do not preserve them.
 
 \Needspace{5\baselineskip}
 
@@ -292,9 +331,9 @@ A completed review should state both what the evidence supports and what remains
 
 The repository artifact \href{https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/failure-trace-review.md}{\texttt{protocols/failure-trace-review.md}} provides the blinded review sequence, pass condition, and adjudication record.
 
-The failure corpus remains an operating asset after Part III. Chapter 14 uses it to tune compaction policy, because compression should preserve the evidence that prior investigations found decisive.
+The failure corpus remains an operating asset after Part III. Chapter 15 uses it to tune compaction policy, because compression should preserve the evidence that prior investigations found decisive.
 
-Part IV turns to the evidence available when the model acts: retrieval, context budgets, and memory. Chapter 11 begins by measuring repository retrieval, the first step in deciding which parts of a codebase enter that evidence.
+Part IV turns to the evidence available when the model acts: retrieval, context budgets, and memory. Chapter 12 begins by measuring repository retrieval, the first step in deciding which parts of a codebase enter that evidence.
 
 \textbf{Portable claim.} Attribute the first upstream failure the trace can support.
 

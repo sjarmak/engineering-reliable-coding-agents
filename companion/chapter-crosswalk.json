@@ -351,7 +351,7 @@
     ]
   },
   {
-    "chapter": 7,
+    "chapter": 8,
     "title": "Agent isolation, injection defenses, and independent verification",
     "developed_practices": [
       {
@@ -401,7 +401,7 @@
     ]
   },
   {
-    "chapter": 8,
+    "chapter": 9,
     "title": "Persistent agent state, durable workflows, and idempotent retries",
     "developed_practices": [
       {
@@ -476,7 +476,7 @@
     ]
   },
   {
-    "chapter": 9,
+    "chapter": 10,
     "title": "Replayable traces and fault-injection recovery testing",
     "developed_practices": [
       {
@@ -527,7 +527,7 @@
     ]
   },
   {
-    "chapter": 10,
+    "chapter": 11,
     "title": "Human-auditable failure analysis and taxonomy development",
     "developed_practices": [
       {
@@ -582,7 +582,7 @@
     ]
   },
   {
-    "chapter": 11,
+    "chapter": 12,
     "title": "Measuring and designing repository retrieval",
     "developed_practices": [
       {
@@ -627,7 +627,7 @@
     ]
   },
   {
-    "chapter": 12,
+    "chapter": 13,
     "title": "Localization funnels, repository indexes, and freshness checks",
     "developed_practices": [
       {
@@ -687,7 +687,7 @@
     ]
   },
   {
-    "chapter": 13,
+    "chapter": 14,
     "title": "Usable context budgets, consolidated-spec restarts, and file-based tool output",
     "developed_practices": [
       {
@@ -741,7 +741,7 @@
     ]
   },
   {
-    "chapter": 14,
+    "chapter": 15,
     "title": "Cross-session memory, raw traces, and compaction policies",
     "developed_practices": [
       {
@@ -791,7 +791,7 @@
     ]
   },
   {
-    "chapter": 15,
+    "chapter": 16,
     "title": "Efficient verification interfaces and risk-based human escalation",
     "developed_practices": [
       {
@@ -851,7 +851,7 @@
     ]
   },
   {
-    "chapter": 16,
+    "chapter": 17,
     "title": "Autonomy calibration, provenance, effective gates, and accountability",
     "developed_practices": [
       {
@@ -940,7 +940,7 @@
     ]
   },
   {
-    "chapter": 17,
+    "chapter": 18,
     "title": "Agent topology selection and dynamic task allocation",
     "developed_practices": [
       {
@@ -989,7 +989,7 @@
     ]
   },
   {
-    "chapter": 18,
+    "chapter": 19,
     "title": "Cost-aware fleet scheduling and model routing",
     "developed_practices": [
       {

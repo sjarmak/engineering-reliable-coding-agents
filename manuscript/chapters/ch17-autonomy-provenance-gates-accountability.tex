@@ -1,5 +1,5 @@
 \chapter{Autonomy calibration, provenance, effective gates, and accountability}
-\label{ch16-autonomy-provenance-gates-accountability}
+\label{ch17-autonomy-provenance-gates-accountability}
 \begin{quote}
 \textbf{Evidence profile.} 2 strong \(\cdot\) 5 directional \(\cdot\) 0 corroborating evidence items across 4 developed practices (ERCA-145, ERCA-149, ERCA-154, ERCA-165).
 
@@ -327,7 +327,7 @@ In a workflow diagram, the word ``gate'' implies causal control. In execution, a
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{figures/ch16-effective-gate.pdf}
+\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{figures/ch17-effective-gate.pdf}
 \caption{An advisory review can record rejection while leaving execution reachable. An effective gate connects the review decision to an enforcement point, so rejection or modification changes the next reachable state.}
 \end{figure}
 
@@ -391,7 +391,7 @@ The acceptance criteria must be system-specific. One team may require a deployme
 
 Name the claimed oversight function, build a trace capable of falsifying it, and decide in advance what observation would establish control.
 
-Removing a dependency from a gate is itself a state change, so this failure test belongs in a contained environment. Chapter 7 supplies that boundary. Auditing a production gate by allowing its negative result to mutate production converts a test into an incident.
+Removing a dependency from a gate is itself a state change, so this failure test belongs in a contained environment. Chapter 8 supplies that boundary. Auditing a production gate by allowing its negative result to mutate production converts a test into an incident.
 
 My approval queue failed this audit. Missing components allowed scripts to bypass the path that should have waited for a person. Unvalidated command construction weakened the connection between the reviewed proposal and the executed command. The existence of the queue did not establish causal power.
 
@@ -436,7 +436,7 @@ That negative conclusion is bounded. Code review can offer unusually strong epis
 
 The gate must be tested in its own domain. These sources establish no universal conclusion about either human incapacity or human benefit.
 
-Chapter 7 also showed why a control cannot be accepted merely because the harness reports that it ran. The governance extension asks whether a person can independently inspect the relevant state and interrupt the path that changes it. An override button without an independent signal provides nominal authority without usable control.
+Chapter 8 also showed why a control cannot be accepted merely because the harness reports that it ran. The governance extension asks whether a person can independently inspect the relevant state and interrupt the path that changes it. An override button without an independent signal provides nominal authority without usable control.
 
 Three companion entries sit beside this practice: \texttt{separate-control-from-oversight}, \texttt{write-an-oversight-card}, and \texttt{keep-override-authority-real}. Each rests on one evidence item and can help distinguish control before action, observation after action, stated reviewer duties, and override paths.
 

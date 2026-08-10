@@ -3,18 +3,18 @@
   "engine": "xelatex",
   "texlive_version": 2025,
   "container_image": "texlive/texlive:TL2025-historic@sha256:5912d6a33798957f4cd6ff1673819209f59300c378033d25066feb93270b90ce",
-  "source_date_epoch": 1786060800,
+  "source_date_epoch": 1786233600,
   "compiler_version": "XeTeX 3.141592653-2.6-0.999997 (TeX Live 2025)",
-  "archive_sha256": "8ed2c92c9bac3f4a68245286ca05dbc67d9dd2b851fc38ff69ccc4a426195188",
-  "pdf_sha256": "b11ef5c86eeef4a1deeabbeb9743b4258ebaea708f457fe736541de0f9270e76",
+  "archive_sha256": "fcaf6945789d007d201025238eacb5464b6a37777982e61161ab4c1f7d44d54f",
+  "pdf_sha256": "e7dd406aa9960b5f708c765b92fdbf2d17cfe45d10c6953fae08fdb515d9c37b",
   "pdf": {
-    "pages": 271,
+    "pages": 299,
     "encrypted": false,
     "page_size": "612 x 792 pts (letter)",
     "pdf_version": "1.7"
   },
   "diagnostics": {
     "material_errors": 0,
-    "underfull_boxes": 17
+    "underfull_boxes": 18
   }
 }

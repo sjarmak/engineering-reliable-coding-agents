@@ -5811,6 +5811,43 @@
         "published": "2026-08-05",
         "updated": "2026-08-05"
       }
+    },
+    {
+      "id": "2604.25850",
+      "status": "resolved",
+      "metadata": {
+        "id": "2604.25850",
+        "title": "Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses",
+        "authors": [
+          "Jiahang Lin",
+          "Shichun Liu",
+          "Chengjun Pan",
+          "Lizhi Lin",
+          "Shihan Dou",
+          "Zhiheng Xi",
+          "Xuanjing Huang",
+          "Hang Yan",
+          "Zhenhua Han",
+          "Tao Gui",
+          "Yu-Gang Jiang"
+        ],
+        "published": "2026-04-28",
+        "updated": "2026-05-18"
+      }
+    },
+    {
+      "id": "2602.02307",
+      "status": "resolved",
+      "metadata": {
+        "id": "2602.02307",
+        "title": "Understanding and Detecting Flaky Builds in GitHub Actions",
+        "authors": [
+          "Wenhao Ge",
+          "Chen Zhang"
+        ],
+        "published": "2026-02-02",
+        "updated": "2026-02-02"
+      }
     }
   ],
   "dois": [
@@ -5979,6 +6016,28 @@
         "Jacob Cohen"
       ],
       "published": "1960-4"
+    },
+    {
+      "doi": "10.1145/253228.253440",
+      "url": "https://doi.org/10.1145/253228.253440",
+      "status": "resolved",
+      "title": "Software processes are software too, revisited",
+      "authors": [
+        "Leon J. Osterweil"
+      ],
+      "published": "1997"
+    },
+    {
+      "doi": "10.1145/2723372.2723711",
+      "url": "https://doi.org/10.1145/2723372.2723711",
+      "status": "resolved",
+      "title": "Lineage-driven Fault Injection",
+      "authors": [
+        "Peter Alvaro",
+        "Joshua Rosen",
+        "Joseph M. Hellerstein"
+      ],
+      "published": "2015-5-27"
     }
   ],
   "web_sources": [
@@ -6275,6 +6334,167 @@
       "http_status": 200,
       "final_url": "https://x.com/cursor_ai/status/2032148129038950779",
       "title": "Cursor on X: \"We use a combination of offline benchmarks and online evals to measure model quality. This makes results more useful, especially as public benchmarks are increasingly saturated. https://t.co/lMKCkOyXyW\" / X"
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.5555/41765.41766",
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://dl.acm.org/doi/10.5555/41765.41766",
+      "title": null
+    },
+    {
+      "url": "https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf",
+      "title": null
+    },
+    {
+      "url": "https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/",
+      "title": "Secure Software Factory | CNCF TAG Security"
+    },
+    {
+      "url": "https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems",
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://www.usenix.org/conference/osdi-06/chubby-lock-service-loosely-coupled-distributed-systems",
+      "title": null
+    },
+    {
+      "url": "https://www.usenix.org/conference/usenix-atc-10/zookeeper-wait-free-coordination-internet-scale-systems",
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://www.usenix.org/conference/usenix-atc-10/zookeeper-wait-free-coordination-internet-scale-systems",
+      "title": null
+    },
+    {
+      "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2018/03/build-systems-final.pdf",
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2018/03/build-systems-final.pdf",
+      "title": null
+    },
+    {
+      "url": "https://www.usenix.org/conference/osdi20/presentation/zhang-haoran",
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://www.usenix.org/conference/osdi20/presentation/zhang-haoran",
+      "title": null
+    },
+    {
+      "url": "https://www.usenix.org/conference/osdi23/presentation/zhuang",
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://www.usenix.org/conference/osdi23/presentation/zhuang",
+      "title": null
+    },
+    {
+      "url": "https://www.usenix.org/conference/nsdi26/presentation/huang",
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://www.usenix.org/conference/nsdi26/presentation/huang",
+      "title": null
+    },
+    {
+      "url": "https://www.usenix.org/conference/nsdi11/fate-and-destini-framework-cloud-recovery-testing",
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://www.usenix.org/conference/nsdi11/fate-and-destini-framework-cloud-recovery-testing",
+      "title": null
+    },
+    {
+      "url": "https://www.usenix.org/system/files/osdi22-sun.pdf",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://www.usenix.org/system/files/osdi22-sun.pdf",
+      "title": null
+    },
+    {
+      "url": "https://www.usenix.org/conference/nsdi24/presentation/wu-haoze",
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://www.usenix.org/conference/nsdi24/presentation/wu-haoze",
+      "title": null
+    },
+    {
+      "url": "https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu",
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu",
+      "title": null
+    },
+    {
+      "url": "https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/",
+      "title": "Large-scale cluster management at Google with Borg"
+    },
+    {
+      "url": "https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/",
+      "title": "Omega: flexible, scalable schedulers for large compute clusters"
+    },
+    {
+      "url": "https://www.usenix.org/conference/nsdi15/technical-sessions/presentation/mace",
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://www.usenix.org/conference/nsdi15/technical-sessions/presentation/mace",
+      "title": null
+    },
+    {
+      "url": "https://www.usenix.org/conference/nsdi11/mesos-platform-fine-grained-resource-sharing-data-center",
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://www.usenix.org/conference/nsdi11/mesos-platform-fine-grained-resource-sharing-data-center",
+      "title": null
+    },
+    {
+      "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://builder.aws.com/content/3EumjoZascWd1oZiEgL8ORlv3qE/timeouts-retries-and-backoff-with-jitter",
+      "title": "AWS Builder Center"
+    },
+    {
+      "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+      "title": "references-details-empty"
+    },
+    {
+      "url": "https://sre.google/sre-book/addressing-cascading-failures/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://sre.google/sre-book/addressing-cascading-failures/",
+      "title": "Google SRE - Cascading Failures: Reducing System Outage"
+    },
+    {
+      "url": "https://sre.google/sre-book/handling-overload/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://sre.google/sre-book/handling-overload/",
+      "title": "Google SRE: Load Balancing with Client Side Throttling"
+    },
+    {
+      "url": "https://openai.com/index/open-source-codex-orchestration-symphony/",
+      "status": "http_error",
+      "http_status": 403,
+      "final_url": "https://openai.com/index/open-source-codex-orchestration-symphony/",
+      "title": null
+    },
+    {
+      "url": "https://blog.cloudflare.com/astro-issue-triage/",
+      "status": "resolved",
+      "http_status": 200,
+      "final_url": "https://blog.cloudflare.com/astro-issue-triage/",
+      "title": "How we built a software factory to drive Astro’s GitHub issue count to zero | Cloudflare Blog"
     }
   ]
 }

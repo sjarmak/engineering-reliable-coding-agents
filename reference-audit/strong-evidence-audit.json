@@ -115,7 +115,7 @@
       "doi_urls": [],
       "composite_risk_terms": [],
       "status": "pass",
-      "text": "- Strong evidence: Zhang, S., et al. (2025). Which Agent Causes Task Failures and When? On Automated Failure Attribution of LLM Multi-Agent Systems. ICML 2025. arXiv:2505.00212. Chapter 10, `keep-humans-in-failure-attribution`."
+      "text": "- Strong evidence: Zhang, S., et al. (2025). Which Agent Causes Task Failures and When? On Automated Failure Attribution of LLM Multi-Agent Systems. ICML 2025. arXiv:2505.00212. Chapter 11, `keep-humans-in-failure-attribution`."
     },
     {
       "location": "closing.md:105",
@@ -126,7 +126,7 @@
       "doi_urls": [],
       "composite_risk_terms": [],
       "status": "pass",
-      "text": "- Strong evidence: Chen, J., et al. (2016). Sampling as a Baseline Optimizer for Search-Based Software Engineering. arXiv:1608.07617. Chapter 18, `replay-traces-before-policy-changes`."
+      "text": "- Strong evidence: Chen, J., et al. (2016). Sampling as a Baseline Optimizer for Search-Based Software Engineering. arXiv:1608.07617. Chapter 19, `replay-traces-before-policy-changes`."
     },
     {
       "location": "contamination-oracle-workload-validity.md:240",

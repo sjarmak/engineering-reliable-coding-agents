@@ -1,5 +1,5 @@
 \chapter{Cross-session memory, raw traces, and compaction policies}
-\label{ch14-cross-session-memory-raw-traces-compaction}
+\label{ch15-cross-session-memory-raw-traces-compaction}
 \begin{quote}
 \textbf{Evidence profile.} 2 strong \(\cdot\) 4 directional \(\cdot\) 0 corroborating evidence items across 3 developed practices (ERCA-081, ERCA-116, ERCA-118).
 
@@ -85,7 +85,7 @@ earlier rewrite removes material
     -> later rewrite cannot reconstruct it
 \end{verbatim}
 
-The underlying artifact is the replayable trace from Chapter 9, used for another purpose. For recovery, the trace reconstructs execution after a crash. For memory, it reconstructs a representation after that representation proves incomplete or wrong.
+The underlying artifact is the replayable trace from Chapter 10, used for another purpose. For recovery, the trace reconstructs execution after a crash. For memory, it reconstructs a representation after that representation proves incomplete or wrong.
 
 The requirements overlap, but memory adds retrieval patterns, retention policy, user correction, supersession, and deletion obligations that execution replay alone does not resolve.
 
@@ -338,7 +338,7 @@ The two additions address different failures:
 
 A workload may need both, but combining them compounds provenance, synchronization, access-control, deletion, and rebuild obligations. The architecture record should name which representative queries each component answers and which observed failure made the simpler system inadequate.
 
-The decision resembles Chapter 12's repository-index choice, but the corpus differs. Chapter 12 addressed indexing a repository whose entities already exist in source code. Here the corpus is the agent's own experience, and extraction may create entities and relationships absent from the original event.
+The decision resembles Chapter 13's repository-index choice, but the corpus differs. Chapter 13 addressed indexing a repository whose entities already exist in source code. Here the corpus is the agent's own experience, and extraction may create entities and relationships absent from the original event.
 
 That difference raises the cost of opaque derivation errors.
 
@@ -439,13 +439,13 @@ Such material should retain explicit source and time semantics. Code search shou
 \hypertarget{let-observed-failures-determine-what-compaction-preserves}{%
 \section{Let observed failures determine what compaction preserves}\label{let-observed-failures-determine-what-compaction-preserves}}
 
-A reviewer opens a failed trace annotated under Chapter 10's protocol and finds that the first upstream error followed a condensed-history update. \textbf{Compaction} replaces working history with a shorter representation so a run can remain inside its context budget. When a fixed summarization prompt is treated as routine maintenance, its failure profile remains unmeasured.
+A reviewer opens a failed trace annotated under Chapter 11's protocol and finds that the first upstream error followed a condensed-history update. \textbf{Compaction} replaces working history with a shorter representation so a run can remain inside its context budget. When a fixed summarization prompt is treated as routine maintenance, its failure profile remains unmeasured.
 
 One policy may preserve goals while dropping constraints. Another may retain decisions while obscuring the tool observations that supported them. A third may preserve every apparent dependency and fill the effective context window with obsolete branches.
 
 The evidence for treating compaction as a tunable component rests on one strong study, from Kang et al.~(\href{https://arxiv.org/abs/2510.00615}{2025}), covering app, office, and question-answering agents. It includes no coding-agent benchmark, so transfer to repository work remains an inference. The study supports treating each compaction policy as a candidate component whose omissions, distortions, and distractions should be measured through downstream tasks rather than assumed away.
 
-Chapter 10 asks the reader to build a corpus of roughly one hundred diverse traces, cluster them into five to ten failure classes, and assign the first upstream failure in each run. Those counts are unmeasured starting recommendations. For compaction failures, I add a context label only when the preserved trace supports it.
+Chapter 11 asks the reader to build a corpus of roughly one hundred diverse traces, cluster them into five to ten failure classes, and assign the first upstream failure in each run. Those counts are unmeasured starting recommendations. For compaction failures, I add a context label only when the preserved trace supports it.
 
 \Needspace{5\baselineskip}
 
@@ -463,7 +463,7 @@ The label records whether necessary evidence was:
 
 It also identifies the compaction-policy version and points to the source events that should have survived or been removed.
 
-This label is an attribution judgment rather than a direct measurement. Chapter 10 requires a named human to approve any attribution that changes remediation or the interpretation of an evaluation. Revising the compaction policy is such a decision.
+This label is an attribution judgment rather than a direct measurement. Chapter 11 requires a named human to approve any attribution that changes remediation or the interpretation of an evaluation. Revising the compaction policy is such a decision.
 
 The label also prevents a common attribution error. A task may fail after compaction even when compaction played no causal role. The repository may have changed, a tool may have timed out, or the agent may have ignored evidence that remained available. I revise the policy only when the trace supports a counterfactual claim: a different representation of the same prior history could plausibly have changed the relevant decision.
 
@@ -539,12 +539,12 @@ The smaller model's outputs and downstream task results should therefore be comp
 
 The tuning loop cannot begin on the first day because no local failure evidence exists. Borrowed rules can provide an initial safety hypothesis, while preserved raw traces make mistakes recoverable by allowing the derived representation to be rebuilt.
 
-Optimization begins only after the traces show which omissions, distortions, and distractions caused consequential errors. This dependence on Chapter 10's failure corpus is why compaction tuning follows the broader retrieval and context architecture rather than preceding it.
+Optimization begins only after the traces show which omissions, distortions, and distractions caused consequential errors. This dependence on Chapter 11's failure corpus is why compaction tuning follows the broader retrieval and context architecture rather than preceding it.
 
 \hypertarget{build-memory-in-reversible-stages}{%
 \section{Build memory in reversible stages}\label{build-memory-in-reversible-stages}}
 
-Storage and retention decisions take effect from the first session. Compaction-policy optimization waits for the failure corpus from Chapter 10. The sequence below separates controls required immediately from those that depend on observed failures.
+Storage and retention decisions take effect from the first session. Compaction-policy optimization waits for the failure corpus from Chapter 11. The sequence below separates controls required immediately from those that depend on observed failures.
 
 From the first run, I preserve every permitted raw trace in inexpensive immutable storage. Every summary, profile, extracted fact, embedding, and graph edge is marked as derived. Provenance, schema versions, and policy versions are recorded before the derived layer becomes operationally important.
 
@@ -566,7 +566,7 @@ Before adding another retrieval component, I write down the representative queri
 
 Operating cost, remote dependencies, provenance, deletion behavior, and access control belong in the same decision.
 
-Initial compaction rules remain explicit hypotheses, and every condensed history stays reproducible from the raw trace. Once the Chapter 10 corpus contains failures attributed to context omission, distortion, or distraction, I revise the policy against those cases and remeasure task correctness through paired runs.
+Initial compaction rules remain explicit hypotheses, and every condensed history stays reproducible from the raw trace. Once the Chapter 11 corpus contains failures attributed to context omission, distortion, or distraction, I revise the policy against those cases and remeasure task correctness through paired runs.
 
 Token reduction is useful for capacity planning. It cannot substitute for evidence that the agent made better decisions.
 

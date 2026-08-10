@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "version": "1.0.0-rc.14",
-  "freeze_date": "2026-08-07",
+  "version": "1.0.0-rc.15",
+  "freeze_date": "2026-08-09",
   "manuscript": {
-    "pages": 271,
-    "figures": 17,
-    "numbered_tables": 7
+    "pages": 299,
+    "figures": 22,
+    "numbered_tables": 9
   },
   "arxiv": {
     "primary_category": "cs.SE",

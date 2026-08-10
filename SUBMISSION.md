@@ -10,7 +10,7 @@ Prepared August 7, 2026 for the August 2026 edition of *Engineering Reliable Cod
 
 - `engineering-reliable-coding-agents-arxiv-source.zip`: LaTeX release candidate for arXiv.
 - `engineering-reliable-coding-agents-preview.pdf`: PDF compiled from that source.
-- `engineering-reliable-coding-agents-companion-1.0.0-rc.14.zip`: separate companion research artifact release candidate.
+- `engineering-reliable-coding-agents-companion-1.0.0-rc.15.zip`: separate companion research artifact release candidate.
 - `engineering-reliable-coding-agents-skills-0.1.0.zip`: reusable agent workflows derived from selected companion practices.
 - `reference-audit/README.md`: reference-audit summary.
 
@@ -189,7 +189,7 @@ cutoff. License, endorsement, ORCID, and DOI remain pending.
 - TeX diagnostics: no errors, missing files, missing characters, undefined commands, or overfull boxes. A small number of harmless underfull-box warnings remain in source-list paragraphs.
 - Prose review: all 21 source files were reviewed for academic register, casual framing, unsupported certainty, promotional language, and unexplained internal evidence shorthand.
 - Companion checks: catalog and benchmark JSON validate against their schemas; checksums pass; the evidence ledger contains 578 records with a consistent 13-column structure. The update-screening decisions total 39: 11 admitted, one already present, and 27 deferred or excluded. The 148-record SE coverage probe admitted nine works, retains the 40-DOI diagnostic sample, and records that all 26 TSE candidates in the known set match SciX exactly by DOI.
-- Release contract: `release-metadata.json` agrees with rc.14 metadata; every file in the arXiv source and companion ZIPs matches the repository byte-for-byte; the preview is an unencrypted 271-page letter-size PDF carrying the rc.14 identity; the TeX Live report binds a clean 271-page XeLaTeX build to the exact source ZIP; extracted text contains no observed substitution glyphs or leaked front-matter running headers; the stable-mode gate rejects incomplete methodology, licensing, identity, endorsement, or DOI state.
+- Release contract: `release-metadata.json` agrees with rc.15 metadata; every file in the arXiv source and companion ZIPs matches the repository byte-for-byte; the preview is an unencrypted 299-page letter-size PDF carrying the rc.15 identity; the TeX Live report binds a clean 299-page XeLaTeX build to the exact source ZIP; extracted text contains no observed substitution glyphs or leaked front-matter running headers; the stable-mode gate rejects incomplete methodology, licensing, identity, endorsement, or DOI state.
 
 ## Official arXiv guidance
 

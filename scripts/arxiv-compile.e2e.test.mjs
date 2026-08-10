@@ -23,11 +23,11 @@ test("the exact arXiv ZIP reproduces the recorded build under the pinned environ
     ),
   );
 
-  assert.equal(actual.pdf.pages, 271);
+  assert.equal(actual.pdf.pages, 299);
   assert.equal(actual.pdf.page_size, "612 x 792 pts (letter)");
   assert.equal(actual.pdf.encrypted, false);
   assert.equal(actual.diagnostics.material_errors, 0);
-  assert.equal(actual.source_date_epoch, 1786060800);
+  assert.equal(actual.source_date_epoch, 1786233600);
   for (const field of [
     "archive_sha256",
     "pdf_sha256",

@@ -1,5 +1,5 @@
 \chapter{Agent topology selection and dynamic task allocation}
-\label{ch17-agent-topology-dynamic-task-allocation}
+\label{ch18-agent-topology-dynamic-task-allocation}
 \begin{quote}
 \textbf{Evidence profile.} 6 strong \(\cdot\) 16 directional \(\cdot\) 1 corroborating \(\cdot\) 1 historical evidence items across 4 developed practices (ERCA-044, ERCA-093, ERCA-101, ERCA-107).
 
@@ -21,7 +21,7 @@ A failure class does not become persistent merely because it occurred more than 
 
 Chapter 1's variance discipline still applies when the proposed treatment is a model upgrade. Analyze paired per-item differences rather than comparing two aggregate scores.
 
-Once persistence is established, Chapter 10's taxonomy and first-upstream-failure method locate the earliest supported cause. That location constrains the repair. If retrieval produced an incomplete candidate set, adding a stronger instruction for the final writer to cite sources attacks the last visible symptom. The relevant repair belongs where the candidate set is formed, checked, or handed off.
+Once persistence is established, Chapter 11's taxonomy and first-upstream-failure method locate the earliest supported cause. That location constrains the repair. If retrieval produced an incomplete candidate set, adding a stronger instruction for the final writer to cite sources attacks the last visible symptom. The relevant repair belongs where the candidate set is formed, checked, or handed off.
 
 The companion catalog states the broader rule as repairing the supported root cause rather than the final visible error. Its evidence is thin, so I use it here only as a diagnostic reminder.
 
@@ -227,7 +227,7 @@ Cost measurement must include the full topology:
 
 Measure latency separately from total computation. Parallel execution may reduce wall-clock time while increasing tokens and monetary cost. That trade may be justified for a high-consequence incident and unacceptable for routine maintenance.
 
-Chapter 18 develops routing and cost engineering in more detail. The minimum requirement here is to choose the cost axis that matters, measure it end to end, and record the acceptable increase before seeing the treatment result. A ceiling selected afterward can always be adjusted to preserve the favored architecture.
+Chapter 19 develops routing and cost engineering in more detail. The minimum requirement here is to choose the cost axis that matters, measure it end to end, and record the acceptable increase before seeing the treatment result. A ceiling selected afterward can always be adjusted to preserve the favored architecture.
 
 One validity check comes before any outcome comparison: the multi-agent mechanism must actually execute.
 
@@ -385,7 +385,7 @@ In a hierarchy, a lead's inaccurate summary can erase correct subordinate findin
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{figures/ch17-topology-faults.pdf}
+\includegraphics{figures/ch18-topology-faults.pdf}
 \caption{Fault propagation depends on collaboration topology, ranging from downstream contamination in pipelines to contained local errors when shared systems preserve provenance and state labels.}
 \end{figure}
 
@@ -589,24 +589,17 @@ Retries require the same discipline. A retry creates a new attempt for the same 
 
 The owner field in the node record is commonly implemented with a lease: a worker holds a time-bounded claim on the work and renews it while making progress, and when renewals stop, the control plane may reassign. That reading is correct, and it is the only question a lease answers. A lease resolves a liveness and allocation question: after the timeout, the control plane is permitted to give the work to someone else. It does not establish that the previous worker is dead. A process paused under memory pressure resumes after its lease has expired. A network partition heals after reassignment has already happened. A mutation issued before expiry arrives at its target after it.
 
-I therefore never write that a lease guarantees a single writer. Safety comes from a separate mechanism at the boundary being protected, and describing that mechanism requires three identities from Part III's opener. The \texttt{work\_id} names the stable logical work, the intent that should happen once logically. The \texttt{ownership\_epoch} is a monotonic generation of write authority, incremented each time the control plane reassigns the work. The \texttt{attempt\_id} names one execution attempt under that work and epoch. The attempt field in the node record above is this third identity; the epoch completes the picture the earlier paragraph on late responses began. Preventing an expired worker's late response from overwriting a successful retry is exactly the fencing problem, stated at the scheduler. The general form states it at every protected boundary.
+I therefore never write that a lease guarantees a single writer. Safety comes from a separate mechanism at the boundary being protected, and describing that mechanism requires three identities from Chapter 7. The \texttt{work\_id} names the stable logical work, the intent that should happen once logically. The \texttt{ownership\_epoch} is a monotonic generation of write authority, incremented each time the control plane reassigns the work. The \texttt{attempt\_id} names one execution attempt under that work and epoch. The attempt field in the node record above is this third identity; the epoch completes the picture the earlier paragraph on late responses began. Preventing an expired worker's late response from overwriting a successful retry is exactly the fencing problem, stated at the scheduler. The general form states it at every protected boundary.
 
-The rule is invariant I2 from the Part III opener: only the current ownership generation may commit a mutation at a protected boundary, and a superseded worker must be rejected even if it is still running. Every mutation to a protected shared target carries the current \texttt{ownership\_epoch}, and the target itself, or an authoritative mutation gateway in front of it, rejects any older epoch. Invariant I3 follows at the ledger: a durable state transition validates generation and attempt identity rather than trusting the scheduler's belief about who is active.
+The rule is invariant I2 from Chapter 7: only the current ownership generation may commit a mutation at a protected boundary, and a superseded worker must be rejected even if it is still running. Every mutation to a protected shared target carries the current \texttt{ownership\_epoch}, and the target itself, or an authoritative mutation gateway in front of it, rejects any older epoch. Invariant I3 follows at the ledger: a durable state transition validates generation and attempt identity rather than trusting the scheduler's belief about who is active.
 
-A worked sequence makes the mechanism concrete:
+The worked sequence in the figure below makes the mechanism concrete.
 
-\begin{verbatim}
-work W-311, protected target: integration branch head
-epoch 41: worker A holds the lease and prepares a mutation
-worker A's process is paused; lease renewals stop
-lease expires; control plane increments authority to epoch 42
-epoch 42: worker B claims W-311 and starts a new attempt
-worker A resumes and submits its mutation, tagged epoch 41
-the gateway compares 41 against the current epoch 42 and rejects it
-worker B's mutation, tagged epoch 42, is eligible for normal validation
-\end{verbatim}
-
-Two details in that sequence carry the safety argument. Worker A is not dead, was never told it lost authority, and behaves correctly by its own lights; only the epoch check at the target stops it. And worker B's mutation is eligible for validation, not automatically accepted; holding the current epoch confers the right to be evaluated, not a presumption of correctness.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{figures/ch18-epoch-fencing.pdf}
+\caption{Epoch fencing on work W-311. Worker A is not dead and behaves correctly by its own lights, having never been told it lost authority; only the epoch check at the protected target stops its stale mutation. Worker B's mutation, carrying the current epoch, is eligible for normal validation, not automatically accepted: holding the current epoch confers the right to be evaluated, not a presumption of correctness.}
+\end{figure}
 
 The check must occur at the mutable boundary whose integrity matters: the branch head, the work ledger, the external-effect adapter. Validating only at the scheduler before dispatch is insufficient, because the scheduler's belief about which workers are alive is precisely the information the failure invalidates. By the time worker A's late mutation arrives, the scheduler's dispatch-time check has already passed.
 
@@ -614,7 +607,7 @@ The precedent is old. Burrows (\href{https://www.usenix.org/conference/osdi-06/c
 
 Where should the epochs and lease state themselves live? Hunt et al.~(\href{https://www.usenix.org/conference/usenix-atc-10/zookeeper-wait-free-coordination-internet-scale-systems}{2010}) built ZooKeeper on the observation that coordination state belongs in a service designed to survive individual process failure rather than in the memory of any process it coordinates. I take that narrow principle and nothing more. It does not follow that every factory needs ZooKeeper, or a consensus protocol at all; a single durable database that records epochs transactionally can enforce I2 for a modest fleet. The requirement is that the record of who currently holds authority survives the failure of the workers it governs.
 
-Testing this machinery requires perturbing the controller's view of the world, not just the workers. The scheduler and any reconciling component need tests under stale work status, intermediate artifact states, transitions the controller never observed, late completion arriving after reassignment, and controller restart during active work. Sun et al.~(\href{https://www.usenix.org/system/files/osdi22-sun.pdf}{2022}) built Sieve on exactly this method for Kubernetes controllers: perturb what the controller observes, then compare resulting cluster state against an unperturbed run. They found real bugs in mature controllers whose logic was correct under an accurate view. I transfer the method, at directional strength, not the tooling. Chapter 9's fault-injection protocol supplies the harness discipline; the epoch-41 sequence above is precisely the kind of scenario such a test suite should replay on every scheduler change.
+Testing this machinery requires perturbing the controller's view of the world, not just the workers. The scheduler and any reconciling component need tests under stale work status, intermediate artifact states, transitions the controller never observed, late completion arriving after reassignment, and controller restart during active work. Sun et al.~(\href{https://www.usenix.org/system/files/osdi22-sun.pdf}{2022}) built Sieve on exactly this method for Kubernetes controllers: perturb what the controller observes, then compare resulting cluster state against an unperturbed run. They found real bugs in mature controllers whose logic was correct under an accurate view. I transfer the method, at directional strength, not the tooling. Chapter 10's fault-injection protocol supplies the harness discipline; the epoch-41 sequence above is precisely the kind of scenario such a test suite should replay on every scheduler change.
 
 \Needspace{5\baselineskip}
 
@@ -641,7 +634,7 @@ If those answers cannot be reconstructed, the graph has become another hidden co
 \hypertarget{what-evidence-should-promote-a-topology}{%
 \section{What evidence should promote a topology?}\label{what-evidence-should-promote-a-topology}}
 
-Chapter 1 defines the paired comparison, Chapter 2 the baseline and cost coordinates, Chapter 9 the fault-injection method, and Chapter 10 the first-upstream-failure label. A topology experiment should reuse those protocols rather than restating them.
+Chapter 1 defines the paired comparison, Chapter 2 the baseline and cost coordinates, Chapter 10 the fault-injection method, and Chapter 11 the first-upstream-failure label. A topology experiment should reuse those protocols rather than restating them.
 
 Begin with one recurring failure class and draw the smallest boundary at which it could have become observable and stoppable. Change one structural element at that boundary: a verification loop, specialist role, handoff, communication route, aggregation rule, or dependency-aware dispatcher. Preserve the live single-agent workflow as the cheapest credible baseline.
 
