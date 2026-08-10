@@ -6,7 +6,7 @@
 > `node scripts/editable-manuscript.mjs --status` to list the sections that need to be
 > transferred back to TeX. Do not regenerate this file while it contains unapplied edits.
 >
-> Baseline: version `1.0.0-rc.16`, repository revision `bb60702a47e56e882a526f842b5b3374803cc672`.
+> Baseline: version `1.0.0-rc.16`, repository revision `35b6bd050791fb72fca5018cecbba2de94926b5d`.
 
 The `tex-sync` comments delimit exact file mappings and carry baseline hashes. Leave those
 comments in place; edit the prose between them.
@@ -20,19 +20,19 @@ comments in place; edit the prose between them.
 - **Version line:** Version 1.0.0-rc.16 --- August 2026
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/abstract.tex","tex_sha256":"5ff3b20f18841de8061bacca6f5f6242353ab1c46165c5a72776f63421612ca7","markdown_sha256":"7245c4d4634ccc5e8f5397d8a8293268ebc7dd557aaf206e9906350df99e361b"} -->
+<!-- tex-sync:start {"path":"manuscript/abstract.tex","tex_sha256":"0d208b990817c3ccad4997eae4d2fb740ab17943499939f5648d2ca5417fc5a5","markdown_sha256":"46935a66c388f19e872e02a578bb87ce568ac69e0bcd385e536c20d80c8622b9"} -->
 # Abstract
 
 AI coding agents are commonly evaluated as models but deployed as systems. Their reliability depends not only on model capability, but on the harness, execution state, retrieval, memory and state management, permissions, review interfaces, and resource allocation around the model. This technical review and engineering monograph examines those system boundaries and develops a practical framework for evaluating and operating coding agents reliably.
 
-The study synthesizes 138 scholarly works, 91 practitioner records, 29 benchmark records, and 17 author-system case records through a structured multivocal review, targeted update audits, and software-engineering coverage analysis. Across this evidence, a consistent pattern emerges: many apparent model failures originate elsewhere in the system, while improvements measured at one layer often fail to propagate to end-to-end task outcomes. Evaluation and operation are therefore treated as a dependency chain in which weaknesses in task construction, execution environments, retrieval, state management, verification, or observability can invalidate conclusions made downstream.
+The study synthesizes 159 scholarly works, 98 practitioner records, 29 benchmark records, and 17 author-system case records through a structured multivocal review, targeted update audits, software-engineering coverage analysis, and a distributed-systems evidence synthesis. Across this evidence, a consistent pattern emerges: many apparent model failures originate elsewhere in the system, while improvements measured at one layer often fail to propagate to end-to-end task outcomes. Evaluation and operation are therefore treated as a dependency chain in which weaknesses in task construction, execution environments, retrieval, state management, verification, or observability can invalidate conclusions made downstream.
 
 The monograph contributes a versioned catalog of 206 reliability practices, including 56 developed in depth; an evidence ledger linking claims to their support; a framework for reasoning about dependency and repair asymmetry across the agent lifecycle; empirical measurements and failure cases from operated agent systems; runnable evaluation and reliability protocols; and five reusable agent skills with evidence maps. Together, these provide a system-level methodology for distinguishing model capability from infrastructure effects, designing evaluations that support defensible conclusions, and building agent systems that can recover safely when components fail.
 
 The review is structured rather than exhaustive, evidence strength varies by topic, and empirical results remain dependent on workload and system configuration. The publisher- and index-native search supplement remains incomplete in this release candidate: ACM Digital Library and IEEE Xplore were not searched through their publisher lanes, Scopus was not searched through its index, and the practice taxonomy has not received blinded external calibration. All four remain release gates for archival v1. The release candidate therefore claims neither provider coverage nor independent calibration and reports no inter-rater statistic.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/frontmatter.tex","tex_sha256":"25862b9a33fb33b7683c8e15967a947e4ab896794e3d4964e3ed4e5637edfef8","markdown_sha256":"80e5089c62826cefc9b4f10c6863cdfd1acb792def968b2e2dfb9b367da311d4"} -->
+<!-- tex-sync:start {"path":"manuscript/frontmatter.tex","tex_sha256":"143200d78596b46d08957a5f90f789ed720f292d311f7c5f0e43ca57d5035604","markdown_sha256":"51aacde1fd6372685be4ec7993db64dd36e029e81d5ef4d15583aa61be1cfad8"} -->
 # Introduction
 
 ## Problem and scope
@@ -72,7 +72,7 @@ This review treats source collection, evidence grading, practice derivation, and
 
 ### Search and source assembly
 
-The review was consolidated on July 26, 2026, then subjected to a bounded update audit and a software-engineering venue coverage probe through August 6, 2026. The release-candidate source collection contains 138 scholarly works, 91 practitioner records, 29 benchmark records, and 17 author-system case records. The original 118 scholarly works were organized into seven topic-specific threads covering benchmark validity, failure taxonomy, evaluation statistics, oversight and accountability, context and retrieval, durable execution, and scheduling with repository-scale scoping. Eleven works were admitted during the update audit and nine during the coverage probe.
+The review was consolidated on July 26, 2026, then subjected to a bounded update audit and a software-engineering venue coverage probe through August 6, 2026. The release-candidate source collection contains 159 scholarly works, 98 practitioner records, 29 benchmark records, and 17 author-system case records. The original 118 scholarly works were organized into seven topic-specific threads covering benchmark validity, failure taxonomy, evaluation statistics, oversight and accountability, context and retrieval, durable execution, and scheduling with repository-scale scoping. Eleven works were admitted during the update audit and nine during the coverage probe. The distributed-systems synthesis added with this release candidate admitted a further 21 scholarly works, drawn from the distributed-systems, cluster-scheduling, and build-systems literatures together with three agent-specific preprints, and 7 practitioner records; these entered through targeted citation-driven selection rather than the thread protocol, and the evidence ledger records each one's claim scope.
 
 Scholarly retrieval used [SciX](https://scixplorer.org/scixabout/), the NASA-supported literature discovery service operated by the Smithsonian Astrophysical Observatory, and a local retrieval layer referred to here as **SciX Agent**. The official [SciX API](https://scixplorer.org/scixhelp/api-scix/) supplied bibliographic identities and metadata. At consolidation, SciX Agent searched a 32.4-million-record SciX and arXiv corpus with 299.3 million citation links and full text for 14.9 million records. It combined INDUS dense retrieval with BM25 lexical retrieval through reciprocal-rank fusion. These systems determined which records were retrieved and read first; they did not determine evidence grades.
 

@@ -4,13 +4,16 @@
   "consolidated_at": "2026-07-26",
   "update_cutoff": "2026-08-06",
   "manuscript_source_counts": {
-    "scholarly": 138,
+    "scholarly": 159,
     "scholarly_at_consolidation": 118,
     "scholarly_admitted_in_update": 11,
     "scholarly_admitted_in_se_coverage_probe": 9,
-    "practitioner": 91,
+    "practitioner": 98,
     "benchmarks": 29,
-    "author_system_cases": 17
+    "author_system_cases": 17,
+    "scholarly_admitted_in_distributed_systems_synthesis": 21,
+    "practitioner_at_consolidation": 91,
+    "practitioner_admitted_in_distributed_systems_synthesis": 7
   },
   "scholarly_retrieval": {
     "official_service": "SciX, operated by the Smithsonian Astrophysical Observatory under a NASA cooperative agreement",
