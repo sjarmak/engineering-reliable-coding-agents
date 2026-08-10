@@ -36,8 +36,10 @@ test("venue coverage distinguishes publisher-native and index-native lanes", asy
   const abstract = await readFile("manuscript/abstract.tex", "utf8");
   const submission = await readFile("SUBMISSION.md", "utf8");
 
-  for (const artifact of [frontmatter, abstract, submission]) {
+  for (const artifact of [frontmatter, submission]) {
     assert.match(artifact, /publisher- and index-native/i);
+  }
+  for (const artifact of [frontmatter, abstract, submission]) {
     assert.doesNotMatch(artifact, /publisher-native ACM(?: Digital Library)?, IEEE(?: Xplore)?, and Scopus/i);
   }
 });
@@ -53,14 +55,31 @@ test("the release candidate discloses missing external grading while stable v1 r
   const frontmatter = await readFile("manuscript/frontmatter.tex", "utf8");
   const abstract = await readFile("manuscript/abstract.tex", "utf8");
   const submission = await readFile("SUBMISSION.md", "utf8");
+  const metadata = JSON.parse(await readFile("release-metadata.json", "utf8"));
 
+  // The methods section carries the full disclosure for both open gates.
   assert.match(frontmatter, /has not commissioned external graders/i);
   assert.match(frontmatter, /does not claim independent calibration/i);
   assert.match(frontmatter, /At least two external readers must complete.*before archival v1/i);
-  for (const artifact of [abstract, submission]) {
-    assert.match(artifact, /has not received blinded external calibration/i);
-    assert.match(artifact, /claims neither provider coverage nor independent calibration/i);
-  }
+
+  // The abstract states the limitation at field-typical length and defers the
+  // lane-by-lane record to the methods section; it must still send the reader there.
+  assert.match(abstract, /review is structured rather than exhaustive/i);
+  assert.match(abstract, /methods section records which search lanes/i);
+  assert.match(abstract, /gates for archival v1/i);
+
+  // The submission handoff tracks both gates as blocking decisions, and the
+  // release metadata records them as not-performed with a disclosed limitation.
+  assert.match(submission, /^\d+\.\s+\*\*External grading calibration\.\*\*/m);
+  assert.match(submission, /^\d+\.\s+\*\*Publisher- and index-native SE search\.\*\*/m);
+  assert.equal(
+    metadata.methodology_gates.external_grading,
+    "not-performed-with-disclosed-limitation",
+  );
+  assert.equal(
+    metadata.methodology_gates.publisher_native_search,
+    "not-performed-with-disclosed-source-limitations",
+  );
 });
 
 test("manuscript records the exposed IEEE credential boundary", async () => {

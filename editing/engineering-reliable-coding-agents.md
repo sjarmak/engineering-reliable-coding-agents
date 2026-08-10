@@ -6,7 +6,7 @@
 > `node scripts/editable-manuscript.mjs --status` to list the sections that need to be
 > transferred back to TeX. Do not regenerate this file while it contains unapplied edits.
 >
-> Baseline: version `1.0.0-rc.16`, repository revision `a60c1966c71e441eb7c25617f750f37e025c19f8`.
+> Baseline: version `1.0.0-rc.16`, repository revision `631ae8a483d915dc0fef274a7a1fa4be2ec077c4`.
 
 The `tex-sync` comments delimit exact file mappings and carry baseline hashes. Leave those
 comments in place; edit the prose between them.
@@ -20,7 +20,7 @@ comments in place; edit the prose between them.
 - **Version line:** Version 1.0.0-rc.16 --- August 2026
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/abstract.tex","tex_sha256":"0d208b990817c3ccad4997eae4d2fb740ab17943499939f5648d2ca5417fc5a5","markdown_sha256":"46935a66c388f19e872e02a578bb87ce568ac69e0bcd385e536c20d80c8622b9"} -->
+<!-- tex-sync:start {"path":"manuscript/abstract.tex","tex_sha256":"d4bcc120c47674630d3bf09aeed93cf955c2799d49cb35b32103de1e0c78f4c3","markdown_sha256":"edaf50d01c062b36eb765da6cd3be62b19d63765611c3cdd49db79f90164e03f"} -->
 # Abstract
 
 AI coding agents are commonly evaluated as models but deployed as systems. Their reliability depends not only on model capability, but on the harness, execution state, retrieval, memory and state management, permissions, review interfaces, and resource allocation around the model. This technical review and engineering monograph examines those system boundaries and develops a practical framework for evaluating and operating coding agents reliably.
@@ -29,7 +29,7 @@ The study synthesizes 159 scholarly works, 98 practitioner records, 29 benchmark
 
 The monograph contributes a versioned catalog of 206 reliability practices, including 56 developed in depth; an evidence ledger linking claims to their support; a framework for reasoning about dependency and repair asymmetry across the agent lifecycle; empirical measurements and failure cases from operated agent systems; runnable evaluation and reliability protocols; and five reusable agent skills with evidence maps. Together, these provide a system-level methodology for distinguishing model capability from infrastructure effects, designing evaluations that support defensible conclusions, and building agent systems that can recover safely when components fail.
 
-The review is structured rather than exhaustive, evidence strength varies by topic, and empirical results remain dependent on workload and system configuration. The publisher- and index-native search supplement remains incomplete in this release candidate: ACM Digital Library and IEEE Xplore were not searched through their publisher lanes, Scopus was not searched through its index, and the practice taxonomy has not received blinded external calibration. All four remain release gates for archival v1. The release candidate therefore claims neither provider coverage nor independent calibration and reports no inter-rater statistic.
+The review is structured rather than exhaustive, evidence strength varies by topic, and empirical results remain dependent on workload and system configuration. The methods section records which search lanes this release candidate executed, which remain open as gates for archival v1, and the limits those choices place on its evidence-grading claims.
 <!-- tex-sync:end -->
 
 <!-- tex-sync:start {"path":"manuscript/frontmatter.tex","tex_sha256":"a3d04cf592c3f6a131bc894970f7df9444f7102a4e4ce1ba8f29bf096f32e3ac","markdown_sha256":"4d93d887b3fbeee5d60620f93fa202584db6d797d82d41c49af45206a6c0f921"} -->

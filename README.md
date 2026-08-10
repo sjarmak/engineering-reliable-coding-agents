@@ -16,7 +16,7 @@ fault-testing protocols.
 
 | Path | Contents |
 | --- | --- |
-| [`manuscript/`](manuscript/) | Complete, compilable LaTeX source with 18 chapters, a closing chapter, 17 figures, 7 numbered tables, a glossary, and 213 references |
+| [`manuscript/`](manuscript/) | Complete, compilable LaTeX source with 19 chapters, a closing chapter, 22 figures, 9 numbered tables, a glossary, and 241 references |
 | [`editing/engineering-reliable-coding-agents.md`](editing/engineering-reliable-coding-agents.md) | Complete human-editable Markdown rendering with section-level mappings back to the canonical TeX files |
 | [`companion/`](companion/) | Human-readable learnings plus the machine-readable practice catalog, evidence ledger, chapter crosswalk, benchmark catalog, review-method records, schemas, web-source preservation record, checksums, citation metadata, and provenance |
 | [`protocols/`](protocols/) | Six runnable protocols and a minimum reliability pass, each with a decision, inputs, bounded procedure, pass condition, retained artifact, and stable practice mappings |
@@ -52,7 +52,7 @@ cd manuscript
 tectonic main.tex
 ```
 
-The generated PDF is 271 pages on US letter paper. The source uses standard
+The generated PDF is 297 pages on US letter paper. The source uses standard
 LaTeX packages and contains all required figures locally.
 
 The arXiv compatibility contract uses XeLaTeX under TeX Live 2025. The
@@ -83,9 +83,9 @@ cd companion
 sha256sum -c SHA256SUMS
 ```
 
-The release candidate contains 192 practice records, 578 evidence or
+The release candidate contains 206 practice records, 611 evidence or
 corroboration records, and 29 benchmark records. Its methodology directory
-records the corpus snapshots, common search protocol, 138 retained scholarly
+records the corpus snapshots, common search protocol, 159 retained scholarly
 works, all 39 decisions in the bounded August update audit, a 148-record
 software-engineering coverage probe, a deterministic 40-DOI SciX comparison,
 a complete 26-record TSE known-set comparison, a 55-record DBLP title census,
