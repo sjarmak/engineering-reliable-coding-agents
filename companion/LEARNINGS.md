@@ -604,6 +604,12 @@ As an investigatory variant, you could retain tests, diff size, coverage delta, 
 
 A survey by Chen and colleagues ([2020](https://arxiv.org/abs/2001.08236)) provides directional support for the selection mechanism: weighted-search solutions can be dominated by Pareto-search alternatives, while fixed weights can over-constrain search and create a burdensome weight-specification problem. The same survey also reports that plain Pareto dominance loses discriminating power as the number of objectives grows. Separate-author verification and multi-model checking appear in project and vendor records, but those records provide illustration rather than independent empirical support. The vendor figure of 44% fewer AI-derived outages remains unverified, and another production record shows a scalar score of 950 / 1000 against a threshold of 850 still operating as the shipped gate. The support is therefore too thin to recommend this practice. It should remain a lead for investigation in agent-generated changes, automated refactoring, and eval-driven optimization, with any adoption evaluated against scalar gates under local conditions.
 
+## Chapter 7: The software factory as a distributed system
+
+0 developed in the chapter, 0 carried here. 0 practices in total.
+
+Chapter 7 supplies the system model rather than practices: the factory decomposition, the identity vocabulary, and the six contract families (I1 through I11) that later chapters' practices cite by identifier. Every practice that enforces one of those contracts is cataloged under the chapter that develops its mechanism, from containment in Chapter 8 through fleet scheduling in Chapter 19.
+
 ## Chapter 8: Agent isolation, injection defenses, and independent verification
 
 3 developed in the chapter, 6 carried here. 9 practices in total.
@@ -1734,7 +1740,7 @@ This is a catalog-level entry; distributed lock- and coordination-service eviden
 
 ## Chapter 19: Cost-aware fleet scheduling and model routing
 
-3 developed in the chapter, 13 carried here. 16 practices in total.
+4 developed in the chapter, 13 carried here. 17 practices in total.
 
 The following pointer entries identify the practices developed in Chapter 19, where their full arguments, evidence, and boundaries are developed.
 
