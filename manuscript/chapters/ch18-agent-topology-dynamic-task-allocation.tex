@@ -3,7 +3,7 @@
 \begin{quote}
 \textbf{Evidence profile.} 6 strong \(\cdot\) 16 directional \(\cdot\) 1 corroborating \(\cdot\) 0 null or conflicting evidence items across 4 developed practices (ERCA-044, ERCA-093, ERCA-101, ERCA-107). One additional source establishes historical lineage.
 
-\textbf{Chapter claim.} Coordination must earn its cost against a live single-agent baseline.
+\textbf{Chapter claim.} Coordination must justify its cost against a live single-agent baseline.
 \end{quote}
 
 In one CodeProbe rerun (\href{https://github.com/sjarmak/codeprobe}{public repository}), I changed an agent's preamble to correct a retrieval behavior I had already diagnosed. The patch reduced cost while leaving the motivating failure intact.
@@ -17,13 +17,13 @@ Prompt changes are cheap, visible, and easy to isolate in an experiment. Structu
 \hypertarget{when-does-a-persistent-failure-require-structural-repair}{%
 \section{When does a persistent failure require structural repair?}\label{when-does-a-persistent-failure-require-structural-repair}}
 
-A failure class does not become persistent merely because it occurred more than once. I call a class persistent only after a paired comparison across model versions, with repeated trials, shows that it survives. One successful run on the newer model proves no more than one failed run on the older one.
+A failure class does not become persistent merely because it occurred more than once. A class counts as persistent only after a paired comparison across model versions, with repeated trials, shows that it survives. One successful run on the newer model proves no more than one failed run on the older one.
 
 Chapter 1's variance discipline still applies when the proposed treatment is a model upgrade. Analyze paired per-item differences rather than comparing two aggregate scores.
 
 Once persistence is established, Chapter 11's taxonomy and first-upstream-failure method locate the earliest supported cause. That location constrains the repair. If retrieval produced an incomplete candidate set, adding a stronger instruction for the final writer to cite sources attacks the last visible symptom. The relevant repair belongs where the candidate set is formed, checked, or handed off.
 
-The companion catalog states the broader rule as repairing the supported root cause rather than the final visible error. Its evidence is thin, so I use it here only as a diagnostic reminder.
+The companion catalog states the broader rule as repairing the supported root cause rather than the final visible error. Its evidence is thin, so it serves here only as a diagnostic reminder.
 
 Cemri et al.~(\href{https://arxiv.org/abs/2503.13657}{2025}) developed MAST, a taxonomy of failures in multi-agent language-model systems. They reported limited gains from prompt improvements on persistent classes and stronger results from interventions such as redesigned verification topology and modular roles while retaining the same underlying model.
 
@@ -49,6 +49,7 @@ The specialization is justified only because it creates a boundary at which the 
 
 Structured handoffs can address the same coupling:
 
+\Needspace*{8\baselineskip}
 \begin{verbatim}
 query: exact request issued to the retriever
 candidates: identifiers returned
@@ -237,7 +238,7 @@ Configuration is not behavior. A system may expose a delegation tool while the p
 
 \Needspace{5\baselineskip}
 
-I therefore instrument the treatment at three levels:
+Instrument the treatment at three levels:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -278,6 +279,7 @@ Replaying both configurations for each consequential release turns that shift in
 
 A compact promotion record can contain:
 
+\Needspace*{31\baselineskip}
 \begin{verbatim}
 golden_set_version: repository-maintenance-2026-07
 
@@ -320,6 +322,7 @@ The faults were synthetic and the comparison covered three architectures. The re
 
 A \textbf{pipeline} passes work through a fixed sequence of stages. It fits tasks that decompose into stable ordered transformations, such as:
 
+\Needspace*{7\baselineskip}
 \begin{verbatim}
 retrieve candidate files
     -> extract relevant regions
@@ -341,7 +344,7 @@ Failure of the orchestrator has a larger blast radius than failure of one worker
 
 A \textbf{hierarchy} or explicit leadership structure extends this arrangement when a flat team would exchange too many messages or when subproblems require their own coordination. A lead assigns work to subordinate groups and accepts bounded summaries rather than allowing every worker to communicate with every other worker.
 
-This can reduce message growth. It also introduces information loss and concentrates authority. A hierarchy earns its cost only when the lead measurably reduces communication and integration burden without suppressing critical evidence. Titles assigned to the agents establish nothing.
+This can reduce message growth. It also introduces information loss and concentrates authority. A hierarchy repays its cost only when the lead measurably reduces communication and integration burden without suppressing critical evidence. Titles assigned to the agents establish nothing.
 
 A \textbf{blackboard} is shared evolving state that workers read and update. It fits tasks whose next useful action depends on discoveries made by any participant, such as an incident investigation in which logs, hypotheses, eliminated causes, and requested checks change throughout the run.
 
@@ -371,7 +374,7 @@ Zhao et al.~(\href{https://arxiv.org/abs/2605.26178}{2026}) provide strong exper
 
 Those are short-form question-answering, mathematics, and code benchmarks. The study supports difficulty-conditioned orchestration within that scope.
 
-Topology-to-task matching remains unvalidated for long-horizon repository work, where files persist, tools have side effects, branches remain partially complete, tests are expensive, and concurrent edits conflict. I therefore use the topology menu as an engineering hypothesis to test rather than importing a benchmark conclusion.
+Topology-to-task matching remains unvalidated for long-horizon repository work, where files persist, tools have side effects, branches remain partially complete, tests are expensive, and concurrent edits conflict. The topology menu is therefore an engineering hypothesis to test rather than a benchmark conclusion to import.
 
 Two directional research lines expand the vocabulary without resolving the transfer. Huang and Zhou (\href{https://arxiv.org/abs/2605.13850}{2026}) organize agent design patterns along two dimensions. Shang (\href{https://arxiv.org/abs/2604.08206}{2026}) relates blackboard coordination to a global workspace in Theater of Mind. Both provide exploratory support without a quantitative claim here.
 
@@ -383,7 +386,7 @@ In a pipeline, a retrieval error may contaminate every downstream artifact. In a
 
 In a hierarchy, a lead's inaccurate summary can erase correct subordinate findings. On a blackboard, an unsupported claim can spread through repeated reads unless provenance and status remain attached.
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
 \centering
 \includegraphics{figures/ch18-topology-faults.pdf}
 \caption{Fault propagation depends on collaboration topology, ranging from downstream contamination in pipelines to contained local errors when shared systems preserve provenance and state labels.}
@@ -552,6 +555,7 @@ A task graph is not enough for repository work. Its edges record which work item
 
 Each node therefore needs enough state to support both scheduling and recovery:
 
+\Needspace*{16\baselineskip}
 \begin{verbatim}
 node_id: stable logical identity
 inputs: immutable artifact versions
@@ -582,6 +586,7 @@ A per-step time limit contains a slow or failed worker only when expiration prod
 
 Dispatch should fail closed:
 
+\Needspace*{7\baselineskip}
 \begin{verbatim}
 worker exceeds time limit
     -> attempt fails visibly
@@ -659,11 +664,9 @@ The promotion record adds three topology-specific conditions:
   \textbf{Coordination return:} any gain in the target failure class cleared the predeclared success, reliability, latency, review-burden, and total-cost limits.
 \end{itemize}
 
-Run the baseline and treatment on identical task versions and preserve the complete configuration identity. Promote only if all three conditions hold. Retain the baseline when added structure does not earn its coordination cost; redesign when the mechanism executed but left the target failure path intact.
+Run the baseline and treatment on identical task versions and preserve the complete configuration identity. Promote only if all three conditions hold. Retain the baseline when added structure does not repay its coordination cost; redesign when the mechanism executed but left the target failure path intact.
 
 The record should remain intelligible without the architecture's label. ``Hierarchical,'' ``dynamic,'' and ``multi-agent'' describe arrangements; mechanism entry, containment, and measured return decide whether the arrangement earned adoption.
-
-\textbf{Portable claim.} Coordination must earn its cost against a live single-agent baseline.
 
 \section*{Sources and evidence}
 
@@ -678,7 +681,7 @@ The record should remain intelligible without the architecture's label. ``Hierar
 \item
   Cemri, M., et al.~2025. ``Why Do Multi-Agent LLM Systems Fail?'' arXiv:2503.13657. MAST failure taxonomy and benchmark-framework interventions.
 \item
-  Chun, Jina, et al.~2025. ``Is Multi-Agent Debate the Silver Bullet?'' arXiv:2503.12029. Audit-retained strong evidence on debate performance against task baselines; reports inference cost across debate variants and leaves the single-model cost comparison open.
+  Chun, Yong Jin, et al.~2025. ``Enhancing LLM Performance Through Debate: An Empirical Study on Multi-Agent Debate for Coding Tasks,'' arXiv:2503.12029. Audit-retained strong evidence on debate performance against task baselines; reports inference cost across debate variants and leaves the single-model cost comparison open. The v1 record carried the title ``Is Multi-Agent Debate (MAD) the Silver Bullet?''; this entry cites the current version.
 \item
   Huang, Jia, and Joey Tianyi Zhou. 2026. ``A Two-Dimensional Framework for AI Agent Design Patterns: Cognitive Function and Execution Topology.'' arXiv:2605.13850. Directional taxonomy of topology choices.
 \item
@@ -700,7 +703,7 @@ The record should remain intelligible without the architecture's label. ``Hierar
 \item
   Luo, et al.~2025. \emph{Autellix}. arXiv:2502.13965. Directional scheduling and orchestration example.
 \item
-  Masters, et al.~2025. \emph{Manager Agent research challenge}. arXiv:2510.02557. Directional planning and scheduling example.
+  Masters, et al.~2025. \emph{Orchestrating Human-AI Teams: The Manager Agent as a Unifying Research Challenge}. arXiv:2510.02557. Directional planning and scheduling example.
 \item
   Mokhov, Andrey, Neil Mitchell, and Simon Peyton Jones. 2018. ``Build Systems à la Carte.'' ICFP. Directional; separates the dependency graph from scheduling, dependency discovery, rebuild decisions, and trace persistence. The mutable-worktree, external-effect setting of a coding factory limits the analogy.
 \item

@@ -4856,6 +4856,18 @@
         "url": "https://www.reddit.com/r/compsci/comments/1rqcmu8/",
         "claim_support": "90th-percentile general model failed basic domain tasks; rankings shift considerably on domain-lifecycle evals.",
         "resolved_metadata": null
+      },
+      {
+        "evidence_id": "benchmark-on-your-own-workload:supplement-1",
+        "source_kind": "scholarly",
+        "evidence_group": "directional",
+        "citation": "Caitlin Sadowski, Kathryn T. Stolee, Sebastian Elbaum (2015). How Developers Search for Code: A Case Study. Proceedings of the 2015 10th Joint Meeting on Foundations of Software Engineering. DOI:10.1145/2786805.2786855.",
+        "bibcode": null,
+        "arxiv": null,
+        "doi": "10.1145/2786805.2786855",
+        "url": "https://doi.org/10.1145/2786805.2786855",
+        "claim_support": "A survey and log-analysis case study at Google found developers conducting an average of five search sessions with 12 total queries each workday, with queries usually targeted at a particular code location and aimed at how to use an API, what code does, why something is failing, or where code is located. It supports treating code location as a distinct, high-frequency activity that a workload-representative benchmark must include. It measures human developers at one company in 2015, so transfer to agent workloads is directional.",
+        "resolved_metadata": null
       }
     ],
     "corroborating_material": [
@@ -9610,6 +9622,17 @@
     ],
     "corroborating_material": [
       {
+        "evidence_id": "retain-raw-distill-separately:c2",
+        "source_kind": "practitioner",
+        "evidence_group": "corroborating",
+        "citation": "Sergio De Simone (2026). How Slack Manages Context in Long-Running Multi-agent Systems. InfoQ, April 28, 2026.",
+        "bibcode": null,
+        "arxiv": null,
+        "url": "https://www.infoq.com/news/2026/04/slack-agent-context-management/",
+        "claim_support": "Slack replaced accumulated chat logs in a long-running multi-agent system with three structured memory channels (a director's journal, a credibility-scored critic's review, and a critic's timeline that removes duplicates and resolves conflicts). A production account of distilling rather than accumulating context; it supports operational plausibility and does not extend the measured degradation result.",
+        "resolved_metadata": null
+      },
+      {
         "evidence_id": "retain-raw-distill-separately:c1",
         "source_kind": "author_system_illustration",
         "evidence_group": "corroborating",
@@ -11586,9 +11609,10 @@
         "citation": "Suryana, L.E., Nordhoff, S., Calvert, S., Zgonnikov, A., van Arem, B. (2025). Meaningful human control of partially automated driving systems: Insights from interviews with Tesla users. Transportation Research Part F 113, 213-236.",
         "bibcode": "2025TRPF..113..213S",
         "arxiv": null,
-        "url": null,
+        "url": "https://doi.org/10.1016/j.trf.2025.04.026",
         "claim_support": "Tracking/tracing criteria applied to 103 Tesla Autopilot/FSD users localize concrete MHC failures (expectation-reality gaps, inconsistent protocol adherence).",
-        "resolved_metadata": null
+        "resolved_metadata": null,
+        "doi": "10.1016/j.trf.2025.04.026"
       }
     ],
     "corroborating_material": []
@@ -13162,6 +13186,18 @@
           "published": "2024-03-26",
           "updated": "2024-06-27"
         }
+      },
+      {
+        "evidence_id": "index-repository-as-knowledge-graph:supplement-1",
+        "source_kind": "practitioner",
+        "evidence_group": "corroborating",
+        "citation": "Rachel Potvin, Josh Levenberg (2016). Why Google Stores Billions of Lines of Code in a Single Repository. Communications of the ACM 59(7), 78-87. DOI:10.1145/2854146.",
+        "bibcode": null,
+        "arxiv": null,
+        "doi": "10.1145/2854146",
+        "url": "https://doi.org/10.1145/2854146",
+        "claim_support": "An engineering practice report describing one organization's billion-line single repository and the purpose-built tooling its scale required for navigation, search, and dependency analysis. It corroborates that repository scale, rather than retrieval sophistication alone, is what forces an owned indexing and maintenance investment. It is a single-company account rather than a study, it reports no comparison against alternatives, and it predates coding agents.",
+        "resolved_metadata": null
       }
     ],
     "corroborating_material": [

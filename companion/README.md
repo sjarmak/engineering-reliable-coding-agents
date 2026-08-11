@@ -1,8 +1,8 @@
 # Engineering Reliable Coding Agents: companion research artifact
 
-Release candidate 1.0.0-rc.16, prepared August 9, 2026.
+Version 1.0.0, frozen August 11, 2026.
 
-This package accompanies *Engineering Reliable Coding Agents: Evaluating and Operating the System Around the Model*. It is designed to be archived as a separate, citable research artifact. The final archival release should receive its own DOI and should be cited alongside the manuscript.
+This package accompanies *Engineering Reliable Coding Agents: Evaluating and Operating the System Around the Model*. It is designed to be archived as a separate, citable research artifact and should be cited alongside the manuscript.
 
 Review the interactive [website companion](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion), or read the complete chapter-organized catalog in [`LEARNINGS.md`](LEARNINGS.md).
 
@@ -31,6 +31,12 @@ Canonical repository: [https://github.com/sjarmak/engineering-reliable-coding-ag
 
 Author-system cases are labeled `author_system_illustration` and set `independent_external_evidence` to `false`. They illustrate mechanisms and failure cases but do not support general claims independently.
 
-## Before stable release
+## License
 
-Have at least two independent readers complete the blinded external-grading packet, run the analyzer, and report agreement and disagreement patterns. Execute and adjudicate every planned ACM Digital Library, IEEE Xplore, and Scopus cell; DBLP, OpenAlex, and web-surrogate discovery are useful diagnostics but are not provider-equivalent substitutes. Then replace this release-candidate version with `1.0.0`, add the selected license, rebuild the exact source and companion archives, regenerate `methodology/release-verification/arxiv-compile-report.json`, verify the PDF extraction and running headers, freeze all repository and website metadata to the same immutable version, publish the authorized tag, archive those exact objects with a DOI-granting repository, and submit the verified LaTeX source ZIP to arXiv. Do not archive internal review notes, rejected candidates, private receipts, or unpublished operational data.
+The companion is released under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/). Share and adapt it with attribution to the author and an indication of changes. Directory-level terms for the rest of the repository are in [`LICENSE-SCOPE.md`](https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/LICENSE-SCOPE.md).
+
+## What a later edition should add
+
+Two measured additions are out of scope for this edition and are disclosed as limitations rather than performed. First, have at least two independent readers complete the blinded external-grading packet, run the analyzer, and report agreement and disagreement patterns; this edition makes no independent-calibration claim. Second, execute and adjudicate every planned ACM Digital Library, IEEE Xplore, and Scopus cell; DBLP, OpenAlex, and web-surrogate discovery are useful diagnostics but are not provider-equivalent substitutes, so this edition makes no provider-coverage claim. Both packets ship here so a later edition can carry them out.
+
+No archival DOI is assigned; the public repository is the citable source. If a later edition archives these objects with a DOI-granting repository, record the identifier in `release-metadata.json` and carry it into both `CITATION.cff` files, this README, the manuscript's data-availability statement, and the arXiv Comments field. Do not archive internal review notes, rejected candidates, private receipts, or unpublished operational data.

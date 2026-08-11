@@ -51,7 +51,7 @@ test("retrieval systems remain discovery instruments rather than evidence grader
   assert.match(frontmatter, /author made the final inclusion, evidence-group, and practice-admission decisions/i);
 });
 
-test("the release candidate discloses missing external grading while stable v1 requires it", async () => {
+test("the edition discloses missing external grading and releases the packet for reuse", async () => {
   const frontmatter = await readFile("manuscript/frontmatter.tex", "utf8");
   const abstract = await readFile("manuscript/abstract.tex", "utf8");
   const submission = await readFile("SUBMISSION.md", "utf8");
@@ -60,18 +60,19 @@ test("the release candidate discloses missing external grading while stable v1 r
   // The methods section carries the full disclosure for both open gates.
   assert.match(frontmatter, /has not commissioned external graders/i);
   assert.match(frontmatter, /does not claim independent calibration/i);
-  assert.match(frontmatter, /At least two external readers must complete.*before archival v1/i);
+  assert.match(frontmatter, /blinded packet is released so external readers can run that pass/i);
 
   // The abstract states the limitation at field-typical length and defers the
   // lane-by-lane record to the methods section; it must still send the reader there.
   assert.match(abstract, /review is structured rather than exhaustive/i);
   assert.match(abstract, /methods section records which search lanes/i);
-  assert.match(abstract, /gates for archival v1/i);
+  assert.match(abstract, /which remain unexecuted/i);
 
-  // The submission handoff tracks both gates as blocking decisions, and the
-  // release metadata records them as not-performed with a disclosed limitation.
-  assert.match(submission, /^\d+\.\s+\*\*External grading calibration\.\*\*/m);
-  assert.match(submission, /^\d+\.\s+\*\*Publisher- and index-native SE search\.\*\*/m);
+  // The submission handoff still tracks both as open decisions, now explicitly
+  // deferrable, and the release metadata records them as not-performed with a
+  // disclosed limitation.
+  assert.match(submission, /^\d+\.\s+\*\*External grading calibration[^*]*\.\*\*/m);
+  assert.match(submission, /^\d+\.\s+\*\*Publisher- and index-native SE search[^*]*\.\*\*/m);
   assert.equal(
     metadata.methodology_gates.external_grading,
     "not-performed-with-disclosed-limitation",
@@ -82,11 +83,15 @@ test("the release candidate discloses missing external grading while stable v1 r
   );
 });
 
-test("manuscript records the exposed IEEE credential boundary", async () => {
+test("manuscript records the IEEE lane without restating a live credential exposure", async () => {
   const frontmatter = await readFile("manuscript/frontmatter.tex", "utf8");
 
   assert.doesNotMatch(frontmatter, /IEEE Xplore metadata key is configured but awaits provider activation/);
-  assert.match(frontmatter, /IEEE.*credential.*must be rotated.*before another API request/is);
+  // The lane is still disclosed as not searched.
+  assert.match(frontmatter, /IEEE Xplore credential returned a provider-inactive response/i);
+  // The exposure/rotation sentence was removed rather than published.
+  assert.doesNotMatch(frontmatter, /exposed in local diagnostic output/i);
+  assert.doesNotMatch(frontmatter, /must be rotated/i);
 });
 
 test("materials statement links the release checksum and verification evidence", async () => {

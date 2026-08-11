@@ -2,8 +2,13 @@ dist/
 graphify-out/
 .DS_Store
 manuscript/main.aux
+manuscript/main.lof
 manuscript/main.log
+manuscript/main.lot
 manuscript/main.out
 manuscript/main.pdf
 manuscript/main.toc
 manuscript/main.xdv
+
+# Python bytecode from the release-gate scripts
+__pycache__/

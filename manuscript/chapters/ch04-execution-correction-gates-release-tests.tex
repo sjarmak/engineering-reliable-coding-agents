@@ -65,6 +65,7 @@ Resource bounds make nontermination an explicit outcome. A process killed after 
 
 The acceptance contract should be readable without inspecting the controller:
 
+\Needspace*{10\baselineskip}
 \begin{verbatim}
 command:       verify-change
 expected:      exit status 0
@@ -116,6 +117,7 @@ The distinction is informational. Suppose an agent changes a parser because it c
 
 This closes the loop opened by the sandbox:
 
+\Needspace*{9\baselineskip}
 \begin{verbatim}
 candidate
     -> sandbox run
@@ -212,6 +214,7 @@ The result describes a single release candidate only when its configuration rema
 
 \(\mathrm{pass}^{k}\) reflects a different operational question from \(\mathrm{pass}@k\):
 
+\Needspace*{17\baselineskip}
 \begin{verbatim}
 same k trials
     |
@@ -239,6 +242,7 @@ The comparison unit is the fully specified system release. Record the model iden
 
 The release record can remain mechanically small:
 
+\Needspace*{10\baselineskip}
 \begin{verbatim}
 release:         candidate-2026-07-28
 system_digest:   6f5c...
@@ -291,8 +295,6 @@ Replay the set whenever the model, prompt, tools, orchestration, sandbox, or ver
 Record the promotion rule before running the first candidate comparison. When experience shows that the gate is too strict or too permissive, change the policy as a versioned decision and establish a new baseline where necessary. Adjusting the threshold after seeing a result turns the rule into an explanation for a decision already made.
 
 Keep tasks without executable checks in a separate lane. They are not lesser tasks, but forcing them through weak proxies would make the gate appear more complete than it is. Chapter 5 develops the calibrated judgment process those tasks require.
-
-\textbf{Portable claim.} Execution decides whether work moves.
 
 \section*{Sources and evidence}
 

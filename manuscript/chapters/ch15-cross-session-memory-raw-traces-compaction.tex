@@ -1,7 +1,7 @@
 \chapter{Cross-session memory, raw traces, and compaction policies}
 \label{ch15-cross-session-memory-raw-traces-compaction}
 \begin{quote}
-\textbf{Evidence profile.} 2 strong \(\cdot\) 4 directional \(\cdot\) 0 corroborating evidence items across 3 developed practices (ERCA-081, ERCA-116, ERCA-118).
+\textbf{Evidence profile.} 2 strong \(\cdot\) 4 directional \(\cdot\) 1 corroborating evidence items across 3 developed practices (ERCA-081, ERCA-116, ERCA-118).
 
 \textbf{Chapter claim.} Preserve raw events; rebuild derived memory.
 \end{quote}
@@ -14,20 +14,20 @@ The reason for accepting that inconvenience has been measured elsewhere. Zhang (
 
 Each rewriting pass optimizes a representation already produced by earlier optimization. Deletion and distortion can therefore accumulate without any explicit destructive operation. Routine maintenance gradually damages the evidence.
 
-I treat the complete chronological record of a session's inputs, actions, outputs, and state changes as the source record for cross-session memory. I call it the raw, or episodic, trace. Every representation derived from that trace must remain rebuildable. Observed query and task failures, rather than anticipated ones, determine when the storage and retrieval layers deserve additional complexity.
+The complete chronological record of a session's inputs, actions, outputs, and state changes is the source record for cross-session memory, the raw, or episodic, trace. Every representation derived from that trace must remain rebuildable. Observed query and task failures, rather than anticipated ones, determine when the storage and retrieval layers deserve additional complexity.
 
-Six items support the chapter's three design entries; two are strong, and five are syntheses rather than controlled experiments. The contested storage recommendation has no strong supporting item. The evidence defines architectures and measurement decisions, but supplies no defensible retention period, retrieval threshold, or compression ratio.
+Seven items support the chapter's three design entries; two are strong, four are syntheses rather than controlled experiments, and one is a practitioner account. The contested storage recommendation has no strong supporting item. The evidence defines architectures and measurement decisions, but supplies no defensible retention period, retrieval threshold, or compression ratio.
 
 \hypertarget{keep-the-source-record-rebuildable}{%
 \section{Keep the source record rebuildable}\label{keep-the-source-record-rebuildable}}
 
 Continuous rewriting can leave the latest memory without evidence that earlier versions contained. Support for this mechanism comes from one source study retained as strong by the evidence audit, one directional synthesis, and the Slack production account described above. The directional synthesis, Agentic Context Engineering (2025), reports no quantitative result and therefore supports only the direction of the practice. No controlled comparison of storage architectures is available.
 
-I separate the immutable source record from every summary, profile, or extracted fact derived from it. Material removed during an earlier rewrite cannot be reconstructed from the latest version. Another pass may produce a better summary of what remains, but it has no observation from which to recover what disappeared.
+Separate the immutable source record from every summary, profile, or extracted fact derived from it. Material removed during an earlier rewrite cannot be reconstructed from the latest version. Another pass may produce a better summary of what remains, but it has no observation from which to recover what disappeared.
 
 The system has crossed a recovery boundary without recording that it did so. Treating each rewrite as the new authoritative state hides the loss behind a successful update.
 
-An immutable raw layer changes that failure mode. The recorder appends original session events and does not ask a model to revise them. A separate process reads those events and produces summaries, profiles, or extracted facts. I call that output the \textbf{distillate}: a derived representation constructed from the source record for a stated retrieval purpose.
+An immutable raw layer changes that failure mode. The recorder appends original session events and does not ask a model to revise them. A separate process reads those events and produces summaries, profiles, or extracted facts. That output is the \textbf{distillate}: a derived representation constructed from the source record for a stated retrieval purpose.
 
 When the distillate omits relevant material, the omission becomes a retrieval or consolidation defect that can be repaired from preserved evidence.
 
@@ -63,6 +63,7 @@ Rebuildability follows from this separation. Every derived item carries provenan
 
 When the schema changes, the system builds a new derived store from the raw record. It does not ask a model to translate each old conclusion into a new one in place. Parallel rebuilds also allow an operator to compare the old and new distillates before switching readers to the new version.
 
+\Needspace*{22\baselineskip}
 \begin{verbatim}
 recorder
     -> inputs + actions + outputs + state changes
@@ -134,7 +135,7 @@ Immutability does not imply public access or indefinite retention. Raw traces ma
 
 \Needspace{5\baselineskip}
 
-I therefore treat the raw layer as sensitive source material:
+The raw layer is therefore sensitive source material:
 
 \begin{itemize}
 \tightlist
@@ -210,7 +211,7 @@ A practitioner argument that knowledge graphs are the wrong abstraction for agen
 
 \Needspace{5\baselineskip}
 
-I begin with the corpus the agent actually records:
+Begin with the corpus the agent actually records:
 
 \begin{itemize}
 \tightlist
@@ -270,7 +271,7 @@ Vector retrieval addresses lexical mismatch by comparing learned representations
   the useful passage shares a concept but few tokens with the query.
 \end{itemize}
 
-It also introduces an embedding model whose version, chunking policy, and source selection affect the representation. The additional index needs its own update, provenance, access-control, and deletion path. I assess those costs against observed lexical failures rather than anticipated ones.
+It also introduces an embedding model whose version, chunking policy, and source selection affect the representation. The additional index needs its own update, provenance, access-control, and deletion path. Assess those costs against observed lexical failures rather than anticipated ones.
 
 A knowledge graph answers a different class of question. It represents entities and relationships, allowing traversal such as:
 
@@ -346,7 +347,7 @@ Claims of local deployment need the same scrutiny. A framework may store its dat
 
 \Needspace{5\baselineskip}
 
-I inspect the effective dependency graph, including:
+Inspect the effective dependency graph, including:
 
 \begin{itemize}
 \tightlist
@@ -376,7 +377,7 @@ Calling all three ``memory quality'' conceals which component must change.
 
 \Needspace{5\baselineskip}
 
-Before adding infrastructure, I construct a small query set containing:
+Before adding infrastructure, construct a small query set containing:
 
 \begin{itemize}
 \tightlist
@@ -396,7 +397,7 @@ Before adding infrastructure, I construct a small query set containing:
 
 \Needspace{5\baselineskip}
 
-For each query, I record:
+For each query, record:
 
 \begin{itemize}
 \tightlist
@@ -445,7 +446,7 @@ One policy may preserve goals while dropping constraints. Another may retain dec
 
 The evidence for treating compaction as a tunable component rests on one strong study, from Kang et al.~(\href{https://arxiv.org/abs/2510.00615}{2025}), covering app, office, and question-answering agents. It includes no coding-agent benchmark, so transfer to repository work remains an inference. The study supports treating each compaction policy as a candidate component whose omissions, distortions, and distractions should be measured through downstream tasks rather than assumed away.
 
-Chapter 11 asks the reader to build a corpus of roughly one hundred diverse traces, cluster them into five to ten failure classes, and assign the first upstream failure in each run. Those counts are unmeasured starting recommendations. For compaction failures, I add a context label only when the preserved trace supports it.
+Chapter 11 asks the reader to build a corpus of roughly one hundred diverse traces, cluster them into five to ten failure classes, and assign the first upstream failure in each run. Those counts are unmeasured starting recommendations. For compaction failures, add a context label only when the preserved trace supports it.
 
 \Needspace{5\baselineskip}
 
@@ -465,11 +466,11 @@ It also identifies the compaction-policy version and points to the source events
 
 This label is an attribution judgment rather than a direct measurement. Chapter 11 requires a named human to approve any attribution that changes remediation or the interpretation of an evaluation. Revising the compaction policy is such a decision.
 
-The label also prevents a common attribution error. A task may fail after compaction even when compaction played no causal role. The repository may have changed, a tool may have timed out, or the agent may have ignored evidence that remained available. I revise the policy only when the trace supports a counterfactual claim: a different representation of the same prior history could plausibly have changed the relevant decision.
+The label also prevents a common attribution error. A task may fail after compaction even when compaction played no causal role. The repository may have changed, a tool may have timed out, or the agent may have ignored evidence that remained available. Revise the policy only when the trace supports a counterfactual claim: a different representation of the same prior history could plausibly have changed the relevant decision.
 
 \Needspace{5\baselineskip}
 
-The initial policies are therefore hypotheses. Before a local failure corpus exists, I can define structural rules such as preserving:
+The initial policies are therefore hypotheses. Before a local failure corpus exists, only structural rules are available, such as preserving:
 
 \begin{itemize}
 \tightlist
@@ -487,19 +488,19 @@ The initial policies are therefore hypotheses. Before a local failure corpus exi
   uncertainty about external state.
 \end{itemize}
 
-I cannot know their relative value for a particular workload. The early system should preserve the raw trace, record which policy produced each condensed history, and avoid presenting an untested prompt as optimized.
+Their relative value for a particular workload cannot be known in advance. The early system should preserve the raw trace, record which policy produced each condensed history, and avoid presenting an untested prompt as optimized.
 
-Once failures accumulate, I change one policy element at a time. A revision might preserve the exact observation supporting an unresolved dependency, distinguish superseded claims from deleted claims, or remove completed exploratory branches after their artifacts have been recorded.
+Once failures accumulate, change one policy element at a time. A revision might preserve the exact observation supporting an unresolved dependency, distinguish superseded claims from deleted claims, or remove completed exploratory branches after their artifacts have been recorded.
 
-I then run paired repeats on the same tasks using the discipline from Chapter 1. The comparison measures task correctness and the context consumed. Token count remains a resource measure rather than the primary outcome.
+Then run paired repeats on the same tasks using the discipline from Chapter 1. The comparison measures task correctness and the context consumed. Token count remains a resource measure rather than the primary outcome.
 
 A comparison between two compaction policies inherits the run-to-run variation Chapter 1 describes. One run under each policy supplies one draw from each condition. A difference that remains smaller than the measured spread should not justify replacing the incumbent.
 
 The compatibility-wrapper example provides a concrete policy test. The raw trace records that one service still calls the wrapper during rollback. The compacted history drops that observation. The agent recommends removing the wrapper, and the reviewer assigns missing context as the first upstream cause of the error.
 
-I revise one rule so that unresolved rollback dependencies retain their supporting observations, then rebuild the condensed history from the same raw trace. Paired runs on the same removal task test whether the agent now preserves the wrapper and uses the retained evidence.
+Revise one rule so that unresolved rollback dependencies retain their supporting observations, then rebuild the condensed history from the same raw trace. Paired runs on the same removal task test whether the agent now preserves the wrapper and uses the retained evidence.
 
-I accept the revision only when task success improves without introducing distraction failures in neighboring cases. Otherwise the rule remains a hypothesis.
+Accept the revision only when task success improves without introducing distraction failures in neighboring cases. Otherwise the rule remains a hypothesis.
 
 Kang et al.~reported peak-token reductions of 26 to 54 percent alongside improved task success across three app, office, and question-answering benchmarks. They also reported gains of up to 46 percent for small-model agents after distracting context was removed. Under those experimental conditions, less context coincided with better task performance.
 
@@ -513,7 +514,7 @@ Compression creates the inverse failure. A short history may omit a rare constra
 
 \Needspace{5\baselineskip}
 
-Task correctness remains too coarse for diagnosis. I inspect whether the compacted context:
+Task correctness remains too coarse for diagnosis. Inspect whether the compacted context:
 
 \begin{itemize}
 \tightlist
@@ -550,11 +551,11 @@ From the first run, I preserve every permitted raw trace in inexpensive immutabl
 
 Retention limits and deletion propagation are tested as part of the architecture. A recovery boundary that violates its governance boundary cannot remain in service.
 
-I begin retrieval with a relational event store and full-text search. This is a presumption drawn from contested, directional evidence rather than a measured conclusion. Local query failures determine whether the system needs more.
+Begin retrieval with a relational event store and full-text search. This is a presumption drawn from contested, directional evidence rather than a measured conclusion. Local query failures determine whether the system needs more.
 
 \Needspace{5\baselineskip}
 
-Before adding another retrieval component, I write down the representative queries and observed failures that would justify it:
+Before adding another retrieval component, write down the representative queries and observed failures that would justify it:
 
 \begin{itemize}
 \tightlist
@@ -566,13 +567,11 @@ Before adding another retrieval component, I write down the representative queri
 
 Operating cost, remote dependencies, provenance, deletion behavior, and access control belong in the same decision.
 
-Initial compaction rules remain explicit hypotheses, and every condensed history stays reproducible from the raw trace. Once the Chapter 11 corpus contains failures attributed to context omission, distortion, or distraction, I revise the policy against those cases and remeasure task correctness through paired runs.
+Initial compaction rules remain explicit hypotheses, and every condensed history stays reproducible from the raw trace. Once the Chapter 11 corpus contains failures attributed to context omission, distortion, or distraction, revise the policy against those cases and remeasure task correctness through paired runs.
 
 Token reduction is useful for capacity planning. It cannot substitute for evidence that the agent made better decisions.
 
 Review capacity is finite and does not increase automatically with fleet size. Part V turns to the people who remain accountable for this work and to the interfaces, review policies, and escalation paths built around their limited attention.
-
-\textbf{Portable claim.} Preserve raw events; rebuild derived memory.
 
 \section*{Sources and evidence}
 
@@ -583,7 +582,7 @@ Review capacity is finite and does not increase automatically with fleet size. P
 \item
   Strong evidence for the degradation mechanism: ``Useful Memories Become Faulty When Continuously Updated by LLMs'' (Zhang 2026), arXiv:2605.12978. The study measures degradation under repeated LLM memory updates; it does not compare immutable-source and rebuildable-distillate architectures.
 \item
-  Corroborating case: Slack production context management (InfoQ 2026-04). The account supports operational plausibility without extending the strong result.
+  Corroborating case: De Simone, S. (2026), ``How Slack Manages Context in Long-Running Multi-agent Systems,'' \href{https://www.infoq.com/news/2026/04/slack-agent-context-management/}{InfoQ}, April 28, 2026. Slack's engineers replaced accumulated chat logs with three structured memory channels and a credibility-scored review step. The account supports operational plausibility without extending the strong result.
 \item
   Directional evidence: Agentic Context Engineering, arXiv:2510.04618.
 \item
@@ -625,7 +624,7 @@ These are not part of this chapter's three developed practices. Each is named in
 \item
   Directional evidence: Prometheus (Pan, H., et al.~2025), arXiv:2507.19942, carried by the companion record on persisting explored context. No figure quoted here.
 \item
-  Directional evidence: AiScientist long-horizon engineering (Chen 2026), arXiv:2604.13018, carried by the companion record on durable artifact handoff.
+  Directional evidence: ``Toward Autonomous Long-Horizon Engineering for ML Research'' (Chen et al.~2026), arXiv:2604.13018, carried by the companion record on durable artifact handoff.
 \item
   Corroborating case: memorywire (Munirathinam 2026), arXiv:2606.01138, carried by the companion record on memory portability.
 \item

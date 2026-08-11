@@ -1,7 +1,7 @@
 \chapter{Persistent agent state, durable workflows, and idempotent retries}
 \label{ch09-persistent-state-durable-workflows-idempotent-retries}
 \begin{quote}
-\textbf{Evidence profile.} 0 strong \(\cdot\) 12 directional \(\cdot\) 3 corroborating \(\cdot\) 1 null or conflicting evidence items across 3 developed practices (ERCA-124, ERCA-128, ERCA-130).
+\textbf{Evidence profile.} 0 strong \(\cdot\) 12 directional \(\cdot\) 3 corroborating \(\cdot\) 1 null or conflicting evidence items across 3 developed practices (ERCA-124, ERCA-128, ERCA-130). Four directional items are carried by companion records cited inline (ERCA-193, ERCA-194, ERCA-195).
 
 \textbf{Chapter claim.} Durable intent survives the worker; external effects require their own contract.
 \end{quote}
@@ -82,7 +82,7 @@ Its narrower benefit is recoverability. After process death, the replacement wor
 
 The orchestration code Netflix deleted is as informative as the reported reduction in failures. Before the migration, application code coordinated retries, compensating actions, and service state. Afterward, a workflow engine recorded execution history and scheduled application operations from that history. The account corroborates the service-local before-and-after result. Because the migration changed retries, compensation, coordination, and state ownership together, it cannot attribute the improvement to one component or carry the reported rate into agent workloads.
 
-An engine earns its cost when it owns facts that no individual worker can recover reliably after a crash. It records which step became eligible, which attempt started, which result committed, which external event arrived, and which retry policy applies next. Workers still perform model calls, tool calls, and domain operations. The engine owns their order and lifecycle. A replacement worker receives its next action from recorded history rather than reconstructing that history from local conventions.
+An engine justifies its cost when it owns facts that no individual worker can recover reliably after a crash. It records which step became eligible, which attempt started, which result committed, which external event arrived, and which retry policy applies next. Workers still perform model calls, tool calls, and domain operations. The engine owns their order and lifecycle. A replacement worker receives its next action from recorded history rather than reconstructing that history from local conventions.
 
 This division places cross-service coordination in one architectural layer. Consider a deployment that reserves capacity, changes traffic, and updates an inventory. Each service can make its local transaction correct while the deployment remains half-finished. A saga treats those transactions as one logical procedure and defines a compensating action for each step that cannot be rolled back directly. When every service implements its own retry and compensation rules, no component holds a complete view of the deployment.
 
@@ -96,7 +96,7 @@ Centralized history does not provide one universally correct consistency guarant
 
 \Needspace{5\baselineskip}
 
-The engine boundary should follow the workload. I use three questions:
+The engine boundary should follow the workload. Three questions decide it:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -138,7 +138,7 @@ The invocation identity must cross that boundary. Attempt B must send the same i
 
 An operation is idempotent when repeating it converges on the same observable state as applying it once. The useful contract is that a duplicate becomes indistinguishable from no duplicate.
 
-The discussion so far uses several words whose distinctions carry the argument. I fix them here, using the identifiers defined in Chapter 7, ``The software factory as a distributed system'':
+The discussion so far uses several words whose distinctions carry the argument. They are fixed here, using the identifiers defined in Chapter 7, ``The software factory as a distributed system'':
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2500}}
@@ -245,8 +245,6 @@ Next, select the retried step with the most dangerous external effect. Give the 
 On recovery, the run should do one of three things: return the previously recorded result, converge on the same external state, or stop with an explicit unknown-state escalation. It should never silently assume either success or failure.
 
 Recorded state makes a run resumable. Chapter 10 makes the recovery claim replayable and puts it under measurement.
-
-\textbf{Portable claim.} Durable intent survives the worker; external effects require their own contract.
 
 \section*{Sources and evidence}
 

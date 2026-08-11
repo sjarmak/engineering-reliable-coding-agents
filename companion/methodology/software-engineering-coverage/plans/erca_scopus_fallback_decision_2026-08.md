@@ -2,7 +2,7 @@
 
 ## Decision
 
-The Scopus lane was not executed for this release-candidate audit because no
+The Scopus lane was not executed for this edition's audit because no
 Elsevier API key or institutional token was available in the configured
 research environment on 2026-08-07. No Scopus result count, coverage result,
 or publisher/index-native search claim is inferred from that absence.
@@ -73,5 +73,5 @@ and the companion preserves preliminary model recommendations for all 50. The
 identified a factual correction, so all were deferred to the next-edition
 queue. The ACM manual lane and a future IEEE API run remain optional
 extensions. If executed later, the IEEE credential must first be rotated.
-Neither provider plan blocks archival v1, and neither may be represented as
+Neither provider plan blocks the release, and neither may be represented as
 executed from its prepared plan alone.

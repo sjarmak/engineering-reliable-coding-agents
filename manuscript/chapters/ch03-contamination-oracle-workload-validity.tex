@@ -1,12 +1,12 @@
 \chapter{Benchmark contamination, oracle strength, and workload validity}
 \label{ch03-contamination-oracle-workload-validity}
 \begin{quote}
-\textbf{Evidence profile.} 7 strong \(\cdot\) 7 directional \(\cdot\) 1 corroborating evidence items across 4 developed practices (ERCA-001, ERCA-003, ERCA-004, ERCA-066).
+\textbf{Evidence profile.} 7 strong \(\cdot\) 8 directional \(\cdot\) 1 corroborating evidence items across 4 developed practices (ERCA-001, ERCA-003, ERCA-004, ERCA-066).
 
 \textbf{Chapter claim.} A passing score is only as valid as its workload, exposure boundary, and oracle.
 \end{quote}
 
-In February 2026, OpenAI (\href{https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified}{Feb 2026}) stopped reporting results on a benchmark subset it had helped create. In July 2026, it retracted its subsequent recommendation to use SWE-Bench Pro after an audit estimated that roughly 30 percent of its tasks were broken (\href{https://openai.com/index/separating-signal-from-noise-coding-evaluations/}{Jul 2026}). SWE-bench Verified had become one of the most cited measures of coding-agent performance. Its 500 tasks had survived screening by 93 paid professional developers, a process intended to remove ambiguous issues and defective tests. The sponsor later reported that 59.4 percent of 138 audited tasks had flawed tests: about 82 tasks, or 16.4 percent of the full 500-task subset. The same audit showed frontier models reproducing solution details verbatim when given only a task identifier.
+In February 2026, OpenAI (\href{https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified}{2026a}) stopped reporting results on a benchmark subset it had helped create. In July 2026, OpenAI (\href{https://openai.com/index/separating-signal-from-noise-coding-evaluations/}{2026b}) retracted its subsequent recommendation to use SWE-Bench Pro after an audit estimated that roughly 30 percent of its tasks were broken. SWE-bench Verified had become one of the most cited measures of coding-agent performance. Its 500 tasks had survived screening by 93 paid professional developers, a process intended to remove ambiguous issues and defective tests. The sponsor later reported that 59.4 percent of 138 audited tasks had flawed tests: about 82 tasks, or 16.4 percent of the full 500-task subset. The same audit showed frontier models reproducing solution details verbatim when given only a task identifier.
 
 Human screening had improved the original collection, but it could not control what happened after publication. \textbf{Contamination} is exposure to evaluation material before testing. Once tasks, issue discussions, reference patches, tests, and leaderboard results are public, they can enter training corpora, retrieval systems, fine-tuning sets, prompt libraries, and repeated development cycles. A clean review at release establishes nothing about those later paths.
 
@@ -14,6 +14,7 @@ The retirement also exposed a separate problem. Some tasks rejected functionally
 
 You should treat any public score as the output of three coupled measurements. First, has the model already encountered the work? Second, can the test oracle refute an incorrect answer? Third, does the task distribution represent the work someone wants the model to do? The sponsor's reversal is the demonstration that reputation, curation effort, and a large annotator count answer none of these questions. Each question needs its own control.
 
+\Needspace*{18\baselineskip}
 \begin{verbatim}
 public score
     ^
@@ -49,6 +50,7 @@ When each public task has a defensible counterpart, the audit should use a paire
 
 For a given model, the primary estimate is:
 
+\Needspace*{5\baselineskip}
 \begin{verbatim}
 inflation_gap(model) =
     score(model, public_tasks) - score(model, matched_control_tasks)
@@ -95,6 +97,7 @@ The control removes the most direct path from a public task into pre-evaluation 
 
 That distinction changes the data model for an evaluation suite. Each task needs provenance for its issue, repository state, tests, solution, and any discussion that reveals the solution. Each model needs a recorded cutoff and a policy for ambiguous or rolling cutoffs. Eligibility is then a function of both records:
 
+\Needspace*{5\baselineskip}
 \begin{verbatim}
 eligible(task, model) =
     task.first_public_at > model.training_cutoff
@@ -137,7 +140,7 @@ All three failures can produce a successful-looking transcript. A model may repr
 
 Shao et al.~(\href{https://arxiv.org/abs/2607.22368}{2026}) make this broader condition explicit as protocol validity: the intended capability must remain necessary for success under the evaluation protocol. Their HackDetect audit covered 2,385 traces across 15 agent benchmarks and found exposures or reward hacking in 67.0 percent of Frontier Science traces and 66.7 percent of AutoLab tasks; paired audits measured score inflation of 0.45 to 1.00 on their Mislead-gap scale. These are strong measurements for the audited protocols, not prevalence estimates for agent benchmarks as a whole.
 
-I therefore treat a passing patch as a hypothesis about correctness. The test oracle is the ordinary continuous-integration mechanism that decides whether the candidate passes or fails. Its strength is the range of plausible wrong behavior it can reject. A suite is stronger when it checks more of the behavior implied by the task, especially behavior that superficially reasonable patches get wrong.
+A passing patch is therefore best treated as a hypothesis about correctness. The test oracle is the ordinary continuous-integration mechanism that decides whether the candidate passes or fails. Its strength is the range of plausible wrong behavior it can reject. A suite is stronger when it checks more of the behavior implied by the task, especially behavior that superficially reasonable patches get wrong.
 
 Function-level code generation provides a controlled example. Liu et al.~(\href{https://arxiv.org/abs/2305.01210}{2023}) expanded a widely used suite's tests by 80x with generated inputs and mutation-based cases. Across 26 models, the largest relative reductions in \(\mathrm{pass}@k\) ranged from roughly 19 to 29 percent across the reported values of \(k\), and model rankings changed. The models and generated programs were fixed; only the observations used to decide correctness changed. The original ranking had partly measured which wrong programs happened to fit sparse tests.
 
@@ -180,6 +183,10 @@ Construct validity asks whether an instrument measures the property named in the
 
 Public repository suites usually select work that can be reconstructed from visible artifacts. This favors languages with reproducible environments, projects with mature tests, issues linked cleanly to merged changes, and tasks short enough to run economically. A production workload may contain private dependencies, sparse tests, organization-specific conventions, partial requirements, abandoned attempts, incident response, and changes whose value appears weeks later. The public suite can be carefully built and still omit the state transitions that dominate the deployment.
 
+Scale and structure carry the same risk as content. A suite can sample the right kind of work and still misrepresent its shape. Most public repository benchmarks place a task inside one repository of moderate size, with the relevant code reachable by reading a manageable part of the tree. Organizational work often begins in a service repository, depends on an interface defined in a second, is constrained by a schema owned by a third, and requires a migration in a fourth. Repository size changes what search can accomplish, since a codebase of tens of millions of lines cannot be read exhaustively at any context length. Ownership and access boundaries change what one identity can see, which makes retrieval quality and permission scope the same measurement.
+
+A resolve rate measured on single-repository tasks estimates single-repository performance. Cross-repository dependency tracing, ecosystem migration, and incident triage that starts in one service and ends in another have a different dominant failure, which is locating the relevant code rather than editing it once located. Sadowski et al.~(\href{https://doi.org/10.1145/2786805.2786855}{2015}) measured the human form of that activity at Google through a survey and search-log analysis, finding developers conducting an average of five search sessions with twelve queries each workday, usually targeted at a particular code location and aimed at how to use an interface, what code does, why something fails, or where code lives. That study describes people rather than agents, and one company in 2015, so it supports treating location as a distinct workload component rather than supplying any rate for agents. A benchmark meant to support claims about organizational work should record, per task, how many repositories the task spans, the size of each, and whether the required evidence sits inside or outside the repository named in the instruction. Chapter 12 reports an evaluation built to that specification.
+
 Construction should start with the work product and trace backward. For a coding assistant, candidate tasks include production prompts, accepted changes, review outcomes, and the tests associated with completed work. The evaluation record should preserve the repository state available at task start, the instruction as received, the permitted context and tools, and the evidence that caused the organization to accept the result. Other domains need their own decision sequence and artifacts. A general reasoning proxy omits that structure.
 
 Jha et al.~(\href{https://arxiv.org/abs/2604.01527}{2026}) demonstrated one curation approach for a production-derived benchmark. They built tasks from sessions with their own coding assistant, classified the work, checked that tests were relevant to each task, and required stability across repeated runs. This is directional evidence from one vendor's environment. It shows that production traces can be converted into repeatable tasks. It does not establish that the resulting distribution represents another organization, or even every kind of work inside the source organization.
@@ -221,8 +228,6 @@ The next time you encounter a public benchmark number, identify the answers to t
 \end{enumerate}
 
 These answers do not yield a universal correction formula. They turn one impressive-looking score into a bounded claim: performance by a named system, under a named apparatus, on work with a known exposure history, judged by tests with observed power to reject wrong patches. The local replay tests that claim on the work the system will actually be asked to do.
-
-\textbf{Portable claim.} A passing score is only as valid as its workload, exposure boundary, and oracle.
 
 \section*{Sources and evidence}
 
@@ -298,6 +303,8 @@ These answers do not yield a universal correction formula. They turn one impress
   Bytesfortruth (2026), lending-domain benchmark account, r/compsci, 2026-03-10, \url{https://www.reddit.com/r/compsci/comments/1rqcmu8/}. {[}Corroborating case{]}
 \item
   Bean, A.M. et al.~(2025), Measuring what Matters, arXiv:2511.04703. {[}Directional evidence{]} Carried in the companion catalog as the construct-validity record; named inline for the construct-validity definition that opens this section.
+\item
+  Sadowski, C., Stolee, K.T., Elbaum, S. (2015), \emph{How Developers Search for Code: A Case Study}, ESEC/FSE 2015, \href{https://doi.org/10.1145/2786805.2786855}{DOI:10.1145/2786805.2786855}. {[}Directional evidence{]} Establishes code location as a distinct, high-frequency activity in a large codebase. It measures human developers at one company in 2015 and supplies no rate for agents.
 \end{itemize}
 
 \textbf{Author-system illustration cited inline}

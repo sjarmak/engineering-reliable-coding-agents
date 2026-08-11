@@ -7,7 +7,7 @@ for Stephanie Jarmak's technical review and engineering monograph on the
 evaluation, operation, and governance of AI coding-agent systems.
 
 The review treats coding agents as systems rather than isolated models. Its
-contributions include an evidence audit, a catalog of 192 bounded engineering
+contributions include an evidence audit, a catalog of 206 bounded engineering
 practices, a dependency chain across evaluation and operation, scoped
 author-system measurements and failure cases, and runnable evaluation and
 fault-testing protocols.
@@ -16,14 +16,14 @@ fault-testing protocols.
 
 | Path | Contents |
 | --- | --- |
-| [`manuscript/`](manuscript/) | Complete, compilable LaTeX source with 19 chapters, a closing chapter, 22 figures, 9 numbered tables, a glossary, and 241 references |
+| [`manuscript/`](manuscript/) | Complete, compilable LaTeX source with 19 chapters, a closing chapter, 22 figures, 9 numbered tables, a glossary, and 244 references |
 | [`editing/engineering-reliable-coding-agents.md`](editing/engineering-reliable-coding-agents.md) | Complete human-editable Markdown rendering with section-level mappings back to the canonical TeX files |
 | [`companion/`](companion/) | Human-readable learnings plus the machine-readable practice catalog, evidence ledger, chapter crosswalk, benchmark catalog, review-method records, schemas, web-source preservation record, checksums, citation metadata, and provenance |
 | [`protocols/`](protocols/) | Six runnable protocols and a minimum reliability pass, each with a decision, inputs, bounded procedure, pass condition, retained artifact, and stable practice mappings |
 | [`skills/`](skills/) | Five reusable agent skills derived from the evaluation, verification, failure-analysis, and durable-execution practices |
 | [`SUBMISSION.md`](SUBMISSION.md) | Paste-ready arXiv metadata, packaging decisions, license and endorsement notes, audit results, and upload checklist |
 | [`CITATION.cff`](CITATION.cff) | Repository-level citation metadata |
-| [`LICENSE-SCOPE.md`](LICENSE-SCOPE.md) | Current license boundaries for the manuscript, data, and repository infrastructure |
+| [`LICENSE-SCOPE.md`](LICENSE-SCOPE.md) | Directory-scoped license terms: CC-BY-4.0 for the manuscript and companion, Apache-2.0 for everything else |
 
 Read the [browser-based book](https://sjarmak.ai/books/engineering-reliable-coding-agents)
 or use the [interactive companion catalog](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion)
@@ -52,7 +52,7 @@ cd manuscript
 tectonic main.tex
 ```
 
-The generated PDF is 297 pages on US letter paper. The source uses standard
+The generated PDF is 300 pages on US letter paper. The source uses standard
 LaTeX packages and contains all required figures locally.
 
 The arXiv compatibility contract uses XeLaTeX under TeX Live 2025. The
@@ -71,7 +71,7 @@ submission.
 
 ## Validate the companion
 
-Start with [`companion/LEARNINGS.md`](companion/LEARNINGS.md) to review all 192
+Start with [`companion/LEARNINGS.md`](companion/LEARNINGS.md) to review all 206
 practices in chapter context. It presents each practice's action, mechanism,
 evidence, and boundary in prose while preserving stable identifiers for the
 machine-readable files.
@@ -83,9 +83,9 @@ cd companion
 sha256sum -c SHA256SUMS
 ```
 
-The release candidate contains 206 practice records, 611 evidence or
+This edition contains 206 practice records, 614 evidence or
 corroboration records, and 29 benchmark records. Its methodology directory
-records the corpus snapshots, common search protocol, 159 retained scholarly
+records the corpus snapshots, common search protocol, 160 retained scholarly
 works, all 39 decisions in the bounded August update audit, a 148-record
 software-engineering coverage probe, a deterministic 40-DOI SciX comparison,
 a complete 26-record TSE known-set comparison, a 55-record DBLP title census,
@@ -93,13 +93,13 @@ and the prepared ACM, IEEE, and Scopus search plans. The DBLP census exposed 50
 records absent from both prior comparison sets, but remains a title-screening
 queue rather than a publisher-native or Scopus-equivalent result. The
 independent-grading replication packet includes a self-contained reviewer form,
-strict agreement analyzer, and a status record disclosing that this release
-candidate has not commissioned external graders and makes no
-independent-calibration claim.
+strict agreement analyzer, and a status record disclosing that this edition
+has not commissioned external graders and makes no independent-calibration
+claim.
 Author-system cases are marked as illustrations and are not counted as
 independent external evidence.
 
-## Verify a release candidate
+## Verify a release
 
 The release contract is machine-readable in [`release-metadata.json`](release-metadata.json).
 It cross-checks the version and freeze date across the manuscript, citation
@@ -116,13 +116,15 @@ node scripts/release-gate.mjs
 node scripts/arxiv-compile.mjs
 ```
 
-Release candidates may record uncompleted gates with machine-readable
-limitations. Stable `1.0.0` accepts external grading only when at least two
-readers have completed the blinded packet and a valid calibration report is
-present. It also requires complete execution evidence for all planned ACM
-Digital Library, IEEE Xplore, and Scopus cells. The stable gate continues to
-reject unresolved arXiv license, endorsement, ORCID, provisional content
-licensing, and companion DOI state.
+External grading and publisher-native search are disclosed limitations rather
+than release preconditions, so a stable release may declare either as not
+performed. The gate still enforces the disclosure: a not-performed state must
+carry its status artifacts, and a completed state must carry its calibration
+report or execution evidence for every planned ACM Digital Library, IEEE Xplore,
+and Scopus cell. A companion DOI is optional and may be recorded as
+`not-assigned`; when a DOI is declared it must be well formed and present
+everywhere it is cited. The stable gate continues to reject unresolved arXiv
+license, endorsement, or ORCID state and provisional content-license wording.
 
 ## Reusable agent skills
 
@@ -148,13 +150,15 @@ system before use.
 
 ## Release status
 
-The files currently represent the `1.0.0-rc.16` release candidate prepared on
-August 7, 2026. It is explicitly unfinished: no external readers have completed
-the blinded packet, and the ACM Digital Library, IEEE Xplore, and Scopus plans
-have not been executed. The release candidate reports those limitations and
-makes neither an independent-calibration nor provider-coverage claim. Both
-measured additions remain gates for archival `1.0.0`; DBLP, OpenAlex, and web
-surrogates do not substitute for the native searches. The final immutable
-version, licenses, ORCID and endorsement state, companion DOI, exact source
-archive, preview, checksums, GitHub tag, and website metadata must also be
-synchronized before stable release and arXiv submission.
+The files represent version `1.0.0`, frozen on August 11, 2026. Two measured
+additions are deliberately out of scope for this edition: no external readers
+have completed the blinded packet, and the ACM Digital Library, IEEE Xplore, and
+Scopus plans have not been executed. This edition reports those limitations and
+makes neither an independent-calibration nor provider-coverage claim; DBLP,
+OpenAlex, and web surrogates do not substitute for the native searches. Both
+packets are released so a later edition can carry them out. The manuscript and
+companion are released under CC-BY-4.0; the rest of the repository stays under
+Apache-2.0. No archival DOI is assigned; the public repository is the citable
+source for the linked code and data. Version, licenses, ORCID state, source
+archive, preview, checksums, GitHub tag, and website metadata are synchronized
+at release.

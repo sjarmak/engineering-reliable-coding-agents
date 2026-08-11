@@ -12,16 +12,16 @@ The logs already existed before the attribution problem was posed. Chapter 10 es
 
 Attribution is the scarce capability in this sequence. Logging preserves evidence. Attribution claims that one action materially changed the run's prospects. That claim determines what engineers instrument, which component they repair, whether a benchmark case remains valid, and sometimes who is held accountable. With weak attribution, a complete trace can become a precise record attached to the wrong explanation.
 
-Three practices follow. I derive the initial failure taxonomy from traces produced by the system I operate. I keep a person responsible for consequential causal assignments. I structure the trace so that person can inspect and defend the evidence. Automation can organize and extend the work after those conditions exist. It should not be assumed to create them.
+Three practices follow. Derive the initial failure taxonomy from traces produced by the system you operate. Keep a person responsible for consequential causal assignments. Structure the trace so that person can inspect and defend the evidence. Automation can organize and extend the work after those conditions exist. It should not be assumed to create them.
 
 \hypertarget{build-the-taxonomy-from-the-failures-you-can-inspect}{%
 \section{Build the taxonomy from the failures you can inspect}\label{build-the-taxonomy-from-the-failures-you-can-inspect}}
 
-The protocol in this section has limited evidentiary support. Its basis is one directional observational study and one practitioner-authored method. Neither is a controlled result showing that the procedure improves an agent system. I still use it because it provides an auditable process for turning local traces into measurement categories. The method comes from Orosz and Husain (\href{https://newsletter.pragmaticengineer.com/p/evals}{2025}), and their recommendation to begin with at least one hundred traces is an unmeasured protocol choice.
+The protocol in this section has limited evidentiary support. Its basis is one directional observational study and one practitioner-authored method. Neither is a controlled result showing that the procedure improves an agent system. It remains worth using because it provides an auditable process for turning local traces into measurement categories. The method comes from Orosz and Husain (\href{https://newsletter.pragmaticengineer.com/p/evals}{2025}), and their recommendation to begin with at least one hundred traces is an unmeasured protocol choice.
 
-I begin with traces from the system and workload I operate. The sample should vary across task type, outcome, model version, repository area, duration, tool use, and any operating condition likely to alter the path through the system. Apparent successes also belong in the sample when verification was skipped or the result depended on an unexplained retry. Excluding them would define failure as only what the current evaluator already detects, preserving the blind spot the review is meant to uncover.
+Begin with traces from the system and workload you operate. The sample should vary across task type, outcome, model version, repository area, duration, tool use, and any operating condition likely to alter the path through the system. Apparent successes also belong in the sample when verification was skipped or the result depended on an unexplained retry. Excluding them would define failure as only what the current evaluator already detects, preserving the blind spot the review is meant to uncover.
 
-For each trace, I read from the initial request through the terminal state and take open-ended notes. The primary annotation identifies the first upstream failure that materially changed the available path to success. It does not enumerate every later symptom.
+For each trace, read from the initial request through the terminal state, taking open-ended notes. The primary annotation identifies the first upstream failure that materially changed the available path to success. It does not enumerate every later symptom.
 
 A run may begin with an incorrect plan, edit the wrong module, execute a test from the wrong directory, and then misinterpret the failure. Those are four visible defects. If the plan directed all later work toward the wrong module, the planning error is the first upstream failure.
 
@@ -33,7 +33,7 @@ The first-upstream rule also introduces a counterfactual check:
 If this step had been correct while the preceding record remained unchanged, could the later failure still have occurred through the observed path?
 \end{quote}
 
-A clear no makes the step a plausible causal boundary. A yes suggests that the annotation identifies a symptom, or that the trace does not expose enough state to decide. In the latter case, I preserve the uncertainty and leave the causal assignment unresolved.
+A clear no makes the step a plausible causal boundary. A yes suggests that the annotation identifies a symptom, or that the trace does not expose enough state to decide. In the latter case, preserve the uncertainty and leave the causal assignment unresolved.
 
 \begin{figure}[htbp]
 \centering
@@ -43,7 +43,7 @@ A clear no makes the step a plausible causal boundary. A yes suggests that the a
 
 The counterfactual holds the preceding record fixed and asks whether the observed path could still have produced the later failure.
 
-After the open review, I cluster the notes into roughly five to ten themes. The categories should describe failures that require different measurement or investigation surfaces. Planning, retrieval, execution, tool use, self-diagnosis, verification, and environment handling may emerge, but I do not impose them before reading the traces. A local pipeline may instead concentrate failures around identity propagation, stale workspace state, permission boundaries, retry ordering, or task ambiguity.
+After the open review, cluster the notes into roughly five to ten themes. The categories should describe failures that require different measurement or investigation surfaces. Planning, retrieval, execution, tool use, self-diagnosis, verification, and environment handling may emerge, but they should not be imposed before reading the traces. A local pipeline may instead concentrate failures around identity propagation, stale workspace state, permission boundaries, retry ordering, or task ambiguity.
 
 Phase labels are useful because they narrow the evidence required for diagnosis. A planning failure asks whether the system represented the goal, constraints, and dependencies before acting. An execution failure asks whether a valid plan became the intended commands and edits. A self-diagnosis failure asks whether the system interpreted the resulting state correctly. Combining all three under ``reasoning failure'' produces a broad count with little guidance about which part of the trace needs repair.
 
@@ -55,21 +55,21 @@ Their distribution describes the tasks, systems, permissions, and operating poin
 
 I encountered this mismatch in my own trial-annotation pipeline for experimental agent runs. An early taxonomy omitted failure modes that dominated the project's traces even though public taxonomies covered related categories. The third revision grew from annotation of the local corpus and separated failures along more dimensions. This local illustration also exposes its own limit: the published manifest contains no annotations, so the category counts cannot be reproduced from the export.
 
-The unit of analysis is a complete case. I keep the request, relevant starting state, trace, terminal outcome, verification result, and annotation together. When several retries belong to one attempt, I preserve their order and identities so that a later successful retry does not erase the original failure. When the system forks work, I retain the parent-child relationship. Otherwise an error imported from another branch may appear to originate where it was first observed.
+The unit of analysis is a complete case. Keep the request, relevant starting state, trace, terminal outcome, verification result, and annotation together. When several retries belong to one attempt, preserve their order and identities so that a later successful retry does not erase the original failure. When the system forks work, retain the parent-child relationship. Otherwise an error imported from another branch may appear to originate where it was first observed.
 
-Category boundaries will blur in long, multi-phase work. A retrieval failure can induce a bad plan, while an environment defect can make correct execution resemble faulty reasoning. I allow multiple descriptive tags when they preserve useful context, but retain one first-upstream assignment for frequency analysis. This avoids pretending that causation is always singular while keeping the primary count interpretable.
+Category boundaries will blur in long, multi-phase work. A retrieval failure can induce a bad plan, while an environment defect can make correct execution resemble faulty reasoning. Allow multiple descriptive tags when they preserve useful context, but retain one first-upstream assignment for frequency analysis. This avoids pretending that causation is always singular while keeping the primary count interpretable.
 
-Reviewer disagreement is evidence about the taxonomy. If two qualified reviewers repeatedly divide the same cases between planning and retrieval, the definitions may depend on state the trace does not expose. If they agree about the events but disagree about the counterfactual, the causal rule needs a sharper boundary. I revise the definitions and preserve the original annotations so the change remains visible.
+Reviewer disagreement is evidence about the taxonomy. If two qualified reviewers repeatedly divide the same cases between planning and retrieval, the definitions may depend on state the trace does not expose. If they agree about the events but disagree about the counterfactual, the causal rule needs a sharper boundary. Revise the definitions and preserve the original annotations so the change remains visible.
 
 The initial review of roughly one hundred traces is intentionally laborious. Reading them end to end discovers categories, tests whether the recorded evidence can support those categories, and identifies distinctions that require domain expertise. It cannot estimate a stable low-frequency failure rate with the precision that a larger sample and a \textbf{power analysis} would require. A frequency calculated from one run per task also inherits the run-to-run variation described in Chapter 1, so two nearby categories may reverse order under repetition.
 
 The output of the initial pass is a defensible measurement vocabulary and a labeled seed corpus. Estimating the system's failure distribution requires a separate sampling design.
 
-Once the categories stabilize, scale-out returns to Chapter 5. I validate an LLM-as-judge on a held-out, expert-labeled, stratified sample under the same rubric. I then use it to extend labels only within the operating range supported by its measured errors. The validation belongs to the category definitions in force when it ran. Revising a definition invalidates the agreement estimate for that category.
+Once the categories stabilize, scale-out returns to Chapter 5. Validate an LLM-as-judge on a held-out, expert-labeled, stratified sample under the same rubric, then use it to extend labels only within the operating range supported by its measured errors. The validation belongs to the category definitions in force when it ran. Revising a definition invalidates the agreement estimate for that category.
 
 Human review remains concentrated on new categories, ambiguous cases, consequential failures, and strata in which the automated judge performs poorly. Applying a prebuilt judge before the manual pass would automate someone else's taxonomy rather than discover the failures produced by the local system.
 
-Frequency informs priority without determining it. I count first-upstream assignments by phase and category, examine their uncertainty, and compare their prevalence with the cost of each failure. A frequent, recoverable tool error may deserve less attention than a rare attribution error that invalidates an evaluation. The distribution shows where failures concentrate. Engineering judgment still decides which failures are worth repairing.
+Frequency informs priority without determining it. Count first-upstream assignments by phase and category, examine their uncertainty, and compare their prevalence with the cost of each failure. A frequent, recoverable tool error may deserve less attention than a rare attribution error that invalidates an evaluation. The distribution shows where failures concentrate. Engineering judgment still decides which failures are worth repairing.
 
 Several narrower methods remain in the companion catalog. Constraint-violation logs can localize failure when a task has explicit invariants. Trajectory canonicalization can support structural comparisons across runs. Another entry recommends detecting environment errors before execution because they can consume disproportionate effort. These techniques may sharpen a local taxonomy, but none removes the need to discover which categories the operated system actually produces.
 
@@ -78,7 +78,7 @@ Several narrower methods remain in the companion catalog. Constraint-violation l
 
 Attribution becomes consequential when it changes what happens next. An engineer may rewrite a prompt, repair a tool adapter, remove a benchmark task, retrain a model, or revise an incident report based on the assigned cause. The same label may also affect accountability when different people or services own different parts of the run. In those cases, an automated guess is not a harmless summary.
 
-I separate triage from verdict. Triage ranks cases or candidate steps for investigation. A verdict identifies the responsible action and decisive step, supported by enough evidence that another reviewer can challenge the assignment. Automation can make triage cheaper even when its error rate makes it unsuitable for verdicts.
+Triage and verdict are separate decisions. Triage ranks cases or candidate steps for investigation. A verdict identifies the responsible action and decisive step, supported by enough evidence that another reviewer can challenge the assignment. Automation can make triage cheaper even when its error rate makes it unsuitable for verdicts.
 
 The opening result shows the current limit. An agent-level accuracy of 53.5 percent leaves nearly half of responsible-agent assignments wrong. A step-level accuracy of 14.2 percent misses the point at which most failures became decisive.
 
@@ -90,7 +90,7 @@ The fixes were evaluated on the benchmarks that defined the attribution task, an
 
 \Needspace{5\baselineskip}
 
-A human verdict needs a reconstructable chain. I ask:
+A human verdict needs a reconstructable chain, and three questions establish it:
 
 \begin{itemize}
 \tightlist
@@ -112,7 +112,7 @@ The trace cannot resolve those alternatives unless it records what each step rec
 
 \Needspace{5\baselineskip}
 
-I therefore represent attribution as a structured claim. It records:
+Attribution is therefore best represented as a structured claim. It records:
 
 \begin{itemize}
 \tightlist
@@ -134,22 +134,22 @@ I therefore represent attribution as a structured claim. It records:
 
 This structure does not make the judgment objective. It makes visible where judgment entered. A postmortem that names a ``root cause'' without identifying the state transition behind it is a summary rather than an attribution.
 
-Counterfactual reasoning tests an attribution without proving it. I ask whether replacing the candidate action with a correct one, while holding earlier state fixed, would have prevented the observed failure path. Several steps may satisfy that condition because later checks could also have recovered the run.
+Counterfactual reasoning tests an attribution without proving it. The question is whether replacing the candidate action with a correct one, while holding earlier state fixed, would have prevented the observed failure path. Several steps may satisfy that condition because later checks could also have recovered the run.
 
 Under the taxonomy used here, the decisive step is the earliest point at which the relevant error entered the run or an owned opportunity to stop it was irretrievably missed.
 
 That definition requires an explicit ownership model. A verifier that was never assigned responsibility for checking interface currency should not inherit responsibility merely because it could have caught the error. A release gate whose declared contract includes that check does own a meaningful missed intervention. Postmortems become arbitrary when they infer obligations from hindsight rather than from the contracts active during the run.
 
-Retries complicate attribution because the world may change between attempts. A failed attempt can alter files, caches, rate limits, conversation state, or the evidence presented to the next attempt. A successful retry may depend on those changes, while a later failure may be responding to damage introduced earlier. I preserve attempt identity and state boundaries so reviewers can distinguish a repeated decision from a decision made in a changed environment.
+Retries complicate attribution because the world may change between attempts. A failed attempt can alter files, caches, rate limits, conversation state, or the evidence presented to the next attempt. A successful retry may depend on those changes, while a later failure may be responding to damage introduced earlier. Preserve attempt identity and state boundaries so reviewers can distinguish a repeated decision from a decision made in a changed environment.
 
 Concurrency creates another ambiguity. Two workers may read the same starting state, make individually valid changes, and conflict only when their outputs merge. Neither branch necessarily contains a unilateral defect. Depending on the violated contract, the failure may belong to the coordination rule, merge order, or missing conflict check. A transcript sorted by completion time can make the worker whose result arrived last appear responsible for a conflict it did not cause.
 
-Before assigning fault to an agent, I rule out the evaluator and execution environment. A broken dependency, stale fixture, permission mismatch, nondeterministic test, or malformed task can make a correct action appear defective. Differential testing runs the same candidate under a controlled change in agent, harness, or environment and asks whether the failure follows the candidate. The companion catalog treats this as a separate diagnostic control because attribution without apparatus checks can turn measurement error into a model failure.
+Before assigning fault to an agent, rule out the evaluator and execution environment. A broken dependency, stale fixture, permission mismatch, nondeterministic test, or malformed task can make a correct action appear defective. Differential testing runs the same candidate under a controlled change in agent, harness, or environment and asks whether the failure follows the candidate. The companion catalog treats this as a separate diagnostic control because attribution without apparatus checks can turn measurement error into a model failure.
 
 \hypertarget{component-boundaries-as-attribution-vocabulary}{%
 \subsection{Component boundaries as an attribution vocabulary}\label{component-boundaries-as-attribution-vocabulary}}
 
-Phase labels answer where in the run's reasoning a failure entered. The factory decomposition of Chapter 7 supplies a second axis: which component boundary introduced it. When the operated system spans that decomposition, I record the originating boundary alongside the phase:
+Phase labels answer where in the run's reasoning a failure entered. The factory decomposition of Chapter 7 supplies a second axis: which component boundary introduced it. When the operated system spans that decomposition, record the originating boundary alongside the phase:
 
 \begin{itemize}
 \tightlist
@@ -212,7 +212,7 @@ Chapter 10's typed event stream supported replay and recovery. Human audit adds 
 
 \Needspace{5\baselineskip}
 
-At minimum, I retain:
+At minimum, retain:
 
 \begin{itemize}
 \tightlist
@@ -256,7 +256,7 @@ Retries identify the attempt they repeat and the reason the controller authorize
 
 A tool response, file digest, exit status, or test result is an observation. A model statement that the response means a dependency is missing is an interpretation. Storing both under a generic message field encourages later readers to treat the interpretation as though it came from the environment. Typed events allow the reviewer to compare the claim with the observation on which it rests.
 
-Decision records need enough input to reevaluate the choice. A label such as ``selected tool A'' records the outcome but omits the alternatives, constraints, and evidence available at the time. I preserve the relevant input references, selected action, rejected alternatives when the system represented them, and the rule or model version that made the selection.
+Decision records need enough input to reevaluate the choice. A label such as ``selected tool A'' records the outcome but omits the alternatives, constraints, and evidence available at the time. Preserve the relevant input references, selected action, rejected alternatives when the system represented them, and the rule or model version that made the selection.
 
 Replay means re-running or reevaluating a decision against the same recorded inputs. Asking a model to invent a retrospective rationale is a different operation.
 
@@ -264,7 +264,7 @@ Some inputs cannot be stored in full. Repository snapshots, retrieved documents,
 
 Step boundaries should correspond to ownership and state transitions visible to the control plane. One step containing plan generation, three tool calls, an edit, and verification is too coarse for attribution. Recording every token or streaming fragment produces the opposite failure: thousands of events without a meaningful decision boundary.
 
-I use the smallest unit in which one actor receives a defined input and produces an action or state transition consumed by another component.
+The unit of record is the smallest one in which a single actor receives a defined input and produces an action or state transition consumed by another component.
 
 \Needspace{5\baselineskip}
 
@@ -296,13 +296,13 @@ The review interface should support competing explanations. A reviewer should be
 
 CodeProbe (\href{https://github.com/sjarmak/codeprobe}{public repository}) publishes complete transcripts and preserves quarantined runs separately. Its successor adds a side-by-side trace browser for audited comparisons. These author-system choices illustrate preservation and review practices; they make competing conclusions reviewable without claiming an optimal schema.
 
-Quarantined runs are worth preserving because evaluation pipelines often remove timeouts, rate limits, infrastructure failures, and malformed outputs before analysis. Some exclusions are methodologically justified, but deletion prevents a later reviewer from distinguishing an agent failure from an apparatus failure. I retain the raw run, exclusion reason, decision owner, and any replacement attempt. Aggregate reporting can then follow the declared policy without erasing the cases that test it.
+Quarantined runs are worth preserving because evaluation pipelines often remove timeouts, rate limits, infrastructure failures, and malformed outputs before analysis. Some exclusions are methodologically justified, but deletion prevents a later reviewer from distinguishing an agent failure from an apparatus failure. Retain the raw run, exclusion reason, decision owner, and any replacement attempt. Aggregate reporting can then follow the declared policy without erasing the cases that test it.
 
 Structured traces also improve privacy controls because sensitive fields become identifiable. Credentials, personal data, proprietary source, and private model reasoning may require redaction or restricted access. Blanket retention creates a security liability, while blanket deletion destroys auditability. Field-level policies can restrict access, encrypt retained data, and irreversibly redact secrets. The record should distinguish evidence withheld by policy from evidence the system never captured.
 
 The trace schema must record its own version. Adding a field changes what can be inferred from later runs. Renaming an event can break comparisons with the existing failure corpus. A missing field may mean that the event did not occur, that the recorder omitted it, or that an older schema represented it differently. The decoder and migration logic should distinguish those states explicitly.
 
-Instrumentation can also change the system being observed. Synchronous logging adds latency. Large payloads can alter token budgets, memory use, or rate-limit behavior. Asynchronous emission can reorder records or lose the final buffer during a crash. I measure the overhead, assign a durability requirement to each event class, and record missing events as trace failures. A gap must remain visible in the reconstructed record.
+Instrumentation can also change the system being observed. Synchronous logging adds latency. Large payloads can alter token budgets, memory use, or rate-limit behavior. Asynchronous emission can reorder records or lose the final buffer during a crash. Measure the overhead, assign a durability requirement to each event class, and record missing events as trace failures. A gap must remain visible in the reconstructed record.
 
 Changing instrumentation between experimental arms also changes the apparatus, which Chapter 1 requires to remain fixed in a paired comparison.
 
@@ -310,22 +310,22 @@ The practitioner evidence for this practice is anecdotal. One organization repor
 
 Logging does not repair an agent. It makes causal explanations testable against preserved events and makes repeated failure paths comparable. Repair still requires a separate intervention and an evaluation showing that the intervention changed the intended outcome. This distinction prevents observability work from receiving credit for reliability gains it has only made possible to measure.
 
-The schema should evolve from failed investigations. Common gaps concern the state a worker observed, side effects inherited by a retry, the branch selected at a join, or the evidence behind a decision. I record the unanswered question as an instrumentation defect. The next schema version adds the smallest event or relation that would have answered it. This ties auditability to real investigations and limits speculative completeness.
+The schema should evolve from failed investigations. Common gaps concern the state a worker observed, side effects inherited by a retry, the branch selected at a join, or the evidence behind a decision. Record the unanswered question as an instrumentation defect. The next schema version adds the smallest event or relation that would have answered it. This ties auditability to real investigations and limits speculative completeness.
 
 Trajectory shape can provide an early signal while a run remains active. The companion catalog describes monitoring duration, variance, tool-call count, and other structural changes because failed trajectories may run longer or become more variable. Such a signal can preserve a suspicious run or request earlier review. It cannot identify the cause without the structured events that explain what occurred inside that shape.
 
 \hypertarget{turn-failed-runs-into-an-operating-record}{%
 \section{Turn failed runs into an operating record}\label{turn-failed-runs-into-an-operating-record}}
 
-I begin with the twenty most recent failed runs and read each one from the initial request through the terminal state. My notes remain open-ended, and each case receives one primary assignment: the first upstream failure that materially changed its path to success. I also include apparent successes whose verification was skipped, because an unverified outcome cannot provide clean evidence of success.
+Begin with the twenty most recent failed runs and read each one from the initial request through the terminal state. Notes remain open-ended, and each case receives one primary assignment: the first upstream failure that materially changed its path to success. Include apparent successes whose verification was skipped, because an unverified outcome cannot provide clean evidence of success.
 
 This first batch tests the trace as much as the system. It shows whether the record can answer ordinary causal questions before a larger annotation effort depends on it.
 
-I then expand the corpus toward one hundred traces selected across task types, outcomes, model versions, repositories, durations, tools, and operating conditions. I cluster the notes into roughly five to ten failure classes. Their observed frequency helps determine which classes to measure first, while consequence and repair cost determine the final priority.
+Then expand the corpus toward one hundred traces selected across task types, outcomes, model versions, repositories, durations, tools, and operating conditions, and cluster the notes into roughly five to ten failure classes. Their observed frequency helps determine which classes to measure first, while consequence and repair cost determine the final priority.
 
 A named human signs any attribution that changes remediation, accountability, task validity, or the interpretation of an evaluation result. Automated readers may rank the review queue, retrieve related cases, and propose candidate decisive steps. They do not finalize the causal assignment.
 
-The first question the trace cannot answer becomes an instrumentation requirement. I add the missing state reference, event boundary, identity, ordering relation, or outcome field, then preserve the new schema version with later runs. Failed analysis therefore becomes evidence about the observability system itself.
+The first question the trace cannot answer becomes an instrumentation requirement. Add the missing state reference, event boundary, identity, ordering relation, or outcome field, then preserve the new schema version with later runs. Failed analysis therefore becomes evidence about the observability system itself.
 
 A completed review should state both what the evidence supports and what remains unresolved.
 
@@ -334,8 +334,6 @@ The repository artifact \href{https://github.com/sjarmak/engineering-reliable-co
 The failure corpus remains an operating asset after Part III. Chapter 15 uses it to tune compaction policy, because compression should preserve the evidence that prior investigations found decisive.
 
 Part IV turns to the evidence available when the model acts: retrieval, context budgets, and memory. Chapter 12 begins by measuring repository retrieval, the first step in deciding which parts of a codebase enter that evidence.
-
-\textbf{Portable claim.} Attribute the first upstream failure the trace can support.
 
 \section*{Sources and evidence}
 

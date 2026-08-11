@@ -41,6 +41,7 @@ total expected agreement: 0.82
 
 Cohen (\href{https://doi.org/10.1177/001316446002000104}{1960}) defined kappa as the proportion of possible agreement beyond chance that the raters achieved:
 
+\Needspace*{5\baselineskip}
 \begin{verbatim}
 kappa = (observed agreement - expected agreement)
     / (1 - expected agreement)
@@ -48,6 +49,7 @@ kappa = (observed agreement - expected agreement)
 
 For this example:
 
+\Needspace*{6\baselineskip}
 \begin{verbatim}
 kappa = (0.90 - 0.82) / (1 - 0.82)
   = 0.08 / 0.18
@@ -232,8 +234,6 @@ A change in domain, rubric, response format, or model generation reopens the cal
 The first build does not require the complete corpus. Begin with one rubric category and a small set of expert-labeled cases from the score band where that decision turns. Keep those cases outside both the judge prompt and threshold-selection data. Evaluate the judge at the intended deployment threshold and report class-specific rates rather than percent agreement.
 
 That first stratum tests one grading decision and identifies which category should be labeled next. The broader calibration gate remains unmet until the full instrument satisfies its requirements.
-
-\textbf{Portable claim.} Agreement is a calibration result, not a correctness verdict.
 
 \section*{Sources and evidence}
 

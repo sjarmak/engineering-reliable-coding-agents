@@ -1,7 +1,7 @@
 \chapter{Replayable traces and fault-injection recovery testing}
 \label{ch10-replayable-traces-fault-injection-recovery}
 \begin{quote}
-\textbf{Evidence profile.} 1 strong \(\cdot\) 9 directional \(\cdot\) 0 corroborating \(\cdot\) 0 null or conflicting evidence items across 2 developed practices (ERCA-097, ERCA-127). One directional item is a preprint.
+\textbf{Evidence profile.} 1 strong \(\cdot\) 9 directional \(\cdot\) 0 corroborating \(\cdot\) 0 null or conflicting evidence items across 2 developed practices (ERCA-097, ERCA-127). Six directional items are carried by companion records cited inline (ERCA-050, ERCA-196, ERCA-197, ERCA-198, ERCA-204). One directional item is a preprint.
 
 \textbf{Chapter claim.} Recovery is a measured property.
 \end{quote}
@@ -35,6 +35,7 @@ The distinction becomes operational during partial failure. Suppose an agent dec
 
 A typed stream can represent the gap directly:
 
+\Needspace*{8\baselineskip}
 \begin{verbatim}
 step 17 selected action
     -> tool_call_dispatched
@@ -280,7 +281,7 @@ The five kill points strike one worker's lifecycle. Once a factory runs multiple
 
 Sun et al.~(\href{https://www.usenix.org/system/files/osdi22-sun.pdf}{2022}) tested this family directly for Kubernetes reconciliation controllers. Sieve perturbs the controller's view of cluster state, feeding it stale, intermediate, or unobserved states, and detects bugs with differential oracles that compare state transitions between perturbed and unperturbed executions. The evaluated systems are cluster controllers, so the transfer is directional, but the factory analogue is exact: a factory control plane is a reconciliation controller over work items, and the corresponding fault is a controller that believes a worker still owns a task while the repository or another controller has moved on. The differential oracle also transfers: run the same workload with and without the view perturbation and compare the resulting state transitions, rather than asking only whether the perturbed run ended in a passing state.
 
-The table below defines the ambiguity faults I add to the test menu; it is a protocol, not an executed result. Contract identifiers refer to the factory contracts defined in Chapter 7. Each row names the fault, the contract it tests, and the observable behavior an acceptable runtime must exhibit. Five representative rows appear here; the full matrix, including controller-recovery, verifier-failure, schema-compatibility, history-compaction, and retry-storm faults that Chapters 10 and 19 develop in their own sections, is published as a machine-readable protocol in the repository artifact \href{https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/distributed-ambiguity-faults.yaml}{\texttt{protocols/distributed-ambiguity-faults.yaml}}.
+The table below defines the ambiguity faults added to the test menu; it is a protocol, not an executed result. Contract identifiers refer to the factory contracts defined in Chapter 7. Each row names the fault, the contract it tests, and the observable behavior an acceptable runtime must exhibit. Five representative rows appear here; the full matrix, including controller-recovery, verifier-failure, schema-compatibility, history-compaction, and retry-storm faults that Chapters 10 and 19 develop in their own sections, is published as a machine-readable protocol in the repository artifact \href{https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/distributed-ambiguity-faults.yaml}{\texttt{protocols/distributed-ambiguity-faults.yaml}}.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2800}}
@@ -389,22 +390,22 @@ Correctness, reliability, and performance should remain separate in the report. 
 
 Resource use and additional model calls belong to cost. An operator's ability to understand the failure and initiate recovery safely belongs to usability. One combined recovery score conceals which property failed.
 
-A recovery system may also need to withhold action when it cannot classify a failure safely. The companion pattern on diagnosing before gating recovery addresses that policy. Another companion pattern asks whether recovery remains invisible to downstream observers except as monotonic progress. Neither property follows from a successful restart, so I exclude both from the basic pass criterion unless the system claims them explicitly.
+A recovery system may also need to withhold action when it cannot classify a failure safely. The companion pattern on diagnosing before gating recovery addresses that policy. Another companion pattern asks whether recovery remains invisible to downstream observers except as monotonic progress. Neither property follows from a successful restart, so neither belongs in the basic pass criterion unless the system claims it explicitly.
 
 \hypertarget{a-protocol-for-trusting-recovery}{%
 \section{A protocol for trusting recovery}\label{a-protocol-for-trusting-recovery}}
 
-Before accepting a recovery claim about an agent runtime, I look for two linked artifacts.
+Before accepting a recovery claim about an agent runtime, look for two linked artifacts.
 
-The first is a durably persisted typed event stream that distinguishes model calls, tool dispatch and completion, environment changes, external commitments, and state transitions. I begin with the shared OpenTelemetry GenAI conventions, then add explicit state, branch, persistence, and effect fields where the workload requires them. Every agent action identifies its owner, and every tool call can be joined to the reasoning step and session that authorized it.
+The first is a durably persisted typed event stream that distinguishes model calls, tool dispatch and completion, environment changes, external commitments, and state transitions. Begin with the shared OpenTelemetry GenAI conventions, then add explicit state, branch, persistence, and effect fields where the workload requires them. Every agent action identifies its owner, and every tool call can be joined to the reasoning step and session that authorized it.
 
-The second artifact is a fault-injection result produced under representative load. I run a clean control, kill a worker from inside an active step, and place at least one kill between an external effect and its durable completion record. I repeat injections within continuing runs and across independent runs because the first restart does not characterize later recovery. When the runtime spans multiple workers and a control plane, I add faults from the distributed ambiguity menu, placed by the claim they test rather than by a timer.
+The second artifact is a fault-injection result produced under representative load. Run a clean control, kill a worker from inside an active step, and place at least one kill between an external effect and its durable completion record. Repeat injections within continuing runs and across independent runs, because the first restart does not characterize later recovery. When the runtime spans multiple workers and a control plane, add faults from the distributed ambiguity menu, placed by the claim they test rather than by a timer.
 
 The harness must confirm that the intended kill occurred, observe recovery without supplying recovery state, and exercise a naive negative control expected to duplicate effects. Recovery paths themselves enter the sweep as subjects, since a recovery action holds authority and can cause the failure it exists to prevent.
 
 \Needspace{5\baselineskip}
 
-I measure recovery time between declared application events rather than between process death and process restart. I retain:
+Measure recovery time between declared application events rather than between process death and process restart. Retain:
 
 \begin{itemize}
 \tightlist
@@ -420,7 +421,7 @@ I measure recovery time between declared application events rather than between 
   output or state equivalence against the clean control.
 \end{itemize}
 
-When exact equivalence is impossible, I state which properties were constrained and which outputs remain nondeterministic. A pass means only that the runtime met those conditions in the tested trials.
+When exact equivalence is impossible, state which properties were constrained and which outputs remain nondeterministic. A pass means only that the runtime met those conditions in the tested trials.
 
 The fault menu and complete configuration remain attached to the result. Together they define the envelope within which the claim is valid and provide the basis for repeating the experiment after a version or deployment change. A reader should be able to determine which intervals were struck, which faults were omitted, how behavior changed across recurring failures, and which measurements separated correctness from reliability, performance, and cost.
 
@@ -435,8 +436,6 @@ That claim can be challenged, repeated, and revised when the system changes.
 The repository artifact \href{https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/recovery-fault-injection.md}{\texttt{protocols/recovery-fault-injection.md}} supplies the bounded run sequence, pass condition, and output manifest.
 
 A trace detailed enough to replay is also the artifact a person reads when recovery fails. Even a complete trace, however, does not establish which action caused the failure or how a person can defend that attribution.
-
-\textbf{Portable claim.} Recovery is a measured property.
 
 \section*{Sources and evidence}
 
@@ -463,13 +462,13 @@ A trace detailed enough to replay is also the artifact a person reads when recov
 \item
   Directional evidence: Alvaro, Rosen, and Hellerstein (2015), ``Lineage-Driven Fault Injection,'' SIGMOD 2015. Evaluated on distributed data-management protocols; the outcome-backward fault-selection principle transfers.
 \item
-  Directional evidence: Wu, Pan, and Huang (2024), ``Legolas,'' NSDI 2024. Found 20 previously unknown partial-service-failure bugs across six mature distributed systems; the state-aware fault-placement principle transfers, not the bug rate.
+  Directional evidence: Wu, Pan, and Huang (2024), ``Efficient Exposure of Partial Failure Bugs in Distributed Systems with Inferred Abstract States,'' NSDI 2024, which names its tool Legolas. Found 20 previously unknown partial-service-failure bugs across six mature distributed systems; the state-aware fault-placement principle transfers, not the bug rate.
 \item
-  Directional evidence: Sun et al.~(2022), ``Sieve,'' OSDI 2022. Evaluated on Kubernetes controllers; the view-perturbation faults and differential state-transition oracles transfer to factory control planes.
+  Directional evidence: Sun et al.~(2022), ``Sieve: Automatic Reliability Testing for Cluster Management Controllers,'' OSDI 2022. Evaluated on Kubernetes controllers; the view-perturbation faults and differential state-transition oracles transfer to factory control planes.
 \item
   Directional evidence: Li, Cai, and Lou (2026), ``Pilot Execution,'' NSDI 2026. Cloud-infrastructure incident evidence that recovery actions cause severe failures; supports treating recovery paths as production code under contract I10.
 \item
-  Direct evidence, preprint: Zhao et al.~(2026), ``Failure as a Process,'' arXiv:2607.09510. 3,843 trajectories collected, 1,794 complete valid runs annotated across more than 63,000 steps; failure modeled as onset, evolution, and recovery.
+  Directional evidence (preprint): Zhao et al.~(2026), ``Failure as a Process,'' arXiv:2607.09510. 3,843 trajectories collected, 1,794 complete valid runs annotated across more than 63,000 steps; failure modeled as onset, evolution, and recovery.
 \end{itemize}
 
 Author-system cases are narrative illustration, not evidence. The kill demonstration and publish-gate protocol are local artifacts.

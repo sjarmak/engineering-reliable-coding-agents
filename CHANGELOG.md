@@ -1,5 +1,63 @@
 # Changelog
 
+## 1.0.0 — 2026-08-11
+
+- Froze the first stable edition. Version strings, the freeze date, and the
+  companion release metadata now read `1.0.0` rather than a release candidate.
+- Regenerated Figure 2 from its SVG source. The compiled PDF had never been
+  rebuilt after the distributed-systems expansion, so page xv still reported
+  138 scholarly works, 192 records, 55 developed, and 137 companion against a
+  manuscript stating 206 records, 56 developed, and 150 companion.
+- Reframed external grading and the publisher-native ACM Digital Library, IEEE
+  Xplore, and Scopus searches as disclosed limitations rather than archival-v1
+  gates, in the manuscript, the repository docs, and `release-gate.mjs`.
+  Requiring both to be `complete` for a stable release made this edition
+  unreleasable while it truthfully reported them as not performed. The gate
+  still enforces that a not-performed state carries its disclosure artifacts.
+- Made the companion DOI optional. `companion.doi` accepts `not-assigned`, and
+  the manuscript's data-availability statement no longer carries a future-tense
+  DOI promise. A declared DOI is still validated everywhere it is cited.
+- Admitted two sources supporting the repository-scale framing: Sadowski,
+  Stolee, and Elbaum (2015) on developer code search, and Potvin and Levenberg
+  (2016) on single-repository scale. Scholarly count 159 to 160, practitioner
+  98 to 99, evidence ledger 612 to 614 rows.
+- Corrected the data-availability statement. The 370-task retrieval evaluation
+  is CodeScaleBench and is public under `csb-v1-mixed371`; it had been listed as
+  not redistributable with third-party task content. Reconciled its reported
+  repository coverage against the frozen suite: 46 anchor repositories, 56
+  including cross-repository fixtures, replacing the unsupported 73.
+- Added a competing-interests statement covering the author's affiliation and
+  the vendor relationship behind the retrieval evaluation.
+- Fixed a duplicate `web-207` bibliography key and corrected the reference count
+  to 244.
+- Repaired the reference audits. A throttled arXiv response (HTTP 429 with an
+  empty body) was reported as `NOT_FOUND`, marking correct references as
+  nonexistent; two runs over identical input disagreed by 15 findings.
+  `UNVERIFIED` is now distinct from `NOT_FOUND`, omitted IDs are re-queried with
+  backoff, and `scripts/audit_refs_backfill.test.py` covers the regression.
+- Resolved the licensing, endorsement, and identity state the stable gate had
+  held open. The manuscript and companion are CC-BY-4.0; scripts, skills,
+  protocols, and repository metadata stay under Apache-2.0. `LICENSE-SCOPE.md`
+  now states the directory terms instead of an all-rights-reserved placeholder,
+  and both `CITATION.cff` files carry a license field. arXiv endorsement is
+  recorded as not required and ORCID as linked.
+- Rebuilt the release artifacts as one bound set: the arXiv source ZIP, the
+  preview PDF compiled from it in the digest-pinned TeX Live 2025 container,
+  the compile report that records both hashes, `companion/SHA256SUMS`, and the
+  companion ZIP. The stored report had described a 298-page build.
+- Fixed `arxiv-compile.e2e.test.mjs`, which pinned `source_date_epoch` and the
+  page count as literals. It failed on the freeze-date change while the
+  invariant it existed to check, that the report matches
+  `release-metadata.json`, was intact. Both values now derive from the manifest.
+- Refreshed `SUBMISSION.md` against the built artifacts: 244 references, 22
+  figures, 9 tables, 49 archived files, a 614-row ledger, a 300-page preview
+  carrying the 1.0.0 identity, and roughly 113,000 words of chapter text.
+- Re-ran the reference audits against the live arXiv API after the backfill fix:
+  164 manuscript identifiers and 960 cited titles across 321 unique identifiers,
+  none flagged or unverified. Deleted three stale reports produced by the
+  throttling bug.
+- Manuscript output is 300 pages.
+
 ## 1.0.0-rc.16 — 2026-08-09
 
 - Restructured Chapter 7 to the book's chapter form after editorial review: a
@@ -32,7 +90,7 @@
   Chapter 19's allocation ledger as a proposed control-plane requirement, with
   full cross-repository campaign semantics kept in the repository artifacts.
 - Applied the aphorism and generic-authority prose pass across the new
-  material. The manuscript now builds to 297 pages under the pinned TeX
+  material. The manuscript now builds to 298 pages under the pinned TeX
   Live 2025 image.
 
 ## 1.0.0-rc.15 — 2026-08-09

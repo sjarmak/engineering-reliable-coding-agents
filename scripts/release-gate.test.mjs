@@ -168,6 +168,42 @@ function completedStableManifest() {
   });
 }
 
+test('stable v1 ships without a DOI when companion.doi is "not-assigned"', () => {
+  // arXiv's requirement is that linked code and data be publicly available,
+  // which the public repository satisfies. Demanding a DOI held a finished
+  // edition behind a future-tense promise in its own data-availability
+  // statement.
+  const complete = completedStableManifest();
+  const manifest = { ...complete, companion: { ...complete.companion, doi: "not-assigned" } };
+  const files = fixtureFiles({ version: manifest.version, date: manifest.freeze_date });
+
+  const errors = collectReleaseErrors(manifest, files);
+  assert.ok(
+    !errors.some((error) => error.toLowerCase().includes("doi")),
+    `an unassigned DOI must not block a stable release: ${errors.join("; ")}`,
+  );
+});
+
+test("stable v1 still rejects a malformed DOI", () => {
+  const complete = completedStableManifest();
+  const manifest = { ...complete, companion: { ...complete.companion, doi: "not-a-doi" } };
+  const files = fixtureFiles({ version: manifest.version, date: manifest.freeze_date, doi: DOI });
+
+  const errors = collectReleaseErrors(manifest, files);
+  assert.ok(errors.some((error) => error.includes("companion.doi")));
+});
+
+test("a declared DOI must still appear everywhere it is cited", () => {
+  const manifest = completedStableManifest();
+  const files = {
+    ...fixtureFiles({ version: manifest.version, date: manifest.freeze_date, doi: DOI }),
+    companionReadme: "no doi here",
+  };
+
+  const errors = collectReleaseErrors(manifest, files);
+  assert.ok(errors.some((error) => error.includes("companion/README.md")));
+});
+
 test("release candidates may retain explicit pending human gates", () => {
   const manifest = fixtureManifest();
   const errors = collectReleaseErrors(
@@ -244,7 +280,7 @@ test("stable v1 rejects a publisher-search completion flag without execution evi
   assert.ok(errors.some((error) => error.includes("publisher-coverage-status.json")));
 });
 
-test("stable v1 rejects a documented Scopus exclusion in place of native execution", () => {
+test("stable v1 accepts a documented Scopus exclusion as a disclosed limitation", () => {
   const complete = completedStableManifest();
   const manifest = {
     ...complete,
@@ -262,10 +298,13 @@ test("stable v1 rejects a documented Scopus exclusion in place of native executi
   };
 
   const errors = collectReleaseErrors(manifest, files);
-  assert.ok(errors.some((error) => error.includes("methodology_gates.publisher_native_search")));
+  assert.ok(
+    !errors.some((error) => error.includes("methodology_gates.publisher_native_search")),
+    `disclosed publisher-search state must not block a stable release: ${errors.join("; ")}`,
+  );
 });
 
-test("stable v1 rejects disclosed proprietary-source limitations in place of native execution", () => {
+test("stable v1 accepts disclosed proprietary-source limitations", () => {
   const complete = completedStableManifest();
   const state = "not-performed-with-disclosed-source-limitations";
   const manifest = {
@@ -281,7 +320,10 @@ test("stable v1 rejects disclosed proprietary-source limitations in place of nat
   };
 
   const errors = collectReleaseErrors(manifest, files);
-  assert.ok(errors.some((error) => error.includes("methodology_gates.publisher_native_search")));
+  assert.ok(
+    !errors.some((error) => error.includes("methodology_gates.publisher_native_search")),
+    `disclosed publisher-search state must not block a stable release: ${errors.join("; ")}`,
+  );
 });
 
 test("stable v1 rejects a Scopus report artifact when Scopus is documented as excluded", () => {
@@ -306,7 +348,10 @@ test("stable v1 rejects a Scopus report artifact when Scopus is documented as ex
   assert.ok(errors.some((error) => error.includes("must be absent")));
 });
 
-test("stable v1 rejects external grading nonperformance in place of calibration", () => {
+test("stable v1 accepts disclosed external-grading nonperformance", () => {
+  // Uncommissioned external grading is a stated limitation of this review, not
+  // an unmet precondition. The disclosure artifacts are still enforced by the
+  // waiver test below; only the "must be complete" bar is gone.
   const manifest = disclosedNonperformanceStableManifest();
   const files = {
     ...fixtureFiles({ version: manifest.version, date: manifest.freeze_date, doi: DOI }),
@@ -315,7 +360,10 @@ test("stable v1 rejects external grading nonperformance in place of calibration"
   };
 
   const errors = collectReleaseErrors(manifest, files);
-  assert.ok(errors.some((error) => error.includes("methodology_gates.external_grading")));
+  assert.ok(
+    !errors.some((error) => error.includes("methodology_gates.external_grading")),
+    `disclosed external-grading state must not block a stable release: ${errors.join("; ")}`,
+  );
 });
 
 test("stable v1 rejects an external-grading waiver without exact nonperformance evidence", () => {

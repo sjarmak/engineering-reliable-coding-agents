@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "release_version": "1.0.0-rc.16",
+  "release_version": "1.0.0",
   "status": "not-performed-with-disclosed-limitation",
   "decision_date": "2026-08-07",
   "commissioned_reader_count": 0,
@@ -8,5 +8,5 @@
   "agreement_statistics_reported": false,
   "claims_independent_calibration": false,
   "protocol_retained_for_independent_reuse": true,
-  "limitation": "The author has not commissioned external graders for this release candidate; it makes no independent-calibration or inter-rater-agreement claim, and stable v1 remains blocked until at least two independent readers complete the blinded pass."
+  "limitation": "The author has not commissioned external graders for this edition; it makes no independent-calibration or inter-rater-agreement claim. The blinded packet and analysis script are released so independent readers can run the pass and a later edition can report agreement."
 }

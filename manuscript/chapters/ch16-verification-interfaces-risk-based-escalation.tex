@@ -38,7 +38,7 @@ That number says nothing about review depth, escaped defects, or whether the hum
 
 \Needspace{5\baselineskip}
 
-I treat this mismatch as three connected design problems:
+This mismatch is three connected design problems:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -53,7 +53,7 @@ I treat this mismatch as three connected design problems:
 
 Each intervention changes the cost or allocation of review. None creates correctness.
 
-Nearly all of the empirical oversight evidence used here predates long-horizon agents. In my reading of that literature, researchers have rarely tested whether findings about reviewing suggestions transfer to autonomous actions, although the transfer is often assumed.
+Nearly all of the empirical oversight evidence used here predates long-horizon agents. Researchers have rarely tested whether findings about reviewing suggestions transfer to autonomous actions, although the transfer is often assumed.
 
 A code completion that waits for a programmer to accept one function creates a different control problem from an agent that edits several files, runs commands, revises its plan, and opens a proposed patch after a long trajectory. The older evidence remains useful for identifying mechanisms. It does not settle how those mechanisms behave as autonomy, duration, and action space increase.
 
@@ -219,7 +219,7 @@ A \textbf{cognitive forcing function} requires deliberate judgment at a point wh
   require the reviewer to identify which invariant was checked.
 \end{itemize}
 
-The intervention earns its cost only when it changes the decision process at the point where overreliance occurs.
+The intervention repays its cost only when it changes the decision process at the point where overreliance occurs.
 
 Buçinca, Malaya, and Gajos (\href{https://arxiv.org/abs/2102.09692}{2021}) tested cognitive forcing functions in a controlled experiment with 199 participants. The interventions reduced overreliance where explanations did not, but they did not eliminate it. The most effective interventions were also rated least favorably.
 
@@ -395,6 +395,7 @@ A model judge becomes appropriate when the rubric requires contextual interpreta
 
 Each layer must expose its evidence to the next:
 
+\Needspace*{21\baselineskip}
 \begin{verbatim}
 kind of detection
     -> least complex mechanism capable of checking it
@@ -504,7 +505,7 @@ The design question remains relevant: how will the person expected to intervene 
 
 Xie et al.~(\href{https://arxiv.org/abs/2408.01703}{2024}) propose rendering agent actions as live state so a reviewer can inspect a trajectory before it terminates. The support is one prototype-scale result and does not establish improved oversight. The proposal is useful when delayed reconstruction repeatedly fails, provided the live interface preserves the durable trace rather than replacing it.
 
-Monitoring can also alter the behavior being measured. An agent aware of evaluation may adapt to the evaluation frame. I treat this as a design caution rather than a measured result from Kale et al., whose reported finding was that monitor scaffolding mattered more than monitor awareness.
+Monitoring can also alter the behavior being measured. An agent aware of evaluation may adapt to the evaluation frame. This is a design caution rather than a measured result from Kale et al., whose reported finding was that monitor scaffolding mattered more than monitor awareness.
 
 My evaluation harnesses therefore use de-framed prompts that omit evaluation vocabulary. Removing those cues is a precaution against one measurement effect. It does not prove that the resulting behavior matches unobserved production behavior.
 
@@ -583,8 +584,6 @@ Test the route by processing a real rejection through it. When the named owner c
 After deployment, sample both flagged and unflagged cases. Compare human verdicts with monitor decisions by risk stratum and monitor version. Recalibrate after material changes to agents, tools, rubrics, or workload. Examine whether knowledge of monitoring changes behavior.
 
 Finally, budget practice for the people expected to handle rare failures. A name in an escalation table does not preserve operational skill.
-
-\textbf{Portable claim.} Verification must be cheaper than uncritical acceptance.
 
 \section*{Sources and evidence}
 

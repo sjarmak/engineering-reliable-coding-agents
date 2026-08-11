@@ -2,7 +2,7 @@
 \label{closing-evidence-chain}
 The most useful result in my retrieval work was a disagreement between two instruments. Three retrieval measures agreed that the tool had become much better at placing relevant repository evidence in front of the agent. The paired end-to-end reward across 370 tasks moved by +0.0349.
 
-The first interval I reported around that difference likely understates the uncertainty and should not be read as a valid bound. It resampled tasks as though they were independent even though they came from 73 repositories and 20 suites.
+The first interval I reported around that difference likely understates the uncertainty and should not be read as a valid bound. It resampled tasks as though they were independent even though they came from 46 anchor repositories and 20 suites.
 
 Interpreting that experiment required two parts of this monograph. The stage decomposition from Part IV located where the improvement occurred. The resampling rule from Part I determined whether the end-to-end difference had been measured adequately at all.
 
@@ -76,7 +76,7 @@ In each case, the added machinery is evaluated using the instrument the earlier 
 \hypertarget{engineering-controls-can-precede-trial-evidence}{%
 \section{Engineering controls can precede trial evidence}\label{engineering-controls-can-precede-trial-evidence}}
 
-Evidence strength varies across the dependency chain and does not track operational consequence. Strong-graded items account for 56 percent of the evidence in Part I but 10 percent in Part III. Chapter 8 has no strong-graded or direct scholarly evidence item, even though its containment practices may be the first controls needed by a system with production write access. Among the 52 practices ranked by consequence, Spearman's rho between urgency rank and the presence of at least one strong item was -0.004.
+Evidence strength varies across the dependency chain and does not track operational consequence. Strong-graded items account for 56 percent of the evidence in Part I but 10 percent in Part III. Chapter 8 has no strong-graded or direct scholarly evidence item, even though its containment practices may be the first controls needed by a system with production write access. Within the 52-practice consequence ranking, a selection subset rather than the full catalog, Spearman's rho between urgency rank and the presence of at least one strong item was -0.004.
 
 The catalog makes that mismatch concrete. \emph{Contain agent blast radius} ranked first by consequence, yet its incident support consists of two corroborating Reddit accounts: a \href{https://www.reddit.com/r/LLMDevs/comments/1q7avil/}{production-workflow report} and a \href{https://www.reddit.com/r/devops/comments/1tbbls4/}{database-deletion report}. Both have archived snapshots in the companion. They show that the failure can occur, not how often it occurs. I still recommend the control because the current authority boundary can be inspected directly, a prohibited write can be exercised safely against a test resource, and separating ordinary from recovery authority is reversible. The recommendation is mechanism-justified rather than prevalence-justified.
 
@@ -127,11 +127,11 @@ Context restart & Restart or consolidate at 60 percent of the shortest context l
 Freshness & Require exact repository-revision identity for code-bearing retrieval and reject an index with an unknown source revision. & A coarser content-addressed equivalence is acceptable only when it is proved by the indexer. \\
 \end{longtable}
 
-I account for the apparatus as part of system cost. Each comparison records inference and tool cost, elapsed time, labeling and adjudication hours, reviewer queue time, storage, and maintenance work. The denominator is accepted work, not model calls. A control whose ongoing measurement cost is invisible will eventually be bypassed or defended with stale evidence.
+Account for the apparatus as part of system cost. Each comparison records inference and tool cost, elapsed time, labeling and adjudication hours, reviewer queue time, storage, and maintenance work. The denominator is accepted work, not model calls. A control whose ongoing measurement cost is invisible will eventually be bypassed or defended with stale evidence.
 
 \Needspace{5\baselineskip}
 
-When capacity is constrained, I remove apparatus in this order:
+When capacity is constrained, remove apparatus in this order:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -148,7 +148,7 @@ When capacity is constrained, I remove apparatus in this order:
   rich live interfaces and secondary taxonomies whose questions can still be answered from the durable record.
 \end{enumerate}
 
-I keep four elements until last: an executable acceptance check, separation between ordinary and recovery authority, versioned task and configuration identity, and a paired comparison against the cheapest credible baseline. A small team can operate those controls without reproducing the full apparatus in this monograph.
+Four elements should be kept until last: an executable acceptance check, separation between ordinary and recovery authority, versioned task and configuration identity, and a paired comparison against the cheapest credible baseline. A small team can operate those controls without reproducing the full apparatus in this monograph.
 
 Several questions remain research problems rather than missing defaults. No controlled result in the reviewed set shows that a dynamic dependency graph beats a well-designed fixed schedule for repository work. Propagation of deletion through summaries, embeddings, caches, and graph edges is largely unmeasured. Current context, attribution, grader, and routing results are dated snapshots. The structural claims are more durable: one run is one draw; a component that did not execute did not cause the result; a stale artifact can remain fluent after losing authority; and one identity that reaches production data and recovery material defines one failure domain.
 

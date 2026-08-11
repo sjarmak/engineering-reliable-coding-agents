@@ -1,7 +1,7 @@
 \chapter{Localization funnels, repository indexes, and freshness checks}
 \label{ch13-localization-funnels-repository-indexes-freshness-checks}
 \begin{quote}
-\textbf{Evidence profile.} 6 strong \(\cdot\) 5 directional \(\cdot\) 0 corroborating evidence items across 3 developed practices (ERCA-078, ERCA-084, ERCA-174).
+\textbf{Evidence profile.} 6 strong \(\cdot\) 5 directional \(\cdot\) 1 corroborating evidence items across 3 developed practices (ERCA-078, ERCA-084, ERCA-174).
 
 \textbf{Chapter claim.} Evidence without revision identity is stale, not current.
 \end{quote}
@@ -12,7 +12,7 @@ The similarity lane had not malfunctioned. It returned real, highly ranked recor
 
 Repository work presents three related architectural decisions. Some tasks benefit from a funnel that separates coarse file selection from fine edit selection. Some require typed structural relationships because the issue language and the change site share no useful vocabulary. Every retriever, index, and cache also describes a particular repository state, which may expire while its answers remain fluent and specific.
 
-Each decision carries a different cost. A funnel adds handoffs, and an early omission propagates through every later stage. A typed index requires construction, language coverage, storage, query tools, and continuing maintenance. A freshness gate can reject useful evidence when its identity checks are too coarse. I therefore treat all three as architecture choices with observable failure modes rather than as retrieval features to add by default.
+Each decision carries a different cost. A funnel adds handoffs, and an early omission propagates through every later stage. A typed index requires construction, language coverage, storage, query tools, and continuing maintenance. A freshness gate can reject useful evidence when its identity checks are too coarse. All three are therefore architecture choices with observable failure modes rather than retrieval features to add by default.
 
 \hypertarget{stage-localization-before-repair}{%
 \section{Stage localization before repair}\label{stage-localization-before-repair}}
@@ -25,6 +25,7 @@ Repository structure may identify the correct region without identifying the fun
 
 The evidence needed to select the package differs from the evidence needed to select the function and edit location. A localization funnel separates those comparisons:
 
+\Needspace*{8\baselineskip}
 \begin{verbatim}
 repository structure
     -> candidate files
@@ -114,6 +115,8 @@ That work includes:
 
 Each new language or artifact type extends the obligation. Index construction is a continuing product surface even when users encounter it only through search results.
 
+Scale is what makes that surface unavoidable rather than optional. Potvin and Levenberg (\href{https://doi.org/10.1145/2854146}{2016}) describe one organization holding billions of lines in a single repository and the purpose-built navigation, search, and dependency tooling its scale required. This is a practice report from one company with no comparison against alternatives, and it predates coding agents, so it establishes that the obligation exists at that scale rather than which index answers it.
+
 The cheaper alternative is often a generated repository map or skeleton placed near the front of the model's context. It can list directories, important files, top-level symbols, and ownership boundaries. Navigation then relies on inexpensive operations such as exact search, opening definitions, finding references, and listing callers.
 
 A repository map cannot answer arbitrary multi-hop questions. It is, however, easy to regenerate and inspect. For a modest repository, low change rate, or occasional task, that trade may be preferable to maintaining a graph service.
@@ -124,6 +127,7 @@ This representation is a \textbf{typed knowledge graph}. It stores entities unde
 
 The export question can then become a bounded traversal:
 
+\Needspace*{7\baselineskip}
 \begin{verbatim}
 start: export handler named by the issue
     -> follow invocation edges into the queue consumer
@@ -205,7 +209,9 @@ Every returned path should therefore carry enough identity to establish:
 
 Readers unwilling to fund that admission and maintenance path should choose a generated repository map and fixed navigation operations explicitly. Readers willing to fund it should cap candidate sets, budget traversal, validate query construction, test serialization, and measure the graph as one component of the surrounding retrieval system.
 
-The maintenance cost is justified only while a named owner can show which repository state each answer describes.
+The maintenance cost is justified only while a named owner can show which repository state each answer describes. An external code-intelligence service changes who performs the parsing, indexing, and publication work. It does not change who owns correspondence, since the operator still has to know which repository state an answer describes and still absorbs the cost when that answer is wrong. Adoption is a decision about which of the obligations listed above transfer and which remain local, and the ones that remain local are the ones this section has already named.
+
+A shared index across repositories also creates an authority question. Chapter 8 treats the read boundary as part of containment, because anything an identity can read can leave through model output. An index built over many repositories concentrates the material that per-repository access control was meant to separate. If it serves results without evaluating the caller's permissions, an agent reads code its operator cannot open, and the rule Chapter 17 states for the agent is broken by the retrieval layer instead. The local test issues one query under two identities with different repository access and compares the result sets, including the paths and snippets carried in the returned evidence. Identical answers mean the index is a read path around the permission model, and its results are a disclosure surface whatever its ranking quality.
 
 \hypertarget{admit-only-evidence-tied-to-the-current-state}{%
 \section{Admit only evidence tied to the current state}\label{admit-only-evidence-tied-to-the-current-state}}
@@ -345,8 +351,6 @@ A freshness refusal is visible and recoverable. A stale result can silently beco
 
 Chapter 14 turns from which evidence the system retrieves to how much of that evidence the model can use.
 
-\textbf{Portable claim.} Evidence without revision identity is stale, not current.
-
 \section*{Sources and evidence}
 
 \textbf{Stage localization before repair}
@@ -356,7 +360,7 @@ Chapter 14 turns from which evidence the system retrieves to how much of that ev
 \item
   Strong evidence: Xia, C. S., et al.~(2024), ``Agentless: Demystifying LLM-based Software Engineering Agents,'' arXiv:2407.01489.
 \item
-  Directional evidence: Chang, J., et al.~(2025), ``BugCerberus: Bridging Bug Localization and Issue Fixing,'' arXiv:2502.15292. (Per-hierarchy-level specialization.)
+  Directional evidence: Chang, J., et al.~(2025), ``Bridging Bug Localization and Issue Fixing: A Hierarchical Localization Framework Leveraging Large Language Models,'' arXiv:2502.15292, which names its framework BugCerberus. (Per-hierarchy-level specialization.)
 \item
   Strong evidence: Sepidband, M., Viet Pham, H., Hemmati, H. (2026), ``On the Role of Fault Localization Context for LLM-Based Program Repair,'' arXiv:2604.05481.
 \item
@@ -378,9 +382,11 @@ Chapter 14 turns from which evidence the system retrieves to how much of that ev
 \item
   Strong evidence: Ouyang, S., et al.~(2024), ``RepoGraph: Enhancing AI Software Engineering with Repository-level Code Graph,'' arXiv:2410.14684.
 \item
-  Strong evidence: AOCI AI-oriented code indexing (Liu 2026), arXiv:2605.02421.
+  Strong evidence: Liu, J., et al.~(2026), ``AOCI: Symbolic-Semantic Indexing for Practical Repository-Scale Code Understanding with LLMs,'' arXiv:2605.02421.
 \item
-  Directional evidence: MAGIS (Tao 2024), arXiv:2403.17927.
+  Directional evidence: Tao, W., et al.~(2024), ``MAGIS: LLM-Based Multi-Agent Framework for GitHub Issue Resolution,'' arXiv:2403.17927.
+\item
+  Corroborating case: Potvin, R., Levenberg, J. (2016), ``Why Google Stores Billions of Lines of Code in a Single Repository,'' \emph{Communications of the ACM} 59(7), \href{https://doi.org/10.1145/2854146}{DOI:10.1145/2854146}. Documents the scale at which one organization's repository required purpose-built navigation and dependency tooling. A single-company practice report predating coding agents, with no comparison against alternatives.
 \end{itemize}
 
 \textbf{Gate retrieval on freshness}

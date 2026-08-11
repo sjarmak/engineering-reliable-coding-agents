@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "version": "1.0.0-rc.16",
-  "freeze_date": "2026-08-09",
+  "version": "1.0.0",
+  "freeze_date": "2026-08-11",
   "manuscript": {
-    "pages": 297,
+    "pages": 300,
     "figures": 22,
     "numbered_tables": 9
   },
@@ -15,14 +15,13 @@
     "processor": "xelatex",
     "texlive_version": 2025,
     "category_check": "verified_2026-08-07",
-    "license": "pending",
-    "endorsement": "pending",
-    "orcid": "pending"
+    "license": "CC-BY-4.0",
+    "endorsement": "not-required",
+    "orcid": "linked"
   },
   "companion": {
-    "license": "pending",
-    "doi": "pending",
-    "doi_strategy": "reserve_before_final_freeze"
+    "license": "CC-BY-4.0",
+    "doi": "not-assigned"
   },
   "methodology_gates": {
     "external_grading": "not-performed-with-disclosed-limitation",

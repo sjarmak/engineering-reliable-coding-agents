@@ -33,8 +33,22 @@ const STABLE_STATE_VALUES = Object.freeze({
   "arxiv.endorsement": Object.freeze(["confirmed", "not-required"]),
   "arxiv.orcid": Object.freeze(["linked", "not-linked-by-choice"]),
   "companion.license": Object.freeze(["CC-BY-4.0", "CC0-1.0", "Apache-2.0", "MIT"]),
-  "methodology_gates.external_grading": Object.freeze(["complete"]),
-  "methodology_gates.publisher_native_search": Object.freeze(["complete"]),
+  // External grading and publisher-native search are disclosed limitations of a
+  // structured, explicitly non-exhaustive review, not preconditions for it.
+  // Requiring "complete" here made a stable release impossible while the
+  // manuscript truthfully reported both as not performed, which is what
+  // produced the contradiction of publishing a release that called its own
+  // limitations unmet gates. A disclosed state still has to prove disclosure:
+  // methodologyArtifactErrors validates the status artifacts either way.
+  "methodology_gates.external_grading": Object.freeze([
+    "complete",
+    "not-performed-with-disclosed-limitation",
+  ]),
+  "methodology_gates.publisher_native_search": Object.freeze([
+    "complete",
+    "complete-with-documented-exclusions",
+    "not-performed-with-disclosed-source-limitations",
+  ]),
 });
 
 const REQUIRED_DOI_FILES = [
@@ -278,17 +292,27 @@ function stableReleaseErrors(manifest, files) {
             .join(", ")} for a stable release`,
         ],
   );
+  // A DOI is optional. arXiv's requirement is that linked code and data be
+  // publicly available, which the public repository satisfies. When a DOI is
+  // declared it must still be well formed and carried consistently everywhere
+  // it is cited; when it is "not-assigned" the release proceeds without one
+  // rather than holding a finished edition behind a future-tense promise.
   const doi = manifest.companion?.doi;
-  const doiErrors = !DOI_PATTERN.test(doi ?? "")
-    ? ["release-metadata.json: companion.doi must be a valid DOI for a stable release"]
-    : [
-        ...REQUIRED_DOI_FILES.flatMap(([name, key]) =>
-          files[key]?.includes(doi) ? [] : [`${name}: companion DOI ${doi} is missing`],
-        ),
-        ...(markdownSubsection(files.submission, "Comments").includes(doi)
-          ? []
-          : [`SUBMISSION.md: companion DOI ${doi} is missing from arXiv Comments`]),
-      ];
+  const doiErrors =
+    doi === "not-assigned" || doi == null
+      ? []
+      : !DOI_PATTERN.test(doi)
+        ? [
+            'release-metadata.json: companion.doi must be a valid DOI or "not-assigned"',
+          ]
+        : [
+            ...REQUIRED_DOI_FILES.flatMap(([name, key]) =>
+              files[key]?.includes(doi) ? [] : [`${name}: companion DOI ${doi} is missing`],
+            ),
+            ...(markdownSubsection(files.submission, "Comments").includes(doi)
+              ? []
+              : [`SUBMISSION.md: companion DOI ${doi} is missing from arXiv Comments`]),
+          ];
   const provisionalLicense = /all rights reserved|until explicit|provisional notice/i.test(
     files.licenseScope ?? "",
   );

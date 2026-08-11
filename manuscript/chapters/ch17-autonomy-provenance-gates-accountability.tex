@@ -51,6 +51,7 @@ The ladder needs separate rails because action classes expose different risks. A
 
 Hundreds of clean service restarts establish nothing about whether the same system can rotate credentials safely.
 
+\Needspace*{21\baselineskip}
 \begin{verbatim}
 defined action class
     -> its own approval + modification + outcome record
@@ -98,6 +99,7 @@ Outcome correctness requires an action-specific definition. For a restart, ``the
 
 Approval measures are proportions over repeated observations:
 
+\Needspace*{11\baselineskip}
 \begin{verbatim}
 approval rate
     = approved proposals / reviewed proposals
@@ -249,6 +251,7 @@ A preregistered replication could not estimate the share of agent-authored code 
 
 Provenance is also distinct from answerability. In my maintainer practice, an adoption pull request can preserve a contributor's commits while stating:
 
+\Needspace*{5\baselineskip}
 \begin{verbatim}
 Supersedes #X
 Credit: original fix by @X (commit preserved with original authorship)
@@ -415,6 +418,7 @@ This is a design example, not evidence that seven rows, that flag name, or those
 
 More elaborate gates require the same audit. In pull request 1558 of my orchestration system, the review surface recorded:
 
+\Needspace*{5\baselineskip}
 \begin{verbatim}
 Latest review attempt: 6
 Quality score: 950/1000, threshold 850
@@ -615,7 +619,9 @@ Neither should diffuse answerability so widely that no role owns a state transit
 \hypertarget{audit-the-path-from-policy-to-execution}{%
 \section{Audit the path from policy to execution}\label{audit-the-path-from-policy-to-execution}}
 
-Run four checks against one defined action class and one real repository workflow.
+Run four checks against one defined action class and one real repository workflow. The first asks whether the autonomy rung the system claims is the rung it operates at. The second follows a provenance marker attached at generation and asks whether it still identifies responsibility after the repository has rebased, squashed, and moved the code. The third asks whether a gate that reports a decision can change what executes. The fourth separates the people who hold control from the people the record names.
+
+Run them in that order. A provenance marker is worth testing only once the action class is defined, and responsibility can be assigned only after the gate is known to bind.
 
 \hypertarget{test-the-autonomy-transfer}{%
 \section{Test the autonomy transfer}\label{test-the-autonomy-transfer}}
@@ -675,8 +681,6 @@ Measure the findings that carry operational weight: untraceable actions, failed 
 
 Do not adopt a pass rate borrowed from another system. Decide in advance which failures invalidate the accountability claim and preserve the identities, traces, interviews, and execution evidence required to reproduce that decision.
 
-\textbf{Portable claim.} A gate that cannot change execution records assent and nothing more.
-
 \section*{Sources and evidence}
 
 Support is thin across the chapter: four developed practices carry seven evidence items, of which two are strong and five directional; six are scholarly sources and one is a practitioner source. \texttt{audit-human-gates-for-effectiveness} and \texttt{align-accountability-with-actual-control} carry no strong evidence item.
@@ -722,5 +726,5 @@ Support is thin across the chapter: four developed practices carry seven evidenc
 \item
   Directional evidence: Cavalcante Siebert, L., et al.~(2023). Meaningful human control: actionable properties for AI system development. AI and Ethics 3, 241-255. arXiv:2112.01298. Supports responsibility commensurate with ability and authority to control, the framework's third actionable property.
 \item
-  Directional evidence: Suryana, L. E., Nordhoff, S., Calvert, S., Zgonnikov, A., van Arem, B. (2025). Meaningful human control of partially automated driving systems: Insights from interviews with Tesla users. Transportation Research Part F 113, 213-236. Applies tracking and tracing criteria to 103 users to localize expectation-reality gaps and inconsistent protocol adherence. The method requires case-specific operationalization, yields failure localization rather than a compliance score, and is evidenced here in the driving domain. No arXiv identifier or DOI is carried in the catalog record, so the inline citation is unlinked.
+  Directional evidence: Suryana, L. E., Nordhoff, S., Calvert, S., Zgonnikov, A., van Arem, B. (2025). Meaningful human control of partially automated driving systems: Insights from interviews with Tesla users. Transportation Research Part F 113, 213-236. Applies tracking and tracing criteria to 103 users to localize expectation-reality gaps and inconsistent protocol adherence. The method requires case-specific operationalization, yields failure localization rather than a compliance score, and is evidenced here in the driving domain. The record carries no arXiv identifier; the published article is doi:10.1016/j.trf.2025.04.026.
 \end{itemize}

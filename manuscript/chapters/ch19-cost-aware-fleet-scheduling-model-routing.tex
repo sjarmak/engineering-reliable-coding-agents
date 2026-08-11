@@ -32,7 +32,7 @@ Their scheduling cadence, thresholds, cost ratios, and performance constants do 
 
 Allocation policy is easy to mistake for a local configuration detail. In an agent fleet, it determines which model receives a request, which queued task moves first, whether running work remains fixed, and when an obsolete plan is discarded. These choices connect inference cost to elapsed time, reviewer demand, and the probability that completed work will survive evaluation.
 
-A cheaper model call can trigger enough repair and review to cost more per accepted result. A mathematically better schedule can become operationally worse if computing it delays the work beyond its deadline. I therefore treat scheduling and routing as measured decisions rather than static configuration.
+A cheaper model call can trigger enough repair and review to cost more per accepted result. A mathematically better schedule can become operationally worse if computing it delays the work beyond its deadline. Scheduling and routing are therefore measured decisions rather than static configuration.
 
 Production traces also show that coding-agent traffic differs from chatbot traffic. Liu et al.~(\href{https://arxiv.org/abs/2608.00101}{2026}) sampled GitHub Copilot activity from 3.2 million users, 13 million sessions, 761 million model calls, and 95 trillion tokens. KV-cache hit rates averaged 90 percent within a turn and 55 percent across turn boundaries; a lightweight predictor captured 86 to 90 percent of total user idle time. The study strongly characterizes one production workload and directionally supports measuring turn boundaries and idle periods in capacity policy.
 
@@ -251,7 +251,7 @@ Admission requires bounded queue growth. An unbounded queue converts overload in
 
 \textbf{Retry budgets, backoff, and jitter.} Retries are the mechanism by which demand rises as capacity falls, so they need a budget, not just a count. A per-attempt retry cap still permits a retry storm when many attempts fail together; a budget bounds the fraction of total traffic that retries may consume. Individual retries should back off exponentially, and backoff must carry jitter, because deterministic backoff synchronizes the failed population into retry waves that arrive together and re-saturate the recovering dependency. The AWS Builders' Library articles on \href{https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/}{timeouts, retries, and backoff with jitter} and on \href{https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/}{making retries safe with idempotent APIs} state both mechanisms clearly; they are practitioner guidance, and their specific multipliers and cap values are their systems' parameters, not this book's. The idempotency requirement is not optional decoration here. A retry is a new attempt at the same logical work (contract I4), and a retried external effect is safe only under the effect-identity contracts of I5. A retry policy layered over non-idempotent effects converts overload into duplicated external commits.
 
-\textbf{Recovery capacity.} Recovery and reconciliation need their own capacity policy, so that backlog cannot consume every worker needed to recover it. After a worker loss or a dependency outage, the system holds a backlog of interrupted attempts, orphaned leases, and unreconciled external effects. Recovering those requires the same constrained resources as live work. If the backlog is admitted at full priority into an undifferentiated queue, recovery work and live work starve each other, and the reconciliation that would shrink the backlog never gets scheduled. Contract I10 requires that recovery preserve the same obligations as normal execution and be tested as production code; that includes its capacity allocation. A recovery path that only works when the fleet is idle has not been tested under the one condition where it runs. Pilot-execution work by Li, Cai, and Lou (\href{https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu}{2026}) adds the sharper directional warning that recovery actions themselves cause severe failures, which is a second reason to bound the rate at which recovery traffic is released rather than replaying the entire backlog at once. I do not prescribe what fraction of capacity recovery should hold. That is a measured deployment decision, and the experiment below is how to measure it.
+\textbf{Recovery capacity.} Recovery and reconciliation need their own capacity policy, so that backlog cannot consume every worker needed to recover it. After a worker loss or a dependency outage, the system holds a backlog of interrupted attempts, orphaned leases, and unreconciled external effects. Recovering those requires the same constrained resources as live work. If the backlog is admitted at full priority into an undifferentiated queue, recovery work and live work starve each other, and the reconciliation that would shrink the backlog never gets scheduled. Contract I10 requires that recovery preserve the same obligations as normal execution and be tested as production code; that includes its capacity allocation. A recovery path that only works when the fleet is idle has not been tested under the one condition where it runs. Pilot-execution work by Li, Cai, and Lou (\href{https://www.usenix.org/conference/nsdi26/presentation/li-zhenyu}{2026}) adds the sharper directional warning that recovery actions themselves cause severe failures, which is a second reason to bound the rate at which recovery traffic is released rather than replaying the entire backlog at once. No universal fraction of capacity is prescribed here for recovery. That is a measured deployment decision, and the experiment below is how to measure it.
 
 The global-allocation versus worker-local-dispatch separation defended earlier in this chapter has a precedent in this literature. Schwarzkopf et al.~(\href{https://research.google/pubs/omega-flexible-scalable-schedulers-for-large-compute-clusters/}{2013}) built Omega as parallel schedulers operating over shared cluster state with optimistic concurrency control, precisely because a single monolithic scheduler conflated policies with different cadences and stakes. Hindman et al.~(\href{https://www.usenix.org/conference/nsdi11/mesos-platform-fine-grained-resource-sharing-data-center}{2011}) reached a related two-level split in Mesos, with a central allocator offering resources and frameworks deciding what to run on them. Both are directional support for keeping capacity allocation and dispatch as separately auditable layers; neither system's conflict rates, offer semantics, or scale figures describe an agent fleet.
 
@@ -274,7 +274,7 @@ The replay protocol later in this chapter tests dispatch policy under normal arr
   Measure, by declared class: live-work tail latency, recovery completion time, queue depth, retry count, request rate against the recovering dependency, starvation against the existing guard, useful throughput, and duplicate external effects.
 \end{enumerate}
 
-The comparison should show where each policy fails, not which one wins in general. Unrestricted recovery typically minimizes recovery completion time while damaging live-work tails and re-saturating the dependency; an over-tight bound protects live work while the backlog ages past usefulness. The right division is a property of the fleet's own workload, which is why I state the experiment and not a universal recovery-capacity fraction.
+The comparison should show where each policy fails, not which one wins in general. Unrestricted recovery typically minimizes recovery completion time while damaging live-work tails and re-saturating the dependency; an over-tight bound protects live work while the backlog ages past usefulness. The right division is a property of the fleet's own workload, which is why this section gives an experiment rather than a universal recovery-capacity fraction.
 
 \hypertarget{which-worker-is-cheapest-and-sufficient}{%
 \section{Which worker is cheapest and sufficient?}\label{which-worker-is-cheapest-and-sufficient}}
@@ -435,6 +435,7 @@ That result supports the catalog pointer rather than a universal deployment rule
 
 A routing decision record should include:
 
+\Needspace*{15\baselineskip}
 \begin{verbatim}
 sufficiency_requirement:
 reward_version:
@@ -459,7 +460,7 @@ Cheapest-sufficient routing is useful because it makes the economic policy expli
 
 In one replay of my agent fleet, the interesting scheduling idea lost to a one-word configuration change. Across eleven weeks of recorded traffic, a four-feature weighted index performed within 0.1 percent of plain priority banding.
 
-That result has narrative value only and is not load-bearing evidence for this practice. The strong support comes from SWAY, the controlled software-engineering study by Chen et al.~(\href{https://arxiv.org/abs/1608.07617}{2016}), which shows why a proposed search method should have to beat a cheap baseline. Decima, from Mao et al.~(\href{https://arxiv.org/abs/1810.01963}{2018}), and the telescope-network work of Lampoudi, Saunders, and Eastman (\href{https://arxiv.org/abs/1503.07170}{2015}) provide directional support for learned scheduling and validation against known optima.
+That result has narrative value only and is not primary evidence for this practice. The strong support comes from SWAY, the controlled software-engineering study by Chen et al.~(\href{https://arxiv.org/abs/1608.07617}{2016}), which shows why a proposed search method should have to beat a cheap baseline. Decima, from Mao et al.~(\href{https://arxiv.org/abs/1810.01963}{2018}), and the telescope-network work of Lampoudi, Saunders, and Eastman (\href{https://arxiv.org/abs/1503.07170}{2015}) provide directional support for learned scheduling and validation against known optima.
 
 Fixed-arrival replay itself remains a reasoned transfer rather than a controlled result from an agent fleet.
 
@@ -722,8 +723,6 @@ Until the ledger can answer those questions, choosing a more sophisticated polic
 
 The repository artifact \href{https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/allocation-policy-replay.md}{\texttt{protocols/allocation-policy-replay.md}} defines the replay comparison, promotion rule, and retained decision record.
 
-\textbf{Portable claim.} Re-decide from observed state, then ship the best feasible incumbent on time.
-
 \section*{Sources and evidence}
 
 \textbf{Re-decide cheaply and ship the incumbent}
@@ -733,7 +732,7 @@ The repository artifact \href{https://github.com/sjarmak/engineering-reliable-co
 \item
   Directional evidence: Bellm, E. C., et al.~(2019), ``The Zwicky Transient Facility: Surveys and Scheduler,'' PASP 131, 068003, arXiv:1905.02209.
 \item
-  Directional evidence: Naghib, E., et al.~(2019), ``A Framework for Telescope Schedulers: With Applications to the Large Synoptic Survey Telescope,'' AJ 157, 151, arXiv:1810.04815. Framework and simulation evidence.
+  Directional evidence: Naghib, E., et al.~(2018/2019), ``A Framework for Telescope Schedulers: With Applications to the Large Synoptic Survey Telescope,'' AJ 157, 151 (2019), arXiv:1810.04815 (2018). Framework and simulation evidence.
 \item
   Directional evidence: Parazin, B., et al.~(2022), ``Foraging with MUSHROOMS: A Mixed-integer Linear Programming Scheduler for Multimessenger Target of Opportunity Searches with the Zwicky Transient Facility,'' ApJ 935, 87, arXiv:2203.00013.
 \item

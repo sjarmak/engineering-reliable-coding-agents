@@ -3,12 +3,12 @@
   "engine": "xelatex",
   "texlive_version": 2025,
   "container_image": "texlive/texlive:TL2025-historic@sha256:5912d6a33798957f4cd6ff1673819209f59300c378033d25066feb93270b90ce",
-  "source_date_epoch": 1786233600,
+  "source_date_epoch": 1786406400,
   "compiler_version": "XeTeX 3.141592653-2.6-0.999997 (TeX Live 2025)",
-  "archive_sha256": "3f01fdcf352599293c36308c7af73ffbb3ae8f6c72653287f88b9d94000202bb",
-  "pdf_sha256": "f953a21bffeec89cb14cb8f99e0a95b79d63d3b86bf178578c21c6f6bdd8c8ac",
+  "archive_sha256": "4e6229f2623d016b8359c504ad3e7284da11db4f7e99aa1d80f0e87be0043aca",
+  "pdf_sha256": "fdd65851f4eb6500310d0e07e8cfa7cc9ab28825ee294295fcd8160abc4c667f",
   "pdf": {
-    "pages": 297,
+    "pages": 300,
     "encrypted": false,
     "page_size": "612 x 792 pts (letter)",
     "pdf_version": "1.7"

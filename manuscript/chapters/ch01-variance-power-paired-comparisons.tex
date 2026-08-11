@@ -17,7 +17,7 @@ The original observation could not support a configuration-level effect. One unu
 
 This task family scores through a deterministic test-suite oracle, under which the end state either passes the fixed tests or does not. That oracle collapses different trajectories onto the same score, so the tight repeat scores are a certification of scorer stability rather than agent determinism. The conclusion covers these five fixed tasks and no wider population.
 
-Record repeated independent runs before declaring a meaningful difference between agent systems. A single score is one outcome from a variable execution process, even when the configuration appears deterministic. Without repeats, the observed difference mixes the system change I intended to test with variation from model execution, infrastructure, task ordering, and the other choices built into the evaluation apparatus.
+Record repeated independent runs before declaring a meaningful difference between agent systems. A single score is one outcome from a variable execution process, even when the configuration appears deterministic. Without repeats, the observed difference mixes the system change under test with variation from model execution, infrastructure, task ordering, and the other choices built into the evaluation apparatus.
 
 Agent evaluations usually arrive as a table with one row per system and one score per row, which suppresses the execution history behind each cell. A score can aggregate hundreds of tasks and still be a single run, if each task was attempted once under one instantiation of the surrounding conditions.
 
@@ -29,7 +29,7 @@ Large-scale measurement shows how much of that hidden history reaches the score.
 
 Temperature 0 therefore does not deliver a deterministic code-generation evaluation. Ouyang et al.~(\href{https://arxiv.org/abs/2308.02828}{2023}) reached the same qualitative conclusion in an earlier empirical study of code generation: nominally identical requests produced different programs and different outcomes. That variation was not confined to the sampling control the model API exposes.
 
-These findings influence how I read benchmark evaluation claims. Improvements of 2 to 3 percentage points, a common magnitude in system comparisons, fit inside the single-run variation Bjarnason et al.~(\href{https://arxiv.org/abs/2602.07150}{2026}) observed across 60,000 trajectories. That envelope applies to SWE-bench-Verified-class tasks, models, and execution conditions, but it is not a universal constant, and it is necessary to estimate local spread before treating a delta of that size as an improvement.
+These findings should change how benchmark evaluation claims are read. Improvements of 2 to 3 percentage points, a common magnitude in system comparisons, fit inside the single-run variation Bjarnason et al.~(\href{https://arxiv.org/abs/2602.07150}{2026}) observed across 60,000 trajectories. That envelope applies to SWE-bench-Verified-class tasks, models, and execution conditions, but it is not a universal constant, and it is necessary to estimate local spread before treating a delta of that size as an improvement.
 
 A small p-value also does not repair a single-score comparison. Reimers and Gurevych (\href{https://arxiv.org/abs/1803.09578}{2018}) compared one score from each of two identical systems and found apparent significant differences in up to 26\% of comparisons at p \textless{} 0.05. The test correctly described the two observed runs, but it could not establish that the methods differed, because the experiment had not sampled enough runs to estimate method-level variation.
 
@@ -45,7 +45,7 @@ Those results do not establish an equivalent variance rate for long-horizon agen
 
 Prompt variation also creates an ownership problem. Teams often freeze one prompt and describe the resulting configuration as fixed, even though that wording is only one realization from a broader family of semantically equivalent instructions. Fixing the prompt supports reproducibility. Varying it tests whether the conclusion survives reasonable changes in expression. A credible comparison needs both. The exact prompt should be reported so the experiment can be reconstructed, and prompt sensitivity should be measured whenever the conclusion could plausibly depend on wording.
 
-Repeated runs make these hidden choices visible as a distribution. For each configuration, I report every run-level score, along with the mean and standard deviation across runs, and inspect the per-item outcomes behind those aggregates. I randomize the declared nuisance sources and, wherever the design permits, use the same realizations for both configurations. Reporting only the best run identifies the luckiest draw, not how the configuration performs across draws.
+Repeated runs make these hidden choices visible as a distribution. For each configuration, report every run-level score, along with the mean and standard deviation across runs, and inspect the per-item outcomes behind those aggregates. Randomize the declared nuisance sources and, wherever the design permits, use the same realizations for both configurations. Reporting only the best run identifies the luckiest draw, not how the configuration performs across draws.
 
 Repetition is a direct cost multiplier. Three runs require roughly three times the model calls and execution capacity of one run, before adding prompt or seed variants. That cost cannot be avoided by borrowing a variance estimate from another model or task suite, because observed variance depends on the model, the tasks, and the evaluation apparatus together. Provider-side updates introduce temporal drift that local repetition cannot remove. Repeated results therefore also require either a pinned model version or an explicit record that the provider does not make one available.
 
@@ -56,7 +56,7 @@ The operational rule is narrow. Measure the local run-to-run spread, and do not 
 
 Before running a suite, the first question is which differences the design can resolve at all. In Miller's worked example (\href{https://arxiv.org/abs/2411.00640}{2024}), sampling more responses per question reduced the minimum detectable effect from 13.2 percent to 7.5 percent. The minimum detectable effect is the smallest difference the experiment can reliably distinguish from noise. Neither the model nor the questions became more accurate. Each question simply produced a less variable estimate, allowing the same experiment to resolve a smaller difference.
 
-I run a \textbf{power analysis} before commissioning an evaluation. The calculation relates sample size, variance, the false-positive rate, and the probability of detecting a specified difference. I set that difference to the smallest change that would alter the engineering decision, not the difference I hope to report. This prior \textbf{effect size} is the magnitude assumed before any results are observed.
+Run a \textbf{power analysis} before commissioning an evaluation. The calculation relates sample size, variance, the false-positive rate, and the probability of detecting a specified difference. Set that difference to the smallest change that would alter the engineering decision, not the difference you hope to report. This prior \textbf{effect size} is the magnitude assumed before any results are observed.
 
 Statistical and engineering importance must be separated during design. An experiment sized to detect a gain too small to justify a more expensive configuration spends capacity on a decision that will never be made. The target should therefore be the smallest improvement that would justify deployment. Writing that threshold down before the results arrive prevents the observed delta from redefining what counts as a win.
 
@@ -68,9 +68,9 @@ Many published benchmark comparisons cannot support the distinctions their table
 
 An underpowered study fails in two directions. Most real effects will not reach significance, filling the literature or internal decision record with inconclusive null results. Among the estimates that do cross the significance threshold, the observed effects tend to be exaggerated because unusually large estimates are the ones most likely to survive. A significant result from a weak experiment can therefore provide a much less reliable estimate of magnitude than its p-value suggests.
 
-I estimate the required sample size from a pilot and then add margin. The pilot supplies a variance estimate for the planned model, task family, prompts, and evaluation apparatus. Colas, Sigaud and Oudeyer (\href{https://arxiv.org/abs/1806.08295}{2018}) recommend at least 20 pilot runs for estimating this variance. That is a floor for the pilot estimate, not a claim that the estimate has stabilized or that every final configuration requires 20 repetitions. A small or unrepresentative pilot can understate variance and produce a design that appears adequate on paper but remains underpowered in practice.
+Estimate the required sample size from a pilot, then add margin. The pilot supplies a variance estimate for the planned model, task family, prompts, and evaluation apparatus. Colas, Sigaud and Oudeyer (\href{https://arxiv.org/abs/1806.08295}{2018}) recommend at least 20 pilot runs for estimating this variance. That is a floor for the pilot estimate, not a claim that the estimate has stabilized or that every final configuration requires 20 repetitions. A small or unrepresentative pilot can understate variance and produce a design that appears adequate on paper but remains underpowered in practice.
 
-The sizing sequence remains reproducible even when its inputs change. I choose the smallest effect that would alter the engineering decision, estimate variance from the pilot, set the false-positive rate and desired detection probability, and solve for the required item and run counts. At fixed error rates, greater variance increases the required sample size, while a larger target effect reduces it. For a suite whose counts are already fixed, I solve in the other direction for the minimum detectable effect and add margin for uncertainty in the pilot estimate.
+The sizing sequence remains reproducible even when its inputs change. Choose the smallest effect that would alter the engineering decision, estimate variance from the pilot, set the false-positive rate and desired detection probability, and solve for the required item and run counts. At fixed error rates, greater variance increases the required sample size, while a larger target effect reduces it. For a suite whose counts are already fixed, solve in the other direction for the minimum detectable effect and add margin for uncertainty in the pilot estimate.
 
 Which count to increase depends on where the uncertainty originates. More benchmark items reduce uncertainty about performance across items. More independent runs reduce uncertainty from execution variation. More responses per question reduce answer-level variance. Holding the other design choices constant, additional responses cost more model calls but can allow the experiment to resolve a smaller difference.
 
@@ -90,7 +90,7 @@ Retrospective power does not solve these limitations. Computing power from the o
 
 One of my evaluation frameworks makes refusal mechanical. It scores a system across a ladder of successively weakened configurations and locates each readout on the resulting score curve. When too few rungs have been evaluated, the grader cannot place the readouts reliably, so it raises an error and emits no verdict. This refusal is a methodological rule, not a statistical test, and it carries no false-positive or false-negative rate of its own. Its value is that it keeps insufficient resolution visible to the person making the engineering decision.
 
-A completed comparison should therefore report its detectable range. When the observed difference falls below the predeclared engineering threshold or below the experiment's minimum detectable effect, I report that limitation explicitly. Insufficient resolution is not evidence that the systems are equal.
+A completed comparison should therefore report its detectable range. When the observed difference falls below the predeclared engineering threshold or below the experiment's minimum detectable effect, report that limitation explicitly. Insufficient resolution is not evidence that the systems are equal.
 
 \hypertarget{compare-outcomes-item-by-item}{%
 \section{Compare outcomes item by item}\label{compare-outcomes-item-by-item}}
@@ -128,7 +128,7 @@ Item-level subtraction removes shared task difficulty, so the remaining variatio
 
 The interval around the mean difference is obtained by multiplying its standard error by an appropriate critical value. The choice of critical value and the validity of the approximation depend on the statistical procedure and the observed score distribution.
 
-The data record must preserve the pairing. For every task, I retain the task identity, both system scores, the nuisance-source assignments, and the run identity. I report the mean paired difference, its standard error, an interval around that mean, and the correlation between the systems' item-level scores. Once the per-item relationship has been discarded, two headline means are not enough to reconstruct any of these quantities.
+The data record must preserve the pairing. For every task, retain the task identity, both system scores, the nuisance-source assignments, and the run identity. Report the mean paired difference, its standard error, an interval around that mean, and the correlation between the systems' item-level scores. Once the per-item relationship has been discarded, two headline means are not enough to reconstruct any of these quantities.
 
 Pairing also improves diagnosis. The same average difference can arise from small gains across most tasks, a few large reversals, or a trade in which each system solves a different subset. Those patterns have different engineering implications. Item-level records reveal which tasks changed and whether the overall result depends on a small number of discordant cases.
 
@@ -136,7 +136,7 @@ The validity of the pairing depends on experimental identity, not matching task 
 
 An adversarial review of one of my own experiment designs found this exact defect. One arm transformed the repository before presenting it to the system, while the other operated on the original repository. The task label remained the same, but the executable state did not. I therefore treated the planned pairing as invalid. A shared label does not establish that two experimental units are equivalent.
 
-Published aggregate scores create a simpler boundary. If I did not run the other system on the same item instances, I do not have paired observations. The aggregate results can still be compared descriptively, but their item-level covariance cannot be recovered from the means. A valid paired analysis requires rerunning both systems on the same items.
+Published aggregate scores create a simpler boundary. If the other system was not run on the same item instances, the observations are not paired. The aggregate results can still be compared descriptively, but their item-level covariance cannot be recovered from the means. A valid paired analysis requires rerunning both systems on the same items.
 
 Repeated attempts introduce the same identity requirement. Attempt one from system A pairs with attempt one from system B only when the attempts share randomized conditions by construction. Selecting pairs after inspecting the outcomes biases the comparison. Seeds, task order, data order, and other nuisance assignments must therefore be matched before results are visible and recorded with every pair.
 
@@ -191,13 +191,13 @@ The catalog also covers profiling benchmark noise before making decisions, decla
 \hypertarget{before-drawing-a-conclusion-from-a-difference}{%
 \section{Before drawing a conclusion from a difference}\label{before-drawing-a-conclusion-from-a-difference}}
 
-I define the engineering threshold before running the expensive suite. The threshold is the smallest change that would alter the engineering decision, not the smallest change a statistical test might detect.
+Define the engineering threshold before running the expensive suite. The threshold is the smallest change that would alter the engineering decision, not the smallest change a statistical test might detect.
 
-Pilot variance then determines the required numbers of tasks and repeated runs. I add margin because the pilot estimate is itself uncertain, and the design record states the smallest difference the planned experiment can reliably resolve. When the available budget cannot resolve a difference large enough to matter, I narrow the claim or withhold the verdict before spending the calls.
+Pilot variance then determines the required numbers of tasks and repeated runs. Add margin because the pilot estimate is itself uncertain, and the design record states the smallest difference the planned experiment can reliably resolve. When the available budget cannot resolve a difference large enough to matter, narrow the claim or withhold the verdict before spending the calls.
 
-Three independent repeats per configuration are my minimum. Three may still produce an unstable variance estimate, but they prevent one unusually favorable or unfavorable run from determining the result. I pair nuisance conditions across systems wherever possible and run both systems against identical item states. Each retained row records the item identity, the outcomes from both systems, the repeat identity, and the assigned random conditions.
+Three independent repeats per configuration is a workable minimum. Three may still produce an unstable variance estimate, but they prevent one unusually favorable or unfavorable run from determining the result. Pair nuisance conditions across systems wherever possible and run both systems against identical item states. Each retained row records the item identity, the outcomes from both systems, the repeat identity, and the assigned random conditions.
 
-The analysis begins with per-item differences. For continuous outcomes, I report the mean paired difference, its standard error, the correlation between the two systems' scores, and a confidence interval for the mean difference.
+The analysis begins with per-item differences. For continuous outcomes, report the mean paired difference, its standard error, the correlation between the two systems' scores, and a confidence interval for the mean difference.
 
 Binary pass-or-fail outcomes require the discordant pairs and an appropriate paired test. Nonlinear composite metrics require resampling or permutation of intact pairs. Matching task names do not create a paired design when the repository state, inputs, or execution path differs.
 
@@ -223,13 +223,11 @@ Repeated trials remain interpretable only while the apparatus is pinned:
   evaluator version.
 \end{itemize}
 
-When a provider exposes no stable model version, I record the evaluation window and treat later reruns as potentially affected by model drift.
+When a provider exposes no stable model version, record the evaluation window and treat later reruns as potentially affected by model drift.
 
-The observed difference belongs beside the complete run distribution and the engineering threshold written before execution. I do not credit a difference that remains smaller than the measured variation. I return no verdict when the experiment lacked the power to resolve the difference that would have changed the decision.
+The observed difference belongs beside the complete run distribution and the engineering threshold written before execution. A difference smaller than the measured variation does not warrant credit, and an experiment that lacked the power to resolve the difference that would have changed the decision returns no verdict.
 
 The repository artifact \href{https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/protocols/evaluation-comparison.md}{\texttt{protocols/evaluation-comparison.md}} packages this sequence, pass condition, and retained files.
-
-\textbf{Portable claim.} One run is one draw.
 
 \section*{Sources and evidence}
 
@@ -252,7 +250,7 @@ The repository artifact \href{https://github.com/sjarmak/engineering-reliable-co
 \item
   Strong evidence: Sclar et al.~(2023), FormatSpread, arXiv:2310.11324. Meaning-preserving prompt-format changes produced a median 7.5-point accuracy spread across the tested tasks, with larger task-level spreads.
 \item
-  Strong evidence: Mizrahi et al.~(2024), TACL, arXiv:2401.00595. Individual templates reversed some model comparisons even where aggregate comparisons were more stable.
+  Strong evidence: Mizrahi et al.~(2023/2024), TACL (2024), arXiv:2401.00595 (submitted December 31, 2023, hence the January identifier). Individual templates reversed some model comparisons even where aggregate comparisons were more stable.
 \item
   Strong evidence: Salinas and Morstatter (2024), arXiv:2401.03729. Trivial prompt edits changed more than 10 percent of predictions on some tested tasks.
 \end{itemize}
