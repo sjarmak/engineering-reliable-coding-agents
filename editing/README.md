@@ -1,7 +1,7 @@
 # Markdown editing workflow
 
 Edit [`engineering-reliable-coding-agents.md`](engineering-reliable-coding-agents.md). It is a
-single Markdown rendering of the complete current manuscript: abstract, introduction, all 18
+single Markdown rendering of the complete current manuscript: abstract, introduction, all 19
 chapters, closing chapter, glossary, references, and data-availability statement.
 
 LaTeX remains the release source of truth. The Markdown file is an editing surface and change
@@ -34,5 +34,4 @@ bypasses that protection and should be used only when the editing copy is intent
 discarded.
 
 Text drawn inside figures is maintained in the figure source rather than in this Markdown file.
-For example, Figure 2 is sourced from the website repository's
-`src/assets/books/engineering-reliable-coding-agents/review-flow.svg`.
+For example, Figure 2 is sourced from [`../assets/review-flow.svg`](../assets/review-flow.svg).

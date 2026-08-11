@@ -139,7 +139,7 @@ function manifestFor({ target, revision, createdAt }) {
       status: "not-run",
     })),
     interpretation:
-      "This manifest and empty records are a scaffold, not evidence that any control passed.",
+      "This manifest and its empty records only scaffold a run. They contain no evidence that a control passed.",
   };
 }
 

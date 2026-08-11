@@ -4,7 +4,7 @@
 
 Coding agents are evaluated as models but deployed as systems. Once work can outlive a worker, mutate shared code, call external systems, run concurrently, or require durable recovery, reliability belongs to the system around the model.
 
-This repository contains the technical review and engineering monograph, runnable reliability and evaluation protocols, a machine-readable evidence and practice catalog, and reusable agent skills derived from selected practices. The organizing claim is that each layer of the system determines what the next layer may trust; confidence added downstream cannot repair evidence lost upstream.
+This repository contains the technical review and engineering monograph, runnable reliability and evaluation protocols, a machine-readable evidence and practice catalog, and reusable agent skills derived from selected practices. Each system layer determines what the next may trust. Downstream confidence cannot repair evidence lost upstream.
 
 [Read the browser edition](https://sjarmak.ai/books/engineering-reliable-coding-agents) · [Run the minimum reliability pass](protocols/minimum-reliability-pass.md) · [Browse the companion catalog](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion) · [Inspect the research artifact](companion/README.md)
 
@@ -56,7 +56,7 @@ node scripts/new-protocol-run.mjs minimum-reliability-pass ./runs/my-agent
 
 The dependency-free command creates `manifest.json` and six empty control records for repeated runs, outcome verification, the authority boundary, interrupted-run recovery, failure-trace review, and cost/time comparison. It records the current Git revision by default; when the evaluated system is a different checkout, pass its immutable identity with `--revision <revision>` before collecting results.
 
-Open `runs/my-agent/manifest.json`, record the task family, model, harness revision, and tool-policy revision, then execute the six steps in the [minimum reliability pass](protocols/minimum-reliability-pass.md). Every generated record starts as `not-run`. The scaffold is not evidence, a completed pass is not a universal reliability certificate, and one failed control must not be averaged away by the other five.
+Open `runs/my-agent/manifest.json`, record `task_family`, `model`, `harness_revision`, and `tool_policy_revision`, then execute the six steps in the [minimum reliability pass](protocols/minimum-reliability-pass.md). Every generated record starts as `not-run`. The scaffold records no evidence. A completed pass establishes only that the six controls produced inspectable records for the named system revision. Do not average a failed control away with the other five.
 
 For a narrower decision, choose one of the protocols in the table above. Each protocol states the decision it supports, required procedure, local pass condition, retained artifact, and the result it cannot establish without additional evidence. [`protocols/README.md`](protocols/README.md) provides the complete index and stable practice mappings.
 
@@ -73,19 +73,19 @@ Release `1.0.0` synthesizes 160 scholarly works, 99 practitioner records, 29 ben
 | `author_system_illustration` | A local measurement or failure case from a system operated by the author | Independent external evidence or a general recommendation |
 | Catalog-level lead | A thin-support mechanism preserved for investigation | A recommended best practice |
 
-A **developed practice** receives chapter-level treatment of its mechanism, evidence, and boundary. A **companion entry** is intentionally more compact; some extend a chapter and some are thin-support leads. Neither label upgrades its evidence group. Engineering transfers—especially the scheduling, distributed-systems, and topology material in Part VI—are testable designs adapted from adjacent domains, not measured coding-agent effects unless a record explicitly says otherwise.
+A **developed practice** receives chapter-level treatment of its mechanism, evidence, and boundary. A **companion entry** is intentionally more compact; some extend a chapter and some are thin-support leads. Neither label upgrades its evidence group. Part VI adapts scheduling, distributed-systems, and topology mechanisms from adjacent domains into testable designs. Treat a mechanism as a measured coding-agent effect only when its record reports such a measurement.
 
 Use [`companion/catalog.json`](companion/catalog.json) for practice-level evidence and limitations, [`companion/evidence-ledger.csv`](companion/evidence-ledger.csv) for claim-to-source links, [`companion/chapter-crosswalk.json`](companion/chapter-crosswalk.json) for treatment and chapter placement, and [`companion/benchmark-catalog.json`](companion/benchmark-catalog.json) for benchmark records. The [provenance statement](companion/PROVENANCE.md) describes what the public artifact includes and excludes.
 
 ## Read or reuse more
 
-- [Editable browser-oriented manuscript](editing/engineering-reliable-coding-agents.md) — the complete monograph in one Markdown file, mapped back to canonical TeX source.
-- [Canonical manuscript source](manuscript/main.tex) — the release source of truth.
-- [Factory contracts](protocols/factory-contracts.yaml) — machine-readable contracts I1–I11 and their checks.
-- [Distributed ambiguity faults](protocols/distributed-ambiguity-faults.yaml) — fault cases for disagreement across components.
-- [Source-review figure](assets/review-flow.svg) — the self-contained source whose corpus and practice counts are checked against companion data.
-- [Skills manifest](skills/manifest.json) — five derived workflows and their evidence boundary.
-- [Release metadata](release-metadata.json) — authoritative version, freeze, license, and methodology-gate state.
+- [Editable browser-oriented manuscript](editing/engineering-reliable-coding-agents.md): the complete monograph in one Markdown file, mapped back to canonical TeX source.
+- [Canonical manuscript source](manuscript/main.tex): the release source of truth.
+- [Factory contracts](protocols/factory-contracts.yaml): machine-readable contracts I1–I11 and their checks.
+- [Distributed ambiguity faults](protocols/distributed-ambiguity-faults.yaml): fault cases for disagreement across components.
+- [Source-review figure](assets/review-flow.svg): the self-contained source whose corpus and practice counts are checked against companion data.
+- [Skills manifest](skills/manifest.json): five derived workflows and their evidence boundary.
+- [Release metadata](release-metadata.json): authoritative version, freeze, license, and methodology-gate state.
 
 The manuscript and companion are released under CC-BY-4.0; scripts, protocols, skills, and repository metadata are Apache-2.0. See [`LICENSE-SCOPE.md`](LICENSE-SCOPE.md) for the directory-level terms and [`CITATION.cff`](CITATION.cff) for citation metadata.
 
@@ -100,4 +100,4 @@ node --test scripts/new-protocol-run.test.mjs
 (cd companion && sha256sum -c SHA256SUMS)
 ```
 
-The full release gate additionally validates packaged archives and recompiles the arXiv source offline; see [`SUBMISSION.md`](SUBMISSION.md#companion-release-sequence) for that release-maintainer workflow.
+The full release gate validates packaged archives and recompiles the arXiv source offline; see [`SUBMISSION.md`](SUBMISSION.md#companion-release-sequence) for that release-maintainer workflow.
