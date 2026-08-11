@@ -40,12 +40,32 @@ PROSE_FILES = [
     "companion/methodology/assembly-and-adjudication.md",
 ]
 
-FIGURE_SVG = "../website/src/assets/books/engineering-reliable-coding-agents/review-flow.svg"
+FIGURE_SVG = "assets/review-flow.svg"
+
+CORPUS_SUMMARY_FILES = [
+    "manuscript/abstract.tex",
+    "manuscript/frontmatter.tex",
+    "README.md",
+    "SUBMISSION.md",
+]
+
+CORPUS_CLAIM = re.compile(
+    r"(\d+) scholarly works, (\d+) practitioner records, "
+    r"(\d+) benchmark records, and (\d+) author-system case records"
+)
+
+
+def load_json(relative_path):
+    with open(os.path.join(REPO, relative_path), encoding="utf-8") as source:
+        return json.load(source)
 
 
 def load_counts():
-    catalog = json.load(open(os.path.join(REPO, "companion", "catalog.json"), encoding="utf-8"))
-    crosswalk = json.load(open(os.path.join(REPO, "companion", "chapter-crosswalk.json"), encoding="utf-8"))
+    catalog = load_json("companion/catalog.json")
+    crosswalk = load_json("companion/chapter-crosswalk.json")
+    benchmarks = load_json("companion/benchmark-catalog.json")
+    snapshot = load_json("companion/methodology/source-snapshot.json")
+    source_counts = snapshot["manuscript_source_counts"]
 
     total = len(catalog)
     developed = sum(1 for r in catalog if r["treatment"] == "developed_in_manuscript")
@@ -64,6 +84,11 @@ def load_counts():
         "companion_only": companion_only,
         "gated": gated,
         "leads": leads,
+        "scholarly": source_counts["scholarly"],
+        "practitioner": source_counts["practitioner"],
+        "benchmarks": len(benchmarks),
+        "snapshot_benchmarks": source_counts["benchmarks"],
+        "author_system_cases": source_counts["author_system_cases"],
     }
 
 
@@ -97,6 +122,25 @@ def check_invariants(c, problems):
         problems.append(
             f"crosswalk: gated ({c['gated']}) + leads ({c['leads']}) != total ({c['total']})"
         )
+    if c["benchmarks"] != c["snapshot_benchmarks"]:
+        problems.append(
+            f"benchmark catalog has {c['benchmarks']} records, but the source snapshot "
+            f"states {c['snapshot_benchmarks']}"
+        )
+
+
+def corpus_claim_problems(text, counts):
+    expected = (
+        counts["scholarly"],
+        counts["practitioner"],
+        counts["benchmarks"],
+        counts["author_system_cases"],
+    )
+    return [
+        f"states corpus tuple {tuple(map(int, match))}, expected {expected}"
+        for match in CORPUS_CLAIM.findall(text)
+        if tuple(map(int, match)) != expected
+    ]
 
 
 def stale_values(c):
@@ -106,7 +150,9 @@ def stale_values(c):
         "192": "practice-record total (now %d)" % c["total"],
         "55 developed": "developed count (now %d developed)" % c["developed"],
         "137 companion": "companion-only count (now %d companion)" % c["companion_only"],
-        "138 scholarly": "release-candidate scholarly corpus (now 159 scholarly)",
+        "138 scholarly": "release-candidate scholarly corpus (now %d scholarly)" % c["scholarly"],
+        "159 scholarly": "prior scholarly corpus (now %d scholarly)" % c["scholarly"],
+        "98 practitioner": "prior practitioner corpus (now %d practitioner)" % c["practitioner"],
         "192-record": "practice-record total (now %d-record)" % c["total"],
         "192 practices": "practice-record total (now %d practices)" % c["total"],
         "192 companion practices": "practice-record total",
@@ -141,6 +187,28 @@ def main():
                 hits = re.findall(re.escape(needle), text)
             if hits:
                 problems.append(f"{rel}: stale {needle!r} ({len(hits)}x) -- {why}")
+
+    for rel in CORPUS_SUMMARY_FILES:
+        path = os.path.join(REPO, rel)
+        text = open(path, encoding="utf-8").read()
+        matches = CORPUS_CLAIM.findall(text)
+        if not matches:
+            problems.append(f"{rel}: missing exact release corpus summary")
+        problems.extend(f"{rel}: {problem}" for problem in corpus_claim_problems(text, counts))
+
+    figure_path = os.path.join(REPO, FIGURE_SVG)
+    figure = open(figure_path, encoding="utf-8").read()
+    figure_claims = (
+        f"{counts['scholarly']} scholarly",
+        f"{counts['practitioner']} practitioner",
+        f"{counts['total']} edition records",
+        f"{counts['developed']} developed practices",
+        f"{counts['companion_only']} companion practices",
+        f"{counts['gated']} gated records plus {counts['leads']} catalog-level leads",
+    )
+    for claim in figure_claims:
+        if claim not in figure:
+            problems.append(f"{FIGURE_SVG}: missing current figure claim {claim!r}")
 
     # The ledger row count quoted in the repo docs must match the file.
     ledger = os.path.join(REPO, "companion", "evidence-ledger.csv")
