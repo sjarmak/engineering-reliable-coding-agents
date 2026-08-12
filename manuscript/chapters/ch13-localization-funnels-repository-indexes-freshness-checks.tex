@@ -23,18 +23,7 @@ Each phase received bounded input, produced a bounded artifact, and handed that 
 
 Repository structure may identify the correct region without identifying the function or statement that owns a failure. In a disconnect case, search may return a response writer, several transport adapters, and a lifecycle callback. The state transition responsible for the malformed response may sit behind that callback in another package.
 
-The evidence needed to select the package differs from the evidence needed to select the function and edit location. A localization funnel separates those comparisons:
-
-\Needspace*{8\baselineskip}
-\begin{verbatim}
-repository structure
-    -> candidate files
-        -> candidate symbols
-            -> concrete edit locations
-                -> patch validation
-\end{verbatim}
-
-Each stage should reduce the candidate set and leave an inspectable handoff.
+The evidence needed to select the package differs from the evidence needed to select the function and edit location. A localization funnel separates those comparisons, narrowing repository structure to candidate files, then to candidate symbols, then to concrete edit locations, and finally to patch validation. Figure \ref{fig:ch13-localization-funnel} shows the sequence. Each stage should reduce the candidate set and leave an inspectable handoff.
 
 In the disconnect case, the first stage narrows the repository to the transport and lifecycle packages. The file handoff retains the response writer and callback and records why each survived. Symbol inspection follows the callback to the function that changes response state. The final stage proposes a guard at that assignment, and validation exercises the disconnect path. If an intermediate check shows that the state owner was omitted, the funnel widens before repair begins.
 
@@ -44,6 +33,7 @@ The stages have asymmetric consequences. Validation can sometimes correct a mist
 \centering
 \includegraphics{figures/ch13-localization-funnel.pdf}
 \caption{The localization funnel progressively narrows repository evidence, while candidate file selection caps recall because any omitted file remains unavailable to every later inspection and edit stage.}
+\label{fig:ch13-localization-funnel}
 \end{figure}
 
 Inspectable handoffs make downstream errors visible, but validation can repair a poor edit choice only when the necessary file survived initial selection.
@@ -125,17 +115,7 @@ A typed index becomes plausible when the workload repeatedly asks structural que
 
 This representation is a \textbf{typed knowledge graph}. It stores entities under declared kinds and records how each pair of connected entities relates. The types constrain traversal and make a returned path inspectable. They also create schema, parser, identity, and migration obligations that a similarity index does not have.
 
-The export question can then become a bounded traversal:
-
-\Needspace*{7\baselineskip}
-\begin{verbatim}
-start: export handler named by the issue
-    -> follow invocation edges into the queue consumer
-    -> follow references into the lifecycle component
-    -> return functions that write the blocked state
-\end{verbatim}
-
-The issue and the final helper need no shared token. The graph supplies a path that can be inspected edge by edge.
+The export question can then become a bounded traversal. It starts at the export handler named by the issue, follows invocation edges into the queue consumer, follows references into the lifecycle component, and returns the functions that write the blocked state. The issue and the final helper need no shared token. The graph supplies a path that can be inspected edge by edge.
 
 A structural path can also be more compact than the alternatives. Instead of serializing the repository or opening every file encountered during exploration, the retriever can return a small subgraph containing the entry point, intermediate calls, state owner, and relationship types. The model receives both the candidates and an explanation of why they were selected.
 

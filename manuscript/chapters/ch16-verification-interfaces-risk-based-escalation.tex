@@ -393,29 +393,14 @@ A deterministic rule can establish that an agent wrote outside an allowed direct
 
 A model judge becomes appropriate when the rubric requires contextual interpretation, such as whether a migration plan includes a credible rollback for the affected data path. An agent judge is appropriate only when no single artifact contains the evidence, such as whether a sequence of individually permitted actions collectively bypassed a control.
 
-Each layer must expose its evidence to the next:
+Each layer must expose its evidence to the next, as Figure \ref{fig:ch16-detection-ladder} sets out.
 
-\Needspace*{21\baselineskip}
-\begin{verbatim}
-kind of detection
-    -> least complex mechanism capable of checking it
-        |
-        +-> exact violation
-        |   -> deterministic rule
-        |      -> event + matched policy clause
-        |
-        +-> contextual judgment
-        |   -> model judge with fixed rubric
-        |      -> criterion + supporting trace span + uncertainty
-        |
-        +-> sequence + changing state + tool interaction
-            -> agent judge examines live trace
-               -> observations + intermediate actions
-
-human reviewer
-    -> calibrates the layers
-    -> owns the final verdict
-\end{verbatim}
+\begin{figure}[htbp]
+\centering
+\includegraphics{figures/ch16-detection-ladder.pdf}
+\caption{Each kind of detection routes to the least complex mechanism capable of checking it, and every layer must expose the evidence the next one needs.}
+\label{fig:ch16-detection-ladder}
+\end{figure}
 
 A bare risk score forces the reviewer either to repeat the discovery work or to accept the classifier's authority without an affordable check.
 

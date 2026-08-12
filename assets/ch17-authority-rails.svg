@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 486 372" width="486" height="372" role="img" aria-labelledby="figtitle-ch17-authority-rails" class="bookfig">
+<title id="figtitle-ch17-authority-rails">Authority widens one rung at a time within a defined action class. Separate rails do not transfer evidence between them, and the approval floor is permanent.</title>
+<style>.bookfig .f-bg{fill:#ffffff}.bookfig .s-bg{stroke:#ffffff}.bookfig .f-ink{fill:#1a1a1a}.bookfig .s-ink{stroke:#1a1a1a}.bookfig .f-mid{fill:#6b6b6b}.bookfig .s-mid{stroke:#6b6b6b}.bookfig .f-faint{fill:#b8b8b8}.bookfig .s-faint{stroke:#b8b8b8}.bookfig .f-wash{fill:#e2e2e2}.bookfig .s-wash{stroke:#e2e2e2}.bookfig .f-accent{fill:#000000}.bookfig .s-accent{stroke:#000000}.bookfig .f-onacc{fill:#ffffff}.bookfig .s-onacc{stroke:#ffffff}@media (prefers-color-scheme:dark){.bookfig .f-bg{fill:#232019}.bookfig .s-bg{stroke:#232019}.bookfig .f-ink{fill:#ede5d6}.bookfig .s-ink{stroke:#ede5d6}.bookfig .f-mid{fill:#9a8f7c}.bookfig .s-mid{stroke:#9a8f7c}.bookfig .f-faint{fill:#5c5346}.bookfig .s-faint{stroke:#5c5346}.bookfig .f-wash{fill:#3d382f}.bookfig .s-wash{stroke:#3d382f}.bookfig .f-accent{fill:#ffffff}.bookfig .s-accent{stroke:#ffffff}.bookfig .f-onacc{fill:#232019}.bookfig .s-onacc{stroke:#232019}}:where([data-theme="dark"]) .bookfig .f-bg{fill:#232019}:where([data-theme="dark"]) .bookfig .s-bg{stroke:#232019}:where([data-theme="dark"]) .bookfig .f-ink{fill:#ede5d6}:where([data-theme="dark"]) .bookfig .s-ink{stroke:#ede5d6}:where([data-theme="dark"]) .bookfig .f-mid{fill:#9a8f7c}:where([data-theme="dark"]) .bookfig .s-mid{stroke:#9a8f7c}:where([data-theme="dark"]) .bookfig .f-faint{fill:#5c5346}:where([data-theme="dark"]) .bookfig .s-faint{stroke:#5c5346}:where([data-theme="dark"]) .bookfig .f-wash{fill:#3d382f}:where([data-theme="dark"]) .bookfig .s-wash{stroke:#3d382f}:where([data-theme="dark"]) .bookfig .f-accent{fill:#ffffff}:where([data-theme="dark"]) .bookfig .s-accent{stroke:#ffffff}:where([data-theme="dark"]) .bookfig .f-onacc{fill:#232019}:where([data-theme="dark"]) .bookfig .s-onacc{stroke:#232019}:where([data-theme="light"]) .bookfig .f-bg{fill:#ffffff}:where([data-theme="light"]) .bookfig .s-bg{stroke:#ffffff}:where([data-theme="light"]) .bookfig .f-ink{fill:#1a1a1a}:where([data-theme="light"]) .bookfig .s-ink{stroke:#1a1a1a}:where([data-theme="light"]) .bookfig .f-mid{fill:#6b6b6b}:where([data-theme="light"]) .bookfig .s-mid{stroke:#6b6b6b}:where([data-theme="light"]) .bookfig .f-faint{fill:#b8b8b8}:where([data-theme="light"]) .bookfig .s-faint{stroke:#b8b8b8}:where([data-theme="light"]) .bookfig .f-wash{fill:#e2e2e2}:where([data-theme="light"]) .bookfig .s-wash{stroke:#e2e2e2}:where([data-theme="light"]) .bookfig .f-accent{fill:#000000}:where([data-theme="light"]) .bookfig .s-accent{stroke:#000000}:where([data-theme="light"]) .bookfig .f-onacc{fill:#ffffff}:where([data-theme="light"]) .bookfig .s-onacc{stroke:#ffffff}</style>
+<rect class="f-bg" width="486" height="372" fill="#ffffff"/>
+<rect class="f-wash" x="30.6" y="16" width="74.9" height="56" fill="#e2e2e2" fill-opacity="0.85"/>
+<text class="f-ink" x="68" y="40.2" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">defined</text>
+<text class="f-ink" x="68" y="55.2" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">action class</text>
+<rect class="f-wash" x="136.3" y="16" width="99.4" height="56" fill="#e2e2e2" fill-opacity="0.85"/>
+<text class="f-ink" x="186" y="32.7" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">its own approval,</text>
+<text class="f-ink" x="186" y="47.7" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">modification, and</text>
+<text class="f-ink" x="186" y="62.7" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">outcome record</text>
+<rect class="f-wash" x="272.7" y="16" width="66.7" height="56" fill="#e2e2e2" fill-opacity="0.85"/>
+<text class="f-ink" x="306" y="40.2" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">measured</text>
+<text class="f-ink" x="306" y="55.2" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">evidence</text>
+<rect class="f-wash" x="358.2" y="16" width="107.5" height="56" fill="#e2e2e2" fill-opacity="0.85"/>
+<text class="f-ink" x="412" y="40.2" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">one wider rung,</text>
+<text class="f-ink" x="412" y="55.2" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">not a wider system</text>
+<line class="s-mid" x1="108.5" y1="44" x2="124.30000000000001" y2="44" stroke="#6b6b6b" stroke-width="1.6"/>
+<path class="f-mid" d="M 133.3 44 L 124.3 38.8 L 124.3 49.2 Z" fill="#6b6b6b"/>
+<line class="s-mid" x1="238.70000000000002" y1="44" x2="260.7" y2="44" stroke="#6b6b6b" stroke-width="1.6"/>
+<path class="f-mid" d="M 269.7 44 L 260.7 38.8 L 260.7 49.2 Z" fill="#6b6b6b"/>
+<line class="s-mid" x1="342.4" y1="44" x2="346.2" y2="44" stroke="#6b6b6b" stroke-width="1.6"/>
+<path class="f-mid" d="M 355.2 44 L 346.2 38.8 L 346.2 49.2 Z" fill="#6b6b6b"/>
+<rect class="s-mid" x="17" y="98" width="216" height="104" fill="none" stroke="#6b6b6b" stroke-width="1.4"/>
+<text class="f-ink" font-weight="bold" x="125" y="118" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#1a1a1a" text-anchor="middle">service restart rail</text>
+<text class="f-mid" x="125" y="140" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b6b6b" text-anchor="middle">transient process state</text>
+<text class="f-mid" x="125" y="158" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b6b6b" text-anchor="middle">another restart may reverse it</text>
+<text class="f-mid" x="125" y="176" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b6b6b" text-anchor="middle">clean restarts may widen the rung</text>
+<rect class="s-mid" x="253" y="98" width="216" height="104" fill="none" stroke="#6b6b6b" stroke-width="1.4"/>
+<text class="f-ink" font-weight="bold" x="361" y="118" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#1a1a1a" text-anchor="middle">credential rotation rail</text>
+<text class="f-mid" x="361" y="140" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b6b6b" text-anchor="middle">distributed configuration</text>
+<text class="f-mid" x="361" y="158" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b6b6b" text-anchor="middle">invalidates live clients</text>
+<text class="f-mid" x="361" y="176" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b6b6b" text-anchor="middle">may block recovery access</text>
+<line class="s-mid" x1="125" y1="202" x2="125" y2="224" stroke="#6b6b6b" stroke-width="1.6"/>
+<line class="s-mid" x1="125" y1="224" x2="361" y2="224" stroke="#6b6b6b" stroke-width="1.6"/>
+<line class="s-mid" x1="361" y1="224" x2="361" y2="211" stroke="#6b6b6b" stroke-width="1.6"/>
+<path class="f-mid" d="M 361 202 L 355.8 211.0 L 366.2 211.0 Z" fill="#6b6b6b"/>
+<text class="f-mid" x="243" y="244" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#6b6b6b" text-anchor="middle">hundreds of clean restarts here establish nothing about safety there</text>
+<rect class="s-mid" x="72.2" y="268" width="115.7" height="30" fill="none" stroke="#6b6b6b" stroke-width="1.4"/>
+<text class="f-ink" x="130" y="286.9" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#1a1a1a" text-anchor="middle">irreversible actions</text>
+<rect class="s-mid" x="278.4" y="268" width="143.2" height="30" fill="none" stroke="#6b6b6b" stroke-width="1.4"/>
+<text class="f-ink" x="350" y="286.9" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#1a1a1a" text-anchor="middle">high-blast-radius actions</text>
+<line class="s-accent" x1="24" y1="312" x2="462" y2="312" stroke="#000000" stroke-width="3.2"/>
+<text class="f-ink" font-weight="bold" x="243" y="334" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#1a1a1a" text-anchor="middle">permanent approval floor</text>
+<text class="f-mid" x="243" y="352" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#6b6b6b" text-anchor="middle">human authorization stays mandatory, and routine success does not remove it</text>
+</svg>

@@ -12,26 +12,14 @@ Human screening had improved the original collection, but it could not control w
 
 The retirement also exposed a separate problem. Some tasks rejected functionally valid patches because the tests required an undocumented implementation detail or checked behavior absent from the issue. Other tests were too permissive and accepted patches that did not implement the requested behavior. Human review had missed both kinds of defect, because task quality is conditional on the candidates being graded. A test that looks reasonable in isolation can fail when it meets an implementation its authors did not anticipate.
 
-You should treat any public score as the output of three coupled measurements. First, has the model already encountered the work? Second, can the test oracle refute an incorrect answer? Third, does the task distribution represent the work someone wants the model to do? The sponsor's reversal is the demonstration that reputation, curation effort, and a large annotator count answer none of these questions. Each question needs its own control.
+You should treat any public score as the output of three coupled measurements. First, has the model already encountered the work? Second, can the test oracle refute an incorrect answer? Third, does the task distribution represent the work someone wants the model to do? The sponsor's reversal is the demonstration that reputation, curation effort, and a large annotator count answer none of these questions. Each question needs its own control, and Figure \ref{fig:ch03-score-controls} pairs each with the control that answers it.
 
-\Needspace*{18\baselineskip}
-\begin{verbatim}
-public score
-    ^
-    |
-    +-> has the model already encountered the work?
-    |       -> matched control set
-    |
-    +-> can the test oracle refute an incorrect answer?
-    |       -> adversarial test strengthening
-    |       -> re-adjudication
-    |
-    +-> does the task distribution represent the work?
-            -> tasks mined from the reader's own merged work
-
-reputation + curation effort + large annotator count
-    -> answer none of these questions
-\end{verbatim}
+\begin{figure}[htbp]
+\centering
+\includegraphics{figures/ch03-score-controls.pdf}
+\caption{A public score is the output of three coupled measurements. Each question has its own control, and reputation, curation effort, and a large annotator count answer none of them.}
+\label{fig:ch03-score-controls}
+\end{figure}
 
 \hypertarget{measure-the-public-private-gap}{%
 \section{Measure the public-private gap}\label{measure-the-public-private-gap}}
@@ -50,11 +38,10 @@ When each public task has a defensible counterpart, the audit should use a paire
 
 For a given model, the primary estimate is:
 
-\Needspace*{5\baselineskip}
-\begin{verbatim}
-inflation_gap(model) =
-    score(model, public_tasks) - score(model, matched_control_tasks)
-\end{verbatim}
+\Needspace*{4\baselineskip}
+\[
+  \text{inflation gap}(m) = \text{score}(m, \text{public}) - \text{score}(m, \text{matched control})
+\]
 
 The gap estimates the combined effect of public exposure on the measured score. It cannot isolate a pure training-data effect. The estimate may include direct exposure to tasks or solutions, familiarity with repositories and issue conventions, and adaptation through repeated use of the public suite.
 
@@ -97,11 +84,10 @@ The control removes the most direct path from a public task into pre-evaluation 
 
 That distinction changes the data model for an evaluation suite. Each task needs provenance for its issue, repository state, tests, solution, and any discussion that reveals the solution. Each model needs a recorded cutoff and a policy for ambiguous or rolling cutoffs. Eligibility is then a function of both records:
 
-\Needspace*{5\baselineskip}
-\begin{verbatim}
-eligible(task, model) =
-    task.first_public_at > model.training_cutoff
-\end{verbatim}
+\Needspace*{4\baselineskip}
+\[
+  \text{eligible}(t, m) \iff \texttt{first\_public\_at}(t) > \texttt{training\_cutoff}(m)
+\]
 
 The inequality is the easy part. \texttt{first\_public\_at} may refer to an issue that was discussed in a public chat before it reached the tracker, a security fix disclosed after private coordination, or a commit mirrored across several hosts. A benchmark maintainer must choose which event counts and retain enough provenance to revisit that choice. Cutoff claims pose a similar problem, because providers may disclose a date without specifying whether later supervised tuning, tool traces, or retrieval indexes include newer material.
 

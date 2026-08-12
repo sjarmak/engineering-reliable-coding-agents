@@ -18,6 +18,7 @@
 \usepackage{upquote}
 \usepackage[htt]{hyphenat}
 \usepackage{xcolor}
+\usepackage{framed}
 \usepackage{xurl}
 \usepackage{fancyhdr}
 \usepackage[hidelinks,breaklinks=true]{hyperref}
@@ -60,6 +61,15 @@
 \setlength{\abovecaptionskip}{0.45\baselineskip}
 \setlength{\belowcaptionskip}{0.15\baselineskip}
 \fvset{fontsize=\small}
+
+% Record blocks: schemas, manifests, and field lists a reader would copy into a
+% system. Setting them on a light ground separates them from the surrounding
+% prose the way a code listing does, without a frame heavy enough to compete
+% with the figures.
+\definecolor{shadecolor}{gray}{0.955}
+\DefineVerbatimEnvironment{recordbody}{Verbatim}%
+  {fontsize=\small,xleftmargin=10pt,xrightmargin=6pt}
+\newenvironment{record}{\begin{shaded}\vspace{-2pt}}{\vspace{-2pt}\end{shaded}}
 \newcommand{\currentparttitle}{}
 \providecommand{\partmark}[1]{}
 \renewcommand{\partmark}[1]{\gdef\currentparttitle{#1}}

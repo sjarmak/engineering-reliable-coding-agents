@@ -50,13 +50,15 @@ The specialization is justified only because it creates a boundary at which the 
 Structured handoffs can address the same coupling:
 
 \Needspace*{8\baselineskip}
-\begin{verbatim}
+\begin{record}
+\begin{recordbody}
 query: exact request issued to the retriever
 candidates: identifiers returned
 coverage_checks: alternate queries and their results
 claim: sender's interpretation
 status: supported | incomplete | failed
-\end{verbatim}
+\end{recordbody}
+\end{record}
 
 The schema does not make the interpretation correct. It keeps evidence, interpretation, and completion status separate. An incomplete search can no longer become indistinguishable from a supported negative result unless another component explicitly makes that conversion.
 
@@ -280,7 +282,8 @@ Replaying both configurations for each consequential release turns that shift in
 A compact promotion record can contain:
 
 \Needspace*{31\baselineskip}
-\begin{verbatim}
+\begin{record}
+\begin{recordbody}
 golden_set_version: repository-maintenance-2026-07
 
 single_agent:
@@ -309,7 +312,8 @@ promotion_rule:
 
 decision:
   promote | retain baseline | redesign treatment
-\end{verbatim}
+\end{recordbody}
+\end{record}
 
 This gate answers whether to divide the work. Topology selection answers how. A multi-agent design that cannot clear the gate should return to structural diagnosis. The next experiment may require a narrower specialist boundary, a different aggregator, or no additional worker.
 
@@ -320,17 +324,7 @@ Jia et al.~(\href{https://arxiv.org/abs/2602.19843}{2026}) injected synthetic fa
 
 The faults were synthetic and the comparison covered three architectures. The result does not establish a general preference for closed loops. It does show that message routes and feedback paths can determine whether a local error remains local or becomes a system failure.
 
-A \textbf{pipeline} passes work through a fixed sequence of stages. It fits tasks that decompose into stable ordered transformations, such as:
-
-\Needspace*{7\baselineskip}
-\begin{verbatim}
-retrieve candidate files
-    -> extract relevant regions
-        -> generate patch
-            -> run tests
-\end{verbatim}
-
-Its advantage is inspectability. State moves in one direction, and each transition has a defined producer and consumer. Its weakness is the same property. An early omission can flow through every later stage without any component returning to the source.
+A \textbf{pipeline} passes work through a fixed sequence of stages. It fits tasks that decompose into stable ordered transformations: retrieve candidate files, extract the relevant regions, generate a patch, run the tests. Its advantage is inspectability. State moves in one direction, and each transition has a defined producer and consumer. Its weakness is the same property. An early omission can flow through every later stage without any component returning to the source.
 
 Pipelines also compress meaning at each handoff. If retrieval emits only file excerpts, the patch stage may never learn that coverage was uncertain. A status field can preserve that uncertainty, but it does not create a return route. When downstream evidence can invalidate an upstream decision, the task no longer has a purely linear structure even if its implementation remains a sequence of functions.
 
@@ -556,7 +550,8 @@ A task graph is not enough for repository work. Its edges record which work item
 Each node therefore needs enough state to support both scheduling and recovery:
 
 \Needspace*{16\baselineskip}
-\begin{verbatim}
+\begin{record}
+\begin{recordbody}
 node_id: stable logical identity
 inputs: immutable artifact versions
 repositories: the repositories the node may affect
@@ -570,7 +565,8 @@ attempt: retry identity
 in_flight_artifacts: published state of the running attempt's artifact
 status: blocked | ready | running | succeeded | failed
 outputs: versioned artifacts and supporting evidence
-\end{verbatim}
+\end{recordbody}
+\end{record}
 
 The attempt identity prevents a late response from an expired worker from overwriting a successful retry. Immutable input versions reveal when a ready node was planned against stale state. Versioned outputs allow downstream nodes to distinguish attempts that produced different artifacts.
 
@@ -584,15 +580,7 @@ Those rules illustrate the mechanism. They do not provide comparative performanc
 
 A per-step time limit contains a slow or failed worker only when expiration produces and propagates a real failure. Treating a timeout as success destroys the evidence of failure and may release downstream nodes without their required inputs. The schedule then appears healthy because it erased the event needed to diagnose it.
 
-Dispatch should fail closed:
-
-\Needspace*{7\baselineskip}
-\begin{verbatim}
-worker exceeds time limit
-    -> attempt fails visibly
-    -> dependent nodes remain blocked
-    -> retry, escalation, or cancellation policy runs
-\end{verbatim}
+Dispatch should fail closed. When a worker exceeds its time limit, the attempt fails visibly, dependent nodes remain blocked, and the retry, escalation, or cancellation policy runs.
 
 Retries require the same discipline. A retry creates a new attempt for the same logical node rather than a second independent task. The scheduler must either establish that repeated execution is idempotent or isolate side effects before trying again. Otherwise a timeout can produce duplicate comments, partial writes, or two workers claiming the same resource.
 

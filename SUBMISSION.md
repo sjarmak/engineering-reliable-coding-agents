@@ -34,7 +34,7 @@ AI coding agents are commonly evaluated as models but deployed as systems whose 
 
 ### Comments
 
-Technical review and engineering monograph, 312 pages, 23 figures. Includes an evidence audit, a 206-practice companion research artifact, and runnable protocols for evaluating and operating AI coding agents. August 2026. Source, companion, and reusable protocols: https://github.com/sjarmak/engineering-reliable-coding-agents.
+Technical review and engineering monograph, 312 pages, 30 figures. Includes an evidence audit, a 206-practice companion research artifact, and runnable protocols for evaluating and operating AI coding agents. August 2026. Source, companion, and reusable protocols: https://github.com/sjarmak/engineering-reliable-coding-agents.
 
 If the companion receives a DOI before submission, append `Companion DOI: <DOI>.` Otherwise use the text above without a DOI placeholder.
 
@@ -168,7 +168,7 @@ License, endorsement, and ORCID are resolved; no DOI is assigned.
 4. Upload the exact verified `engineering-reliable-coding-agents-arxiv-source.zip`; do not upload the locally generated PDF in place of TeX source.
 5. Confirm that arXiv identifies `main.tex` as the top-level file. Select XeLaTeX with TeX Live 2025; this is the verified processor recorded in `manuscript/00README` and `release-metadata.json`.
 6. Compare arXiv’s generated PDF with `engineering-reliable-coding-agents-preview.pdf`.
-7. Inspect the title page, abstract, table of contents, all part and chapter starts, equations, hyperlinks, all 23 figures, and all 10 numbered tables.
+7. Inspect the title page, abstract, table of contents, all part and chapter starts, equations, hyperlinks, all 30 figures, and all 11 numbered tables.
 8. Paste the metadata above without the Markdown headings or any unresolved placeholder.
 9. Select CC-BY-4.0 as the license.
 10. Submit for moderation. After announcement, record the arXiv identifier and DOI on the website and in the companion metadata.

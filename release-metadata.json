@@ -4,8 +4,8 @@
   "freeze_date": "2026-08-11",
   "manuscript": {
     "pages": 312,
-    "figures": 23,
-    "numbered_tables": 10
+    "figures": 30,
+    "numbered_tables": 11
   },
   "arxiv": {
     "primary_category": "cs.SE",

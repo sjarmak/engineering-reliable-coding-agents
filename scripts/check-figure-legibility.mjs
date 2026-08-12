@@ -3,9 +3,10 @@
  * check-figure-legibility.mjs -- find text a figure draws over or outside its
  * own geometry.
  *
- * Two defects reached the release this way, both caught by eye rather than by
- * a check: a label that ran past the box holding it, and a connector routed
- * straight through a sentence. Both are measurable. Word boxes come from
+ * Three defects reached a draft this way, each caught by eye rather than by a
+ * check: a label that ran past the box holding it, a connector routed straight
+ * through a sentence, and two labels printed on top of each other. All three
+ * are measurable. Word boxes come from
  * `pdftotext -bbox` on the built figure, which reports what the renderer
  * actually placed; boxes and connectors come from the SVG source, where the
  * coordinates are exact. rsvg-convert maps SVG pixels to PDF points at 0.75,
@@ -24,9 +25,9 @@ import { fileURLToPath } from "node:url";
 import { figureNames } from "./build-figures.mjs";
 
 const PT_PER_PX = 0.75;
-// A stroke has width, and a word box from pdftotext carries a little bearing on
-// each side, so exact adjacency reads as a hit without some slack.
-const EDGE_TOLERANCE_PX = 1.5;
+// A word that reaches the inner edge of the box's own stroke already looks
+// clipped, so the only slack here is for rounding in the glyph boxes.
+const EDGE_TOLERANCE_PX = 0.5;
 const CROSSING_INSET_PX = 1.5;
 
 function attribute(tag, name) {
@@ -57,10 +58,9 @@ export function containerRects(svg) {
     if (width >= pageWidth - 1) continue;
     const className = attribute(tag, "class") ?? "";
     if (/\bf-bg\b/.test(className)) continue;
-    // A tint marks a region of the drawing rather than holding anything, and
-    // labels are meant to sit across its edge.
-    if ((numeric(tag, "fill-opacity") ?? 1) < 1) continue;
-    rects.push({ x, y, width, height });
+    // A shaded region holds its labels too. Letting tints off produced exactly
+    // the defect a reader reported: a label hanging off the edge of the band.
+    rects.push({ x, y, width, height, stroke: numeric(tag, "stroke-width") ?? 0 });
   }
   return rects;
 }
@@ -167,6 +167,26 @@ function belongsTo(word, rect) {
   );
 }
 
+/**
+ * Labels printed on top of each other. Word boxes from the renderer are tight,
+ * so any real horizontal overlap between two words sharing a line is a
+ * collision rather than kerning.
+ */
+export function overlappingPairs(words, { minOverlap = 1 } = {}) {
+  const drawn = words.filter((word) => word.text.trim());
+  const pairs = [];
+  for (let i = 0; i < drawn.length; i += 1) {
+    for (let j = i + 1; j < drawn.length; j += 1) {
+      const [a, b] = [drawn[i], drawn[j]];
+      const vertical = Math.min(a.y2, b.y2) - Math.max(a.y1, b.y1);
+      const horizontal = Math.min(a.x2, b.x2) - Math.max(a.x1, b.x1);
+      const shorter = Math.min(a.y2 - a.y1, b.y2 - b.y1);
+      if (horizontal > minOverlap && vertical > shorter / 2) pairs.push([a, b]);
+    }
+  }
+  return pairs;
+}
+
 function crosses(segment, word) {
   const left = word.x1 + CROSSING_INSET_PX;
   const right = word.x2 - CROSSING_INSET_PX;
@@ -192,11 +212,14 @@ export function figureProblems({ svg, words }) {
     const holders = rects.filter((rect) => belongsTo(word, rect));
     const holder = holders.sort((a, b) => a.width * a.height - b.width * b.height)[0];
     if (holder) {
+      // The stroke is drawn centered on the box edge, so the readable interior
+      // stops half a stroke inside it.
+      const inset = (holder.stroke ?? 0) / 2;
       const overflow = Math.max(
-        holder.x - word.x1,
-        word.x2 - (holder.x + holder.width),
-        holder.y - word.y1,
-        word.y2 - (holder.y + holder.height),
+        holder.x + inset - word.x1,
+        word.x2 - (holder.x + holder.width - inset),
+        holder.y + inset - word.y1,
+        word.y2 - (holder.y + holder.height - inset),
       );
       if (overflow > EDGE_TOLERANCE_PX) {
         problems.push(`"${word.text}" runs ${overflow.toFixed(1)}px past its box`);
@@ -207,6 +230,9 @@ export function figureProblems({ svg, words }) {
     if (segments.some((segment) => crosses(segment, run))) {
       problems.push(`a connector runs through "${run.text}"`);
     }
+  }
+  for (const [a, b] of overlappingPairs(words)) {
+    problems.push(`"${a.text}" and "${b.text}" are printed on top of each other`);
   }
   return problems;
 }
@@ -238,6 +264,6 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
     console.log(`${failing.length} of ${results.length} figures have text a reader cannot read.`);
     process.exitCode = 1;
   } else {
-    console.log(`all ${results.length} figures keep their text inside their boxes and clear of connectors`);
+    console.log(`all ${results.length} figures keep their text readable, unclipped, and uncollided`);
   }
 }

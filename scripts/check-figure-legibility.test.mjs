@@ -67,11 +67,25 @@ test("a connector that stops short of a label is not reported", () => {
   assert.deepEqual(problems, []);
 });
 
-test("a tint is a region of the drawing, not a box that holds text", () => {
+test("a tint holds its labels like any other box", () => {
   const problems = problemsFor(
     `<rect x="20" y="40" width="50" height="40" fill="#000000" fill-opacity="0.07"/>\n${LABEL}`,
   );
-  assert.deepEqual(problems, []);
+  assert.equal(problems.length, 1);
+  assert.match(problems[0], /runs [\d.]+px past its box/);
+});
+
+test("a word reaching the inner edge of a thick stroke counts as clipped", () => {
+  // The label ends 0.3px inside the box edge and 1.7px inside the stroke: only
+  // the second reading matches what the page shows, a word sitting on the rule.
+  const onTheStroke = problemsFor(
+    `<rect x="20" y="40" width="98" height="40" fill="none" stroke="#6b6b6b" stroke-width="4"/>\n${LABEL}`,
+  );
+  assert.equal(onTheStroke.length, 1);
+  const clear = problemsFor(
+    `<rect x="20" y="40" width="110" height="40" fill="none" stroke="#6b6b6b" stroke-width="4"/>\n${LABEL}`,
+  );
+  assert.deepEqual(clear, []);
 });
 
 test("words on one line join into a run, and separate labels stay apart", () => {
@@ -116,7 +130,19 @@ test("path connectors are read in absolute and relative form", () => {
 
 test("the full-bleed background is not counted as a container", () => {
   const svg = `<svg viewBox="0 0 300 200"><rect class="f-bg" width="300" height="200"/><rect x="5" y="5" width="20" height="20"/></svg>`;
-  assert.deepEqual(containerRects(svg), [{ x: 5, y: 5, width: 20, height: 20 }]);
+  assert.deepEqual(containerRects(svg), [{ x: 5, y: 5, width: 20, height: 20, stroke: 0 }]);
+});
+
+test("two labels printed on top of each other are reported", () => {
+  const problems = problemsFor(
+    `${LABEL}\n<text x="40" y="60" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#000000">audit trail</text>`,
+  );
+  assert.ok(problems.some((problem) => /printed on top of each other/.test(problem)));
+});
+
+test("adjacent words on a line are not read as a collision", () => {
+  const problems = problemsFor(LABEL);
+  assert.deepEqual(problems, []);
 });
 
 test("every released figure keeps its text readable", () => {

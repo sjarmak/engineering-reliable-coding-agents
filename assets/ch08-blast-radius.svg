@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 486 344" width="486" height="344" role="img" aria-labelledby="figtitle-ch08-blast-radius" class="bookfig">
+<title id="figtitle-ch08-blast-radius">In the database incident, primary and recovery data sat in one reachable failure domain. Blast radius follows from effective capabilities, and a warning in the prompt reduces none of them.</title>
+<style>.bookfig .f-bg{fill:#ffffff}.bookfig .s-bg{stroke:#ffffff}.bookfig .f-ink{fill:#1a1a1a}.bookfig .s-ink{stroke:#1a1a1a}.bookfig .f-mid{fill:#6b6b6b}.bookfig .s-mid{stroke:#6b6b6b}.bookfig .f-faint{fill:#b8b8b8}.bookfig .s-faint{stroke:#b8b8b8}.bookfig .f-wash{fill:#e2e2e2}.bookfig .s-wash{stroke:#e2e2e2}.bookfig .f-accent{fill:#000000}.bookfig .s-accent{stroke:#000000}.bookfig .f-onacc{fill:#ffffff}.bookfig .s-onacc{stroke:#ffffff}@media (prefers-color-scheme:dark){.bookfig .f-bg{fill:#232019}.bookfig .s-bg{stroke:#232019}.bookfig .f-ink{fill:#ede5d6}.bookfig .s-ink{stroke:#ede5d6}.bookfig .f-mid{fill:#9a8f7c}.bookfig .s-mid{stroke:#9a8f7c}.bookfig .f-faint{fill:#5c5346}.bookfig .s-faint{stroke:#5c5346}.bookfig .f-wash{fill:#3d382f}.bookfig .s-wash{stroke:#3d382f}.bookfig .f-accent{fill:#ffffff}.bookfig .s-accent{stroke:#ffffff}.bookfig .f-onacc{fill:#232019}.bookfig .s-onacc{stroke:#232019}}:where([data-theme="dark"]) .bookfig .f-bg{fill:#232019}:where([data-theme="dark"]) .bookfig .s-bg{stroke:#232019}:where([data-theme="dark"]) .bookfig .f-ink{fill:#ede5d6}:where([data-theme="dark"]) .bookfig .s-ink{stroke:#ede5d6}:where([data-theme="dark"]) .bookfig .f-mid{fill:#9a8f7c}:where([data-theme="dark"]) .bookfig .s-mid{stroke:#9a8f7c}:where([data-theme="dark"]) .bookfig .f-faint{fill:#5c5346}:where([data-theme="dark"]) .bookfig .s-faint{stroke:#5c5346}:where([data-theme="dark"]) .bookfig .f-wash{fill:#3d382f}:where([data-theme="dark"]) .bookfig .s-wash{stroke:#3d382f}:where([data-theme="dark"]) .bookfig .f-accent{fill:#ffffff}:where([data-theme="dark"]) .bookfig .s-accent{stroke:#ffffff}:where([data-theme="dark"]) .bookfig .f-onacc{fill:#232019}:where([data-theme="dark"]) .bookfig .s-onacc{stroke:#232019}:where([data-theme="light"]) .bookfig .f-bg{fill:#ffffff}:where([data-theme="light"]) .bookfig .s-bg{stroke:#ffffff}:where([data-theme="light"]) .bookfig .f-ink{fill:#1a1a1a}:where([data-theme="light"]) .bookfig .s-ink{stroke:#1a1a1a}:where([data-theme="light"]) .bookfig .f-mid{fill:#6b6b6b}:where([data-theme="light"]) .bookfig .s-mid{stroke:#6b6b6b}:where([data-theme="light"]) .bookfig .f-faint{fill:#b8b8b8}:where([data-theme="light"]) .bookfig .s-faint{stroke:#b8b8b8}:where([data-theme="light"]) .bookfig .f-wash{fill:#e2e2e2}:where([data-theme="light"]) .bookfig .s-wash{stroke:#e2e2e2}:where([data-theme="light"]) .bookfig .f-accent{fill:#000000}:where([data-theme="light"]) .bookfig .s-accent{stroke:#000000}:where([data-theme="light"]) .bookfig .f-onacc{fill:#ffffff}:where([data-theme="light"]) .bookfig .s-onacc{stroke:#ffffff}</style>
+<rect class="f-bg" width="486" height="344" fill="#ffffff"/>
+<text class="f-mid" x="24" y="24" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b6b6b" text-anchor="start">the database incident</text>
+<rect class="f-wash" x="45.6" y="38" width="84.8" height="32" fill="#e2e2e2" fill-opacity="0.85"/>
+<text class="f-ink" x="88" y="58.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#1a1a1a" text-anchor="middle">one identity</text>
+<line class="s-mid" x1="130.4" y1="54" x2="187" y2="54" stroke="#6b6b6b" stroke-width="1.6"/>
+<path class="f-mid" d="M 196 54 L 187.0 48.8 L 187.0 59.2 Z" fill="#6b6b6b"/>
+<rect class="f-wash" x="200.9" y="38" width="98.2" height="32" fill="#e2e2e2" fill-opacity="0.85"/>
+<text class="f-ink" x="250" y="58.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#1a1a1a" text-anchor="middle">one credential</text>
+<line class="s-mid" x1="299.1" y1="54" x2="330" y2="54" stroke="#6b6b6b" stroke-width="1.6"/>
+<line class="s-mid" x1="330" y1="30" x2="330" y2="78" stroke="#6b6b6b" stroke-width="1.6"/>
+<line class="s-mid" x1="330" y1="30" x2="335" y2="30" stroke="#6b6b6b" stroke-width="1.6"/>
+<path class="f-mid" d="M 344 30 L 335.0 24.8 L 335.0 35.2 Z" fill="#6b6b6b"/>
+<line class="s-mid" x1="330" y1="78" x2="335" y2="78" stroke="#6b6b6b" stroke-width="1.6"/>
+<path class="f-mid" d="M 344 78 L 335.0 72.8 L 335.0 83.2 Z" fill="#6b6b6b"/>
+<rect class="f-wash" x="348.2" y="16" width="119.7" height="28" fill="#e2e2e2" fill-opacity="0.85"/>
+<text class="f-ink" x="408" y="33.9" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#1a1a1a" text-anchor="middle">production database</text>
+<rect class="f-wash" x="366.5" y="64" width="83.0" height="28" fill="#e2e2e2" fill-opacity="0.85"/>
+<text class="f-ink" x="408" y="81.8" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#1a1a1a" text-anchor="middle">backup store</text>
+<text class="f-mid" x="243" y="108" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#6b6b6b" text-anchor="middle">one reachable failure domain holds both the primary and the recovery copy</text>
+<line class="s-faint" x1="24" y1="126" x2="462" y2="126" stroke="#b8b8b8" stroke-width="1.2"/>
+<text class="f-mid" x="24" y="148" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b6b6b" text-anchor="start">effective capabilities</text>
+<rect class="s-mid" x="52.6" y="160" width="70.8" height="28" fill="none" stroke="#6b6b6b" stroke-width="1.4"/>
+<text class="f-ink" x="88" y="177.7" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">credentials</text>
+<rect class="s-mid" x="180.2" y="160" width="125.6" height="28" fill="none" stroke="#6b6b6b" stroke-width="1.4"/>
+<text class="f-ink" x="243" y="177.7" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">filesystem permissions</text>
+<rect class="s-mid" x="353.6" y="160" width="88.9" height="28" fill="none" stroke="#6b6b6b" stroke-width="1.4"/>
+<text class="f-ink" x="398" y="177.7" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">network routes</text>
+<rect class="s-mid" x="45.3" y="198" width="85.4" height="28" fill="none" stroke="#6b6b6b" stroke-width="1.4"/>
+<text class="f-ink" x="88" y="215.7" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">tool endpoints</text>
+<rect class="s-mid" x="193.0" y="198" width="100.0" height="28" fill="none" stroke="#6b6b6b" stroke-width="1.4"/>
+<text class="f-ink" x="243" y="215.7" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">delegated tokens</text>
+<rect class="s-mid" x="341.6" y="198" width="112.8" height="28" fill="none" stroke="#6b6b6b" stroke-width="1.4"/>
+<text class="f-ink" x="398" y="215.7" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">services acting for it</text>
+<rect class="f-accent s-accent" x="102.7" y="244" width="280.6" height="52" fill="#000000" fill-opacity="0.16" stroke="#000000" stroke-width="1.4"/>
+<text class="f-ink" x="243" y="266.5" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#1a1a1a" text-anchor="middle">blast radius: every resource and effect reachable</text>
+<text class="f-ink" x="243" y="281.5" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#1a1a1a" text-anchor="middle">before a new authorization decision is required</text>
+<text class="f-mid" x="243" y="320" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#6b6b6b" text-anchor="middle">a warning in the prompt reaches the same capable process and removes none of that reach</text>
+</svg>

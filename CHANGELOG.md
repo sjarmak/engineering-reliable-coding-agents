@@ -2,6 +2,25 @@
 
 ## 1.0.0 — 2026-08-11
 
+- Converted the last 26 ASCII diagrams out of `verbatim`. Seven became figures
+  (score controls, the correction loop, all-k against at-least-one, blast
+  radius, the trace commitment gap, the detection ladder, and authority rails),
+  one became a table, five became display math, two were deleted as duplication
+  of a figure or the prose above them, three became prose or lists, and the
+  eight remaining schemas became shaded record blocks that read as code. The
+  manuscript now has 30 figures and 11 tables.
+- Removed the competing-interests section. It was a disclosure the book does not
+  need, and it pulled attention away from the argument.
+- Tightened `check-figure-legibility.mjs` after it passed two defects a reader
+  caught. It exempted shaded bands from the overflow check, so a label hanging
+  off the edge of one went unreported, and its 1.5px tolerance was wider than
+  the 1.6px stroke a clipped label was sitting on. Overflow is now measured
+  against the inner edge of the stroke, tints are checked like any other box,
+  and a third defect class was added: two labels printed on top of each other.
+  All three classes have regression tests, and the two shipped defects fail the
+  check in their original form.
+- Widened the Figure 7.1 identity column and the Figure 6.1 shaded band so no
+  label runs past its boundary.
 - Froze the first stable edition. Version strings, the freeze date, and the
   companion release metadata now read `1.0.0` rather than a release candidate.
 - Regenerated Figure 2 from its SVG source. The compiled PDF had never been
@@ -26,8 +45,6 @@
   not redistributable with third-party task content. Reconciled its reported
   repository coverage against the frozen suite: 46 anchor repositories, 56
   including cross-repository fixtures, replacing the unsupported 73.
-- Added a competing-interests statement covering the author's affiliation and
-  the vendor relationship behind the retrieval evaluation.
 - Fixed a duplicate `web-207` bibliography key and corrected the reference count
   to 244.
 - Repaired the reference audits. A throttled arXiv response (HTTP 429 with an
@@ -49,8 +66,8 @@
   page count as literals. It failed on the freeze-date change while the
   invariant it existed to check, that the report matches
   `release-metadata.json`, was intact. Both values now derive from the manifest.
-- Refreshed `SUBMISSION.md` against the built artifacts: 249 references, 23
-  figures, 10 tables, 51 archived files, a 619-row ledger, a 312-page preview
+- Refreshed `SUBMISSION.md` against the built artifacts: 249 references, 30
+  figures, 11 tables, 51 archived files, a 619-row ledger, a 312-page preview
   carrying the 1.0.0 identity, and roughly 113,000 words of chapter text.
 - Re-ran the reference audits against the live arXiv API after the backfill fix:
   164 manuscript identifiers and 960 cited titles across 321 unique identifiers,
@@ -119,7 +136,7 @@
   than as a traffic statistic: an allocation experiment that samples model
   calls as independent requests destroys the session reuse structure it is
   measuring, so replays must preserve turn and session boundaries.
-- Manuscript output is 312 pages, with 23 figures and 10 tables.
+- Manuscript output is 312 pages, with 30 figures and 11 tables.
 
 ## 1.0.0-rc.16 — 2026-08-09
 

@@ -21,50 +21,18 @@ Direct support for this containment practice comes from two practitioner anecdot
 
 The failed boundary in the database incident was an identity. Deleting the backup after deleting production required no additional capability. The agent already held a credential accepted by both systems. Once execution left the intended path, the distinction between primary data and recovery data existed only in the operator's mental model. To the authorization system, both were resources reachable by one identity.
 
-\emph{Blast radius} here means the resources and effects that one mistake or compromise can reach before a new authorization decision is required. For an agent, that radius is determined by its effective capabilities: credentials, filesystem permissions, network routes, tool endpoints, delegated tokens, and services willing to act on its behalf. A warning in the prompt does not reduce that set. It changes the instructions given to the same capable process.
+\emph{Blast radius} here means the resources and effects that one mistake or compromise can reach before a new authorization decision is required. For an agent, that radius is determined by its effective capabilities: credentials, filesystem permissions, network routes, tool endpoints, delegated tokens, and services willing to act on its behalf. A warning in the prompt does not reduce that set. It changes the instructions given to the same capable process. Figure \ref{fig:ch08-blast-radius} traces that reach from the incident outward.
 
-\Needspace*{26\baselineskip}
-\begin{verbatim}
-database incident:
-one identity
-    -> one credential
-        -> production database
-        -> backup store
-
-primary and recovery data
-    -> same reachable failure domain
-
-effective capabilities
-    -> credentials
-    -> filesystem permissions
-    -> network routes
-    -> tool endpoints
-    -> delegated tokens
-    -> services acting on the agent's behalf
-
-blast radius
-    -> every resource and effect reachable before a new decision
-
-prompt warning
-    -> same capable process
-    -> no reduction in reachable authority
-\end{verbatim}
+\begin{figure}[htbp]
+\centering
+\includegraphics{figures/ch08-blast-radius.pdf}
+\caption{In the database incident, primary and recovery data sat inside one reachable failure domain. Blast radius follows from effective capabilities, and a warning in the prompt removes none of them.}
+\label{fig:ch08-blast-radius}
+\end{figure}
 
 The first useful move is to make ordinary access read-only. \emph{Least privilege} means giving the running identity only the capabilities required for its current task and only for the period in which they are required. Read-only should be the default identity. An agent's promise not to write does not create that boundary.
 
-A write should require explicit escalation for one bounded capability, such as deploying one service, updating one issue, or applying one reviewed database migration.
-
-\Needspace*{11\baselineskip}
-\begin{verbatim}
-ordinary identity
-    -> read-only access
-
-write operation
-    -> explicit escalation
-    -> one named capability
-    -> one bounded target
-    -> limited lifetime
-\end{verbatim}
+A write should require explicit escalation for one named capability against one bounded target and for a limited lifetime, such as deploying one service, updating one issue, or applying one reviewed database migration.
 
 A read-only default limits what the process can change. It does not limit what the process can disclose, because anything the identity can read may also leave through model output. Sensitivity therefore belongs in the read boundary as well as the write boundary. The injection section below treats disclosure as a separate threat category.
 
@@ -86,15 +54,37 @@ Test the boundary in both directions. With the ordinary identity, attempt the pr
 
 A successful permitted action does not show what else the identity can do. A denied prohibited action does not show that the recovery operation the gate exists to permit will work.
 
-\Needspace*{9\baselineskip}
-\begin{verbatim}
-normal identity:
-    prohibited action -> denied
-
-escalated identity:
-    intended narrow action -> succeeds
-    adjacent destructive actions -> denied
-\end{verbatim}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2600}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4400}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3000}}@{}}
+\caption{Both directions of the capability boundary. A configuration passes only when every row holds.}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Identity under test
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Action attempted
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Required result
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Identity under test
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Action attempted
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Required result
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Ordinary & The prohibited write & Denied by the enforcing system \\
+Escalated & The intended narrow action & Succeeds \\
+Escalated & Adjacent destructive actions & Denied \\
+\end{longtable}
 
 One passing set of checks describes only the configuration that produced it. Platform scopes, role definitions, and tool endpoints can change beneath a deployed system, so both directions should be tested again after any change to a role, scope, delegation path, or tool endpoint.
 

@@ -66,7 +66,8 @@ Resource bounds make nontermination an explicit outcome. A process killed after 
 The acceptance contract should be readable without inspecting the controller:
 
 \Needspace*{10\baselineskip}
-\begin{verbatim}
+\begin{record}
+\begin{recordbody}
 command:       verify-change
 expected:      exit status 0
 required:      reports/test-results.json
@@ -74,7 +75,8 @@ required:      reports/test-results.json
 artifact rule: each required file exists and is non-empty
 timeout:       12 minutes
 network:       denied
-\end{verbatim}
+\end{recordbody}
+\end{record}
 
 The task definition fixes the command before the candidate encounters a failure. The expected condition names something more specific than ``works correctly.'' The artifact rules remove another common ambiguity: a wrapper can exit successfully after skipping the operation that should have produced the evidence.
 
@@ -115,17 +117,14 @@ An external observation originates outside the inference that produced the candi
 
 The distinction is informational. Suppose an agent changes a parser because it concludes that empty fields should be discarded. Re-reading the issue may reinforce that interpretation. A failing test showing that an empty field must preserve its position introduces a counterexample. The next attempt can now revise a specific assumption rather than search an unconstrained space of possible mistakes.
 
-This closes the loop opened by the sandbox:
+This closes the loop opened by the sandbox, shown in Figure \ref{fig:ch04-correction-loop}.
 
-\Needspace*{9\baselineskip}
-\begin{verbatim}
-candidate
-    -> sandbox run
-        -> pass: eligible for downstream gate
-        -> fail: immutable result returned to correction step
-            -> revised candidate
-                -> new sandbox run
-\end{verbatim}
+\begin{figure}[htbp]
+\centering
+\includegraphics{figures/ch04-correction-loop.pdf}
+\caption{The sandbox verdict is immutable. A failed candidate returns to the correction step, which emits a new candidate under a new identity rather than revising bytes that already carry a verdict.}
+\label{fig:ch04-correction-loop}
+\end{figure}
 
 The correction step does not modify the verdict. It consumes the failed candidate and its run record, then emits a new candidate with a new identity. This preserves the history needed to distinguish recovery from repeated failure. It also prevents revised bytes from inheriting a passing result produced by an earlier version.
 
@@ -212,25 +211,14 @@ Run each case more than once for the same release candidate. The repeated-trial 
 
 The result describes a single release candidate only when its configuration remains pinned across the sequence. Chapter 1's apparatus record applies to every trial, including the model version and decoding settings. Pinning does not guarantee independence. Shared caches, mutable services, provider incidents, and reused infrastructure can correlate outcomes, which limits the analyses the sequence supports.
 
-\(\mathrm{pass}^{k}\) reflects a different operational question from \(\mathrm{pass}@k\):
+\(\mathrm{pass}^{k}\) reflects a different operational question from \(\mathrm{pass}@k\), as Figure \ref{fig:ch04-metric-semantics} sets out.
 
-\Needspace*{17\baselineskip}
-\begin{verbatim}
-same k trials
-    |
-    +-> all-k reliability
-    |     all k of k trials passed
-    |     one failed trajectory breaks the sequence
-    |
-    +-> at-least-one success
-          at least one trajectory succeeded
-          several attempts were available
-
-choose the metric whose failure semantics resemble deployment
-
-workflow must complete reliably without supervision
-    -> stronger reason to use all-k reliability
-\end{verbatim}
+\begin{figure}[htbp]
+\centering
+\includegraphics{figures/ch04-metric-semantics.pdf}
+\caption{The same k trials answer two different operational questions. Choose the metric whose failure semantics resemble the deployment.}
+\label{fig:ch04-metric-semantics}
+\end{figure}
 
 \(\mathrm{pass}@k\) asks whether at least one acceptable trajectory can be found when several attempts are available. \(\mathrm{pass}^{k}\) asks whether every trajectory in a required sequence succeeds. Neither is universally correct. A supervised workflow that can select among alternatives may justify \(\mathrm{pass}@k\). A workflow expected to complete reliably without intervention has a stronger reason to use \(\mathrm{pass}^{k}\).
 
@@ -243,7 +231,8 @@ The comparison unit is the fully specified system release. Record the model iden
 The release record can remain mechanically small:
 
 \Needspace*{10\baselineskip}
-\begin{verbatim}
+\begin{record}
+\begin{recordbody}
 release:         candidate-2026-07-28
 system_digest:   6f5c...
 task_set:        golden-07
@@ -251,7 +240,8 @@ repeats:         k
 baseline:        production-previous
 case_verdicts:   stored run records
 promotion_rule:  recorded before execution
-\end{verbatim}
+\end{recordbody}
+\end{record}
 
 The digest binds the verdict to the evaluated configuration. The case verdicts link to the sandbox evidence. The promotion rule is recorded before the comparison begins. Otherwise the same regression can be accepted for a favored release and rejected for another.
 

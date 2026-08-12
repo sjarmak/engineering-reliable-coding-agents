@@ -33,16 +33,14 @@ A model-call record may include the input and output references, timing, token u
 
 The distinction becomes operational during partial failure. Suppose an agent decides at step 17 to create a support ticket. The runtime records \texttt{tool\_call\_dispatched}, the ticket service creates ticket 8421, and the worker dies before the runtime records \texttt{tool\_result\_persisted}. A transcript reconstructed after restart may omit the first call or show only an unanswered request.
 
-A typed stream can represent the gap directly:
+A typed stream can represent the gap directly, as in Figure \ref{fig:ch10-trace-gap}.
 
-\Needspace*{8\baselineskip}
-\begin{verbatim}
-step 17 selected action
-    -> tool_call_dispatched
-        -> external ticket 8421 created
-            -> worker died
-                -> tool_result_persisted absent
-\end{verbatim}
+\begin{figure}[htbp]
+\centering
+\includegraphics{figures/ch10-trace-gap.pdf}
+\caption{A typed event stream records the commitment gap rather than hiding it: dispatch is certain, the external effect is known, and durable persistence of the result never occurred.}
+\label{fig:ch10-trace-gap}
+\end{figure}
 
 The record does not necessarily settle whether recovery should retry. It identifies the uncertainty the recovery code must resolve: dispatch occurred, the external effect may be known or uncertain, and durable result persistence did not occur.
 

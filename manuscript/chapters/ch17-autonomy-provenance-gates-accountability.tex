@@ -49,29 +49,14 @@ A team should instead define the performance difference that would justify wider
 
 The ladder needs separate rails because action classes expose different risks. A service restart changes transient process state and can often be reversed with another restart. A credential rotation changes distributed configuration, invalidates clients, and may lock operators out of recovery. A branch deletion changes repository state. A proposed text edit changes only an artifact that still requires merge.
 
-Hundreds of clean service restarts establish nothing about whether the same system can rotate credentials safely.
+Hundreds of clean service restarts establish nothing about whether the same system can rotate credentials safely. Figure \ref{fig:ch17-authority-rails} shows the separation and the floor beneath it.
 
-\Needspace*{21\baselineskip}
-\begin{verbatim}
-defined action class
-    -> its own approval + modification + outcome record
-        -> measured evidence
-            -> widen authority one rung at a time
-
-service restart rail              credential rotation rail
-transient process state           distributed configuration
-another restart may reverse       invalidates clients
-clean restarts may widen rung     may block recovery access
-        |                                  ^
-        +-> establish nothing about -------+
-
-permanent approval floor
-    -> human authorization remains mandatory
-    -> irreversible actions stay above
-    -> high-blast-radius actions stay above
-
-routine success does not remove the floor
-\end{verbatim}
+\begin{figure}[htbp]
+\centering
+\includegraphics{figures/ch17-authority-rails.pdf}
+\caption{Authority widens one rung at a time within a defined action class. Separate rails transfer no evidence between them, and the approval floor beneath them is permanent.}
+\label{fig:ch17-authority-rails}
+\end{figure}
 
 My operator policy makes this separation explicit. Service restarts are pre-approved. Destructive operations such as recursive deletion, force-push, and branch deletion require renewed confirmation every time. The policy is durable configuration, so a new session inherits the same boundary. This illustrates the shape of an action-specific policy; it is not evidence that these classifications suit another system.
 
@@ -99,17 +84,12 @@ Outcome correctness requires an action-specific definition. For a restart, ``the
 
 Approval measures are proportions over repeated observations:
 
-\Needspace*{11\baselineskip}
-\begin{verbatim}
-approval rate
-    = approved proposals / reviewed proposals
-
-unmodified approval rate
-    = proposals approved without human change / reviewed proposals
-
-modification rate
-    = proposals changed by a human / reviewed proposals
-\end{verbatim}
+\Needspace*{10\baselineskip}
+\begin{align*}
+  \text{approval rate} &= \frac{\text{approved proposals}}{\text{reviewed proposals}} \\[4pt]
+  \text{unmodified approval rate} &= \frac{\text{proposals approved without human change}}{\text{reviewed proposals}} \\[4pt]
+  \text{modification rate} &= \frac{\text{proposals changed by a human}}{\text{reviewed proposals}}
+\end{align*}
 
 The denominators must refer to the same action class and autonomy rung. Combining restarts with schema changes can produce a stable aggregate while both underlying rates move in opposite directions. Excluding rejected or timed-out proposals makes the system look more acceptable by removing the transfers that failed. Recording only executed actions introduces survivorship bias because abandoned proposals disappear before the outcome record is built.
 
@@ -252,10 +232,12 @@ A preregistered replication could not estimate the share of agent-authored code 
 Provenance is also distinct from answerability. In my maintainer practice, an adoption pull request can preserve a contributor's commits while stating:
 
 \Needspace*{5\baselineskip}
-\begin{verbatim}
+\begin{record}
+\begin{recordbody}
 Supersedes #X
 Credit: original fix by @X (commit preserved with original authorship)
-\end{verbatim}
+\end{recordbody}
+\end{record}
 
 The original author remains attached to the work. The maintainer who adopts and submits it becomes answerable for the integration decision. Both facts survive in the artifact.
 
@@ -419,10 +401,12 @@ This is a design example, not evidence that seven rows, that flag name, or those
 More elaborate gates require the same audit. In pull request 1558 of my orchestration system, the review surface recorded:
 
 \Needspace*{5\baselineskip}
-\begin{verbatim}
+\begin{record}
+\begin{recordbody}
 Latest review attempt: 6
 Quality score: 950/1000, threshold 850
-\end{verbatim}
+\end{recordbody}
+\end{record}
 
 The attempt count and score are verified properties of that artifact. The gate was intended to concentrate human attention after repeated model review, and degradation of the gate was treated as an incident.
 

@@ -6,12 +6,12 @@
 > `node scripts/editable-manuscript.mjs --status` to list the sections that need to be
 > transferred back to TeX. Do not regenerate this file while it contains unapplied edits.
 >
-> Baseline: version `1.0.0`, repository revision `6cdef1c405b3acbc8c931dbcbe1286b1e8c1d598`.
+> Baseline: version `1.0.0`, repository revision `64d783b7395d9866f5d34fde11059b7189188abd`.
 
 The `tex-sync` comments delimit exact file mappings and carry baseline hashes. Leave those
 comments in place; edit the prose between them.
 
-<!-- tex-sync:start {"path":"manuscript/main.tex","tex_sha256":"1ec93dcb32e89ed37d7be0b6e35966aab305c39421e60bf0aac50db13e5994f7","markdown_sha256":"adbb52888269b4a0011ae043d120f24e52d3db24ca04a6b67770d1ad727ab548"} -->
+<!-- tex-sync:start {"path":"manuscript/main.tex","tex_sha256":"1a2f451bae9977dd571ea4b0bb704966e1771734126e5bc11634d7a021b5b9be","markdown_sha256":"adbb52888269b4a0011ae043d120f24e52d3db24ca04a6b67770d1ad727ab548"} -->
 # Title-page metadata
 
 - **Title:** Engineering Reliable Coding Agents
@@ -32,7 +32,7 @@ The monograph contributes a versioned catalog of 206 reliability practices, incl
 The review is structured rather than exhaustive, evidence strength varies by topic, and empirical results remain dependent on workload and system configuration. The methods section records which search lanes this edition executed, which remain unexecuted, and the limits those choices place on its evidence-grading claims.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/frontmatter.tex","tex_sha256":"88cae744bf1489bed7937633284930cb83c7d879ffa9ce5a69861229f225bc3d","markdown_sha256":"ed59db1de8b98994f55cc0218961b9610a891f4dc8b05a80f728f51a5cb7baeb"} -->
+<!-- tex-sync:start {"path":"manuscript/frontmatter.tex","tex_sha256":"7a7a0e63f98b412cefcbb72dea28e20ea92ccd0c1032cb876c419d041c12b16e","markdown_sha256":"ede52e143758237c871d9ba698c595cde1a7ec6eadcad93e42aed5967085b583"} -->
 # Introduction
 
 ## Problem and scope
@@ -227,14 +227,6 @@ A **local artifact** is a record from a system operated by the author and used t
 Evidence remains uneven across topics. Several operational questions have only case-level support, recent capability measurements can age quickly, and practitioner reports are vulnerable to selection, survivorship, and reporting bias. The review excludes model-comparison and prompt-engineering literatures except where they bear directly on system reliability. Transfer is especially substantial in Part VI, where observatory scheduling, compute-cluster scheduling, and adjacent multi-agent studies motivate testable designs for coding-agent fleets. That part should be read partly as a research agenda, not as a body of settled deployment guidance.
 
 This section establishes the standard evidence legend for the whole monograph. Later chapters repeat a limitation only when it changes how a particular result may be used.
-
-### Competing interests
-
-The author works at Sourcegraph, a code-search and code-intelligence vendor, and several author-system cases come from work done there. The retrieval evaluation in Chapter 12 is CodeScaleBench, built and operated by the author at that company, and one of its two arms is that company's retrieval product. The evaluation apparatus behind the cases in Chapters 2 and 3, and the trace-diagnostics corpus behind the cases in Chapters 14 and 18, come from the same environment. The remaining author-system cases come from my own open-source software-factory work, which no vendor operates or funds: the fleet-ledger replay in Chapter 19, the orchestration and worktree failures in Chapter 8, and the approval queue, fail-open gate, and maintainer cases in Chapter 17. Author-system cases are excluded from independent-evidence counts throughout, and the retrieval chapters should be read with the arm identities in view.
-
-Results that run against the vendor's interest are reported on the same terms as the rest. Two studies from the same team returned opposite signs on whether the retrieval server helped, and the measurement apparatus rather than the tool set the sign. A three-arm experiment found that blocking the server's read tools made the agent abandon it, cutting cost 21 percent with no reward regression. A separate investigation traced a task failure to a false-negative cascade from that server, which survived a prompt patch and required a structural fix. The companion evidence ledger records each under its practice identifier.
-
-No vendor funded this work, and no vendor reviewed or approved its content before release.
 
 ## Contributions
 
@@ -884,7 +876,7 @@ Reserve the iteration holdout before the first scaffold change. Decide who can i
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the end-to-end run and the score-per-dollar reporting described above, both of which are narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch03-contamination-oracle-workload-validity.tex","tex_sha256":"1ce123fb4a81a8b161bbb0f8bd67d0f2ed0800d902f9a68d8ce44ecf5b6bf9b9","markdown_sha256":"0b8d32eb3febe79e17c6df07b91e9b2c7830b950da0810d231b814b3eb45cf28"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch03-contamination-oracle-workload-validity.tex","tex_sha256":"198c231de29fdb45c9fc46f2ecbe44cd5a6521f564875f56f02b020fc77b0937","markdown_sha256":"286cb2dadfb64fe48ddcc899781adc4141d5d750a5959d2df35609ddd38c0295"} -->
 # Benchmark contamination, oracle strength, and workload validity
 
 > **Evidence profile.** 7 strong $\cdot$ 8 directional $\cdot$ 1 corroborating evidence items across 4 developed practices (ERCA-001, ERCA-003, ERCA-004, ERCA-066).
@@ -897,23 +889,12 @@ Human screening had improved the original collection, but it could not control w
 
 The retirement also exposed a separate problem. Some tasks rejected functionally valid patches because the tests required an undocumented implementation detail or checked behavior absent from the issue. Other tests were too permissive and accepted patches that did not implement the requested behavior. Human review had missed both kinds of defect, because task quality is conditional on the candidates being graded. A test that looks reasonable in isolation can fail when it meets an implementation its authors did not anticipate.
 
-You should treat any public score as the output of three coupled measurements. First, has the model already encountered the work? Second, can the test oracle refute an incorrect answer? Third, does the task distribution represent the work someone wants the model to do? The sponsor's reversal is the demonstration that reputation, curation effort, and a large annotator count answer none of these questions. Each question needs its own control.
+You should treat any public score as the output of three coupled measurements. First, has the model already encountered the work? Second, can the test oracle refute an incorrect answer? Third, does the task distribution represent the work someone wants the model to do? The sponsor's reversal is the demonstration that reputation, curation effort, and a large annotator count answer none of these questions. Each question needs its own control, and Figure [1.1](#fig:ch03-score-controls){reference-type="ref" reference="fig:ch03-score-controls"} pairs each with the control that answers it.
 
-    public score
-        ^
-        |
-        +-> has the model already encountered the work?
-        |       -> matched control set
-        |
-        +-> can the test oracle refute an incorrect answer?
-        |       -> adversarial test strengthening
-        |       -> re-adjudication
-        |
-        +-> does the task distribution represent the work?
-                -> tasks mined from the reader's own merged work
-
-    reputation + curation effort + large annotator count
-        -> answer none of these questions
+<figure id="fig:ch03-score-controls">
+<embed src="../manuscript/figures/ch03-score-controls.pdf" />
+<figcaption>A public score is the output of three coupled measurements. Each question has its own control, and reputation, curation effort, and a large annotator count answer none of them.</figcaption>
+</figure>
 
 ## Measure the public-private gap
 
@@ -931,8 +912,7 @@ When each public task has a defensible counterpart, the audit should use a paire
 
 For a given model, the primary estimate is:
 
-    inflation_gap(model) =
-        score(model, public_tasks) - score(model, matched_control_tasks)
+$$\text{inflation gap}(m) = \text{score}(m, \text{public}) - \text{score}(m, \text{matched control})$$
 
 The gap estimates the combined effect of public exposure on the measured score. It cannot isolate a pure training-data effect. The estimate may include direct exposure to tasks or solutions, familiarity with repositories and issue conventions, and adaptation through repeated use of the public suite.
 
@@ -974,8 +954,7 @@ The control removes the most direct path from a public task into pre-evaluation 
 
 That distinction changes the data model for an evaluation suite. Each task needs provenance for its issue, repository state, tests, solution, and any discussion that reveals the solution. Each model needs a recorded cutoff and a policy for ambiguous or rolling cutoffs. Eligibility is then a function of both records:
 
-    eligible(task, model) =
-        task.first_public_at > model.training_cutoff
+$$\text{eligible}(t, m) \iff \texttt{first\_public\_at}(t) > \texttt{training\_cutoff}(m)$$
 
 The inequality is the easy part. `first_public_at` may refer to an issue that was discussed in a public chat before it reached the tracker, a security fix disclosed after private coordination, or a commit mirrored across several hosts. A benchmark maintainer must choose which event counts and retain enough provenance to revisit that choice. Cutoff claims pose a similar problem, because providers may disclose a date without specifying whether later supervised tuning, tool traces, or retrieval indexes include newer material.
 
@@ -1157,7 +1136,7 @@ These answers do not yield a universal correction formula. They turn one impress
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the merged-pull-request mining design described above, which is methodology illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch04-execution-correction-gates-release-tests.tex","tex_sha256":"a5f0ce82f7292178e485ab533befb6d9c0607b2368a92c3bc29de7ce45fe0548","markdown_sha256":"c2a6e8dc1ea83030832ae6ef957f882c565873feb2b8fcd9d7aaf3e3e326c443"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch04-execution-correction-gates-release-tests.tex","tex_sha256":"15e4dc9ad46897e2f162163b80edf02932af4dd37a818445dbeefa95d4434369","markdown_sha256":"25d5221702f5dd1c7081c567b4d7a217183fee47361b87bb9f447f796a5cbea6"} -->
 # Part II: Evaluation and grading systems
 
 # Execution-based evaluation, correction gates, and release tests
@@ -1217,13 +1196,11 @@ Resource bounds make nontermination an explicit outcome. A process killed after 
 
 The acceptance contract should be readable without inspecting the controller:
 
-    command:       verify-change
-    expected:      exit status 0
-    required:      reports/test-results.json
-                   build/package.tar.gz
-    artifact rule: each required file exists and is non-empty
-    timeout:       12 minutes
-    network:       denied
+:::: {.record}
+::: {.recordbody}
+command: verify-change expected: exit status 0 required: reports/test-results.json build/package.tar.gz artifact rule: each required file exists and is non-empty timeout: 12 minutes network: denied
+:::
+::::
 
 The task definition fixes the command before the candidate encounters a failure. The expected condition names something more specific than "works correctly." The artifact rules remove another common ambiguity: a wrapper can exit successfully after skipping the operation that should have produced the evidence.
 
@@ -1263,14 +1240,12 @@ An external observation originates outside the inference that produced the candi
 
 The distinction is informational. Suppose an agent changes a parser because it concludes that empty fields should be discarded. Re-reading the issue may reinforce that interpretation. A failing test showing that an empty field must preserve its position introduces a counterexample. The next attempt can now revise a specific assumption rather than search an unconstrained space of possible mistakes.
 
-This closes the loop opened by the sandbox:
+This closes the loop opened by the sandbox, shown in Figure [1.1](#fig:ch04-correction-loop){reference-type="ref" reference="fig:ch04-correction-loop"}.
 
-    candidate
-        -> sandbox run
-            -> pass: eligible for downstream gate
-            -> fail: immutable result returned to correction step
-                -> revised candidate
-                    -> new sandbox run
+<figure id="fig:ch04-correction-loop">
+<embed src="../manuscript/figures/ch04-correction-loop.pdf" />
+<figcaption>The sandbox verdict is immutable. A failed candidate returns to the correction step, which emits a new candidate under a new identity rather than revising bytes that already carry a verdict.</figcaption>
+</figure>
 
 The correction step does not modify the verdict. It consumes the failed candidate and its run record, then emits a new candidate with a new identity. This preserves the history needed to distinguish recovery from repeated failure. It also prevents revised bytes from inheriting a passing result produced by an earlier version.
 
@@ -1340,22 +1315,12 @@ Run each case more than once for the same release candidate. The repeated-trial 
 
 The result describes a single release candidate only when its configuration remains pinned across the sequence. Chapter 1's apparatus record applies to every trial, including the model version and decoding settings. Pinning does not guarantee independence. Shared caches, mutable services, provider incidents, and reused infrastructure can correlate outcomes, which limits the analyses the sequence supports.
 
-$\mathrm{pass}^{k}$ reflects a different operational question from $\mathrm{pass}@k$:
+$\mathrm{pass}^{k}$ reflects a different operational question from $\mathrm{pass}@k$, as Figure [1.2](#fig:ch04-metric-semantics){reference-type="ref" reference="fig:ch04-metric-semantics"} sets out.
 
-    same k trials
-        |
-        +-> all-k reliability
-        |     all k of k trials passed
-        |     one failed trajectory breaks the sequence
-        |
-        +-> at-least-one success
-              at least one trajectory succeeded
-              several attempts were available
-
-    choose the metric whose failure semantics resemble deployment
-
-    workflow must complete reliably without supervision
-        -> stronger reason to use all-k reliability
+<figure id="fig:ch04-metric-semantics">
+<embed src="../manuscript/figures/ch04-metric-semantics.pdf" />
+<figcaption>The same k trials answer two different operational questions. Choose the metric whose failure semantics resemble the deployment.</figcaption>
+</figure>
 
 $\mathrm{pass}@k$ asks whether at least one acceptable trajectory can be found when several attempts are available. $\mathrm{pass}^{k}$ asks whether every trajectory in a required sequence succeeds. Neither is universally correct. A supervised workflow that can select among alternatives may justify $\mathrm{pass}@k$. A workflow expected to complete reliably without intervention has a stronger reason to use $\mathrm{pass}^{k}$.
 
@@ -1367,13 +1332,11 @@ The comparison unit is the fully specified system release. Record the model iden
 
 The release record can remain mechanically small:
 
-    release:         candidate-2026-07-28
-    system_digest:   6f5c...
-    task_set:        golden-07
-    repeats:         k
-    baseline:        production-previous
-    case_verdicts:   stored run records
-    promotion_rule:  recorded before execution
+:::: {.record}
+::: {.recordbody}
+release: candidate-2026-07-28 system_digest: 6f5c\... task_set: golden-07 repeats: k baseline: production-previous case_verdicts: stored run records promotion_rule: recorded before execution
+:::
+::::
 
 The digest binds the verdict to the evaluated configuration. The case verdicts link to the sandbox evidence. The promotion rule is recorded before the comparison begins. Otherwise the same regression can be accepted for a favored release and rejected for another.
 
@@ -1448,7 +1411,7 @@ Keep tasks without executable checks in a separate lane. They are not lesser tas
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the consecutive-release acceptance gate described above, which is narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch05-calibrating-model-graders-agreement-correctness.tex","tex_sha256":"21c0cf1f8a6d127d044ecfd96a40bbcbc22900ce6c4a3037ed2626dd5cc02458","markdown_sha256":"0b8f5e29734b01626a0bcdcea889bd8ad807eb15afafe4fff0a33f50b1ffde7e"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch05-calibrating-model-graders-agreement-correctness.tex","tex_sha256":"74d346093ba8f815d8dec09ca7ce44ffd677f517f2f9c00b4c03c79f3b48df89","markdown_sha256":"677428be15a09a1e07a548e2fa175f96baabc9bd96c8cfe8c698c7b7f861698a"} -->
 # Calibrating model graders and separating agreement from correctness
 
 > **Evidence profile.** 5 strong $\cdot$ 7 directional $\cdot$ 0 corroborating evidence items across 2 developed practices (ERCA-096, ERCA-111).
@@ -1485,14 +1448,12 @@ That number appears strong until label prevalence is taken into account. Given t
 
 Cohen ([1960](https://doi.org/10.1177/001316446002000104)) defined kappa as the proportion of possible agreement beyond chance that the raters achieved:
 
-    kappa = (observed agreement - expected agreement)
-        / (1 - expected agreement)
+$$\kappa = \frac{\text{observed agreement} - \text{expected agreement}}
+                {1 - \text{expected agreement}}$$
 
 For this example:
 
-    kappa = (0.90 - 0.82) / (1 - 0.82)
-      = 0.08 / 0.18
-      approximately 0.44
+$$\kappa = \frac{0.90 - 0.82}{1 - 0.82} = \frac{0.08}{0.18} \approx 0.44$$
 
 The raters agreed on 90 percent of the items, but much of that agreement followed from both assigning PASS almost all the time. Their agreement beyond what the label frequencies alone would predict is only moderate.
 
@@ -1935,7 +1896,7 @@ Part III begins at that observable boundary and turns to containing what happens
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the recall-family scorer and its replacement default, both of which are narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch07-software-factory-distributed-system.tex","tex_sha256":"327ed6c88dea71e519d566cb731e52c7cace7663fb7dcb6e0f4a972f734493c9","markdown_sha256":"0f093f91c09d866a24e37cbec04ab89256fcb7d00fa7f39730e6a815191fc724"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch07-software-factory-distributed-system.tex","tex_sha256":"d8e2ee01c080529d1983075c83fb0816dff9834d7b4c2cf1850424d3abce68c8","markdown_sha256":"8d4362aa7a4c14c8deaf0de231fb68f10ce5a9b49bfe366ad0ba17b06381ced9"} -->
 # Part III: Containment, durable execution, and recovery engineering
 
 # The software factory as a distributed system
@@ -1952,7 +1913,7 @@ Now consider the same fault without the guard, as a constructed sequence. A work
 
 A single coding-agent trajectory, the sequence of model calls, tool calls, and edits one agent performs, is one execution component. It starts, reads state, produces an artifact, and stops. Everything that makes that trajectory count as work belongs to machinery the trajectory does not contain: the scheduler that assigned it, the store that remembers what it was asked to do, the repository state it read and will write, the verifier that decides whether its output is acceptable, the publisher that turns an accepted artifact into an external effect, the external services that accept or reject that effect, and the resource policy that decided this work deserved compute at all. The whole arrangement can be thought of as a **software factory**: the durable system that accepts logical work, schedules attempts, runs workers, verifies artifacts, publishes effects, and reconciles disagreement between its records and the world. The agent is one worker inside it.
 
-Treating that machinery as an engineered system is not a new idea. Osterweil ([1987](https://dl.acm.org/doi/10.5555/41765.41766), [1997](https://dl.acm.org/doi/10.1145/253228.253440)) argued that software processes are software too, and Choi and Scacchi ([1991](https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf)) described the software factory itself as distributed infrastructure, with the coordination substrate treated as a first-class engineering object; the CNCF's Secure Software Factory reference architecture ([CNCF TAG Security](https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/)) supplies the contemporary vocabulary, scoped to supply-chain security rather than fault tolerance. The Sources and evidence section places each of these. Autonomous workers change the failure model. The processes Osterweil programmed and the infrastructure Choi and Scacchi described coordinated deterministic tools and human developers who could be asked what they meant. The modern factory schedules autonomous, nondeterministic workers that edit persistent code, call external APIs, run concurrently with one another, and can claim completion incorrectly. A compiler does not assert that it succeeded when it failed. An agent can, fluently and in detail. Practitioner systems have converged on the same decomposition: OpenAI's Symphony orchestration ([OpenAI 2026](https://openai.com/index/open-source-codex-orchestration-symphony/)) and Cloudflare's issue-triage factory ([Cloudflare 2026](https://blog.cloudflare.com/astro-issue-triage/)) both separate a durable work ledger, a scheduler, disposable workers, and gated publication. Vercel's factory for the AI SDK repository ([Grammel and Dodds 2026](https://vercel.com/blog/building-a-software-factory-for-ai-sdk)) reports the same four parts by name, with factory data in Postgres, queued tasks dispatched to workers, one task-specific agent per run in an isolated sandbox, and nothing merged without approval from a human maintainer. It also names the distinction this chapter turns on: every run ends in one of four outcomes, success, flawed, blocked, or manual, and only success ships, so a run that fails is an attempt that failed rather than an issue that is done. These are practitioner cases from the operating teams, corroborating convergence on the decomposition, not controlled evidence that the decomposition improves any measured outcome.
+Treating that machinery as an engineered system is not a new idea. Osterweil ([1987](https://dl.acm.org/doi/10.5555/41765.41766), [1997](https://dl.acm.org/doi/10.1145/253228.253440)) argued that software processes are software too, and Choi and Scacchi ([1991](https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf)) described the software factory itself as distributed infrastructure, with the coordination substrate treated as a first-class engineering object; the CNCF's Secure Software Factory reference architecture ([CNCF TAG Security](https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/)) supplies the contemporary vocabulary, scoped to supply-chain security rather than fault tolerance. The Sources and evidence section places each of these. Autonomous workers change the failure model. The processes Osterweil programmed and the infrastructure Choi and Scacchi described coordinated deterministic tools and human developers who could be asked what they meant. The modern factory schedules autonomous, nondeterministic workers that edit persistent code, call external APIs, run concurrently with one another, and can claim completion incorrectly. A compiler does not assert that it succeeded when it failed. An agent can, fluently and in detail. Practitioner systems have converged on the same decomposition: OpenAI's Symphony orchestration ([OpenAI 2026](https://openai.com/index/open-source-codex-orchestration-symphony/)) and Cloudflare's issue-triage factory ([Cloudflare 2026](https://blog.cloudflare.com/astro-issue-triage/)) both separate a durable work ledger, a scheduler, disposable workers, and gated publication. Vercel's factory for the AI SDK repository ([Grammel and Dodds 2026](https://vercel.com/blog/building-a-software-factory-for-ai-sdk)) reports the same four parts by name, with factory data in Postgres, queued tasks dispatched to workers, one task-specific agent per run in an isolated sandbox, and nothing merged without approval from a human maintainer. Its run outcomes are four-valued, success, flawed, blocked, or manual, and only success ships. A run that fails is therefore an attempt that failed, not an issue that is done, which is the distinction the rest of this chapter develops. These are practitioner cases from the operating teams, corroborating convergence on the decomposition, not controlled evidence that the decomposition improves any measured outcome.
 
 Not every agent deployment needs this frame. A local assistant that reads a repository, proposes a patch in an interactive session, and exits has one process, one human, and no durable coordination state. If the process dies, the human restarts it and loses only convenience. Modeling that as a distributed system would likely add more cognitive overhead than worthwhile.
 
@@ -2131,7 +2092,7 @@ The unanswered questions from step 8 are often the audit's most valuable result.
 - Grammel and Dodds ([2026](https://vercel.com/blog/building-a-software-factory-for-ai-sdk)), the AI SDK software factory, Vercel Blog. The same decomposition, plus a four-valued run outcome (success, flawed, blocked, manual) that separates attempt result from work state, and a human approval gate on every merge. The post reports authoring 25 to 35 percent of merged pull requests, closing over 75 percent of July's closed issues, and open issues falling from 1,022 to 844 over four weeks; those are self-reported operating shares against no baseline, and they are cited here for the structure of the system, not as a measured effect of it. Published after this edition's update cutoff and admitted as a corroborating case on that basis.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch08-isolation-injection-independent-verification.tex","tex_sha256":"fb76bd638f449334ec1dd17757e1cfec5ad55a6f871db4776eafd023b01dffaf","markdown_sha256":"143c9cea751fcfc8083a9a71a7fd2a541f429c4d7bc3cb911cd6e1cd33e1e1b5"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch08-isolation-injection-independent-verification.tex","tex_sha256":"a69a1a555a6a68e2fb2d8e050c43295229da799c4d0a2217abcd0d943563cbad","markdown_sha256":"8cd979c8fe94468252f05e9f0352a9c062ae821490c65753f83170f02ffe671f"} -->
 # Agent isolation, injection defenses, and independent verification
 
 > **Evidence profile.** 0 strong $\cdot$ 4 directional $\cdot$ 3 corroborating evidence items across 3 developed practices (ERCA-068, ERCA-069, ERCA-105). Two strong items appear in the sources below but are counted against companion records rather than these three: AgentS4D under ERCA-104, and Perry et al. under ERCA-152.
@@ -2152,44 +2113,16 @@ Direct support for this containment practice comes from two practitioner anecdot
 
 The failed boundary in the database incident was an identity. Deleting the backup after deleting production required no additional capability. The agent already held a credential accepted by both systems. Once execution left the intended path, the distinction between primary data and recovery data existed only in the operator's mental model. To the authorization system, both were resources reachable by one identity.
 
-*Blast radius* here means the resources and effects that one mistake or compromise can reach before a new authorization decision is required. For an agent, that radius is determined by its effective capabilities: credentials, filesystem permissions, network routes, tool endpoints, delegated tokens, and services willing to act on its behalf. A warning in the prompt does not reduce that set. It changes the instructions given to the same capable process.
+*Blast radius* here means the resources and effects that one mistake or compromise can reach before a new authorization decision is required. For an agent, that radius is determined by its effective capabilities: credentials, filesystem permissions, network routes, tool endpoints, delegated tokens, and services willing to act on its behalf. A warning in the prompt does not reduce that set. It changes the instructions given to the same capable process. Figure [1.1](#fig:ch08-blast-radius){reference-type="ref" reference="fig:ch08-blast-radius"} traces that reach from the incident outward.
 
-    database incident:
-    one identity
-        -> one credential
-            -> production database
-            -> backup store
-
-    primary and recovery data
-        -> same reachable failure domain
-
-    effective capabilities
-        -> credentials
-        -> filesystem permissions
-        -> network routes
-        -> tool endpoints
-        -> delegated tokens
-        -> services acting on the agent's behalf
-
-    blast radius
-        -> every resource and effect reachable before a new decision
-
-    prompt warning
-        -> same capable process
-        -> no reduction in reachable authority
+<figure id="fig:ch08-blast-radius">
+<embed src="../manuscript/figures/ch08-blast-radius.pdf" />
+<figcaption>In the database incident, primary and recovery data sat inside one reachable failure domain. Blast radius follows from effective capabilities, and a warning in the prompt removes none of them.</figcaption>
+</figure>
 
 The first useful move is to make ordinary access read-only. *Least privilege* means giving the running identity only the capabilities required for its current task and only for the period in which they are required. Read-only should be the default identity. An agent's promise not to write does not create that boundary.
 
-A write should require explicit escalation for one bounded capability, such as deploying one service, updating one issue, or applying one reviewed database migration.
-
-    ordinary identity
-        -> read-only access
-
-    write operation
-        -> explicit escalation
-        -> one named capability
-        -> one bounded target
-        -> limited lifetime
+A write should require explicit escalation for one named capability against one bounded target and for a limited lifetime, such as deploying one service, updating one issue, or applying one reviewed database migration.
 
 A read-only default limits what the process can change. It does not limit what the process can disclose, because anything the identity can read may also leave through model output. Sensitivity therefore belongs in the read boundary as well as the write boundary. The injection section below treats disclosure as a separate threat category.
 
@@ -2211,12 +2144,50 @@ Test the boundary in both directions. With the ordinary identity, attempt the pr
 
 A successful permitted action does not show what else the identity can do. A denied prohibited action does not show that the recovery operation the gate exists to permit will work.
 
-    normal identity:
-        prohibited action -> denied
-
-    escalated identity:
-        intended narrow action -> succeeds
-        adjacent destructive actions -> denied
+<table>
+<caption>Both directions of the capability boundary. A configuration passes only when every row holds.</caption>
+<thead>
+<tr>
+<th style="text-align: left;"><div class="minipage">
+<p>Identity under test</p>
+</div></th>
+<th style="text-align: left;"><div class="minipage">
+<p>Action attempted</p>
+</div></th>
+<th style="text-align: left;"><div class="minipage">
+<p>Required result</p>
+</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><div class="minipage">
+<p>Identity under test</p>
+</div></td>
+<td style="text-align: left;"><div class="minipage">
+<p>Action attempted</p>
+</div></td>
+<td style="text-align: left;"><div class="minipage">
+<p>Required result</p>
+</div></td>
+</tr>
+<tr>
+<td style="text-align: left;">Ordinary</td>
+<td style="text-align: left;">The prohibited write</td>
+<td style="text-align: left;">Denied by the enforcing system</td>
+</tr>
+<tr>
+<td style="text-align: left;">Escalated</td>
+<td style="text-align: left;">The intended narrow action</td>
+<td style="text-align: left;">Succeeds</td>
+</tr>
+<tr>
+<td style="text-align: left;">Escalated</td>
+<td style="text-align: left;">Adjacent destructive actions</td>
+<td style="text-align: left;">Denied</td>
+</tr>
+</tbody>
+</table>
 
 One passing set of checks describes only the configuration that produced it. Platform scopes, role definitions, and tool endpoints can change beneath a deployed system, so both directions should be tested again after any change to a role, scope, delegation path, or tool endpoint.
 
@@ -2709,7 +2680,7 @@ Recorded state makes a run resumable. Chapter 10 makes the recovery claim replay
 - Directional evidence: Trofimov, Kuralenok, Marshalkin & Novikov (2019). Delivery, consistency, and determinism: rethinking guarantees in distributed stream processing. arXiv:1907.06250.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch10-replayable-traces-fault-injection-recovery.tex","tex_sha256":"38ddaeadecfef2850eaa7d180aa0080bd1f307c262bcc96374132a937de86b60","markdown_sha256":"09357ed316e0cd05d4812d49d55224aadabef4a96003b69cc685cda3cc8fc9a1"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch10-replayable-traces-fault-injection-recovery.tex","tex_sha256":"4418e1827b16297b1af9e182c358b3ccbe637b628171c0496b8677804a4b7a17","markdown_sha256":"c85bf2f8901d0f15b351829049280c4cc8173edb7b440947fd43f054d5132a19"} -->
 # Replayable traces and fault-injection recovery testing
 
 > **Evidence profile.** 1 strong $\cdot$ 9 directional $\cdot$ 0 corroborating $\cdot$ 0 null or conflicting evidence items across 2 developed practices (ERCA-097, ERCA-127). Six directional items are carried by companion records cited inline (ERCA-050, ERCA-196, ERCA-197, ERCA-198, ERCA-204). One directional item is a preprint.
@@ -2742,13 +2713,12 @@ A model-call record may include the input and output references, timing, token u
 
 The distinction becomes operational during partial failure. Suppose an agent decides at step 17 to create a support ticket. The runtime records `tool_call_dispatched`, the ticket service creates ticket 8421, and the worker dies before the runtime records `tool_result_persisted`. A transcript reconstructed after restart may omit the first call or show only an unanswered request.
 
-A typed stream can represent the gap directly:
+A typed stream can represent the gap directly, as in Figure [1.1](#fig:ch10-trace-gap){reference-type="ref" reference="fig:ch10-trace-gap"}.
 
-    step 17 selected action
-        -> tool_call_dispatched
-            -> external ticket 8421 created
-                -> worker died
-                    -> tool_result_persisted absent
+<figure id="fig:ch10-trace-gap">
+<embed src="../manuscript/figures/ch10-trace-gap.pdf" />
+<figcaption>A typed event stream records the commitment gap rather than hiding it: dispatch is certain, the external effect is known, and durable persistence of the result never occurred.</figcaption>
+</figure>
 
 The record does not necessarily settle whether recovery should retry. It identifies the uncertainty the recovery code must resolve: dispatch occurred, the external effect may be known or uncertain, and durable result persistence did not occur.
 
@@ -3821,7 +3791,7 @@ Chapter 13 turns to the architecture around these measurements: cheap retrieval 
 - Corroboration for this entry: none on record. The other two entries in this chapter include author-system cases as illustrations rather than independent sources.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch13-localization-funnels-repository-indexes-freshness-checks.tex","tex_sha256":"101f42c1158ca3814fa57f7ea4f12c2c9594381e16cbb5dcca17b088f93b2a99","markdown_sha256":"328e414305885cb3b7c1ea22e273539b3a60516e20d7945d34762373ea74acec"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch13-localization-funnels-repository-indexes-freshness-checks.tex","tex_sha256":"2859de6e0d43f360c1ac4fbaaf85daf70d4e788ae6dcefd05eb809d9b50623ed","markdown_sha256":"80b3690fceaecc18643c2fee4ac3d4cbce9e5df2b624dd9d56da97d66058ddc2"} -->
 # Localization funnels, repository indexes, and freshness checks
 
 > **Evidence profile.** 6 strong $\cdot$ 5 directional $\cdot$ 1 corroborating evidence items across 3 developed practices (ERCA-078, ERCA-084, ERCA-174).
@@ -3844,21 +3814,13 @@ Each phase received bounded input, produced a bounded artifact, and handed that 
 
 Repository structure may identify the correct region without identifying the function or statement that owns a failure. In a disconnect case, search may return a response writer, several transport adapters, and a lifecycle callback. The state transition responsible for the malformed response may sit behind that callback in another package.
 
-The evidence needed to select the package differs from the evidence needed to select the function and edit location. A localization funnel separates those comparisons:
-
-    repository structure
-        -> candidate files
-            -> candidate symbols
-                -> concrete edit locations
-                    -> patch validation
-
-Each stage should reduce the candidate set and leave an inspectable handoff.
+The evidence needed to select the package differs from the evidence needed to select the function and edit location. A localization funnel separates those comparisons, narrowing repository structure to candidate files, then to candidate symbols, then to concrete edit locations, and finally to patch validation. Figure [1.1](#fig:ch13-localization-funnel){reference-type="ref" reference="fig:ch13-localization-funnel"} shows the sequence. Each stage should reduce the candidate set and leave an inspectable handoff.
 
 In the disconnect case, the first stage narrows the repository to the transport and lifecycle packages. The file handoff retains the response writer and callback and records why each survived. Symbol inspection follows the callback to the function that changes response state. The final stage proposes a guard at that assignment, and validation exercises the disconnect path. If an intermediate check shows that the state owner was omitted, the funnel widens before repair begins.
 
 The stages have asymmetric consequences. Validation can sometimes correct a mistaken edit location after a patch fails. A file omitted during the first stage is unavailable to every later stage, however capable the repair model may be. The maximum recall of the complete pipeline is therefore capped by file selection.
 
-<figure>
+<figure id="fig:ch13-localization-funnel">
 <embed src="../manuscript/figures/ch13-localization-funnel.pdf" />
 <figcaption>The localization funnel progressively narrows repository evidence, while candidate file selection caps recall because any omitted file remains unavailable to every later inspection and edit stage.</figcaption>
 </figure>
@@ -3929,14 +3891,7 @@ A typed index becomes plausible when the workload repeatedly asks structural que
 
 This representation is a **typed knowledge graph**. It stores entities under declared kinds and records how each pair of connected entities relates. The types constrain traversal and make a returned path inspectable. They also create schema, parser, identity, and migration obligations that a similarity index does not have.
 
-The export question can then become a bounded traversal:
-
-    start: export handler named by the issue
-        -> follow invocation edges into the queue consumer
-        -> follow references into the lifecycle component
-        -> return functions that write the blocked state
-
-The issue and the final helper need no shared token. The graph supplies a path that can be inspected edge by edge.
+The export question can then become a bounded traversal. It starts at the export handler named by the issue, follows invocation edges into the queue consumer, follows references into the lifecycle component, and returns the functions that write the blocked state. The issue and the final helper need no shared token. The graph supplies a path that can be inspected edge by edge.
 
 A structural path can also be more compact than the alternatives. Instead of serializing the repository or opening every file encountered during exploration, the retriever can return a small subgraph containing the entry point, intermediate calls, state owner, and relationship types. The model receives both the candidates and an explanation of why they were selected.
 
@@ -5092,7 +5047,7 @@ These are not part of this chapter's three developed practices. Each is named in
 - Directional evidence: Product context and coding-agent decision compliance (Dillon 2026), arXiv:2605.08112, carried by the companion record on the tribal-knowledge substrate. Its compliance figure is not used in the prose.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch16-verification-interfaces-risk-based-escalation.tex","tex_sha256":"ea627462b558bebfdf41f9477e1f6b8b21dedc781bee1b1ac788491dc6997788","markdown_sha256":"2e0bb5dfe0ae98b6e7229e0827d3020c84e6d6d01708ee6a66929ad4e0c679f5"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch16-verification-interfaces-risk-based-escalation.tex","tex_sha256":"21fd56fdb6a1383c820acb9a3a6ccb0c13de3b5d8ef3614d02c42ae56231d11d","markdown_sha256":"93c3d955d38ebd893f1ecb4ee5e3f85210345b9b3f8605e9deb394c421338c31"} -->
 # Part V: Human review and accountability engineering
 
 # Efficient verification interfaces and risk-based human escalation
@@ -5395,26 +5350,12 @@ A deterministic rule can establish that an agent wrote outside an allowed direct
 
 A model judge becomes appropriate when the rubric requires contextual interpretation, such as whether a migration plan includes a credible rollback for the affected data path. An agent judge is appropriate only when no single artifact contains the evidence, such as whether a sequence of individually permitted actions collectively bypassed a control.
 
-Each layer must expose its evidence to the next:
+Each layer must expose its evidence to the next, as Figure [1.1](#fig:ch16-detection-ladder){reference-type="ref" reference="fig:ch16-detection-ladder"} sets out.
 
-    kind of detection
-        -> least complex mechanism capable of checking it
-            |
-            +-> exact violation
-            |   -> deterministic rule
-            |      -> event + matched policy clause
-            |
-            +-> contextual judgment
-            |   -> model judge with fixed rubric
-            |      -> criterion + supporting trace span + uncertainty
-            |
-            +-> sequence + changing state + tool interaction
-                -> agent judge examines live trace
-                   -> observations + intermediate actions
-
-    human reviewer
-        -> calibrates the layers
-        -> owns the final verdict
+<figure id="fig:ch16-detection-ladder">
+<embed src="../manuscript/figures/ch16-detection-ladder.pdf" />
+<figcaption>Each kind of detection routes to the least complex mechanism capable of checking it, and every layer must expose the evidence the next one needs.</figcaption>
+</figure>
 
 A bare risk score forces the reviewer either to repeat the discovery work or to accept the classifier's authority without an affordable check.
 
@@ -5605,7 +5546,7 @@ Finally, budget practice for the people expected to handle rare failures. A name
 - Corroborating evidence: InfoQ, "Stripe Engineers Deploy Minions, Autonomous Agents Producing Thousands of Pull Requests Weekly," 2026-03-20, <https://www.infoq.com/news/2026/03/stripe-autonomous-coding-agents/>. Reports over 1,300 production pull requests per week with human review retained. Carried as scale context; it reports no measure of review depth or defect escape.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch17-autonomy-provenance-gates-accountability.tex","tex_sha256":"d3bbf2b0f85229770be963513893c093d5e698b5a7b286e1508c97bc521508dc","markdown_sha256":"e837906f8992717668c04c00fca8df14147d9d0ea9c36aa1b376f67f6d0c266c"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch17-autonomy-provenance-gates-accountability.tex","tex_sha256":"5cd5aa3a1eea470af69deec5bcae7ddf6b8ea64154dedf30429df09fd87cf24e","markdown_sha256":"6d5d38ecb0def1846ba515297ef99f274bea287339ff81ed2df1457e28986c42"} -->
 # Autonomy calibration, provenance, effective gates, and accountability
 
 > **Evidence profile.** 2 strong $\cdot$ 5 directional $\cdot$ 0 corroborating evidence items across 4 developed practices (ERCA-145, ERCA-149, ERCA-154, ERCA-165).
@@ -5648,26 +5589,12 @@ A team should instead define the performance difference that would justify wider
 
 The ladder needs separate rails because action classes expose different risks. A service restart changes transient process state and can often be reversed with another restart. A credential rotation changes distributed configuration, invalidates clients, and may lock operators out of recovery. A branch deletion changes repository state. A proposed text edit changes only an artifact that still requires merge.
 
-Hundreds of clean service restarts establish nothing about whether the same system can rotate credentials safely.
+Hundreds of clean service restarts establish nothing about whether the same system can rotate credentials safely. Figure [1.1](#fig:ch17-authority-rails){reference-type="ref" reference="fig:ch17-authority-rails"} shows the separation and the floor beneath it.
 
-    defined action class
-        -> its own approval + modification + outcome record
-            -> measured evidence
-                -> widen authority one rung at a time
-
-    service restart rail              credential rotation rail
-    transient process state           distributed configuration
-    another restart may reverse       invalidates clients
-    clean restarts may widen rung     may block recovery access
-            |                                  ^
-            +-> establish nothing about -------+
-
-    permanent approval floor
-        -> human authorization remains mandatory
-        -> irreversible actions stay above
-        -> high-blast-radius actions stay above
-
-    routine success does not remove the floor
+<figure id="fig:ch17-authority-rails">
+<embed src="../manuscript/figures/ch17-authority-rails.pdf" />
+<figcaption>Authority widens one rung at a time within a defined action class. Separate rails transfer no evidence between them, and the approval floor beneath them is permanent.</figcaption>
+</figure>
 
 My operator policy makes this separation explicit. Service restarts are pre-approved. Destructive operations such as recursive deletion, force-push, and branch deletion require renewed confirmation every time. The policy is durable configuration, so a new session inherits the same boundary. This illustrates the shape of an action-specific policy; it is not evidence that these classifications suit another system.
 
@@ -5689,14 +5616,11 @@ Outcome correctness requires an action-specific definition. For a restart, "the 
 
 Approval measures are proportions over repeated observations:
 
-    approval rate
-        = approved proposals / reviewed proposals
-
-    unmodified approval rate
-        = proposals approved without human change / reviewed proposals
-
-    modification rate
-        = proposals changed by a human / reviewed proposals
+$$\begin{aligned}
+  \text{approval rate} &= \frac{\text{approved proposals}}{\text{reviewed proposals}} \\[4pt]
+  \text{unmodified approval rate} &= \frac{\text{proposals approved without human change}}{\text{reviewed proposals}} \\[4pt]
+  \text{modification rate} &= \frac{\text{proposals changed by a human}}{\text{reviewed proposals}}
+\end{aligned}$$
 
 The denominators must refer to the same action class and autonomy rung. Combining restarts with schema changes can produce a stable aggregate while both underlying rates move in opposite directions. Excluding rejected or timed-out proposals makes the system look more acceptable by removing the transfers that failed. Recording only executed actions introduces survivorship bias because abandoned proposals disappear before the outcome record is built.
 
@@ -5812,8 +5736,11 @@ A preregistered replication could not estimate the share of agent-authored code 
 
 Provenance is also distinct from answerability. In my maintainer practice, an adoption pull request can preserve a contributor's commits while stating:
 
-    Supersedes #X
-    Credit: original fix by @X (commit preserved with original authorship)
+:::: {.record}
+::: {.recordbody}
+Supersedes \#X Credit: original fix by @X (commit preserved with original authorship)
+:::
+::::
 
 The original author remains attached to the work. The maintainer who adopts and submits it becomes answerable for the integration decision. Both facts survive in the artifact.
 
@@ -5978,8 +5905,11 @@ This is a design example, not evidence that seven rows, that flag name, or those
 
 More elaborate gates require the same audit. In pull request 1558 of my orchestration system, the review surface recorded:
 
-    Latest review attempt: 6
-    Quality score: 950/1000, threshold 850
+:::: {.record}
+::: {.recordbody}
+Latest review attempt: 6 Quality score: 950/1000, threshold 850
+:::
+::::
 
 The attempt count and score are verified properties of that artifact. The gate was intended to concentrate human attention after repeated model review, and degradation of the gate was treated as an incident.
 
@@ -6220,7 +6150,7 @@ Support is thin across the chapter: four developed practices carry seven evidenc
 - Directional evidence: Suryana, L. E., Nordhoff, S., Calvert, S., Zgonnikov, A., van Arem, B. (2025). Meaningful human control of partially automated driving systems: Insights from interviews with Tesla users. Transportation Research Part F 113, 213-236. Applies tracking and tracing criteria to 103 users to localize expectation-reality gaps and inconsistent protocol adherence. The method requires case-specific operationalization, yields failure localization rather than a compliance score, and is evidenced here in the driving domain. The record carries no arXiv identifier; the published article is doi:10.1016/j.trf.2025.04.026.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch18-agent-topology-dynamic-task-allocation.tex","tex_sha256":"846545e974f21109ef0e3ce5328448c7dde77c1c702acd04d917d45502e1b8fd","markdown_sha256":"c14e39f4cd9adbc0c65389d35f7fbd8cd17279cb003102c79d643f9807ba1df8"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch18-agent-topology-dynamic-task-allocation.tex","tex_sha256":"fb6a529dbd26613b54e0a6f619694016d73c8fb69e35984f5dc1c40e0f015936","markdown_sha256":"d6c4332ec3afad851c70c056405a38ecc0e310e8a6968c8d894ba2a26525270d"} -->
 # Part VI: Research agenda: work allocation and cost engineering
 
 # Agent topology selection and dynamic task allocation
@@ -6271,11 +6201,11 @@ The specialization is justified only because it creates a boundary at which the 
 
 Structured handoffs can address the same coupling:
 
-    query: exact request issued to the retriever
-    candidates: identifiers returned
-    coverage_checks: alternate queries and their results
-    claim: sender's interpretation
-    status: supported | incomplete | failed
+:::: {.record}
+::: {.recordbody}
+query: exact request issued to the retriever candidates: identifiers returned coverage_checks: alternate queries and their results claim: sender's interpretation status: supported \| incomplete \| failed
+:::
+::::
 
 The schema does not make the interpretation correct. It keeps evidence, interpretation, and completion status separate. An incomplete search can no longer become indistinguishable from a supported negative result unless another component explicitly makes that conversion.
 
@@ -6445,34 +6375,23 @@ Replaying both configurations for each consequential release turns that shift in
 
 A compact promotion record can contain:
 
-    golden_set_version: repository-maintenance-2026-07
+:::: {.record}
+::: {.recordbody}
+golden_set_version: repository-maintenance-2026-07
 
-    single_agent:
-      all_k_success:
-      total_tokens:
-      elapsed_time:
-      failures_by_class:
+single_agent: all_k_success: total_tokens: elapsed_time: failures_by_class:
 
-    multi_agent:
-      all_k_success:
-      total_tokens:
-      elapsed_time:
-      failures_by_class:
+multi_agent: all_k_success: total_tokens: elapsed_time: failures_by_class:
 
-    mechanism_check:
-      delegations_observed:
-      branches_consumed:
-      aggregator_used:
+mechanism_check: delegations_observed: branches_consumed: aggregator_used:
 
-    aggregation_check:
-      correct_candidates_retained_or_discarded:
+aggregation_check: correct_candidates_retained_or_discarded:
 
-    promotion_rule:
-      success_floor:
-      cost_ceiling:
+promotion_rule: success_floor: cost_ceiling:
 
-    decision:
-      promote | retain baseline | redesign treatment
+decision: promote \| retain baseline \| redesign treatment
+:::
+::::
 
 This gate answers whether to divide the work. Topology selection answers how. A multi-agent design that cannot clear the gate should return to structural diagnosis. The next experiment may require a narrower specialist boundary, a different aggregator, or no additional worker.
 
@@ -6482,14 +6401,7 @@ Jia et al. ([2026](https://arxiv.org/abs/2602.19843)) injected synthetic faults
 
 The faults were synthetic and the comparison covered three architectures. The result does not establish a general preference for closed loops. It does show that message routes and feedback paths can determine whether a local error remains local or becomes a system failure.
 
-A **pipeline** passes work through a fixed sequence of stages. It fits tasks that decompose into stable ordered transformations, such as:
-
-    retrieve candidate files
-        -> extract relevant regions
-            -> generate patch
-                -> run tests
-
-Its advantage is inspectability. State moves in one direction, and each transition has a defined producer and consumer. Its weakness is the same property. An early omission can flow through every later stage without any component returning to the source.
+A **pipeline** passes work through a fixed sequence of stages. It fits tasks that decompose into stable ordered transformations: retrieve candidate files, extract the relevant regions, generate a patch, run the tests. Its advantage is inspectability. State moves in one direction, and each transition has a defined producer and consumer. Its weakness is the same property. An early omission can flow through every later stage without any component returning to the source.
 
 Pipelines also compress meaning at each handoff. If retrieval emits only file excerpts, the patch stage may never learn that coverage was uncertain. A status field can preserve that uncertainty, but it does not create a return route. When downstream evidence can invalidate an upstream decision, the task no longer has a purely linear structure even if its implementation remains a sequence of functions.
 
@@ -6664,19 +6576,11 @@ A task graph is not enough for repository work. Its edges record which work item
 
 Each node therefore needs enough state to support both scheduling and recovery:
 
-    node_id: stable logical identity
-    inputs: immutable artifact versions
-    repositories: the repositories the node may affect
-    input_revisions: branch and revision per repository
-    code_index_version: the index generation conflict claims were computed from
-    affected_entities: files, symbols, or interfaces the node claims to touch
-    depends_on: prerequisite nodes that must succeed
-    conflicts_with: resources or nodes that cannot overlap
-    owner: currently assigned worker
-    attempt: retry identity
-    in_flight_artifacts: published state of the running attempt's artifact
-    status: blocked | ready | running | succeeded | failed
-    outputs: versioned artifacts and supporting evidence
+:::: {.record}
+::: {.recordbody}
+node_id: stable logical identity inputs: immutable artifact versions repositories: the repositories the node may affect input_revisions: branch and revision per repository code_index_version: the index generation conflict claims were computed from affected_entities: files, symbols, or interfaces the node claims to touch depends_on: prerequisite nodes that must succeed conflicts_with: resources or nodes that cannot overlap owner: currently assigned worker attempt: retry identity in_flight_artifacts: published state of the running attempt's artifact status: blocked \| ready \| running \| succeeded \| failed outputs: versioned artifacts and supporting evidence
+:::
+::::
 
 The attempt identity prevents a late response from an expired worker from overwriting a successful retry. Immutable input versions reveal when a ready node was planned against stale state. Versioned outputs allow downstream nodes to distinguish attempts that produced different artifacts.
 
@@ -6690,12 +6594,7 @@ Those rules illustrate the mechanism. They do not provide comparative performanc
 
 A per-step time limit contains a slow or failed worker only when expiration produces and propagates a real failure. Treating a timeout as success destroys the evidence of failure and may release downstream nodes without their required inputs. The schedule then appears healthy because it erased the event needed to diagnose it.
 
-Dispatch should fail closed:
-
-    worker exceeds time limit
-        -> attempt fails visibly
-        -> dependent nodes remain blocked
-        -> retry, escalation, or cancellation policy runs
+Dispatch should fail closed. When a worker exceeds its time limit, the attempt fails visibly, dependent nodes remain blocked, and the retry, escalation, or cancellation policy runs.
 
 Retries require the same discipline. A retry creates a new attempt for the same logical node rather than a second independent task. The scheduler must either establish that repeated execution is idempotent or isolate side effects before trying again. Otherwise a timeout can produce duplicate comments, partial writes, or two workers claiming the same resource.
 
@@ -6811,7 +6710,7 @@ The record should remain intelligible without the architecture's label. "Hierarc
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the preamble rerun described in the opening, which is narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch19-cost-aware-fleet-scheduling-model-routing.tex","tex_sha256":"e9ad385a755461e47e6193d15443c2ce76202fea76212ef6c93b16efeb72fa54","markdown_sha256":"a9063acf9ac77bbb700a31bbf87a66414b7b2f6d8e780e70b367d3eafbfee45d"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch19-cost-aware-fleet-scheduling-model-routing.tex","tex_sha256":"f7a2d6e70859538ee2576befdd1b570ae78d86b434be378e048e13eb3e42711e","markdown_sha256":"9742a0f5867ab10f4dcd1ee848741dfc4a9bce5ef54dd2d32d09063d3cd1068e"} -->
 # Cost-aware fleet scheduling and model routing
 
 > **Evidence profile.** 2 strong $\cdot$ 17 directional $\cdot$ 2 corroborating $\cdot$ 0 null or conflicting evidence items across 4 developed practices (ERCA-171, ERCA-187, ERCA-191, ERCA-206). Four of the directional items are inference-serving systems results, admitted for the serving-conditions section and measured outside any agent fleet.
@@ -6842,7 +6741,7 @@ A cheaper model call can trigger enough repair and review to cost more per accep
 
 Production traces also show that coding-agent traffic differs from chatbot traffic. Liu et al. ([2026](https://arxiv.org/abs/2608.00101)) sampled GitHub Copilot activity from 3.2 million users, 13 million sessions, 761 million model calls, and 95 trillion tokens. KV-cache hit rates averaged 90 percent within a turn and 55 percent across turn boundaries; a lightweight predictor captured 86 to 90 percent of total user idle time. The study strongly characterizes one production workload and directionally supports measuring turn boundaries and idle periods in capacity policy.
 
-Those rates belong to one product's traffic and do not transfer to another coding agent. What the result does establish is the shape of the workload: an agent session accumulates inference state that later calls in the same session can reuse, and much less of it survives the boundary between turns. Cache behavior of that kind sets how much concurrent work an inference endpoint can carry and what each call costs, which is why the serving conditions behind a model endpoint get a section of their own later in this chapter. The immediate consequence is a constraint on how allocation is measured: an experiment that samples model calls as interchangeable independent requests destroys the reuse structure it is supposed to be measuring, so replays and shadow runs must preserve turn and session boundaries.
+Those rates belong to one product's traffic and do not transfer to another coding agent. The shape of the workload is what does carry. An agent session accumulates inference state that later calls in the same session can reuse, and much less of it survives the boundary between turns. Cache behavior of that kind sets how much concurrent work an inference endpoint can carry and what each call costs, which is why the serving conditions behind a model endpoint get a section of their own later in this chapter. That constrains how allocation is measured. An experiment that samples model calls as interchangeable independent requests destroys the reuse structure it is supposed to be measuring, so replays and shadow runs must preserve turn and session boundaries.
 
 ## What allocation decision is the system making?
 
@@ -7150,18 +7049,11 @@ That result supports the catalog pointer rather than a universal deployment rule
 
 A routing decision record should include:
 
-    sufficiency_requirement:
-    reward_version:
-    calibration_population:
-    model_pool_version:
-    predicted_performance:
-    predicted_cost:
-    uncertainty:
-    routing_reason:
-    exploration_budget:
-    static_fallback:
-    eventual_outcome:
-    accepted_result_cost:
+:::: {.record}
+::: {.recordbody}
+sufficiency_requirement: reward_version: calibration_population: model_pool_version: predicted_performance: predicted_cost: uncertainty: routing_reason: exploration_budget: static_fallback: eventual_outcome: accepted_result_cost:
+:::
+::::
 
 Evaluation should report cost per accepted result and failure rates by request class, not only average token use.
 
@@ -7169,19 +7061,19 @@ Cheapest-sufficient routing is useful because it makes the economic policy expli
 
 ## Under what serving conditions should that inference run?
 
-Choosing a model settles one question. A second remains: where the call executes and in what state that endpoint currently is. A model endpoint is not an unbounded pool of identical workers. Behind it sit finite accelerators, finite device memory, finite memory bandwidth, a queue, a batching policy, and inference state that is either present or absent. Those conditions move latency, cost, and failure rate with no change in the model's capability, which puts them in the same decision record as price and predicted performance.
+Choosing a model settles one question and leaves another. Where does the call execute, and what state is that endpoint in when it arrives? A model endpoint is not an unbounded pool of identical workers. Behind it sit finite accelerators, finite device memory, finite memory bandwidth, a queue, a batching policy, and inference state that is either present or absent. Those conditions move latency, cost, and failure rate with no change in the model's capability, which puts them in the same decision record as price and predicted performance.
 
-Only a little of the serving mechanism is needed to make that argument. A model call runs in two phases. **Prefill** processes the input, which for a coding agent means system instructions, tool definitions, repository context, retrieved evidence, and the conversation so far. **Decode** then generates output tokens one at a time. The phases load the hardware differently and surface as different operational measures: time to first token is dominated by prefill and by whatever queueing precedes it, while generation latency scales with output length. A record that reports only total call latency cannot separate a long input from a slow generation, and the two have different remedies.
+A model call runs in two phases. **Prefill** processes the input, which for a coding agent means system instructions, tool definitions, repository context, retrieved evidence, and the conversation so far. **Decode** then generates output tokens one at a time. The phases load the hardware differently and surface as different operational measures: time to first token is dominated by prefill and by whatever queueing precedes it, while generation latency scales with output length. A record that reports only total call latency cannot separate a long input from a slow generation, and the two have different remedies.
 
-Decode avoids recomputing the attention state of every earlier token by retaining it, which is the key-value cache. The cache trades compute for memory, and that memory is the binding constraint rather than an accounting detail: Kwon et al. ([2023](https://arxiv.org/abs/2309.06180)) report that holding each request's cache in one contiguous block loses enough of it to fragmentation and duplication to limit how many requests fit at once, and that paging that memory instead, with sharing within and across requests, raises throughput by two to four times at the same latency. Two consequences follow at fleet scale. Cached state has a size, so a worker's remaining capacity is not described by its request count. Cached state also has a location, so it is present on one replica and absent on another.
+Decode avoids recomputing the attention state of every earlier token by retaining it, which is the key-value cache. The cache trades compute for memory, and that memory is what binds. Kwon et al. ([2023](https://arxiv.org/abs/2309.06180)) report that holding each request's cache in one contiguous block loses enough of it to fragmentation and duplication to limit how many requests fit at once, and that paging that memory instead, with sharing within and across requests, raises throughput by two to four times at the same latency. Two consequences follow at fleet scale. Cached state has a size, so a worker's remaining capacity is not described by its request count. Cached state also has a location, so it is present on one replica and absent on another.
 
-Coding-agent sessions make both consequences larger than a short exchange would. A session carries a long and slowly changing prefix: system instructions, tool schemas, repository conventions, retrieved files, and an accumulating history of prior tool outputs. Reuse of a shared prefix across separate requests is a different mechanism from retaining state within one generation, and serving systems implement it explicitly. Zheng et al. ([2023](https://arxiv.org/abs/2312.07104)) retain previously computed prefixes in a radix tree and report up to 6.4 times higher throughput on workloads whose calls share structure, including agent control and multi-turn chat. Whether an agent workload has that structure is a property of the harness and its prompt construction, not of the model, and the realized gain depends on the serving implementation as well. It is measurable on the operated fleet, and it should be measured rather than assumed.
+Coding-agent sessions make both consequences larger than a short exchange would. A session carries a long and slowly changing prefix: system instructions, tool schemas, repository conventions, retrieved files, and an accumulating history of prior tool outputs. Reuse of a shared prefix across separate requests is a different mechanism from retaining state within one generation, and serving systems implement it explicitly. Zheng et al. ([2023](https://arxiv.org/abs/2312.07104)) retain previously computed prefixes in a radix tree and report up to 6.4 times higher throughput on workloads whose calls share structure, including agent control and multi-turn chat. Whether an agent workload has that structure is a property of the harness and its prompt construction, not of the model, and the realized gain depends on the serving implementation as well. Both are measurable on the operated fleet, and assuming them is how a routing experiment ends up crediting the wrong cause.
 
-Two replicas exposing the same model are therefore not operationally equivalent at a given instant if one already holds the session's prefix. Routing inputs can then include model capability, price, queue depth, memory pressure, the request's deadline, and cache locality. This is the two-level structure the Mesos and Omega lineage already gives the fleet, one layer lower: a fleet-wide allocator decides what should run and against which requirement, and a worker-local dispatcher places the call where current serving conditions can meet it. None of this establishes that a cache-aware router is better than a simple one. It is another policy with its own cost and failure modes, and it earns promotion through the same fixed-arrival replay as any other.
+Two replicas exposing the same model are therefore not operationally equivalent at a given instant if one already holds the session's prefix. Routing inputs can then include model capability, price, queue depth, memory pressure, the request's deadline, and cache locality. This is the two-level structure the Mesos and Omega lineage already gives the fleet, one layer lower. A fleet-wide allocator decides what should run and against which requirement, and a worker-local dispatcher places the call where current serving conditions can meet it. None of this establishes that a cache-aware router is better than a simple one. It is another policy with its own cost and failure modes, and it earns promotion through the same fixed-arrival replay as any other.
 
-Batching sits underneath both layers. A server that groups concurrent requests keeps the accelerator busy and raises tokens served per second; it also introduces queueing, and a request can wait behind work unrelated to it. That is this chapter's throughput-versus-cost distinction one level down: maximizing tokens per second is not the same as minimizing time to an accepted result. A fleet usually carries both kinds of demand, an interactive session where time to first token is most of the experience and an overnight migration, evaluation sweep, or background repair where only completion time and price matter. They want different points on that tradeoff, and a request that does not declare its class cannot be served according to one.
+Batching sits underneath both layers. A server that groups concurrent requests keeps the accelerator busy and raises tokens served per second; it also introduces queueing, and a request can wait behind work unrelated to it. That is this chapter's throughput-versus-cost distinction one level down. Maximizing tokens per second is not the same as minimizing time to an accepted result, and a fleet usually carries both kinds of demand. An interactive session spends most of its perceived quality on time to first token. An overnight migration, evaluation sweep, or background repair spends none of it there and cares about completion time and price. Those sit at different points on the batching tradeoff, and a serving policy can only honor the difference if the request declares which one it is.
 
-Implementation-level optimizations move the envelope again. Paged cache management, speculative decoding (Leviathan, Kalman, and Matias [2022](https://arxiv.org/abs/2211.17192)), and reduced-precision execution (Dettmers et al. [2022](https://arxiv.org/abs/2208.07339)) each change how much work an accelerator completes and at what latency. None is recommended here, and their reported gains are properties of the models and workloads they were measured on. They matter to a scheduler for one reason: a serving change can alter the resource envelope beneath the fleet with no change in the harness, so the serving configuration belongs in capacity planning and in the version fields of any routing experiment.
+Implementation-level optimizations move the envelope again. Paged cache management, speculative decoding (Leviathan, Kalman, and Matias [2022](https://arxiv.org/abs/2211.17192)), and reduced-precision execution (Dettmers et al. [2022](https://arxiv.org/abs/2208.07339)) each change how much work an accelerator completes and at what latency. None is recommended here, and their reported gains are properties of the models and workloads they were measured on. They matter to a scheduler because a serving change can alter the resource envelope beneath the fleet with no change in the harness, which puts the serving configuration in capacity planning and in the version fields of any routing experiment.
 
 The reliability consequence is that inference conditions can produce what the fleet records as an agent failure:
 
@@ -7195,11 +7087,11 @@ The reliability consequence is that inference conditions can produce what the fl
 
 - the added demand deepens the saturation that produced the timeout.
 
-Nothing in that sequence requires the model to have become less capable, and nothing in it is visible from the agent's trajectory alone. It is the retry-amplification shape from earlier in this chapter with an inference endpoint as the constrained dependency, and the same controls apply: bound admitted demand, jitter and cap retries, and reserve capacity so that recovery traffic does not compete with the load that displaced it. Pilot Execution's finding that recovery actions themselves cause severe failures has an instance here. So does Chapter 11's attribution discipline: a first-upstream-failure analysis that stops at "the agent timed out" has assigned the failure to the wrong component.
+Nothing in that sequence requires the model to have become less capable, and nothing in it is visible from the agent's trajectory alone. It is the retry-amplification shape from earlier in this chapter with an inference endpoint as the constrained dependency, and the same controls apply: bound admitted demand, jitter and cap retries, and reserve capacity so that recovery traffic does not compete with the load that displaced it. Pilot Execution's finding that recovery actions themselves cause severe failures has an instance here. So does Chapter 11's attribution discipline. A first-upstream-failure analysis that stops at "the agent timed out" has assigned the failure to the wrong component.
 
 Telling that story from the record rather than from memory requires the call's own serving observations, which the allocation-ledger table later in this chapter lists alongside the rest. Managed providers expose different subsets of those fields, and several expose almost none of them. A field the provider does not report is not a field to estimate; it is a limit on the causal claims the operator may make from the record, and it should be stated as one. These observations also stay separate from the chapter's other measurements. Cached-input share is a cost and performance observation. It says nothing about whether the result was correct, and nothing about whether the work survived review. Collapsing the two into one efficiency ratio would hide the failure this section is about.
 
-None of the serving work cited here was measured on a coding-agent fleet. It establishes that the mechanisms exist, that they bind on memory and locality rather than on request count, and that they are configurable. Whether cache locality, batching policy, or a serving change is worth routing on in a particular fleet is a question for that fleet's replay.
+None of the serving work cited here was measured on a coding-agent fleet. It establishes that these mechanisms exist, that they bind on memory and locality rather than on request count, and that an operator can change them. Whether any of them is worth routing on in a particular fleet is a question for that fleet's replay.
 
 ## Does the policy survive a fixed-arrival replay?
 
@@ -8261,10 +8153,10 @@ Siyuan Zhuang, Stephanie Wang, Eric Liang, Yi Cheng, Ion Stoica (2023). ExoFlow:
 Jacob Meyers and Rob Zienert (2025). How Temporal powers reliable cloud operations at Netflix. Netflix Technology Blog. <https://netflixtechblog.com/how-temporal-powers-reliable-cloud-operations-at-netflix-73c69ccb5953>
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/materials.tex","tex_sha256":"08f47e4eef3ea02eb90b52b2f42bb90bc96b80474d56297dcc86597d6953e05a","markdown_sha256":"47a6969f343f005d5a72ae5adfd1fea440d6f848172f5c2f3e4535a81e774e00"} -->
+<!-- tex-sync:start {"path":"manuscript/materials.tex","tex_sha256":"fafd745d728564271f514ffbff3a52a9e00ccd5a43b634e2262318c4eb39e22a","markdown_sha256":"6e3882c1e9d17f02c365f76b10aa78a128ae73e24d7b51b60b987937ead47bd1"} -->
 # Data and materials availability
 
-The version-controlled manuscript source and companion research artifact are available at <https://github.com/sjarmak/engineering-reliable-coding-agents>. The companion contains the machine-readable 206-record practice catalog, evidence ledger, chapter crosswalk, benchmark catalog, schemas, source snapshots, thread protocols and source identities, update-screening decisions, software-engineering coverage probe, DBLP title-census replacement evidence, blinded external-grading packet, provenance record, and checksums. The repository also packages six named runnable protocols and five reusable agent skills derived from selected practices, with practice-level evidence maps; these workflows are implementation artifacts rather than independent evidence. The exact companion-file digests are listed in [`companion/SHA256SUMS`](https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/companion/SHA256SUMS), and the pinned compilation record binds the arXiv source and preview bytes in [`arxiv-compile-report.json`](https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/companion/methodology/release-verification/arxiv-compile-report.json). A browser-based catalog is available at <https://sjarmak.ai/books/engineering-reliable-coding-agents/companion>, and the web edition is available at <https://sjarmak.ai/books/engineering-reliable-coding-agents>. The evidence ledger is scheduled for annual review, with out-of-cycle releases for material factual or citation corrections. The retrieval evaluation reported in Chapter 12 is CodeScaleBench, and it is public. The frozen suite `csb-v1-mixed371`, from which the 370 paired analysis tasks are drawn, is available at <https://github.com/sourcegraph/CodeScaleBench> under tag `v1-mixed371` with an Apache-2.0 license, and the problem layer is mirrored at <https://huggingface.co/datasets/sgjarmak/CodeScaleBench>. Repository contents are version-pinned public mirrors in the `sg-evals` organization, so each task resolves to a fixed commit. Frozen result snapshots under `runs/snapshots/` carry per-task traces, reward scores, timing, and cost, and full agent trajectories are attached to the corresponding release. Chapter 12 still reports its results as an author-system illustration, because the author built and operates the benchmark at the vendor whose retrieval product supplies one of its two arms. The competing-interests statement records that relationship.
+The version-controlled manuscript source and companion research artifact are available at <https://github.com/sjarmak/engineering-reliable-coding-agents>. The companion contains the machine-readable 206-record practice catalog, evidence ledger, chapter crosswalk, benchmark catalog, schemas, source snapshots, thread protocols and source identities, update-screening decisions, software-engineering coverage probe, DBLP title-census replacement evidence, blinded external-grading packet, provenance record, and checksums. The repository also packages six named runnable protocols and five reusable agent skills derived from selected practices, with practice-level evidence maps; these workflows are implementation artifacts rather than independent evidence. The exact companion-file digests are listed in [`companion/SHA256SUMS`](https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/companion/SHA256SUMS), and the pinned compilation record binds the arXiv source and preview bytes in [`arxiv-compile-report.json`](https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/companion/methodology/release-verification/arxiv-compile-report.json). A browser-based catalog is available at <https://sjarmak.ai/books/engineering-reliable-coding-agents/companion>, and the web edition is available at <https://sjarmak.ai/books/engineering-reliable-coding-agents>. The evidence ledger is scheduled for annual review, with out-of-cycle releases for material factual or citation corrections. The retrieval evaluation reported in Chapter 12 is CodeScaleBench, and it is public. The frozen suite `csb-v1-mixed371`, from which the 370 paired analysis tasks are drawn, is available at <https://github.com/sourcegraph/CodeScaleBench> under tag `v1-mixed371` with an Apache-2.0 license, and the problem layer is mirrored at <https://huggingface.co/datasets/sgjarmak/CodeScaleBench>. Repository contents are version-pinned public mirrors in the `sg-evals` organization, so each task resolves to a fixed commit. Frozen result snapshots under `runs/snapshots/` carry per-task traces, reward scores, timing, and cost, and full agent trajectories are attached to the corresponding release. Chapter 12 still reports its results as an author-system illustration, because the author built and operates the benchmark at the vendor whose retrieval product supplies one of its two arms.
 
 The 199-trace diagnostic corpus and the 1,286-item fleet ledger are not redistributed. The trace corpus records complete agent runs against private repositories, including prompts, tool outputs, and file contents captured for operational diagnosis rather than publication. The fleet ledger is the author's own work-item history from an open-source software-factory project, and carries the service, pool, and operational identifiers of that deployment. De-identification would remove state and grouping information required to audit the reported causal and dependence structure. Their aggregate results are therefore identified in the text as author-system illustrations rather than independently reproducible external evidence.
 <!-- tex-sync:end -->
