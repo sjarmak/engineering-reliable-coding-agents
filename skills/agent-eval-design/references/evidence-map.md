@@ -6,6 +6,11 @@ unchanged to another workload.
 
 ## Mapped practices
 
+`ERCA-NNN` is the stable identifier of a practice record in the companion
+catalog, after the initials of *Engineering Reliable Coding Agents*. Resolve
+one in [`companion/catalog.json`](https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/companion/catalog.json)
+or on the [companion site](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion).
+
 - `ERCA-020` · `never-report-a-single-run`: require repeated randomized runs and report the distribution.
 - `ERCA-025` · `power-analyze-before-running`: plan sample size or state the minimum detectable effect.
 - `ERCA-024` · `use-paired-tests-matched-to-metric`: compare matched systems with metric-appropriate paired analysis.

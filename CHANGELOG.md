@@ -56,6 +56,19 @@
   164 manuscript identifiers and 960 cited titles across 321 unique identifiers,
   none flagged or unverified. Deleted three stale reports produced by the
   throttling bug.
+- Define the `ERCA-NNN` identifier. It appeared 71 times in the manuscript,
+  including in every chapter's opening evidence profile, without ever being
+  expanded or pointed at the catalog that resolves it. The glossary, front
+  matter, companion README, protocols README, skill evidence maps, and root
+  README now state what the identifier is and where to look one up, and the
+  front matter explains how to read an evidence profile.
+- Correct the competing-interests statement, which attributed the fleet and
+  orchestration infrastructure to the vendor environment. The fleet-ledger
+  replay in Chapter 19, the orchestration failures in Chapter 8, and the
+  approval-queue and maintainer cases in Chapter 17 come from the author's own
+  open-source software-factory work. The vendor-linked cases are the retrieval
+  evaluation in Chapter 12, the evaluation apparatus in Chapters 2 and 3, and
+  the trace-diagnostics corpus in Chapters 14 and 18.
 - Manuscript output is 300 pages.
 
 ## 1.0.0-rc.16 — 2026-08-09

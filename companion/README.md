@@ -25,6 +25,10 @@ Canonical repository: [https://github.com/sjarmak/engineering-reliable-coding-ag
 - `CITATION.cff`: citation metadata for GitHub and archival services.
 - `SHA256SUMS`: checksums for the release files.
 
+## Practice identifiers
+
+Every practice record carries a stable identifier of the form `ERCA-NNN`, after the initials of *Engineering Reliable Coding Agents*. The same identifier names that record in the manuscript's chapter evidence profiles and source sections, `catalog.json`, `evidence-ledger.csv`, `chapter-crosswalk.json`, the runnable protocols, and the skill evidence maps, so a record can be traced across all of them. Identifiers are never reused: a later edition may retire, split, or merge a record, but its number will not be reassigned to a different practice. Resolve one in [`catalog.json`](catalog.json) or on the [companion site](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion).
+
 ## Evidence vocabulary
 
 `strong` directly supports the stated claim through a controlled comparison, validated benchmark result, or comparably specific measurement. `directional` supports the mechanism or direction without establishing magnitude or broad transfer. `corroborating` establishes plausibility through a case or convergent observation. `null_or_conflicting` records a result that did not support the expected effect or limits another claim.

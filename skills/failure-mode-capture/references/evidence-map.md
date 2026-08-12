@@ -5,6 +5,11 @@ a local prevention, not evidence that the same failure is common elsewhere.
 
 ## Mapped practices
 
+`ERCA-NNN` is the stable identifier of a practice record in the companion
+catalog, after the initials of *Engineering Reliable Coding Agents*. Resolve
+one in [`companion/catalog.json`](https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/companion/catalog.json)
+or on the [companion site](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion).
+
 - `ERCA-045` · `derive-taxonomy-from-own-traces`: let observed failures determine the prevention vocabulary.
 - `ERCA-044` · `fix-failures-structurally-not-prompts`: encode recurring mechanisms in durable system controls rather than prompt patches.
 - `ERCA-116` · `retain-raw-distill-separately`: preserve the incident record separately from the compact prevention.

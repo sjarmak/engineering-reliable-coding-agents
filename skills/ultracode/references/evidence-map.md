@@ -6,6 +6,11 @@ or for any particular task tracker.
 
 ## Mapped practices
 
+`ERCA-NNN` is the stable identifier of a practice record in the companion
+catalog, after the initials of *Engineering Reliable Coding Agents*. Resolve
+one in [`companion/catalog.json`](https://github.com/sjarmak/engineering-reliable-coding-agents/blob/main/companion/catalog.json)
+or on the [companion site](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion).
+
 - `ERCA-130` · `make-agent-state-first-class-persistent`: keep goal and task state outside the model context.
 - `ERCA-094` · `ground-evaluation-in-execution`: use executable checks as completion evidence.
 - `ERCA-069` · `distrust-agent-self-reports`: inspect artifacts, diffs, and repository state before closing work.

@@ -5,6 +5,12 @@ checks. They are reusable templates, not new evidence and not universal
 thresholds. Record local deviations instead of silently changing a pass
 condition.
 
+`ERCA-NNN` is the stable identifier of a practice record in the companion
+catalog, after the initials of *Engineering Reliable Coding Agents*. Resolve
+one in [`companion/catalog.json`](../companion/catalog.json) or on the
+[companion site](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion)
+to read that practice's action, mechanism, evidence, and boundary.
+
 | Protocol | Decision it supports | Mapped practices |
 | --- | --- | --- |
 | [`minimum-reliability-pass.md`](minimum-reliability-pass.md) | What should a constrained team implement first? | Cross-chapter minimum |
