@@ -11,7 +11,9 @@ frontier over the live incumbent without hiding deadline failures.
 
 1. Freeze a trace set containing arrival times, task features available at the
    decision point, eligible workers, measured outcomes, costs, latencies, and
-   deadlines. Remove features learned only after routing.
+   deadlines. Remove features learned only after routing. Keep model calls
+   grouped by turn and session: sampling them as independent requests discards
+   the inference-state reuse that sets what the calls actually cost.
 2. Replay the incumbent policy and reproduce its observed decisions within a
    declared tolerance.
 3. Replay the candidate policy on the same arrivals and worker availability.

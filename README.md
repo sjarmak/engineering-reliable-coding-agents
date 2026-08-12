@@ -62,7 +62,7 @@ For a narrower decision, choose one of the protocols in the table above. Each pr
 
 ## Know what a claim establishes
 
-Release `1.0.0` synthesizes 160 scholarly works, 99 practitioner records, 29 benchmark records, and 17 author-system case records. Its catalog contains 206 bounded practice records: 56 are developed in the manuscript and 150 are companion-only entries. Those are catalog counts, not estimates of how many reliability practices exist.
+Release `1.0.0` synthesizes 164 scholarly works, 100 practitioner records, 29 benchmark records, and 17 author-system case records. Its catalog contains 206 bounded practice records: 56 are developed in the manuscript and 150 are companion-only entries. Those are catalog counts, not estimates of how many reliability practices exist.
 
 | Label | What it can establish | What it does not establish |
 | --- | --- | --- |

@@ -49,8 +49,8 @@
   page count as literals. It failed on the freeze-date change while the
   invariant it existed to check, that the report matches
   `release-metadata.json`, was intact. Both values now derive from the manifest.
-- Refreshed `SUBMISSION.md` against the built artifacts: 244 references, 23
-  figures, 10 tables, 51 archived files, a 614-row ledger, a 307-page preview
+- Refreshed `SUBMISSION.md` against the built artifacts: 249 references, 23
+  figures, 10 tables, 51 archived files, a 619-row ledger, a 312-page preview
   carrying the 1.0.0 identity, and roughly 113,000 words of chapter text.
 - Re-ran the reference audits against the live arXiv API after the backfill fix:
   164 manuscript identifiers and 960 cited titles across 321 unique identifiers,
@@ -80,18 +80,46 @@
   edited without tracked sources: two had drifted from the SVGs they mirrored
   and one had lost its source, which is how the stale Figure 2 counts survived.
   A test now compares each committed PDF's drawing against a fresh render.
-- Changed the figure accent from `#8f4e1c` to `#b34300`, matching the website's
-  ember tone. Contrast against white is 5.65:1 and the dark-theme accent is
-  7.06:1 against its background, both above the WCAG AA threshold for text.
-- Fixed the one real text overflow in the figures. In the source-review flow,
-  the corpus label ran 16.8pt past its box; the box is wider and the following
-  arrow starts clear of it. Verified across all figures with glyph bounding
-  boxes from `pdftotext -bbox` rather than by eye.
+- Drew the figures in black and greyscale. The accent color is gone; emphasis
+  now comes from weight, with accent shapes filled black and accent labels set
+  bold against the existing grey ramp.
+- Fixed the two illegible places in the figures: in the source-review flow a
+  corpus label ran 16.8pt past its box, and in Figure 7.2 the terminal-failure
+  connector was routed straight through the retryable-failure sentence. The
+  attempt lifecycle now branches at two depths, and the self-report annotation
+  sits under the state it describes.
+- Added `scripts/check-figure-legibility.mjs`, which measures both defects
+  instead of leaving them to be caught by eye. Word boxes come from
+  `pdftotext -bbox` on the built figure and geometry from the SVG source. It
+  reports text that leaves its box and connectors that cross a line of text,
+  including one that threads the gap between two words, which is how the
+  Figure 7.2 collision escaped a glyph-only check.
 - Replaced the Chapter 15 memory-architecture ASCII block with a drawn figure.
 - Taught the editable-Markdown generator the manuscript's own macros. Pandoc
   sees one file at a time, so `\erca{193}` was dropped along with its number,
   and the generated edition read "( through )".
-- Manuscript output is 307 pages, with 23 figures and 10 tables.
+- Admitted a third corroborating factory case in Chapter 7: Vercel's AI SDK
+  factory (Grammel and Dodds 2026), which reports the same ledger, scheduler,
+  worker, and gate decomposition and names a four-valued run outcome that
+  separates attempt result from work state. Published after the update cutoff
+  and admitted on that basis; its reported operating shares are self-reported
+  over four weeks against no baseline. Practitioner count 99 to 100.
+- Extended Chapter 19 with the serving conditions under which a routed call
+  actually runs. Model routing has two layers: which model suffices, and where
+  that inference executes given prefill and decode cost, key-value cache
+  memory, cross-request prefix reuse, queueing, and batching policy. Two
+  replicas of one model are not equivalent when one holds the session's prefix.
+  Adds the inference-saturation failure chain, where a timeout and its retry
+  amplify a capacity problem that never involved the model's capability, and
+  the per-call serving fields the allocation ledger needs to tell that apart.
+  Four inference-serving systems papers admitted as directional evidence
+  (PagedAttention, SGLang, speculative decoding, 8-bit inference); scholarly
+  count 160 to 164, evidence ledger 615 to 619 rows.
+- Reused the Liu et al. cache-hit result for the constraint it implies rather
+  than as a traffic statistic: an allocation experiment that samples model
+  calls as independent requests destroys the session reuse structure it is
+  measuring, so replays must preserve turn and session boundaries.
+- Manuscript output is 312 pages, with 23 figures and 10 tables.
 
 ## 1.0.0-rc.16 — 2026-08-09
 

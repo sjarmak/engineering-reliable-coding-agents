@@ -6,7 +6,7 @@
 > `node scripts/editable-manuscript.mjs --status` to list the sections that need to be
 > transferred back to TeX. Do not regenerate this file while it contains unapplied edits.
 >
-> Baseline: version `1.0.0`, repository revision `96e112a8712be6584200f489d421057cf4f7cfde`.
+> Baseline: version `1.0.0`, repository revision `6cdef1c405b3acbc8c931dbcbe1286b1e8c1d598`.
 
 The `tex-sync` comments delimit exact file mappings and carry baseline hashes. Leave those
 comments in place; edit the prose between them.
@@ -20,19 +20,19 @@ comments in place; edit the prose between them.
 - **Version line:** Version 1.0.0 --- August 2026
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/abstract.tex","tex_sha256":"d47f999bf61c211eaa856bbfe845235036e8b183e6c77b853b79d2ab52e599b7","markdown_sha256":"a023d7c0766be6f9dc3b66fe2270d71759d8d7d92141255e17f119b05f599823"} -->
+<!-- tex-sync:start {"path":"manuscript/abstract.tex","tex_sha256":"af322b5ad5ca3b905161639297a2ba2acc4439d91997f44a45e6959a90399d75","markdown_sha256":"ea4078eca0be6bea5189f487ca814be2e45dcabf4800f0345fa6f8850228e5d9"} -->
 # Abstract
 
 AI coding agents are commonly evaluated as models but deployed as systems. Their reliability depends not only on model capability, but on the harness, execution state, retrieval, memory and state management, permissions, review interfaces, and resource allocation around the model. This technical review and engineering monograph examines those system boundaries and develops a practical framework for evaluating and operating coding agents reliably.
 
-The study synthesizes 160 scholarly works, 99 practitioner records, 29 benchmark records, and 17 author-system case records through a structured multivocal review, targeted update audits, software-engineering coverage analysis, and a distributed-systems evidence synthesis. Across this evidence, a consistent pattern emerges: many apparent model failures originate elsewhere in the system, while improvements measured at one layer often fail to propagate to end-to-end task outcomes. Evaluation and operation are therefore treated as a dependency chain in which weaknesses in task construction, execution environments, retrieval, state management, verification, or observability can invalidate conclusions made downstream.
+The study synthesizes 164 scholarly works, 100 practitioner records, 29 benchmark records, and 17 author-system case records through a structured multivocal review, targeted update audits, software-engineering coverage analysis, and a distributed-systems evidence synthesis. Across this evidence, a consistent pattern emerges: many apparent model failures originate elsewhere in the system, while improvements measured at one layer often fail to propagate to end-to-end task outcomes. Evaluation and operation are therefore treated as a dependency chain in which weaknesses in task construction, execution environments, retrieval, state management, verification, or observability can invalidate conclusions made downstream.
 
 The monograph contributes a versioned catalog of 206 reliability practices, including 56 developed in depth; an evidence ledger linking claims to their support; a framework for reasoning about dependency and repair asymmetry across the agent lifecycle; empirical measurements and failure cases from operated agent systems; runnable evaluation and reliability protocols; and five reusable agent skills with evidence maps. Together, these provide a system-level methodology for distinguishing model capability from infrastructure effects, designing evaluations that support defensible conclusions, and building agent systems that can recover safely when components fail.
 
 The review is structured rather than exhaustive, evidence strength varies by topic, and empirical results remain dependent on workload and system configuration. The methods section records which search lanes this edition executed, which remain unexecuted, and the limits those choices place on its evidence-grading claims.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/frontmatter.tex","tex_sha256":"2e0a658bfa8c1cd2977cb2497c5354193238d5f0f1a195b9e2f0fd1fe4f99ab6","markdown_sha256":"bd47da3f9fe8f532debdfad9720f20f621442e16f603d6767562dde77aa654a9"} -->
+<!-- tex-sync:start {"path":"manuscript/frontmatter.tex","tex_sha256":"88cae744bf1489bed7937633284930cb83c7d879ffa9ce5a69861229f225bc3d","markdown_sha256":"ed59db1de8b98994f55cc0218961b9610a891f4dc8b05a80f728f51a5cb7baeb"} -->
 # Introduction
 
 ## Problem and scope
@@ -74,7 +74,7 @@ This review treats source collection, evidence grading, practice derivation, and
 
 ### Search and source assembly
 
-The review was consolidated on July 26, 2026, then subjected to a bounded update audit and a software-engineering venue coverage probe through August 6, 2026. This edition's source collection contains 160 scholarly works, 99 practitioner records, 29 benchmark records, and 17 author-system case records. The original 118 scholarly works were organized into seven topic-specific threads covering benchmark validity, failure taxonomy, evaluation statistics, oversight and accountability, context and retrieval, durable execution, and scheduling with repository-scale scoping. Eleven works were admitted during the update audit and nine during the coverage probe. The distributed-systems synthesis added with this edition admitted a further 21 scholarly works, drawn from the distributed-systems, cluster-scheduling, and build-systems literatures together with three agent-specific preprints, and 7 practitioner records; these entered through targeted citation-driven selection rather than the thread protocol, and the evidence ledger records each one's claim scope. Two further records, one scholarly and one practitioner, were admitted on the same targeted basis to support the repository-scale framing stated above, and are recorded in the screening decisions with their placements.
+The review was consolidated on July 26, 2026, then subjected to a bounded update audit and a software-engineering venue coverage probe through August 6, 2026. This edition's source collection contains 164 scholarly works, 100 practitioner records, 29 benchmark records, and 17 author-system case records. The original 118 scholarly works were organized into seven topic-specific threads covering benchmark validity, failure taxonomy, evaluation statistics, oversight and accountability, context and retrieval, durable execution, and scheduling with repository-scale scoping. Eleven works were admitted during the update audit and nine during the coverage probe. The distributed-systems synthesis added with this edition admitted a further 21 scholarly works, drawn from the distributed-systems, cluster-scheduling, and build-systems literatures together with three agent-specific preprints, and 7 practitioner records; these entered through targeted citation-driven selection rather than the thread protocol, and the evidence ledger records each one's claim scope. Two further records, one scholarly and one practitioner, were admitted on the same targeted basis to support the repository-scale framing stated above, and are recorded in the screening decisions with their placements. One practitioner record published after the cutoff, an operating team's account of a production issue-and-pull-request factory, was admitted on the same basis as a third corroborating case for the system model in Chapter 7; the ledger records its post-cutoff admission and its self-reported scope. Four scholarly systems papers on inference serving were admitted by the same targeted selection, to support Chapter 19's treatment of the model endpoint as a constrained shared resource; none was measured on an agent workload, and the ledger records that limit on each.
 
 Scholarly retrieval used [SciX](https://scixplorer.org/scixabout/), the NASA-supported literature discovery service operated by the Smithsonian Astrophysical Observatory, and a local retrieval layer referred to here as **SciX Agent**. The official [SciX API](https://scixplorer.org/scixhelp/api-scix/) supplied bibliographic identities and metadata. At consolidation, SciX Agent searched a 32.4-million-record SciX and arXiv corpus with 299.3 million citation links and full text for 14.9 million records. It combined INDUS dense retrieval with BM25 lexical retrieval through reciprocal-rank fusion. These systems determined which records were retrieved and read first; they did not determine evidence grades.
 
@@ -1935,12 +1935,12 @@ Part III begins at that observable boundary and turns to containing what happens
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the recall-family scorer and its replacement default, both of which are narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch07-software-factory-distributed-system.tex","tex_sha256":"e25c3574760c2148510b255089b20504d6b7813d198d64eed3c615f32b80946a","markdown_sha256":"56614991c25690663a961861689dac1d334e6e3af19c48a6bc89ffc9cc7003cb"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch07-software-factory-distributed-system.tex","tex_sha256":"327ed6c88dea71e519d566cb731e52c7cace7663fb7dcb6e0f4a972f734493c9","markdown_sha256":"0f093f91c09d866a24e37cbec04ab89256fcb7d00fa7f39730e6a815191fc724"} -->
 # Part III: Containment, durable execution, and recovery engineering
 
 # The software factory as a distributed system
 
-> **Evidence profile.** 0 strong $\cdot$ 4 directional $\cdot$ 2 corroborating $\cdot$ 0 null or conflicting evidence items. Four additional sources establish historical lineage but do not provide evidence about agent-system outcomes. This chapter supplies the system model that the practices in Chapters 8 through 19 attach to; it develops no practice of its own.
+> **Evidence profile.** 0 strong $\cdot$ 4 directional $\cdot$ 3 corroborating $\cdot$ 0 null or conflicting evidence items. Four additional sources establish historical lineage but do not provide evidence about agent-system outcomes. This chapter supplies the system model that the practices in Chapters 8 through 19 attach to; it develops no practice of its own.
 >
 > **Chapter claim.** The factory, not the worker, owns the reliability promise.
 
@@ -1952,7 +1952,7 @@ Now consider the same fault without the guard, as a constructed sequence. A work
 
 A single coding-agent trajectory, the sequence of model calls, tool calls, and edits one agent performs, is one execution component. It starts, reads state, produces an artifact, and stops. Everything that makes that trajectory count as work belongs to machinery the trajectory does not contain: the scheduler that assigned it, the store that remembers what it was asked to do, the repository state it read and will write, the verifier that decides whether its output is acceptable, the publisher that turns an accepted artifact into an external effect, the external services that accept or reject that effect, and the resource policy that decided this work deserved compute at all. The whole arrangement can be thought of as a **software factory**: the durable system that accepts logical work, schedules attempts, runs workers, verifies artifacts, publishes effects, and reconciles disagreement between its records and the world. The agent is one worker inside it.
 
-Treating that machinery as an engineered system is not a new idea. Osterweil ([1987](https://dl.acm.org/doi/10.5555/41765.41766), [1997](https://dl.acm.org/doi/10.1145/253228.253440)) argued that software processes are software too, and Choi and Scacchi ([1991](https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf)) described the software factory itself as distributed infrastructure, with the coordination substrate treated as a first-class engineering object; the CNCF's Secure Software Factory reference architecture ([CNCF TAG Security](https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/)) supplies the contemporary vocabulary, scoped to supply-chain security rather than fault tolerance. The Sources and evidence section places each of these. Autonomous workers change the failure model. The processes Osterweil programmed and the infrastructure Choi and Scacchi described coordinated deterministic tools and human developers who could be asked what they meant. The modern factory schedules autonomous, nondeterministic workers that edit persistent code, call external APIs, run concurrently with one another, and can claim completion incorrectly. A compiler does not assert that it succeeded when it failed. An agent can, fluently and in detail. Practitioner systems have converged on the same decomposition: OpenAI's Symphony orchestration ([OpenAI 2026](https://openai.com/index/open-source-codex-orchestration-symphony/)) and Cloudflare's issue-triage factory ([Cloudflare 2026](https://blog.cloudflare.com/astro-issue-triage/)) both separate a durable work ledger, a scheduler, disposable workers, and gated publication. These are practitioner cases from the operating teams, corroborating convergence on the decomposition, not controlled evidence that the decomposition improves any measured outcome.
+Treating that machinery as an engineered system is not a new idea. Osterweil ([1987](https://dl.acm.org/doi/10.5555/41765.41766), [1997](https://dl.acm.org/doi/10.1145/253228.253440)) argued that software processes are software too, and Choi and Scacchi ([1991](https://www.ics.uci.edu/~wscacchi/Software-Process/Readings/DistSysFactory.pdf)) described the software factory itself as distributed infrastructure, with the coordination substrate treated as a first-class engineering object; the CNCF's Secure Software Factory reference architecture ([CNCF TAG Security](https://tag-security.cncf.io/community/working-groups/supply-chain-security/secure-software-factory/secure-software-factory/)) supplies the contemporary vocabulary, scoped to supply-chain security rather than fault tolerance. The Sources and evidence section places each of these. Autonomous workers change the failure model. The processes Osterweil programmed and the infrastructure Choi and Scacchi described coordinated deterministic tools and human developers who could be asked what they meant. The modern factory schedules autonomous, nondeterministic workers that edit persistent code, call external APIs, run concurrently with one another, and can claim completion incorrectly. A compiler does not assert that it succeeded when it failed. An agent can, fluently and in detail. Practitioner systems have converged on the same decomposition: OpenAI's Symphony orchestration ([OpenAI 2026](https://openai.com/index/open-source-codex-orchestration-symphony/)) and Cloudflare's issue-triage factory ([Cloudflare 2026](https://blog.cloudflare.com/astro-issue-triage/)) both separate a durable work ledger, a scheduler, disposable workers, and gated publication. Vercel's factory for the AI SDK repository ([Grammel and Dodds 2026](https://vercel.com/blog/building-a-software-factory-for-ai-sdk)) reports the same four parts by name, with factory data in Postgres, queued tasks dispatched to workers, one task-specific agent per run in an isolated sandbox, and nothing merged without approval from a human maintainer. It also names the distinction this chapter turns on: every run ends in one of four outcomes, success, flawed, blocked, or manual, and only success ships, so a run that fails is an attempt that failed rather than an issue that is done. These are practitioner cases from the operating teams, corroborating convergence on the decomposition, not controlled evidence that the decomposition improves any measured outcome.
 
 Not every agent deployment needs this frame. A local assistant that reads a repository, proposes a patch in an interactive session, and exits has one process, one human, and no durable coordination state. If the process dies, the human restarts it and loses only convenience. Modeling that as a distributed system would likely add more cognitive overhead than worthwhile.
 
@@ -2127,6 +2127,8 @@ The unanswered questions from step 8 are often the audit's most valuable result.
 **Corroborating practitioner cases**
 
 - OpenAI ([2026](https://openai.com/index/open-source-codex-orchestration-symphony/)), Symphony orchestration, and Cloudflare ([2026](https://blog.cloudflare.com/astro-issue-triage/)), Astro issue-triage factory. Corroborating convergence on the ledger-scheduler-worker-gate decomposition from the operating teams; not controlled evidence that the decomposition improves any measured outcome.
+
+- Grammel and Dodds ([2026](https://vercel.com/blog/building-a-software-factory-for-ai-sdk)), the AI SDK software factory, Vercel Blog. The same decomposition, plus a four-valued run outcome (success, flawed, blocked, manual) that separates attempt result from work state, and a human approval gate on every merge. The post reports authoring 25 to 35 percent of merged pull requests, closing over 75 percent of July's closed issues, and open issues falling from 1,022 to 844 over four weeks; those are self-reported operating shares against no baseline, and they are cited here for the structure of the system, not as a measured effect of it. Published after this edition's update cutoff and admitted as a corroborating case on that basis.
 <!-- tex-sync:end -->
 
 <!-- tex-sync:start {"path":"manuscript/chapters/ch08-isolation-injection-independent-verification.tex","tex_sha256":"fb76bd638f449334ec1dd17757e1cfec5ad55a6f871db4776eafd023b01dffaf","markdown_sha256":"143c9cea751fcfc8083a9a71a7fd2a541f429c4d7bc3cb911cd6e1cd33e1e1b5"} -->
@@ -6809,10 +6811,10 @@ The record should remain intelligible without the architecture's label. "Hierarc
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the preamble rerun described in the opening, which is narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch19-cost-aware-fleet-scheduling-model-routing.tex","tex_sha256":"bf8a0edef1e1647f10ad5eb2a24c498ff5ba3b32972a586dad73113b3e366c75","markdown_sha256":"6348b29fff8c16a0c4a034a7a2485d2914fb006285ab58faded45adccdcf7f81"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch19-cost-aware-fleet-scheduling-model-routing.tex","tex_sha256":"e9ad385a755461e47e6193d15443c2ce76202fea76212ef6c93b16efeb72fa54","markdown_sha256":"a9063acf9ac77bbb700a31bbf87a66414b7b2f6d8e780e70b367d3eafbfee45d"} -->
 # Cost-aware fleet scheduling and model routing
 
-> **Evidence profile.** 2 strong $\cdot$ 13 directional $\cdot$ 2 corroborating $\cdot$ 0 null or conflicting evidence items across 4 developed practices (ERCA-171, ERCA-187, ERCA-191, ERCA-206).
+> **Evidence profile.** 2 strong $\cdot$ 17 directional $\cdot$ 2 corroborating $\cdot$ 0 null or conflicting evidence items across 4 developed practices (ERCA-171, ERCA-187, ERCA-191, ERCA-206). Four of the directional items are inference-serving systems results, admitted for the serving-conditions section and measured outside any agent fleet.
 >
 > **Chapter claim.** Re-decide from observed state, then ship the best feasible incumbent on time.
 
@@ -6839,6 +6841,8 @@ Allocation policy is easy to mistake for a local configuration detail. In an age
 A cheaper model call can trigger enough repair and review to cost more per accepted result. A mathematically better schedule can become operationally worse if computing it delays the work beyond its deadline. Scheduling and routing are therefore measured decisions rather than static configuration.
 
 Production traces also show that coding-agent traffic differs from chatbot traffic. Liu et al. ([2026](https://arxiv.org/abs/2608.00101)) sampled GitHub Copilot activity from 3.2 million users, 13 million sessions, 761 million model calls, and 95 trillion tokens. KV-cache hit rates averaged 90 percent within a turn and 55 percent across turn boundaries; a lightweight predictor captured 86 to 90 percent of total user idle time. The study strongly characterizes one production workload and directionally supports measuring turn boundaries and idle periods in capacity policy.
+
+Those rates belong to one product's traffic and do not transfer to another coding agent. What the result does establish is the shape of the workload: an agent session accumulates inference state that later calls in the same session can reuse, and much less of it survives the boundary between turns. Cache behavior of that kind sets how much concurrent work an inference endpoint can carry and what each call costs, which is why the serving conditions behind a model endpoint get a section of their own later in this chapter. The immediate consequence is a constraint on how allocation is measured: an experiment that samples model calls as interchangeable independent requests destroys the reuse structure it is supposed to be measuring, so replays and shadow runs must preserve turn and session boundaries.
 
 ## What allocation decision is the system making?
 
@@ -7163,6 +7167,40 @@ Evaluation should report cost per accepted result and failure rates by request c
 
 Cheapest-sufficient routing is useful because it makes the economic policy explicit: what is being predicted, what requirement must be met, and which tradeoff is being selected. It cannot repair an unrepresentative calibration set, a reward that measures the wrong outcome, or a task whose true cost appears only after repair and review.
 
+## Under what serving conditions should that inference run?
+
+Choosing a model settles one question. A second remains: where the call executes and in what state that endpoint currently is. A model endpoint is not an unbounded pool of identical workers. Behind it sit finite accelerators, finite device memory, finite memory bandwidth, a queue, a batching policy, and inference state that is either present or absent. Those conditions move latency, cost, and failure rate with no change in the model's capability, which puts them in the same decision record as price and predicted performance.
+
+Only a little of the serving mechanism is needed to make that argument. A model call runs in two phases. **Prefill** processes the input, which for a coding agent means system instructions, tool definitions, repository context, retrieved evidence, and the conversation so far. **Decode** then generates output tokens one at a time. The phases load the hardware differently and surface as different operational measures: time to first token is dominated by prefill and by whatever queueing precedes it, while generation latency scales with output length. A record that reports only total call latency cannot separate a long input from a slow generation, and the two have different remedies.
+
+Decode avoids recomputing the attention state of every earlier token by retaining it, which is the key-value cache. The cache trades compute for memory, and that memory is the binding constraint rather than an accounting detail: Kwon et al. ([2023](https://arxiv.org/abs/2309.06180)) report that holding each request's cache in one contiguous block loses enough of it to fragmentation and duplication to limit how many requests fit at once, and that paging that memory instead, with sharing within and across requests, raises throughput by two to four times at the same latency. Two consequences follow at fleet scale. Cached state has a size, so a worker's remaining capacity is not described by its request count. Cached state also has a location, so it is present on one replica and absent on another.
+
+Coding-agent sessions make both consequences larger than a short exchange would. A session carries a long and slowly changing prefix: system instructions, tool schemas, repository conventions, retrieved files, and an accumulating history of prior tool outputs. Reuse of a shared prefix across separate requests is a different mechanism from retaining state within one generation, and serving systems implement it explicitly. Zheng et al. ([2023](https://arxiv.org/abs/2312.07104)) retain previously computed prefixes in a radix tree and report up to 6.4 times higher throughput on workloads whose calls share structure, including agent control and multi-turn chat. Whether an agent workload has that structure is a property of the harness and its prompt construction, not of the model, and the realized gain depends on the serving implementation as well. It is measurable on the operated fleet, and it should be measured rather than assumed.
+
+Two replicas exposing the same model are therefore not operationally equivalent at a given instant if one already holds the session's prefix. Routing inputs can then include model capability, price, queue depth, memory pressure, the request's deadline, and cache locality. This is the two-level structure the Mesos and Omega lineage already gives the fleet, one layer lower: a fleet-wide allocator decides what should run and against which requirement, and a worker-local dispatcher places the call where current serving conditions can meet it. None of this establishes that a cache-aware router is better than a simple one. It is another policy with its own cost and failure modes, and it earns promotion through the same fixed-arrival replay as any other.
+
+Batching sits underneath both layers. A server that groups concurrent requests keeps the accelerator busy and raises tokens served per second; it also introduces queueing, and a request can wait behind work unrelated to it. That is this chapter's throughput-versus-cost distinction one level down: maximizing tokens per second is not the same as minimizing time to an accepted result. A fleet usually carries both kinds of demand, an interactive session where time to first token is most of the experience and an overnight migration, evaluation sweep, or background repair where only completion time and price matter. They want different points on that tradeoff, and a request that does not declare its class cannot be served according to one.
+
+Implementation-level optimizations move the envelope again. Paged cache management, speculative decoding (Leviathan, Kalman, and Matias [2022](https://arxiv.org/abs/2211.17192)), and reduced-precision execution (Dettmers et al. [2022](https://arxiv.org/abs/2208.07339)) each change how much work an accelerator completes and at what latency. None is recommended here, and their reported gains are properties of the models and workloads they were measured on. They matter to a scheduler for one reason: a serving change can alter the resource envelope beneath the fleet with no change in the harness, so the serving configuration belongs in capacity planning and in the version fields of any routing experiment.
+
+The reliability consequence is that inference conditions can produce what the fleet records as an agent failure:
+
+- inference demand exceeds the serving capacity available to the fleet, through concurrency, cache pressure, or a shift in input length;
+
+- queueing rises, and with it time to first token and total call latency;
+
+- calls begin to exceed the harness timeout;
+
+- the harness retries, which adds fresh prefill work and, when the session's cached prefix has been evicted, recomputes it; and
+
+- the added demand deepens the saturation that produced the timeout.
+
+Nothing in that sequence requires the model to have become less capable, and nothing in it is visible from the agent's trajectory alone. It is the retry-amplification shape from earlier in this chapter with an inference endpoint as the constrained dependency, and the same controls apply: bound admitted demand, jitter and cap retries, and reserve capacity so that recovery traffic does not compete with the load that displaced it. Pilot Execution's finding that recovery actions themselves cause severe failures has an instance here. So does Chapter 11's attribution discipline: a first-upstream-failure analysis that stops at "the agent timed out" has assigned the failure to the wrong component.
+
+Telling that story from the record rather than from memory requires the call's own serving observations, which the allocation-ledger table later in this chapter lists alongside the rest. Managed providers expose different subsets of those fields, and several expose almost none of them. A field the provider does not report is not a field to estimate; it is a limit on the causal claims the operator may make from the record, and it should be stated as one. These observations also stay separate from the chapter's other measurements. Cached-input share is a cost and performance observation. It says nothing about whether the result was correct, and nothing about whether the work survived review. Collapsing the two into one efficiency ratio would hide the failure this section is about.
+
+None of the serving work cited here was measured on a coding-agent fleet. It establishes that the mechanisms exist, that they bind on memory and locality rather than on request count, and that they are configurable. Whether cache locality, batching policy, or a serving change is worth routing on in a particular fleet is a question for that fleet's replay.
+
 ## Does the policy survive a fixed-arrival replay?
 
 In one replay of my agent fleet, the interesting scheduling idea lost to a one-word configuration change. Across eleven weeks of recorded traffic, a four-feature weighted index performed within 0.1 percent of plain priority banding.
@@ -7355,6 +7393,10 @@ When the ledger does not preserve decision state, add fields in dependency order
 <td style="text-align: left;">Arrival time, priority, claim and release events, observed duration, completion or failure outcome, and review verdict.</td>
 </tr>
 <tr>
+<td style="text-align: left;">Serving observations</td>
+<td style="text-align: left;">Per call: endpoint or route selected, model and serving configuration version, input and output token counts, cached input share where the provider reports it, time to first token, total call latency, observed queueing, and retry count. Record which of these the provider does not expose.</td>
+</tr>
+<tr>
 <td style="text-align: left;">Decision state</td>
 <td style="text-align: left;">Available capacity, eligible execution pools, work already running, leases or locks, deadlines, model or tool compatibility, reviewer availability, and constraints that excluded an otherwise eligible item.</td>
 </tr>
@@ -7435,7 +7477,13 @@ The repository artifact [`protocols/allocation-policy-replay.md`](https://github
 
 - Strong evidence for one benchmark-bound scout-and-fixer configuration and its no-router ablation: Bhola, I., Krishnan, A., and NS, M. (2026), "Scrouting: Cost-Aware Routing of Coding Agents by Scouting the Repository First," arXiv:2608.04804. The handoff, rather than the router, carried the measured result.
 
-- The three routing-theory items remain directional, and no source evaluates a production software-agent fleet; generalized cheapest-sufficient routing therefore remains a decision to test rather than an established cost reduction.
+- Directional evidence: Kwon, W., et al. (2023), "Efficient Memory Management for Large Language Model Serving with PagedAttention," SOSP 2023, arXiv:2309.06180. Key-value cache memory, not request count, bounds concurrent serving capacity; the reported two-to-four-times throughput gain is a property of the evaluated systems and models.
+
+- Directional evidence: Zheng, L., et al. (2023), "SGLang: Efficient Execution of Structured Language Model Programs," arXiv:2312.07104. Cross-request prefix reuse makes two replicas of one model operationally unequal; the reported gains depend on workload structure and serving implementation.
+
+- Directional evidence: Leviathan, Y., Kalman, M., & Matias, Y. (2022), "Fast Inference from Transformers via Speculative Decoding," arXiv:2211.17192, and Dettmers, T., et al. (2022), "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale," arXiv:2208.07339. Cited only as evidence that serving-level optimizations exist and change the resource envelope; no claim that either is appropriate for a given fleet.
+
+- The three routing-theory items remain directional, and no source evaluates a production software-agent fleet; generalized cheapest-sufficient routing therefore remains a decision to test rather than an established cost reduction. The four inference-serving items are systems results measured on serving benchmarks, not on agent workloads, and they support the existence and mechanics of the constraint rather than any routing policy over it.
 
 - Directional evidence for this developed practice: CascadeDebate (Chang 2026), arXiv:2604.12262. Its confidence-gated cascade comparison strongly supports the narrower companion-catalog claim in the tested setting; transfer to production software-agent routing remains directional.
 
@@ -7711,7 +7759,7 @@ The part-level and chapter-level evidence shares restated above were recomputed 
 **Typed knowledge graph.** A graph whose nodes and edges carry explicit semantic types, provenance, and revision identity rather than only untyped similarity.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/references.tex","tex_sha256":"54ffbf8b7c915f4627df65ac1cf58fd1310c5e797762e8ab7e1fa006ceb37a4e","markdown_sha256":"0ad56a37ed6644da517b13ded37948b3467fd1e491fa2db91712f9ec12713cf4"} -->
+<!-- tex-sync:start {"path":"manuscript/references.tex","tex_sha256":"07c49a6be0d34189af73347ac9ddbc1da068a0464fd5f7bc42da7d7acd275df7","markdown_sha256":"2467ba768eaa4a0ab3a205b747cba0651c3f746de63de4d229e61e1968db31e5"} -->
 # References
 
 Julian Acuna (2026). EngramaBench: Evaluating Long-Term Conversational Memory with Structured Graph Retrieval. arXiv:2604.21229. <https://arxiv.org/abs/2604.21229>
@@ -7733,6 +7781,8 @@ Wenhao Ge, Chen Zhang (2026). Understanding and Detecting Flaky Builds in GitHub
 Google SRE Book. Addressing Cascading Failures. Undated; accessed 2026-08-10. <https://sre.google/sre-book/addressing-cascading-failures/>
 
 Google SRE Book. Handling Overload. Undated; accessed 2026-08-10. <https://sre.google/sre-book/handling-overload/>
+
+Lars Grammel and Eric Dodds (2026). Building a Software Factory for AI SDK. Vercel Blog. <https://vercel.com/blog/building-a-software-factory-for-ai-sdk>
 
 Haryadi S. Gunawi, Thanh Do, Pallavi Joshi, Peter Alvaro, Joseph M. Hellerstein, Andrea C. Arpaci-Dusseau, Remzi H. Arpaci-Dusseau, Koushik Sen, et al. (2011). FATE and DESTINI: A Framework for Cloud Recovery Testing. NSDI 2011. <https://www.usenix.org/conference/nsdi11/fate-and-destini-framework-cloud-recovery-testing>
 
@@ -7839,6 +7889,8 @@ Cursor (2026). Dynamic context discovery. Cursor Blog. <https://cursor.com/blog/
 Edoardo Debenedetti, Jie Zhang, Mislav Balunović, Luca Beurer-Kellner, Marc Fischer, Florian Tramèr (2024). AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents. arXiv:2406.13352. <https://arxiv.org/abs/2406.13352>
 
 Darshan Deshpande, Varun Gangal, Hersh Mehta, Jitin Krishnan, Anand Kannappan, Rebecca Qian (2025). TRAIL: Trace Reasoning and Agentic Issue Localization. arXiv:2505.08638. <https://arxiv.org/abs/2505.08638>
+
+Tim Dettmers, Mike Lewis, Younes Belkada, Luke Zettlemoyer (2022). LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale. arXiv:2208.07339. <https://arxiv.org/abs/2208.07339>
 
 Drew Dillon, Kasyap Varanasi (2026). Context-Augmented Code Generation: How Product Context Improves AI Coding Agent Decision Compliance by 49%. arXiv:2605.08112. <https://arxiv.org/abs/2605.08112>
 
@@ -7956,6 +8008,8 @@ Barbara Kitchenham, Lech Madeyski, David Budgen (2023). SEGRESS: Software Engine
 
 Rajesh Kumar, Waqar Ali, Junaid Ahmed, Najma Imtiaz Ali, Shaban Usman (2026). AgentForge: Execution-Grounded Multi-Agent LLM Framework for Autonomous Software Engineering. arXiv:2604.13120. <https://arxiv.org/abs/2604.13120>
 
+Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Ying Sheng, Lianmin Zheng, Cody Hao Yu, Joseph E. Gonzalez, Hao Zhang, et al. (2023). Efficient Memory Management for Large Language Model Serving with PagedAttention. SOSP 2023. arXiv:2309.06180. <https://arxiv.org/abs/2309.06180>
+
 Philippe Laban, Hiroaki Hayashi, Yingbo Zhou, Jennifer Neville (2025). LLMs Get Lost In Multi-Turn Conversation. arXiv:2505.06120. <https://arxiv.org/abs/2505.06120>
 
 Cassidy Laidlaw, Shivam Singhal, Anca Dragan (2024). Correlated Proxies: A New Definition and Improved Mitigation for Reward Hacking. arXiv:2403.03185. <https://arxiv.org/abs/2403.03185>
@@ -7963,6 +8017,8 @@ Cassidy Laidlaw, Shivam Singhal, Anca Dragan (2024). Correlated Proxies: A New D
 Rodrigo Laigner, Yongluan Zhou, Marcos Antonio Vaz Salles, Yijian Liu, Marcos Kalinowski (2021). Data Management in Microservices: State of the Practice, Challenges, and Research Directions. arXiv:2103.00170. <https://arxiv.org/abs/2103.00170>
 
 Sotiria Lampoudi, Eric Saunders, Jason Eastman (2015). An Integer Linear Programming Solution to the Telescope Network Scheduling Problem. arXiv:1503.07170. <https://arxiv.org/abs/1503.07170>
+
+Yaniv Leviathan, Matan Kalman, Yossi Matias (2022). Fast Inference from Transformers via Speculative Decoding. arXiv:2211.17192. <https://arxiv.org/abs/2211.17192>
 
 Yingtie Lei, Zhongwei Wan, Jiankun Zhang, Samiul Alam, Zixuan Zhong, Peizhou Huang, Xin Wang, Jingxuan Zhang, et al. (2026). SkillEvolBench: Benchmarking the Evolution from Episodic Experience to Procedural Skills. arXiv:2605.24117. <https://arxiv.org/abs/2605.24117>
 
@@ -8191,6 +8247,8 @@ Xinkui Zhao, Sai Liu, Yifan Zhang, Qingyu Ma, Zewen Lin, Naibo Wang, Guanjie Che
 Xiangxin Zhao, Han Li, Shuaiting Li, Tianyi Zhao, Earl T. Barr, Federica Sarro, He Ye (2026). Failure as a Process: An Anatomy of CLI Coding Agent Trajectories. arXiv:2607.09510. <https://arxiv.org/abs/2607.09510>
 
 Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin, Zhuohan Li, et al. (2023). Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. arXiv:2306.05685. <https://arxiv.org/abs/2306.05685>
+
+Lianmin Zheng, Liangsheng Yin, Zhiqiang Xie, Chuyue Sun, Jeff Huang, Cody Hao Yu, Shiyi Cao, Christos Kozyrakis, et al. (2023). SGLang: Efficient Execution of Structured Language Model Programs. arXiv:2312.07104. <https://arxiv.org/abs/2312.07104>
 
 Yusheng Zheng, Yanpeng Hu, Tong Yu, Andi Quinn (2025). AgentSight: System-Level Observability for AI Agents Using eBPF. arXiv:2508.02736. <https://arxiv.org/abs/2508.02736>
 

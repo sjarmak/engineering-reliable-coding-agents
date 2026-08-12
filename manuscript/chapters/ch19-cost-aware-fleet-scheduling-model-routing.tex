@@ -1,7 +1,7 @@
 \chapter{Cost-aware fleet scheduling and model routing}
 \label{ch19-cost-aware-fleet-scheduling-model-routing}
 \begin{quote}
-\textbf{Evidence profile.} 2 strong \(\cdot\) 13 directional \(\cdot\) 2 corroborating \(\cdot\) 0 null or conflicting evidence items across 4 developed practices (\erca{171}, \erca{187}, \erca{191}, \erca{206}).
+\textbf{Evidence profile.} 2 strong \(\cdot\) 17 directional \(\cdot\) 2 corroborating \(\cdot\) 0 null or conflicting evidence items across 4 developed practices (\erca{171}, \erca{187}, \erca{191}, \erca{206}). Four of the directional items are inference-serving systems results, admitted for the serving-conditions section and measured outside any agent fleet.
 
 \textbf{Chapter claim.} Re-decide from observed state, then ship the best feasible incumbent on time.
 \end{quote}
@@ -35,6 +35,8 @@ Allocation policy is easy to mistake for a local configuration detail. In an age
 A cheaper model call can trigger enough repair and review to cost more per accepted result. A mathematically better schedule can become operationally worse if computing it delays the work beyond its deadline. Scheduling and routing are therefore measured decisions rather than static configuration.
 
 Production traces also show that coding-agent traffic differs from chatbot traffic. Liu et al.~(\href{https://arxiv.org/abs/2608.00101}{2026}) sampled GitHub Copilot activity from 3.2 million users, 13 million sessions, 761 million model calls, and 95 trillion tokens. KV-cache hit rates averaged 90 percent within a turn and 55 percent across turn boundaries; a lightweight predictor captured 86 to 90 percent of total user idle time. The study strongly characterizes one production workload and directionally supports measuring turn boundaries and idle periods in capacity policy.
+
+Those rates belong to one product's traffic and do not transfer to another coding agent. What the result does establish is the shape of the workload: an agent session accumulates inference state that later calls in the same session can reuse, and much less of it survives the boundary between turns. Cache behavior of that kind sets how much concurrent work an inference endpoint can carry and what each call costs, which is why the serving conditions behind a model endpoint get a section of their own later in this chapter. The immediate consequence is a constraint on how allocation is measured: an experiment that samples model calls as interchangeable independent requests destroys the reuse structure it is supposed to be measuring, so replays and shadow runs must preserve turn and session boundaries.
 
 \hypertarget{what-allocation-decision-is-the-system-making}{%
 \section{What allocation decision is the system making?}\label{what-allocation-decision-is-the-system-making}}
@@ -455,6 +457,47 @@ Evaluation should report cost per accepted result and failure rates by request c
 
 Cheapest-sufficient routing is useful because it makes the economic policy explicit: what is being predicted, what requirement must be met, and which tradeoff is being selected. It cannot repair an unrepresentative calibration set, a reward that measures the wrong outcome, or a task whose true cost appears only after repair and review.
 
+\hypertarget{under-what-serving-conditions-should-that-inference-run}{%
+\section{Under what serving conditions should that inference run?}\label{under-what-serving-conditions-should-that-inference-run}}
+
+Choosing a model settles one question. A second remains: where the call executes and in what state that endpoint currently is. A model endpoint is not an unbounded pool of identical workers. Behind it sit finite accelerators, finite device memory, finite memory bandwidth, a queue, a batching policy, and inference state that is either present or absent. Those conditions move latency, cost, and failure rate with no change in the model's capability, which puts them in the same decision record as price and predicted performance.
+
+Only a little of the serving mechanism is needed to make that argument. A model call runs in two phases. \textbf{Prefill} processes the input, which for a coding agent means system instructions, tool definitions, repository context, retrieved evidence, and the conversation so far. \textbf{Decode} then generates output tokens one at a time. The phases load the hardware differently and surface as different operational measures: time to first token is dominated by prefill and by whatever queueing precedes it, while generation latency scales with output length. A record that reports only total call latency cannot separate a long input from a slow generation, and the two have different remedies.
+
+Decode avoids recomputing the attention state of every earlier token by retaining it, which is the key-value cache. The cache trades compute for memory, and that memory is the binding constraint rather than an accounting detail: Kwon et al.~(\href{https://arxiv.org/abs/2309.06180}{2023}) report that holding each request's cache in one contiguous block loses enough of it to fragmentation and duplication to limit how many requests fit at once, and that paging that memory instead, with sharing within and across requests, raises throughput by two to four times at the same latency. Two consequences follow at fleet scale. Cached state has a size, so a worker's remaining capacity is not described by its request count. Cached state also has a location, so it is present on one replica and absent on another.
+
+Coding-agent sessions make both consequences larger than a short exchange would. A session carries a long and slowly changing prefix: system instructions, tool schemas, repository conventions, retrieved files, and an accumulating history of prior tool outputs. Reuse of a shared prefix across separate requests is a different mechanism from retaining state within one generation, and serving systems implement it explicitly. Zheng et al.~(\href{https://arxiv.org/abs/2312.07104}{2023}) retain previously computed prefixes in a radix tree and report up to 6.4 times higher throughput on workloads whose calls share structure, including agent control and multi-turn chat. Whether an agent workload has that structure is a property of the harness and its prompt construction, not of the model, and the realized gain depends on the serving implementation as well. It is measurable on the operated fleet, and it should be measured rather than assumed.
+
+Two replicas exposing the same model are therefore not operationally equivalent at a given instant if one already holds the session's prefix. Routing inputs can then include model capability, price, queue depth, memory pressure, the request's deadline, and cache locality. This is the two-level structure the Mesos and Omega lineage already gives the fleet, one layer lower: a fleet-wide allocator decides what should run and against which requirement, and a worker-local dispatcher places the call where current serving conditions can meet it. None of this establishes that a cache-aware router is better than a simple one. It is another policy with its own cost and failure modes, and it earns promotion through the same fixed-arrival replay as any other.
+
+Batching sits underneath both layers. A server that groups concurrent requests keeps the accelerator busy and raises tokens served per second; it also introduces queueing, and a request can wait behind work unrelated to it. That is this chapter's throughput-versus-cost distinction one level down: maximizing tokens per second is not the same as minimizing time to an accepted result. A fleet usually carries both kinds of demand, an interactive session where time to first token is most of the experience and an overnight migration, evaluation sweep, or background repair where only completion time and price matter. They want different points on that tradeoff, and a request that does not declare its class cannot be served according to one.
+
+Implementation-level optimizations move the envelope again. Paged cache management, speculative decoding (Leviathan, Kalman, and Matias \href{https://arxiv.org/abs/2211.17192}{2022}), and reduced-precision execution (Dettmers et al.~\href{https://arxiv.org/abs/2208.07339}{2022}) each change how much work an accelerator completes and at what latency. None is recommended here, and their reported gains are properties of the models and workloads they were measured on. They matter to a scheduler for one reason: a serving change can alter the resource envelope beneath the fleet with no change in the harness, so the serving configuration belongs in capacity planning and in the version fields of any routing experiment.
+
+\Needspace{8\baselineskip}
+
+The reliability consequence is that inference conditions can produce what the fleet records as an agent failure:
+
+\begin{itemize}
+\tightlist
+\item
+  inference demand exceeds the serving capacity available to the fleet, through concurrency, cache pressure, or a shift in input length;
+\item
+  queueing rises, and with it time to first token and total call latency;
+\item
+  calls begin to exceed the harness timeout;
+\item
+  the harness retries, which adds fresh prefill work and, when the session's cached prefix has been evicted, recomputes it; and
+\item
+  the added demand deepens the saturation that produced the timeout.
+\end{itemize}
+
+Nothing in that sequence requires the model to have become less capable, and nothing in it is visible from the agent's trajectory alone. It is the retry-amplification shape from earlier in this chapter with an inference endpoint as the constrained dependency, and the same controls apply: bound admitted demand, jitter and cap retries, and reserve capacity so that recovery traffic does not compete with the load that displaced it. Pilot Execution's finding that recovery actions themselves cause severe failures has an instance here. So does Chapter 11's attribution discipline: a first-upstream-failure analysis that stops at ``the agent timed out'' has assigned the failure to the wrong component.
+
+Telling that story from the record rather than from memory requires the call's own serving observations, which the allocation-ledger table later in this chapter lists alongside the rest. Managed providers expose different subsets of those fields, and several expose almost none of them. A field the provider does not report is not a field to estimate; it is a limit on the causal claims the operator may make from the record, and it should be stated as one. These observations also stay separate from the chapter's other measurements. Cached-input share is a cost and performance observation. It says nothing about whether the result was correct, and nothing about whether the work survived review. Collapsing the two into one efficiency ratio would hide the failure this section is about.
+
+None of the serving work cited here was measured on a coding-agent fleet. It establishes that the mechanisms exist, that they bind on memory and locality rather than on request count, and that they are configurable. Whether cache locality, batching policy, or a serving change is worth routing on in a particular fleet is a question for that fleet's replay.
+
 \hypertarget{does-the-policy-survive-a-fixed-arrival-replay}{%
 \section{Does the policy survive a fixed-arrival replay?}\label{does-the-policy-survive-a-fixed-arrival-replay}}
 
@@ -696,6 +739,7 @@ Fields
 \bottomrule\noalign{}
 \endlastfoot
 Observed events & Arrival time, priority, claim and release events, observed duration, completion or failure outcome, and review verdict. \\
+Serving observations & Per call: endpoint or route selected, model and serving configuration version, input and output token counts, cached input share where the provider reports it, time to first token, total call latency, observed queueing, and retry count. Record which of these the provider does not expose. \\
 Decision state & Available capacity, eligible execution pools, work already running, leases or locks, deadlines, model or tool compatibility, reviewer availability, and constraints that excluded an otherwise eligible item. \\
 Policy estimates & Predicted cost, predicted task performance, routing uncertainty, expected duration, solver objective value, and optimality gap. \\
 Code-estate state & Campaign identity, repository, base revision, host or workspace, affected entities, artifact version, code index version, conflict evidence, and publication state. \\
@@ -778,7 +822,13 @@ The repository artifact \href{https://github.com/sjarmak/engineering-reliable-co
 \item
   Strong evidence for one benchmark-bound scout-and-fixer configuration and its no-router ablation: Bhola, I., Krishnan, A., and NS, M. (2026), ``Scrouting: Cost-Aware Routing of Coding Agents by Scouting the Repository First,'' arXiv:2608.04804. The handoff, rather than the router, carried the measured result.
 \item
-  The three routing-theory items remain directional, and no source evaluates a production software-agent fleet; generalized cheapest-sufficient routing therefore remains a decision to test rather than an established cost reduction.
+  Directional evidence: Kwon, W., et al.~(2023), ``Efficient Memory Management for Large Language Model Serving with PagedAttention,'' SOSP 2023, arXiv:2309.06180. Key-value cache memory, not request count, bounds concurrent serving capacity; the reported two-to-four-times throughput gain is a property of the evaluated systems and models.
+\item
+  Directional evidence: Zheng, L., et al.~(2023), ``SGLang: Efficient Execution of Structured Language Model Programs,'' arXiv:2312.07104. Cross-request prefix reuse makes two replicas of one model operationally unequal; the reported gains depend on workload structure and serving implementation.
+\item
+  Directional evidence: Leviathan, Y., Kalman, M., \& Matias, Y. (2022), ``Fast Inference from Transformers via Speculative Decoding,'' arXiv:2211.17192, and Dettmers, T., et al.~(2022), ``LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale,'' arXiv:2208.07339. Cited only as evidence that serving-level optimizations exist and change the resource envelope; no claim that either is appropriate for a given fleet.
+\item
+  The three routing-theory items remain directional, and no source evaluates a production software-agent fleet; generalized cheapest-sufficient routing therefore remains a decision to test rather than an established cost reduction. The four inference-serving items are systems results measured on serving benchmarks, not on agent workloads, and they support the existence and mechanics of the constraint rather than any routing policy over it.
 \item
   Directional evidence for this developed practice: CascadeDebate (Chang 2026), arXiv:2604.12262. Its confidence-gated cascade comparison strongly supports the narrower companion-catalog claim in the tested setting; transfer to production software-agent routing remains directional.
 \item
