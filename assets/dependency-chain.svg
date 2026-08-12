@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 410" width="680" height="410" role="img" aria-labelledby="figtitle-dependency-chain" class="bookfig">
+<title id="figtitle-dependency-chain">Argument map for the reliability dependency chain: measurement, grading, containment and recovery, retrieval and context, review and accountability, and allocation and cost. Each layer supplies the evidence boundary on which the next relies.</title>
+<style>.bookfig .f-bg{fill:#ffffff}.bookfig .s-bg{stroke:#ffffff}.bookfig .f-ink{fill:#1a1a1a}.bookfig .s-ink{stroke:#1a1a1a}.bookfig .f-mid{fill:#6b6b6b}.bookfig .s-mid{stroke:#6b6b6b}.bookfig .f-faint{fill:#b8b8b8}.bookfig .s-faint{stroke:#b8b8b8}.bookfig .f-wash{fill:#e2e2e2}.bookfig .s-wash{stroke:#e2e2e2}.bookfig .f-accent{fill:#b34300}.bookfig .s-accent{stroke:#b34300}.bookfig .f-onacc{fill:#ffffff}.bookfig .s-onacc{stroke:#ffffff}@media (prefers-color-scheme:dark){.bookfig .f-bg{fill:#232019}.bookfig .s-bg{stroke:#232019}.bookfig .f-ink{fill:#ede5d6}.bookfig .s-ink{stroke:#ede5d6}.bookfig .f-mid{fill:#9a8f7c}.bookfig .s-mid{stroke:#9a8f7c}.bookfig .f-faint{fill:#5c5346}.bookfig .s-faint{stroke:#5c5346}.bookfig .f-wash{fill:#3d382f}.bookfig .s-wash{stroke:#3d382f}.bookfig .f-accent{fill:#df9d5e}.bookfig .s-accent{stroke:#df9d5e}.bookfig .f-onacc{fill:#232019}.bookfig .s-onacc{stroke:#232019}}:where([data-theme="dark"]) .bookfig .f-bg{fill:#232019}:where([data-theme="dark"]) .bookfig .s-bg{stroke:#232019}:where([data-theme="dark"]) .bookfig .f-ink{fill:#ede5d6}:where([data-theme="dark"]) .bookfig .s-ink{stroke:#ede5d6}:where([data-theme="dark"]) .bookfig .f-mid{fill:#9a8f7c}:where([data-theme="dark"]) .bookfig .s-mid{stroke:#9a8f7c}:where([data-theme="dark"]) .bookfig .f-faint{fill:#5c5346}:where([data-theme="dark"]) .bookfig .s-faint{stroke:#5c5346}:where([data-theme="dark"]) .bookfig .f-wash{fill:#3d382f}:where([data-theme="dark"]) .bookfig .s-wash{stroke:#3d382f}:where([data-theme="dark"]) .bookfig .f-accent{fill:#df9d5e}:where([data-theme="dark"]) .bookfig .s-accent{stroke:#df9d5e}:where([data-theme="dark"]) .bookfig .f-onacc{fill:#232019}:where([data-theme="dark"]) .bookfig .s-onacc{stroke:#232019}:where([data-theme="light"]) .bookfig .f-bg{fill:#ffffff}:where([data-theme="light"]) .bookfig .s-bg{stroke:#ffffff}:where([data-theme="light"]) .bookfig .f-ink{fill:#1a1a1a}:where([data-theme="light"]) .bookfig .s-ink{stroke:#1a1a1a}:where([data-theme="light"]) .bookfig .f-mid{fill:#6b6b6b}:where([data-theme="light"]) .bookfig .s-mid{stroke:#6b6b6b}:where([data-theme="light"]) .bookfig .f-faint{fill:#b8b8b8}:where([data-theme="light"]) .bookfig .s-faint{stroke:#b8b8b8}:where([data-theme="light"]) .bookfig .f-wash{fill:#e2e2e2}:where([data-theme="light"]) .bookfig .s-wash{stroke:#e2e2e2}:where([data-theme="light"]) .bookfig .f-accent{fill:#b34300}:where([data-theme="light"]) .bookfig .s-accent{stroke:#b34300}:where([data-theme="light"]) .bookfig .f-onacc{fill:#ffffff}:where([data-theme="light"]) .bookfig .s-onacc{stroke:#ffffff}</style>
+<rect class="f-bg" width="680" height="410"/>
+
+<!-- Draw the dependency spine first so it stays behind every state marker. -->
+<line class="s-faint" x1="172" y1="45" x2="172" y2="335" stroke-width="2"/>
+<path class="s-accent" d="M172 335 L172 367 L622 367" fill="none" stroke-width="1.5" stroke-dasharray="5 5"/>
+
+<circle class="f-mid" cx="172" cy="45" r="6"/>
+<circle class="f-mid" cx="172" cy="103" r="6"/>
+<circle class="f-mid" cx="172" cy="161" r="6"/>
+<circle class="f-mid" cx="172" cy="219" r="6"/>
+<circle class="f-mid" cx="172" cy="277" r="6"/>
+<circle class="f-accent" cx="172" cy="335" r="7"/>
+
+<text class="f-ink" x="194" y="50" font-family="Helvetica, Arial, sans-serif" font-size="17">measurement</text>
+<text class="f-mid" x="430" y="50" font-family="Helvetica, Arial, sans-serif" font-size="13">credible comparison</text>
+
+<text class="f-ink" x="194" y="108" font-family="Helvetica, Arial, sans-serif" font-size="17">grading</text>
+<text class="f-mid" x="430" y="108" font-family="Helvetica, Arial, sans-serif" font-size="13">defensible verdict</text>
+
+<text class="f-ink" x="194" y="166" font-family="Helvetica, Arial, sans-serif" font-size="17">containment and recovery</text>
+<text class="f-mid" x="430" y="166" font-family="Helvetica, Arial, sans-serif" font-size="13">bounded, recoverable record</text>
+
+<text class="f-ink" x="194" y="224" font-family="Helvetica, Arial, sans-serif" font-size="17">retrieval and context</text>
+<text class="f-mid" x="430" y="224" font-family="Helvetica, Arial, sans-serif" font-size="13">current, usable evidence</text>
+
+<text class="f-ink" x="194" y="282" font-family="Helvetica, Arial, sans-serif" font-size="17">review and accountability</text>
+<text class="f-mid" x="430" y="282" font-family="Helvetica, Arial, sans-serif" font-size="13">challengeable decision</text>
+
+<text class="f-accent" x="194" y="340" font-family="Helvetica, Arial, sans-serif" font-size="17">allocation and cost</text>
+<text class="f-accent" x="430" y="340" font-family="Helvetica, Arial, sans-serif" font-size="13">measured commitment</text>
+
+<text class="f-accent" x="622" y="397" font-family="Helvetica, Arial, sans-serif" font-size="13" text-anchor="end">future work re-enters the measurement layer</text>
+<text class="f-ink" x="30" y="195" font-family="Helvetica, Arial, sans-serif" font-size="13" text-anchor="middle" transform="rotate(-90 30 195)">each layer determines what the next may trust</text>
+</svg>

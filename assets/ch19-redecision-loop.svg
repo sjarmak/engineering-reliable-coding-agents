@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 486 458" width="486" height="458" role="img" aria-labelledby="figtitle-ch18-redecision-loop" class="bookfig">
+<title id="figtitle-ch18-redecision-loop">The re-decision loop recomputes from observed events under fixed work and churn costs, then executes a deadline capped incumbent while retaining its optimality gap.</title>
+<style>.bookfig .f-bg{fill:#ffffff}.bookfig .s-bg{stroke:#ffffff}.bookfig .f-ink{fill:#1a1a1a}.bookfig .s-ink{stroke:#1a1a1a}.bookfig .f-mid{fill:#6b6b6b}.bookfig .s-mid{stroke:#6b6b6b}.bookfig .f-faint{fill:#b8b8b8}.bookfig .s-faint{stroke:#b8b8b8}.bookfig .f-wash{fill:#e2e2e2}.bookfig .s-wash{stroke:#e2e2e2}.bookfig .f-accent{fill:#b34300}.bookfig .s-accent{stroke:#b34300}.bookfig .f-onacc{fill:#ffffff}.bookfig .s-onacc{stroke:#ffffff}@media (prefers-color-scheme:dark){.bookfig .f-bg{fill:#232019}.bookfig .s-bg{stroke:#232019}.bookfig .f-ink{fill:#ede5d6}.bookfig .s-ink{stroke:#ede5d6}.bookfig .f-mid{fill:#9a8f7c}.bookfig .s-mid{stroke:#9a8f7c}.bookfig .f-faint{fill:#5c5346}.bookfig .s-faint{stroke:#5c5346}.bookfig .f-wash{fill:#3d382f}.bookfig .s-wash{stroke:#3d382f}.bookfig .f-accent{fill:#df9d5e}.bookfig .s-accent{stroke:#df9d5e}.bookfig .f-onacc{fill:#232019}.bookfig .s-onacc{stroke:#232019}}:where([data-theme="dark"]) .bookfig .f-bg{fill:#232019}:where([data-theme="dark"]) .bookfig .s-bg{stroke:#232019}:where([data-theme="dark"]) .bookfig .f-ink{fill:#ede5d6}:where([data-theme="dark"]) .bookfig .s-ink{stroke:#ede5d6}:where([data-theme="dark"]) .bookfig .f-mid{fill:#9a8f7c}:where([data-theme="dark"]) .bookfig .s-mid{stroke:#9a8f7c}:where([data-theme="dark"]) .bookfig .f-faint{fill:#5c5346}:where([data-theme="dark"]) .bookfig .s-faint{stroke:#5c5346}:where([data-theme="dark"]) .bookfig .f-wash{fill:#3d382f}:where([data-theme="dark"]) .bookfig .s-wash{stroke:#3d382f}:where([data-theme="dark"]) .bookfig .f-accent{fill:#df9d5e}:where([data-theme="dark"]) .bookfig .s-accent{stroke:#df9d5e}:where([data-theme="dark"]) .bookfig .f-onacc{fill:#232019}:where([data-theme="dark"]) .bookfig .s-onacc{stroke:#232019}:where([data-theme="light"]) .bookfig .f-bg{fill:#ffffff}:where([data-theme="light"]) .bookfig .s-bg{stroke:#ffffff}:where([data-theme="light"]) .bookfig .f-ink{fill:#1a1a1a}:where([data-theme="light"]) .bookfig .s-ink{stroke:#1a1a1a}:where([data-theme="light"]) .bookfig .f-mid{fill:#6b6b6b}:where([data-theme="light"]) .bookfig .s-mid{stroke:#6b6b6b}:where([data-theme="light"]) .bookfig .f-faint{fill:#b8b8b8}:where([data-theme="light"]) .bookfig .s-faint{stroke:#b8b8b8}:where([data-theme="light"]) .bookfig .f-wash{fill:#e2e2e2}:where([data-theme="light"]) .bookfig .s-wash{stroke:#e2e2e2}:where([data-theme="light"]) .bookfig .f-accent{fill:#b34300}:where([data-theme="light"]) .bookfig .s-accent{stroke:#b34300}:where([data-theme="light"]) .bookfig .f-onacc{fill:#ffffff}:where([data-theme="light"]) .bookfig .s-onacc{stroke:#ffffff}</style>
+<rect class="f-bg" width="486" height="458" fill="#ffffff"/>
+<circle class="f-mid" cx="66.6" cy="66.6" r="5.0" fill="#6b6b6b"/>
+<text class="f-ink" x="80.5" y="70.1" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1a1a1a" text-anchor="start">a coarse interval, or an event that invalidates an assumption</text>
+<line class="s-mid" x1="66.6" y1="76.3" x2="66.6" y2="114.5" stroke="#6b6b6b" stroke-width="1.6"/>
+<path class="f-mid" d="M 66.6 123.5 L 61.4 114.5 L 71.8 114.5 Z" fill="#6b6b6b"/>
+<circle class="f-mid" cx="66.6" cy="133.2" r="5.0" fill="#6b6b6b"/>
+<text class="f-ink" x="80.5" y="136.7" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1a1a1a" text-anchor="start">observed state</text>
+<line class="s-mid" x1="66.6" y1="143.0" x2="66.6" y2="181.2" stroke="#6b6b6b" stroke-width="1.6"/>
+<path class="f-mid" d="M 66.6 190.2 L 61.4 181.2 L 71.8 181.2 Z" fill="#6b6b6b"/>
+<circle class="f-mid" cx="66.6" cy="199.9" r="5.0" fill="#6b6b6b"/>
+<text class="f-ink" x="80.5" y="203.3" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1a1a1a" text-anchor="start">compute again</text>
+<line class="s-mid" x1="66.6" y1="209.6" x2="66.6" y2="247.8" stroke="#6b6b6b" stroke-width="1.6"/>
+<path class="f-mid" d="M 66.6 256.8 L 61.4 247.8 L 71.8 247.8 Z" fill="#6b6b6b"/>
+<circle class="f-mid" cx="66.6" cy="266.5" r="5.0" fill="#6b6b6b"/>
+<text class="f-ink" x="80.5" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1a1a1a" text-anchor="start">decision deadline</text>
+<line class="s-mid" x1="66.6" y1="276.2" x2="66.6" y2="314.4" stroke="#6b6b6b" stroke-width="1.6"/>
+<path class="f-mid" d="M 66.6 323.4 L 61.4 314.4 L 71.8 314.4 Z" fill="#6b6b6b"/>
+<circle class="f-accent" cx="66.6" cy="333.1" r="6.0" fill="#b34300"/>
+<text class="f-accent" x="80.5" y="336.6" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#b34300" text-anchor="start">incumbent plus its optimality gap, then execute</text>
+<line class="s-accent" x1="70.8" y1="351.2" x2="388.6" y2="351.2" stroke="#b34300" stroke-width="1.6" stroke-dasharray="5 4"/>
+<line class="s-accent" x1="388.6" y1="351.2" x2="388.6" y2="115.2" stroke="#b34300" stroke-width="1.6" stroke-dasharray="5 4"/>
+<line class="s-accent" x1="388.6" y1="115.2" x2="89.5" y2="115.2" stroke="#b34300" stroke-width="1.6"/>
+<path class="f-accent" d="M 80.5 115.2 L 89.5 110.0 L 89.5 120.4 Z" fill="#b34300"/>
+<text class="f-accent" x="383.1" y="297.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#b34300" text-anchor="end">a new observed state re-enters</text>
+<text class="f-mid" x="212.4" y="187.4" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b6b6b" text-anchor="start">in-flight work as fixed constraints</text>
+<text class="f-mid" x="212.4" y="202.6" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b6b6b" text-anchor="start">a charge for plan churn</text>
+<text class="f-mid" x="212.4" y="217.9" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b6b6b" text-anchor="start">a mixed-integer solver search</text>
+<line class="s-faint" x1="202.6" y1="179.1" x2="202.6" y2="213.8" stroke="#b8b8b8" stroke-width="1.4"/>
+<text class="f-ink" x="20.8" y="399.7" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#1a1a1a" text-anchor="start">Between events, a competent greedy rule places ordinary arrivals</text>
+<text class="f-mid" x="20.8" y="417.8" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b6b6b" text-anchor="start">When recomputation is cheaper than repairing an obsolete plan, discard the plan</text>
+<text class="f-mid" x="20.8" y="435.8" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#6b6b6b" text-anchor="start">An incumbent recorded without its gap makes nearly best and merely feasible one state</text>
+</svg>

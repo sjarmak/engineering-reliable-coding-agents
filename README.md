@@ -83,7 +83,8 @@ Every practice record carries a stable `ERCA-NNN` identifier, after the initials
 - [Canonical manuscript source](manuscript/main.tex): the release source of truth.
 - [Factory contracts](protocols/factory-contracts.yaml): machine-readable contracts I1–I11 and their checks.
 - [Distributed ambiguity faults](protocols/distributed-ambiguity-faults.yaml): fault cases for disagreement across components.
-- [Source-review figure](assets/review-flow.svg): the self-contained source whose corpus and practice counts are checked against companion data.
+- [Figure sources](assets/): one self-contained SVG per figure, rendered to `manuscript/figures/` by `node scripts/build-figures.mjs`. The source-review figure's corpus and practice counts are checked against companion data.
+- [Practice catalog index](manuscript/appendix-practices.tex): the in-book appendix generated from `companion/catalog.json` by `node scripts/build-practice-appendix.mjs`, which every `ERCA-NNN` in the manuscript links to.
 - [Skills manifest](skills/manifest.json): five derived workflows and their evidence boundary.
 - [Release metadata](release-metadata.json): authoritative version, freeze, license, and methodology-gate state.
 

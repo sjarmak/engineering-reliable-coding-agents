@@ -1,7 +1,7 @@
 \chapter{Cross-session memory, raw traces, and compaction policies}
 \label{ch15-cross-session-memory-raw-traces-compaction}
 \begin{quote}
-\textbf{Evidence profile.} 2 strong \(\cdot\) 4 directional \(\cdot\) 1 corroborating evidence items across 3 developed practices (ERCA-081, ERCA-116, ERCA-118).
+\textbf{Evidence profile.} 2 strong \(\cdot\) 4 directional \(\cdot\) 1 corroborating evidence items across 3 developed practices (\erca{081}, \erca{116}, \erca{118}).
 
 \textbf{Chapter claim.} Preserve raw events; rebuild derived memory.
 \end{quote}
@@ -63,28 +63,11 @@ Rebuildability follows from this separation. Every derived item carries provenan
 
 When the schema changes, the system builds a new derived store from the raw record. It does not ask a model to translate each old conclusion into a new one in place. Parallel rebuilds also allow an operator to compare the old and new distillates before switching readers to the new version.
 
-\Needspace*{22\baselineskip}
-\begin{verbatim}
-recorder
-    -> inputs + actions + outputs + state changes
-        -> chronological raw, or episodic, trace
-           [source record: ordering + identity + state references]
-                |
-                v
-distiller
-    -> stated retrieval purpose
-        -> derived store
-            -> provenance to source events
-            -> extraction or summarization version
-            -> schema version
-
-schema changes
-    -> raw record
-        -> new derived store
-
-earlier rewrite removes material
-    -> later rewrite cannot reconstruct it
-\end{verbatim}
+\begin{figure}[htbp]
+\centering
+\includegraphics{figures/ch15-memory-architecture.pdf}
+\caption{The recorder appends an immutable source record; the distiller reads it for one stated retrieval purpose and writes a derived store whose items carry provenance, extraction version, and schema version. A schema change rebuilds that store from the record, because material removed by an in-place rewrite has no observation left from which a later rewrite could restore it.}
+\end{figure}
 
 The underlying artifact is the replayable trace from Chapter 10, used for another purpose. For recovery, the trace reconstructs execution after a crash. For memory, it reconstructs a representation after that representation proves incomplete or wrong.
 

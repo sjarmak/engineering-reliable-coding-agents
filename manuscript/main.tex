@@ -28,6 +28,10 @@
   pdfsubject={Evaluation, operation, and governance of AI coding-agent systems}
 }
 
+% Practice records are named by identifier throughout; \erca{NNN} prints the
+% identifier and links to its row in the practice catalog index appendix.
+\newcommand{\erca}[1]{\hyperlink{erca-#1}{ERCA-#1}}
+
 \setlength{\emergencystretch}{6em}
 \setlength{\parindent}{1.25em}
 \setlength{\parskip}{0.14\baselineskip plus 0.04\baselineskip minus 0.03\baselineskip}
@@ -163,6 +167,10 @@
 
 \gdef\currentparttitle{Closing}
 \input{chapters/closing}
+
+\appendix
+\gdef\currentparttitle{Appendix}
+\input{appendix-practices}
 
 \backmatter
 \markboth{Reference material}{}

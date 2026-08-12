@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 486 372" width="486" height="372" role="img" aria-labelledby="figtitle-ch07-factory-decomposition" class="bookfig">
+<title id="figtitle-ch07-factory-decomposition">Identity and boundary model: logical work carries an ownership epoch granting authority to an attempt, an input state observed by the attempt that produces a candidate artifact bound to a verification record, and an effect identity for each external commitment, which is paired with an owned reconciliation path.</title>
+<style>.bookfig .f-bg{fill:#ffffff}.bookfig .s-bg{stroke:#ffffff}.bookfig .f-ink{fill:#1a1a1a}.bookfig .s-ink{stroke:#1a1a1a}.bookfig .f-mid{fill:#6b6b6b}.bookfig .s-mid{stroke:#6b6b6b}.bookfig .f-faint{fill:#b8b8b8}.bookfig .s-faint{stroke:#b8b8b8}.bookfig .f-wash{fill:#e2e2e2}.bookfig .s-wash{stroke:#e2e2e2}.bookfig .f-accent{fill:#b34300}.bookfig .s-accent{stroke:#b34300}.bookfig .f-onacc{fill:#ffffff}.bookfig .s-onacc{stroke:#ffffff}@media (prefers-color-scheme:dark){.bookfig .f-bg{fill:#232019}.bookfig .s-bg{stroke:#232019}.bookfig .f-ink{fill:#ede5d6}.bookfig .s-ink{stroke:#ede5d6}.bookfig .f-mid{fill:#9a8f7c}.bookfig .s-mid{stroke:#9a8f7c}.bookfig .f-faint{fill:#5c5346}.bookfig .s-faint{stroke:#5c5346}.bookfig .f-wash{fill:#3d382f}.bookfig .s-wash{stroke:#3d382f}.bookfig .f-accent{fill:#df9d5e}.bookfig .s-accent{stroke:#df9d5e}.bookfig .f-onacc{fill:#232019}.bookfig .s-onacc{stroke:#232019}}:where([data-theme="dark"]) .bookfig .f-bg{fill:#232019}:where([data-theme="dark"]) .bookfig .s-bg{stroke:#232019}:where([data-theme="dark"]) .bookfig .f-ink{fill:#ede5d6}:where([data-theme="dark"]) .bookfig .s-ink{stroke:#ede5d6}:where([data-theme="dark"]) .bookfig .f-mid{fill:#9a8f7c}:where([data-theme="dark"]) .bookfig .s-mid{stroke:#9a8f7c}:where([data-theme="dark"]) .bookfig .f-faint{fill:#5c5346}:where([data-theme="dark"]) .bookfig .s-faint{stroke:#5c5346}:where([data-theme="dark"]) .bookfig .f-wash{fill:#3d382f}:where([data-theme="dark"]) .bookfig .s-wash{stroke:#3d382f}:where([data-theme="dark"]) .bookfig .f-accent{fill:#df9d5e}:where([data-theme="dark"]) .bookfig .s-accent{stroke:#df9d5e}:where([data-theme="dark"]) .bookfig .f-onacc{fill:#232019}:where([data-theme="dark"]) .bookfig .s-onacc{stroke:#232019}:where([data-theme="light"]) .bookfig .f-bg{fill:#ffffff}:where([data-theme="light"]) .bookfig .s-bg{stroke:#ffffff}:where([data-theme="light"]) .bookfig .f-ink{fill:#1a1a1a}:where([data-theme="light"]) .bookfig .s-ink{stroke:#1a1a1a}:where([data-theme="light"]) .bookfig .f-mid{fill:#6b6b6b}:where([data-theme="light"]) .bookfig .s-mid{stroke:#6b6b6b}:where([data-theme="light"]) .bookfig .f-faint{fill:#b8b8b8}:where([data-theme="light"]) .bookfig .s-faint{stroke:#b8b8b8}:where([data-theme="light"]) .bookfig .f-wash{fill:#e2e2e2}:where([data-theme="light"]) .bookfig .s-wash{stroke:#e2e2e2}:where([data-theme="light"]) .bookfig .f-accent{fill:#b34300}:where([data-theme="light"]) .bookfig .s-accent{stroke:#b34300}:where([data-theme="light"]) .bookfig .f-onacc{fill:#ffffff}:where([data-theme="light"]) .bookfig .s-onacc{stroke:#ffffff}</style>
+<rect class="f-bg" width="486" height="372" fill="#ffffff"/>
+<rect class="s-ink" x="24" y="118" width="122" height="66" rx="3" fill="none" stroke="#1a1a1a" stroke-width="1.6"/>
+<text class="f-ink" x="85" y="145" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1a1a1a" text-anchor="middle">logical work</text>
+<text class="f-mid" x="85" y="161" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b6b6b" text-anchor="middle">work_id</text>
+<line class="s-mid" x1="146" y1="134" x2="172" y2="134" stroke="#6b6b6b" stroke-width="1.4"/>
+<line class="s-mid" x1="172" y1="62" x2="172" y2="134" stroke="#6b6b6b" stroke-width="1.4"/>
+<line class="s-mid" x1="172" y1="62" x2="251" y2="62" stroke="#6b6b6b" stroke-width="1.4"/>
+<path class="f-mid" d="M 258 62 L 251.0 67.18 L 251.0 56.82 Z" fill="#6b6b6b"/>
+<text class="f-mid" x="254" y="54" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b6b6b" text-anchor="end">ownership_epoch</text>
+<rect class="s-mid" x="266" y="44" width="108" height="36" rx="3" fill="none" stroke="#6b6b6b" stroke-width="1.4" stroke-dasharray="3 3"/>
+<text class="f-ink" x="320" y="60" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#1a1a1a" text-anchor="middle">attempt / executor</text>
+<text class="f-mid" x="320" y="74" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#6b6b6b" text-anchor="middle">attempt_id</text>
+<line class="s-mid" x1="146" y1="151" x2="251" y2="151" stroke="#6b6b6b" stroke-width="1.4"/>
+<path class="f-mid" d="M 258 151 L 251.0 156.18 L 251.0 145.82 Z" fill="#6b6b6b"/>
+<text class="f-mid" x="168" y="143" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b6b6b" text-anchor="start">input_state_id</text>
+<rect class="s-mid" x="266" y="133" width="108" height="36" rx="3" fill="none" stroke="#6b6b6b" stroke-width="1.4"/>
+<text class="f-ink" x="320" y="149" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#1a1a1a" text-anchor="middle">candidate artifact</text>
+<text class="f-mid" x="320" y="163" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#6b6b6b" text-anchor="middle">artifact_version</text>
+<line class="s-mid" x1="320" y1="169" x2="320" y2="199" stroke="#6b6b6b" stroke-width="1.4"/>
+<path class="f-mid" d="M 320 206 L 314.82 199.0 L 325.18 199.0 Z" fill="#6b6b6b"/>
+<rect class="s-mid" x="266" y="206" width="108" height="36" rx="3" fill="none" stroke="#6b6b6b" stroke-width="1.4"/>
+<text class="f-ink" x="320" y="222" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#1a1a1a" text-anchor="middle">verification record</text>
+<text class="f-mid" x="320" y="236" font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#6b6b6b" text-anchor="middle">verification_id</text>
+<line class="s-mid" x1="146" y1="168" x2="190" y2="168" stroke="#6b6b6b" stroke-width="1.4"/>
+<line class="s-mid" x1="190" y1="168" x2="190" y2="290" stroke="#6b6b6b" stroke-width="1.4"/>
+<line class="s-mid" x1="190" y1="290" x2="251" y2="290" stroke="#6b6b6b" stroke-width="1.4"/>
+<path class="f-mid" d="M 258 290 L 251.0 295.18 L 251.0 284.82 Z" fill="#6b6b6b"/>
+<text class="f-mid" x="198" y="282" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6b6b6b" text-anchor="start">effect_id</text>
+<rect class="s-accent" x="266" y="272" width="108" height="36" rx="3" fill="none" stroke="#b34300" stroke-width="1.6"/>
+<text class="f-accent" x="320" y="288" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#b34300" text-anchor="middle">external commitment</text>
+<text class="f-mid" x="320" y="320" font-family="Helvetica, Arial, sans-serif" font-size="9.5" fill="#6b6b6b" text-anchor="middle">named, protected boundary</text>
+<line class="s-accent" x1="374" y1="290" x2="393" y2="290" stroke="#b34300" stroke-width="1.4"/>
+<path class="f-accent" d="M 400 290 L 393.0 295.18 L 393.0 284.82 Z" fill="#b34300"/>
+<rect class="s-mid" x="400" y="272" width="74" height="36" rx="3" fill="none" stroke="#6b6b6b" stroke-width="1.4" stroke-dasharray="3 3"/>
+<text class="f-ink" x="437" y="292" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#1a1a1a" text-anchor="middle">reconciliation</text>
+<text class="f-ink" x="24" y="340" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#1a1a1a" text-anchor="start">Identities and boundaries, not a service architecture. No authoritative fact required for</text>
+<text class="f-ink" x="24" y="355" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#1a1a1a" text-anchor="start">recovery or publication exists only in a worker; every external effect crosses a named boundary.</text>
+</svg>

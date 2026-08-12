@@ -34,7 +34,7 @@ AI coding agents are commonly evaluated as models but deployed as systems whose 
 
 ### Comments
 
-Technical review and engineering monograph, 300 pages, 22 figures. Includes an evidence audit, a 206-practice companion research artifact, and runnable protocols for evaluating and operating AI coding agents. August 2026. Source, companion, and reusable protocols: https://github.com/sjarmak/engineering-reliable-coding-agents.
+Technical review and engineering monograph, 307 pages, 23 figures. Includes an evidence audit, a 206-practice companion research artifact, and runnable protocols for evaluating and operating AI coding agents. August 2026. Source, companion, and reusable protocols: https://github.com/sjarmak/engineering-reliable-coding-agents.
 
 If the companion receives a DOI before submission, append `Companion DOI: <DOI>.` Otherwise use the text above without a DOI placeholder.
 
@@ -85,7 +85,7 @@ The companion release contains:
 - a human-readable, chapter-organized presentation of all 206 practices, with a direct link to the interactive website companion;
 - 206 practice records, including boundary conditions;
 - a 614-row evidence and corroboration ledger;
-- a crosswalk mapping the 193 gated records to chapters, separating 56 manuscript-developed practices from 137 chapter-assigned companion-only practices; the 13 catalog-level leads (ERCA-193 through ERCA-205) are indexed in the catalog without a chapter assignment, giving 150 companion-only records in total;
+- a crosswalk mapping the 193 gated records to chapters, separating 56 manuscript-developed practices from 137 chapter-assigned companion-only practices; the 13 catalog-level leads (ERCA-193 through ERCA-205) are indexed in the catalog outside that gated crosswalk, giving 150 companion-only records in total;
 - 29 benchmark records;
 - resolved metadata for 321 arXiv identifiers, 16 DOIs, and 65 other web sources;
 - source snapshots, seven literature-review thread protocols, a 160-work scholarly corpus, 39 record-level update-screening decisions, a 148-record software-engineering coverage probe, a deterministic 40-DOI SciX comparison, a complete 26-record TSE known-set audit, a 55-record DBLP title census with 50 records absent from both prior comparison sets, and the prepared ACM, IEEE, and Scopus plans;
@@ -168,7 +168,7 @@ License, endorsement, and ORCID are resolved; no DOI is assigned.
 4. Upload the exact verified `engineering-reliable-coding-agents-arxiv-source.zip`; do not upload the locally generated PDF in place of TeX source.
 5. Confirm that arXiv identifies `main.tex` as the top-level file. Select XeLaTeX with TeX Live 2025; this is the verified processor recorded in `manuscript/00README` and `release-metadata.json`.
 6. Compare arXiv’s generated PDF with `engineering-reliable-coding-agents-preview.pdf`.
-7. Inspect the title page, abstract, table of contents, all part and chapter starts, equations, hyperlinks, all 22 figures, and all 9 numbered tables.
+7. Inspect the title page, abstract, table of contents, all part and chapter starts, equations, hyperlinks, all 23 figures, and all 10 numbered tables.
 8. Paste the metadata above without the Markdown headings or any unresolved placeholder.
 9. Select CC-BY-4.0 as the license.
 10. Submit for moderation. After announcement, record the arXiv identifier and DOI on the website and in the companion metadata.
@@ -176,17 +176,17 @@ License, endorsement, and ORCID are resolved; no DOI is assigned.
 ## Technical validation
 
 - Exact source ZIP compiled twice in fresh temporary directories with XeLaTeX under the digest-pinned TeX Live 2025 container recorded in `companion/methodology/release-verification/arxiv-compile-report.json`. Both offline runs produced the same PDF SHA-256.
-- Output: 300 letter-size pages, single-spaced, one-inch margins, PDF 1.7. A separate `pdflatex` diagnostic is not the release processor.
-- Figures: 22 of 22 included as PDF, 20 numbered by chapter plus 2 in the front matter; tables: 9, of which 7 are numbered by chapter and 2 appear in the front matter.
+- Output: 307 letter-size pages, single-spaced, one-inch margins, PDF 1.7. A separate `pdflatex` diagnostic is not the release processor.
+- Figures: 23 of 23 included as PDF, 21 numbered by chapter plus 2 in the front matter; tables: 10, of which 7 are numbered by chapter, 2 appear in the front matter, and 1 is the appendix index.
 - Chapter sources: 19 unnumbered chapter-end source blocks, excluded from the numbered section hierarchy and table of contents.
 - Full references: 244 alphabetized entries; all manuscript-cited arXiv identifiers, 17 DOI records, and audited web sources are represented, with additional named sources and author illustrations identified separately.
 - Text extraction: approximately 113,000 machine-readable words in the numbered chapters and closing chapter, plus front matter, glossary, references, and the data statement.
 - PDF security: no encryption, JavaScript, forms, or embedded multimedia.
-- Archive hygiene: 49 required files (52 ZIP entries including directories); no generated manuscript PDF, log, auxiliary file, Markdown source, dataset, or private note.
+- Archive hygiene: 51 required files (54 ZIP entries including directories); no generated manuscript PDF, log, auxiliary file, Markdown source, dataset, or private note.
 - TeX diagnostics: no errors, missing files, missing characters, undefined commands, or overfull boxes. A small number of harmless underfull-box warnings remain in source-list paragraphs.
 - Prose review: all 21 source files were reviewed for academic register, casual framing, unsupported certainty, promotional language, and unexplained internal evidence shorthand.
 - Companion checks: catalog and benchmark JSON validate against their schemas; checksums pass; the evidence ledger contains 614 records with a consistent 13-column structure. The update-screening decisions total 39: 11 admitted, one already present, and 27 deferred or excluded. The 148-record SE coverage probe admitted nine works, retains the 40-DOI diagnostic sample, and records that all 26 TSE candidates in the known set match SciX exactly by DOI.
-- Release contract: `release-metadata.json` agrees with the 1.0.0 metadata; every file in the arXiv source and companion ZIPs matches the repository byte-for-byte; the preview is an unencrypted 300-page letter-size PDF carrying the 1.0.0 identity; the TeX Live report binds a clean 300-page XeLaTeX build to the exact source ZIP; extracted text contains no observed substitution glyphs or leaked front-matter running headers; the stable-mode gate rejects unresolved licensing, identity, or endorsement state, and rejects a declared DOI that is malformed or inconsistently carried.
+- Release contract: `release-metadata.json` agrees with the 1.0.0 metadata; every file in the arXiv source and companion ZIPs matches the repository byte-for-byte; the preview is an unencrypted 307-page letter-size PDF carrying the 1.0.0 identity; the TeX Live report binds a clean 307-page XeLaTeX build to the exact source ZIP; extracted text contains no observed substitution glyphs or leaked front-matter running headers; the stable-mode gate rejects unresolved licensing, identity, or endorsement state, and rejects a declared DOI that is malformed or inconsistently carried.
 
 ## Official arXiv guidance
 

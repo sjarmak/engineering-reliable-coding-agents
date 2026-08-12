@@ -49,8 +49,8 @@
   page count as literals. It failed on the freeze-date change while the
   invariant it existed to check, that the report matches
   `release-metadata.json`, was intact. Both values now derive from the manifest.
-- Refreshed `SUBMISSION.md` against the built artifacts: 244 references, 22
-  figures, 9 tables, 49 archived files, a 614-row ledger, a 300-page preview
+- Refreshed `SUBMISSION.md` against the built artifacts: 244 references, 23
+  figures, 10 tables, 51 archived files, a 614-row ledger, a 307-page preview
   carrying the 1.0.0 identity, and roughly 113,000 words of chapter text.
 - Re-ran the reference audits against the live arXiv API after the backfill fix:
   164 manuscript identifiers and 960 cited titles across 321 unique identifiers,
@@ -69,7 +69,29 @@
   open-source software-factory work. The vendor-linked cases are the retrieval
   evaluation in Chapter 12, the evaluation apparatus in Chapters 2 and 3, and
   the trace-diagnostics corpus in Chapters 14 and 18.
-- Manuscript output is 300 pages.
+- Added Appendix A, the practice catalog index: one row per catalog record with
+  its name, chapter, and treatment, generated from `companion/catalog.json` by
+  `scripts/build-practice-appendix.mjs`. Every `ERCA-NNN` in the manuscript is
+  now a link into that table, through a `\erca{}` macro, so a reader who meets
+  an identifier in an evidence profile can resolve it without leaving the PDF.
+  The compiled book carries 206 named destinations and 76 link annotations.
+- Put the figure sources under version control in `assets/`, one self-contained
+  SVG per figure, rendered by `scripts/build-figures.mjs`. The PDFs had been
+  edited without tracked sources: two had drifted from the SVGs they mirrored
+  and one had lost its source, which is how the stale Figure 2 counts survived.
+  A test now compares each committed PDF's drawing against a fresh render.
+- Changed the figure accent from `#8f4e1c` to `#b34300`, matching the website's
+  ember tone. Contrast against white is 5.65:1 and the dark-theme accent is
+  7.06:1 against its background, both above the WCAG AA threshold for text.
+- Fixed the one real text overflow in the figures. In the source-review flow,
+  the corpus label ran 16.8pt past its box; the box is wider and the following
+  arrow starts clear of it. Verified across all figures with glyph bounding
+  boxes from `pdftotext -bbox` rather than by eye.
+- Replaced the Chapter 15 memory-architecture ASCII block with a drawn figure.
+- Taught the editable-Markdown generator the manuscript's own macros. Pandoc
+  sees one file at a time, so `\erca{193}` was dropped along with its number,
+  and the generated edition read "( through )".
+- Manuscript output is 307 pages, with 23 figures and 10 tables.
 
 ## 1.0.0-rc.16 — 2026-08-09
 

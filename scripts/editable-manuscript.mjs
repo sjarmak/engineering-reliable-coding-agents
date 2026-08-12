@@ -2,6 +2,7 @@
 
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
+import { readFileSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -208,6 +209,7 @@ function editingStructureErrors(sections, specs) {
 function command(name, args, options = {}) {
   const result = spawnSync(name, args, {
     cwd: options.cwd,
+    input: options.input,
     encoding: "utf8",
     maxBuffer: 128 * 1024 * 1024,
     timeout: 120_000,
@@ -219,22 +221,33 @@ function command(name, args, options = {}) {
   return result.stdout;
 }
 
+// Macros the chapters use but do not define: main.tex holds the definitions and
+// pandoc only sees the one file it is handed, so an undefined macro's call is
+// dropped and its argument disappears with it. Feeding the source through stdin
+// behind these definitions keeps the text they print.
+const MACRO_PREAMBLE = "\\newcommand{\\erca}[1]{ERCA-#1}\n";
+
 function convertTex(root, sourcePath) {
-  return command("docker", [
-    "run",
-    "--rm",
-    "--network",
-    "none",
-    "--volume",
-    `${root}:/data:ro`,
-    "--workdir",
-    "/data",
-    PANDOC_IMAGE,
-    sourcePath,
-    "--from=latex",
-    "--to=commonmark_x+tex_math_dollars",
-    "--wrap=none",
-  ]);
+  const source = readFileSync(path.join(root, sourcePath), "utf8");
+  return command(
+    "docker",
+    [
+      "run",
+      "--rm",
+      "--interactive",
+      "--network",
+      "none",
+      "--volume",
+      `${root}:/data:ro`,
+      "--workdir",
+      "/data",
+      PANDOC_IMAGE,
+      "--from=latex",
+      "--to=commonmark_x+tex_math_dollars",
+      "--wrap=none",
+    ],
+    { input: `${MACRO_PREAMBLE}${source}` },
+  );
 }
 
 async function loadTexByPath(root, specs = SECTION_SPECS) {

@@ -50,7 +50,9 @@ PROFILE_RE = re.compile(
 )
 SCOPE_RE = re.compile(r"across\s+(\d+)\s+developed practices?\s*\(([^)]*)\)")
 COMPANION_RE = re.compile(r"carried by (?:a |the )?companion records?[^(]*\(([^)]*)\)")
-PRACTICE_RE = re.compile(r"ERCA-\d+")
+# The manuscript writes practice identifiers as \erca{NNN}, which links to the
+# appendix index; accept the bare form too so the check survives either style.
+PRACTICE_RE = re.compile(r"\\erca\{(\d+)\}|(?:ERCA-)(\d+)")
 ARXIV_RE = re.compile(r"(\d{4}\.\d{4,5})")
 CHAPTER_RE = re.compile(r"ch(\d+)-")
 
@@ -97,6 +99,11 @@ def load_ledger():
     return by_practice
 
 
+def practice_ids(text):
+    """Every practice identifier in a fragment, normalized to ERCA-NNN."""
+    return [f"ERCA-{macro or bare}" for macro, bare in PRACTICE_RE.findall(text or "")]
+
+
 def parse_profile(text):
     match = PROFILE_RE.search(text)
     if not match:
@@ -106,9 +113,9 @@ def parse_profile(text):
     companion = COMPANION_RE.search(body)
     return {
         "stated_count": int(scope.group(1)) if scope else None,
-        "developed": PRACTICE_RE.findall(scope.group(2)) if scope else [],
-        "companion": PRACTICE_RE.findall(companion.group(1)) if companion else [],
-        "all_ids": PRACTICE_RE.findall(body),
+        "developed": practice_ids(scope.group(2)) if scope else [],
+        "companion": practice_ids(companion.group(1)) if companion else [],
+        "all_ids": practice_ids(body),
     }
 
 

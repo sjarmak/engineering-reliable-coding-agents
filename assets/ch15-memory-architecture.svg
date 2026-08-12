@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 462" width="612" height="462" role="img" aria-labelledby="figtitle-ch15-memory-architecture" class="bookfig">
+<title id="figtitle-ch15-memory-architecture">The recorder appends an immutable source record of session events. A distiller reads that record for one stated retrieval purpose and writes a derived store whose every item carries provenance, extraction version, and schema version. A schema change rebuilds the derived store from the source record rather than rewriting the previous distillate in place, because material removed by an earlier in-place rewrite cannot be recovered by a later one.</title>
+<style>.bookfig .f-bg{fill:#ffffff}.bookfig .s-bg{stroke:#ffffff}.bookfig .f-ink{fill:#1a1a1a}.bookfig .s-ink{stroke:#1a1a1a}.bookfig .f-mid{fill:#6b6b6b}.bookfig .s-mid{stroke:#6b6b6b}.bookfig .f-faint{fill:#b8b8b8}.bookfig .s-faint{stroke:#b8b8b8}.bookfig .f-wash{fill:#e2e2e2}.bookfig .s-wash{stroke:#e2e2e2}.bookfig .f-accent{fill:#b34300}.bookfig .s-accent{stroke:#b34300}.bookfig .f-onacc{fill:#ffffff}.bookfig .s-onacc{stroke:#ffffff}@media (prefers-color-scheme:dark){.bookfig .f-bg{fill:#232019}.bookfig .s-bg{stroke:#232019}.bookfig .f-ink{fill:#ede5d6}.bookfig .s-ink{stroke:#ede5d6}.bookfig .f-mid{fill:#9a8f7c}.bookfig .s-mid{stroke:#9a8f7c}.bookfig .f-faint{fill:#5c5346}.bookfig .s-faint{stroke:#5c5346}.bookfig .f-wash{fill:#3d382f}.bookfig .s-wash{stroke:#3d382f}.bookfig .f-accent{fill:#df9d5e}.bookfig .s-accent{stroke:#df9d5e}.bookfig .f-onacc{fill:#232019}.bookfig .s-onacc{stroke:#232019}}:where([data-theme="dark"]) .bookfig .f-bg{fill:#232019}:where([data-theme="dark"]) .bookfig .s-bg{stroke:#232019}:where([data-theme="dark"]) .bookfig .f-ink{fill:#ede5d6}:where([data-theme="dark"]) .bookfig .s-ink{stroke:#ede5d6}:where([data-theme="dark"]) .bookfig .f-mid{fill:#9a8f7c}:where([data-theme="dark"]) .bookfig .s-mid{stroke:#9a8f7c}:where([data-theme="dark"]) .bookfig .f-faint{fill:#5c5346}:where([data-theme="dark"]) .bookfig .s-faint{stroke:#5c5346}:where([data-theme="dark"]) .bookfig .f-wash{fill:#3d382f}:where([data-theme="dark"]) .bookfig .s-wash{stroke:#3d382f}:where([data-theme="dark"]) .bookfig .f-accent{fill:#df9d5e}:where([data-theme="dark"]) .bookfig .s-accent{stroke:#df9d5e}:where([data-theme="dark"]) .bookfig .f-onacc{fill:#232019}:where([data-theme="dark"]) .bookfig .s-onacc{stroke:#232019}:where([data-theme="light"]) .bookfig .f-bg{fill:#ffffff}:where([data-theme="light"]) .bookfig .s-bg{stroke:#ffffff}:where([data-theme="light"]) .bookfig .f-ink{fill:#1a1a1a}:where([data-theme="light"]) .bookfig .s-ink{stroke:#1a1a1a}:where([data-theme="light"]) .bookfig .f-mid{fill:#6b6b6b}:where([data-theme="light"]) .bookfig .s-mid{stroke:#6b6b6b}:where([data-theme="light"]) .bookfig .f-faint{fill:#b8b8b8}:where([data-theme="light"]) .bookfig .s-faint{stroke:#b8b8b8}:where([data-theme="light"]) .bookfig .f-wash{fill:#e2e2e2}:where([data-theme="light"]) .bookfig .s-wash{stroke:#e2e2e2}:where([data-theme="light"]) .bookfig .f-accent{fill:#b34300}:where([data-theme="light"]) .bookfig .s-accent{stroke:#b34300}:where([data-theme="light"]) .bookfig .f-onacc{fill:#ffffff}:where([data-theme="light"]) .bookfig .s-onacc{stroke:#ffffff}</style>
+<style>.label{font:600 13px system-ui,sans-serif}.body{font:11.5px system-ui,sans-serif}.small{font:10px system-ui,sans-serif}.tag{font:600 9.5px system-ui,sans-serif;letter-spacing:.06em}.line{fill:none;stroke-width:1.4}.dash{stroke-dasharray:6 5}</style>
+<defs>
+  <marker id="arrow15" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" class="f-ink"/>
+  </marker>
+  <marker id="arrow15a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" class="f-accent"/>
+  </marker>
+</defs>
+<rect width="612" height="462" class="f-bg"/>
+
+<rect x="24" y="26" width="196" height="56" rx="7" class="f-wash s-mid line"/>
+<text x="40" y="50" class="label f-ink">recorder</text>
+<text x="40" y="68" class="small f-mid">appends; never revises</text>
+
+<path d="M220 54 H286" class="s-ink line" marker-end="url(#arrow15)"/>
+<text x="296" y="45" class="small f-mid">inputs · actions · outputs</text>
+<text x="296" y="61" class="small f-mid">state changes</text>
+
+<path d="M122 82 V104" class="s-ink line" marker-end="url(#arrow15)"/>
+
+<rect x="24" y="108" width="564" height="66" rx="7" class="f-wash s-mid line"/>
+<text x="40" y="132" class="label f-ink">source record: chronological raw or episodic trace</text>
+<text x="40" y="152" class="small f-mid">ordering · identity · state references</text>
+<text x="474" y="132" class="tag f-accent">IMMUTABLE</text>
+<text x="474" y="152" class="small f-mid">append only</text>
+
+<path d="M122 174 V212" class="s-ink line" marker-end="url(#arrow15)"/>
+<text x="134" y="197" class="small f-mid">read, never rewritten</text>
+
+<rect x="24" y="216" width="196" height="62" rx="7" class="f-wash s-mid line"/>
+<text x="40" y="240" class="label f-ink">distiller</text>
+<text x="40" y="259" class="small f-mid">one stated retrieval purpose</text>
+
+<path d="M220 247 H286" class="s-ink line" marker-end="url(#arrow15)"/>
+
+<rect x="290" y="204" width="298" height="86" rx="7" class="f-wash s-mid line"/>
+<text x="306" y="228" class="label f-ink">derived store</text>
+<text x="306" y="248" class="small f-mid">provenance to the source events</text>
+<text x="306" y="264" class="small f-mid">extraction or summarization version</text>
+<text x="306" y="280" class="small f-mid">schema version</text>
+
+<path d="M520 174 V200" class="s-accent line dash" marker-end="url(#arrow15a)"/>
+<text x="306" y="312" class="small f-accent">On a schema change, rebuild this store from the source
+<tspan x="306" dy="16">record instead of rewriting it in place.</tspan></text>
+
+<rect x="24" y="358" width="564" height="76" rx="7" class="f-accent"/>
+<text x="44" y="390" class="label f-onacc">Without the immutable layer, the loss is unrecoverable</text>
+<text x="44" y="412" class="small f-onacc">An earlier rewrite removes material; a later rewrite has no observation from which to restore it.</text>
+</svg>

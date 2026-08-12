@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" width="680" height="340" role="img" aria-labelledby="figtitle-ch03-validity-chain" class="bookfig">
+<title id="figtitle-ch03-validity-chain">A passing score supports a capability claim only when the benchmark matches the target workload, the solution is independent of prior or in-task exposure, and the oracle rejects incorrect artifacts. A failure at any link invalidates a different inference.</title>
+<style>.bookfig .f-bg{fill:#ffffff}.bookfig .s-bg{stroke:#ffffff}.bookfig .f-ink{fill:#1a1a1a}.bookfig .s-ink{stroke:#1a1a1a}.bookfig .f-mid{fill:#6b6b6b}.bookfig .s-mid{stroke:#6b6b6b}.bookfig .f-faint{fill:#b8b8b8}.bookfig .s-faint{stroke:#b8b8b8}.bookfig .f-wash{fill:#e2e2e2}.bookfig .s-wash{stroke:#e2e2e2}.bookfig .f-accent{fill:#b34300}.bookfig .s-accent{stroke:#b34300}.bookfig .f-onacc{fill:#ffffff}.bookfig .s-onacc{stroke:#ffffff}@media (prefers-color-scheme:dark){.bookfig .f-bg{fill:#232019}.bookfig .s-bg{stroke:#232019}.bookfig .f-ink{fill:#ede5d6}.bookfig .s-ink{stroke:#ede5d6}.bookfig .f-mid{fill:#9a8f7c}.bookfig .s-mid{stroke:#9a8f7c}.bookfig .f-faint{fill:#5c5346}.bookfig .s-faint{stroke:#5c5346}.bookfig .f-wash{fill:#3d382f}.bookfig .s-wash{stroke:#3d382f}.bookfig .f-accent{fill:#df9d5e}.bookfig .s-accent{stroke:#df9d5e}.bookfig .f-onacc{fill:#232019}.bookfig .s-onacc{stroke:#232019}}:where([data-theme="dark"]) .bookfig .f-bg{fill:#232019}:where([data-theme="dark"]) .bookfig .s-bg{stroke:#232019}:where([data-theme="dark"]) .bookfig .f-ink{fill:#ede5d6}:where([data-theme="dark"]) .bookfig .s-ink{stroke:#ede5d6}:where([data-theme="dark"]) .bookfig .f-mid{fill:#9a8f7c}:where([data-theme="dark"]) .bookfig .s-mid{stroke:#9a8f7c}:where([data-theme="dark"]) .bookfig .f-faint{fill:#5c5346}:where([data-theme="dark"]) .bookfig .s-faint{stroke:#5c5346}:where([data-theme="dark"]) .bookfig .f-wash{fill:#3d382f}:where([data-theme="dark"]) .bookfig .s-wash{stroke:#3d382f}:where([data-theme="dark"]) .bookfig .f-accent{fill:#df9d5e}:where([data-theme="dark"]) .bookfig .s-accent{stroke:#df9d5e}:where([data-theme="dark"]) .bookfig .f-onacc{fill:#232019}:where([data-theme="dark"]) .bookfig .s-onacc{stroke:#232019}:where([data-theme="light"]) .bookfig .f-bg{fill:#ffffff}:where([data-theme="light"]) .bookfig .s-bg{stroke:#ffffff}:where([data-theme="light"]) .bookfig .f-ink{fill:#1a1a1a}:where([data-theme="light"]) .bookfig .s-ink{stroke:#1a1a1a}:where([data-theme="light"]) .bookfig .f-mid{fill:#6b6b6b}:where([data-theme="light"]) .bookfig .s-mid{stroke:#6b6b6b}:where([data-theme="light"]) .bookfig .f-faint{fill:#b8b8b8}:where([data-theme="light"]) .bookfig .s-faint{stroke:#b8b8b8}:where([data-theme="light"]) .bookfig .f-wash{fill:#e2e2e2}:where([data-theme="light"]) .bookfig .s-wash{stroke:#e2e2e2}:where([data-theme="light"]) .bookfig .f-accent{fill:#b34300}:where([data-theme="light"]) .bookfig .s-accent{stroke:#b34300}:where([data-theme="light"]) .bookfig .f-onacc{fill:#ffffff}:where([data-theme="light"]) .bookfig .s-onacc{stroke:#ffffff}</style>
+<rect class="f-bg" width="680" height="340"/>
+
+<!-- Draw the valid path first so the state markers remain legible. -->
+<line class="s-faint" x1="70" y1="105" x2="610" y2="105" stroke-width="2"/>
+<polygon class="f-mid" points="214,98 226,105 214,112"/>
+<polygon class="f-mid" points="394,98 406,105 394,112"/>
+<polygon class="f-mid" points="594,98 606,105 594,112"/>
+
+<line class="s-accent" x1="150" y1="105" x2="150" y2="205" stroke-width="1.4" stroke-dasharray="5 5"/>
+<line class="s-accent" x1="320" y1="105" x2="320" y2="205" stroke-width="1.4" stroke-dasharray="5 5"/>
+<line class="s-accent" x1="510" y1="105" x2="510" y2="205" stroke-width="1.4" stroke-dasharray="5 5"/>
+
+<circle class="f-mid" cx="70" cy="105" r="7"/>
+<circle class="f-mid" cx="230" cy="105" r="7"/>
+<circle class="f-mid" cx="410" cy="105" r="7"/>
+<circle class="f-accent" cx="610" cy="105" r="8"/>
+<circle class="f-accent" cx="150" cy="205" r="5"/>
+<circle class="f-accent" cx="320" cy="205" r="5"/>
+<circle class="f-accent" cx="510" cy="205" r="5"/>
+
+<text class="f-mid" x="150" y="72" font-family="Helvetica, Arial, sans-serif" font-size="12.5" text-anchor="middle">workload match</text>
+<text class="f-mid" x="320" y="72" font-family="Helvetica, Arial, sans-serif" font-size="12.5" text-anchor="middle">independent solution</text>
+<text class="f-mid" x="510" y="72" font-family="Helvetica, Arial, sans-serif" font-size="12.5" text-anchor="middle">oracle strength</text>
+
+<text class="f-ink" x="70" y="137" font-family="Helvetica, Arial, sans-serif" font-size="13" text-anchor="middle">target capability</text>
+<text class="f-ink" x="230" y="137" font-family="Helvetica, Arial, sans-serif" font-size="13" text-anchor="middle">benchmark task</text>
+<text class="f-ink" x="410" y="137" font-family="Helvetica, Arial, sans-serif" font-size="13" text-anchor="middle">candidate artifact</text>
+<text class="f-accent" x="610" y="137" font-family="Helvetica, Arial, sans-serif" font-size="13" text-anchor="middle">passing score</text>
+
+<text class="f-accent" x="150" y="232" font-family="Helvetica, Arial, sans-serif" font-size="11.5" text-anchor="middle">wrong workload</text>
+<text class="f-mid" x="150" y="250" font-family="Helvetica, Arial, sans-serif" font-size="10.5" text-anchor="middle">the result does not transfer</text>
+
+<text class="f-accent" x="320" y="232" font-family="Helvetica, Arial, sans-serif" font-size="11.5" text-anchor="middle">prior exposure or leaked answer</text>
+<text class="f-mid" x="320" y="250" font-family="Helvetica, Arial, sans-serif" font-size="10.5" text-anchor="middle">recall appears as problem-solving</text>
+
+<text class="f-accent" x="510" y="232" font-family="Helvetica, Arial, sans-serif" font-size="11.5" text-anchor="middle">weak oracle</text>
+<text class="f-mid" x="510" y="250" font-family="Helvetica, Arial, sans-serif" font-size="10.5" text-anchor="middle">a wrong artifact receives credit</text>
+
+<text class="f-ink" x="340" y="315" font-family="Helvetica, Arial, sans-serif" font-size="13" text-anchor="middle">One broken link severs the passing score from the capability claim</text>
+</svg>

@@ -6,12 +6,12 @@
 > `node scripts/editable-manuscript.mjs --status` to list the sections that need to be
 > transferred back to TeX. Do not regenerate this file while it contains unapplied edits.
 >
-> Baseline: version `1.0.0`, repository revision `48f7ef1050db83590d733e5711ad61d53c0bf845`.
+> Baseline: version `1.0.0`, repository revision `96e112a8712be6584200f489d421057cf4f7cfde`.
 
 The `tex-sync` comments delimit exact file mappings and carry baseline hashes. Leave those
 comments in place; edit the prose between them.
 
-<!-- tex-sync:start {"path":"manuscript/main.tex","tex_sha256":"e34917cea3757deb3ac72b839beefb64f0e0d878286a51c948d1e59dfa602df3","markdown_sha256":"adbb52888269b4a0011ae043d120f24e52d3db24ca04a6b67770d1ad727ab548"} -->
+<!-- tex-sync:start {"path":"manuscript/main.tex","tex_sha256":"1ec93dcb32e89ed37d7be0b6e35966aab305c39421e60bf0aac50db13e5994f7","markdown_sha256":"adbb52888269b4a0011ae043d120f24e52d3db24ca04a6b67770d1ad727ab548"} -->
 # Title-page metadata
 
 - **Title:** Engineering Reliable Coding Agents
@@ -32,7 +32,7 @@ The monograph contributes a versioned catalog of 206 reliability practices, incl
 The review is structured rather than exhaustive, evidence strength varies by topic, and empirical results remain dependent on workload and system configuration. The methods section records which search lanes this edition executed, which remain unexecuted, and the limits those choices place on its evidence-grading claims.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/frontmatter.tex","tex_sha256":"dbc4c90aa313963909f11666e6ccb30aec992130972abafef3e9bedbcd83e09d","markdown_sha256":"bd47da3f9fe8f532debdfad9720f20f621442e16f603d6767562dde77aa654a9"} -->
+<!-- tex-sync:start {"path":"manuscript/frontmatter.tex","tex_sha256":"2e0a658bfa8c1cd2977cb2497c5354193238d5f0f1a195b9e2f0fd1fe4f99ab6","markdown_sha256":"bd47da3f9fe8f532debdfad9720f20f621442e16f603d6767562dde77aa654a9"} -->
 # Introduction
 
 ## Problem and scope
@@ -456,7 +456,7 @@ Retrieval should be evaluated separately from generation so that a wrong answer 
 The goal is to provide you with the tools to measure what matters for your work, so the result describes the system you operate rather than a position on a leaderboard.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch01-variance-power-paired-comparisons.tex","tex_sha256":"43c219fb5a0bd857eed74b4550dc81432e7cf0f3a8bd8bc63446c28ba0e6cbe0","markdown_sha256":"7b4cc567ee4d3efefc5a29a8501eca31b94279bede6624f9d81235b2cd44b63f"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch01-variance-power-paired-comparisons.tex","tex_sha256":"8c2b35d05673868d894a5f3e5d542e9f69a6ec614ca45824e187ad7cf15b11ab","markdown_sha256":"7b4cc567ee4d3efefc5a29a8501eca31b94279bede6624f9d81235b2cd44b63f"} -->
 # Part I: Evaluation measurement and experiment design
 
 # Run-to-run variance, statistical power, and paired comparisons
@@ -729,7 +729,7 @@ The repository artifact [`protocols/evaluation-comparison.md`](https://github.co
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the task-family run and rerun described in the opening, which are narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch02-baselines-ablations-cost-accuracy.tex","tex_sha256":"78276e9a6652df2ee29ed266b08fb4ba30dd9625ca626471fbca6d3218f7a2fb","markdown_sha256":"b226d7a6a82341ca2096a476b3664cbbc29fd7ad8bc1c07b3bbf071b90245d59"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch02-baselines-ablations-cost-accuracy.tex","tex_sha256":"df7419e7257ae7bdc00f4db70b5e721dc36d135fd64443196c2f710579bc2d52","markdown_sha256":"b226d7a6a82341ca2096a476b3664cbbc29fd7ad8bc1c07b3bbf071b90245d59"} -->
 # Baselines, ablations, and cost-accuracy tradeoffs
 
 > **Evidence profile.** 1 strong $\cdot$ 5 directional $\cdot$ 0 corroborating evidence items across 2 developed practices (ERCA-012, ERCA-114).
@@ -884,7 +884,7 @@ Reserve the iteration holdout before the first scaffold change. Decide who can i
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the end-to-end run and the score-per-dollar reporting described above, both of which are narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch03-contamination-oracle-workload-validity.tex","tex_sha256":"6c6d4685af4289609dcd8831353f12fe0db08163ed9acb068ed5be384b895293","markdown_sha256":"0b8d32eb3febe79e17c6df07b91e9b2c7830b950da0810d231b814b3eb45cf28"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch03-contamination-oracle-workload-validity.tex","tex_sha256":"1ce123fb4a81a8b161bbb0f8bd67d0f2ed0800d902f9a68d8ce44ecf5b6bf9b9","markdown_sha256":"0b8d32eb3febe79e17c6df07b91e9b2c7830b950da0810d231b814b3eb45cf28"} -->
 # Benchmark contamination, oracle strength, and workload validity
 
 > **Evidence profile.** 7 strong $\cdot$ 8 directional $\cdot$ 1 corroborating evidence items across 4 developed practices (ERCA-001, ERCA-003, ERCA-004, ERCA-066).
@@ -1157,7 +1157,7 @@ These answers do not yield a universal correction formula. They turn one impress
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the merged-pull-request mining design described above, which is methodology illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch04-execution-correction-gates-release-tests.tex","tex_sha256":"e51e5c5b13c9595ac7a6be7f5494824f4edebd4725f0b1a8ae4fdb4225a75cf8","markdown_sha256":"c2a6e8dc1ea83030832ae6ef957f882c565873feb2b8fcd9d7aaf3e3e326c443"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch04-execution-correction-gates-release-tests.tex","tex_sha256":"a5f0ce82f7292178e485ab533befb6d9c0607b2368a92c3bc29de7ce45fe0548","markdown_sha256":"c2a6e8dc1ea83030832ae6ef957f882c565873feb2b8fcd9d7aaf3e3e326c443"} -->
 # Part II: Evaluation and grading systems
 
 # Execution-based evaluation, correction gates, and release tests
@@ -1448,7 +1448,7 @@ Keep tasks without executable checks in a separate lane. They are not lesser tas
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the consecutive-release acceptance gate described above, which is narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch05-calibrating-model-graders-agreement-correctness.tex","tex_sha256":"6fb0199b3ee9d0942888a7a566fc5c112860a4720087fa2f02208ddd2ab07790","markdown_sha256":"0b8f5e29734b01626a0bcdcea889bd8ad807eb15afafe4fff0a33f50b1ffde7e"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch05-calibrating-model-graders-agreement-correctness.tex","tex_sha256":"21c0cf1f8a6d127d044ecfd96a40bbcbc22900ce6c4a3037ed2626dd5cc02458","markdown_sha256":"0b8f5e29734b01626a0bcdcea889bd8ad807eb15afafe4fff0a33f50b1ffde7e"} -->
 # Calibrating model graders and separating agreement from correctness
 
 > **Evidence profile.** 5 strong $\cdot$ 7 directional $\cdot$ 0 corroborating evidence items across 2 developed practices (ERCA-096, ERCA-111).
@@ -1705,7 +1705,7 @@ That first stratum tests one grading decision and identifies which category shou
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the dual-curator calibration gate described in the closing section, which is narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch06-proxy-gaming-layered-signals.tex","tex_sha256":"49683ce67e2e68e7b0e25e0da123165cc584241e9853fa61f6f0e375ca818968","markdown_sha256":"d8935b9ba61ca2f5c00ea11a79ed015d199904ed2de22e62ff85666753f387b4"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch06-proxy-gaming-layered-signals.tex","tex_sha256":"0de4aa8942c2d1305dc2f43aedcdf390ca723ddb7d26d933d934dd62f856b9cc","markdown_sha256":"d8935b9ba61ca2f5c00ea11a79ed015d199904ed2de22e62ff85666753f387b4"} -->
 # Proxy metric gaming and layered evaluation signals
 
 > **Evidence profile.** 3 strong $\cdot$ 3 directional $\cdot$ 0 corroborating evidence items across 3 developed practices (ERCA-038, ERCA-039, ERCA-042). One directional item is carried by a companion record cited inline (ERCA-199).
@@ -2129,7 +2129,7 @@ The unanswered questions from step 8 are often the audit's most valuable result.
 - OpenAI ([2026](https://openai.com/index/open-source-codex-orchestration-symphony/)), Symphony orchestration, and Cloudflare ([2026](https://blog.cloudflare.com/astro-issue-triage/)), Astro issue-triage factory. Corroborating convergence on the ledger-scheduler-worker-gate decomposition from the operating teams; not controlled evidence that the decomposition improves any measured outcome.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch08-isolation-injection-independent-verification.tex","tex_sha256":"c0c7fb773ccdf075a597ee5ebc68265d67371959e80a1d7dfc79c10834bd0fe7","markdown_sha256":"143c9cea751fcfc8083a9a71a7fd2a541f429c4d7bc3cb911cd6e1cd33e1e1b5"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch08-isolation-injection-independent-verification.tex","tex_sha256":"fb76bd638f449334ec1dd17757e1cfec5ad55a6f871db4776eafd023b01dffaf","markdown_sha256":"143c9cea751fcfc8083a9a71a7fd2a541f429c4d7bc3cb911cd6e1cd33e1e1b5"} -->
 # Agent isolation, injection defenses, and independent verification
 
 > **Evidence profile.** 0 strong $\cdot$ 4 directional $\cdot$ 3 corroborating evidence items across 3 developed practices (ERCA-068, ERCA-069, ERCA-105). Two strong items appear in the sources below but are counted against companion records rather than these three: AgentS4D under ERCA-104, and Perry et al. under ERCA-152.
@@ -2421,7 +2421,7 @@ Containment limits the damage a live process can cause. Chapter 9 turns to what 
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the container refusal, disabled networking, and recorded isolation posture described above, all of which are narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch09-persistent-state-durable-workflows-idempotent-retries.tex","tex_sha256":"73b7d009e95b1ce1d47e6e2470f0a01ebd58739142cbd02bdea68e8ac6b7a86b","markdown_sha256":"e9d05d9393b829eeac3bb6dad98bd282b89a2d873601130d8e0fa11a11c82cc7"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch09-persistent-state-durable-workflows-idempotent-retries.tex","tex_sha256":"b8746208143ad0478c67ec12ef31e89922d3c2b463f524a42eb03249cff806d7","markdown_sha256":"e9d05d9393b829eeac3bb6dad98bd282b89a2d873601130d8e0fa11a11c82cc7"} -->
 # Persistent agent state, durable workflows, and idempotent retries
 
 > **Evidence profile.** 0 strong $\cdot$ 12 directional $\cdot$ 3 corroborating $\cdot$ 1 null or conflicting evidence items across 3 developed practices (ERCA-124, ERCA-128, ERCA-130). Four directional items are carried by companion records cited inline (ERCA-193, ERCA-194, ERCA-195).
@@ -2707,7 +2707,7 @@ Recorded state makes a run resumable. Chapter 10 makes the recovery claim replay
 - Directional evidence: Trofimov, Kuralenok, Marshalkin & Novikov (2019). Delivery, consistency, and determinism: rethinking guarantees in distributed stream processing. arXiv:1907.06250.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch10-replayable-traces-fault-injection-recovery.tex","tex_sha256":"a34ddc7bbc43c6b55a929bf9395aa5d386c5b6e42f5544ba22e00dcc44615b8d","markdown_sha256":"09357ed316e0cd05d4812d49d55224aadabef4a96003b69cc685cda3cc8fc9a1"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch10-replayable-traces-fault-injection-recovery.tex","tex_sha256":"38ddaeadecfef2850eaa7d180aa0080bd1f307c262bcc96374132a937de86b60","markdown_sha256":"09357ed316e0cd05d4812d49d55224aadabef4a96003b69cc685cda3cc8fc9a1"} -->
 # Replayable traces and fault-injection recovery testing
 
 > **Evidence profile.** 1 strong $\cdot$ 9 directional $\cdot$ 0 corroborating $\cdot$ 0 null or conflicting evidence items across 2 developed practices (ERCA-097, ERCA-127). Six directional items are carried by companion records cited inline (ERCA-050, ERCA-196, ERCA-197, ERCA-198, ERCA-204). One directional item is a preprint.
@@ -3129,7 +3129,7 @@ A trace detailed enough to replay is also the artifact a person reads when recov
 Author-system cases are narrative illustration, not evidence. The kill demonstration and publish-gate protocol are local artifacts.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch11-human-auditable-failure-analysis-taxonomy.tex","tex_sha256":"add9e870cd2932a5435bab69c19686dc5361aae5e21a388df811f470d62dd510","markdown_sha256":"1228af3e931c343a25cdbf1c5a0a5365019f9a66676a8bc794488b8def5765cc"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch11-human-auditable-failure-analysis-taxonomy.tex","tex_sha256":"9fb6de07bd02bbd75cf37ce01cb2dbc43875061e6ce2a170305654db7f341863","markdown_sha256":"1228af3e931c343a25cdbf1c5a0a5365019f9a66676a8bc794488b8def5765cc"} -->
 # Human-auditable failure analysis and taxonomy development
 
 > **Evidence profile.** 2 strong $\cdot$ 4 directional $\cdot$ 1 corroborating evidence items across 3 developed practices (ERCA-045, ERCA-046, ERCA-047).
@@ -3450,7 +3450,7 @@ Part IV turns to the evidence available when the model acts: retrieval, context 
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the published transcripts and quarantined runs described above, which are narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch12-measuring-designing-repository-retrieval.tex","tex_sha256":"e063e0b7f481aa8f4d6d0b8df7b8beffd69ef5da984d53ae9bcd534ef3667479","markdown_sha256":"54442f8bb7f3de7c3bd8cc322543931f983fa543403999ef504ac9879d328f9f"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch12-measuring-designing-repository-retrieval.tex","tex_sha256":"cb9f226b23c8a90fca909bd6aa8462692abb5ba7b1a26f93f39e541906ac58cf","markdown_sha256":"54442f8bb7f3de7c3bd8cc322543931f983fa543403999ef504ac9879d328f9f"} -->
 # Part IV: Context engineering: retrieval, budgets, and memory
 
 # Measuring and designing repository retrieval
@@ -3819,7 +3819,7 @@ Chapter 13 turns to the architecture around these measurements: cheap retrieval 
 - Corroboration for this entry: none on record. The other two entries in this chapter include author-system cases as illustrations rather than independent sources.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch13-localization-funnels-repository-indexes-freshness-checks.tex","tex_sha256":"dd10c1318e735fa46355f63bf6748ff6ea81dc12d27df1bf9358ce934203400b","markdown_sha256":"328e414305885cb3b7c1ea22e273539b3a60516e20d7945d34762373ea74acec"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch13-localization-funnels-repository-indexes-freshness-checks.tex","tex_sha256":"101f42c1158ca3814fa57f7ea4f12c2c9594381e16cbb5dcca17b088f93b2a99","markdown_sha256":"328e414305885cb3b7c1ea22e273539b3a60516e20d7945d34762373ea74acec"} -->
 # Localization funnels, repository indexes, and freshness checks
 
 > **Evidence profile.** 6 strong $\cdot$ 5 directional $\cdot$ 1 corroborating evidence items across 3 developed practices (ERCA-078, ERCA-084, ERCA-174).
@@ -4147,7 +4147,7 @@ Chapter 14 turns from which evidence the system retrieves to how much of that ev
 - Directional evidence: Weng, H., et al. (2026), "When Retrieval Hurts Code Completion: A Diagnostic Study of Stale Repository Context," arXiv:2605.14478.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch14-usable-context-budgets-spec-restarts-file-output.tex","tex_sha256":"905147035bf286c623133bf6756cb8edb75a4011caf3a2796bcb07e2fd317b16","markdown_sha256":"b19baea65ed45608d363cd52612a38eb86d3a81200cbd3ac0cbdddb582193bbc"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch14-usable-context-budgets-spec-restarts-file-output.tex","tex_sha256":"2f2a91c8957f23bdf965ea6da4a8a7660beec6358c39140df6369887badff6a4","markdown_sha256":"b19baea65ed45608d363cd52612a38eb86d3a81200cbd3ac0cbdddb582193bbc"} -->
 # Usable context budgets, consolidated-spec restarts, and file-based tool output
 
 > **Evidence profile.** 6 strong $\cdot$ 2 directional $\cdot$ 0 corroborating $\cdot$ 2 null or conflicting evidence items across 4 developed practices (ERCA-072, ERCA-088, ERCA-143, ERCA-178).
@@ -4619,7 +4619,7 @@ Chapter 15 turns to what survives between sessions and in what form.
 - Corroboration, narrative only: the author's systems include a context file maintained as a failure-mode ledger and a knowledge map with a machine-checkable source hash; contrary cases include a review-checker whose live rule count disagreed with its header and wrapper, and a skill-library README with three inconsistent counts.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch15-cross-session-memory-raw-traces-compaction.tex","tex_sha256":"b627d698a9fac364d2d4100924b6ac0f1a0e028dc910b77d361b5b2b7e2ff325","markdown_sha256":"75241f0064234dbc45fa427df0ab0c817308c906f6f2ee57be9b9a9141fcfaf5"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch15-cross-session-memory-raw-traces-compaction.tex","tex_sha256":"20bdd06c739918f98d0f49b89871d5aa3c7a1f54267a6655860d4ad629e3eae8","markdown_sha256":"d124db7896f8c8c4be596db29c30436414ae89672eee350ecaeae0b765804dbb"} -->
 # Cross-session memory, raw traces, and compaction policies
 
 > **Evidence profile.** 2 strong $\cdot$ 4 directional $\cdot$ 1 corroborating evidence items across 3 developed practices (ERCA-081, ERCA-116, ERCA-118).
@@ -4670,25 +4670,10 @@ Rebuildability follows from this separation. Every derived item carries provenan
 
 When the schema changes, the system builds a new derived store from the raw record. It does not ask a model to translate each old conclusion into a new one in place. Parallel rebuilds also allow an operator to compare the old and new distillates before switching readers to the new version.
 
-    recorder
-        -> inputs + actions + outputs + state changes
-            -> chronological raw, or episodic, trace
-               [source record: ordering + identity + state references]
-                    |
-                    v
-    distiller
-        -> stated retrieval purpose
-            -> derived store
-                -> provenance to source events
-                -> extraction or summarization version
-                -> schema version
-
-    schema changes
-        -> raw record
-            -> new derived store
-
-    earlier rewrite removes material
-        -> later rewrite cannot reconstruct it
+<figure>
+<embed src="../manuscript/figures/ch15-memory-architecture.pdf" />
+<figcaption>The recorder appends an immutable source record; the distiller reads it for one stated retrieval purpose and writes a derived store whose items carry provenance, extraction version, and schema version. A schema change rebuilds that store from the record, because material removed by an in-place rewrite has no observation left from which a later rewrite could restore it.</figcaption>
+</figure>
 
 The underlying artifact is the replayable trace from Chapter 10, used for another purpose. For recovery, the trace reconstructs execution after a crash. For memory, it reconstructs a representation after that representation proves incomplete or wrong.
 
@@ -5105,7 +5090,7 @@ These are not part of this chapter's three developed practices. Each is named in
 - Directional evidence: Product context and coding-agent decision compliance (Dillon 2026), arXiv:2605.08112, carried by the companion record on the tribal-knowledge substrate. Its compliance figure is not used in the prose.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch16-verification-interfaces-risk-based-escalation.tex","tex_sha256":"2f8a91999b2c49bee7cdf78191c450ff9e3bf66470b1d26812c35c3a318d3872","markdown_sha256":"2e0bb5dfe0ae98b6e7229e0827d3020c84e6d6d01708ee6a66929ad4e0c679f5"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch16-verification-interfaces-risk-based-escalation.tex","tex_sha256":"ea627462b558bebfdf41f9477e1f6b8b21dedc781bee1b1ac788491dc6997788","markdown_sha256":"2e0bb5dfe0ae98b6e7229e0827d3020c84e6d6d01708ee6a66929ad4e0c679f5"} -->
 # Part V: Human review and accountability engineering
 
 # Efficient verification interfaces and risk-based human escalation
@@ -5618,7 +5603,7 @@ Finally, budget practice for the people expected to handle rare failures. A name
 - Corroborating evidence: InfoQ, "Stripe Engineers Deploy Minions, Autonomous Agents Producing Thousands of Pull Requests Weekly," 2026-03-20, <https://www.infoq.com/news/2026/03/stripe-autonomous-coding-agents/>. Reports over 1,300 production pull requests per week with human review retained. Carried as scale context; it reports no measure of review depth or defect escape.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch17-autonomy-provenance-gates-accountability.tex","tex_sha256":"0d9e713fb6af11ee4519e90cf425e8cfe52364d1814475e0eca94e38754ffbcb","markdown_sha256":"e837906f8992717668c04c00fca8df14147d9d0ea9c36aa1b376f67f6d0c266c"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch17-autonomy-provenance-gates-accountability.tex","tex_sha256":"d3bbf2b0f85229770be963513893c093d5e698b5a7b286e1508c97bc521508dc","markdown_sha256":"e837906f8992717668c04c00fca8df14147d9d0ea9c36aa1b376f67f6d0c266c"} -->
 # Autonomy calibration, provenance, effective gates, and accountability
 
 > **Evidence profile.** 2 strong $\cdot$ 5 directional $\cdot$ 0 corroborating evidence items across 4 developed practices (ERCA-145, ERCA-149, ERCA-154, ERCA-165).
@@ -6233,7 +6218,7 @@ Support is thin across the chapter: four developed practices carry seven evidenc
 - Directional evidence: Suryana, L. E., Nordhoff, S., Calvert, S., Zgonnikov, A., van Arem, B. (2025). Meaningful human control of partially automated driving systems: Insights from interviews with Tesla users. Transportation Research Part F 113, 213-236. Applies tracking and tracing criteria to 103 users to localize expectation-reality gaps and inconsistent protocol adherence. The method requires case-specific operationalization, yields failure localization rather than a compliance score, and is evidenced here in the driving domain. The record carries no arXiv identifier; the published article is doi:10.1016/j.trf.2025.04.026.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch18-agent-topology-dynamic-task-allocation.tex","tex_sha256":"bd1b4df150088b1bd7d5a6be27043a8359544daf7f94f53293394861dc251917","markdown_sha256":"c14e39f4cd9adbc0c65389d35f7fbd8cd17279cb003102c79d643f9807ba1df8"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch18-agent-topology-dynamic-task-allocation.tex","tex_sha256":"846545e974f21109ef0e3ce5328448c7dde77c1c702acd04d917d45502e1b8fd","markdown_sha256":"c14e39f4cd9adbc0c65389d35f7fbd8cd17279cb003102c79d643f9807ba1df8"} -->
 # Part VI: Research agenda: work allocation and cost engineering
 
 # Agent topology selection and dynamic task allocation
@@ -6824,7 +6809,7 @@ The record should remain intelligible without the architecture's label. "Hierarc
 - Not an evidence item: CodeProbe, the author's task-mining evaluation tool, [public repository](https://github.com/sjarmak/codeprobe). Named inline for the preamble rerun described in the opening, which is narrative illustration.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/ch19-cost-aware-fleet-scheduling-model-routing.tex","tex_sha256":"66d8c69a70044efb0ef6393c90fd71a94bf2e92015c4b52970e8756186a8aaac","markdown_sha256":"6348b29fff8c16a0c4a034a7a2485d2914fb006285ab58faded45adccdcf7f81"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/ch19-cost-aware-fleet-scheduling-model-routing.tex","tex_sha256":"bf8a0edef1e1647f10ad5eb2a24c498ff5ba3b32972a586dad73113b3e366c75","markdown_sha256":"6348b29fff8c16a0c4a034a7a2485d2914fb006285ab58faded45adccdcf7f81"} -->
 # Cost-aware fleet scheduling and model routing
 
 > **Evidence profile.** 2 strong $\cdot$ 13 directional $\cdot$ 2 corroborating $\cdot$ 0 null or conflicting evidence items across 4 developed practices (ERCA-171, ERCA-187, ERCA-191, ERCA-206).
@@ -7648,7 +7633,7 @@ No evidence is introduced here. Each identifier below is carried by the chapter 
 The part-level and chapter-level evidence shares restated above were recomputed from the companion catalog: Part I has 18 of 32 items grouped as strong, Part III has 3 of 30, Part IV has 20 of 42, and Part VI has 8 of 29. Chapter 8 has no strong or direct scholarly evidence item.
 <!-- tex-sync:end -->
 
-<!-- tex-sync:start {"path":"manuscript/chapters/glossary.tex","tex_sha256":"6c369e1a2977f71f01b7b4b1d90181427d3a48819b005f55abec3c5c6a8c72a6","markdown_sha256":"3c4b2b3226e70039bd5dacbfe46bd4c1e1908c0fe4b61fe57eb879fc2d6b1593"} -->
+<!-- tex-sync:start {"path":"manuscript/chapters/glossary.tex","tex_sha256":"b8aef03f43a5457a0e50f74add7ca4a3635f80f5b5c0e38b3fd9493357dd5e5e","markdown_sha256":"3c4b2b3226e70039bd5dacbfe46bd4c1e1908c0fe4b61fe57eb879fc2d6b1593"} -->
 # Glossary
 
 **Ablation.** A comparison that removes, disables, or weakens one component while holding the rest of the evaluated system as constant as the design permits.
