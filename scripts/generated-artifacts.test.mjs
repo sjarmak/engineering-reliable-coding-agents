@@ -133,6 +133,6 @@ test("the rendered appendix reports the counts the manuscript claims", () => {
     { practice_id: "ERCA-050", name: "Two", chapter: 9, treatment: "companion_only", thin_support: true },
     { practice_id: "ERCA-199", name: "Three", chapter: 6, treatment: "companion_only", thin_support: true },
   ]);
-  assert.match(rendered, /all 3 of them: 1 developed in the main chapters, 1 companion entries, and 1 catalog-level leads/);
+  assert.match(rendered, /3 reliability records: 2 gated practices, including 1 developed in the main chapters, plus 1 research lead/);
   assert.match(rendered, /A dagger marks the 1 companion entries/);
 });

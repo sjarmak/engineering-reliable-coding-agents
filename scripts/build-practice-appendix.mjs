@@ -49,7 +49,7 @@ export function renderAppendix(records) {
   const sorted = [...records].sort((a, b) => a.practice_id.localeCompare(b.practice_id));
   const developed = sorted.filter((r) => treatmentLabel(r) === "developed").length;
   const leads = sorted.filter((r) => treatmentLabel(r) === "lead").length;
-  const companion = sorted.length - developed - leads;
+  const gated = sorted.length - leads;
   const limited = sorted.filter((r) => r.thin_support && treatmentLabel(r) !== "lead").length;
 
   const rows = sorted.map((record) => {
@@ -63,7 +63,7 @@ export function renderAppendix(records) {
 % Do not edit by hand; run the script and commit its output.
 \\chapter{Practice catalog index}\\label{appendix-practices}
 
-Every practice record in this edition carries a stable identifier of the form \\texttt{ERCA-NNN}, after the initials of this book's title. The chapters name records by identifier rather than by title, because a title can be rewritten while the identifier must not be. This index resolves all ${sorted.length} of them: ${developed} developed in the main chapters, ${companion} companion entries, and ${leads} catalog-level leads. Every \\texttt{ERCA-NNN} in the text links to its row here.
+Every reliability record in this edition carries a stable identifier of the form \\texttt{ERCA-NNN}, after the initials of this book's title. The chapters name records by identifier rather than by title, because a title can be rewritten while the identifier must not be. This index resolves ${sorted.length} reliability records: ${gated} gated practices, including ${developed} developed in the main chapters, plus ${leads} research ${leads === 1 ? "lead" : "leads"}. Every \\texttt{ERCA-NNN} in the text links to its row here.
 
 The \\emph{chapter} column gives the chapter whose mechanism the record extends, including for records the chapters do not develop. The \\emph{treatment} column separates records developed in the main text from compact companion entries and from leads, which are preserved for investigation rather than recommended. A dagger marks the ${limited} companion entries labeled limited support, where the available evidence does not support a recommendation.
 

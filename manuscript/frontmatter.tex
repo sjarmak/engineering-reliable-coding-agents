@@ -194,7 +194,7 @@ This work makes six contributions:
 \item
   a multivocal evidence audit and machine-readable ledger that distinguish direct support, directional findings, corroborating cases, and null or conflicting results;
 \item
-  a versioned catalog of 206 bounded practice records in this edition, including 56 developed in depth and stable identifiers that connect the manuscript, companion, and implementation artifacts;
+  a versioned catalog of 206 reliability records: 193 gated practices, including 56 developed in depth, plus 13 research leads, with stable identifiers that connect the manuscript, companion, and implementation artifacts;
 \item
   a system-level reliability model, stated as a dependency chain with its repair asymmetry and as an explicit set of factory contracts, that connects evaluation, containment, durable execution, repository state, verification, human control, and fleet allocation through the ownership, identity, persistence, ordering, authority, and observation boundaries a coding-agent system must preserve;
 \item
@@ -236,7 +236,7 @@ The pass leaves six challengeable artifacts: a paired distribution, a cost-quali
 \hypertarget{how-the-monograph-is-organized}{%
 \section{How the monograph is organized}\label{how-the-monograph-is-organized}}
 
-The monograph has six parts and nineteen chapters. Measurement comes first because every later practice is adopted or rejected through a measured comparison. Nineteen developed practices in Parts II through VI also require a method introduced in Part I. Interleaving those methods with their uses would scatter each method across four or five chapters.
+The monograph has six parts and twenty chapters. Chapters 1 through 19 develop the methods and practices; Chapter 20 closes by tracing the evidence chain that connects them. Measurement comes first because every later practice is adopted or rejected through a measured comparison. Nineteen developed practices in Parts II through VI also require a method introduced in Part I. Interleaving those methods with their uses would scatter each method across four or five chapters.
 
 This order places three chapters of experiment design before the agent-specific operating chapters. Later recommendations depend on those definitions and comparison methods.
 
@@ -271,25 +271,26 @@ Title
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-\textbf{Part I: Evaluation measurement and experiment design} & 1 & Run-to-run variance, statistical power, and paired comparisons \\
-& 2 & Baselines, ablations, and cost-accuracy tradeoffs \\
-& 3 & Benchmark contamination, oracle strength, and workload validity \\
-\textbf{Part II: Evaluation and grading systems} & 4 & Execution-based evaluation, correction gates, and release tests \\
-& 5 & Calibrating model graders and separating agreement from correctness \\
-& 6 & Proxy metric gaming and layered evaluation signals \\
-\textbf{Part III: Containment, durable execution, and recovery engineering} & 7 & The software factory as a distributed system \\
-& 8 & Agent isolation, injection defenses, and independent verification \\
-& 9 & Persistent agent state, durable workflows, and idempotent retries \\
-& 10 & Replayable traces and fault-injection recovery testing \\
-& 11 & Human-auditable failure analysis and taxonomy development \\
-\textbf{Part IV: Context engineering: retrieval, budgets, and memory} & 12 & Measuring and designing repository retrieval \\
-& 13 & Localization funnels, repository indexes, and freshness checks \\
-& 14 & Usable context budgets, consolidated-spec restarts, and file-based tool output \\
-& 15 & Cross-session memory, raw traces, and compaction policies \\
-\textbf{Part V: Human review and accountability engineering} & 16 & Efficient verification interfaces and risk-based human escalation \\
-& 17 & Autonomy calibration, provenance, effective gates, and accountability \\
-\textbf{Part VI: Research agenda---work allocation and cost engineering} & 18 & Agent topology selection and dynamic task allocation \\
-& 19 & Cost-aware fleet scheduling and model routing \\
+\textbf{Part I: Evaluation measurement and experiment design} & \mbox{1} & Run-to-run variance, statistical power, and paired comparisons \\
+& \mbox{2} & Baselines, ablations, and cost-accuracy tradeoffs \\
+& \mbox{3} & Benchmark contamination, oracle strength, and workload validity \\
+\textbf{Part II: Evaluation and grading systems} & \mbox{4} & Execution-based evaluation, correction gates, and release tests \\
+& \mbox{5} & Calibrating model graders and separating agreement from correctness \\
+& \mbox{6} & Proxy metric gaming and layered evaluation signals \\
+\textbf{Part III: Containment, durable execution, and recovery engineering} & \mbox{7} & The software factory as a distributed system \\
+& \mbox{8} & Agent isolation, injection defenses, and independent verification \\
+& \mbox{9} & Persistent agent state, durable workflows, and idempotent retries \\
+& \mbox{10} & Replayable traces and fault-injection recovery testing \\
+& \mbox{11} & Human-auditable failure analysis and taxonomy development \\
+\textbf{Part IV: Context engineering: retrieval, budgets, and memory} & \mbox{12} & Measuring and designing repository retrieval \\
+& \mbox{13} & Localization funnels, repository indexes, and freshness checks \\
+& \mbox{14} & Usable context budgets, consolidated-spec restarts, and file-based tool output \\
+& \mbox{15} & Cross-session memory, raw traces, and compaction policies \\
+\textbf{Part V: Human review and accountability engineering} & \mbox{16} & Efficient verification interfaces and risk-based human escalation \\
+& \mbox{17} & Autonomy calibration, provenance, effective gates, and accountability \\
+\textbf{Part VI: Research agenda---work allocation and cost engineering} & \mbox{18} & Agent topology selection and dynamic task allocation \\
+& \mbox{19} & Cost-aware fleet scheduling and model routing \\
+\textbf{Closing} & \mbox{20} & The evidence chain behind reliable agents \\
 \end{longtable}
 
 \hypertarget{what-i-assume-you-know}{%
@@ -319,7 +320,7 @@ Every chapter opens with an evidence profile: how many strong, directional, corr
 \hypertarget{the-companion-catalog}{%
 \section{The companion catalog}\label{the-companion-catalog}}
 
-The \href{https://sjarmak.ai/books/engineering-reliable-coding-agents/companion}{companion site} indexes all 206 practices under the chapter whose mechanism each extends. The 56 developed in the main chapters appear as short pointers into the chapter; the remaining 150 appear as compact entries. The catalog broadens the set of available options without forcing the main text to explain every variation. The \href{https://github.com/sjarmak/engineering-reliable-coding-agents}{project repository} contains the versioned manuscript, evidence ledger, benchmark catalog, schemas, provenance data, and release checksums. The \href{https://sjarmak.ai/books/engineering-reliable-coding-agents}{web edition} provides the browser-oriented reading version.
+The \href{https://sjarmak.ai/books/engineering-reliable-coding-agents/companion}{companion site} indexes 206 reliability records: 193 gated practices, including 56 developed in depth, plus 13 research leads. The 56 developed practices point into the main chapters, while the other 137 gated practices appear as compact entries. The 13 leads are preserved for investigation, not recommendation, outside the gated chapter crosswalk. The catalog broadens the set of available options without forcing the main text to explain every variation. The \href{https://github.com/sjarmak/engineering-reliable-coding-agents}{project repository} contains the versioned manuscript, evidence ledger, benchmark catalog, schemas, provenance data, and release checksums. The \href{https://sjarmak.ai/books/engineering-reliable-coding-agents}{web edition} provides the browser-oriented reading version.
 
 Use the relevant chapter as the foundation, then consult the catalog for practices that match a specific constraint. A compact entry cannot reproduce the chapter's full treatment of mechanism, evidence, tradeoffs, and failure boundaries. The chapter provides the reasoning needed to decide whether a neighboring practice applies to your workload.
 

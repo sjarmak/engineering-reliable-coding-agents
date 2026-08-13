@@ -67,7 +67,7 @@
   invariant it existed to check, that the report matches
   `release-metadata.json`, was intact. Both values now derive from the manifest.
 - Refreshed `SUBMISSION.md` against the built artifacts: 249 references, 30
-  figures, 11 tables, 51 archived files, a 619-row ledger, a 312-page preview
+  figures, 11 tables, 51 archived files, a 619-row ledger, a 314-page preview
   carrying the 1.0.0 identity, and roughly 113,000 words of chapter text.
 - Re-ran the reference audits against the live arXiv API after the backfill fix:
   164 manuscript identifiers and 960 cited titles across 321 unique identifiers,
@@ -136,7 +136,7 @@
   than as a traffic statistic: an allocation experiment that samples model
   calls as independent requests destroys the session reuse structure it is
   measuring, so replays must preserve turn and session boundaries.
-- Manuscript output is 312 pages, with 30 figures and 11 tables.
+- Manuscript output is 314 pages, with 30 figures and 11 tables.
 
 ## 1.0.0-rc.16 — 2026-08-09
 

@@ -1,100 +1,194 @@
-\chapter{Closing: the evidence chain behind reliable agents}
+\chapter{The evidence chain behind reliable agents}
 \label{closing-evidence-chain}
-The most useful result in my retrieval work was a disagreement between two instruments. Three retrieval measures agreed that the tool had become much better at placing relevant repository evidence in front of the agent. The paired end-to-end reward across 370 tasks moved by +0.0349.
 
-The first interval I reported around that difference likely understates the uncertainty and should not be read as a valid bound. It resampled tasks as though they were independent even though they came from 46 anchor repositories and 20 suites.
+The most useful result in my retrieval work was a disagreement between two instruments.
 
-Interpreting that experiment required two parts of this monograph. The stage decomposition from Part IV located where the improvement occurred. The resampling rule from Part I determined whether the end-to-end difference had been measured adequately at all.
+Three retrieval measures agreed that the system had become substantially better at placing relevant repository evidence in front of the agent. Across 370 paired tasks, however, the end-to-end reward moved by only +0.0349. Worse, the first interval I reported around that difference was too optimistic: it resampled tasks as though they were independent even though they came from 46 anchor repositories and 20 suites.
 
-The dependency chain introduced at the beginning therefore returns as the conclusion. A defect in an earlier layer rarely announces itself downstream. It arrives as a clean score, a confident verdict, or a plausible artifact.
+The retrieval result was real. I had measured the uncertainty around the downstream result incorrectly.
+
+Understanding that experiment required two parts of this monograph. The stage decomposition from Part IV identified where the improvement occurred. The resampling rules from Part I determined whether the end-to-end difference had been measured adequately at all.
+
+A coding agent's reliability depends on a chain of claims about the system. A strong model, high benchmark score, complete trace, sophisticated retrieval system, or gated deployment cannot establish reliability alone. Each claim gives the next layer something it is allowed to trust.
+
+When an earlier claim is wrong, the failure rarely announces itself downstream. It arrives as a clean score, a confident grader verdict, a plausible trace, a relevant-looking context window, an approved change, or a successfully completed workflow.
+
+The hard problem is deciding which claims about agent behavior deserve to survive contact with the next layer of the system.
 
 \hypertarget{each-layer-determines-what-the-next-may-trust}{%
 \section{Each layer determines what the next may trust}\label{each-layer-determines-what-the-next-may-trust}}
 
-Part I sits beneath the rest of the monograph because every later practice is adopted or rejected through a comparison. Before a difference can describe the system rather than one draw from it, the evaluation must measure local run-to-run variation and be capable of resolving an effect large enough to matter.
+Part I sits beneath the rest of this monograph because every later practice is eventually accepted or rejected through a comparison.
 
-Nineteen practices developed in later parts execute a method introduced in Part I. Removing that dependency does not remove the requirement. It leaves the requirement unstated.
+One run is one draw from a stochastic system. Before a measured difference can describe the system rather than one favorable draw, the evaluation must characterize local variation, preserve the dependency structure of the sample, and be capable of resolving an effect large enough to matter.
 
-Part II turns measurements into operating verdicts. A model grader, consensus vote, and proxy score are all instruments, and Part I supplies the methods for estimating their errors. In Skalse et al.'s (\href{https://arxiv.org/abs/2209.13085}{2022}) linear expected-return formalization over all stochastic policies, two rewards can be mutually unhackable only when at least one is constant. This bounded theorem supplies a structural warning against treating any nonconstant proxy as final authority.
+Nineteen practices developed in later parts execute methods introduced in Part I. Removing the explicit evaluation machinery merely leaves those requirements unstated.
 
-A grading system therefore produces a verdict at an operating point under a stated distribution. Layering is necessary because any nonconstant verdict can become an optimization target.
+Part II turns measurements into operating verdicts.
+
+A model grader, consensus vote, reward model, heuristic score, or proxy metric is an instrument. Each has an operating point, a distribution on which it was calibrated, and errors that can matter asymmetrically. Skalse et al.~(\href{https://arxiv.org/abs/2209.13085}{2022}) showed, in a bounded formal setting over stochastic policies, how restrictive the relationship between a useful reward and an unhacked optimization target can be. The practical lesson is broader than the theorem: a nonconstant proxy should not quietly become final authority merely because it is convenient to optimize.
+
+A grading system therefore produces a verdict under stated conditions. It does not produce truth.
 
 \Needspace{5\baselineskip}
 
-Part III asks whether the record underlying those verdicts is evidence at all. Four ordinary failures can corrupt that record in ways no later statistic repairs:
+Part III asks whether the record underneath those verdicts is evidence at all.
+
+Four ordinary system failures can corrupt that record in ways no later statistical treatment repairs:
 
 \begin{itemize}
 \tightlist
 \item
   One identity can reach both primary data and its recovery material.
 \item
-  A run can die without a durable account of completed work.
+  A run can die without leaving a durable account of completed work.
 \item
-  A trace can fail to distinguish tool dispatch from external commitment.
+  A trace can record tool dispatch without distinguishing whether the external effect committed.
 \item
-  A quarantine policy can remove failed runs before anyone examines them.
+  A quarantine or cleanup policy can remove failed runs before anyone examines them.
 \end{itemize}
 
-Preserving the record is necessary and insufficient. Zhang et al.~(\href{https://arxiv.org/abs/2505.00212}{2025}) gave expert-annotated failure logs from 127 multi-agent systems to the strongest automated attribution methods they evaluated. The best method identified the decisive step in 14.2 percent of cases.
+Even a complete record does not solve attribution automatically. Zhang et al.~(\href{https://arxiv.org/abs/2505.00212}{2025}) gave expert-annotated failure logs from 127 multi-agent systems to the strongest automated attribution methods they evaluated. The best method located the decisive step in only 14.2 percent of cases.
 
-A complete trace supports a causal explanation. It does not generate one automatically.
+A trace can make an explanation possible, but it cannot manufacture causality.
 
 \Needspace{5\baselineskip}
 
-Part IV determines what evidence reached the model. A failure should not be assigned to model reasoning until the evaluation records whether the required evidence:
+Part IV determines what evidence reached the model.
+
+A failed implementation should not be assigned to reasoning until the evaluation can answer a more basic sequence of questions:
 
 \begin{itemize}
 \tightlist
 \item
-  existed in the searchable corpus;
+  Did the required evidence exist in the searchable corpus?
 \item
-  was present in the current index;
+  Was the relevant version present in the index?
 \item
-  was returned by retrieval;
+  Did retrieval return it?
 \item
-  survived ranking and context selection; and
+  Did ranking and context selection preserve it?
 \item
-  described the repository state being modified.
+  Did it describe the repository state the agent was actually modifying?
 \end{itemize}
 
-Stale context is the sharpest case. It converts an ordinary absence of evidence into a confident implementation against an interface that no longer exists.
+Stale context is the sharpest example because it can remain perfectly fluent after losing authority. The agent may reason correctly over an interface that no longer exists.
 
-Part V treats human review capacity as a finite system resource. Its allocation depends on monitors calibrated in Part II. Its interfaces determine whether challenging a claim costs less than accepting it. Its gates depend on the authority and evidence preserved in Part III.
+Part V treats human review as a finite system resource rather than an unlimited source of correctness.
 
-A gate that cannot change the execution path records assent and nothing more.
+Its allocation depends on monitors calibrated in Part II. Its interfaces determine how expensive it is to challenge a claim rather than accept one. Its gates depend on the authority boundaries and evidence preserved in Part III.
 
-Part VI depends on artifacts produced by every earlier part. Routing and scheduling policies are evaluated by replaying recorded arrivals while holding demand fixed and forcing sophisticated policies to compete against cheap alternatives.
+A gate that cannot change the execution path records assent. It does not provide control.
 
-That discipline appears at both ends of the monograph. Kapoor et al.~(\href{https://arxiv.org/abs/2407.01502}{2024}) found that retrying a model matched more elaborate architectures on a function-level coding benchmark at a fraction of their inference cost. Chen et al.~(\href{https://arxiv.org/abs/1608.07617}{2016}) proposed inexpensive random sampling as the baseline a search-based method should beat before earning adoption.
+Part VI depends on artifacts produced by every earlier part. Routing and scheduling policies should be judged by replaying recorded arrivals, holding demand fixed, and forcing sophisticated policies to compete against cheap alternatives.
 
-The dependency chain also limits what a repair can accomplish. Compensating for an earlier defect with machinery from a later part is among the most expensive mistakes available here, and it is easy to make because the later component is often easier to deploy.
+That requirement appears repeatedly in the literature because complexity has a habit of beating an absent baseline. Kapoor et al.~(\href{https://arxiv.org/abs/2407.01502}{2024}) found that simple model retries could match more elaborate agent architectures on a function-level coding benchmark at a fraction of their inference cost. Chen et al.~(\href{https://arxiv.org/abs/1608.07617}{2016}) made the same methodological point in search-based software engineering: an optimization method should first beat inexpensive random sampling.
 
-More samples do not repair a task distribution that excludes production work. More judges do not repair a rubric that experts apply inconsistently. More agents do not repair a retrieval boundary that treats an empty result as authoritative. More context does not repair a run that has lost its governing specification.
+The exact baseline changes, but the obligation does not.
 
-In each case, the added machinery is evaluated using the instrument the earlier layer was supposed to repair.
+The dependency chain also explains why some repairs are so expensive. Later machinery cannot reliably compensate for an earlier defect:
 
-\hypertarget{engineering-controls-can-precede-trial-evidence}{%
-\section{Engineering controls can precede trial evidence}\label{engineering-controls-can-precede-trial-evidence}}
+\begin{itemize}
+\tightlist
+\item
+  More samples do not repair a task distribution that excludes production work.
+\item
+  More judges do not repair a rubric experts interpret inconsistently.
+\item
+  More agents do not repair a retrieval boundary that treats an empty result as authoritative.
+\item
+  More context does not repair a run that has lost its governing specification.
+\item
+  Better scheduling does not repair a work ledger that cannot identify which attempt owns the right to publish.
+\item
+  More observability does not repair an external effect whose identity was never recorded.
+\end{itemize}
 
-Evidence strength varies across the dependency chain and does not track operational consequence. Strong-graded items account for 56 percent of the evidence in Part I but 10 percent in Part III. Chapter 8 has no strong-graded or direct scholarly evidence item, even though its containment practices may be the first controls needed by a system with production write access. Within the 52-practice consequence ranking, a selection subset rather than the full catalog, Spearman's rho between urgency rank and the presence of at least one strong item was -0.004.
+In each case, the added machinery is evaluated through the instrument that was already defective.
 
-The catalog makes that mismatch concrete. \emph{Contain agent blast radius} ranked first by consequence, yet its incident support consists of two corroborating Reddit accounts: a \href{https://www.reddit.com/r/LLMDevs/comments/1q7avil/}{production-workflow report} and a \href{https://www.reddit.com/r/devops/comments/1tbbls4/}{database-deletion report}. Both have archived snapshots in the companion. They show that the failure can occur, not how often it occurs. I still recommend the control because the current authority boundary can be inspected directly, a prohibited write can be exercised safely against a test resource, and separating ordinary from recovery authority is reversible. The recommendation is mechanism-justified rather than prevalence-justified.
+This repair asymmetry lets problems propagate forward cheaply while making downstream correction expensive.
 
-This is not evidence-derived consensus. It is an authorial selection among controls supported in different ways. Some recommendations follow measured effects. Others follow a structural failure argument: the failure is possible under the current authority or state model, its consequence is material, the proposed control is reversible, and the boundary can be tested directly. A denied write, a durable completion record, and a replay in which the same arrivals face two schedulers are observations rather than prevalence claims.
+\hypertarget{engineering-controls-can-precede-prevalence-evidence}{%
+\section{Engineering controls can precede prevalence evidence}\label{engineering-controls-can-precede-prevalence-evidence}}
 
-The imperative headings in thin-evidence chapters should be read in that sense. They name an engineering action and the check that can falsify its local justification; they do not assert a universal effect size. A mechanism that cannot be reduced to an executable observation has not yet been specified well enough to recommend.
+The evidence in this monograph is uneven, and that unevenness does not track operational consequence.
 
-Two studies would materially strengthen the record: a controlled comparison of isolation designs scored against observed incidents, and a recovery benchmark with a published fault menu, several kill placements, recurring failures, and upgrades across runtime versions. Part VI remains more transfer-heavy: its topology and scheduling proposals are executable research questions for coding-agent fleets, not established production effects.
+Strong-graded items make up 56 percent of the evidence in Part I but only 10 percent in Part III. Chapter 8 contains no strong-graded or direct scholarly evidence item even though its containment practices may be among the first controls needed by a system with production write access.
 
-\hypertarget{personal-starting-points-and-a-constrained-budget-order}{%
-\section{Personal starting points and a constrained-budget order}\label{personal-starting-points-and-a-constrained-budget-order}}
+Within the 52-practice consequence-ranking subset, Spearman's rho between urgency rank and the presence of at least one strong evidence item is -0.004. In that selection, evidence strength and operational urgency are effectively unrelated.
 
-The literature does not supply universal values for repeat count, inter-rater agreement, context limits, refresh cadence, routing cost, or re-solve frequency. The following are my starting points for a new system. They are deliberately labeled as personal defaults: each is a trigger for measurement or review, not evidence that the value transfers.
+Engineering sometimes has to move before prevalence has been estimated.
+
+\texttt{Contain agent blast radius} ranked first by consequence in the catalog, yet its incident support consists of two corroborating practitioner reports: one involving a production workflow and another involving database deletion. Those reports establish possibility. They do not establish frequency.
+
+I still recommend the control because its mechanism can be inspected directly. If one credential can alter both production state and the material required to recover that state, those resources share a failure domain. The authority boundary can be changed. A prohibited write can be exercised against a test resource. Ordinary and recovery authority can be separated. The control is reversible and its local effect is observable.
+
+This is a mechanism-based justification, not a claim that the literature has proved a universal effect size.
+
+Some practices in this monograph are supported by measured effects. Others are supported by a structural failure argument:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The failure is possible under the current authority or state model.
+\item
+  Its consequence is material.
+\item
+  The proposed control changes the relevant mechanism rather than a proxy for it.
+\item
+  The change is reversible or bounded.
+\item
+  The resulting boundary can be exercised directly.
+\end{enumerate}
+
+The following are observations of local protections, not estimates of production frequency:
+
+\begin{itemize}
+\tightlist
+\item
+  A denied write.
+\item
+  A durable completion record that survives a worker crash.
+\item
+  A stale completion rejected by a newer ownership generation.
+\item
+  A replay in which the same recorded arrivals face two schedulers.
+\end{itemize}
+
+Each observation shows whether a claimed local protection exists.
+
+The imperative headings in thin-evidence chapters should be read in this sense. They specify an engineering action and the observation that can falsify its local justification. They do not imply a universal prevalence estimate or effect size.
+
+A mechanism that cannot be reduced to an executable observation has not yet been specified well enough to rely on.
+
+Important gaps remain. Two studies would materially strengthen the record developed here:
+
+\begin{itemize}
+\tightlist
+\item
+  A controlled comparison of isolation and authority designs scored against observed incidents.
+\item
+  A recovery benchmark with a published fault menu, named kill placements, recurring failures, lost acknowledgements, and upgrades across runtime versions.
+\end{itemize}
+
+Part VI remains more transfer-heavy still. Its topology, admission-control, partitioning, and scheduling proposals are executable research questions for coding-agent fleets. They should not be mistaken for established production effects.
+
+Useful engineering hypotheses need not masquerade as settled science. They need claims that state what kind of evidence supports them.
+
+\hypertarget{start-smaller-than-this-book}{%
+\section{Start smaller than this book}\label{start-smaller-than-this-book}}
+
+A production system does not need every mechanism described in these chapters before it can improve.
+
+It does need enough instrumentation to tell whether an improvement occurred and enough durable state to show what happened when something failed.
+
+The literature does not provide universal values for repeat count, inter-rater agreement, context limits, refresh cadence, routing cost, retry count, or re-solve frequency. The values below are starting points for a new system, not transferred effect estimates.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.22}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.43}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.35}}@{}}
 \caption{Personal starting points for a new system. These values are author defaults, not transferred effect estimates.}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -106,53 +200,123 @@ What changes it
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Decision
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Personal starting point
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-What changes it
-\end{minipage} \\
-\midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Repeated evaluation & Use \(k=3\) paired runs per item for inexpensive screening; do not promote from that screen. Size the release comparison from a pilot and the smallest decision-relevant effect. & Higher variance, clustered tasks, or a smaller meaningful effect requires more runs. \\
-Reliability reporting & Report both \(\mathrm{pass}@k\), where any attempt succeeds, and \(\mathrm{pass}^{k}\), where every attempt succeeds, with \(k\) printed beside the result. I begin with \(k=3\). & The deployed retry policy and cost of intermittent failure determine the useful \(k\). \\
-Human-label agreement & Treat Cohen's or Fleiss's kappa below 0.60 as a rubric-debugging trigger. A value above 0.60 is not a correctness gate; promotion still depends on class-specific error rates against expert adjudication. & Class imbalance, ambiguous labels, and high-consequence errors make the confusion matrix more important than kappa. \\
-Promotion threshold & Before execution, require either a three-percentage-point absolute success gain at no material cost increase or a ten-percent cost reduction at no success loss. Treat smaller effects as uncredited until a decision justifies them. & Task value, baseline rate, and operating cost should replace these round numbers. \\
-Failure review & Read twenty stratified failures after a material model, harness, or policy change and keep an abstain category when the trace cannot support attribution. & Rare high-consequence classes are oversampled regardless of frequency. \\
-Context restart & Restart or consolidate at 60 percent of the shortest context length at which the weakest required task shows material degradation in a local sweep. & New models, tools, instruction files, or task mix require a new sweep. \\
-Freshness & Require exact repository-revision identity for code-bearing retrieval and reject an index with an unknown source revision. & A coarser content-addressed equivalence is acceptable only when it is proved by the indexer. \\
+\textbf{Repeated evaluation} & Use \(k=3\) paired runs per item for inexpensive screening, but do not promote from that screen alone. Size release comparisons from a pilot and the smallest decision-relevant effect. & Higher variance, clustered tasks, or smaller meaningful effects require more runs. \\
+\textbf{Reliability reporting} & Report both \(\mathrm{pass}@k\), where any attempt succeeds, and \(\mathrm{pass}^{k}\), where every attempt succeeds, with \(k\) printed beside the result. Begin with \(k=3\). & The deployed retry policy and the cost of intermittent failure determine the useful \(k\). \\
+\textbf{Human-label agreement} & Treat Cohen's or Fleiss's kappa below 0.60 as a rubric-debugging trigger. A value above 0.60 is not a correctness gate. Promotion still depends on class-specific errors against expert adjudication. & Class imbalance, ambiguous labels, and high-consequence mistakes make the confusion matrix more informative than kappa alone. \\
+\textbf{Promotion threshold} & Before execution, require either a three-percentage-point absolute success gain at no material cost increase or a ten-percent cost reduction at no success loss. Treat smaller effects as uncredited until a decision justifies them. & Task value, baseline success rate, and operating cost should replace these round numbers. \\
+\textbf{Failure review} & Read twenty stratified failures after a material model, evaluation apparatus, or policy change. Preserve an abstain category when the trace cannot support attribution. & Rare high-consequence failure classes should be oversampled regardless of frequency. \\
+\textbf{Context restart} & Restart or consolidate at 60 percent of the shortest context length at which the weakest required task shows material degradation in a local sweep. & New models, tools, instruction files, or task mixtures require another sweep. \\
+\textbf{Freshness} & Require exact repository-revision identity for code-bearing retrieval and reject an index whose source revision is unknown. & A coarser content-addressed equivalence is acceptable only when the indexer can prove it. \\
 \end{longtable}
 
-Account for the apparatus as part of system cost. Each comparison records inference and tool cost, elapsed time, labeling and adjudication hours, reviewer queue time, storage, and maintenance work. The denominator is accepted work, not model calls. A control whose ongoing measurement cost is invisible will eventually be bypassed or defended with stale evidence.
+The apparatus itself belongs in the cost model.
 
-\Needspace{5\baselineskip}
+Each serious comparison should record inference and tool cost, elapsed time, labeling and adjudication hours, reviewer queue time, storage, and maintenance work. The denominator should be accepted work rather than model calls.
 
-When capacity is constrained, remove apparatus in this order:
+A control whose measurement cost remains invisible will eventually be bypassed, removed, or defended with stale evidence.
+
+When capacity is constrained, remove complexity from the outside inward. Cut dynamic scheduling and learned routing before cutting the records needed to evaluate them. Cut multi-agent debate, specialist roles, and elaborate aggregation before cutting the acceptance check. Cut redundant model judges and retrieval lanes before cutting the ability to reconstruct which artifact was accepted. Reduce benchmark breadth before abandoning a small stratified set of consequential tasks.
+
+Rich interfaces and secondary taxonomies can also go if their questions remain answerable from the durable record.
+
+Four things should survive almost to the floor:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
-  dynamic scheduling and learned routing;
+  \textbf{An executable acceptance check.}
 \item
-  multi-agent debate, specialist roles, and elaborate aggregation;
+  \textbf{Separation between ordinary authority and recovery authority.}
 \item
-  extra model judges and retrieval lanes that have not shown unique contribution;
+  \textbf{Versioned identity for the task, input state, configuration, attempt, and accepted artifact.}
 \item
-  benchmark breadth, while retaining a small stratified set of consequential tasks; and
-\item
-  rich live interfaces and secondary taxonomies whose questions can still be answered from the durable record.
+  \textbf{A paired comparison against the cheapest credible baseline.}
 \end{enumerate}
 
-Four elements should be kept until last: an executable acceptance check, separation between ordinary and recovery authority, versioned task and configuration identity, and a paired comparison against the cheapest credible baseline. A small team can operate those controls without reproducing the full apparatus in this monograph.
+A small team can operate those controls without reproducing the full apparatus described in this monograph.
 
-Several questions remain research problems rather than missing defaults. No controlled result in the reviewed set shows that a dynamic dependency graph beats a well-designed fixed schedule for repository work. Propagation of deletion through summaries, embeddings, caches, and graph edges is largely unmeasured. Current context, attribution, grader, and routing results are dated snapshots. The structural claims are more durable: one run is one draw; a component that did not execute did not cause the result; a stale artifact can remain fluent after losing authority; and one identity that reaches production data and recovery material defines one failure domain.
+This minimum viable reliability system can show whether the work passed and which state and configuration produced it. It can keep a failed worker from silently retaining authority and show whether a more complicated system beat the simpler one.
 
-The six-step minimum pass now appears in the introduction because it is the shortest path into the dependency chain. Begin with the comparison you currently trust most, and keep the per-item record even when the rerun agrees with you.
+Everything added after that should have to earn its place.
+
+\hypertarget{some-uncertainty-should-remain-visible}{%
+\section{Some uncertainty should remain visible}\label{some-uncertainty-should-remain-visible}}
+
+Several questions in this book remain research problems rather than missing configuration defaults.
+
+No controlled result in the reviewed set establishes that a dynamic dependency graph outperforms a well-designed fixed schedule for repository work. Propagation of deletion through summaries, embeddings, caches, and graph edges remains poorly measured. The optimal recovery architecture for long-running coding agents is not settled. Neither are universal grader thresholds, context policies, retry counts, or fleet scheduling rules.
+
+Many empirical conclusions here are also dated snapshots. Models, context windows, retrieval systems, agent runtimes, and costs will change. Benchmarks will become contaminated or obsolete.
+
+The structural claims are harder to age out:
+
+\begin{itemize}
+\tightlist
+\item
+  One stochastic run is one draw.
+\item
+  A component that did not execute did not cause the observed result.
+\item
+  An instrument has to be calibrated for the decision it is being asked to make.
+\item
+  A trace can preserve evidence without proving causality.
+\item
+  An empty retrieval result is not proof that relevant evidence does not exist.
+\item
+  A stale artifact can remain fluent after losing authority.
+\item
+  An acknowledged workflow transition does not prove an external effect occurred exactly once.
+\item
+  A worker that has lost ownership must also lose the ability to make consequential mutations.
+\item
+  One identity that reaches production data and recovery material defines one failure domain.
+\item
+  Additional machinery should beat the cheapest credible alternative under the same workload before it earns adoption.
+\end{itemize}
+
+Those claims describe constraints on reasoning about systems, not preferences for today's agent stack. They are the part of this book I expect to last longest.
+
+\hypertarget{the-system-around-the-model}{%
+\section{The system around the model}\label{the-system-around-the-model}}
+
+The easiest way to misunderstand a coding agent is to look only at the model.
+
+A production result is jointly determined by the task presented to the system, the version of the world the system can see, the evidence retrieval makes available, the state retained across steps, the tools and permissions through which actions occur, the workflow that decides what may happen next, the acceptance path that decides what counts, and the evaluation that tells us whether any of those choices helped.
+
+The model matters enormously, but it is only one component in the causal path.
+
+A better model can fail inside a weak execution system; better retrieval can disappear inside a noisy end-to-end score; a complete trace can support the wrong attribution; a successful retry can duplicate an external effect; and an elaborate fleet scheduler can optimize a workload whose ownership semantics were never correct.
+
+The practical consequence is a debugging order:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Begin with the comparison you currently trust most.
+\item
+  Preserve the per-item result.
+\item
+  Ask whether repeated runs support the difference.
+\item
+  Check whether the verdict instrument agrees with expert adjudication on the errors that matter.
+\item
+  Confirm that the durable record can reconstruct the accepted attempt and artifact.
+\item
+  Verify that the evidence required by the task existed, was current, and reached the model.
+\item
+  Exercise the consequential boundary under failure.
+\item
+  Add machinery only after those checks pass.
+\end{enumerate}
+
+The six-step minimum pass is the shortest practical route through this dependency chain. It exposes the claims a system already depends on without prescribing a single agent architecture.
+
+A reliable agent system preserves the evidence needed to understand a failure, prevents stale authority from surviving recovery, keeps uncertain measurements uncertain, and requires added complexity to improve accepted work.
+
+The model can propose the work. The surrounding system determines what evidence the proposal used, what it could change, whether the result was accepted, whether the effect occurred, and what evidence survived.
 
 \section*{Sources and evidence}
 
@@ -161,13 +325,13 @@ No evidence is introduced here. Each identifier below is carried by the chapter 
 \begin{itemize}
 \tightlist
 \item
-  Strong evidence: Skalse, Howe, Krasheninnikov \& Krueger (2022). Defining and Characterizing Reward Hacking. NeurIPS 2022. arXiv:2209.13085. Chapter 6, \texttt{layer-signals-beyond-single-proxy}.
+  Strong evidence: Skalse, Howe, Krasheninnikov \& Krueger (2022). \emph{Defining and Characterizing Reward Hacking}. NeurIPS 2022. arXiv:2209.13085. Chapter 6, \texttt{layer-signals-beyond-single-proxy}.
 \item
-  Strong evidence: Zhang, S., et al.~(2025). Which Agent Causes Task Failures and When? On Automated Failure Attribution of LLM Multi-Agent Systems. ICML 2025. arXiv:2505.00212. Chapter 11, \texttt{keep-humans-in-failure-attribution}.
+  Strong evidence: Zhang, S., et al.~(2025). \emph{Which Agent Causes Task Failures and When? On Automated Failure Attribution of LLM Multi-Agent Systems}. ICML 2025. arXiv:2505.00212. Chapter 11, \texttt{keep-humans-in-failure-attribution}.
 \item
-  Directional evidence: Kapoor, Stroebl, Siegel, Nadgir \& Narayanan (2024). AI Agents That Matter. arXiv:2407.01502. Chapter 2, \texttt{report-cost-accuracy-pareto}.
+  Directional evidence: Kapoor, Stroebl, Siegel, Nadgir \& Narayanan (2024). \emph{AI Agents That Matter}. arXiv:2407.01502. Chapter 2, \texttt{report-cost-accuracy-pareto}.
 \item
-  Strong evidence: Chen, J., et al.~(2016). Sampling as a Baseline Optimizer for Search-Based Software Engineering. arXiv:1608.07617. Chapter 19, \texttt{replay-traces-before-policy-changes}.
+  Strong evidence: Chen, J., et al.~(2016). \emph{Sampling as a Baseline Optimizer for Search-Based Software Engineering}. arXiv:1608.07617. Chapter 19, \texttt{replay-traces-before-policy-changes}.
 \end{itemize}
 
 The part-level and chapter-level evidence shares restated above were recomputed from the companion catalog: Part I has 18 of 32 items grouped as strong, Part III has 3 of 30, Part IV has 20 of 42, and Part VI has 8 of 29. Chapter 8 has no strong or direct scholarly evidence item.

@@ -26,8 +26,8 @@ class ReleaseCountSourceTests(unittest.TestCase):
             f"{counts['practitioner']} practitioner",
             f"{counts['total']} edition records",
             f"{counts['developed']} developed practices",
-            f"{counts['companion_only']} companion practices",
-            f"{counts['gated']} gated records plus {counts['leads']} catalog-level leads",
+            f"{counts['companion_only']} companion records",
+            f"{counts['gated']} gated practices plus {counts['leads']} research leads",
         ):
             self.assertIn(expected, text)
         self.assertNotIn(f"{counts['scholarly'] - 1} scholarly", text)

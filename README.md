@@ -62,7 +62,7 @@ For a narrower decision, choose one of the protocols in the table above. Each pr
 
 ## Know what a claim establishes
 
-Release `1.0.0` synthesizes 164 scholarly works, 100 practitioner records, 29 benchmark records, and 17 author-system case records. Its catalog contains 206 bounded practice records: 56 are developed in the manuscript and 150 are companion-only entries. Those are catalog counts, not estimates of how many reliability practices exist.
+Release `1.0.0` synthesizes 164 scholarly works, 100 practitioner records, 29 benchmark records, and 17 author-system case records. Its catalog contains 206 reliability records: 193 gated practices, including 56 developed in depth, plus 13 research leads. The other 137 gated practices appear only in the companion. The 13 leads are prompts for investigation, not recommendations. These are catalog counts, not estimates of how many reliability practices exist.
 
 | Label | What it can establish | What it does not establish |
 | --- | --- | --- |
@@ -75,7 +75,7 @@ Release `1.0.0` synthesizes 164 scholarly works, 100 practitioner records, 29 be
 
 A **developed practice** receives chapter-level treatment of its mechanism, evidence, and boundary. A **companion entry** is intentionally more compact; some extend a chapter and some are thin-support leads. Neither label upgrades its evidence group. Part VI adapts scheduling, distributed-systems, and topology mechanisms from adjacent domains into testable designs. Treat a mechanism as a measured coding-agent effect only when its record reports such a measurement.
 
-Every practice record carries a stable `ERCA-NNN` identifier, after the initials of this book's title, and the same number names that record in the chapters, the companion files, the protocols, and the skills. Use [`companion/catalog.json`](companion/catalog.json) to resolve one, along with practice-level evidence and limitations; [`companion/evidence-ledger.csv`](companion/evidence-ledger.csv) for claim-to-source links, [`companion/chapter-crosswalk.json`](companion/chapter-crosswalk.json) for treatment and chapter placement, and [`companion/benchmark-catalog.json`](companion/benchmark-catalog.json) for benchmark records. The [provenance statement](companion/PROVENANCE.md) describes what the public artifact includes and excludes.
+Every catalog record carries a stable `ERCA-NNN` identifier, after the initials of this book's title, and the same number names that record in the chapters, the companion files, the protocols, and the skills. Use [`companion/catalog.json`](companion/catalog.json) to resolve one, along with practice-level evidence and limitations; [`companion/evidence-ledger.csv`](companion/evidence-ledger.csv) for claim-to-source links, [`companion/chapter-crosswalk.json`](companion/chapter-crosswalk.json) for treatment and chapter placement, and [`companion/benchmark-catalog.json`](companion/benchmark-catalog.json) for benchmark records. The [provenance statement](companion/PROVENANCE.md) describes what the public artifact includes and excludes.
 
 ## Read or reuse more
 

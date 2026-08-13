@@ -13,9 +13,9 @@ Canonical repository: [https://github.com/sjarmak/engineering-reliable-coding-ag
 ## Contents
 
 - `LEARNINGS.md`: human-readable, chapter-organized presentation of the practice records in this edition, including stable IDs, actions, mechanisms, evidence, and boundaries.
-- `catalog.json`: the 206 bounded practice records in this edition in machine-readable form, including the bounded August 6 evidence additions and the distributed-systems catalog-level entries (ERCA-193 through ERCA-205). The count reflects this edition's granularity decisions; it is not an estimate of how many reliability practices exist.
+- `catalog.json`: 206 reliability records: 193 gated practices, including 56 developed in depth, plus 13 research leads (ERCA-193 through ERCA-205). The machine-readable count reflects this edition's granularity decisions; it is not an estimate of how many reliability practices exist.
 - `evidence-ledger.csv`: one row per evidence item or corroborating item.
-- `chapter-crosswalk.json`: the 56 practices developed in the manuscript and the 150 companion-only entries.
+- `chapter-crosswalk.json`: the 56 practices developed in the manuscript and the 137 chapter-assigned companion-only practices; the 13 research leads remain outside the gated crosswalk.
 - `benchmark-catalog.json`: 29 coding-agent benchmark records.
 - `reference-metadata.json`: resolved arXiv, DOI, and web-source metadata from the manuscript audit.
 - `WEB-SOURCE-PRESERVATION.md`: canonical and archived URLs for retained practitioner sources on mutable hosts.
@@ -27,7 +27,7 @@ Canonical repository: [https://github.com/sjarmak/engineering-reliable-coding-ag
 
 ## Practice identifiers
 
-Every practice record carries a stable identifier of the form `ERCA-NNN`, after the initials of *Engineering Reliable Coding Agents*. The same identifier names that record in the manuscript's chapter evidence profiles and source sections, `catalog.json`, `evidence-ledger.csv`, `chapter-crosswalk.json`, the runnable protocols, and the skill evidence maps, so a record can be traced across all of them. Identifiers are never reused: a later edition may retire, split, or merge a record, but its number will not be reassigned to a different practice. Resolve one in [`catalog.json`](catalog.json) or on the [companion site](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion).
+Every catalog record carries a stable identifier of the form `ERCA-NNN`, after the initials of *Engineering Reliable Coding Agents*. The same identifier names that record in the manuscript's chapter evidence profiles and source sections, `catalog.json`, `evidence-ledger.csv`, `chapter-crosswalk.json`, the runnable protocols, and the skill evidence maps, so a record can be traced across all of them. Identifiers are never reused: a later edition may retire, split, or merge a record, but its number will not be reassigned to a different practice. Resolve one in [`catalog.json`](catalog.json) or on the [companion site](https://sjarmak.ai/books/engineering-reliable-coding-agents/companion).
 
 ## Evidence vocabulary
 
